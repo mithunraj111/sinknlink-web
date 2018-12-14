@@ -15,6 +15,9 @@ h1, h2, h3, h4, h5, h6 {
     font-family: 'Nunito',sans-serif;
     font-weight: 300;
 }
+.w-100{
+    width:100% !important;
+}
 .m-t_5{
     margin-top:-5px !important;
 }
@@ -35,6 +38,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 .m-t-5{
     margin-top:5px !important;
+}
+.m-t-60{
+    margin-top:60px;
 }
 .m-r-30{
     margin-right:30px !important;
@@ -494,18 +500,8 @@ button{
     height: 78vh;
 }
 
-// .employee-form{
-//      height: 74vh;
-//      display: inline-block;
-//      overflow: auto;
-// }
-// .user-form{
-//     height: 78vh;
-//     display: inline-block;
-//     overflow: auto;
-// }
 .employee-profile{
-    top: 23%;
+    top: 8%;
     .custom-file{
         font-weight: normal;
         height: auto;
@@ -656,5 +652,22 @@ button{
     }
      input:focus::placeholder{
            color:#97A1A7 ;
+    }
+}
+
+// fixed header //
+.fixedheader{
+    display: inline;
+    .pos-fixed{
+        width:77%;
+        max-width: 100%;
+        z-index: 120;
+    }
+}
+// fixed header //
+
+.generate-button{
+    .btn{
+        padding: 7px 25px;
     }
 }

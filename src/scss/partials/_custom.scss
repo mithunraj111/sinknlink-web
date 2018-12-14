@@ -905,16 +905,18 @@ ngx-datatable.data-table {
 
 .full-data-table {
   .glyphicon {
-    font-family: IcoFont;
+    font-family: FontAwesome;
     position: absolute;
-    right: -5px;
-    font-size: 20px;
-    top: 5px;
+    right: 14px;
+    top: 0;
+
     &.glyphicon-triangle-bottom:before {
-      content: "\eb56";
+      content: "\f175";
+      font-size: 14px;
     }
     &.glyphicon-triangle-top:before {
-      content: "\eb53";
+      content: "\f176";
+      font-size: 14px;
     }
   }
   th {

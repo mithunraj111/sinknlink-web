@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UsersRoutingModule } from './users-routing.module';
-import { UsersComponent} from './users.component'
+import { UsersComponent} from './users.component';
 import { HttpModule } from '@angular/http';
 import { DataTableModule } from 'angular2-datatable';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -21,6 +21,6 @@ import { UiSwitchModule } from 'ng2-ui-switch';
     UiSwitchModule
   ],
   declarations: [UsersComponent, AddEditUsersComponent],
-  bootstrap:[UsersComponent]
+  bootstrap: [UsersComponent]
 })
 export class UsersModule { }

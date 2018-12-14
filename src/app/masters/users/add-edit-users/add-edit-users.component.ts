@@ -9,7 +9,7 @@ export class AddEditUsersComponent implements OnInit {
 
   @Input('modalDefault') modalDefault: any;
 
-  ngOnInit(){}
+  ngOnInit() {}
 
   openMyModal(event) {
     document.querySelector('#' + event).classList.add('md-show');
