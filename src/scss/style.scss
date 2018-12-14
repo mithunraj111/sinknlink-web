@@ -1,0 +1,96 @@
+
+// General theme contents
+@import '~bootstrap/scss/bootstrap';
+@import "partials/variables";
+@import "partials/mixins";
+@import "partials/general";
+@import "partials/generic";
+// Menu
+@import "partials/menu/pcmenu";
+// Important Theme elements
+@import "partials/theme-elements/button";
+@import "partials/theme-elements/form-elements";
+// Theme elements
+@import "partials/theme-elements/label-badges";
+@import "partials/theme-elements/icon-layout";
+@import "partials/theme-elements/ready-to-use";
+@import "partials/theme-elements/box-shadow";
+// Tables
+@import "partials/tables/tables";
+// Widget
+@import "partials/widget-dashboard/widget";
+@import "partials/widget-dashboard/dashboard";
+// Other
+@import "partials/other/alert";
+@import "partials/other/authentication";
+@import "partials/other/breadcrumb";
+@import "partials/other/charts";
+@import "partials/other/chat";
+@import "partials/other/color";
+@import "partials/other/draggable";
+@import "partials/other/e-payment";
+@import "partials/other/editors";
+@import "partials/other/fb-wall";
+@import "partials/other/full-calender";
+@import "partials/other/job-find";
+@import "partials/other/mail-pages";
+@import "partials/other/maps";
+@import "partials/other/navbars";
+@import "partials/other/note";
+@import "partials/other/prism";
+@import "partials/other/progress-bar";
+@import "partials/other/pre-loader";
+@import "partials/other/range-slider";
+@import "partials/other/rating";
+//To-do
+@import "partials/todo/todo";
+// Responsive css
+@import "partials/responsive/responsive";
+// dark layout css
+@import "partials/dark";
+
+//angular custom
+@import "partials/custom";
+
+@import '~ngx-bar-rating/themes/br-default-theme';
+@import '~ngx-bar-rating/themes/br-bootstrap-theme';
+@import '~ngx-bar-rating/themes/br-fontawesome-theme';
+@import '~ngx-bar-rating/themes/br-fontawesome-o-theme';
+@import '~ngx-bar-rating/themes/br-horizontal-theme';
+@import '~ngx-bar-rating/themes/br-vertical-theme';
+@import '~ngx-bar-rating/themes/br-stars-theme';
+@import '~ngx-bar-rating/themes/br-movie-theme';
+@import '~ngx-bar-rating/themes/br-square-theme';
+
+@import '~angular-tree-component/dist/angular-tree-component.css';
+
+
+:root {
+    --scroll-bar-size: 10px;
+    --scroll-bar-thumb-background-color: rgba(255, 255, 255, 0.2);
+    --scroll-bar-thumb-background-color-active: rgba(255, 255, 255, 0.5);
+  }
+
+  ::-webkit-scrollbar {
+    width: var(--scroll-bar-size);
+    height: var(--scroll-bar-size);
+    background: transparent;
+    cursor: pointer;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--scroll-bar-thumb-background-color);
+    border-radius: var(--scroll-bar-size);
+    border-color: transparent;
+    border-style: solid;
+    border-width: calc(var(--scroll-bar-size)/3);
+    background-clip: padding-box;
+  }
+  ::-webkit-scrollbar-thumb:active {
+    background-color: var(--scroll-bar-thumb-background-color-active);
+  }
+  ::-webkit-scrollbar-thumb:hover,
+  ::-webkit-scrollbar-thumb:active {
+    border-width: 1px;
+    background-color: var(--scroll-bar-thumb-background-color-active);
+    cursor: pointer;
+  }

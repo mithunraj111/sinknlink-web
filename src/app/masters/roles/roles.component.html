@@ -1,0 +1,91 @@
+<div class="header-title">
+  <div class="row">
+    <div class="col-md-5 col-sm-6">
+      <h2>Roles</h2>
+      <p>Define your organization's role descriptions and permissions</p>
+    </div>
+    <div class="col-md-6 col-sm-6">
+      <div class="text-right m-t-5">
+        <label>Search:
+          <input type="search" [(ngModel)]="filterQuery" class="header-search form-control input-sm full-data-search" placeholder="">
+        </label>
+      </div>
+    </div>
+    <div class="col-md-1 col-sm-1 p-r-30">
+      <button type="button" placement="top" ngbTooltip="Click to add new roles" class="btn pull-left btn-primary waves-effect waves-light f-right d-inline-block md-trigger"
+        routerLink="create">
+        <i class="fa fa-plus-circle m-r-5"></i> NEW
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="card table-header">
+  <div class="card-body">
+    <div class="table-content crm-table">
+      <div class="project-table">
+        <div class="dt-responsive">
+          <!-- <div class="panel-heading">User information</div>-->
+          <div class="table-responsive">
+            <table class="table table-striped table-bordered full-data-table" [mfData]="data"
+              #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+              <thead>
+                <tr>
+                  <th>
+                    <mfDefaultSorter by="rolename">Role Name</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter by="dataccess">Data Access</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter by="updatedby">Updated By</mfDefaultSorter>
+                  </th>
+                  <th class="text-center">
+                    <mfDefaultSorter by="status">Status</mfDefaultSorter>
+                  </th>
+                  <th class="text-center">
+                    <mfDefaultSorter>Action</mfDefaultSorter>
+                  </th>
+                </tr>
+                <tr>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let item of mf.data; let i = index;">
+                  <td>Admin</td>
+                  <td>Team</td>
+                  <td>
+                    <span class="updatename">Kannan Kumar</span>
+                    <span class="updatedate">03-Dec-2018 20:32</span>
+                  </td>
+                  <td class="text-center">
+                    <ui-switch class="js-small" placement="top" ngbTooltip="Click to change the status" color="#03ADED"
+                      switchColor="#fff" size="small" checked></ui-switch>
+                  </td>
+                  <td class="action-icon text-center">
+                    <a href="javascript:;" placement="top" ngbTooltip="click to view role" class="m-r-15 crm-action-view text-info"
+                      (click)="openMyModalData(i);modalDefault.show();"><i class="fa fa-book"></i></a>
+                    <a href="javascript:;" placement="top" ngbTooltip="click to edit role" class="m-r-15 crm-action-edit text-primary"><i
+                        class="fa fa-pencil"></i></a>
+                    <a href="javascript:;" placement="top" ngbTooltip="click to delete role" class="crm-action-delete text-danger"><i
+                        class="fa fa-trash"></i></a>
+                  </td>
+                </tr>
+
+              </tbody>
+              <!-- <tfoot>
+                <tr class="page-nav">
+                  <td colspan="12">
+                    <mfBootstrapPaginator class="pagination-main f-right"></mfBootstrapPaginator>
+                  </td>
+                </tr>
+              </tfoot> -->
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Add Contact Start Model -->

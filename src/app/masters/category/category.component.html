@@ -1,0 +1,50 @@
+<div class="card table-header">
+  <div class="dt-responsive">
+    <div class="table-responsive">
+      <div class="add-button">
+        <button type="button" class="pull-right btn btn-primary btn-outline-primary btn-icon" placement="bottom"
+          ngbTooltip="Click to add category" (click)="openMyModal('categorymodal')"><i class="fa fa-plus"></i></button>
+      </div>
+      <table class="table table-striped table-bordered full-data-table" [mfData]="data" #mf="mfDataTable"
+        [mfRowsOnPage]="rowsOnPage">
+        <thead>
+          <tr>
+            <th>Category Name</th>
+            <th>Updated By</th>
+            <th class="text-center">Status</th>
+            <th class="text-center">Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let item of mf.data; let i = index;">
+            <td>{{item.categoryname}}</td>
+            <td>
+              <span class="updatename">{{item.lastupdatedby}}</span>
+              <span class="updatedate">{{item.lastupdateddt}}</span>
+            </td>
+            <td class="text-center">
+              <ui-switch class="js-small" placement="top" ngbTooltip="Click to change the status" color="#03ADED"
+                switchColor="#fff" size="small" checked></ui-switch>
+            </td>
+            <td class="action-icon text-center">
+              <a href="javascript:;" placement="top" ngbTooltip="click to edit the UOM" class="m-r-15 crm-action-edit text-primary"><i
+                  class="fa fa-pencil"></i></a>
+              <a href="javascript:;" placement="bottom" ngbTooltip="Click to delete" class="crm-action-delete text-danger"><i
+                  class="fa fa-trash"></i></a>
+            </td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr class="page-nav">
+            <td colspan="12">
+              <mfBootstrapPaginator class="pagination-main f-right"></mfBootstrapPaginator>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>
+
+<app-add-edit-category></app-add-edit-category>

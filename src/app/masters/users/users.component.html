@@ -1,0 +1,76 @@
+<div class="header-title">
+  <div class="row">
+    <div class="col-md-5 col-sm-5">
+      <h2>Users</h2>
+      <p>Create or Update the user logins</p>
+    </div>
+    <div class="col-md-6 col-sm-6">
+      <div class="text-right m-t-5">
+        <label>Search:
+          <input type="search" [(ngModel)]="filterQuery" class="header-search form-control input-sm full-data-search"
+            placeholder="">
+        </label>
+      </div>
+    </div>
+    <div class="col-md-1 col-sm-1 p-r-30">
+      <button type="button" placement="top" ngbTooltip="Click to add new user" class="btn pull-left btn-primary waves-effect waves-light f-right d-inline-block md-trigger">
+        <i class="fa fa-plus-circle m-r-5"></i> New
+      </button>
+    </div>
+  </div>
+</div>
+<div class="card table-header">
+  <div class="card-body">
+    <div class="table-content crm-table">
+      <div class="project-table">
+        <div class="dt-responsive">
+          <div class="table-responsive">
+            <table class="table table-striped table-bordered full-data-table" 
+              [mfData]="data" #mf="mfDataTable" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+              <thead>
+                <tr>
+                  <th>
+                    <mfDefaultSorter by='fullname'>Full Name</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter by='mobileno'>Mobile No</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter by='role'>Role</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter by='updatedby'>Updated By</mfDefaultSorter>
+                  </th>
+                  <th class="text-center">Status</th>
+                  <th class="text-center">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let utable of mf.data">
+                  <td>{{utable.fullname}}</td>
+                  <td>{{utable.mobileno}}</td>
+                  <td>{{utable.role}}</td>
+                  <td>
+                    <span class="updatename">{{utable.updatedby}}</span>
+                    <span class="updatedate">{{utable.updateddt}}</span>
+                  </td>
+                  <td class="text-center">
+                    <ui-switch class="js-small" placement="top" ngbTooltip="Click to change the status" color="#03ADED"
+                      switchColor="#fff" size="small" checked></ui-switch>
+                  </td>
+                  <td class="action-icon text-center">
+                    <a href="javascript:;" placement="top" ngbTooltip="Click to edit the state " class="m-r-15 crm-action-edit text-primary">
+                      <i class="fa fa-pencil"></i></a>
+                    <a href="javascript:;" placement="bottom" ngbTooltip="Click to delete the state " class="crm-action-delete text-danger">
+                      <i class="fa fa-trash"></i></a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Add Contact Start Model -->

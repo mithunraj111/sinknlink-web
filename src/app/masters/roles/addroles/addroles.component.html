@@ -1,0 +1,118 @@
+<div class="header-title">
+  <h2>Role</h2>
+  <div class="row">
+    <div class="col-md-4 col-sm-4 p-l-30">
+      <div class="form-group required row role-input">
+        <label class="col-md-4 p-r-0 col-form-label"><b>Role Name</b></label>
+        <div class="col-md-8 p-l-0 p-r-0">
+          <input type="text" class="header-search form-control input-sm full-data-search" placeholder="Role Name">
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 col-sm-4">
+      <div class="form-group required row">
+        <label class="col-sm-3 p-l-0 p-r-0 col-form-label"><b>Data Access</b></label>
+        <div class="col-sm-9 p-l-0 p-r-0"><select class="form-control" name="select">
+            <option value="opt1">Select Data Access</option>
+            <option value="opt2">All</option>
+            <option value="opt3">Own</option>
+            <option value="opt3">Team</option>
+          </select></div>
+      </div>
+    </div>
+
+    <div class="col-md-2 col-sm-2 text-center">
+      <div class="form-group row">
+        <label class="col-sm-6 p-r-0 col-form-label text-right"><b>Status</b><small>*</small></label>
+        <div class="col-sm-4 p-l-0 p-r-0">
+          <ui-switch class="js-small" color="#03ADED" placement="top" ngbTooltip="Click to change the status"
+            switchColor="#fff" size="small" checked></ui-switch>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-2 col-sm-2 pull-right m-t_5 p-r-30">
+      <button type="button" placement="top" ngbTooltip=" Go back" routerLink="/masters/roles" class="btn pull-right btn-inverse btn-primary waves-effect"><i
+          class="fa fa-arrow-circle-left"></i></button>
+      <button type="button" placement="top" ngbTooltip="Click to save role" class="btn pull-right btn-primary waves-effect m-r-10 text-capitalize">Save</button>
+    </div>
+  </div>
+</div>
+
+<div class="card table-header">
+  <div class="card-body">
+    <div class="table-content crm-table">
+      <div class="project-table">
+        <div class="dt-responsive">
+          <!-- <div class="panel-heading">User information</div>-->
+          <div class="table-responsive">
+            <table class="table addrole-table table-striped table-bordered full-data-table" [mfData]="data"
+              #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+              <thead>
+                <tr>
+                  <th>
+                    <mfDefaultSorter by="rolename">Screen Names</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter by="dataccess">Access</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter by="updatedby">Available Permissions</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter by="status">Assigned Permissions</mfDefaultSorter>
+                  </th>
+                  <th class="text-center">
+                    <mfDefaultSorter>Actions</mfDefaultSorter>
+                  </th>
+                </tr>
+                <tr>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let item of mf.data; let i = index;">
+                  <td>Dashboard</td>
+                  <td>No</td>
+                  <td>View,Create,Edit,Delete</td>
+                  <td>-</td>
+                  <td class="action-icon text-center">
+                    <a href="javascript:;" placement="top" ngbTooltip="Click to add permissions" (click)="openMyModal('effect-7')"
+                      class="m-r-15 crm-action-edit text-primary"><i class="fa fa-pencil"></i></a>
+                  </td>
+                </tr>
+
+              </tbody>
+              <tfoot>
+                <tr class="page-nav">
+                  <td colspan="12">
+                    <mfBootstrapPaginator class="pagination-main f-right"></mfBootstrapPaginator>
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Add Contact Start Model -->
+<div class="modal-size">
+  <app-modal-animation [modalID]="'effect-7'" [modalClass]="'md-effect-7'">
+    <h3 class="f-26">Permissions</h3>
+    <div class="form-header">
+
+      <div class="form-group required row">
+        <label class="col-sm-12">Permissions</label>
+        <div class="col-sm-12">
+          <ng-select [ngClass]="'ng-select'" [options]="simpleOption" [multiple]="true" placeholder="test"></ng-select>
+        </div>
+      </div>
+
+
+      <button type="button" placement="top" ngbTooltip="Click to save permissions" class="btn pull-right btn-primary waves-effect m-b-10">Save</button>
+    </div>
+    <button (click)="closeMyModal($event)" aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>
+  </app-modal-animation>
+</div>
