@@ -1,0 +1,63 @@
+<div class="modal-size select-input">
+  <app-modal-animation [modalID]="'locationmodal'" [modalClass]="'md-effect-7'">
+    <h3 class="f-26">Add Location</h3>
+    <div class="form-header">
+      <div class="row ">
+        <div class="col-md-12">
+          <div class="form-group required">
+            <label>Pincode</label>
+            <input type="text" class="form-control" placeholder="Pincode">
+          </div>
+          <div class="form-group required">
+            <label>Area</label>
+            <input type="text" class="form-control" placeholder="Area">
+          </div>
+          <div class="form-group required">
+            <label>State</label>
+            <select name="select" class="form-control p-1">
+              <option value="opt1">Select your state</option>
+              <option value="opt2">TamilNadu</option>
+              <option value="opt3">Kerala</option>
+              <option value="opt4">Andrapradesh</option>
+              <option value="opt5">Karnataka</option>
+            </select>
+          </div>
+          <div class="form-group required">
+            <label>City</label>
+            <tag-input [ngClass]="'tag-select'" theme='bootstrap' [secondaryPlaceholder]="'Select your City'"
+              [placeholder]="''" [ngModel]="[]" [onlyFromAutocomplete]="true">
+              <tag-input-dropdown [autocompleteItems]="autocompleteItems"></tag-input-dropdown>
+            </tag-input>
+            <!-- <div class="form-group required row">
+              <label class="col-sm-12">City</label>
+              <div class="col-sm-12">
+                <ng-select [ngClass]="'ng-select'" [options]="simpleOption" [multiple]="true" placeholder="Enter your city"></ng-select>
+              </div>
+            </div> -->
+          </div>
+          <div class="form-group ">
+            <label>Status <small>*</small></label>
+            <div class="form-radio">
+              <form>
+                <div class="radio radio-inline">
+                  <label>
+                    <input type="radio" name="radio" checked="checked">
+                    <i class="helper"></i>Active
+                  </label>
+                </div>
+                <div class="radio radio-inline">
+                  <label>
+                    <input type="radio" name="radio">
+                    <i class="helper"></i>Inactive
+                  </label>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button (click)="closeMyModal($event)" type="button" placement="top" ngbTooltip="Click to save state " class="btn pull-right btn-primary waves-effect m-b-10">Save</button>
+    </div>
+    <button (click)="closeMyModal($event)" aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>
+  </app-modal-animation>
+</div>

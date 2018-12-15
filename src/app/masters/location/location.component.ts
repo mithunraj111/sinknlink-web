@@ -15,22 +15,13 @@ export class LocationComponent implements OnInit {
   public userProPic: string;
   showDetails = false;
   showRegion = false;
-  constructor(public http: Http) {
+  constructor() {
     this.data=[
       { pincode:'600 078', area:'K.K.Nagar', state:'TamilNadu', city:'Chennai', lastupdatedby:'Admin', lastupdateddt:'02/12/2018' },
       { pincode:'600 083', area:'Ashok Nagar', state:'TamilNadu', city:'Chennai', lastupdatedby:'Admin', lastupdateddt:'11/12/2018' },
       { pincode:'600 078', area:'K.K.Nagar', state:'TamilNadu', city:'Chennai', lastupdatedby:'Admin', lastupdateddt:'02/12/2018' },
       { pincode:'600 083', area:'Ashok Nagar', state:'TamilNadu', city:'Chennai', lastupdatedby:'Admin', lastupdateddt:'11/12/2018' },
-      { pincode:'600 078', area:'K.K.Nagar', state:'TamilNadu', city:'Chennai', lastupdatedby:'Admin', lastupdateddt:'02/12/2018' },
-      { pincode:'600 083', area:'Ashok Nagar', state:'TamilNadu', city:'Chennai', lastupdatedby:'Admin', lastupdateddt:'11/12/2018' },
-      { pincode:'600 078', area:'K.K.Nagar', state:'TamilNadu', city:'Chennai', lastupdatedby:'Admin', lastupdateddt:'02/12/2018' },
-      { pincode:'600 083', area:'Ashok Nagar', state:'TamilNadu', city:'Chennai', lastupdatedby:'Admin', lastupdateddt:'11/12/2018' },
-      { pincode:'600 078', area:'K.K.Nagar', state:'TamilNadu', city:'Chennai', lastupdatedby:'Admin', lastupdateddt:'02/12/2018' },
-      { pincode:'600 083', area:'Ashok Nagar', state:'TamilNadu', city:'Chennai', lastupdatedby:'Admin', lastupdateddt:'11/12/2018' },
-      { pincode:'600 078', area:'K.K.Nagar', state:'TamilNadu', city:'Chennai', lastupdatedby:'Admin', lastupdateddt:'02/12/2018' },
-      { pincode:'600 083', area:'Ashok Nagar', state:'TamilNadu', city:'Chennai', lastupdatedby:'Admin', lastupdateddt:'11/12/2018' },
-      { pincode:'600 078', area:'K.K.Nagar', state:'TamilNadu', city:'Chennai', lastupdatedby:'Admin', lastupdateddt:'02/12/2018' },
-      { pincode:'600 083', area:'Ashok Nagar', state:'TamilNadu', city:'Chennai', lastupdatedby:'Admin', lastupdateddt:'11/12/2018' }
+      { pincode:'600 078', area:'K.K.Nagar', state:'TamilNadu', city:'Chennai', lastupdatedby:'Admin', lastupdateddt:'02/12/2018' }
     ]
   }
 

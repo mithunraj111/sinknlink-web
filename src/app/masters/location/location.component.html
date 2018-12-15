@@ -1,34 +1,35 @@
-<div class="header-title">
-  <div class="row">
-    <div class="col-md-5 col-sm-5">
-      <h2>Location</h2>
-      <p>lorem ipsum dolor sit amet, consectetur adipisicing elit - Location</p>
-    </div>
-    <div class="col-md-6 col-sm-6">
-      <div class="text-right m-t-5">
-        <label>Search:
-          <input type="search" [(ngModel)]="filterQuery" class="header-search form-control input-sm full-data-search"
-            placeholder="">
-        </label>
+<div class="fixedheader">
+  <div class="header-title pos-fixed">
+    <div class="row">
+      <div class="col-md-5 col-sm-5">
+        <h2>Location</h2>
+        <p>lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
       </div>
-    </div>
-    <div class="col-md-1 col-sm-1 p-r-30">
-      <button type="button" placement="top" ngbTooltip="Click to add new user" class="btn pull-left btn-primary waves-effect waves-light f-right d-inline-block md-trigger"
-        routerLink="create">
-        <i class="fa fa-plus-circle m-r-5"></i> NEW
-      </button>
+      <div class="col-md-6 col-sm-6">
+        <div class="text-right">
+          <label>Search:
+            <input type="search" [(ngModel)]="filterQuery" class="header-search form-control input-sm full-data-search"
+              placeholder="">
+          </label>
+        </div>
+      </div>
+      <div class="col-md-1 col-sm-1 p-r-30">
+        <button type="button" placement="top" ngbTooltip="Click to add new user" class="btn pull-left btn-primary waves-effect"
+          (click)="openMyModal('locationmodal')">
+          <i class="fa fa-plus-circle m-r-5"></i> NEW
+        </button>
+      </div>
     </div>
   </div>
 </div>
-
-<div class="card table-header">
+<div class="card table-header m-t-60">
   <div class="card-body">
     <div class="table-content crm-table">
       <div class="project-table">
         <div class="dt-responsive">
           <div class="table-responsive">
-            <table class="table table-striped table-bordered full-data-table" [mfData]="data" #mf="mfDataTable"
-              [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+            <table class="table table-striped table-bordered full-data-table" [mfData]="data | dataFilter : filterQuery"
+              #mf="mfDataTable" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
               <thead class="pr-1">
                 <tr>
                   <th>
@@ -51,21 +52,22 @@
                 </tr>
               </thead>
               <tbody class="pr-1">
-                <tr *ngFor="let ltable of mf.data">
-                  <td>{{ltable.pincode}}</td>
-                  <td>{{ltable.area}}</td>
-                  <td>{{ltable.state}}</td>
-                  <td>{{ltable.city}}</td>
+                <tr *ngFor="let items of mf.data; let i = index;">
+                  <td>{{items.pincode}}</td>
+                  <td>{{items.area}}</td>
+                  <td>{{items.state}}</td>
+                  <td>{{items.city}}</td>
                   <td>
-                    <span class="updatename">{{ltable.lastupdatedby}}</span>
-                    <span class="updatedate">{{ltable.lastupdateddt}}</span>
+                    <span class="updatename">{{items.lastupdatedby}}</span>
+                    <span class="updatedate">{{items.lastupdateddt}}</span>
                   </td>
                   <td class="text-center">
                     <ui-switch class="js-small" placement="top" ngbTooltip="Click to change the status" color="#03ADED"
                       switchColor="#fff" size="small" checked></ui-switch>
                   </td>
                   <td class="action-icon text-center">
-                    <a href="javascript:;" placement="top" ngbTooltip="Click to edit the state " class="m-r-15 crm-action-edit text-primary">
+                    <a placement="top" (click)="openMyModal('locationmodal')" ngbTooltip="Click to edit the state "
+                      class="m-r-15 crm-action-edit text-primary">
                       <i class="fa fa-pencil"></i></a>
                     <a href="javascript:;" placement="bottom" ngbTooltip="Click to delete the state " class="crm-action-delete text-danger">
                       <i class="fa fa-trash"></i></a>
@@ -79,7 +81,7 @@
     </div>
   </div>
 </div>
-
+<app-add-edit-location></app-add-edit-location>
 
 
 

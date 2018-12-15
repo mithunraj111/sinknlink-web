@@ -28,6 +28,20 @@ export class UsersComponent implements OnInit {
     this.data = [
       { fullname: 'Mithunraj', mobileno: '9874563210', role: 'Admin', updatedby: 'Admin', updateddt: '02/12/2018' },
       { fullname: 'Raj', mobileno: '9876543210', role: 'Manager', updatedby: 'Admin', updateddt: '10/08/2018' },
+      { fullname: 'Mithunraj', mobileno: '9517538426', role: 'Operator', updatedby: 'Admin', updateddt: '20/12/2018' },
+      { fullname: 'Mithunraj', mobileno: '9874563210', role: 'Admin', updatedby: 'Admin', updateddt: '02/12/2018' },
+      { fullname: 'Raj', mobileno: '9876543210', role: 'Manager', updatedby: 'Admin', updateddt: '10/08/2018' },
+      { fullname: 'Mithunraj', mobileno: '9517538426', role: 'Operator', updatedby: 'Admin', updateddt: '20/12/2018' },
+      { fullname: 'Mithunraj', mobileno: '9874563210', role: 'Admin', updatedby: 'Admin', updateddt: '02/12/2018' },
+      { fullname: 'Raj', mobileno: '9876543210', role: 'Manager', updatedby: 'Admin', updateddt: '10/08/2018' },
+      { fullname: 'Mithunraj', mobileno: '9874563210', role: 'Admin', updatedby: 'Admin', updateddt: '02/12/2018' },
+      { fullname: 'Raj', mobileno: '9876543210', role: 'Manager', updatedby: 'Admin', updateddt: '10/08/2018' },
+      { fullname: 'Mithunraj', mobileno: '9517538426', role: 'Operator', updatedby: 'Admin', updateddt: '20/12/2018' },
+      { fullname: 'Mithunraj', mobileno: '9874563210', role: 'Admin', updatedby: 'Admin', updateddt: '02/12/2018' },
+      { fullname: 'Raj', mobileno: '9876543210', role: 'Manager', updatedby: 'Admin', updateddt: '10/08/2018' },
+      { fullname: 'Mithunraj', mobileno: '9517538426', role: 'Operator', updatedby: 'Admin', updateddt: '20/12/2018' },
+      { fullname: 'Mithunraj', mobileno: '9874563210', role: 'Admin', updatedby: 'Admin', updateddt: '02/12/2018' },
+      { fullname: 'Raj', mobileno: '9876543210', role: 'Manager', updatedby: 'Admin', updateddt: '10/08/2018' },
       { fullname: 'Mithunraj', mobileno: '9517538426', role: 'Operator', updatedby: 'Admin', updateddt: '20/12/2018' }
     ];
   }

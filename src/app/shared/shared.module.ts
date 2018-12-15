@@ -41,7 +41,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ModalBasicComponent,
     ModalAnimationComponent,
     SpinnerComponent,
-    ClickOutsideModule
+    ClickOutsideModule,
+    DataFilterPipe
   ],
   declarations: [
     ToggleFullScreenDirective,

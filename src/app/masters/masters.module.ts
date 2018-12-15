@@ -10,6 +10,8 @@ import { LocationComponent } from './location/location.component';
 import { AccordionModule } from '../ui-elements/basic/accordion/accordion.module';
 import { CategoryComponent } from './category/category.component';
 import { AddEditCategoryComponent } from './category/add-edit-category/add-edit-category.component';
+import { AddEditLocationComponent } from './location/add-edit-location/add-edit-location.component';
+import { TagInputModule } from 'ngx-chips';
 
 @NgModule({
   imports: [
@@ -21,12 +23,14 @@ import { AddEditCategoryComponent } from './category/add-edit-category/add-edit-
     FormsModule,
     ReactiveFormsModule,
     UiSwitchModule,
-    AccordionModule
+    AccordionModule,
+    TagInputModule
   ],
   declarations: [
     LocationComponent,
     CategoryComponent,
-    AddEditCategoryComponent
+    AddEditCategoryComponent,
+    AddEditLocationComponent
   ],
 })
 export class MastersModule { }
