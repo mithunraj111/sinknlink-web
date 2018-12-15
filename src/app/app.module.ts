@@ -10,6 +10,7 @@ import { MenuItems } from './shared/menu-items/menu-items';
 import { BreadcrumbsComponent } from './layout/admin/breadcrumbs/breadcrumbs.component';
 import { MastersComponent } from './masters/masters.component';
 import { DataFilterPipe } from './shared/elements/data-filter.pipe';
+import { AdminsComponent} from './admins/admins.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { DataFilterPipe } from './shared/elements/data-filter.pipe';
     AuthComponent,
     BreadcrumbsComponent,
     MastersComponent,
+    AdminsComponent
   ],
   imports: [
     BrowserModule,

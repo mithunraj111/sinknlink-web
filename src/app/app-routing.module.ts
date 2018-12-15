@@ -22,6 +22,10 @@ const routes: Routes = [
         loadChildren: './masters/masters.module#MastersModule'
       },
       {
+        path: 'admins',
+        loadChildren: './admins/admins.module#AdminsModule'
+      },
+      {
         path: 'navigation',
         loadChildren: './navigation/navigation.module#NavigationModule'
       },
