@@ -1,50 +1,72 @@
-<div class="card table-header">
-  <div class="dt-responsive">
-    <div class="table-responsive">
-      <div class="add-button">
-        <button type="button" class="pull-right btn btn-primary btn-outline-primary btn-icon" placement="bottom"
-          ngbTooltip="Click to add category" (click)="openMyModal('categorymodal')"><i class="fa fa-plus"></i></button>
+<div class="fixedheader">
+  <div class="header-title pos-fixed">
+    <div class="row">
+      <div class="col-md-6 col-sm-6">
+        <h2>Business Category</h2>
+        <p>lorem ipsum dolor sit amet, consectetur adipisicing elit - Business Category</p>
       </div>
-      <table class="table table-striped table-bordered full-data-table" [mfData]="data" #mf="mfDataTable"
-        [mfRowsOnPage]="rowsOnPage">
-        <thead>
-          <tr>
-            <th>Category Name</th>
-            <th>Updated By</th>
-            <th class="text-center">Status</th>
-            <th class="text-center">Action</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <tr *ngFor="let item of mf.data; let i = index;">
-            <td>{{item.categoryname}}</td>
-            <td>
-              <span class="updatename">{{item.lastupdatedby}}</span>
-              <span class="updatedate">{{item.lastupdateddt}}</span>
-            </td>
-            <td class="text-center">
-              <ui-switch class="js-small" placement="top" ngbTooltip="Click to change the status" color="#03ADED"
-                switchColor="#fff" size="small" checked></ui-switch>
-            </td>
-            <td class="action-icon text-center">
-              <a href="javascript:;" placement="top" ngbTooltip="click to edit the UOM" class="m-r-15 crm-action-edit text-primary"><i
-                  class="fa fa-pencil"></i></a>
-              <a href="javascript:;" placement="bottom" ngbTooltip="Click to delete" class="crm-action-delete text-danger"><i
-                  class="fa fa-trash"></i></a>
-            </td>
-          </tr>
-        </tbody>
-        <tfoot>
-          <tr class="page-nav">
-            <td colspan="12">
-              <mfBootstrapPaginator class="pagination-main f-right"></mfBootstrapPaginator>
-            </td>
-          </tr>
-        </tfoot>
-      </table>
+      <div class="col-md-5 col-sm-5">
+        <div class="text-right">
+          <label>Search:
+            <input type="search" [(ngModel)]="filterQuery" class="header-search form-control input-sm full-data-search"
+              placeholder="">
+          </label>
+        </div>
+      </div>
+      <div class="col-md-1 col-sm-1 p-r-30">
+        <button type="button" placement="bottom" ngbTooltip="Click to add new business category" class="btn pull-left btn-primary waves-effect"
+          (click)="openMyModal('categorymodal')"><i class="fa fa-plus-circle m-r-5"></i> New
+        </button>
+      </div>
     </div>
   </div>
 </div>
-
+<div class="card table-header m-t-60">
+  <div class="card-body">
+    <div class="table-content crm-table">
+      <div class="project-table">
+        <div class="dt-responsive">
+          <div class="table-responsive">
+            <table class="table table-striped table-bordered full-data-table" [mfData]="data| dataFilter : filterQuery" #mf="mfDataTable"
+              [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+              <thead>
+                <tr>
+                  <th>
+                    <mfDefaultSorter by='businesscategory'>Business Category</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter by='updatedby'>Updated By</mfDefaultSorter>
+                  </th>
+                  <th class="text-center">Status</th>
+                  <th class="text-center">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of mf.data;let i = index;">
+                  <td>{{item.businesscategory}}</td>
+                  <td>
+                    <span class="updatename">{{item.lastupdatedby}}</span>
+                    <span class="updatedate">{{item.lastupdateddt}}</span>
+                  </td>
+                  <td class="text-center">
+                    <ui-switch class="js-small" placement="top" ngbTooltip="Click to change the status" color="#03ADED"
+                      switchColor="#fff" size="small" checked></ui-switch>
+                  </td>
+                  <td class="action-icon text-center">
+                    <a href="javascript:;" placement="top" ngbTooltip="Click to edit the business category " class="m-r-15 crm-action-edit text-primary"
+                      (click)="openMyModal('editcategorymodal')">
+                      <i class="fa fa-pencil"></i></a>
+                    <a href="javascript:;" placement="bottom" ngbTooltip="Click to delete the business category " class="crm-action-delete text-danger">
+                      <i class="fa fa-trash"></i></a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <app-add-edit-category></app-add-edit-category>
+<!-- Add Contact Start Model -->

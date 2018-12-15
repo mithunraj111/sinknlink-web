@@ -57,7 +57,7 @@ const MENUITEMS = [
             name: 'Roles'
           },
           {
-            state: 'categories',
+            state: 'category',
             name: 'Categories'
           },
           {

@@ -14,10 +14,10 @@ export class CategoryComponent implements OnInit {
   constructor() {
     this.data = [
       {
-        categoryname: 'Nike', lastupdateddt: '26-Dec-2018 15:00', lastupdatedby: 'Admin', status: 'Active'
+        businesscategory: 'Nike', lastupdateddt: '26-Dec-2018 15:00', lastupdatedby: 'Admin'
       },
       {
-        categoryname: 'Piece', lastupdateddt: '26-Dec-2018 15:00', lastupdatedby: 'Admin', status: 'Active'
+        businesscategory: 'Piece', lastupdateddt: '26-Dec-2018 15:00', lastupdatedby: 'Admin'
       }
     ];
   }
