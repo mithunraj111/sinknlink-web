@@ -1,3 +1,78 @@
-<p>
-  events works!
-</p>
+<div class="fixedheader">
+  <div class="header-title pos-fixed">
+    <div class="row">
+      <div class="col-md-5 col-sm-5">
+        <h2>Events</h2>
+        <p>lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
+      </div>
+      <div class="col-md-6 col-sm-6">
+        <div class="text-right">
+          <label>Search:
+            <input type="search" [(ngModel)]="filterQuery" class="header-search form-control input-sm full-data-search"
+              placeholder="">
+          </label>
+        </div>
+      </div>
+      <div class="col-md-1 col-sm-1 p-r-30">
+        <button type="button" placement="bottom" ngbTooltip="Click to add new events" class="btn pull-left btn-primary waves-effect"
+          routerLink="create">
+          <i class="fa fa-plus-circle m-r-5"></i> NEW
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="card table-header m-t-60">
+  <div class="card-body">
+    <div class="table-content crm-table">
+      <div class="project-table">
+        <div class="dt-responsive">
+          <div class="table-responsive">
+            <table class="table table-fixed table-striped table-bordered full-data-table" [mfData]="data | dataFilter : filterQuery"
+              #mf="mfDataTable" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+              <thead class="pr-1">
+                <tr>
+                  <th>
+                    <mfDefaultSorter by='eventname'>Event name</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter by='date'>Date</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter by='city'>City</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter by='lastupdatedby'>Updated by</mfDefaultSorter>
+                  </th>
+                  <th class="text-center">Status</th>
+                  <th class="text-center">Action</th>
+                </tr>
+              </thead>
+              <tbody class="pr-1">
+                <tr *ngFor="let items of mf.data; let i = index;">
+                  <td>{{items.eventname}}</td>
+                  <td>{{items.date}}</td>
+                  <td>{{items.city}}</td>
+                  <td>
+                    <span class="updatename">{{items.lastupdatedby}}</span>
+                    <span class="updatedate">{{items.lastupdateddt}}</span>
+                  </td>
+                  <td class="text-center">
+                    <ui-switch class="js-small" placement="top" ngbTooltip="Click to change the status" color="#03ADED"
+                      switchColor="#fff" size="small" checked></ui-switch>
+                  </td>
+                  <td class="action-icon text-center">
+                    <a placement="top" routerLink="create" ngbTooltip="Click to edit event details " class="m-r-15 crm-action-edit text-primary">
+                      <i class="fa fa-pencil"></i></a>
+                    <a href="javascript:;" placement="bottom" ngbTooltip="Click to delete the events " class="crm-action-delete text-danger">
+                      <i class="fa fa-trash"></i></a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

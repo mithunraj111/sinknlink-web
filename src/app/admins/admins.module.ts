@@ -12,6 +12,8 @@ import { UiSwitchModule } from 'ng2-ui-switch';
 import { AccordionModule } from '../ui-elements/basic/accordion/accordion.module';
 import { TagInputModule } from 'ngx-chips';
 import { AddEditDonationsComponent } from './donations/add-edit-donations/add-edit-donations.component';
+import { AddEditEventsComponent } from  './events/add-edit-events/add-edit-events.component';
+import {FileUploadModule} from 'ng2-file-upload';
 
 @NgModule({
   imports: [
@@ -24,8 +26,9 @@ import { AddEditDonationsComponent } from './donations/add-edit-donations/add-ed
     ReactiveFormsModule,
     UiSwitchModule,
     AccordionModule,
-    TagInputModule
+    TagInputModule,
+    FileUploadModule
   ],
-  declarations: [EventsComponent, DonationsComponent, AddEditDonationsComponent]
+  declarations: [EventsComponent, DonationsComponent, AddEditDonationsComponent, AddEditEventsComponent]
 })
 export class AdminsModule { }

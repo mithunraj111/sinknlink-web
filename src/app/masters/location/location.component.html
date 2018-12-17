@@ -14,7 +14,7 @@
         </div>
       </div>
       <div class="col-md-1 col-sm-1 p-r-30">
-        <button type="button" placement="top" ngbTooltip="Click to add new user" class="btn pull-left btn-primary waves-effect"
+        <button type="button" placement="bottom" ngbTooltip="Click to add new location" class="btn pull-left btn-primary waves-effect"
           (click)="openMyModal('locationmodal')">
           <i class="fa fa-plus-circle m-r-5"></i> NEW
         </button>
@@ -62,14 +62,14 @@
                     <span class="updatedate">{{items.lastupdateddt}}</span>
                   </td>
                   <td class="text-center">
-                    <ui-switch class="js-small" placement="top" ngbTooltip="Click to change the status" color="#03ADED"
+                    <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change the status" color="#03ADED"
                       switchColor="#fff" size="small" checked></ui-switch>
                   </td>
                   <td class="action-icon text-center">
-                    <a placement="top" (click)="openMyModal('locationmodal')" ngbTooltip="Click to edit the state "
+                    <a placement="bottom" (click)="openMyModal('locationmodal')" ngbTooltip="Click to edit location "
                       class="m-r-15 crm-action-edit text-primary">
                       <i class="fa fa-pencil"></i></a>
-                    <a href="javascript:;" placement="bottom" ngbTooltip="Click to delete the state " class="crm-action-delete text-danger">
+                    <a href="javascript:;" placement="bottom" ngbTooltip="Click to delete location" class="crm-action-delete text-danger">
                       <i class="fa fa-trash"></i></a>
                   </td>
                 </tr>

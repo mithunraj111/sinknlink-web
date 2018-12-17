@@ -6,7 +6,6 @@ import { Http } from '@angular/http';
   templateUrl: './location.component.html',
   styleUrls: ['./location.component.scss']
 })
-
 export class LocationComponent implements OnInit {
   public data: any;
   public filterQuery = '';

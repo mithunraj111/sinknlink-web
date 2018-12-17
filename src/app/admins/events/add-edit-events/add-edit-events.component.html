@@ -1,0 +1,164 @@
+<div class="header-title m-b-15">
+  <div class="row">
+    <div class="col-md-6 col-sm-6">
+      <h2 class="add-tenant">Events</h2>
+    </div>
+    <div class="col-md-3 text-right pr-3 pt-2 mt-1 f-w-600"><span>ID: 875643</span></div>
+    <div class="col-md-3 col-sm-6 save-button text-right p-r-30">
+      <button type="button" placement="bottom" ngbTooltip="click to save events" class="btn btn-primary waves-effect m-r-10 text-capitalize">Save</button>
+      <button type="button" placement="bottom" ngbTooltip="Go back" routerLink="/admins/events" class="btn btn-inverse btn-primary waves-effect"><i
+          class="fa fa-arrow-circle-left"></i></button>
+    </div>
+  </div>
+</div>
+<div class="col-md-12 col-sm-12">
+  <div class="row">
+    <div class="col-md-9 col-sm-8 p-l-0 p-r-10">
+      <div class="employee-form">
+        <div class="card tenants-page tenants-pages m-b-10">
+          <div class="col-md-12 col-sm-12 p-t-10">
+            <div class="form-group row required">
+              <label class="col-md-3 col-sm-6 col-form-label text-right">Event Name</label>
+              <div class="col-md-9 col-sm-6">
+                <input type="text" class="form-control" placeholder="Event Name">
+              </div>
+            </div>
+            <div class="form-group row required">
+              <label class="col-md-3 col-sm-6 col-form-label text-right">Location</label>
+              <div class="col-md-9 col-sm-6">
+                <select name="select" class="form-control p-1">
+                  <option value="opt1">Select your Location</option>
+                  <option value="opt2">TamilNadu</option>
+                  <option value="opt3">Kerala</option>
+                  <option value="opt4">Andrapradesh</option>
+                  <option value="opt5">Karnataka</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row required">
+              <label class="col-md-3 col-sm-6 col-form-label text-right">Start Date</label>
+              <div class="col-md-9 col-sm-6">
+                <div class="input-group">
+                  <input class="form-control" placeholder="dd-mm-yyyy" name="dp" [(ngModel)]="modelPopup" ngbDatepicker
+                    #dp="ngbDatepicker">
+                  <div class="input-group-append bg-default" (click)="dp.toggle()">
+                    <span class="fa fa-calendar input-group-text"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row required">
+              <label class="col-md-3 col-sm-6 col-form-label text-right">Expiry Date</label>
+              <div class="col-md-9 col-sm-6">
+                <div class="input-group">
+                  <input class="form-control" placeholder="dd-mm-yyyy" name="dp" [(ngModel)]="modelPop" ngbDatepicker
+                    #d="ngbDatepicker">
+                  <div class="input-group-append bg-default" (click)="d.toggle()">
+                    <span class="fa fa-calendar input-group-text"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 col-sm-12">
+              <div class="form-group row required">
+                <label class="col-md-3 col-sm-6 col-form-label text-right">Address</label>
+                <div class="col-md-9 col-sm-6 pr-0 pl-2">
+                  <textarea></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 col-sm-12">
+              <div class="form-group row required">
+                <label class="col-md-3 col-sm-6 col-form-label text-right">Particulars</label>
+                <div class="col-md-9 col-sm-6 pr-0 pl-2">
+                  <textarea></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row required">
+              <label class="col-md-3 col-sm-6 col-form-label text-right">Status</label>
+              <div class="col-md-9 col-sm-6">
+                <ui-switch class="js-small" placement="top" ngbTooltip="Click to change the status" color="#03ADED"
+                  switchColor="#fff" size="small" checked></ui-switch>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 col-sm-4">
+      <div class="employee-page pos-fixed">
+        <div class="col-md-12 col-sm-12 text-center employee-profile">
+          <div class="form-group">
+            <label class="custom-file mb-3">
+              <img src="assets/images/employee.jpg" class="img-responsive" alt="employee">
+              <input type="file" ng2FileSelect [uploader]="uploader" multiple class="custom-file-input">
+              <span class="custom-file-control"></span>
+            </label>
+            <div class="col-md-12 col-sm-12">
+              <div class="row">
+                <div class="col-md-5" *ngFor="let item of uploader.queue">
+                  <strong>{{ item?.file?.name }}</strong>
+                  <img class="preview p-0" src="{{item?.file?.name}}">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<p>
+  Start editing to see some magic happen :)
+</p>
+
+<img [src]="url" height="200"> <br/>
+<input type='file' (change)="onSelectFile($event)">
+<!-- 
+<div class="sub-title">Photos</div>
+<label class="custom-file mb-3">
+  <input type="file" ng2FileSelect [uploader]="uploader" multiple class="custom-file-input">
+  <span class="custom-file-control"></span>
+</label>
+<div class="col-md-9">
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th width="50%">Name</th>
+          <th>Size</th>
+          <th>Progress</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of uploader.queue">
+          <td><strong>{{ item?.file?.data }}</strong></td>
+          <td *ngIf="uploader.isHTML5" nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }} MB</td>
+          <td *ngIf="uploader.isHTML5">
+            <div class="progress" style="margin-bottom: 0;">
+              <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': item.progress + '%' }"></div>
+            </div>
+          </td>
+          <td class="text-center">
+            <span *ngIf="item.isSuccess"><i class="fa fa-check"></i></span>
+            <span *ngIf="item.isCancel"><i class="fa fa-ban"></i></span>
+            <span *ngIf="item.isError"><i class="fa fa-times"></i></span>
+          </td>
+          <td nowrap>
+            <button type="button" class="btn btn-danger btn-sm m-b-5" (click)="item.remove()">
+              <span class="fa fa-trash"></span> Remove
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <button type="button" class="btn btn-success btn-sm m-b-5" (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
+    <span class="fa fa-upload"></span> Upload all
+  </button>
+</div> -->
