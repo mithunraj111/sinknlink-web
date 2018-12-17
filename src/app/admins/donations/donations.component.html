@@ -1,11 +1,11 @@
 <div class="fixedheader">
   <div class="header-title pos-fixed">
     <div class="row">
-      <div class="col-md-5 col-sm-5">
+      <div class="col-md-6 col-sm-6">
         <h2>Donation</h2>
         <p>lorem ipsum dolor sit amet, consectetur adipisicing elit-Donation</p>
       </div>
-      <div class="col-md-6 col-sm-6">
+      <div class="col-md-5 col-sm-5">
         <div class="text-right">
           <label>Search:
             <input type="search" [(ngModel)]="filterQuery" class="header-search form-control input-sm full-data-search"
@@ -15,7 +15,7 @@
       </div>
       <div class="col-md-1 col-sm-1 p-r-30">
         <button type="button" placement="bottom" ngbTooltip="Click to add donation" class="btn pull-left btn-primary waves-effect"
-        (click)="openMyModal('categorymodal')"><i class="fa fa-plus-circle m-r-5"></i> New
+        routerLink="create"><i class="fa fa-plus-circle m-r-5"></i> New
         </button>
       </div>
     </div>
@@ -32,7 +32,7 @@
               <thead>
                 <tr>
                   <th>
-                    <mfDefaultSorter by='charity'>Charity</mfDefaultSorter>
+                    <mfDefaultSorter by='charity'>Charity Name</mfDefaultSorter>
                   </th>
                   <th>
                     <mfDefaultSorter by='startdate'>Start Date</mfDefaultSorter>
@@ -75,4 +75,4 @@
     </div>
   </div>
 </div>
-<app-add-edit-donations></app-add-edit-donations>
+<!-- <app-add-edit-donations></app-add-edit-donations> -->

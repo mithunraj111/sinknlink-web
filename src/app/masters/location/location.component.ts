@@ -16,11 +16,11 @@ export class LocationComponent implements OnInit {
   showRegion = false;
   constructor() {
     this.data=[
-      { pincode:'600 078', area:'K.K.Nagar', state:'TamilNadu', city:'Chennai', lastupdatedby:'Admin', lastupdateddt:'02/12/2018' },
-      { pincode:'600 083', area:'Ashok Nagar', state:'TamilNadu', city:'Chennai', lastupdatedby:'Admin', lastupdateddt:'11/12/2018' },
-      { pincode:'600 078', area:'K.K.Nagar', state:'TamilNadu', city:'Chennai', lastupdatedby:'Admin', lastupdateddt:'02/12/2018' },
-      { pincode:'600 083', area:'Ashok Nagar', state:'TamilNadu', city:'Chennai', lastupdatedby:'Admin', lastupdateddt:'11/12/2018' },
-      { pincode:'600 078', area:'K.K.Nagar', state:'TamilNadu', city:'Chennai', lastupdatedby:'Admin', lastupdateddt:'02/12/2018' }
+      { pincode:'600 078', area:'K.K.Nagar', state:'TamilNadu', city:'Chennai', lastupdatedby:'Admin', lastupdateddt:'26-Dec-2018 15:00' },
+      { pincode:'600 083', area:'Ashok Nagar', state:'TamilNadu', city:'Chennai', lastupdatedby:'Admin', lastupdateddt:'26-Dec-2018 15:00' },
+      { pincode:'600 078', area:'K.K.Nagar', state:'TamilNadu', city:'Chennai', lastupdatedby:'Admin', lastupdateddt:'26-Dec-2018 15:00' },
+      { pincode:'600 083', area:'Ashok Nagar', state:'TamilNadu', city:'Chennai', lastupdatedby:'Admin', lastupdateddt:'26-Dec-2018 15:00' },
+      { pincode:'600 078', area:'K.K.Nagar', state:'TamilNadu', city:'Chennai', lastupdatedby:'Admin', lastupdateddt:'26-Dec-2018 15:00' }
     ]
   }
 
