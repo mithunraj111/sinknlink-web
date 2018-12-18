@@ -14,7 +14,7 @@
       </div>
       <div class="col-md-1 col-sm-1 p-r-30">
         <button type="button" placement="bottom" ngbTooltip="Click to add new events" class="btn pull-right btn-primary waves-effect"
-          routerLink="create">
+        (click)="addEvents()" >
           <i class="fa fa-plus-circle m-r-5"></i> NEW
         </button>
       </div>
@@ -63,7 +63,7 @@
                       switchColor="#fff" size="small" checked></ui-switch>
                   </td>
                   <td class="action-icon text-center">
-                    <a placement="top" routerLink="create" ngbTooltip="Click to edit event details " class="m-r-15 crm-action-edit text-primary">
+                    <a placement="top" (click)="editEvents()" ngbTooltip="Click to edit event details " class="m-r-15 crm-action-edit text-primary">
                       <i class="fa fa-pencil"></i></a>
                     <a href="javascript:;" placement="bottom" ngbTooltip="Click to delete the events " class="crm-action-delete text-danger">
                       <i class="fa fa-trash"></i></a>

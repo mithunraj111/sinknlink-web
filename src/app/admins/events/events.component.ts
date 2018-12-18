@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-events',
@@ -13,7 +14,7 @@ export class EventsComponent implements OnInit {
   public userProPic: string;
   showDetails = false;
   showRegion = false;
-  constructor() { 
+  constructor(private router: Router) { 
     this.data=[
       { eventname: 'Moksha events', date: '16-Dec-2018', city:'Chennai', lastupdatedby:'Admin', lastupdateddt:'12-Nov-2018 11:00' },
       { eventname: 'Hackathon on UAV', date: '16-Dec-2018', city:'Chennai', lastupdatedby:'Admin', lastupdateddt:'12-Nov-2018 11:00' },
@@ -35,5 +36,11 @@ export class EventsComponent implements OnInit {
   }
   closeMyModal(event) {
     ((event.target.parentElement.parentElement).parentElement).classList.remove('md-show');
+  }
+  addEvents() {
+    this.router.navigate(['admins/events/create']);
+  }
+  editEvents(data) {
+    this.router.navigate(['admins/events/edit/' + 1]);
   }
 }

@@ -14,8 +14,8 @@
         </div>
       </div>
       <div class="col-md-1 col-sm-1 p-r-30">
-        <button type="button" placement="bottom" ngbTooltip="Click to add  business category" class="btn pull-left btn-primary waves-effect"
-          (click)="openMyModal('categorymodal')"><i class="fa fa-plus-circle m-r-5"></i> New
+        <button type="button" placement="bottom" ngbTooltip="Click to add business category" class="btn pull-left btn-primary waves-effect"
+          (click)="addCategory()"><i class="fa fa-plus-circle m-r-5"></i> New
         </button>
       </div>
     </div>
@@ -57,7 +57,7 @@
                   </td>
                   <td class="action-icon text-center">
                     <a href="javascript:;" placement="top" ngbTooltip="Click to edit the business category " class="m-r-15 crm-action-edit text-primary"
-                      (click)="openMyModal('editcategorymodal')">
+                      (click)="editCategory(data)">
                       <i class="fa fa-pencil"></i></a>
                     <a href="javascript:;" placement="bottom" ngbTooltip="Click to delete the business category " class="crm-action-delete text-danger">
                       <i class="fa fa-trash"></i></a>
@@ -71,5 +71,4 @@
     </div>
   </div>
 </div>
-<app-add-edit-category></app-add-edit-category>
-<!-- Add Contact Start Model -->
+<app-add-edit-category [title]="formTitle"></app-add-edit-category>

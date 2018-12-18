@@ -2,14 +2,18 @@
   <div class="row">
     <div class="col-md-6 col-sm-6">
       <h2 class="add-tenant">Events</h2>
+      <p *ngIf="eventid" class="mb-0" >ID: 875643</p>
     </div>
-    <div class="col-md-3 text-right pr-3 pt-2 mt-1 f-w-600"><span>ID: 875643</span></div>
+    <!-- <div class="col-md-3 text-right pr-3 pt-2 mt-1 f-w-600" *ngIf="eventid" ></div> -->
     <div class="col-md-3 col-sm-6 save-button text-right p-r-30">
       <button type="button" placement="bottom" ngbTooltip="click to save events" class="btn btn-primary waves-effect m-r-10 text-capitalize">Save</button>
       <button type="button" placement="bottom" ngbTooltip="Go back" routerLink="/admins/events" class="btn btn-inverse btn-primary waves-effect"><i
           class="fa fa-arrow-circle-left"></i></button>
     </div>
   </div>
+  <!-- <div *ngIf="eventid">
+      <span>ID: 875643</span>
+  </div> -->
 </div>
 <div class="col-md-12 col-sm-12">
   <div class="row">

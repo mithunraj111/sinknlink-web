@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-category',
@@ -6,11 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./category.component.scss']
 })
 export class CategoryComponent implements OnInit {
+  @Output() categorydtls: {};
   public data: any;
   public rowsOnPage = 8;
   public filterQuery = '';
   public sortBy = '';
   public sortOrder = 'desc';
+    formTitle: string;
   constructor() {
     this.data = [
       {
@@ -26,6 +28,16 @@ export class CategoryComponent implements OnInit {
   }
   openMyModal(event) {
     document.querySelector('#' + event).classList.add('md-show');
+  }
+  addCategory(){
+    this.categorydtls= {};
+    this.formTitle= 'Add Category';
+    this.openMyModal('categorymodal');
+  }
+  editCategory(data){
+    this.categorydtls= data;
+    this.formTitle= 'Edit Category';
+    this.openMyModal('categorymodal');
   }
 }
 

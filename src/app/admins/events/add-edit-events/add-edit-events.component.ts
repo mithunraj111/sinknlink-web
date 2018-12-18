@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import {FileUploader} from 'ng2-file-upload';
+import { ActivatedRoute } from '@angular/router';
 const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
 
 @Component({
@@ -15,12 +16,21 @@ export class AddEditEventsComponent implements OnInit {
   });
   hasBaseDropZoneOver = false;
   hasAnotherDropZoneOver = false;
+  isaddForm = true;
+  eventid: number;
 
-  constructor() { }
+  constructor(private route: ActivatedRoute) { 
+    this.route.params.subscribe(params => {
+      if (params.id !== undefined) {
+        this.isaddForm = false;
+        this.eventid = params.id;
+      }
+    });
+   }
 
   ngOnInit() {
   }
-
+  
   fileOverBase(e: any): void {
     this.hasBaseDropZoneOver = e;
   }

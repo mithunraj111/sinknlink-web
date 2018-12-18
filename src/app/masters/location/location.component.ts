@@ -15,7 +15,6 @@ export class LocationComponent implements OnInit {
   showDetails = false;
   showRegion = false;
   @Output() locationdtls :any ={};
-  addedit: boolean = false;
   formTitle: string;
 
   constructor() {
@@ -46,7 +45,6 @@ export class LocationComponent implements OnInit {
   }
   addLocation(){
     this.locationdtls={};
-    this.addedit= true;
     this.formTitle = 'Add Location';
     this.openMyModal('locationmodal');
   }
