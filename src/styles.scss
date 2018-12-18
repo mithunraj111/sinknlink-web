@@ -409,9 +409,9 @@ textarea {
     label{
         font-weight: bold;
     }
-    .dropdown-menu.show {
-        top: -220px !important;
-    }
+    // .dropdown-menu.show {
+    //     top: -220px !important;
+    // }
 }
 select.form-control:not([size]):not([multiple]){
     height: auto !important;
@@ -701,6 +701,58 @@ button{
         .ng-pristine{
             .ng2-tag-input__text-input{
                 padding:0;
+            }
+        }
+    }
+}
+.no-data {
+    position: absolute;
+    top: 80%;
+    left: 37%;
+    z-index: 1;
+    h5{
+        color: #c8c9cb;
+        // font-size: 35px;
+        // font-weight: bold;
+    }
+}
+.fixed-table-header{
+    table{
+        thead{
+            display: block;
+            margin-right: 10px;
+        }
+        tbody{
+            display: block;
+            overflow: auto;
+            height: 360px;
+        }
+    }
+}
+.location-table{
+    th{
+        width: 16%;
+    }
+    td{
+        width:16%;
+    }
+}
+.events-table{
+    th,td{
+        width:19%;
+    }
+}
+.ng2-tag-input__text-input[_ngcontent-c11]{
+    font-size: 14px !important;
+}
+tag{
+    .tag-wrapper{
+        height: 15px;
+        line-height: 15px;
+        padding-left: 3px;
+        .ng-star-inserted{
+            svg{
+                margin-top:-5px;
             }
         }
     }

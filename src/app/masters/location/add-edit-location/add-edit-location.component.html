@@ -24,10 +24,19 @@
           </div>
           <div class="form-group required">
             <label>City</label>
-            <tag-input [ngClass]="'tag-select'" theme='bootstrap' [secondaryPlaceholder]="'Select your City'"
-              [placeholder]="''" [ngModel]="[]" [onlyFromAutocomplete]="true">
+            <tag-input [ngClass]="'tag-select'" theme='bootstrap' [placeholder]="'Select your city'" [maxItems]="1" [ngModel]="[]"
+              [addOnBlur]="true" [clearOnBlur]="true">
+              <!-- <option value="opt1">Select your state</option>
+              <option value="opt2">TamilNadu</option>
+              <option value="opt3">Kerala</option>
+              <option value="opt4">Andrapradesh</option>
+              <option value="opt5">Karnataka</option>    -->
               <tag-input-dropdown [autocompleteItems]="autocompleteItems"></tag-input-dropdown>
             </tag-input>
+            <!-- <tag-input [ngClass]="'tag-select'" theme='bootstrap' [secondaryPlaceholder]="'Select your City'"
+              [placeholder]="'Select your city'" [ngModel]="[]" [onlyFromAutocomplete]="true">
+              <tag-input-dropdown [autocompleteItems]="autocompleteItems"></tag-input-dropdown>
+            </tag-input> -->
             <!-- <div class="form-group required row">
               <label class="col-sm-12">City</label>
               <div class="col-sm-12">

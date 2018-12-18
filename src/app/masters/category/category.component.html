@@ -21,7 +21,10 @@
     </div>
   </div>
 </div>
-<div class="card table-header m-t-60">
+<div *ngIf="data.length==0" class="no-data p-0 m-0">
+    <h3><i>No data found</i></h3>
+</div>
+<div class="card table-header m-t-60" *ngIf="data.length!=0">
   <div class="card-body">
     <div class="table-content crm-table">
       <div class="project-table">
