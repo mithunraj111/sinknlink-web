@@ -1,10 +1,11 @@
 <div class="header-title m-b-15">
   <div class="row">
     <div class="col-md-6 col-sm-6">
-      <h2 class="add-tenant">User</h2>
+      <h2>Users</h2>
+      <p class="m-b-0">ID:87567</p>
     </div>
     <div class="col-md-6 col-sm-6 save-button text-right p-r-30">
-      <button type="button" placement="bottom" ngbTooltip="Click to save employees" class="btn btn-primary waves-effect m-r-10 text-capitalize">Save</button>
+      <button type="button" placement="bottom" ngbTooltip="Click to save user" class="btn btn-primary waves-effect m-r-10 text-capitalize">Save</button>
       <button type="button" placement="bottom" ngbTooltip="Go back" routerLink="/masters/users" class="btn btn-inverse btn-primary waves-effect"><i
           class="fa fa-arrow-circle-left"></i></button>
     </div>
@@ -13,7 +14,7 @@
 
 <div class="col-md-12 col-sm-12">
   <div class="row">
-    <div class="col-md-9 col-sm-8 p-l-0 p-r-10">
+    <div class="col-md-9 col-sm-9 p-l-0 p-r-10">
       <div class="user-form">
 
         <div class="card tenants-page tenants-pages m-b-10">
@@ -21,22 +22,22 @@
             <div class="col-md-12 col-sm-12">
               <div class="form-group row required">
                 <label class="col-md-3 col-sm-6 col-form-label text-right">Full Name</label>
-                <div class="col-md-9 col-sm-6">
-                  <input type="text" class="form-control" placeholder="Username">
+                <div class="col-md-6 col-sm-6 p-r-0">
+                  <input type="text" class="form-control" placeholder="Username" style="width:100% !important">
                 </div>
               </div>
 
               <div class="form-group row required">
                 <label class="col-md-3 col-sm-6 col-form-label text-right">Mobile No</label>
-                <div class="col-md-9 col-sm-6">
-                  <input type="text" class="form-control" placeholder="Mobile No">
+                <div class="col-md-6 col-sm-6 p-r-0">
+                  <input type="text" class="form-control" placeholder="Mobile No" style="width:100% !important">
                 </div>
               </div>
 
               <div class="form-group row required">
                 <label class="col-md-3 col-sm-6 col-form-label text-right">Role</label>
-                <div class="col-md-9 col-sm-6">
-                  <select name="select" class="form-control">
+                <div class="col-md-6 col-sm-6 p-r-0">
+                  <select name="select" class="form-control users-list" style="width:100% !important">
                     <option value="opt1">Select Role</option>
                     <option value="opt2">Admin</option>
                     <option value="opt2">Manager</option>
@@ -60,24 +61,30 @@
                   <ui-switch class="js-small" color="#03ADED" switchColor="#fff" size="small" checked></ui-switch>
                 </div>
               </div>
-
+              <div class="form-group row">
+                <label class="col-md-3 col-sm-6 col-form-label text-right">Last Login</label>
+                <div class="col-md-6 col-sm-6 m-t-5">
+                  <span class="f-13">27-Nov-2018 20:32</span>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 col-sm-6 col-form-label text-right">Created By</label>
+                <div class="col-md-6 col-sm-6 m-t-5">
+                  <span class="f-15">Admin</span><br>
+                  <span class="text-align f-12">02-Nov-2018 20:00</span>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 col-sm-6 col-form-label text-right">Updated By</label>
+                <div class="col-md-6 col-sm-6 m-t-5">
+                  <span class="f-15">pavithra</span><br>
+                  <span class="text-align f-12 ">02-Dec-2018 20:00</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <!-- <div class="col-md-3 col-sm-4">
-      <div class="user-page pos-fixed">
-        <div class="col-md-12 col-sm-12 text-center employee-profile">
-          <div class="form-group">
-            <label class="custom-file">
-              <img src="assets/images/avatar-4.jpg" class="img-responsive" alt="user">
-              <input type="file" class="custom-file-input">
-              <span class="custom-file-control"></span>
-            </label>
-          </div>
-        </div>
-      </div>
-    </div> -->
   </div>
 </div>
