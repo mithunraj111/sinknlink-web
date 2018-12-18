@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { Http } from '@angular/http';
 
 @Component({
@@ -14,6 +14,10 @@ export class LocationComponent implements OnInit {
   public userProPic: string;
   showDetails = false;
   showRegion = false;
+  @Output() locationdtls :any ={};
+  addedit: boolean = false;
+  formTitle: string;
+
   constructor() {
     this.data=[
       { pincode:'600 078', area:'K.K.Nagar', state:'TamilNadu', city:'Chennai', lastupdatedby:'Admin', lastupdateddt:'26-Dec-2018 15:00' },
@@ -39,5 +43,16 @@ export class LocationComponent implements OnInit {
   }
   closeMyModal(event) {
     ((event.target.parentElement.parentElement).parentElement).classList.remove('md-show');
+  }
+  addLocation(){
+    this.locationdtls={};
+    this.addedit= true;
+    this.formTitle = 'Add Location';
+    this.openMyModal('locationmodal');
+  }
+  editLocation(data){
+    this.locationdtls= data;
+    this.formTitle = 'Edit Location';
+    this.openMyModal('locationmodal');
   }
 }

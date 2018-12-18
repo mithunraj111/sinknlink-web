@@ -14,7 +14,7 @@
     </div>
     <div class="col-md-1 col-sm-1 p-r-30">
       <button type="button" placement="bottom" ngbTooltip="Click to add new location" class="btn pull-right btn-primary waves-effect"
-        (click)="openMyModal('locationmodal')">
+        (click)="addLocation()">
         <i class="fa fa-plus-circle m-r-5"></i> NEW
       </button>
     </div>
@@ -67,8 +67,7 @@
                       switchColor="#fff" size="small" checked></ui-switch>
                   </td>
                   <td class="action-icon text-center">
-                    <a placement="bottom" (click)="openMyModal('locationmodal')" ngbTooltip="Click to edit location "
-                      class="m-r-15 crm-action-edit text-primary">
+                    <a placement="bottom" (click)="editLocation(data)" ngbTooltip="Click to edit location" class="m-r-15 crm-action-edit text-primary">
                       <i class="fa fa-pencil"></i></a>
                     <a href="javascript:;" placement="bottom" ngbTooltip="Click to delete location" class="crm-action-delete text-danger">
                       <i class="fa fa-trash"></i></a>
@@ -82,8 +81,7 @@
     </div>
   </div>
 </div>
-
-<app-add-edit-location></app-add-edit-location>
+<app-add-edit-location [title]="formTitle"></app-add-edit-location>
 
 
 

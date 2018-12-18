@@ -1,6 +1,6 @@
 <div class="modal-size select-input">
   <app-modal-animation [modalID]="'locationmodal'" [modalClass]="'md-effect-7'">
-    <h3 class="f-26">Add Location</h3>
+    <h3 class="f-26">{{title}}</h3>
     <div class="form-header">
       <div class="row ">
         <div class="col-md-12">
@@ -25,7 +25,7 @@
           <div class="form-group required">
             <label>City</label>
             <tag-input [ngClass]="'tag-select'" theme='bootstrap' [placeholder]="'Select your city'" [maxItems]="1" [ngModel]="[]"
-              [addOnBlur]="true" [clearOnBlur]="true">
+             [addOnBlur]="true" [clearOnBlur]="true">
               <!-- <option value="opt1">Select your state</option>
               <option value="opt2">TamilNadu</option>
               <option value="opt3">Kerala</option>

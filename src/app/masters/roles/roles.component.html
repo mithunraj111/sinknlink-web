@@ -29,7 +29,7 @@
         <div class="dt-responsive">
           <!-- <div class="panel-heading">User information</div>-->
           <div class="table-responsive">
-            <table class="table table-striped table-bordered full-data-table" [mfData]="data"
+            <table class="table table-striped table-bordered full-data-table roles-table" [mfData]="data"
               #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
               <thead>
                 <tr>
@@ -39,21 +39,19 @@
                   <th>
                     <mfDefaultSorter by="dataccess">Data Access</mfDefaultSorter>
                   </th>
-                  <th>
+                  <th class="pl-0">
                     <mfDefaultSorter by="updatedby">Updated By</mfDefaultSorter>
                   </th>
-                  <th class="text-center">
+                  <th class="text-center pl-0">
                     <mfDefaultSorter by="status">Status</mfDefaultSorter>
                   </th>
                   <th class="text-center">
                     <mfDefaultSorter>Action</mfDefaultSorter>
                   </th>
                 </tr>
-                <tr>
-                </tr>
               </thead>
 
-              <tbody>
+              <tbody class="mr-2">
                 <tr *ngFor="let item of mf.data; let i = index;">
                   <td>Admin</td>
                   <td>Team</td>
