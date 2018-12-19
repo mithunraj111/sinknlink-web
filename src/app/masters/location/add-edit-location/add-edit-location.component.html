@@ -1,4 +1,4 @@
-<div class="modal-size select-input">
+<div class="modal-size select-input addlocation">
   <app-modal-animation [modalID]="'locationmodal'" [modalClass]="'md-effect-7'">
     <h3 class="f-26">{{title}}</h3>
     <div class="form-header">
@@ -9,8 +9,8 @@
             <input type="text" class="form-control" placeholder="Pincode">
           </div>
           <div class="form-group required">
-            <label>Area</label>
-            <input type="text" class="form-control" placeholder="Area">
+            <label>Select your city</label>
+            <input type="text" class="form-control" placeholder="Select your city">
           </div>
           <div class="form-group required">
             <label>State</label>
@@ -25,24 +25,8 @@
           <div class="form-group required">
             <label>City</label>
             <tag-input [ngClass]="'tag-select'" theme='bootstrap' [placeholder]="'Select your city'" [maxItems]="1" [ngModel]="[]"
-             [addOnBlur]="true" [clearOnBlur]="true">
-              <!-- <option value="opt1">Select your state</option>
-              <option value="opt2">TamilNadu</option>
-              <option value="opt3">Kerala</option>
-              <option value="opt4">Andrapradesh</option>
-              <option value="opt5">Karnataka</option>    -->
-              <tag-input-dropdown [autocompleteItems]="autocompleteItems"></tag-input-dropdown>
+             [addOnBlur]="true" [clearOnBlur]="true"[secondaryPlaceholder]="'Select your city'">
             </tag-input>
-            <!-- <tag-input [ngClass]="'tag-select'" theme='bootstrap' [secondaryPlaceholder]="'Select your City'"
-              [placeholder]="'Select your city'" [ngModel]="[]" [onlyFromAutocomplete]="true">
-              <tag-input-dropdown [autocompleteItems]="autocompleteItems"></tag-input-dropdown>
-            </tag-input> -->
-            <!-- <div class="form-group required row">
-              <label class="col-sm-12">City</label>
-              <div class="col-sm-12">
-                <ng-select [ngClass]="'ng-select'" [options]="simpleOption" [multiple]="true" placeholder="Enter your city"></ng-select>
-              </div>
-            </div> -->
           </div>
           <div class="form-group ">
             <label>Status <small>*</small></label>

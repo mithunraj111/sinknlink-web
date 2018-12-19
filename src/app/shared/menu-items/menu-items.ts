@@ -103,8 +103,8 @@ const MENUITEMS = [
             name: 'Donations'
           },
           {
-            state: 'vipregistrationnumber',
-            name: 'VIP Registration Number'
+            state: 'vipnumberregistration',
+            name: 'VIP Number Registration'
           },
           {
             state: 'lookup',

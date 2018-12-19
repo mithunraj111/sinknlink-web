@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import {Http} from '@angular/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-roles',
@@ -25,13 +26,28 @@ export class RolesComponent implements OnInit {
 
   @Input('modalDefault') modalDefault: any;
 
-  constructor(public http: Http) { }
+  constructor(private router: Router) { 
+    this.data=[
+      { rolename: 'Admin', dataaccess: 'Team', updatedby: 'Mithun', updateddt: '20-Dec-2018 20:12' },
+      { rolename: 'Operator', dataaccess: 'Team', updatedby: 'Raj', updateddt: '20-Dec-2018 20:12' },
+      { rolename: 'Manager', dataaccess: 'Team', updatedby: 'Mithunraj', updateddt: '20-Dec-2018 20:12' },
+      { rolename: 'Admin', dataaccess: 'Team', updatedby: 'Mithun', updateddt: '20-Dec-2018 20:12' },
+      { rolename: 'Operator', dataaccess: 'Team', updatedby: 'Raj', updateddt: '20-Dec-2018 20:12' },
+      { rolename: 'Manager', dataaccess: 'Team', updatedby: 'Mithunraj', updateddt: '20-Dec-2018 20:12' },
+      { rolename: 'Admin', dataaccess: 'Team', updatedby: 'Mithun', updateddt: '20-Dec-2018 20:12' },
+      { rolename: 'Operator', dataaccess: 'Team', updatedby: 'Mithunraj', updateddt: '20-Dec-2018 20:12' },
+      { rolename: 'Manager', dataaccess: 'Team', updatedby: 'Raj', updateddt: '20-Dec-2018 20:12' },
+      { rolename: 'Admin', dataaccess: 'Team', updatedby: 'Mithun', updateddt: '20-Dec-2018 20:12' },
+      { rolename: 'Operator', dataaccess: 'Team', updatedby: 'Mithunraj', updateddt: '20-Dec-2018 20:12' },
+      { rolename: 'Manager', dataaccess: 'Team', updatedby: 'Raj', updateddt: '20-Dec-2018 20:12' }
+    ]
+  }
 
   ngOnInit() {
-    this.http.get(`assets/data/crm-contact.json`)
-      .subscribe((data) => {
-        this.data = data.json();
-      });
+    // this.http.get(`assets/data/crm-contact.json`)
+    //   .subscribe((data) => {
+    //     this.data = data.json();
+    //   });
   }
 
   openMyModal(event) {
@@ -53,5 +69,10 @@ export class RolesComponent implements OnInit {
   closeMyModal(event) {
     ((event.target.parentElement.parentElement).parentElement).classList.remove('md-show');
   }
-
+  addRole() {
+    this.router.navigate(['masters/roles/create']);
+  }
+  editRole(data) {
+    this.router.navigate(['masters/roles/edit/' + 1]);
+  }
 }

@@ -65,9 +65,9 @@ export class UsersComponent implements OnInit {
     this.hasAnotherDropZoneOver = e;
   }
   addUsers() {
-    this.router.navigate(['admins/events/create']);
+    this.router.navigate(['masters/users/create']);
   }
   editUsers(data) {
-    this.router.navigate(['admins/events/edit/' + 1]);
+    this.router.navigate(['masters/users/edit/' + 1]);
   }
 }

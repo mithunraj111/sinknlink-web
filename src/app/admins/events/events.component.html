@@ -36,7 +36,7 @@
                   <th>
                     <mfDefaultSorter by='eventname'>Event name</mfDefaultSorter>
                   </th>
-                  <th>
+                  <th class="text-center">
                     <mfDefaultSorter by='date'>Date</mfDefaultSorter>
                   </th>
                   <th>
@@ -52,7 +52,7 @@
               <tbody class="p-r-1">
                 <tr *ngFor="let items of mf.data; let i = index;">
                   <td>{{items.eventname}}</td>
-                  <td>{{items.date}}</td>
+                  <td class="text-center">{{items.date}}</td>
                   <td>{{items.city}}</td>
                   <td>
                     <span class="updatename">{{items.lastupdatedby}}</span>

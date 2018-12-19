@@ -1,5 +1,15 @@
 <div class="header-title">
-  <h2>Role</h2>
+  <div class="row">
+    <div class="col-md-6">
+      <h2>Role</h2>
+      <p *ngIf="roleid" class="m-b-0">ID: 875643</p>
+    </div>
+    <div class="col-md-6 pull-right m-t_5 p-r-30">
+      <button type="button" placement="top" ngbTooltip=" Go back" routerLink="/masters/roles" class="btn pull-right btn-inverse btn-primary waves-effect"><i
+          class="fa fa-arrow-circle-left"></i></button>
+      <button type="button" placement="top" ngbTooltip="Click to save role" class="btn pull-right btn-primary waves-effect m-r-10 text-capitalize">Save</button>
+    </div>
+  </div>
   <div class="row">
     <div class="col-md-4 col-sm-4 p-l-30">
       <div class="form-group required row role-input">
@@ -31,11 +41,11 @@
       </div>
     </div>
 
-    <div class="col-md-2 col-sm-2 pull-right m-t_5 p-r-30">
+    <!-- <div class="col-md-2 col-sm-2 pull-right m-t_5 p-r-30">
       <button type="button" placement="top" ngbTooltip=" Go back" routerLink="/masters/roles" class="btn pull-right btn-inverse btn-primary waves-effect"><i
           class="fa fa-arrow-circle-left"></i></button>
       <button type="button" placement="top" ngbTooltip="Click to save role" class="btn pull-right btn-primary waves-effect m-r-10 text-capitalize">Save</button>
-    </div>
+    </div> -->
   </div>
 </div>
 
@@ -46,21 +56,21 @@
         <div class="dt-responsive">
           <!-- <div class="panel-heading">User information</div>-->
           <div class="table-responsive">
-            <table class="table addrole-table table-striped table-bordered full-data-table" [mfData]="data"
-              #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+            <table class="table addrole-table table-striped table-bordered full-data-table" [mfData]="data" #mf="mfDataTable"
+              [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
               <thead>
                 <tr>
                   <th>
-                    <mfDefaultSorter by="rolename">Screen Names</mfDefaultSorter>
+                    <mfDefaultSorter by="screenname">Screen Names</mfDefaultSorter>
                   </th>
                   <th>
-                    <mfDefaultSorter by="dataccess">Access</mfDefaultSorter>
+                    <mfDefaultSorter by="dataaccess">Access</mfDefaultSorter>
                   </th>
                   <th>
-                    <mfDefaultSorter by="updatedby">Available Permissions</mfDefaultSorter>
+                    <mfDefaultSorter by="availablepermission">Available Permissions</mfDefaultSorter>
                   </th>
                   <th>
-                    <mfDefaultSorter by="status">Assigned Permissions</mfDefaultSorter>
+                    <mfDefaultSorter by="assignedpermission">Assigned Permissions</mfDefaultSorter>
                   </th>
                   <th class="text-center">
                     <mfDefaultSorter>Actions</mfDefaultSorter>
@@ -71,17 +81,16 @@
               </thead>
 
               <tbody>
-                <tr *ngFor="let item of mf.data; let i = index;">
-                  <td>Dashboard</td>
-                  <td>No</td>
-                  <td>View,Create,Edit,Delete</td>
-                  <td>-</td>
+                <tr *ngFor="let items of mf.data; let i = index;">
+                  <td>{{items.screenname}}</td>
+                  <td>{{items.dataaccess}}</td>
+                  <td>{{items.availablepermission}}</td>
+                  <td>{{items.assignedpermission}}</td>
                   <td class="action-icon text-center">
-                    <a href="javascript:;" placement="top" ngbTooltip="Click to add permissions" (click)="openMyModal('effect-7')"
-                      class="m-r-15 crm-action-edit text-primary"><i class="fa fa-pencil"></i></a>
+                    <a placement="top" ngbTooltip="Click to add permissions" (click)="openMyModal('effect-7')" class="m-r-15 crm-action-edit text-primary"><i
+                        class="fa fa-pencil"></i></a>
                   </td>
                 </tr>
-
               </tbody>
               <tfoot>
                 <tr class="page-nav">

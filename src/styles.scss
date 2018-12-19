@@ -695,7 +695,7 @@ button{
             }
         }
         ::placeholder{
-            font-size:13px;
+            font-size:14px;
             padding-right:10px;
         }
         .ng-pristine{
@@ -714,15 +714,17 @@ button{
         color: #c8c9cb;
     }
 }
-table{
-    thead{
-        display: block;
-        margin-right: 10px;
-    }
-    tbody{
-        display: block;
-        overflow: auto;
-        height: 62vh;
+.fixed-table-header{
+    table{
+        thead{
+            display: block;
+            margin-right: 10px;
+        }
+        tbody{
+            display: block;
+            overflow: auto;
+            height: 62vh;
+        }
     }
 }
 .location-table{
@@ -746,8 +748,16 @@ table{
         margin-top: 1px;
     }
 }
-.ng2-tag-input__text-input[_ngcontent-c11]{
-    font-size: 14px !important;
+.addlocation{
+    .form-group{
+        .tag-select{
+            .ng-pristine{
+                font-size: 14px !important;
+                font-family: inherit !important;
+                color: #3b4650;
+            }
+        }
+    }
 }
 .tag-wrapper{
     height: 15px;

@@ -23,6 +23,10 @@ const routes: Routes = [
       caption: 'add roles',
       status: false
     }
+  },
+  {
+    path: 'edit/:id',
+    component: AddrolesComponent,
   }
 ];
 

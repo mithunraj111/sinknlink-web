@@ -10,12 +10,12 @@ export class AddEditUsersComponent implements OnInit {
 
   @Input('modalDefault') modalDefault: any;
   isaddForm= true;
-  eventid: number;
+  userid: number;
   constructor(private route: ActivatedRoute) { 
     this.route.params.subscribe(params => {
       if (params.id !== undefined) {
         this.isaddForm = false;
-        this.eventid = params.id;
+        this.userid = params.id;
       }
     });
    }

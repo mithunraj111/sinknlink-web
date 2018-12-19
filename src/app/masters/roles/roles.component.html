@@ -5,7 +5,7 @@
       <p>Define your organization's role descriptions and permissions</p>
     </div>
     <div class="col-md-6 col-sm-6">
-      <div class="text-right m-t-5">
+      <div class="text-right">
         <label>Search:
           <input type="search" [(ngModel)]="filterQuery" class="header-search form-control input-sm full-data-search" placeholder="">
         </label>
@@ -13,31 +13,31 @@
     </div>
     <div class="col-md-1 col-sm-1 p-r-30">
       <button type="button" placement="top" ngbTooltip="Click to add new roles" class="btn pull-left btn-primary waves-effect waves-light f-right d-inline-block md-trigger"
-        routerLink="create">
+        (click)='addRole()'>
         <i class="fa fa-plus-circle m-r-5"></i> NEW
       </button>
     </div>
   </div>
 </div>
-<div *ngIf="data.length==0" class="no-data p-0 m-0">
+<!-- <div class="no-data p-0 m-0">
     <h3><i>No data found</i></h3>
-</div>
-<div class="card table-header" *ngIf="data.length!=0">
+</div> -->
+<div class="card table-header fixed-table-header">
   <div class="card-body">
     <div class="table-content crm-table">
       <div class="project-table">
         <div class="dt-responsive">
           <!-- <div class="panel-heading">User information</div>-->
           <div class="table-responsive">
-            <table class="table table-striped table-bordered full-data-table roles-table" [mfData]="data"
-              #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+            <table class="table table-striped table-bordered full-data-table roles-table" [mfData]="data | dataFilter : filterQuery"
+              #mf="mfDataTable" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
               <thead>
                 <tr>
                   <th>
                     <mfDefaultSorter by="rolename">Role Name</mfDefaultSorter>
                   </th>
                   <th>
-                    <mfDefaultSorter by="dataccess">Data Access</mfDefaultSorter>
+                    <mfDefaultSorter by="dataaccess">Data Access</mfDefaultSorter>
                   </th>
                   <th class="p-l-0">
                     <mfDefaultSorter by="updatedby">Updated By</mfDefaultSorter>
@@ -52,12 +52,12 @@
               </thead>
 
               <tbody class="m-r-2">
-                <tr *ngFor="let item of mf.data; let i = index;">
-                  <td>Admin</td>
-                  <td>Team</td>
+                <tr *ngFor="let items of mf.data; let i = index;">
+                  <td>{{items.rolename}}</td>
+                  <td>{{items.dataaccess}}</td>
                   <td>
-                    <span class="updatename">Kannan Kumar</span>
-                    <span class="updatedate">03-Dec-2018 20:32</span>
+                    <span class="updatename">{{items.updatedby}}</span>
+                    <span class="updatedate">{{items.updateddt}}</span>
                   </td>
                   <td class="text-center">
                     <ui-switch class="js-small" placement="top" ngbTooltip="Click to change the status" color="#03ADED"
@@ -66,8 +66,8 @@
                   <td class="action-icon text-center">
                     <a href="javascript:;" placement="top" ngbTooltip="click to view role" class="m-r-15 crm-action-view text-info"
                       (click)="openMyModalData(i);modalDefault.show();"><i class="fa fa-book"></i></a>
-                    <a href="javascript:;" placement="top" ngbTooltip="click to edit role" class="m-r-15 crm-action-edit text-primary"><i
-                        class="fa fa-pencil"></i></a>
+                    <a href="javascript:;" placement="top" ngbTooltip="click to edit role" class="m-r-15 crm-action-edit text-primary"
+                      (click)='editRole()'><i class="fa fa-pencil"></i></a>
                     <a href="javascript:;" placement="top" ngbTooltip="click to delete role" class="crm-action-delete text-danger"><i
                         class="fa fa-trash"></i></a>
                   </td>
@@ -88,4 +88,3 @@
     </div>
   </div>
 </div>
-<!-- Add Contact Start Model -->
