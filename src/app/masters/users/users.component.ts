@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit, Input } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -24,7 +25,7 @@ export class UsersComponent implements OnInit {
 
   @Input('modalDefault') modalDefault: any;
 
-  constructor() {
+  constructor(private router: Router) {
     this.data = [
       { fullname: 'Mithunraj', mobileno: '9874563210', role: 'Admin', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' },
       { fullname: 'Raj', mobileno: '9876543210', role: 'Manager', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' },
@@ -62,5 +63,11 @@ export class UsersComponent implements OnInit {
 
   fileOverAnother(e: any): void {
     this.hasAnotherDropZoneOver = e;
+  }
+  addUsers() {
+    this.router.navigate(['admins/events/create']);
+  }
+  editUsers(data) {
+    this.router.navigate(['admins/events/edit/' + 1]);
   }
 }

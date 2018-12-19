@@ -31,7 +31,7 @@
           <div class="table-responsive">
             <table class="table table-fixed table-striped table-bordered full-data-table events-table" [mfData]="data | dataFilter : filterQuery"
               #mf="mfDataTable" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
-              <thead class="pr-1">
+              <thead class="p-r-1">
                 <tr>
                   <th>
                     <mfDefaultSorter by='eventname'>Event name</mfDefaultSorter>
@@ -49,7 +49,7 @@
                   <th class="text-center">Action</th>
                 </tr>
               </thead>
-              <tbody class="pr-1">
+              <tbody class="p-r-1">
                 <tr *ngFor="let items of mf.data; let i = index;">
                   <td>{{items.eventname}}</td>
                   <td>{{items.date}}</td>

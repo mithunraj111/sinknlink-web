@@ -15,16 +15,14 @@ const routes: Routes = [
     }
   },
   {
-    path: 'create',
-    component: AddEditUsersComponent,
-    data: {
-      title: 'Users',
-      icon: 'ti-settings',
-      caption: 'users',
-      status: false
-    }
+    path: 'users/create',
+    component: AddEditUsersComponent
+  },
+  {
+    path: 'users/edit/:id',
+    component: AddEditUsersComponent
   }
-];
+]
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

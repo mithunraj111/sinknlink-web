@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-add-edit-donations',
@@ -6,8 +7,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-edit-donations.component.scss']
 })
 export class AddEditDonationsComponent implements OnInit {
+  isaddForm= true;
+  eventid: number;
 
-  constructor() { }
+  constructor(private route: ActivatedRoute) { 
+    this.route.params.subscribe(params => {
+      if (params.id !== undefined) {
+        this.isaddForm = false;
+        this.eventid = params.id;
+      }
+    });
+  }
 
   ngOnInit() {
   }

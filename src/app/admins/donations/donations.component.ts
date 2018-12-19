@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy,Component, OnInit,Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-donations',
@@ -17,7 +18,7 @@ export class DonationsComponent implements OnInit {
   public sortBy = '';
   public sortOrder = 'desc';
   public userProPic: string;
-  constructor() {
+  constructor(private router: Router) {
     this.data = [
       { charity: 'AARP Foundation', startdate: '02-Nov-2018', enddate: '02-Dec-2018', lastupdatedby: 'Admin', lastupdateddt: '02-Dec-2018 15:00' },
       { charity: 'AWP Foundation', startdate: '02-Nov-2018', enddate: '02-Dec-2018', lastupdatedby: 'Admin', lastupdateddt: '02-Dec-2018 15:00' },
@@ -44,5 +45,11 @@ export class DonationsComponent implements OnInit {
 
   fileOverAnother(e: any): void {
     this.hasAnotherDropZoneOver = e;
+  }
+  addDonations() {
+    this.router.navigate(['admins/donations/create']);
+  }
+  editDonations(data) {
+    this.router.navigate(['admins/donations/edit/' + 1]);
   }
 }

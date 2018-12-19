@@ -2,18 +2,14 @@
   <div class="row">
     <div class="col-md-6 col-sm-6">
       <h2 class="add-tenant">Events</h2>
-      <p *ngIf="eventid" class="mb-0" >ID: 875643</p>
+      <p *ngIf="eventid" class="m-b-0" >ID: 875643</p>
     </div>
-    <!-- <div class="col-md-3 text-right pr-3 pt-2 mt-1 f-w-600" *ngIf="eventid" ></div> -->
     <div class="col-md-3 col-sm-6 save-button text-right p-r-30">
       <button type="button" placement="bottom" ngbTooltip="click to save events" class="btn btn-primary waves-effect m-r-10 text-capitalize">Save</button>
       <button type="button" placement="bottom" ngbTooltip="Go back" routerLink="/admins/events" class="btn btn-inverse btn-primary waves-effect"><i
           class="fa fa-arrow-circle-left"></i></button>
     </div>
   </div>
-  <!-- <div *ngIf="eventid">
-      <span>ID: 875643</span>
-  </div> -->
 </div>
 <div class="col-md-12 col-sm-12">
   <div class="row">
@@ -66,7 +62,7 @@
             <div class="col-md-12 col-sm-12">
               <div class="form-group row required">
                 <label class="col-md-3 col-sm-6 col-form-label text-right">Address</label>
-                <div class="col-md-9 col-sm-6 pr-0 pl-2">
+                <div class="col-md-9 col-sm-6 p-r-0 p-l-2">
                   <textarea></textarea>
                 </div>
               </div>
@@ -74,7 +70,7 @@
             <div class="col-md-12 col-sm-12">
               <div class="form-group row required">
                 <label class="col-md-3 col-sm-6 col-form-label text-right">Particulars</label>
-                <div class="col-md-9 col-sm-6 pr-0 pl-2">
+                <div class="col-md-9 col-sm-6 p-r-0 p-l-2">
                   <textarea></textarea>
                 </div>
               </div>
@@ -94,7 +90,7 @@
       <div class="employee-page pos-fixed">
         <div class="col-md-12 col-sm-12 text-center employee-profile">
           <div class="form-group">
-            <label class="custom-file mb-3">
+            <label class="custom-file m-b-3">
               <img src="assets/images/employee.jpg" class="img-responsive" alt="employee">
               <input type="file" ng2FileSelect [uploader]="uploader" multiple class="custom-file-input">
               <span class="custom-file-control"></span>

@@ -28,25 +28,28 @@ const routes: Routes = [
       {
         path: 'donations',
         component: DonationsComponent
+      }, 
+      {
+        path: 'donations/create',
+        component: AddEditDonationsComponent,
       },
+      {
+        path: 'donations/edit/:id',
+        component: AddEditDonationsComponent,
+      }
     ],
   },
-  {
-    path: '',
-    component: DonationsComponent,
-    data: {
-      title: 'Donations',
-      icon: 'ti-settings',
-      caption: 'donations',
-      status: false
-    }
-  },
-  {
-    path: 'donations/create',
-    component: AddEditDonationsComponent,
-   
-  }
-];
+  // {
+  //   path: '',
+  //   component: DonationsComponent,
+  //   data: {
+  //     title: 'Donations',
+  //     icon: 'ti-settings',
+  //     caption: 'donations',
+  //     status: true
+  //   }
+  // },
+]
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

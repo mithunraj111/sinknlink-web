@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-add-edit-users',
@@ -8,7 +9,16 @@ import { Component, OnInit, Input } from '@angular/core';
 export class AddEditUsersComponent implements OnInit {
 
   @Input('modalDefault') modalDefault: any;
-
+  isaddForm= true;
+  eventid: number;
+  constructor(private route: ActivatedRoute) { 
+    this.route.params.subscribe(params => {
+      if (params.id !== undefined) {
+        this.isaddForm = false;
+        this.eventid = params.id;
+      }
+    });
+   }
   ngOnInit() {}
 
   openMyModal(event) {
