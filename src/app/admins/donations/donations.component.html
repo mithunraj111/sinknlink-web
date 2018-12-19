@@ -65,9 +65,10 @@
                   </td>
                   <td class="action-icon text-center">
                     <a href="javascript:;" placement="top" ngbTooltip="Click to edit the donation " class="m-r-15 crm-action-edit text-primary"
-                    (click)='editDonations()'>
+                      (click)='editDonations()'>
                       <i class="fa fa-pencil"></i></a>
-                    <a href="javascript:;" placement="bottom" ngbTooltip="Click to delete the donation " class="crm-action-delete text-danger">
+                    <a href="javascript:;" placement="bottom" ngbTooltip="Click to delete the donation " class="crm-action-delete text-danger"
+                      (click)="open(content)">
                       <i class="fa fa-trash"></i></a>
                   </td>
                 </tr>
@@ -79,4 +80,18 @@
     </div>
   </div>
 </div>
-<!-- <app-add-edit-donations></app-add-edit-donations> -->
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Delete</h4>
+    <button type="button" class="close" aria-label="Close" (click)="dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p><i class="fa fa-exclamation-circle"></i> Are you sure you want to delete?</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>
+    <button type="button" class="btn btn-danger" (click)="modal.close('Ok click')">Ok</button>
+  </div>
+</ng-template>

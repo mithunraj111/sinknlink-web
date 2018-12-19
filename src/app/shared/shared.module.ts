@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModule,NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import {ToggleFullScreenDirective} from './fullscreen/toggle-fullscreen.directive';
 import {AccordionAnchorDirective} from './accordion/accordionanchor.directive';
 import {AccordionLinkDirective} from './accordion/accordionlink.directive';
@@ -61,7 +61,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     {
       provide: PERFECT_SCROLLBAR_CONFIG,
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
-    }
+    },NgbActiveModal 
   ]
 })
 export class SharedModule { }
