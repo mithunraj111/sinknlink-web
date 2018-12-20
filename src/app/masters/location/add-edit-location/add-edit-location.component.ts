@@ -7,6 +7,7 @@ import { Component, OnInit, Input,OnChanges } from '@angular/core';
 })
 export class AddEditLocationComponent implements OnInit,OnChanges {
   @Input() title: string;
+  @Input() submit: string;
   constructor() { }
 
   ngOnInit() {

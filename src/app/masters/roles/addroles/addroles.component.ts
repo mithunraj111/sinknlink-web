@@ -3,6 +3,7 @@ import { Http } from '@angular/http';
 import { IOption } from 'ng-select';
 import { SelectOptionService } from '../../../shared/elements/select-option.service';
 import { ActivatedRoute } from '@angular/router';
+import { AppConstant } from '../../../app.constants';
 
 @Component({
   selector: 'app-addroles',
@@ -43,6 +44,7 @@ export class AddrolesComponent implements OnInit {
   @Input('modalDefault') modalDefault: any;
   roleid: number;
   isaddForm: boolean =true;
+  buttontext= AppConstant.BUTTON_TXT.SAVE;
 
   constructor(
     public selectOptionService: SelectOptionService, 
@@ -53,6 +55,7 @@ export class AddrolesComponent implements OnInit {
       if (params.id !== undefined) {
         this.isaddForm = false;
         this.roleid = params.id;
+        this.buttontext= AppConstant.BUTTON_TXT.UPDATE;
       }
     });
     this.data=[

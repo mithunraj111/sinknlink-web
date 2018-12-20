@@ -16,6 +16,7 @@ export class LocationComponent implements OnInit {
   showRegion = false;
   @Output() locationdtls :any ={};
   formTitle: string;
+  formSubmit: string;
 
   constructor() {
     this.data=[
@@ -46,11 +47,13 @@ export class LocationComponent implements OnInit {
   addLocation(){
     this.locationdtls={};
     this.formTitle = 'Add Location';
+    this.formSubmit = 'Save';
     this.openMyModal('locationmodal');
   }
   editLocation(data){
     this.locationdtls= data;
     this.formTitle = 'Edit Location';
+    this.formSubmit = 'Update';
     this.openMyModal('locationmodal');
   }
 }

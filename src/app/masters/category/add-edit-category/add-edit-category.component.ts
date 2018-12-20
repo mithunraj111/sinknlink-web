@@ -7,6 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class AddEditCategoryComponent implements OnInit {
   @Input() title: string;
+  @Input() submit: string;
   constructor() { }
 
   ngOnInit() {

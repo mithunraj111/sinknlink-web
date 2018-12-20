@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit, Input } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload';
 import { Router } from '@angular/router';
-
+import { AppConstant } from '../../app.constants';
 
 @Component({
   selector: 'app-users',
@@ -24,6 +24,7 @@ export class UsersComponent implements OnInit {
   public userProPic: string;
 
   @Input('modalDefault') modalDefault: any;
+  buttontext: string;
 
   constructor(private router: Router) {
     this.data = [
@@ -66,8 +67,10 @@ export class UsersComponent implements OnInit {
   }
   addUsers() {
     this.router.navigate(['masters/users/create']);
+    this.buttontext= AppConstant.BUTTON_TXT.SAVE;
   }
   editUsers(data) {
     this.router.navigate(['masters/users/edit/' + 1]);
+    this.buttontext= AppConstant.BUTTON_TXT.UPDATE;
   }
 }

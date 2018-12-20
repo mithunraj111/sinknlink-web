@@ -13,6 +13,7 @@ export class CategoryComponent implements OnInit {
   public sortBy = '';
   public sortOrder = 'desc';
     formTitle: string;
+  formSubmit: string;
   constructor() {
     this.data = [
       {
@@ -32,11 +33,13 @@ export class CategoryComponent implements OnInit {
   addCategory(){
     this.categorydtls= {};
     this.formTitle= 'Add Business Category';
+    this.formSubmit= 'Save';
     this.openMyModal('categorymodal');
   }
   editCategory(data){
     this.categorydtls= data;
     this.formTitle= 'Edit Business Category';
+    this.formSubmit= 'Update';
     this.openMyModal('categorymodal');
   }
 }
