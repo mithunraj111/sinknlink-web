@@ -1,29 +1,31 @@
-  <div class="header-title">
+<div class="fixedheader">
+  <div class="header-title pos-fixed">
     <div class="row">
-      <div class="col-md-5 col-sm-5">
+      <div class="col-md-6 col-sm-6">
         <h2>Events</h2>
         <p>lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
       </div>
-      <div class="col-md-6 col-sm-6">
+      <div class="col-md-5 col-sm-5 p-r-35">
         <div class="text-right">
           <label>Search:
             <input type="search" [(ngModel)]="filterQuery" class="header-search form-control input-sm full-data-search"
-              placeholder="">
+              placeholder="Search for here" placement="bottom" ngbTooltip="Type here to search">
           </label>
         </div>
       </div>
       <div class="col-md-1 col-sm-1 p-r-30">
         <button type="button" placement="bottom" ngbTooltip="Click to add new events" class="btn pull-right btn-primary waves-effect"
-        (click)="addEvents()" >
+          (click)="addEvents()">
           <i class="fa fa-plus-circle m-r-5"></i> NEW
         </button>
       </div>
     </div>
   </div>
-<div *ngIf="data.length==0" class="no-data p-0 m-0">
-    <h3><i>No data found</i></h3>
 </div>
-<div class="card table-header fixed-table-header" *ngIf="data.length!=0">
+<div *ngIf="data.length==0" class="no-data p-0 m-0">
+  <h3><i>No data found</i></h3>
+</div>
+<div class="card table-header fixed-table-header m-t-60" *ngIf="data.length!=0">
   <div class="card-body">
     <div class="table-content crm-table">
       <div class="project-table">

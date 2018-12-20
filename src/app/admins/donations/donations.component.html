@@ -9,7 +9,7 @@
         <div class="text-right">
           <label>Search:
             <input type="search" [(ngModel)]="filterQuery" class="header-search form-control input-sm full-data-search"
-              placeholder="">
+              placeholder="Search for here" placement="bottom" ngbTooltip="Type here to search">
           </label>
         </div>
       </div>
@@ -37,10 +37,10 @@
                   <th>
                     <mfDefaultSorter by='charity'>Charity Name</mfDefaultSorter>
                   </th>
-                  <th>
+                  <th class="text-center">
                     <mfDefaultSorter by='startdate'>Start Date</mfDefaultSorter>
                   </th>
-                  <th>
+                  <th class="text-center">
                     <mfDefaultSorter by='enddate'>End Date</mfDefaultSorter>
                   </th>
                   <th>
@@ -53,8 +53,8 @@
               <tbody>
                 <tr *ngFor="let item of mf.data">
                   <td>{{item.charity}}</td>
-                  <td>{{item.startdate}}</td>
-                  <td>{{item.enddate}}</td>
+                  <td class="text-center">{{item.startdate}}</td>
+                  <td class="text-center">{{item.enddate}}</td>
                   <td>
                     <span class="updatename">{{item.lastupdatedby}}</span>
                     <span class="updatedate">{{item.lastupdateddt}}</span>

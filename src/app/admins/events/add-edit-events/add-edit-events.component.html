@@ -1,13 +1,15 @@
-<div class="header-title m-b-15">
-  <div class="row">
-    <div class="col-md-6 col-sm-6">
-      <h2 class="add-tenant">Events</h2>
-      <p *ngIf="eventid" class="m-b-0" >ID: 875643</p>
-    </div>
-    <div class="col-md-3 col-sm-6 save-button text-right p-r-30">
-      <button type="button" placement="bottom" ngbTooltip="click to save events" class="btn btn-primary waves-effect m-r-10 text-capitalize">Save</button>
-      <button type="button" placement="bottom" ngbTooltip="Go back" routerLink="/admins/events" class="btn btn-inverse btn-primary waves-effect"><i
-          class="fa fa-arrow-circle-left"></i></button>
+<div class="fixedheader">
+  <div class="header-title m-b-15 pos-fixed">
+    <div class="row">
+      <div class="col-md-6 col-sm-6">
+        <h2 class="add-tenant">Events</h2>
+        <p *ngIf="eventid" class="m-b-0">ID: 875643</p>
+      </div>
+      <div class="col-md-3 col-sm-6 save-button text-right p-r-30">
+        <button type="button" placement="bottom" ngbTooltip="click to save events" class="btn btn-primary waves-effect m-r-10 text-capitalize">Save</button>
+        <button type="button" placement="bottom" ngbTooltip="Go back" routerLink="/admins/events" class="btn btn-inverse btn-primary waves-effect"><i
+            class="fa fa-arrow-circle-left"></i></button>
+      </div>
     </div>
   </div>
 </div>
@@ -15,7 +17,7 @@
   <div class="row">
     <div class="col-md-9 col-sm-8 p-l-0 p-r-10">
       <div class="employee-form">
-        <div class="card tenants-page tenants-pages m-b-10">
+        <div class="card tenants-page tenants-pages m-b-10 m-t-50">
           <div class="col-md-12 col-sm-12 p-t-10">
             <div class="form-group row required">
               <label class="col-md-3 col-sm-6 col-form-label text-right">Event Name</label>
@@ -26,7 +28,7 @@
             <div class="form-group row required">
               <label class="col-md-3 col-sm-6 col-form-label text-right">Location</label>
               <div class="col-md-9 col-sm-6">
-                <select name="select" class="form-control p-1">
+                <select name="select" class="form-control p-1 location-title">
                   <option value="opt1">Select your Location</option>
                   <option value="opt2">TamilNadu</option>
                   <option value="opt3">Kerala</option>
@@ -86,7 +88,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-3 col-sm-4">
+    <!-- <div class="col-md-3 col-sm-4">
       <div class="employee-page pos-fixed">
         <div class="col-md-12 col-sm-12 text-center employee-profile">
           <div class="form-group">
@@ -106,6 +108,6 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </div>

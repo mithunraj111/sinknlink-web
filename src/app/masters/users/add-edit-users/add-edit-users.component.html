@@ -1,4 +1,5 @@
-<div class="header-title m-b-15">
+<div class="fixedheader">
+  <div class="header-title m-b-15  pos-fixed">
     <div class="row">
       <div class="col-md-6 col-sm-6">
         <h2>Users</h2>
@@ -11,65 +12,65 @@
       </div>
     </div>
   </div>
-  
-  <div class="col-md-12 col-sm-12">
-    <div class="row">
-      <div class="col-md-9 col-sm-9 p-l-0 p-r-10">
-        <div class="user-form">
-  
-          <div class="card tenants-page tenants-pages m-b-10">
-            <div class="row p-t-10 p-b-5">
-              <div class="col-md-12 col-sm-12">
+</div>
+<div class="col-md-12 col-sm-12">
+  <div class="row">
+    <div class="col-md-8 col-sm-8 p-l-0 p-r-10">
+      <div class="user-form">
+
+        <div class="card tenants-page tenants-pages m-b-10 m-t-50">
+          <div class="row p-t-10 p-b-5">
+            <div class="col-md-12 col-sm-12">
+              <div class="form-group row required">
+                <label class="col-md-3 col-sm-6 col-form-label text-right">User Name</label>
+                <div class="col-md-6 col-sm-6 p-r-0">
+                  <input type="text" class="form-control" placeholder="Username">
+                </div>
+              </div>
+
+              <div class="form-group row required">
+                <label class="col-md-3 col-sm-6 col-form-label text-right">Mobile No</label>
+                <div class="col-md-6 col-sm-6 p-r-0">
+                  <input type="text" class="form-control" placeholder="Mobile No">
+                </div>
+              </div>
+
+              <div class="form-group row required">
+                <label class="col-md-3 col-sm-6 col-form-label text-right">Role</label>
+                <div class="col-md-6 col-sm-6 p-r-0">
+                  <select name="select" class="form-control users-list">
+                    <option value="opt1">Select Role</option>
+                    <option value="opt2">Admin</option>
+                    <option value="opt2">Manager</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group row required">
+                <label class="col-md-3 col-sm-6 col-form-label text-right">Password</label>
+                <div class="col-md-6 col-sm-6 p-r-0">
+                  <input type="password" style="width:100% !important" class="form-control" placeholder="Password">
+                </div>
+                <div class="col-md-3 col-sm-6 generate-button">
+                  <button type="button" placement="top" ngbTooltip="Click to Generate" class="btn btn-primary waves-effect">Generate</button>
+                </div>
+              </div>
+
+              <div *ngIf="userid">
                 <div class="form-group row required">
-                  <label class="col-md-3 col-sm-6 col-form-label text-right">User Name</label>
-                  <div class="col-md-6 col-sm-6 p-r-0">
-                    <input type="text" class="form-control" placeholder="Username">
+                  <label class="col-md-3 col-sm-6 col-form-label text-right">Status</label>
+                  <div class="col-md-9 col-sm-6">
+                    <ui-switch class="js-small" color="#03ADED" switchColor="#fff" size="small" checked></ui-switch>
                   </div>
                 </div>
-  
-                <div class="form-group row required">
-                  <label class="col-md-3 col-sm-6 col-form-label text-right">Mobile No</label>
-                  <div class="col-md-6 col-sm-6 p-r-0">
-                    <input type="text" class="form-control" placeholder="Mobile No">
+
+                <div class="form-group row">
+                  <label class="col-md-3 col-sm-6 col-form-label text-right">Last Login</label>
+                  <div class="col-md-6 col-sm-6 m-t-5">
+                    <span class="f-13">27-Nov-2018 20:32</span>
                   </div>
                 </div>
-  
-                <div class="form-group row required">
-                  <label class="col-md-3 col-sm-6 col-form-label text-right">Role</label>
-                  <div class="col-md-6 col-sm-6 p-r-0">
-                    <select name="select" class="form-control users-list">
-                      <option value="opt1">Select Role</option>
-                      <option value="opt2">Admin</option>
-                      <option value="opt2">Manager</option>
-                    </select>
-                  </div>
-                </div>
-  
-                <div class="form-group row required">
-                  <label class="col-md-3 col-sm-6 col-form-label text-right">Password</label>
-                  <div class="col-md-6 col-sm-6 p-r-0">
-                    <input type="password" style="width:100% !important" class="form-control" placeholder="Password">
-                  </div>
-                  <div class="col-md-3 col-sm-6 generate-button">
-                    <button type="button" placement="top" ngbTooltip="Click to Generate" class="btn btn-primary waves-effect">Generate</button>
-                  </div>
-                </div>
-  
-                <div *ngIf="userid">
-                  <div class="form-group row required">
-                    <label class="col-md-3 col-sm-6 col-form-label text-right">Status</label>
-                    <div class="col-md-9 col-sm-6">
-                      <ui-switch class="js-small" color="#03ADED" switchColor="#fff" size="small" checked></ui-switch>
-                    </div>
-                  </div>
-  
-                  <div class="form-group row">
-                    <label class="col-md-3 col-sm-6 col-form-label text-right">Last Login</label>
-                    <div class="col-md-6 col-sm-6 m-t-5">
-                      <span class="f-13">27-Nov-2018 20:32</span>
-                    </div>
-                  </div>
-                  <!-- <div class="form-group row">
+                <!-- <div class="form-group row">
                     <div class="col-md-6"></div>
                     <div class="col-md-3 col-sm-6 text-center">
                       <label class="col-form-label pr-4 p-b-0">Created By</label><br>
@@ -86,19 +87,18 @@
                       </div>
                     </div>
                   </div> -->
-                  <div class="form-group row">
-                    <label class="col-md-3 col-sm-6 col-form-label text-right pr-4">Created By</label>
-                    <div class="col-md-3 col-sm-6 m-t-5 pr-4">
-                      <span class="f-15">Admin</span><br>
-                      <span class="text-align f-12">02-Nov-2018 20:00</span>
-                    </div>
+                <div class="form-group row">
+                  <label class="col-md-3 col-sm-6 col-form-label text-right pr-4">Created By</label>
+                  <div class="col-md-3 col-sm-6 m-t-5 pr-4">
+                    <span class="f-15">Admin</span><br>
+                    <span class="text-align f-12">02-Nov-2018 20:00</span>
                   </div>
-                  <div class="form-group row">
-                    <label class="col-md-3 col-sm-6 col-form-label text-right">Updated By</label>
-                    <div class="col-md-6 col-sm-6 m-t-5">
-                      <span class="f-15">Pavithra</span><br>
-                      <span class="text-align f-12 ">02-Dec-2018 20:00</span>
-                    </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-md-3 col-sm-6 col-form-label text-right">Updated By</label>
+                  <div class="col-md-6 col-sm-6 m-t-5">
+                    <span class="f-15">Pavithra</span><br>
+                    <span class="text-align f-12 ">02-Dec-2018 20:00</span>
                   </div>
                 </div>
               </div>
@@ -108,3 +108,4 @@
       </div>
     </div>
   </div>
+</div>
