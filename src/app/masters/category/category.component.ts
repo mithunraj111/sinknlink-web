@@ -31,12 +31,12 @@ export class CategoryComponent implements OnInit {
   }
   addCategory(){
     this.categorydtls= {};
-    this.formTitle= 'Add Category';
+    this.formTitle= 'Add Business Category';
     this.openMyModal('categorymodal');
   }
   editCategory(data){
     this.categorydtls= data;
-    this.formTitle= 'Edit Category';
+    this.formTitle= 'Edit Business Category';
     this.openMyModal('categorymodal');
   }
 }

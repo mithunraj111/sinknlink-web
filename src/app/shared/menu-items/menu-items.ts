@@ -38,7 +38,7 @@ const MENUITEMS = [
         state: 'dashboard',
         short_label: 'D',
         name: 'Dashboard',
-        type: 'sub',
+        type: 'link',
         icon: 'ti-home',
       },
       {

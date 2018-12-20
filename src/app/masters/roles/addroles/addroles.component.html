@@ -64,9 +64,6 @@
                     <mfDefaultSorter by="screenname">Screen Names</mfDefaultSorter>
                   </th>
                   <th>
-                    <mfDefaultSorter by="dataaccess">Access</mfDefaultSorter>
-                  </th>
-                  <th>
                     <mfDefaultSorter by="availablepermission">Available Permissions</mfDefaultSorter>
                   </th>
                   <th>
@@ -83,7 +80,6 @@
               <tbody>
                 <tr *ngFor="let items of mf.data; let i = index;">
                   <td>{{items.screenname}}</td>
-                  <td>{{items.dataaccess}}</td>
                   <td>{{items.availablepermission}}</td>
                   <td>{{items.assignedpermission}}</td>
                   <td class="action-icon text-center">
@@ -115,7 +111,7 @@
       <div class="form-group required row">
         <label class="col-sm-12">Permissions</label>
         <div class="col-sm-12">
-          <ng-select [ngClass]="'ng-select'" [options]="simpleOption" [multiple]="true" placeholder="test"></ng-select>
+          <ng-select [ngClass]="'ng-select'" [options]="simpleOption" [multiple]="true" placeholder="Permissions"></ng-select>
         </div>
       </div>
 

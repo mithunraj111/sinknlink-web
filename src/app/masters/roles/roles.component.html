@@ -1,28 +1,30 @@
-<div class="header-title">
-  <div class="row">
-    <div class="col-md-5 col-sm-6">
-      <h2>Roles</h2>
-      <p>Define your organization's role descriptions and permissions</p>
-    </div>
-    <div class="col-md-6 col-sm-6">
-      <div class="text-right">
-        <label>Search:
-          <input type="search" [(ngModel)]="filterQuery" class="header-search form-control input-sm full-data-search" placeholder="">
-        </label>
+<div class="fixedheader">
+  <div class="header-title pos-fixed">
+    <div class="row">
+      <div class="col-md-5 col-sm-5">
+        <h2>Roles</h2>
+        <p>Define your organization's role descriptions and permissions</p>
       </div>
-    </div>
-    <div class="col-md-1 col-sm-1 p-r-30">
-      <button type="button" placement="top" ngbTooltip="Click to add new roles" class="btn pull-left btn-primary waves-effect waves-light f-right d-inline-block md-trigger"
-        (click)='addRole()'>
-        <i class="fa fa-plus-circle m-r-5"></i> NEW
-      </button>
+      <div class="col-md-6 col-sm-6">
+        <div class="text-right">
+          <label>Search:
+            <input type="search" [(ngModel)]="filterQuery" class="header-search form-control input-sm full-data-search"
+              placeholder="Search for here" placement="bottom" ngbTooltip="Type here to search">
+          </label>
+        </div>
+      </div>
+      <div class="col-md-1 col-sm-1 p-r-30">
+        <button type="button" placement="bottom" ngbTooltip="Click to add roles" class="btn pull-left btn-primary waves-effect"
+          (click)='addRole()'><i class="fa fa-plus-circle m-r-5"></i> New
+        </button>
+      </div>
     </div>
   </div>
 </div>
 <!-- <div class="no-data p-0 m-0">
     <h3><i>No data found</i></h3>
 </div> -->
-<div class="card table-header fixed-table-header">
+<div class="card table-header fixed-table-header m-t-60">
   <div class="card-body">
     <div class="table-content crm-table">
       <div class="project-table">
@@ -64,8 +66,6 @@
                       switchColor="#fff" size="small" checked></ui-switch>
                   </td>
                   <td class="action-icon text-center">
-                    <a href="javascript:;" placement="top" ngbTooltip="click to view role" class="m-r-15 crm-action-view text-info"
-                      (click)="openMyModalData(i);modalDefault.show();"><i class="fa fa-book"></i></a>
                     <a href="javascript:;" placement="top" ngbTooltip="click to edit role" class="m-r-15 crm-action-edit text-primary"
                       (click)='editRole()'><i class="fa fa-pencil"></i></a>
                     <a href="javascript:;" placement="top" ngbTooltip="click to delete role" class="crm-action-delete text-danger"><i
