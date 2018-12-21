@@ -1,11 +1,11 @@
 <div class="fixedheader">
-  <div class="header-title pos-fixed">
+  <div class="header-title">
     <div class="row">
-      <div class="col-md-6 col-sm-6">
+      <div class="col-md-6 col-sm-6 pos-fixed">
         <h2>Business Category</h2>
         <p>lorem ipsum dolor sit amet, consectetur adipisicing elit - Business Category</p>
       </div>
-      <div class="col-md-5 col-sm-5">
+      <div class="col-md-5 col-sm-5 pos-fixed fixedsearch">
         <div class="text-right">
           <label>Search:
             <input type="search" [(ngModel)]="filterQuery" class="header-search form-control input-sm full-data-search"
@@ -13,8 +13,8 @@
           </label>
         </div>
       </div>
-      <div class="col-md-1 col-sm-1 p-r-30">
-        <button type="button" placement="bottom" ngbTooltip="Click to add business category" class="btn pull-left btn-primary waves-effect"
+      <div class="col-md-1 col-sm-1 p-r-30 pos-fixed fixedbutton">
+        <button type="button" placement="bottom" ngbTooltip="Click to add business category" class="btn pull-right btn-primary waves-effect"
           (click)="addCategory()"><i class="fa fa-plus-circle m-r-5"></i> New
         </button>
       </div>
@@ -56,10 +56,10 @@
                       switchColor="#fff" size="small" checked></ui-switch>
                   </td>
                   <td class="action-icon text-center">
-                    <a href="javascript:;" placement="top" ngbTooltip="Click to edit the business category " class="m-r-15 crm-action-edit text-primary"
+                    <a placement="top" ngbTooltip="Click to edit the business category " class="m-r-15 crm-action-edit text-primary"
                       (click)="editCategory(data)">
                       <i class="fa fa-pencil"></i></a>
-                    <a href="javascript:;" placement="bottom" ngbTooltip="Click to delete the business category " class="crm-action-delete text-danger">
+                    <a placement="bottom" ngbTooltip="Click to delete the business category " class="crm-action-delete text-danger">
                       <i class="fa fa-trash"></i></a>
                   </td>
                 </tr>

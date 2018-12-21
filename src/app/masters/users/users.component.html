@@ -1,11 +1,11 @@
 <div class="fixedheader">
-  <div class="header-title pos-fixed">
+  <div class="header-title">
     <div class="row">
-      <div class="col-md-5 col-sm-5">
+      <div class="col-md-5 col-sm-5 pos-fixed">
         <h2>User</h2>
         <p>Create or Update the user logins</p>
       </div>
-      <div class="col-md-6 col-sm-6">
+      <div class="col-md-6 col-sm-6 pos-fixed fixedsearch">
         <div class="text-right">
           <label>Search:
             <input type="search" [(ngModel)]="filterQuery" class="header-search form-control input-sm full-data-search"
@@ -13,8 +13,8 @@
           </label>
         </div>
       </div>
-      <div class="col-md-1 col-sm-1 p-r-30">
-        <button type="button" placement="bottom" ngbTooltip="Click to add user" class="btn pull-left btn-primary waves-effect"
+      <div class="col-md-1 col-sm-1 pos-fixed p-r-30 fixedbutton">
+        <button type="button" placement="bottom" ngbTooltip="Click to add user" class="btn pull-right btn-primary waves-effect"
           (click)='addUsers()'><i class="fa fa-plus-circle m-r-5"></i> New
         </button>
       </div>
@@ -35,7 +35,7 @@
               <thead>
                 <tr>
                   <th>
-                    <mfDefaultSorter by='fullname'>Full Name</mfDefaultSorter>
+                    <mfDefaultSorter by='fullname'>User Name</mfDefaultSorter>
                   </th>
                   <th>
                     <mfDefaultSorter by='mobileno'>Mobile No</mfDefaultSorter>
@@ -50,7 +50,7 @@
                   <th class="text-center">Action</th>
                 </tr>
               </thead>
-              <tbody  *ngIf="data.length!=0">
+              <tbody *ngIf="data.length!=0">
                 <tr *ngFor="let item of mf.data">
                   <td>{{item.fullname}}</td>
                   <td>{{item.mobileno}}</td>
@@ -64,10 +64,10 @@
                       switchColor="#fff" size="small" checked></ui-switch>
                   </td>
                   <td class="action-icon text-center">
-                    <a href="javascript:;" placement="top" ngbTooltip="Click to edit the user " class="m-r-15 crm-action-edit text-primary"
+                    <a placement="top" ngbTooltip="Click to edit the user " class="m-r-15 crm-action-edit text-primary"
                       (click)='editUsers()'>
                       <i class="fa fa-pencil"></i></a>
-                    <a href="javascript:;" placement="bottom" ngbTooltip="Click to delete the user " class="crm-action-delete text-danger">
+                    <a placement="bottom" ngbTooltip="Click to delete the user " class="crm-action-delete text-danger">
                       <i class="fa fa-trash"></i></a>
                   </td>
                 </tr>

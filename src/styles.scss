@@ -658,6 +658,12 @@ button{
 // fixed header //
 .fixedheader{
     display: inline;
+    .fixedsearch{
+        right: 150px;
+    }
+    .fixedbutton{
+        right: 10px;
+    }
     .pos-fixed{
         width:77%;
         max-width: 100%;
@@ -735,7 +741,7 @@ button{
 }
 .events-table{
     th,td{
-        width:19%;
+        width:20%;
     }
 }
 .roles-table{
@@ -767,6 +773,18 @@ button{
     .ng-star-inserted{
         svg{
             margin-top:-5px;
+        }
+    }
+}
+
+@media screen and (max-width: 900px) {
+    div {
+        position: relative !important;
+        right: 0px !important;
+    }
+    .fixedsearch{
+        .text-right{
+            text-align: left !important;
         }
     }
 }

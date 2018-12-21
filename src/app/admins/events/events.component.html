@@ -1,11 +1,11 @@
 <div class="fixedheader">
-  <div class="header-title pos-fixed">
+  <div class="header-title">
     <div class="row">
-      <div class="col-md-6 col-sm-6">
+      <div class="col-md-6 col-sm-6 pos-fixed">
         <h2>Event</h2>
         <p>lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
       </div>
-      <div class="col-md-5 col-sm-5">
+      <div class="col-md-5 col-sm-5 pos-fixed fixedsearch">
         <div class="text-right">
           <label>Search:
             <input type="search" [(ngModel)]="filterQuery" class="header-search form-control input-sm full-data-search"
@@ -13,10 +13,9 @@
           </label>
         </div>
       </div>
-      <div class="col-md-1 col-sm-1 p-r-30">
+      <div class="col-md-1 col-sm-1 p-r-30 pos-fixed fixedbutton">
         <button type="button" placement="bottom" ngbTooltip="Click to add new event" class="btn pull-right btn-primary waves-effect"
-          (click)="addEvents()">
-          <i class="fa fa-plus-circle m-r-5"></i> NEW
+          (click)="addEvents()"><i class="fa fa-plus-circle m-r-5"></i> NEW
         </button>
       </div>
     </div>
@@ -67,7 +66,7 @@
                   <td class="action-icon text-center">
                     <a placement="top" (click)="editEvents()" ngbTooltip="Click to edit event" class="m-r-15 crm-action-edit text-primary">
                       <i class="fa fa-pencil"></i></a>
-                    <a href="javascript:;" placement="bottom" ngbTooltip="Click to delete the event " class="crm-action-delete text-danger">
+                    <a placement="bottom" ngbTooltip="Click to delete the event " class="crm-action-delete text-danger">
                       <i class="fa fa-trash"></i></a>
                   </td>
                 </tr>
