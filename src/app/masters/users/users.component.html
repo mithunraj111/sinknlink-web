@@ -1,28 +1,25 @@
 <div class="fixedheader">
-  <div class="header-title">
+  <div class="header-title pos-fixed">
     <div class="row">
-      <div class="col-md-5 col-sm-5 pos-fixed">
+      <div class="col-md-5 col-sm-5">
         <h2>User</h2>
         <p>Create or Update the user logins</p>
       </div>
-      <div class="col-md-6 col-sm-6 pos-fixed fixedsearch">
+      <div class="col-md-6 col-sm-6">
         <div class="text-right">
           <label>Search:
-            <input type="search" [(ngModel)]="filterQuery" class="header-search form-control input-sm full-data-search"
-              placeholder="Search for here" placement="bottom" ngbTooltip="Type here to search">
+            <input type='text' class="header-search form-control input-sm full-data-search" placeholder='Search Name'
+              (keyup)='search($event)' placement="bottom" ngbTooltip="Type here to search" />
           </label>
         </div>
       </div>
-      <div class="col-md-1 col-sm-1 pos-fixed p-r-30 fixedbutton">
-        <button type="button" placement="bottom" ngbTooltip="Click to add user" class="btn pull-right btn-primary waves-effect"
+      <div class="col-md-1 col-sm-1 p-r-30">
+        <button type="button" placement="bottom" ngbTooltip="Click to add user" class="btn pull-left btn-primary waves-effect"
           (click)='addUsers()'><i class="fa fa-plus-circle m-r-5"></i> New
         </button>
       </div>
     </div>
   </div>
-</div>
-<div *ngIf="data.length==0" class="no-data p-0 m-0">
-  <h3><i>No data found</i></h3>
 </div>
 <div class="card table-header fixed-table-header m-t-60">
   <div class="card-body">
@@ -30,53 +27,36 @@
       <div class="project-table">
         <div class="dt-responsive">
           <div class="table-responsive">
-            <table class="table table-striped table-bordered full-data-table events-table" [mfData]="data| dataFilter : filterQuery"
-              #mf="mfDataTable" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
-              <thead>
-                <tr>
-                  <th>
-                    <mfDefaultSorter by='fullname'>User Name</mfDefaultSorter>
-                  </th>
-                  <th>
-                    <mfDefaultSorter by='mobileno'>Mobile No</mfDefaultSorter>
-                  </th>
-                  <th>
-                    <mfDefaultSorter by='role'>Role</mfDefaultSorter>
-                  </th>
-                  <th>
-                    <mfDefaultSorter by='updatedby'>Updated By</mfDefaultSorter>
-                  </th>
-                  <th class="text-center">Status</th>
-                  <th class="text-center">Action</th>
-                </tr>
-              </thead>
-              <tbody *ngIf="data.length!=0">
-                <tr *ngFor="let item of mf.data">
-                  <td>{{item.fullname}}</td>
-                  <td>{{item.mobileno}}</td>
-                  <td>{{item.role}}</td>
-                  <td>
-                    <span class="updatename">{{item.updatedby}}</span>
-                    <span class="updatedate">{{item.updateddt}}</span>
-                  </td>
-                  <td class="text-center">
-                    <ui-switch class="js-small" placement="top" ngbTooltip="Click to change the status" color="#03ADED"
-                      switchColor="#fff" size="small" checked></ui-switch>
-                  </td>
-                  <td class="action-icon text-center">
-                    <a placement="top" ngbTooltip="Click to edit the user " class="m-r-15 crm-action-edit text-primary"
-                      (click)='editUsers()'>
-                      <i class="fa fa-pencil"></i></a>
-                    <a placement="bottom" ngbTooltip="Click to delete the user " class="crm-action-delete text-danger">
-                      <i class="fa fa-trash"></i></a>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            <ngx-datatable #table class="table table-striped table-bordered full-data-table events-table data-table"
+              [columns]="columns" [columnMode]="'force'" [headerHeight]="50" [rowHeight]="50" [rows]='data'>
+              <ngx-datatable-column prop="fullname" name="FullName"></ngx-datatable-column>
+              <ngx-datatable-column prop="mobileno" name="Mobile No"></ngx-datatable-column>
+              <ngx-datatable-column prop="role" name="Role"></ngx-datatable-column>
+              <ngx-datatable-column name="UpdatedBy">
+                <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                  <span class="updatename">{{data[rowIndex].updatedby}}</span>
+                  <span class="updatedate"> {{data[rowIndex].updateddt}}</span>
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column prop="status" name="Status" [sortable]="false" class="text-center">
+                <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row" class="text-center">
+                  <ui-switch class="js-small" placement="top" ngbTooltip="Click to change the status" color="#03ADED"
+                    switchColor="#fff" size="small" checked></ui-switch>
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column prop="updatedby" name="Action" [sortable]="false" class="action-icon text-center">
+                <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                  <a placement="top" ngbTooltip="Click to edit the user " class="m-r-15 crm-action-edit text-primary"
+                    (click)='editUsers()'>
+                    <i class="fa fa-pencil"></i></a>
+                  <a href="javascript:;" placement="bottom" ngbTooltip="Click to delete the user " class="crm-action-delete text-danger">
+                    <i class="fa fa-trash"></i></a>
+                </ng-template>
+              </ngx-datatable-column>
+            </ngx-datatable>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-<!-- Add Contact Start Model -->

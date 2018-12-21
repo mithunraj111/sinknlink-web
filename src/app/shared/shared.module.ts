@@ -15,6 +15,7 @@ import {ModalAnimationComponent} from './modal-animation/modal-animation.compone
 import {SpinnerComponent} from './spinner/spinner.component';
 import {ClickOutsideModule} from 'ng-click-outside';
 import { DataFilterPipe } from '../shared/elements/data-filter.pipe';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
 };
@@ -42,7 +43,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ModalAnimationComponent,
     SpinnerComponent,
     ClickOutsideModule,
-    DataFilterPipe
+    DataFilterPipe,
+    NgxDatatableModule
   ],
   declarations: [
     ToggleFullScreenDirective,

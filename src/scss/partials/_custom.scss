@@ -718,11 +718,11 @@ ngx-datatable.data-table {
     }
     &.sortable {
       &:before, &:after {
-        font-family: 'IcoFont' !important;
+        font-family: 'FontAwesome' !important;
         position: absolute;
         top: 10px;
         color: #ccc;
-        font-size: 20px;
+        font-size: 14px;
       }
     }
   }
@@ -744,11 +744,11 @@ ngx-datatable.data-table {
 .data-table {
   datatable-header-cell.sortable {
     &:after {
-      content: "\eb53";
+      content: "\f175";
       right: 10px;
     }
     &:before {
-      content: "\eb56";
+      content: "\f176";
       right: 15px;
     }
     &.sort-active {
