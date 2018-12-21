@@ -2,7 +2,7 @@
   <div class="header-title pos-fixed">
     <div class="row">
       <div class="col-md-5 col-sm-5">
-        <h2>Roles</h2>
+        <h2>Role</h2>
         <p>Define your organization's role descriptions and permissions</p>
       </div>
       <div class="col-md-6 col-sm-6">
@@ -14,7 +14,7 @@
         </div>
       </div>
       <div class="col-md-1 col-sm-1 p-r-30">
-        <button type="button" placement="bottom" ngbTooltip="Click to add roles" class="btn pull-left btn-primary waves-effect"
+        <button type="button" placement="bottom" ngbTooltip="Click to add role" class="btn pull-left btn-primary waves-effect"
           (click)='addRole()'><i class="fa fa-plus-circle m-r-5"></i> New
         </button>
       </div>
@@ -44,12 +44,8 @@
                   <th class="p-l-0">
                     <mfDefaultSorter by="updatedby">Updated By</mfDefaultSorter>
                   </th>
-                  <th class="text-center p-l-0">
-                    <mfDefaultSorter by="status">Status</mfDefaultSorter>
-                  </th>
-                  <th class="text-center">
-                    <mfDefaultSorter>Action</mfDefaultSorter>
-                  </th>
+                  <th class="text-center p-l-0">Status</th>
+                  <th class="text-center">Action</th>
                 </tr>
               </thead>
 

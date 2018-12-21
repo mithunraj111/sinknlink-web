@@ -8,7 +8,7 @@
             <label>Business Category Name</label>
             <input type="text" class="form-control" placeholder=" Business Category Name">
           </div>
-          <div class="form-group">
+          <div *ngIf="categoryPage" class="form-group">
             <label>Status <small>*</small></label>
             <div class="form-radio">
               <form>

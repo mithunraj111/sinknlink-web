@@ -24,11 +24,11 @@
           </div>
           <div class="form-group required">
             <label>City</label>
-            <tag-input [ngClass]="'tag-select'" theme='bootstrap' [placeholder]="'Select your city'" [maxItems]="1" [ngModel]="[]"
-             [addOnBlur]="true" [clearOnBlur]="true"[secondaryPlaceholder]="'Select your city'">
+            <tag-input [ngClass]="'tag-select'" theme='bootstrap' [placeholder]="'Select your city'" [maxItems]="1"
+              [ngModel]="[]" [addOnBlur]="true" [clearOnBlur]="true" [secondaryPlaceholder]="'Select your city'">
             </tag-input>
           </div>
-          <div class="form-group ">
+          <div *ngIf="locationPage" class="form-group ">
             <label>Status <small>*</small></label>
             <div class="form-radio">
               <form>
@@ -49,7 +49,8 @@
           </div>
         </div>
       </div>
-      <button (click)="closeMyModal($event)" type="button" placement="top" ngbTooltip="Click to {{submit}} location " class="btn pull-right btn-primary waves-effect m-b-10">{{submit}}</button>
+      <button (click)="closeMyModal($event)" type="button" placement="top" ngbTooltip="Click to {{submit}} locations "
+        class="btn pull-right btn-primary waves-effect m-b-10">{{submit}}</button>
     </div>
     <button (click)="closeMyModal($event)" aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>
   </app-modal-animation>

@@ -2,7 +2,7 @@
   <div class="header-title m-b-15 pos-fixed">
     <div class="row">
       <div class="col-md-6 col-sm-6">
-        <h2 class="add-tenant">Events</h2>
+        <h2 class="add-tenant">Event</h2>
         <p *ngIf="eventid" class="m-b-0">ID: 875643</p>
       </div>
       <div class="col-md-3 col-sm-6 save-button text-right p-r-30">
@@ -61,27 +61,26 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-12 col-sm-12">
-              <div class="form-group row required">
-                <label class="col-md-3 col-sm-6 col-form-label text-right">Address</label>
-                <div class="col-md-9 col-sm-6 p-r-0 p-l-2">
-                  <textarea></textarea>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-12 col-sm-12">
-              <div class="form-group row required">
-                <label class="col-md-3 col-sm-6 col-form-label text-right">Particulars</label>
-                <div class="col-md-9 col-sm-6 p-r-0 p-l-2">
-                  <textarea></textarea>
-                </div>
+            <div class="form-group row required">
+              <label class="col-md-3 col-sm-6 col-form-label text-right">Address</label>
+              <div class="col-md-9 col-sm-6">
+                <textarea rows="3" cols="3" class="form-control"></textarea>
+
               </div>
             </div>
             <div class="form-group row required">
-              <label class="col-md-3 col-sm-6 col-form-label text-right">Status</label>
+              <label class="col-md-3 col-sm-6 col-form-label text-right">Particulars</label>
               <div class="col-md-9 col-sm-6">
-                <ui-switch class="js-small" placement="top" ngbTooltip="Click to change the status" color="#03ADED"
-                  switchColor="#fff" size="small" checked></ui-switch>
+                <textarea rows="3" cols="3" class="form-control"></textarea>
+
+              </div>
+            </div>
+            <div *ngIf="eventid">
+              <div class="form-group row">
+                <label class="col-md-3 col-sm-6 col-form-label text-right">Status</label>
+                <div class="col-md-9 col-sm-6">
+                  <ui-switch class="js-small" color="#03ADED" switchColor="#fff" size="small" checked></ui-switch>
+                </div>
               </div>
             </div>
           </div>
