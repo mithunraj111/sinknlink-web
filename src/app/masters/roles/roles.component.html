@@ -1,11 +1,11 @@
 <div class="fixedheader">
-  <div class="header-title">
+  <div class="header-title pos-fixed">
     <div class="row">
-      <div class="col-md-5 col-sm-5 pos-fixed">
+      <div class="col-md-5 col-sm-5">
         <h2>Role</h2>
         <p>Define your organization's role descriptions and permissions</p>
       </div>
-      <div class="col-md-6 col-sm-6 pos-fixed fixedsearch">
+      <div class="col-md-6 col-sm-6">
         <div class="text-right">
           <label>Search:
             <input type="search" [(ngModel)]="filterQuery" class="header-search form-control input-sm full-data-search"
@@ -13,8 +13,8 @@
           </label>
         </div>
       </div>
-      <div class="col-md-1 col-sm-1 p-r-30 pos-fixed fixedbutton">
-        <button type="button" placement="bottom" ngbTooltip="Click to add role" class="btn pull-right btn-primary waves-effect"
+      <div class="col-md-1 col-sm-1 p-r-30">
+        <button type="button" placement="bottom" ngbTooltip="Click to add role" class="btn btn-primary waves-effect"
           (click)='addRole()'><i class="fa fa-plus-circle m-r-5"></i> New
         </button>
       </div>

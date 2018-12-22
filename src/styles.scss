@@ -782,9 +782,11 @@ button{
         position: relative !important;
         right: 0px !important;
     }
-    .fixedsearch{
-        .text-right{
-            text-align: left !important;
+}
+#pcoded{
+    &[vertical-nav-type="offcanvas"] {
+        .header-title {
+            width: 96%;
         }
     }
 }
