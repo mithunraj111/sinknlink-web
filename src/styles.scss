@@ -206,6 +206,7 @@ textarea {
             border:0;
         }
     }
+
 }
 
 .table-header{
@@ -263,6 +264,47 @@ textarea {
             }
         }
     }
+    .data-table{
+        border:1px solid #fff;
+     .datatable-header {
+        border-bottom: 1px solid hsl(216, 6%, 84%);
+        margin-left:-13px;
+            .datatable-header-cell{
+                border: 0px solid #d3d5d8;
+                color: #4b5056;
+                padding: 0px 10px;
+                font-family: 'Montserrat', sans-serif;
+                font-weight: 600;
+                font-size: 13px;
+                &:first-child{
+                 padding-left: 5px;
+            }
+            
+        }
+    }
+}
+
+.datatable-body{
+    .datatable-body-row{
+        border-bottom:1px solid #d3d5d8;
+            .datatable-body-cell{
+                border: 0px solid #d3d5d8;
+                font-size: 13px;
+                color: #67757c;
+                padding: 3px 10px;
+                font-family: 'Montserrat', sans-serif;
+                    font-weight: 500;
+                display: inline-block;
+                vertical-align: top;
+                line-height: 40px;
+                &:first-child{
+                    padding-left: 5px;
+            }
+       }
+        
+    }
+       
+}    
     .page-nav{
         border-bottom: 0 none !important;
         td{
@@ -313,10 +355,13 @@ textarea {
 }
 .updatename{
     display: inherit;
+    line-height:20px;
 }
 .updatedate{
     color: #bcc3d3;
     font-size: 12px;
+    line-height: 20px;
+    display: inherit;
 }
 
 .required{
@@ -657,7 +702,7 @@ button{
 
 // fixed header //
 .fixedheader{
-    display: inline;
+        display:inline;
     .fixedsearch{
         right: 150px;
     }
@@ -725,7 +770,7 @@ button{
     table{
         thead{
             display: block;
-            margin-right: 10px;
+            // margin-right: 10px;
         }
         tbody{
             display: block;
@@ -733,7 +778,16 @@ button{
             height: 62vh;
         }
     }
+     .datatable-header{
+        display: block;
+    }
+    .datatable-body{
+        display: block;
+        overflow: auto;
+        height: 62vh !important;
+    }
 }
+
 .location-table{
     th,td{
         width: 16%;
@@ -790,3 +844,4 @@ button{
         }
     }
 }
+

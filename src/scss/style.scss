@@ -67,8 +67,8 @@
 
 :root {
     --scroll-bar-size: 10px;
-    --scroll-bar-thumb-background-color: rgba(255, 255, 255, 0.2);
-    --scroll-bar-thumb-background-color-active: rgba(255, 255, 255, 0.5);
+    --scroll-bar-thumb-background-color: rgba(0, 0, 0, 0.2);
+    --scroll-bar-thumb-background-color-active: rgba(0, 0, 0, 0.5);
   }
 
   ::-webkit-scrollbar {
