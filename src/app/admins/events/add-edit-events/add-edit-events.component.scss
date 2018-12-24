@@ -1,3 +1,27 @@
 .location-title{
     color:#818990 !important;
     }
+    .md-close-btn {
+        border: 0;
+        position: absolute;
+        top: -20px;
+        right: -10px;
+        cursor: pointer;
+        background: transparent;
+        .fa-close{
+            border: 1px solid black;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            color: #000;
+            vertical-align: middle;
+            line-height: 22px;
+        }
+    }
+    .fixedheader{
+        .pos-fixed{
+            background-color: #efefef;
+            margin: -15px -15px 0px -15px;
+            padding: 15px 15px 0px 15px;
+        }
+    }

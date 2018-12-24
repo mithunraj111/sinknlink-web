@@ -1,21 +1,23 @@
-<div class="fixedheader">
-  <div class="header-title m-b-15 pos-fixed">
-    <div class="row">
-      <div class="col-md-6 col-sm-6">
-        <h2 class="add-tenant">Event</h2>
-        <p *ngIf="eventid" class="m-b-0">ID: 875643</p>
-      </div>
-      <div class="col-md-3 col-sm-6 save-button text-right p-r-30">
-        <button type="button" placement="bottom" ngbTooltip="Click to {{buttontext}} events" class="btn btn-primary waves-effect m-r-10 text-capitalize">{{buttontext}}</button>
-        <button type="button" placement="bottom" ngbTooltip="Go back" routerLink="/admins/events" class="btn btn-inverse btn-primary waves-effect"><i
-            class="fa fa-arrow-circle-left"></i></button>
+<div class="fixedheader-bg">
+  <div class="fixedheader">
+    <div class="header-title m-b-15 pos-fixed">
+      <div class="row">
+        <div class="col-md-6 col-sm-6">
+          <h2 class="add-tenant mt-0">Event</h2>
+          <p *ngIf="eventid" class="m-b-0">ID: 875643</p>
+        </div>
+        <div class="col-md-3 col-sm-6 save-button text-right p-r-30">
+          <button type="button" placement="bottom" ngbTooltip="Click to {{buttontext}} events" class="btn btn-primary waves-effect m-r-10 text-capitalize">{{buttontext}}</button>
+          <button type="button" placement="bottom" ngbTooltip="Go back" routerLink="/admins/events" class="btn btn-inverse btn-primary waves-effect"><i
+              class="fa fa-arrow-circle-left"></i></button>
+        </div>
       </div>
     </div>
   </div>
 </div>
 <div class="col-md-12 col-sm-12">
   <div class="row">
-    <div class="col-md-9 col-sm-8 p-l-0 p-r-10">
+    <div class="col-md-12 col-sm-8 p-l-0">
       <div class="employee-form">
         <div class="card tenants-page tenants-pages m-b-10 m-t-50">
           <div class="col-md-12 col-sm-12 p-t-10">
@@ -99,7 +101,7 @@
             <div class="col-md-12 col-sm-12">
               <div class="row">
                 <div class="col-md-5" *ngFor="let item of uploader.queue">
-                  <strong>{{ item?.file?.name }}</strong>
+                  <strong>{{ item?.file?.name }} {{item?.file | json}} {{item?.file?.rawFile | json}}</strong>
                   <img class="preview p-0" src="{{item?.file?.name}}">
                 </div>
               </div>
@@ -108,5 +110,82 @@
         </div>
       </div>
     </div> -->
+  </div>
+</div>
+<div class="header-title">
+  <h2 class="add-tenant mb-3">Photos</h2>
+</div>
+<div class="card">
+  <div class="row mt-4 mb-4">
+    <div class="col-md-3 col-sm-6 ml-4 text-right middle">
+      <label class="f-14 mt-5 pt-3"><b>Select an image to upload</b></label>
+      <!-- <div class="text-center employee-profile mb-2">
+        <div class="form-group">
+          <label class="custom-file">
+            <input type="file" ng2FileSelect [uploader]="uploader" multiple class="custom-file-input mb-3">
+            <span class="custom-file-control mb-4" style="width: 50%;"></span>
+          </label>
+        </div>
+      </div> -->
+    </div>
+    <div class="col-md-5 col-sm-6 mb-4">
+        <div class="text-center employee-profile mb-2">
+            <div class="form-group">
+              <label class="custom-file">
+                <input type="file" ng2FileSelect [uploader]="uploader" multiple class="custom-file-input mb-3">
+                <span class="custom-file-control mb-4" style="width: 100%;"></span>
+              </label>
+            </div>
+          </div>
+    </div>
+    <div class="col-md-12 col-m-6">
+      <div class="row mb-4 mt-5">
+        <div class="col-md-2 col-sm-6 ml-4 mb-4">
+          <img src="assets/images/employee.jpg" class="img-responsive" alt="employee" style="width:100%;">
+          <button aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>
+        </div>
+        <div class="col-md-2 col-sm-6  ml-4 mb-4">
+          <img src="assets/images/employee.jpg" class="img-responsive" alt="employee" style="width:100%;">
+          <button aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>
+
+        </div>
+        <div class="col-md-2 col-sm-6 ml-4 mb-4">
+          <img src="assets/images/employee.jpg" class="img-responsive" alt="employee" style="width:100%;">
+          <button aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>
+
+        </div>
+        <div class="col-md-2 col-sm-6 ml-4 mb-4">
+          <img src="assets/images/employee.jpg" class="img-responsive" alt="employee" style="width:100%;">
+          <button aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>
+        </div>
+        <div class="col-md-2 col-sm-6 ml-4 mb-4">
+          <img src="assets/images/employee.jpg" class="img-responsive" alt="employee" style="width:100%;">
+          <button aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2 col-sm-6 ml-4 mb-4">
+          <img src="assets/images/employee.jpg" class="img-responsive" alt="employee" style="width:100%;">
+          <button aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>
+        </div>
+        <div class="col-md-2 col-sm-6  ml-4 mb-4">
+          <img src="assets/images/employee.jpg" class="img-responsive" alt="employee" style="width:100%;">
+          <button aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>
+
+        </div>
+        <div class="col-md-2 col-sm-6 ml-4 mb-4">
+          <img src="assets/images/employee.jpg" class="img-responsive" alt="employee" style="width:100%;">
+          <button aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>
+        </div>
+        <div class="col-md-2 col-sm-6 ml-4 mb-4">
+          <img src="assets/images/employee.jpg" class="img-responsive" alt="employee" style="width:100%;">
+          <button aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>
+        </div>
+        <div class="col-md-2 col-sm-6 ml-4 mb-4">
+          <img src="assets/images/employee.jpg" class="img-responsive" alt="employee" style="width:100%;">
+          <button aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
