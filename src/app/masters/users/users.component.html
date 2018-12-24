@@ -1,11 +1,11 @@
-<div class="fixedheader header-block">
+<div class="fixedheader">
   <div class="header-title  pos-fixed">
     <div class="row">
-      <div class="col-md-5 col-sm-5">
+      <div class="col-md-6 col-sm-6">
         <h2>Users</h2>
         <p>Create or Update the user logins</p>
       </div>
-      <div class="col-md-6 col-sm-6">
+      <div class="col-md-5 col-sm-5">
         <div class="text-right">
           <label>Search:
             <input type='text' class="header-search form-control input-sm full-data-search" placeholder='Search Name'
@@ -21,30 +21,32 @@
     </div>
   </div>
 </div>
-<div class="card table-header fixed-table-header m-t-60">
+
+<div class="header-block">
+<div class="card table-header fixed-table-header m-t-60 pos-fixed">
   <div class="card-body">
     <div class="table-content crm-table">
       <div class="project-table">
         <div class="dt-responsive">
           <div class="table-responsive">
-            <ngx-datatable #table class="table table-bordered data-table" [columns]="columns" [columnMode]="'force'"
-              [headerHeight]="50" [rowHeight]="50" [rows]='data'>
-              <ngx-datatable-column prop="fullname" name="User Name"></ngx-datatable-column>
-              <ngx-datatable-column prop="mobileno" name="Mobile No"></ngx-datatable-column>
-              <ngx-datatable-column prop="role" name="Role"></ngx-datatable-column>
-              <ngx-datatable-column name="Updated By">
+            <ngx-datatable #table class="table table-bordered data-table" [columns]="columns" [columnMode]="'flex'"
+              [headerHeight]="40" [rowHeight]="40" [rows]='data' [scrollbarV]="true" [scrollbarH]="true">
+              <ngx-datatable-column prop="fullname" name="User Name" [flexGrow]="1.25"></ngx-datatable-column>
+              <ngx-datatable-column prop="mobileno" name="Mobile No" [flexGrow]="1.0"></ngx-datatable-column>
+              <ngx-datatable-column prop="role" name="Role" [flexGrow]="1.0"></ngx-datatable-column>
+              <ngx-datatable-column name="Updated By" [flexGrow]="1.0">
                 <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
                   <span class="updatename">{{data[rowIndex].updatedby}}</span>
                   <span class="updatedate"> {{data[rowIndex].updateddt}}</span>
                 </ng-template>
               </ngx-datatable-column>
-              <ngx-datatable-column prop="status" name="Status" [sortable]="false">
+              <ngx-datatable-column prop="status" name="Status" [sortable]="false" [flexGrow]="0.75">
                 <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
                   <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change the status" color="#03ADED"
                     switchColor="#fff" size="small" checked></ui-switch>
                 </ng-template>
               </ngx-datatable-column>
-              <ngx-datatable-column prop="updatedby" name="Action" [sortable]="false">
+              <ngx-datatable-column prop="updatedby" name="Action" [sortable]="false" [flexGrow]="0.5">
                 <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
                   <a placement="bottom" ngbTooltip="Click to edit the user " class="m-r-15 crm-action-edit text-primary"
                     (click)='editUsers()'>
@@ -59,4 +61,5 @@
       </div>
     </div>
   </div>
+</div>
 </div>

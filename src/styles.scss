@@ -266,9 +266,11 @@ textarea {
     }
     .data-table{
         border:1px solid #fff;
+        
      .datatable-header {
         border-bottom: 1px solid hsl(216, 6%, 84%);
-        margin-left:-13px;
+        margin-left:-11px;
+       
             .datatable-header-cell{
                 border: 0px solid #d3d5d8;
                 color: #4b5056;
@@ -285,20 +287,24 @@ textarea {
 }
 
 .datatable-body{
-    .datatable-body-row{
-        border-bottom:1px solid #d3d5d8;
-            .datatable-body-cell{
-                border: 0px solid #d3d5d8;
-                font-size: 13px;
-                color: #67757c;
-                padding: 3px 10px;
-                font-family: 'Montserrat', sans-serif;
+    // .datatable-row-wrapper {
+    //     padding-left:4px;
+    // }
+       
+        .datatable-body-row{
+            border-bottom:1px solid #d3d5d8;
+                .datatable-body-cell{
+                    border: 0px solid #d3d5d8;
+                    font-size: 13px;
+                    color: #67757c;
+                    padding: 3px 10px;
+                    font-family: 'Montserrat', sans-serif;
                     font-weight: 500;
-                display: inline-block;
-                vertical-align: top;
-                line-height: 40px;
-                &:first-child{
-                    padding-left: 5px;
+                    display: inline-block;
+                    vertical-align: top;
+                    line-height: 31px;
+                    &:first-child{
+                        padding-left: 5px;
             }
        }
         
@@ -355,7 +361,7 @@ textarea {
 }
 .updatename{
     display: inherit;
-    line-height:20px;
+    line-height:16px;
 }
 .updatedate{
     color: #bcc3d3;
@@ -702,7 +708,7 @@ button{
 
 // fixed header //
 .fixedheader{
-        display:inline;
+         display:inline;
     .fixedsearch{
         right: 150px;
     }
@@ -779,7 +785,7 @@ button{
         }
     }
      .datatable-header{
-        display: block;
+         display: block;
     }
     .datatable-body{
         display: block;
@@ -845,3 +851,12 @@ button{
     }
 }
 
+.header-block{
+    // display:inline;
+
+.pos-fixed{
+    width:79%;
+    max-width: 100%;
+    z-index: 120;
+}
+}
