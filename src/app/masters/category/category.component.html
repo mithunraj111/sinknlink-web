@@ -49,7 +49,7 @@
                   <td>{{item.businesscategory}}</td>
                   <td>
                     <span class="updatename">{{item.lastupdatedby}}</span>
-                    <span class="updatedate">{{item.lastupdateddt}}</span>
+                    <span class="updatedate">{{item.lastupdateddt | date:'dd-MMM-yyyy hh:mm'}}</span>
                   </td>
                   <td class="text-center">
                     <ui-switch class="js-small" placement="top" ngbTooltip="Click to change the status" color="#03ADED"

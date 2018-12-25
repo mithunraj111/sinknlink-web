@@ -1,11 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppConstant }  from '../../../app.constants';
+import { NgbDateCustomParserFormatter } from '../../../shared/elements/dateParser';
+import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-add-edit-donations',
   templateUrl: './add-edit-donations.component.html',
-  styleUrls: ['./add-edit-donations.component.scss']
+  styleUrls: ['./add-edit-donations.component.scss'],
+  providers: [
+    { provide: NgbDateParserFormatter, useClass: NgbDateCustomParserFormatter }
+  ]
 })
 export class AddEditDonationsComponent implements OnInit {
   isaddForm= true;

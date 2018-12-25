@@ -55,7 +55,7 @@
                   <td>{{items.dataaccess}}</td>
                   <td>
                     <span class="updatename">{{items.updatedby}}</span>
-                    <span class="updatedate">{{items.updateddt}}</span>
+                    <span class="updatedate">{{items.updateddt | date:'dd-MMM-yyyy hh:mm'}}</span>
                   </td>
                   <td class="text-center">
                     <ui-switch class="js-small" placement="top" ngbTooltip="Click to change the status" color="#03ADED"

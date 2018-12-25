@@ -53,11 +53,11 @@
               <tbody class="p-r-1">
                 <tr *ngFor="let items of mf.data; let i = index;">
                   <td>{{items.eventname}}</td>
-                  <td class="text-center">{{items.date}}</td>
+                  <td class="text-center">{{items.date | date:'dd-MMM-yyyy'}}</td>
                   <td>{{items.city}}</td>
                   <td>
                     <span class="updatename">{{items.lastupdatedby}}</span>
-                    <span class="updatedate">{{items.lastupdateddt}}</span>
+                    <span class="updatedate">{{items.lastupdateddt | date:'dd-MMM-yyyy hh:mm'}}</span>
                   </td>
                   <td class="text-center">
                     <ui-switch class="js-small" placement="top" ngbTooltip="Click to change the status" color="#03ADED"

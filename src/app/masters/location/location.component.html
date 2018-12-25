@@ -61,7 +61,7 @@
                   <td>{{items.city}}</td>
                   <td>
                     <span class="updatename">{{items.lastupdatedby}}</span>
-                    <span class="updatedate">{{items.lastupdateddt}}</span>
+                    <span class="updatedate">{{items.lastupdateddt | date:'dd-MMM-yyyy hh:mm'}}</span>
                   </td>
                   <td class="text-center">
                     <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change the status" color="#03ADED"
