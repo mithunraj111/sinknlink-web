@@ -270,7 +270,6 @@ textarea {
      .datatable-header {
         border-bottom: 1px solid hsl(216, 6%, 84%);
         margin-left:-11px;
-       
             .datatable-header-cell{
                 border: 0px solid #d3d5d8;
                 color: #4b5056;
@@ -290,7 +289,6 @@ textarea {
     // .datatable-row-wrapper {
     //     padding-left:4px;
     // }
-       
         .datatable-body-row{
             border-bottom:1px solid #d3d5d8;
                 .datatable-body-cell{
@@ -879,11 +877,14 @@ button{
 }
 
 .header-block{
-    // display:inline;
+  
 
 .pos-fixed{
     width:79%;
     max-width: 100%;
     z-index: 120;
+}
+.tooltip{
+    z-index: 999999;
 }
 }
