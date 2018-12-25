@@ -1,14 +1,19 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import {FileUploader} from 'ng2-file-upload';
+import { FileUploader } from 'ng2-file-upload';
 import { ActivatedRoute } from '@angular/router';
 import { AppConstant } from '../../../app.constants';
+import { NgbDateCustomParserFormatter } from '../../../shared/elements/dateParser';
+import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
 
 @Component({
   selector: 'app-add-edit-events',
   templateUrl: './add-edit-events.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: ['./add-edit-events.component.scss']
+  styleUrls: ['./add-edit-events.component.scss'],
+  providers: [
+    { provide: NgbDateParserFormatter, useClass: NgbDateCustomParserFormatter }
+  ]
 })
 export class AddEditEventsComponent implements OnInit {
   uploader: FileUploader = new FileUploader({
@@ -19,21 +24,21 @@ export class AddEditEventsComponent implements OnInit {
   hasAnotherDropZoneOver = false;
   isaddForm = true;
   eventid: number;
-  buttontext= AppConstant.BUTTON_TXT.SAVE;
+  buttontext = AppConstant.BUTTON_TXT.SAVE;
 
-  constructor(private route: ActivatedRoute) { 
+  constructor(private route: ActivatedRoute) {
     this.route.params.subscribe(params => {
       if (params.id !== undefined) {
         this.isaddForm = false;
         this.eventid = params.id;
-        this.buttontext= AppConstant.BUTTON_TXT.UPDATE;
+        this.buttontext = AppConstant.BUTTON_TXT.UPDATE;
       }
     });
-   }
+  }
 
   ngOnInit() {
   }
-  
+
   fileOverBase(e: any): void {
     this.hasBaseDropZoneOver = e;
   }
@@ -41,7 +46,7 @@ export class AddEditEventsComponent implements OnInit {
   fileOverAnother(e: any): void {
     this.hasAnotherDropZoneOver = e;
   }
-  
+
   url = '';
   onSelectFile(event) {
     if (event.target.files && event.target.files[0]) {
