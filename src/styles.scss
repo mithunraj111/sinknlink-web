@@ -877,14 +877,45 @@ button{
 }
 
 .header-block{
-  
-
-.pos-fixed{
-    width:79%;
-    max-width: 100%;
-    z-index: 120;
+    .pos-fixed{
+        width:79%;
+        max-width: 100%;
+        z-index: 120;
+    }
+    .tooltip{
+        z-index: 999999;
+    }
 }
-.tooltip{
-    z-index: 999999;
-}
-}
+.table-header{
+    .data-table{
+        datatable-header-cell.sortable:before, .data-table datatable-header-cell.sortable:after{
+            top: 13px !important;
+        }
+        .datatable-header{
+            width: 100% !important;
+            .datatable-header-inner{
+                width: 100% !important;
+                .datatable-header-cell{
+                    width: 100% !important;
+                    padding: 0px 4px !important;
+                    line-height: 0.7 !important;
+                    .datatable-header-cell-label{
+                        padding: 0.75rem 0.75rem !important;
+                    }
+                }
+            }
+        }
+        .datatable-body{
+            width: 100% !important;
+            .datatable-row-wrapper{
+                width: 100% !important;
+                .datatable-body-row{
+                    width: 100% !important;
+                    .datatable-body-cell{
+                        width: 100% !important;
+                    }
+                }
+            }
+        }
+    }
+}  
