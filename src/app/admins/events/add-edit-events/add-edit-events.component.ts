@@ -5,6 +5,7 @@ import { AppConstant } from '../../../app.constants';
 import { NgbDateCustomParserFormatter } from '../../../shared/elements/dateParser';
 import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
+import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
 
 @Component({
   selector: 'app-add-edit-events',
@@ -26,7 +27,7 @@ export class AddEditEventsComponent implements OnInit {
   eventid: number;
   buttontext = AppConstant.BUTTON_TXT.SAVE;
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute,private bootstrapAlertService: BootstrapAlertService) {
     this.route.params.subscribe(params => {
       if (params.id !== undefined) {
         this.isaddForm = false;
@@ -61,4 +62,12 @@ export class AddEditEventsComponent implements OnInit {
       console.log(event.target.result);
     }
   }
+
+
+  submit(){
+    this.bootstrapAlertService.showError('This is an error!');
+     this.bootstrapAlertService.showInfo('This is an info!');    
+    this.bootstrapAlertService.showWarning('This is a warning!');    
+    this.bootstrapAlertService.showSucccess('This is a success message!');
+}
 }

@@ -10,7 +10,8 @@ import { MenuItems } from './shared/menu-items/menu-items';
 import { BreadcrumbsComponent } from './layout/admin/breadcrumbs/breadcrumbs.component';
 import { MastersComponent } from './masters/masters.component';
 import { DataFilterPipe } from './shared/elements/data-filter.pipe';
-import { AdminsComponent} from './admins/admins.component';
+import { AdminsComponent } from './admins/admins.component';
+import { BootstrapAlertService, BootstrapAlertModule } from 'ngx-bootstrap-alert-service';
 
 @NgModule({
   declarations: [
@@ -25,9 +26,10 @@ import { AdminsComponent} from './admins/admins.component';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    SharedModule
+    SharedModule,
+    BootstrapAlertModule
   ],
-  providers: [MenuItems, DataFilterPipe],
+  providers: [MenuItems, DataFilterPipe, BootstrapAlertService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
