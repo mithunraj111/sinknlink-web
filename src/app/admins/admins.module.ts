@@ -14,6 +14,7 @@ import { TagInputModule } from 'ngx-chips';
 import { AddEditDonationsComponent } from './donations/add-edit-donations/add-edit-donations.component';
 import { AddEditEventsComponent } from  './events/add-edit-events/add-edit-events.component';
 import {FileUploadModule} from 'ng2-file-upload';
+import { VipNumberRegistrationComponent } from './vip-number-registration/vip-number-registration.component';
 
 @NgModule({
   imports: [
@@ -29,6 +30,6 @@ import {FileUploadModule} from 'ng2-file-upload';
     TagInputModule,
     FileUploadModule
   ],
-  declarations: [EventsComponent, DonationsComponent, AddEditDonationsComponent, AddEditEventsComponent]
+  declarations: [EventsComponent, DonationsComponent, AddEditDonationsComponent, AddEditEventsComponent, VipNumberRegistrationComponent]
 })
 export class AdminsModule { }

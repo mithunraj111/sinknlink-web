@@ -2,42 +2,40 @@
   <div class="header-title pos-fixed">
     <div class="row">
       <div class="col-md-5 col-sm-5">
-        <h2>Users</h2>
-        <p>Create or Update the user logins</p>
+        <h2>VIP Membership Id</h2>
+        <p>VIP membership id status can be checked and blocked.</p>
       </div>
-      <div class="col-md-6 col-sm-6">
+      <div class="col-md-5 col-sm-6">
         <div class="text-right">
           <label>Search:
-            <input type='text' class="header-search form-control input-sm full-data-search" placeholder='Search Name'
-              (keyup)='search($event)' placement="bottom" title="Type here to search" />
+            <input type="search" [(ngModel)]="filterQuery" class="header-search form-control input-sm full-data-search"
+              placeholder="Search for here" placement="bottom" ngbTooltip="Type here to search">
           </label>
         </div>
       </div>
-      <div class="col-md-1 col-sm-1">
-        <button type="button" placement="bottom" title="Click to add user" class="btn pull-left btn-primary waves-effect"
-          (click)='addUsers()'><i class="fa fa-plus-circle m-r-5"></i> New
+      <div class="col-md-1 col-sm-1 p-r-30">
+        <button type="button" placement="bottom" ngbTooltip="Click to block a VIP number" class="btn btn-primary waves-effect"
+          (click)='addRole()'><i class="fa fa-minus-circle m-r-5"></i> Block
+        </button>
+      </div>
+      <div class="col-md-1 col-sm-1 p-r-30">
+        <button type="button" placement="bottom" ngbTooltip="Click to add role" class="btn btn-primary waves-effect"
+          (click)='addRole()'><i class="fa fa-plus-circle m-r-5"></i> New
         </button>
       </div>
     </div>
   </div>
 </div>
-
 <div class="header-block m-t-60">
   <div class="card table-header fixed-table-header">
     <div class="card-body">
       <ngx-datatable #table class="table table-bordered data-table" [columns]="columns" [columnMode]="'flex'"
         [headerHeight]="40" [rowHeight]="40" [rows]='data' [scrollbarV]="true" [scrollbarH]="true">
-        <ngx-datatable-column prop="fullname" name="User Name" [flexGrow]="1"></ngx-datatable-column>
-        <ngx-datatable-column prop="mobileno" name="Mobile No" [flexGrow]="1"></ngx-datatable-column>
-        <ngx-datatable-column prop="role" name="Role" [flexGrow]="1"></ngx-datatable-column>
-        <ngx-datatable-column name="Updated By" [flexGrow]="1">
-          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-            <span class="updatename">{{data[rowIndex].updatedby}}</span>
-            <span class="updatedate"> {{data[rowIndex].updateddt}}</span>
-          </ng-template>
-        </ngx-datatable-column>
+        <ngx-datatable-column prop="membershipid" name="Membership Id" [flexGrow]="1"></ngx-datatable-column>
+        <ngx-datatable-column prop="state" name="State" [flexGrow]="1"></ngx-datatable-column>
+        <ngx-datatable-column prop="price" name="Price" [flexGrow]="1"></ngx-datatable-column>
         <ngx-datatable-column prop="status" name="Status" [sortable]="false" [flexGrow]="1">
-          <ng-template class="text-center" ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value"
+          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value"
             let-row="row">
             <ui-switch class="js-small" placement="bottom" title="Click to change the status" color="#03ADED"
               switchColor="#fff" size="small" checked></ui-switch>

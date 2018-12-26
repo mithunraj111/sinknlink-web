@@ -4,6 +4,7 @@ import { EventsComponent } from './events/events.component';
 import { DonationsComponent } from './donations/donations.component';
 import { AddEditEventsComponent } from './events/add-edit-events/add-edit-events.component';
 import { AddEditDonationsComponent } from './donations/add-edit-donations/add-edit-donations.component';
+import { VipNumberRegistrationComponent } from './vip-number-registration/vip-number-registration.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,10 @@ const routes: Routes = [
       {
         path: 'donations/edit/:id',
         component: AddEditDonationsComponent,
+      },
+      {
+        path: 'vipnumberregistration',
+        component: VipNumberRegistrationComponent
       }
     ],
   },
