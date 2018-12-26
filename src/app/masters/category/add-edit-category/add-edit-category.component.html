@@ -29,7 +29,7 @@
           </div>
         </div>
       </div>
-      <button type="button" placement="top" ngbTooltip="Click to {{submit}} business category" class="btn pull-right btn-primary waves-effect m-b-10">{{submit}}</button>
+      <button type="button" placement="top" (click)="save()" ngbTooltip="Click to {{submit}} business category" class="btn pull-right btn-primary waves-effect m-b-10">{{submit}}</button>
     </div>
     <button (click)="closeMyModal($event)" aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>
   </app-modal-animation>

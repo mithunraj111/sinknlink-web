@@ -719,7 +719,7 @@ button{
     .pos-fixed{
         width:77%;
         max-width: 100%;
-        z-index: 120;
+        z-index: 9;
     }
 }
 // fixed header //
@@ -857,16 +857,7 @@ button{
     }
 }
 
-.header-block{
-    .pos-fixed{
-        width:79%;
-        max-width: 100%;
-        z-index: 120;
-    }
-    .tooltip{
-        z-index: 999999;
-    }
-}
+
 .table-header{
     .data-table{
         datatable-header-cell.sortable:before, .data-table datatable-header-cell.sortable:after{
@@ -938,3 +929,45 @@ button{
 //         text-align: center;
 //     }
 // }
+.floating-alert{
+    .alert{
+       margin-right: 33rem;
+       margin-top: -5px;
+    //    border:none;
+       font-size:14px;
+       padding:12px 32px;
+   }
+   .alert-success{
+    background-color:#2ed8b6;
+    color:#fff;
+    border-color:#2ed8b6;
+    }
+    .alert-danger{
+        background-color:#FF5371;
+        color:#fff;
+        border-color:#FF5371;
+        font-size:15px;
+    }
+    .alert-info{
+        background-color:#00bcd4;
+        border-color:#00bcd4;
+        color:#fff;
+        font-size:15px;
+    }
+    .alert-warning{
+        background-color:#FFB64D;
+        border-color:#FFB64D;
+        color:#fff;
+        font-size:15px;
+    }
+    .close{
+            margin-top:0px;
+            font-size:18px;
+            margin-left:22px;
+            color:#fff;
+        }
+    }
+    .pcoded[theme-layout="vertical"] .pcoded-header[pcoded-header-position="fixed"] {
+        position: fixed;
+        z-index: 8;
+     }

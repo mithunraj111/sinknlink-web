@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppConstant } from '../../../app.constants';
+import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
 
 @Component({
   selector: 'app-add-edit-users',
@@ -10,18 +11,18 @@ import { AppConstant } from '../../../app.constants';
 export class AddEditUsersComponent implements OnInit {
 
   @Input('modalDefault') modalDefault: any;
-  isaddForm= true;
+  isaddForm = true;
   userid: number;
-  buttontext= AppConstant.BUTTON_TXT.SAVE;
-  constructor(private route: ActivatedRoute) { 
+  buttontext = AppConstant.BUTTON_TXT.SAVE;
+  constructor(private route: ActivatedRoute, private bootstrapAlertService: BootstrapAlertService) {
     this.route.params.subscribe(params => {
       if (params.id !== undefined) {
         this.isaddForm = false;
         this.userid = params.id;
-        this.buttontext= AppConstant.BUTTON_TXT.UPDATE;
+        this.buttontext = AppConstant.BUTTON_TXT.UPDATE;
       }
     });
-   }
+  }
   ngOnInit() {
   }
 
@@ -31,5 +32,11 @@ export class AddEditUsersComponent implements OnInit {
 
   closeMyModal(event) {
     ((event.target.parentElement.parentElement).parentElement).classList.remove('md-show');
+  }
+  submit() {
+    // this.bootstrapAlertService.showError('Error Occured');
+    // this.bootstrapAlertService.showInfo('This is an info!');    
+    //  this.bootstrapAlertService.showWarning('This is a warning!');    
+    this.bootstrapAlertService.showSucccess('Saved Successfully');
   }
 }

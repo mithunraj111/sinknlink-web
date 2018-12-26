@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AppConstant }  from '../../../app.constants';
+import { AppConstant } from '../../../app.constants';
 import { NgbDateCustomParserFormatter } from '../../../shared/elements/dateParser';
 import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
 
 @Component({
   selector: 'app-add-edit-donations',
@@ -13,16 +14,17 @@ import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
   ]
 })
 export class AddEditDonationsComponent implements OnInit {
-  isaddForm= true;
+  isaddForm = true;
   eventid: number;
-  buttontext= AppConstant.BUTTON_TXT.SAVE;
+  buttontext = AppConstant.BUTTON_TXT.SAVE;
 
-  constructor(private route: ActivatedRoute) { 
+  constructor(private route: ActivatedRoute,
+    private bootstrapAlertService: BootstrapAlertService) {
     this.route.params.subscribe(params => {
       if (params.id !== undefined) {
         this.isaddForm = false;
         this.eventid = params.id;
-        this.buttontext= AppConstant.BUTTON_TXT.UPDATE;
+        this.buttontext = AppConstant.BUTTON_TXT.UPDATE;
       }
     });
   }
@@ -32,4 +34,8 @@ export class AddEditDonationsComponent implements OnInit {
   closeMyModal(event) {
     ((event.target.parentElement.parentElement).parentElement).classList.remove('md-show');
   }
+  submit() {
+    this.bootstrapAlertService.showSucccess('Saved Successfully');
+  }
+  
 }

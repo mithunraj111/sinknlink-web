@@ -24,6 +24,9 @@ export class AppComponent implements OnInit {
     });
     this.bootstrapAlertService.getAlertEvent().subscribe(r => {
       this.messageList.push(r);
+      setTimeout(() => {
+        this.messageList = [];
+      }, 5000);
     });
   }
 }

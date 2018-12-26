@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
 
 @Component({
   selector: 'app-add-edit-vip-registration-number',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddEditVipRegistrationNumberComponent implements OnInit {
 
-  constructor() { }
+  constructor(private bootstrapAlertService: BootstrapAlertService) { }
 
   ngOnInit() {
   }
-
+  submit() {
+    this.bootstrapAlertService.showError('Error Occured');
+    // this.bootstrapAlertService.showInfo('This is an info!');    
+    //  this.bootstrapAlertService.showWarning('This is a warning!');    
+    // this.bootstrapAlertService.showSucccess('Saved Successfully');
+  }
 }

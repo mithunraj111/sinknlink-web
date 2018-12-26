@@ -50,7 +50,7 @@
         </div>
       </div>
       <button (click)="closeMyModal($event)" type="button" placement="top" ngbTooltip="Click to {{submit}} locations "
-        class="btn pull-right btn-primary waves-effect m-b-10">{{submit}}</button>
+      (click)="save()" class="btn pull-right btn-primary waves-effect m-b-10">{{submit}}</button>
     </div>
     <button (click)="closeMyModal($event)" aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>
   </app-modal-animation>

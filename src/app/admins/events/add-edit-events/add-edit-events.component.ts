@@ -65,9 +65,9 @@ export class AddEditEventsComponent implements OnInit {
 
 
   submit(){
-    // this.bootstrapAlertService.showError('This is an error!');
-    // this.bootstrapAlertService.showInfo('This is an info!');    
-    // this.bootstrapAlertService.showWarning('This is a warning!');    
-    this.bootstrapAlertService.showSucccess('This is a success message!');
+    // this.bootstrapAlertService.showError('Error Occured');
+    this.bootstrapAlertService.showInfo('This is an info!');    
+    //  this.bootstrapAlertService.showWarning('This is a warning!');    
+    // this.bootstrapAlertService.showSucccess('Saved Successfully');
 }
 }

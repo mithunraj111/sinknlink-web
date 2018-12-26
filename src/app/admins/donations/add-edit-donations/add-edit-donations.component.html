@@ -7,7 +7,8 @@
           <p *ngIf="eventid" class="m-b-0">ID: 875643</p>
         </div>
         <div class="col-md-6 col-sm-6 save-button text-right p-r-30">
-          <button type="button" placement="bottom" ngbTooltip="Click to {{buttontext}} donation" class="btn btn-primary waves-effect m-r-10 text-capitalize">{{buttontext}}</button>
+          <button type="button" placement="bottom" ngbTooltip="Click to {{buttontext}} donation" (click)="submit()"
+            class="btn btn-primary waves-effect m-r-10 text-capitalize">{{buttontext}}</button>
           <button type="button" placement="bottom" ngbTooltip="Go back" routerLink="/admins/donations" class="btn btn-inverse btn-primary waves-effect"><i
               class="fa fa-arrow-circle-left"></i></button>
         </div>
