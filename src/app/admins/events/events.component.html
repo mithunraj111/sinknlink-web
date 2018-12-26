@@ -8,7 +8,7 @@
       <div class="col-md-5 col-sm-5">
         <div class="text-right">
           <label>Search:
-            <input type="search" [(ngModel)]="filterQuery" class="header-search form-control input-sm full-data-search"
+            <input type="search" (keyup)='search($event)' class="header-search form-control input-sm full-data-search"
               placeholder="Search for here" placement="bottom" ngbTooltip="Type here to search">
           </label>
         </div>
@@ -45,7 +45,7 @@
         <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="1">
           <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
             <a placement="bottom" title="Click to edit event detals" class="m-r-15 crm-action-edit text-primary"
-              (click)='editDonations()'>
+              (click)='editEvents()'>
               <i class="fa fa-pencil"></i></a>
             <a placement="bottom" title="Click to delete events" class="crm-action-delete text-danger">
               <i class="fa fa-trash"></i></a>

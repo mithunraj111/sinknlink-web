@@ -1,6 +1,7 @@
-import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Input, ViewEncapsulation, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalDismissReasons, NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { DatatableComponent } from '@swimlane/ngx-datatable';
 
 @Component({
   selector: 'app-donations',
@@ -12,6 +13,7 @@ export class DonationsComponent implements OnInit {
   hasBaseDropZoneOver = false;
   hasAnotherDropZoneOver = false;
   @Input('modalDefault') modalDefault: any;
+  @ViewChild(DatatableComponent) table: DatatableComponent;
   closeResult: string;
   // ariaLabelledBy:string;
   public data: any;
@@ -20,6 +22,7 @@ export class DonationsComponent implements OnInit {
   public sortOrder = 'desc';
   public userProPic: string;
   openResult: { ariaLabelledBy: string; };
+  tempFilter = [];
 
   constructor(private router: Router,
     public modalService: NgbModal, public activeModal: NgbActiveModal) {
@@ -36,7 +39,8 @@ export class DonationsComponent implements OnInit {
       { charity: 'AWP Foundation', startdate: '02-Nov-2018', enddate: '02-Dec-2018', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' },
       { charity: 'AWP Foundation', startdate: '02-Nov-2018', enddate: '02-Dec-2018', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' },
       { charity: 'AWP Foundation', startdate: '02-Nov-2018', enddate: '02-Dec-2018', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' }
-    ]
+    ];
+    this.tempFilter = this.data;
   }
 
   ngOnInit() {
@@ -71,5 +75,17 @@ export class DonationsComponent implements OnInit {
   }
   editDonations(data) {
     this.router.navigate(['admins/donations/edit/' + 1]);
+  }
+  search(event) {
+    const val = event.target.value.toLowerCase();
+    const temp = this.tempFilter.filter(item => {
+      for (let key in item) {
+        if (("" + item[key]).toLocaleLowerCase().includes(val)) {
+          return ("" + item[key]).toLocaleLowerCase().includes(val);
+        }
+      }
+    });
+    this.data = temp;
+    this.table.offset = 0;
   }
 }

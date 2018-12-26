@@ -5,6 +5,7 @@ import { DonationsComponent } from './donations/donations.component';
 import { AddEditEventsComponent } from './events/add-edit-events/add-edit-events.component';
 import { AddEditDonationsComponent } from './donations/add-edit-donations/add-edit-donations.component';
 import { VipNumberRegistrationComponent } from './vip-number-registration/vip-number-registration.component';
+import { AddEditVipRegistrationNumberComponent } from './vip-number-registration/add-edit-vip-registration-number/add-edit-vip-registration-number.component';
 
 const routes: Routes = [
   {
@@ -41,6 +42,14 @@ const routes: Routes = [
       {
         path: 'vipnumberregistration',
         component: VipNumberRegistrationComponent
+      },
+      {
+        path: 'vipnumberregistration/create',
+        component: AddEditVipRegistrationNumberComponent,
+      },
+      {
+        path: 'vipnumberregistration/edit/:id',
+        component: AddEditVipRegistrationNumberComponent,
       }
     ],
   },

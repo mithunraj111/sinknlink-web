@@ -15,6 +15,7 @@ import { AddEditDonationsComponent } from './donations/add-edit-donations/add-ed
 import { AddEditEventsComponent } from  './events/add-edit-events/add-edit-events.component';
 import {FileUploadModule} from 'ng2-file-upload';
 import { VipNumberRegistrationComponent } from './vip-number-registration/vip-number-registration.component';
+import { AddEditVipRegistrationNumberComponent } from './vip-number-registration/add-edit-vip-registration-number/add-edit-vip-registration-number.component';
 
 @NgModule({
   imports: [
@@ -30,6 +31,6 @@ import { VipNumberRegistrationComponent } from './vip-number-registration/vip-nu
     TagInputModule,
     FileUploadModule
   ],
-  declarations: [EventsComponent, DonationsComponent, AddEditDonationsComponent, AddEditEventsComponent, VipNumberRegistrationComponent]
+  declarations: [EventsComponent, DonationsComponent, AddEditDonationsComponent, AddEditEventsComponent, VipNumberRegistrationComponent, AddEditVipRegistrationNumberComponent]
 })
 export class AdminsModule { }

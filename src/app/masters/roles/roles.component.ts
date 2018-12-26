@@ -1,6 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import {Http} from '@angular/http';
 import { Router } from '@angular/router';
+import { DatatableComponent } from '@swimlane/ngx-datatable';
 
 @Component({
   selector: 'app-roles',
@@ -13,6 +14,8 @@ export class RolesComponent implements OnInit {
   public filterQuery = '';
   public sortBy = '';
   public sortOrder = 'desc';
+  tempFilter = [];
+  @ViewChild(DatatableComponent) table: DatatableComponent;
 
   public rolename: string;
   public userID: string;
@@ -40,7 +43,8 @@ export class RolesComponent implements OnInit {
       { rolename: 'Admin', dataaccess: 'Team', updatedby: 'Mithun', updateddt: '20-Dec-2018 20:12' },
       { rolename: 'Operator', dataaccess: 'Team', updatedby: 'Mithunraj', updateddt: '20-Dec-2018 20:12' },
       { rolename: 'Manager', dataaccess: 'Team', updatedby: 'Raj', updateddt: '20-Dec-2018 20:12' }
-    ]
+    ];
+    this.tempFilter = this.data;
   }
 
   ngOnInit() {
@@ -74,5 +78,17 @@ export class RolesComponent implements OnInit {
   }
   editRole(data) {
     this.router.navigate(['masters/roles/edit/' + 1]);
+  }
+  search(event) {
+    const val = event.target.value.toLowerCase();
+    const temp = this.tempFilter.filter(item => {
+      for (let key in item) {
+        if (("" + item[key]).toLocaleLowerCase().includes(val)) {
+          return ("" + item[key]).toLocaleLowerCase().includes(val);
+        }
+      }
+    });
+    this.data = temp;
+    this.table.offset = 0;
   }
 }

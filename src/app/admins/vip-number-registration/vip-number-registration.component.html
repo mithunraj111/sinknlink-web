@@ -8,19 +8,19 @@
       <div class="col-md-5 col-sm-6">
         <div class="text-right">
           <label>Search:
-            <input type="search" [(ngModel)]="filterQuery" class="header-search form-control input-sm full-data-search"
+            <input type="search" (keyup)='search($event)' class="header-search form-control input-sm full-data-search"
               placeholder="Search for here" placement="bottom" ngbTooltip="Type here to search">
           </label>
         </div>
       </div>
       <div class="col-md-1 col-sm-1 p-r-30">
         <button type="button" placement="bottom" ngbTooltip="Click to block a VIP number" class="btn btn-primary waves-effect"
-          (click)='addRole()'><i class="fa fa-minus-circle m-r-5"></i> Block
+          (click)='allocateVipNumber()'><i class="fa fa-minus-circle m-r-5"></i> Block
         </button>
       </div>
       <div class="col-md-1 col-sm-1 p-r-30">
-        <button type="button" placement="bottom" ngbTooltip="Click to add role" class="btn btn-primary waves-effect"
-          (click)='addRole()'><i class="fa fa-plus-circle m-r-5"></i> New
+        <button type="button" placement="bottom" ngbTooltip="Click to add" class="btn btn-primary waves-effect"
+          (click)='addVipRegistration()'><i class="fa fa-plus-circle m-r-5"></i> New
         </button>
       </div>
     </div>
@@ -35,18 +35,16 @@
         <ngx-datatable-column prop="state" name="State" [flexGrow]="1"></ngx-datatable-column>
         <ngx-datatable-column prop="price" name="Price" [flexGrow]="1"></ngx-datatable-column>
         <ngx-datatable-column prop="status" name="Status" [sortable]="false" [flexGrow]="1">
-          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value"
-            let-row="row">
+          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
             <ui-switch class="js-small" placement="bottom" title="Click to change the status" color="#03ADED"
               switchColor="#fff" size="small" checked></ui-switch>
           </ng-template>
         </ngx-datatable-column>
         <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="1">
           <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-            <a placement="bottom" title="Click to edit the user " class="m-r-15 crm-action-edit text-primary"
-              (click)='editUsers()'>
+            <a placement="bottom" title="Click to edit" class="m-r-15 crm-action-edit text-primary" (click)='editVipRegistration()'>
               <i class="fa fa-pencil"></i></a>
-            <a placement="bottom" title="Click to delete the user " class="crm-action-delete text-danger">
+            <a placement="bottom" title="Click to delete" class="crm-action-delete text-danger">
               <i class="fa fa-trash"></i></a>
           </ng-template>
         </ngx-datatable-column>
@@ -54,3 +52,16 @@
     </div>
   </div>
 </div>
+<!-- Modal popup window -->
+<app-modal-animation [modalID]="'vipnoregmodal'" [modalClass]="'md-effect-7'">
+  <h3 class="f-26">Block/Allocate</h3>
+  <div class="form-header">
+    <div class="form-group required">
+      <label>Membership ID</label>
+      <input type="text" class="form-control" placeholder="Membership ID">
+    </div>
+    <button (click)="closeMyModal($event)" type="button" placement="top" ngbTooltip="Click to Save"
+      class="btn pull-right btn-primary waves-effect m-b-10">Save</button>
+  </div>
+  <button (click)="closeMyModal($event)" aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>
+</app-modal-animation>

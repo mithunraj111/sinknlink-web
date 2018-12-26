@@ -8,7 +8,7 @@
       <div class="col-md-6 col-sm-6">
         <div class="text-right">
           <label>Search:
-            <input type="search" [(ngModel)]="filterQuery" class="header-search form-control input-sm full-data-search"
+            <input type="search" (keyup)='search($event)' class="header-search form-control input-sm full-data-search"
               placeholder="Search for here" placement="bottom" ngbTooltip="Type here to search">
           </label>
         </div>
