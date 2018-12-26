@@ -25,17 +25,17 @@ export class DonationsComponent implements OnInit {
     public modalService: NgbModal, public activeModal: NgbActiveModal) {
     console.log(activeModal)
     this.data = [
-      { charity: 'AARP Foundation', startdate: '02-Nov-2018', enddate: '02-Dec-2018', lastupdatedby: 'Admin', lastupdateddt: '02-Dec-2018 15:00' },
-      { charity: 'AWP Foundation', startdate: '02-Nov-2018', enddate: '02-Dec-2018', lastupdatedby: 'Admin', lastupdateddt: '02-Dec-2018 15:00' },
-      { charity: 'AWP Foundation', startdate: '02-Nov-2018', enddate: '02-Dec-2018', lastupdatedby: 'Admin', lastupdateddt: '02-Dec-2018 15:00' },
-      { charity: 'AWP Foundation', startdate: '02-Nov-2018', enddate: '02-Dec-2018', lastupdatedby: 'Admin', lastupdateddt: '02-Dec-2018 15:00' },
-      { charity: 'AWP Foundation', startdate: '02-Nov-2018', enddate: '02-Dec-2018', lastupdatedby: 'Admin', lastupdateddt: '02-Dec-2018 15:00' },
-      { charity: 'AWP Foundation', startdate: '02-Nov-2018', enddate: '02-Dec-2018', lastupdatedby: 'Admin', lastupdateddt: '02-Dec-2018 15:00' },
-      { charity: 'AWP Foundation', startdate: '02-Nov-2018', enddate: '02-Dec-2018', lastupdatedby: 'Admin', lastupdateddt: '02-Dec-2018 15:00' },
-      { charity: 'AWP Foundation', startdate: '02-Nov-2018', enddate: '02-Dec-2018', lastupdatedby: 'Admin', lastupdateddt: '02-Dec-2018 15:00' },
-      { charity: 'AWP Foundation', startdate: '02-Nov-2018', enddate: '02-Dec-2018', lastupdatedby: 'Admin', lastupdateddt: '02-Dec-2018 15:00' },
-      { charity: 'AWP Foundation', startdate: '02-Nov-2018', enddate: '02-Dec-2018', lastupdatedby: 'Admin', lastupdateddt: '02-Dec-2018 15:00' },
-      { charity: 'AWP Foundation', startdate: '02-Nov-2018', enddate: '02-Dec-2018', lastupdatedby: 'Admin', lastupdateddt: '02-Dec-2018 15:00' }
+      { charity: 'AARP Foundation', startdate: '02-Nov-2018', enddate: '02-Dec-2018', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' },
+      { charity: 'AWP Foundation', startdate: '02-Nov-2018', enddate: '02-Dec-2018', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' },
+      { charity: 'AWP Foundation', startdate: '02-Nov-2018', enddate: '02-Dec-2018', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' },
+      { charity: 'AWP Foundation', startdate: '02-Nov-2018', enddate: '02-Dec-2018', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' },
+      { charity: 'AWP Foundation', startdate: '02-Nov-2018', enddate: '02-Dec-2018', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' },
+      { charity: 'AWP Foundation', startdate: '02-Nov-2018', enddate: '02-Dec-2018', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' },
+      { charity: 'AWP Foundation', startdate: '02-Nov-2018', enddate: '02-Dec-2018', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' },
+      { charity: 'AWP Foundation', startdate: '02-Nov-2018', enddate: '02-Dec-2018', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' },
+      { charity: 'AWP Foundation', startdate: '02-Nov-2018', enddate: '02-Dec-2018', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' },
+      { charity: 'AWP Foundation', startdate: '02-Nov-2018', enddate: '02-Dec-2018', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' },
+      { charity: 'AWP Foundation', startdate: '02-Nov-2018', enddate: '02-Dec-2018', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' }
     ]
   }
 

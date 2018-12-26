@@ -21,60 +21,37 @@
     </div>
   </div>
 </div>
-<div *ngIf="data.length==0" class="no-data p-0 m-0">
-  <h3><i>No data found</i></h3>
-</div>
-<div class="card table-header fixed-table-header m-t-60" *ngIf="data.length!=0">
-  <div class="card-body">
-    <div class="table-content crm-table">
-      <div class="project-table">
-        <div class="dt-responsive">
-          <div class="table-responsive">
-            <table class="table table-fixed table-striped table-bordered full-data-table events-table" [mfData]="data | dataFilter : filterQuery"
-              #mf="mfDataTable" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
-              <thead class="p-r-1">
-                <tr>
-                  <th>
-                    <mfDefaultSorter by='eventname'>Event name</mfDefaultSorter>
-                  </th>
-                  <th class="text-center">
-                    <mfDefaultSorter by='date'>Date</mfDefaultSorter>
-                  </th>
-                  <th>
-                    <mfDefaultSorter by='city'>City</mfDefaultSorter>
-                  </th>
-                  <th>
-                    <mfDefaultSorter by='lastupdatedby'>Updated by</mfDefaultSorter>
-                  </th>
-                  <th class="text-center">Status</th>
-                  <th class="text-center">Action</th>
-                </tr>
-              </thead>
-              <tbody class="p-r-1">
-                <tr *ngFor="let items of mf.data; let i = index;">
-                  <td>{{items.eventname}}</td>
-                  <td class="text-center">{{items.date | date:'dd-MMM-yyyy'}}</td>
-                  <td>{{items.city}}</td>
-                  <td>
-                    <span class="updatename">{{items.lastupdatedby}}</span>
-                    <span class="updatedate">{{items.lastupdateddt | date:'dd-MMM-yyyy hh:mm'}}</span>
-                  </td>
-                  <td class="text-center">
-                    <ui-switch class="js-small" placement="top" ngbTooltip="Click to change the status" color="#03ADED"
-                      switchColor="#fff" size="small" checked></ui-switch>
-                  </td>
-                  <td class="action-icon text-center">
-                    <a placement="top" (click)="editEvents()" ngbTooltip="Click to edit event" class="m-r-15 crm-action-edit text-primary">
-                      <i class="fa fa-pencil"></i></a>
-                    <a placement="bottom" ngbTooltip="Click to delete the event " class="crm-action-delete text-danger">
-                      <i class="fa fa-trash"></i></a>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
+<div class="header-block m-t-60">
+  <div class="card table-header fixed-table-header">
+    <div class="card-body">
+      <ngx-datatable #table class="table table-bordered data-table event-table" [columnMode]="'flex'"
+        [headerHeight]="40" [rowHeight]="40" [rows]='data' [scrollbarV]="true" [scrollbarH]="true">
+        <ngx-datatable-column prop="eventname" name="Event Name" [flexGrow]="1"></ngx-datatable-column>
+        <ngx-datatable-column prop="date" name="Date" [flexGrow]="1"></ngx-datatable-column>
+        <ngx-datatable-column prop="city" name="City" [flexGrow]="1"></ngx-datatable-column>
+        <ngx-datatable-column name="Updated By" [flexGrow]="1">
+          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+            <span class="updatename">{{data[rowIndex].updatedby}}</span>
+            <span class="updatedate"> {{data[rowIndex].updateddt}}</span>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column prop="status" name="Status" [sortable]="false" [flexGrow]="1">
+          <ng-template class="text-center" ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value"
+            let-row="row">
+            <ui-switch class="js-small" placement="bottom" title="Click to change the status" color="#03ADED"
+              switchColor="#fff" size="small" checked></ui-switch>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="1">
+          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+            <a placement="bottom" title="Click to edit event detals" class="m-r-15 crm-action-edit text-primary"
+              (click)='editDonations()'>
+              <i class="fa fa-pencil"></i></a>
+            <a placement="bottom" title="Click to delete events" class="crm-action-delete text-danger">
+              <i class="fa fa-trash"></i></a>
+          </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
     </div>
   </div>
 </div>

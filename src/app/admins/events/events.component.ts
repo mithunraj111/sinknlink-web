@@ -16,17 +16,17 @@ export class EventsComponent implements OnInit {
   showRegion = false;
   constructor(private router: Router) { 
     this.data=[
-      { eventname: 'Moksha events', date: '16-Dec-2018', city:'Chennai', lastupdatedby:'Admin', lastupdateddt:'12-Nov-2018 11:00' },
-      { eventname: 'Hackathon on UAV', date: '16-Dec-2018', city:'Chennai', lastupdatedby:'Admin', lastupdateddt:'12-Nov-2018 11:00' },
-      { eventname: 'TEDxGCT 2018', date: '16-Dec-2018' ,city:'Chennai', lastupdatedby:'Admin', lastupdateddt:'12-Nov-2018 11:00' },
-      { eventname: 'ARM Workshop', date: '16-Dec-2018' , city:'Chennai', lastupdatedby:'Admin', lastupdateddt:'12-Nov-2018 11:00' },
-      { eventname: 'Moksha events', date: '16-Dec-2018', city:'Chennai', lastupdatedby:'Admin', lastupdateddt:'12-Nov-2018 11:00' },
-      { eventname: 'Hackathon on UAV', date: '16-Dec-2018', city:'Chennai', lastupdatedby:'Admin', lastupdateddt:'12-Nov-2018 11:00' },
-      { eventname: 'TEDxGCT 2018', date: '16-Dec-2018' ,city:'Chennai', lastupdatedby:'Admin', lastupdateddt:'12-Nov-2018 11:00' },
-      { eventname: 'TEDxGCT 2018', date: '16-Dec-2018' ,city:'Chennai', lastupdatedby:'Admin', lastupdateddt:'12-Nov-2018 11:00' },
-      { eventname: 'TEDxGCT 2018', date: '16-Dec-2018' ,city:'Chennai', lastupdatedby:'Admin', lastupdateddt:'12-Nov-2018 11:00' },
-      { eventname: 'ARM Workshop', date: '16-Dec-2018' , city:'Chennai', lastupdatedby:'Admin', lastupdateddt:'12-Nov-2018 11:00' },
-      { eventname: 'Mechovation 2k18-19', date: '16-Dec-2018' , city:'Chennai', lastupdatedby:'Admin', lastupdateddt:'12-Nov-2018 11:00' }
+      { eventname: 'Moksha events', date: '16-Dec-2018', city:'Chennai', updatedby:'Admin', updateddt:'12-Nov-2018 11:00' },
+      { eventname: 'Hackathon on UAV', date: '16-Dec-2018', city:'Chennai', updatedby:'Admin', updateddt:'12-Nov-2018 11:00' },
+      { eventname: 'TEDxGCT 2018', date: '16-Dec-2018' ,city:'Chennai', updatedby:'Admin', updateddt:'12-Nov-2018 11:00' },
+      { eventname: 'ARM Workshop', date: '16-Dec-2018' , city:'Chennai', updatedby:'Admin', updateddt:'12-Nov-2018 11:00' },
+      { eventname: 'Moksha events', date: '16-Dec-2018', city:'Chennai', updatedby:'Admin', updateddt:'12-Nov-2018 11:00' },
+      { eventname: 'Hackathon on UAV', date: '16-Dec-2018', city:'Chennai', updatedby:'Admin', updateddt:'12-Nov-2018 11:00' },
+      { eventname: 'TEDxGCT 2018', date: '16-Dec-2018' ,city:'Chennai', updatedby:'Admin', updateddt:'12-Nov-2018 11:00' },
+      { eventname: 'TEDxGCT 2018', date: '16-Dec-2018' ,city:'Chennai', updatedby:'Admin', updateddt:'12-Nov-2018 11:00' },
+      { eventname: 'TEDxGCT 2018', date: '16-Dec-2018' ,city:'Chennai', updatedby:'Admin', updateddt:'12-Nov-2018 11:00' },
+      { eventname: 'ARM Workshop', date: '16-Dec-2018' , city:'Chennai', updatedby:'Admin', updateddt:'12-Nov-2018 11:00' },
+      { eventname: 'Mechovation 2k18-19', date: '16-Dec-2018' , city:'Chennai', updatedby:'Admin', updateddt:'12-Nov-2018 11:00' }
     ]
   }
 

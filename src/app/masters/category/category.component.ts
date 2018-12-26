@@ -17,12 +17,20 @@ export class CategoryComponent implements OnInit {
   categoryPage: any;
   constructor() {
     this.data = [
-      {
-        businesscategory: 'Nike', lastupdateddt: '26-Dec-2018 15:00', lastupdatedby: 'Admin'
-      },
-      {
-        businesscategory: 'Piece', lastupdateddt: '26-Dec-2018 15:00', lastupdatedby: 'Admin'
-      }
+      { businesscategory: 'Nike', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
+      { businesscategory: 'Piece', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
+      { businesscategory: 'Nike', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
+      { businesscategory: 'Piece', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
+      { businesscategory: 'Nike', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
+      { businesscategory: 'Piece', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
+      { businesscategory: 'Nike', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
+      { businesscategory: 'Piece', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
+      { businesscategory: 'Nike', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
+      { businesscategory: 'Piece', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
+      { businesscategory: 'Nike', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
+      { businesscategory: 'Piece', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
+      { businesscategory: 'Nike', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
+      { businesscategory: 'Piece', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' }
     ];
   }
 

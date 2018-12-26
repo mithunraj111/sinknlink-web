@@ -23,16 +23,6 @@ export class UsersComponent implements OnInit {
   public sortBy = '';
   public sortOrder = 'desc';
   public userProPic: string;
-
-  columns = [
-    { prop: 'fullname', name: 'FullName' },
-    { prop: 'mobileno', name: 'Mobile No' },
-    { prop: 'role', name: 'Role' },
-    { prop: 'updatedby', name: 'CreatedBy' },
-    { prop: 'status', name: 'Status' },
-    { prop: 'action', name: 'Action' }
-  ];
-
   tempFilter = [];
 
   @Input('modalDefault') modalDefault: any;

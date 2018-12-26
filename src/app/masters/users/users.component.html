@@ -8,7 +8,7 @@
       <div class="col-md-6 col-sm-6">
         <div class="text-right">
           <label>Search:
-            <input type='text' class="header-search form-control input-sm full-data-search" placeholder='Search Name'
+            <input type='text' class="header-search form-control input-sm full-data-search" placeholder='Search for here'
               (keyup)='search($event)' placement="bottom" title="Type here to search" />
           </label>
         </div>
@@ -25,9 +25,9 @@
 <div class="header-block m-t-60">
   <div class="card table-header fixed-table-header">
     <div class="card-body">
-      <ngx-datatable #table class="table table-bordered data-table" [columns]="columns" [columnMode]="'flex'"
-        [headerHeight]="40" [rowHeight]="40" [rows]='data' [scrollbarV]="true" [scrollbarH]="true">
-        <ngx-datatable-column prop="fullname" name="User Name" [flexGrow]="1"></ngx-datatable-column>
+      <ngx-datatable #table class="table table-bordered data-table user-table" [columnMode]="'flex'" [headerHeight]="40"
+        [rowHeight]="40" [rows]='data' [scrollbarV]="true" [scrollbarH]="true">
+        <ngx-datatable-column style="text-align:center;" prop="fullname" name="User Name" [flexGrow]="1"></ngx-datatable-column>
         <ngx-datatable-column prop="mobileno" name="Mobile No" [flexGrow]="1"></ngx-datatable-column>
         <ngx-datatable-column prop="role" name="Role" [flexGrow]="1"></ngx-datatable-column>
         <ngx-datatable-column name="Updated By" [flexGrow]="1">
@@ -37,18 +37,17 @@
           </ng-template>
         </ngx-datatable-column>
         <ngx-datatable-column prop="status" name="Status" [sortable]="false" [flexGrow]="1">
-          <ng-template class="text-center" ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value"
-            let-row="row">
-            <ui-switch class="js-small" placement="bottom" title="Click to change the status" color="#03ADED"
+          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+            <ui-switch class="js-small text-center" placement="bottom" title="Click to change status" color="#03ADED"
               switchColor="#fff" size="small" checked></ui-switch>
           </ng-template>
         </ngx-datatable-column>
         <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="1">
           <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-            <a placement="bottom" title="Click to edit the user " class="m-l-5 m-r-15 crm-action-edit text-primary"
+            <a placement="bottom" title="Click to edit user" class="m-r-15 crm-action-edit text-primary"
               (click)='editUsers()'>
               <i class="fa fa-pencil"></i></a>
-            <a placement="bottom" title="Click to delete the user " class="crm-action-delete text-danger">
+            <a placement="bottom" title="Click to delete user" class="crm-action-delete text-danger">
               <i class="fa fa-trash"></i></a>
           </ng-template>
         </ngx-datatable-column>
