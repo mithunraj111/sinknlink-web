@@ -12,6 +12,7 @@ import { MastersComponent } from './masters/masters.component';
 import { DataFilterPipe } from './shared/elements/data-filter.pipe';
 import { AdminsComponent } from './admins/admins.component';
 import { BootstrapAlertService, BootstrapAlertModule } from 'ngx-bootstrap-alert-service';
+import { BusinessComponent } from './business/business.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { BootstrapAlertService, BootstrapAlertModule } from 'ngx-bootstrap-alert
     AuthComponent,
     BreadcrumbsComponent,
     MastersComponent,
-    AdminsComponent
+    AdminsComponent,
+    BusinessComponent
   ],
   imports: [
     BrowserModule,
