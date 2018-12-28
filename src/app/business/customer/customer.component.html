@@ -1,3 +1,56 @@
-<p>
-  customer works!
-</p>
+<div class="fixedheader">
+  <div class="header-title pos-fixed">
+    <div class="row">
+      <div class="col-md-5 col-sm-5">
+        <h2>Customer</h2>
+        <p>Create or Update the user logins</p>
+      </div>
+      <div class="col-md-6 col-sm-6">
+        <div class="text-right">
+          <label>Search:
+            <input type="search" class="header-search form-control input-sm full-data-search" placeholder="Search for here"
+              (keyup)='search($event)' placement="bottom" ngbTooltip="Type here to search">
+          </label>
+        </div>
+      </div>
+      <div class="col-md-1 col-sm-1 p-r-30">
+        <button type="button" placement="bottom" ngbTooltip="Click to add customer" class="btn btn-primary waves-effect"
+          (click)='addCustomer()'><i class="fa fa-plus-circle m-r-5"></i> New
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="header-block m-t-60">
+  <div class="card table-header fixed-table-header">
+    <div class="card-body">
+      <ngx-datatable #table class="table table-bordered data-table location-table" [columnMode]="'flex'" [headerHeight]="40"
+        [rowHeight]="40" [rows]='data' [scrollbarV]="true" [scrollbarH]="true">
+        <ngx-datatable-column prop="businessname" name="Business Name" [flexGrow]="1"></ngx-datatable-column>
+        <ngx-datatable-column prop="mobileno" name="Mobile No" [flexGrow]="1"></ngx-datatable-column>
+        <ngx-datatable-column prop="membershipid" name="Membersip ID" [flexGrow]="1"></ngx-datatable-column>
+        <ngx-datatable-column prop="city" name="City" [flexGrow]="1"></ngx-datatable-column>
+        <ngx-datatable-column name="Updated By" [flexGrow]="1">
+          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+            <span class="updatename">{{data[rowIndex].updatedby}}</span>
+            <span class="updatedate"> {{data[rowIndex].updateddt}}</span>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column prop="status" name="Status" [sortable]="false" [flexGrow]="1">
+          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+            <ui-switch class="js-small" placement="bottom" title="Click to change status" color="#03ADED" switchColor="#fff"
+              size="small" checked></ui-switch>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="1">
+          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+            <a placement="bottom" title="Click to edit customer" class="m-r-15 crm-action-edit text-primary" (click)="editCustomer(data)">
+              <i class="fa fa-pencil"></i></a>
+            <a placement="bottom" title="Click to delete customer" class="crm-action-delete text-danger">
+              <i class="fa fa-trash"></i></a>
+          </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
+    </div>
+  </div>
+</div>

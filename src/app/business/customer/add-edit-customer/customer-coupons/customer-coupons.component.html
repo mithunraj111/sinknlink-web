@@ -1,0 +1,100 @@
+<app-add-edit-customer></app-add-edit-customer>
+<div class="col-md-9 col-sm-9 p-l-0 p-r-10">
+  <div class="header-title m-t-60 mb-3">
+    <h3 class="f-18 text-primary m-l-15">Coupons</h3>
+  </div>
+  <div class="employee-form">
+    <div class="card tenants-page tenants-pages m-b-10">
+      <div class="row p-t-10 p-b-5">
+        <div class="col-md-12 col-sm-12">
+          <div class="form-group row required">
+            <label class="col-md-3 col-sm-6 col-form-label text-right">Coupon code</label>
+            <div class="col-md-9 col-sm-6">
+              <input type="text" class="form-control" placeholder="Coupon">
+            </div>
+          </div>
+          <div class="form-group row required">
+            <label class="col-md-3 col-sm-6 col-form-label text-right">Number of coupons</label>
+            <div class="col-md-9 col-sm-6">
+              <input type="text" class="form-control" placeholder="Number of coupons">
+            </div>
+          </div>
+          <div class="form-group row required">
+            <label class="col-md-3 col-sm-6 col-form-label text-right">Contact Person</label>
+            <div class="col-md-9 col-sm-6">
+              <input type="text" class="form-control" placeholder="Person to contact">
+            </div>
+          </div>
+          <div class="form-group row required">
+            <label class="col-md-3 col-sm-6 col-form-label text-right">Expires at</label>
+            <div class="col-md-9 col-sm-6">
+              <input type="text" class="form-control" placeholder="Expires at">
+            </div>
+          </div>
+          <div class="form-group row required">
+            <label class="col-md-3 col-sm-6 col-form-label text-right">Claimed</label>
+            <div class="col-md-9 col-sm-6">
+              <input type="text" class="form-control" placeholder="Yes" readonly>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 col-sm-6 col-form-label text-right">Particulars</label>
+            <div class="col-md-9 col-sm-6">
+              <textarea rows="3" cols="3" class="form-control" placeholder="Particulars"></textarea>
+            </div>
+          </div>
+          <div class="form-group row required">
+            <label class="col-md-3 col-sm-6 col-form-label text-right">Status</label>
+            <div class="col-md-9 col-sm-6">
+              <select name="select" class="form-control p-1 location-title">
+                <option value="opt1">Active</option>
+                <option value="opt2">Inactive</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="header-title m-t-30 mb-3">
+    <div class="row">
+      <div class="col-md-6 col-sm-6">
+        <h3 class="f-18 text-primary m-l-15">History</h3>
+      </div>
+      <div class="col-md-6 col-sm-6">
+        <div class="text-right">
+          <label>Search:
+            <input type="search" class="header-search form-control input-sm full-data-search" placeholder="Search for here"
+              (keyup)='search($event)' placement="bottom" ngbTooltip="Type here to search">
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card table-header fixed-table-header">
+    <div class="card-body">
+      <ngx-datatable #table class="table table-bordered data-table location-table" [columnMode]="'flex'" [headerHeight]="40"
+        [rowHeight]="40" [rows]='data' [scrollbarV]="true" [scrollbarH]="true">
+        <ngx-datatable-column prop="couponcode" name="Coupon code" [flexGrow]="1"></ngx-datatable-column>
+        <ngx-datatable-column prop="numberofcoupons" name="No of coupon" [flexGrow]="1"></ngx-datatable-column>
+        <ngx-datatable-column prop="claimed" name="Claimed" [flexGrow]="1"></ngx-datatable-column>
+        <ngx-datatable-column prop="expiresat" name="Expires at" [flexGrow]="1">
+        </ngx-datatable-column>
+        <ngx-datatable-column prop="status" name="Status" [sortable]="false" [flexGrow]="0.5">
+          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+            <ui-switch class="js-small" placement="bottom" title="Click to change status" color="#03ADED" switchColor="#fff"
+              size="small" checked></ui-switch>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="1">
+          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+            <a placement="bottom" title="Click to edit branch details" class="m-r-15 crm-action-edit text-primary">
+              <i class="fa fa-pencil"></i></a>
+            <a placement="bottom" title="Click to delete customer" class="crm-action-delete text-danger">
+              <i class="fa fa-trash"></i></a>
+          </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
+    </div>
+  </div>
+</div>

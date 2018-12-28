@@ -971,3 +971,12 @@ button{
         position: fixed;
         z-index: 8;
      }
+     select.form-control:not([size]):not([multiple]){
+        height: 38px !important;
+    }
+    .tag-chips .ng2-tag-input{
+        width: 90%;
+        line-height: 24px;
+        border: 1px solid #dfe8f1 !important;
+        box-shadow: inset 1px 1px 3px #f6f6f6;
+    }

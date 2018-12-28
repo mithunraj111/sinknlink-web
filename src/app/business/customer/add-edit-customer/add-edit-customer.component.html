@@ -1,0 +1,80 @@
+<div class="addeditpage">
+  <div class="fixedheader">
+    <div class="header-title m-b-15 pos-fixed">
+      <div class="row">
+        <div class="col-md-6 col-sm-6">
+          <h2>Customer</h2>
+          <p *ngIf="customerid" class="m-b-0">
+            <i class="fa fa-pencil"></i> Membership ID: 875643
+          </p>
+        </div>
+        <div class="col-md-6 col-sm-6 save-button text-right p-r-30">
+          <button type="button" placement="bottom" ngbTooltip="Click To {{buttontext}} Customer Details" (click)="submit()"
+            class="btn btn-primary waves-effect m-r-10 text-capitalize">{{buttontext}}</button>
+          <button type="button" placement="bottom" ngbTooltip="Go back" routerLink="/business/customers" class="btn btn-inverse btn-primary waves-effect"><i
+              class="fa fa-arrow-circle-left"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12 col-sm-12">
+    <div class="row">
+      <div class="col-md-3 col-sm-4">
+        <div class="employee-page pos-fixed customer-menu">
+          <div class="col-md-12 col-sm-12 text-center employee-profile">
+            <div class="form-group">
+              <label class="custom-file mb-3">
+                <img src="assets/images/employee.jpg" class="img-responsive w-75" alt="employee">
+                <input type="file" ng2FileSelect [uploader]="uploader" multiple class="custom-file-input">
+                <span class="custom-file-control"></span>
+              </label>
+            </div>
+            <!-- FLOATING MENU Starts -->
+            <div class="customer-floating-menu">
+              <button class="btn btn-inverse btn-outline-inverse" (click)="customerdetails();">Customer Details</button>
+              <button class="btn btn-inverse btn-outline-inverse" (click)="paymentdetails();">Payment Details</button>
+              <button class="btn btn-inverse btn-outline-inverse" (click)="branchdetails();">Branches</button>
+              <button class="btn btn-inverse btn-outline-inverse">Settings</button>
+              <button class="btn btn-inverse btn-outline-inverse" (click)="gigssection();">Gigs</button>
+              <button class="btn btn-inverse btn-outline-inverse" (click)="couponsection();">Coupons</button>
+              <button class="btn btn-inverse btn-outline-inverse">Gallery</button>
+            </div>
+            <!-- FLOATING MENU ends -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SOCIAL ID POPUP Starts -->
+<div class="modal-size select-input addlocation">
+  <app-modal-animation [modalID]="'socialidmodal'" [modalClass]="'md-effect-7'">
+    <h3 class="f-26">Social ID</h3>
+    <div class="form-header">
+      <div class="row ">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label>Facebook</label>
+            <input type="text" class="form-control" placeholder="Facebook ID">
+          </div>
+          <div class="form-group">
+            <label>Twitter</label>
+            <input type="text" class="form-control" placeholder="Twitter ID">
+          </div>
+          <div class="form-group">
+            <label>Google</label>
+            <input type="text" class="form-control" placeholder="Google ID">
+          </div>
+          <div class="form-group">
+            <label>Instagram</label>
+            <input type="text" class="form-control" placeholder="Instagram ID">
+          </div>
+        </div>
+      </div>
+      <button (click)="closeMyModal($event)" type="button" placement="top" ngbTooltip="Click to {{submit}} locations "
+        (click)="save()" class="btn pull-right btn-primary waves-effect m-b-10">Save</button>
+    </div>
+    <button (click)="closeMyModal($event)" aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>
+  </app-modal-animation>
+</div>
