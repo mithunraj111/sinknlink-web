@@ -1,0 +1,37 @@
+<app-add-edit-dealer></app-add-edit-dealer>
+<div class="col-md-9 col-sm-9 p-l-0 p-r-10">
+  <div class="header-title m-t-60 mb-3">
+    <div class="row">
+      <div class="col-md-6 col-sm-6">
+        <div class="header-line">
+          <h3 class="f-18 text-primary m-l-15">Customers</h3>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-6">
+        <div class="text-right">
+          <div class="form-control-static">02-dec-2018</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="customerlist">
+    <div class="card table-header fixed-table-header">
+      <div class="card-body">
+        <ngx-datatable #table class="table table-bordered data-table location-table" [columnMode]="'flex'"
+          [headerHeight]="40" [rowHeight]="40" [rows]='data' [scrollbarV]="true" [scrollbarH]="true">
+          <ngx-datatable-column prop="businessname" name=" BusinessName" [flexGrow]="1" [width]="300"></ngx-datatable-column>
+          <ngx-datatable-column prop="memberid" name="Member ID" [flexGrow]="0.5"></ngx-datatable-column>
+          <ngx-datatable-column prop="location" name="Location" [flexGrow]="0.5"></ngx-datatable-column>
+          <ngx-datatable-column prop="enrolldate" name="Enroll Date" [flexGrow]="0.5"></ngx-datatable-column>
+          <ngx-datatable-column prop="payment" name="Payment" [flexGrow]="0.25"></ngx-datatable-column>
+          <ngx-datatable-column prop="status" name="Status" [sortable]="false" [flexGrow]="1">
+            <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+              <ui-switch class="js-small" placement="bottom" title="Click to change status" color="#03ADED" switchColor="#fff"
+                size="small" checked></ui-switch>
+            </ng-template>
+          </ngx-datatable-column>
+        </ngx-datatable>
+      </div>
+    </div>
+  </div>
+</div>

@@ -9,6 +9,10 @@ import { CustomerBranchesComponent } from './customer/add-edit-customer/customer
 import { CustomerGigsComponent } from './customer/add-edit-customer/customer-gigs/customer-gigs.component';
 import { CustomerBusinessDetailsComponent } from './customer/add-edit-customer/customer-business-details/customer-business-details.component';
 import { CustomerCouponsComponent } from './customer/add-edit-customer/customer-coupons/customer-coupons.component';
+import { AddEditDealerComponent } from './dealer/add-edit-dealer/add-edit-dealer.component';
+import { DealerBusinessDetailsComponent } from './dealer/add-edit-dealer/dealer-business-details/dealer-business-details.component';
+import { CustomersComponent } from './dealer/add-edit-dealer/customers/customers.component';
+import { DealerPaymentsComponent } from './dealer/add-edit-dealer/dealer-payments/dealer-payments.component';
 
 const routes: Routes = [
   {
@@ -28,22 +32,22 @@ const routes: Routes = [
       },
       {
         path: 'customers/edit/:id',
-        component: AddEditCustomerComponent      
+        component: AddEditCustomerComponent
       },
       {
-        path:'customers/business_details',
+        path: 'customers/business_details',
         component: CustomerBusinessDetailsComponent
       },
       {
-        path:'customers/branches',
+        path: 'customers/branches',
         component: CustomerBranchesComponent
       },
       {
-        path:'customers/gigs',
+        path: 'customers/gigs',
         component: CustomerGigsComponent
       },
       {
-        path:'customers/coupons',
+        path: 'customers/coupons',
         component: CustomerCouponsComponent
       },
       {
@@ -51,9 +55,37 @@ const routes: Routes = [
         component: ConsumerComponent
       },
       {
-        path: 'dealers',
+        path: 'dealer',
         component: DealerComponent
-      }
+      },
+      {
+        path: 'dealer/create',
+        component: AddEditDealerComponent
+      },
+      {
+        path: 'dealer/edit/:id',
+        component: AddEditDealerComponent
+      },
+      {
+        path: 'dealer/business-details',
+        component: DealerBusinessDetailsComponent
+      },
+      {
+        path: 'dealer/business-details/edit/:id',
+        component: DealerBusinessDetailsComponent
+      },
+      {
+        path: 'dealer/customers',
+        component: CustomersComponent
+      },
+      {
+        path: 'dealer/dealer-payments',
+        component: DealerPaymentsComponent
+      },
+      {
+        path: 'dealer/dealer-business-details',
+        component: DealerBusinessDetailsComponent
+      },
     ],
   },
 ]

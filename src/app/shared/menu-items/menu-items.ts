@@ -82,7 +82,7 @@ const MENUITEMS = [
             name: 'Consumers'
           },
           {
-            state: 'dealers',
+            state: 'dealer',
             name: 'Dealers'
           }
         ]

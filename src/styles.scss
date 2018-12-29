@@ -856,13 +856,23 @@ button{
         }
     }
 }
-
+.customerlist{
+    .table-header{
+        .data-table datatable-header-cell.sortable:before{
+            right:4px;
+        }
+        .data-table datatable-header-cell.sortable:after{
+            right:-1px;
+        }
+    }
+}
 
 .table-header{
-    .data-table{
+  .data-table{
         datatable-header-cell.sortable:before, .data-table datatable-header-cell.sortable:after{
             top: 13px !important;
         }
+        
         .datatable-header{
             width: 100% !important;
             .datatable-header-inner{
@@ -980,3 +990,4 @@ button{
         border: 1px solid #dfe8f1 !important;
         box-shadow: inset 1px 1px 3px #f6f6f6;
     }
+   

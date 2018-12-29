@@ -1,0 +1,37 @@
+<app-add-edit-dealer></app-add-edit-dealer>
+<div class="col-md-9 col-sm-9 p-l-0 p-r-10">
+  <div class="header-title m-t-60 mb-3">
+    <div class="row">
+    <div class="col-md-6 col-sm-6">
+      <h3 class="f-18 text-primary m-l-4">Payments</h3>
+    </div>
+    <div class="col-md-6 col-sm-6">
+      <div class="text-right">
+        <label>Search:
+            <input type='text' class="header-search form-control input-sm full-data-search" placeholder='Search for here'
+              (keyup)='search($event)' placement="bottom" title="Type here to search" />
+          </label>
+          </div>
+    </div>
+  </div>
+  </div>
+  <div class="card table-header fixed-table-header">
+    <div class="card-body">
+      <ngx-datatable #table class="table table-bordered data-table location-table" [columnMode]="'flex'" [headerHeight]="40"
+        [rowHeight]="40" [rows]='data' [scrollbarV]="true" [scrollbarH]="true">
+        <ngx-datatable-column prop="paymentdate" name="Payment Date" [flexGrow]="0.5"></ngx-datatable-column>
+        <ngx-datatable-column prop="amount" name="Amount" [flexGrow]="0.5"></ngx-datatable-column>
+        <ngx-datatable-column prop="mode" name="Mode" [flexGrow]="0.5"></ngx-datatable-column>
+        <ngx-datatable-column prop="remarks" name="Remarks" [flexGrow]="0.5"></ngx-datatable-column>
+        <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="1">
+          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+            <a placement="bottom" title="Click to view payment" class="m-r-15 crm-action-edit text-primary">
+              <i class="fa fa-eye"></i>
+            </a>
+          </ng-template>
+        </ngx-datatable-column>
+
+      </ngx-datatable>
+    </div>
+  </div>
+</div>
