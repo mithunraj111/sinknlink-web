@@ -1,3 +1,150 @@
-<p>
-  customer-payments works!
-</p>
+<app-add-edit-customer></app-add-edit-customer>
+<div class="col-md-9 col-sm-9 p-l-0 p-r-10">
+    <div class="employee-form">
+        <div class="card tenants-page tenants-pages m-b-10">
+            <div class="row p-t-10 p-b-5">
+                <div class="col-md-12 col-sm-12">
+                    <div class="header-title m-t-60 mb-3">
+                        <h3 class="f-18 text-primary m-l-15">Payments</h3>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-sm-6 col-form-label text-right">Next due</label>
+                        <span class="col-form-label col-md-9 col-sm-6">02-Dec-2018</span>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-sm-6 col-form-label text-right">Last paid</label>
+                        <span class="col-form-label col-md-9 col-sm-6 f-16">02-Dec-2018</span>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-sm-6 col-form-label text-right">Subscription Amount</label>
+                        <span class="col-form-label col-md-7 col-sm-6 f-16 m-r-15">500 + Tax</span>
+                        <input class="col-md-1 m-t-5 border-checkbox" type="checkbox">
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-sm-6 col-form-label text-right">Association Branch</label>
+                        <span class="col-form-label col-md-7 col-sm-6 f-16 m-r-15">1,500 + Tax</span>
+                        <input class="col-md-1 m-t-5 border-checkbox" type="checkbox">
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-sm-6 col-form-label text-right">Notes</label>
+                        <div class="col-md-9 col-sm-6">
+                            <textarea rows="3" cols="3" class="form-control" placeholder="Payment Notes"></textarea>
+                        </div>
+                    </div>
+                    <div class="header-title m-t-60 mb-3">
+                        <h3 class="f-18 text-primary m-l-15">Donate for a cause</h3>
+                    </div>
+                    <div class="form-group row required">
+                        <label class="col-md-3 col-sm-6 col-form-label text-right">Scan Foundation</label>
+                        <button type="button" placement="bottom" ngbTooltip="Click to view donation cause" class="col-md-1 btn btn-primary waves-effect p-0 m-l-15"
+                            (click)="viewDonationCause();">
+                            <i class="fa fa-eye"></i> View
+                        </button>
+                        <div class=" col-md-6 col-sm-6 p-l-0 p-r-20">
+                            <input type="text" class="form-control" style="width: 100% !important;" placeholder="Amount">
+                        </div>
+                        <input class="col-md-1 m-t-5 border-checkbox" type="checkbox">
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-sm-6 col-form-label text-right">Total</label>
+                        <span class="col-form-label col-md-5 col-sm-6 f-16">2,450$</span>
+                        <button type="button" placement="bottom" ngbTooltip="Click to pa online" class="col-md-3 btn btn-primary waves-effect p-0">
+                            Pay online
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="header-title m-t-30 mb-3">
+        <div class="row">
+            <div class="col-md-5 col-sm-6">
+                <h3 class="f-18 text-primary m-l-15">History</h3>
+            </div>
+            <div class="col-md-4 col-sm-6 mr-4">
+                <div class="text-right">
+                    <label>Search:
+                        <input type="search" class="header-search form-control input-sm full-data-search" placeholder="Search for here"
+                            (keyup)='search($event)' placement="bottom" ngbTooltip="Type here to search">
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-1 col-sm-1 ml-2">
+                <button type="button" placement="bottom" ngbTooltip="Click to add payment" class="btn btn-primary waves-effect"
+                    (click)='viewpayment()'><i class="fa fa-plus-circle m-r-5"></i> Add Payment
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="card table-header fixed-table-header">
+        <div class="card-body">
+            <ngx-datatable #table class="table table-bordered data-table location-table" [columnMode]="'flex'"
+                [headerHeight]="40" [rowHeight]="40" [rows]='data' [scrollbarV]="true" [scrollbarH]="true">
+                <ngx-datatable-column prop="paiddt" name="Paid Date" [flexGrow]="1"></ngx-datatable-column>
+                <ngx-datatable-column prop="amount" name="Amount" [flexGrow]="1"></ngx-datatable-column>
+                <ngx-datatable-column prop="reference" name="Reference#" [flexGrow]="1"></ngx-datatable-column>
+                <ngx-datatable-column prop="mode" name="Mode" [flexGrow]="1"></ngx-datatable-column>
+                <ngx-datatable-column prop="status" name="Status" [sortable]="false" [flexGrow]="0.5">
+                    <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                        <ui-switch class="js-small" placement="bottom" title="Click to change status" color="#03ADED"
+                            switchColor="#fff" size="small" checked></ui-switch>
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="1">
+                    <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                        <a placement="bottom" title="Click to edit branch details" class="m-r-15 crm-action-edit text-primary"
+                            (click)="viewpayment();"><i class="fa fa-eye"></i></a>
+                    </ng-template>
+                </ngx-datatable-column>
+            </ngx-datatable>
+        </div>
+    </div>
+</div>
+<!-- View Payment Details PopUp Starts -->
+<div class="modal-size">
+    <app-modal-animation [modalID]="'customerpaymentmodal'" [modalClass]="'md-effect-7'">
+        <h3 class="f-26">Payment details</h3>
+        <div class="form-header">
+            <div class="row ">
+                <div class="col-md-12">
+                    <div class="form-group required">
+                        <label>Payment date</label>
+                        <input type="text" class="form-control" placeholder="Payment date">
+                    </div>
+                    <div class="form-group required">
+                        <label>Payment amount</label>
+                        <input type="text" class="form-control" placeholder="Payment amount">
+                    </div>
+                    <div class="form-group required">
+                        <label>Mode of payment</label>
+                        <select name="select" class="form-control p-1">
+                            <option value="opt1">Select your mode of payment</option>
+                            <option value="opt2">Cheque</option>
+                            <option value="opt3">NEFT</option>
+                            <option value="opt4">PayTM</option>
+                            <option value="opt5">Googletez</option>
+                        </select>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-sm-6 col-form-label">Reference</label>
+                        <span class="col-form-label col-md-9 col-sm-6">#BD/PM/001</span>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-sm-6 col-form-label">Status</label>
+                        <span class="col-form-label col-md-9 col-sm-6">Active</span>
+                    </div>
+                    <div *ngIf="locationPage" class="form-group "></div>
+                </div>
+            </div>
+            <button (click)="closeMyModal($event)" type="button" placement="top" ngbTooltip="Click to save payment details"
+                (click)="save()" class="btn pull-right btn-primary waves-effect m-b-10">Save</button>
+        </div>
+        <button (click)="closeMyModal($event)" aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>
+    </app-modal-animation>
+</div>
+<!-- View Payment Details PopUp Ends -->
+<div class="modal-size">
+    <app-modal-animation [modalID]="'donationCauseModal'" [modalClass]="'md-effect-7'">
+        <textarea rows="3" cols="3" class="form-control" placeholder="Payment Notes" readonly>The description about the cause of Donation will be mentioned here.</textarea>
+    </app-modal-animation> 
+</div>

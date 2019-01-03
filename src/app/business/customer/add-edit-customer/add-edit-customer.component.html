@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col-md-6 col-sm-6">
           <h2>Customer</h2>
-          <p *ngIf="customerid" class="m-b-0">
+          <p class="m-b-0">
             <i class="fa fa-pencil"></i> Membership ID: 875643
           </p>
         </div>
@@ -21,7 +21,7 @@
     <div class="row">
       <div class="col-md-3 col-sm-4">
         <div class="employee-page pos-fixed customer-menu">
-          <div class="col-md-12 col-sm-12 text-center employee-profile">
+          <div class="col-md-12 col-sm-12 text-center employee-profile m-t-25">
             <div class="form-group">
               <label class="custom-file mb-3">
                 <img src="assets/images/employee.jpg" class="img-responsive w-75" alt="employee">
@@ -31,13 +31,13 @@
             </div>
             <!-- FLOATING MENU Starts -->
             <div class="customer-floating-menu">
-              <button class="btn btn-inverse btn-outline-inverse" (click)="customerdetails();">Customer Details</button>
-              <button class="btn btn-inverse btn-outline-inverse" (click)="paymentdetails();">Payment Details</button>
+              <button class="btn btn-inverse btn-outline-inverse" [routerLink]="['/business/customers/business_details']" >Details</button>
+              <button class="btn btn-inverse btn-outline-inverse" (click)="paymentdetails();">Payments</button>
               <button class="btn btn-inverse btn-outline-inverse" (click)="branchdetails();">Branches</button>
               <button class="btn btn-inverse btn-outline-inverse">Settings</button>
               <button class="btn btn-inverse btn-outline-inverse" (click)="gigssection();">Gigs</button>
               <button class="btn btn-inverse btn-outline-inverse" (click)="couponsection();">Coupons</button>
-              <button class="btn btn-inverse btn-outline-inverse">Gallery</button>
+              <button class="btn btn-inverse btn-outline-inverse" (click)="gallerysection();">Gallery</button>
             </div>
             <!-- FLOATING MENU ends -->
           </div>

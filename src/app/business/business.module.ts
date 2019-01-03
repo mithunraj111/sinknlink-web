@@ -22,6 +22,8 @@ import { AddEditDealerComponent } from './dealer/add-edit-dealer/add-edit-dealer
 import { DealerBusinessDetailsComponent } from './dealer/add-edit-dealer/dealer-business-details/dealer-business-details.component';
 import { CustomersComponent } from './dealer/add-edit-dealer/customers/customers.component';
 import { DealerPaymentsComponent } from './dealer/add-edit-dealer/dealer-payments/dealer-payments.component';
+import { CustomerGalleryComponent } from './customer/add-edit-customer/customer-gallery/customer-gallery.component';
+import { ViewConsumerComponent } from './consumer/view-consumer/view-consumer.component';
 
 
 @NgModule({
@@ -51,7 +53,9 @@ import { DealerPaymentsComponent } from './dealer/add-edit-dealer/dealer-payment
     AddEditDealerComponent,
     DealerBusinessDetailsComponent,
     CustomersComponent,
-    DealerPaymentsComponent
+    DealerPaymentsComponent,
+    ViewConsumerComponent,
+    CustomerGalleryComponent
   ]
 })
 export class BusinessModule { }

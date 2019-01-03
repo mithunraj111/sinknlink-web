@@ -4,7 +4,8 @@ import { AppConstant } from 'src/app/app.constants';
 import { NgbDateCustomParserFormatter } from '../../../shared/elements/dateParser';
 import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
-
+import { RouterModule } from '@angular/router';
+ 
 @Component({
   selector: 'app-add-edit-customer',
   templateUrl: './add-edit-customer.component.html',
@@ -79,34 +80,22 @@ export class AddEditCustomerComponent implements OnInit {
     ((event.target.parentElement.parentElement).parentElement).classList.remove('md-show');
   }
   customerdetails(){
-    // this.customerDetails= true;
-    // this.paymentDetails=false;
-    // this.branchDetails=false;
-    // this.gigsSection=false;
     this.router.navigate(['business/customers/business_details']);
   }
   paymentdetails(){
-    this.customerDetails= false;
-    this.paymentDetails=true;
-    this.branchDetails=false;
-    this.gigsSection=false;
+    this.router.navigate(['business/customers/payment_details'])
   }
   branchdetails(){
-    // this.customerDetails= false;
-    // this.paymentDetails=false;
-    // this.branchDetails=true;
-    // this.gigsSection=false;
     this.router.navigate(['business/customers/branches']);
   }
   gigssection(){
-    // this.customerDetails= false;
-    // this.paymentDetails=false;
-    // this.branchDetails=false;
-    // this.gigsSection=true;
     this.router.navigate(['business/customers/gigs']);
   }
   couponsection(){
     this.router.navigate(['business/customers/coupons']);
+  }
+  gallerysection(){
+    this.router.navigate(['business/customers/gallery']);
   }
   search(event) {
     const val = event.target.value.toLowerCase();
