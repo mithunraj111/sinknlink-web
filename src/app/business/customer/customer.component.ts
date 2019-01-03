@@ -62,10 +62,10 @@ import { Router } from '@angular/router';
  }
 
  addCustomer() {
-  this.router.navigate(['business/customers/business_details']);
+  this.router.navigate(['business/customers/create']);
  }
  editCustomer(data) {
-  this.router.navigate(['business/customers/business_details']);
+  this.router.navigate(['business/customers/create']);
 }
  search(event) {
    const val = event.target.value.toLowerCase();

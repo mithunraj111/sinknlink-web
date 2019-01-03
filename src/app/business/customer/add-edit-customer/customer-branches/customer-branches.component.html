@@ -1,31 +1,28 @@
-<app-add-edit-customer></app-add-edit-customer>
-<div class="col-md-9 col-sm-9 p-l-0 p-r-10">
-  <div class="header-title m-t-60 mb-3">
-    <h3 class="f-18 text-primary m-l-15">Branches</h3>
-  </div>
-  <div class="card table-header fixed-table-header">
-    <div class="card-body">
-      <ngx-datatable #table class="table table-bordered data-table location-table" [columnMode]="'flex'" [headerHeight]="40"
-        [rowHeight]="40" [rows]='data' [scrollbarV]="true" [scrollbarH]="true">
-        <ngx-datatable-column prop="name" name="Name" [flexGrow]="1"></ngx-datatable-column>
-        <ngx-datatable-column prop="memberid" name="MemberID" [flexGrow]="1"></ngx-datatable-column>
-        <ngx-datatable-column prop="location" name="Location" [flexGrow]="1"></ngx-datatable-column>
-        <ngx-datatable-column prop="payment" name="Payment" [flexGrow]="1"></ngx-datatable-column>
-        <ngx-datatable-column prop="duedate" name="Due Date" [flexGrow]=""></ngx-datatable-column>
-        <ngx-datatable-column prop="status" name="Status" [sortable]="false" [flexGrow]="0.5">
-          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-            <ui-switch class="js-small" placement="bottom" title="Click to change status" color="#03ADED" switchColor="#fff"
-              size="small" checked></ui-switch>
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="1">
-          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-            <a placement="bottom" title="Click to edit branch details" class="m-r-15 crm-action-edit text-primary">
-              <i class="fa fa-eye"></i>
-            </a>
-          </ng-template>
-        </ngx-datatable-column>
-      </ngx-datatable>
-    </div>
+<div class="header-title m-t-60 mb-3">
+  <h3 class="f-18 text-primary m-l-15">Branches</h3>
+</div>
+<div class="card table-header fixed-table-header">
+  <div class="card-body">
+    <ngx-datatable #table class="table table-bordered data-table location-table" [columnMode]="'flex'" [headerHeight]="40"
+      [rowHeight]="40" [rows]='data' [scrollbarV]="true" [scrollbarH]="true">
+      <ngx-datatable-column prop="name" name="Name" [flexGrow]="1"></ngx-datatable-column>
+      <ngx-datatable-column prop="memberid" name="MemberID" [flexGrow]="1"></ngx-datatable-column>
+      <ngx-datatable-column prop="location" name="Location" [flexGrow]="1"></ngx-datatable-column>
+      <ngx-datatable-column prop="payment" name="Payment" [flexGrow]="1"></ngx-datatable-column>
+      <ngx-datatable-column prop="duedate" name="Due Date" [flexGrow]="1"></ngx-datatable-column>
+      <ngx-datatable-column prop="status" name="Status" [sortable]="false" [flexGrow]="0.75">
+        <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+          <ui-switch class="js-small" placement="bottom" title="Click to change status" color="#03ADED" switchColor="#fff"
+            size="small" checked></ui-switch>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.75">
+        <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+          <a placement="bottom" title="Click to edit branch details" class="m-r-15 crm-action-edit text-primary">
+            <i class="fa fa-eye"></i>
+          </a>
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
   </div>
 </div>

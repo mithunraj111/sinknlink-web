@@ -30,6 +30,7 @@ export class AddEditCustomerComponent implements OnInit {
   gigsdata: any[];
   tempFilter = [];
   @ViewChild(DatatableComponent) table: DatatableComponent;
+  activeTab: string= 'details';
   
   constructor(private route: ActivatedRoute,
     private router: Router){ 
@@ -79,23 +80,8 @@ export class AddEditCustomerComponent implements OnInit {
   closeMyModal(event) {
     ((event.target.parentElement.parentElement).parentElement).classList.remove('md-show');
   }
-  customerdetails(){
-    this.router.navigate(['business/customers/business_details']);
-  }
-  paymentdetails(){
-    this.router.navigate(['business/customers/payment_details'])
-  }
-  branchdetails(){
-    this.router.navigate(['business/customers/branches']);
-  }
-  gigssection(){
-    this.router.navigate(['business/customers/gigs']);
-  }
-  couponsection(){
-    this.router.navigate(['business/customers/coupons']);
-  }
-  gallerysection(){
-    this.router.navigate(['business/customers/gallery']);
+  navigateTo(activeTab){
+    this.activeTab=activeTab;
   }
   search(event) {
     const val = event.target.value.toLowerCase();

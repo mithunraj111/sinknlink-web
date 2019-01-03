@@ -19,6 +19,14 @@
   </div>
   <div class="col-md-12 col-sm-12">
     <div class="row">
+      <div class="col-md-9 col-sm-9 p-l-0 p-r-10">
+        <app-customer-business-details *ngIf="activeTab=='details'"></app-customer-business-details>
+        <app-customer-payments *ngIf="activeTab=='payments'"></app-customer-payments>
+        <app-customer-branches *ngIf="activeTab=='branches'"></app-customer-branches>
+        <app-customer-gigs *ngIf="activeTab=='gigs'"></app-customer-gigs>
+        <app-customer-coupons *ngIf="activeTab=='coupons'"></app-customer-coupons>
+        <app-customer-gallery *ngIf="activeTab=='gallery'"></app-customer-gallery>
+      </div>
       <div class="col-md-3 col-sm-4">
         <div class="employee-page pos-fixed customer-menu">
           <div class="col-md-12 col-sm-12 text-center employee-profile m-t-25">
@@ -31,13 +39,13 @@
             </div>
             <!-- FLOATING MENU Starts -->
             <div class="customer-floating-menu">
-              <button class="btn btn-inverse btn-outline-inverse" [routerLink]="['/business/customers/business_details']" >Details</button>
-              <button class="btn btn-inverse btn-outline-inverse" (click)="paymentdetails();">Payments</button>
-              <button class="btn btn-inverse btn-outline-inverse" (click)="branchdetails();">Branches</button>
+              <button class="btn btn-inverse btn-outline-inverse" [class.btn-inverse-active]="activeTab=='details'" (click)="navigateTo('details');"  >Details</button>
+              <button class="btn btn-inverse btn-outline-inverse" [class.btn-inverse-active]="activeTab=='payments'" (click)="navigateTo('payments');">Payments</button>
+              <button class="btn btn-inverse btn-outline-inverse" [class.btn-inverse-active]="activeTab=='branches'" (click)="navigateTo('branches');">Branches</button>
               <button class="btn btn-inverse btn-outline-inverse">Settings</button>
-              <button class="btn btn-inverse btn-outline-inverse" (click)="gigssection();">Gigs</button>
-              <button class="btn btn-inverse btn-outline-inverse" (click)="couponsection();">Coupons</button>
-              <button class="btn btn-inverse btn-outline-inverse" (click)="gallerysection();">Gallery</button>
+              <button class="btn btn-inverse btn-outline-inverse" [class.btn-inverse-active]="activeTab=='gigs'" (click)="navigateTo('gigs');">Gigs</button>
+              <button class="btn btn-inverse btn-outline-inverse" [class.btn-inverse-active]="activeTab=='coupons'" (click)="navigateTo('coupons');">Coupons</button>
+              <button class="btn btn-inverse btn-outline-inverse" [class.btn-inverse-active]="activeTab=='gallery'" (click)="navigateTo('gallery');">Gallery</button>
             </div>
             <!-- FLOATING MENU ends -->
           </div>
