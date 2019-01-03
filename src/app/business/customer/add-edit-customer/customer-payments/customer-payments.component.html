@@ -84,13 +84,13 @@
             <ngx-datatable-column prop="mode" name="Mode" [flexGrow]="1"></ngx-datatable-column>
             <ngx-datatable-column prop="status" name="Status" [sortable]="false" [flexGrow]="0.5">
                 <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-                    <ui-switch class="js-small" placement="bottom" title="Click to change status" color="#03ADED"
+                    <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="#03ADED"
                         switchColor="#fff" size="small" checked></ui-switch>
                 </ng-template>
             </ngx-datatable-column>
             <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.5">
                 <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-                    <a placement="bottom" title="Click to edit branch details" class="m-r-15 crm-action-edit text-primary text-center"
+                    <a placement="bottom" ngbTooltip="Click to edit branch details" class="m-r-15 crm-action-edit text-primary text-center"
                         (click)="viewpayment();"><i class="fa fa-eye"></i></a>
                 </ng-template>
             </ngx-datatable-column>

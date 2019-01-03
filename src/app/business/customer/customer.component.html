@@ -44,9 +44,9 @@
         </ngx-datatable-column>
         <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="1">
           <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-            <a placement="bottom" title="Click to edit customer" class="m-r-15 crm-action-edit text-primary" (click)="editCustomer(data)">
+            <a placement="bottom" ngbTooltip="Click to edit customer" class="m-r-15 crm-action-edit text-primary" (click)="editCustomer(data)">
               <i class="fa fa-pencil"></i></a>
-            <a placement="bottom" title="Click to delete customer" class="crm-action-delete text-danger">
+            <a placement="bottom" ngbTooltip="Click to delete customer" class="crm-action-delete text-danger">
               <i class="fa fa-trash"></i></a>
           </ng-template>
         </ngx-datatable-column>

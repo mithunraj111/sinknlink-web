@@ -36,15 +36,15 @@
         <ngx-datatable-column prop="price" name="Price" [flexGrow]="1"></ngx-datatable-column>
         <ngx-datatable-column prop="status" name="Status" [sortable]="false" [flexGrow]="1">
           <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-            <ui-switch class="js-small" placement="bottom" title="Click to change the status" color="#03ADED"
+            <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change the status" color="#03ADED"
               switchColor="#fff" size="small" checked></ui-switch>
           </ng-template>
         </ngx-datatable-column>
         <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="1">
           <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-            <a placement="bottom" title="Click to edit" class="m-r-15 crm-action-edit text-primary" (click)='editVipRegistration()'>
+            <a placement="bottom" ngbTooltip="Click to edit" class="m-r-15 crm-action-edit text-primary" (click)='editVipRegistration()'>
               <i class="fa fa-pencil"></i></a>
-            <a placement="bottom" title="Click to delete" class="crm-action-delete text-danger">
+            <a placement="bottom" ngbTooltip="Click to delete" class="crm-action-delete text-danger">
               <i class="fa fa-trash"></i></a>
           </ng-template>
         </ngx-datatable-column>

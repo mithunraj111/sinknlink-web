@@ -20,13 +20,13 @@
         <ngx-datatable #table class="table table-bordered data-table location-table" [columnMode]="'flex'"
           [headerHeight]="40" [rowHeight]="40" [rows]='data' [scrollbarV]="true" [scrollbarH]="true">
           <ngx-datatable-column prop="businessname" name=" BusinessName" [flexGrow]="1" [width]="300"></ngx-datatable-column>
-          <ngx-datatable-column prop="memberid" name="Member ID" [flexGrow]="0.5"></ngx-datatable-column>
-          <ngx-datatable-column prop="location" name="Location" [flexGrow]="0.5"></ngx-datatable-column>
-          <ngx-datatable-column prop="enrolldate" name="Enroll Date" [flexGrow]="0.5"></ngx-datatable-column>
-          <ngx-datatable-column prop="payment" name="Payment" [flexGrow]="0.25"></ngx-datatable-column>
+          <ngx-datatable-column prop="memberid" name="Member ID" [flexGrow]="1"></ngx-datatable-column>
+          <ngx-datatable-column prop="location" name="Location" [flexGrow]="1"></ngx-datatable-column>
+          <ngx-datatable-column prop="enrolldate" name="Enroll Date" [flexGrow]="1"></ngx-datatable-column>
+          <ngx-datatable-column prop="payment" name="Payment" [flexGrow]="1"></ngx-datatable-column>
           <ngx-datatable-column prop="status" name="Status" [sortable]="false" [flexGrow]="1">
             <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-              <ui-switch class="js-small" placement="bottom" title="Click to change status" color="#03ADED" switchColor="#fff"
+              <ui-switch class="js-small" placement="top" ngbTooltip="Click to change status" color="#03ADED" switchColor="#fff"
                 size="small" checked></ui-switch>
             </ng-template>
           </ngx-datatable-column>
