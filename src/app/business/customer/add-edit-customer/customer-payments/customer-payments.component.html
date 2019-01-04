@@ -13,35 +13,40 @@
                     <label class="col-md-3 col-sm-6 col-form-label text-right">Last paid</label>
                     <span class="col-form-label col-md-9 col-sm-6 f-16">02-Dec-2018</span>
                 </div>
-                <div class="form-group row">
+                <div class="form group row">
                     <label class="col-md-3 col-sm-6 col-form-label text-right">Subscription Amount</label>
-                    <span class="col-form-label col-md-7 col-sm-6 f-16 m-r-15">500 + Tax</span>
-                    <input class="col-md-1 m-t-5 border-checkbox" type="checkbox">
+                    <div class="checkbox-color checkbox-primary col-md-7 col-sm-6 m-l-5 p-t-5">
+                        <input id="checkbox1" type="checkbox" checked="">
+                        <label for="checkbox1" class="checkbox-label">
+                            500 + Tax
+                        </label>
+                    </div>
                 </div>
-                <div class="form-group row">
+                <div class="form group row">
                     <label class="col-md-3 col-sm-6 col-form-label text-right">Association Branch</label>
-                    <span class="col-form-label col-md-7 col-sm-6 f-16 m-r-15">1,500 + Tax</span>
-                    <input class="col-md-1 m-t-5 border-checkbox" type="checkbox">
-                </div>
-                <div class="form-group row">
-                    <label class="col-md-3 col-sm-6 col-form-label text-right">Notes</label>
-                    <div class="col-md-9 col-sm-6">
-                        <textarea rows="3" cols="3" class="form-control" placeholder="Payment Notes"></textarea>
+                    <div class="checkbox-color checkbox-primary col-md-7 col-sm-6 m-l-5 p-t-5">
+                        <input id="checkbox2" type="checkbox" checked="">
+                        <label for="checkbox2" class="checkbox-label">
+                            1,500 + Tax
+                        </label>
                     </div>
                 </div>
                 <div class="header-title m-t-60 mb-3">
                     <h3 class="f-18 text-primary m-l-15">Donate for a cause</h3>
                 </div>
-                <div class="form-group row required">
+                <div class="form-group row">
                     <label class="col-md-3 col-sm-6 col-form-label text-right">Scan Foundation</label>
-                    <button type="button" placement="bottom" ngbTooltip="Click to view donation cause" class="col-md-1 btn btn-primary waves-effect p-0 m-l-15"
+                    <div class="checkbox-color checkbox-primary col-md-1 col-sm-1 m-l-5 p-t-5">
+                        <input id="checkbox3" type="checkbox" checked="">
+                        <label for="checkbox3" class="checkbox-label"></label>
+                    </div>
+                    <button type="button" placement="bottom" ngbTooltip="Click to view donation cause" class="col-md-1 btn btn-primary waves-effect p-0 m-l-15 donation-view-button"
                         (click)="viewDonationCause();">
                         <i class="fa fa-eye"></i> View
                     </button>
                     <div class=" col-md-6 col-sm-6 p-l-0 p-r-20">
                         <input type="text" class="form-control" style="width: 100% !important;" placeholder="Amount">
                     </div>
-                    <input class="col-md-1 m-t-5 border-checkbox" type="checkbox">
                 </div>
                 <div class="form-group row">
                     <label class="col-md-3 col-sm-6 col-form-label text-right">Total</label>

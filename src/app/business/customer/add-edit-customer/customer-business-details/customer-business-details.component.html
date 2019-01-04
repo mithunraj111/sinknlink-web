@@ -42,7 +42,7 @@
         <div class="form-group row required">
           <label class="col-md-3 col-sm-6 col-form-label text-right">Phone</label>
           <div class="col-md-9 col-sm-6">
-            <tag-input class="tag-chips" [(ngModel)]="itemsAsObjects" [secondaryPlaceholder]="'Enter your number'"
+            <tag-input class="tag-chips" [(ngModel)]="itemsAsObjects" [secondaryPlaceholder]="'Enter phone number'"
               [identifyBy]="'id'" [displayBy]="'name'"></tag-input>
           </div>
         </div>
@@ -115,7 +115,7 @@
           <div class="col-md-9 col-sm-6">
             <div class="input-box">
               <tag-input [ngClass]="'tag-select'" theme='bootstrap' [placeholder]="'+'" [maxItems]="5" [addOnBlur]="true"
-                [clearOnBlur]="true" [secondaryPlaceholder]="'Select payment method'">
+                [clearOnBlur]="true" [secondaryPlaceholder]="'Select payment methods'">
                 <tag-input-dropdown [autocompleteItems]="autocompleteItems"></tag-input-dropdown>
               </tag-input>
             </div>
@@ -125,7 +125,7 @@
           <label class="col-md-3 col-sm-6 col-form-label text-right">Delivery method</label>
           <div class="col-md-9 col-sm-6">
             <select name="select" class="form-control p-1 location-title">
-              <option value="opt1">Available delivery methods</option>
+              <option value="opt1">Available delivery method</option>
               <option value="opt2">Method 1</option>
               <option value="opt3">Method 2</option>
               <option value="opt4">Method 3</option>
@@ -136,8 +136,12 @@
         <div class="form-group row required">
           <label class="col-md-3 col-sm-6 col-form-label text-right">Social ID's</label>
           <div class="col-md-9 col-sm-6">
-            <button class="btn btn-inverse btn-outline-inverse text-left" style="border: 1px solid #DFE8F1; width: 90%;"
-              (click)='addSocialId();'>Social ID's</button>
+            <div class="input-group">
+              <input type="text" class="form-control w-75" placeholder="Social Ids" readonly>
+              <div class="input-group-append bg-default" (click)='addSocialId();'>
+                <span class="fa fa-plus input-group-text"></span>
+              </div>
+            </div>
           </div>
         </div>
         <div class="form-group row required">
