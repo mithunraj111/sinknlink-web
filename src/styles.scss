@@ -1000,3 +1000,18 @@ button{
     .fa{
         cursor:pointer;
     }
+    .datatable-header-cell[title="Status"]{
+        text-align: center;
+        padding: 0 !important;
+        .datatable-header-cell-label {
+            padding: .75rem 30px .75rem 2.75rem;
+        }
+    }
+
+    .datatable-header-cell[title="Action"]{
+        text-align: center;
+        padding: 0 !important;
+        .datatable-header-cell-label {
+            padding: .75rem 30px .75rem 2.75rem;
+        }
+    }

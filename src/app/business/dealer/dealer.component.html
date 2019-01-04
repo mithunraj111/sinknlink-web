@@ -36,13 +36,13 @@
             <span class="updatedate"> {{data[rowIndex].updateddt}}</span>
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column prop="status" name="Status" [sortable]="false" [flexGrow]="1">
+        <ngx-datatable-column prop="status" name="Status" [sortable]="false" [flexGrow]="0.75" [cellClass]="'text-center'">
           <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-            <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="#03ADED" switchColor="#fff"
-              size="small" checked></ui-switch>
+            <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="#03ADED"
+              switchColor="#fff" size="small" checked></ui-switch>
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="1">
+        <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.75" [cellClass]="'text-center'">
           <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
             <a placement="bottom" ngbTooltip="Click to edit dealer" class="m-r-15 crm-action-edit text-primary" (click)="editDealers()">
               <i class="fa fa-pencil"></i></a>

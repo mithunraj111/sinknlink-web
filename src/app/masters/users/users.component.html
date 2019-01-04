@@ -9,12 +9,12 @@
         <div class="text-right">
           <label>Search:
             <input type='text' class="header-search form-control input-sm full-data-search" placeholder='Search for here'
-              (keyup)='search($event)' placement="bottom" title="Type here to search" />
+              (keyup)='search($event)' placement="bottom" ngbTooltip="Type here to search" />
           </label>
         </div>
       </div>
       <div class="col-md-1 col-sm-1">
-        <button type="button" placement="bottom" title="Click to add user" class="btn pull-left btn-primary waves-effect"
+        <button type="button" placement="bottom" ngbTooltip="Click to add user" class="btn pull-left btn-primary waves-effect"
           (click)='addUsers()'><i class="fa fa-plus-circle m-r-5"></i> New
         </button>
       </div>
@@ -36,16 +36,15 @@
             <span class="updatedate"> {{data[rowIndex].updateddt}}</span>
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column prop="status" name="Status" [sortable]="false" [flexGrow]="0.5">
+        <ngx-datatable-column prop="status" name="Status" [sortable]="false" [flexGrow]="0.5" [cellClass]="'text-center'">
           <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
             <ui-switch class="js-small text-center" placement="bottom" ngbTooltip="Click to change status" color="#03ADED"
               switchColor="#fff" size="small" checked></ui-switch>
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.5">
+        <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.5" [cellClass]="'text-center'">
           <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-            <a placement="bottom" ngbTooltip="Click to edit user" class="m-r-15 crm-action-edit text-primary"
-              (click)='editUsers()'>
+            <a placement="bottom" ngbTooltip="Click to edit user" class="m-r-15 crm-action-edit text-primary" (click)='editUsers()'>
               <i class="fa fa-pencil"></i></a>
             <a placement="bottom" ngbTooltip="Click to delete user" class="crm-action-delete text-danger">
               <i class="fa fa-trash"></i></a>

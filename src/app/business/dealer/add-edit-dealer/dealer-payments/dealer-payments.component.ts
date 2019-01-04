@@ -13,11 +13,11 @@ export class DealerPaymentsComponent implements OnInit {
 
   constructor() {
     this.data = [
-      { paymentdate: 'Pavithra', amount: '1000', mode: 'Cheque', remarks: 'No remarks' },
-      { paymentdate: 'Pavithra', amount: '5000', mode: 'Cheque', remarks: 'No remarks' },
-      { paymentdate: 'Pavithra', amount: '1000', mode: 'Cheque', remarks: 'No remarks' },
-      { paymentdate: 'pavi', amount: '4000', mode: 'Cash', remarks: 'No remarks' },
-      { paymentdate: 'pavi', amount: '5000', mode: 'Cash', remarks: 'No remarks' },
+      { paymentdate: '02-Dec-2018', amount: '1000', mode: 'Cheque', remarks: 'No remarks' },
+      { paymentdate: '02-Dec-2018', amount: '5000', mode: 'Cheque', remarks: 'No remarks' },
+      { paymentdate: '02-Dec-2018', amount: '1000', mode: 'Cheque', remarks: 'No remarks' },
+      { paymentdate: '02-Dec-2018', amount: '4000', mode: 'Cash', remarks: 'No remarks' },
+      { paymentdate: '02-Dec-2018', amount: '5000', mode: 'Cash', remarks: 'No remarks' },
     ];
     this.tempFilter = this.data;
 

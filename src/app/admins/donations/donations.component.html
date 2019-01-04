@@ -24,8 +24,8 @@
 <div class="header-block m-t-60">
   <div class="card table-header fixed-table-header">
     <div class="card-body">
-      <ngx-datatable #table class="table table-bordered data-table donation-table" [columnMode]="'flex'"
-        [headerHeight]="40" [rowHeight]="40" [rows]='data' [scrollbarV]="true" [scrollbarH]="true">
+      <ngx-datatable #table class="table table-bordered data-table donation-table" [columnMode]="'flex'" [headerHeight]="40"
+        [rowHeight]="40" [rows]='data' [scrollbarV]="true" [scrollbarH]="true">
         <ngx-datatable-column prop="charity" name="Charity" [flexGrow]="1"></ngx-datatable-column>
         <ngx-datatable-column prop="startdate" name="Start Date" [flexGrow]="1"></ngx-datatable-column>
         <ngx-datatable-column prop="enddate" name="End Date" [flexGrow]="1"></ngx-datatable-column>
@@ -35,14 +35,14 @@
             <span class="updatedate"> {{data[rowIndex].updateddt}}</span>
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column prop="status" name="Status" [sortable]="false" [flexGrow]="1">
+        <ngx-datatable-column prop="status" name="Status" [sortable]="false" [flexGrow]="0.5" [cellClass]="'text-center'">
           <ng-template class="text-center" ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value"
             let-row="row">
             <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="#03ADED"
               switchColor="#fff" size="small" checked></ui-switch>
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="1">
+        <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.5" [cellClass]="'text-center'">
           <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
             <a placement="bottom" ngbTooltip="Click to edit donation details" class="m-r-15 crm-action-edit text-primary"
               (click)='editDonations()'>

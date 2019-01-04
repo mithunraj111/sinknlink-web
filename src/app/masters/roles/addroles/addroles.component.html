@@ -51,7 +51,7 @@
         <ngx-datatable-column prop="screenname" name="Screen Name" [flexGrow]="1"></ngx-datatable-column>
         <ngx-datatable-column prop="availablepermission" name="Available Permissions" [flexGrow]="1"></ngx-datatable-column>
         <ngx-datatable-column prop="assignedpermission" name="Assigned Permissions" [flexGrow]="1"></ngx-datatable-column>
-        <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="1">
+        <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="1" [cellClass]="'text-center'">
           <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
             <a placement="bottom" ngbTooltip="Click to edit role " class="m-r-15 crm-action-edit text-primary" (click)="openMyModal('effect-7')"><i
                 class="fa fa-pencil"></i></a>

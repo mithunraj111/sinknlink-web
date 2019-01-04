@@ -19,8 +19,8 @@
         </button>
       </div>
       <div class="col-md-1 col-sm-1 p-r-30">
-        <button type="button" placement="bottom" ngbTooltip="Click to add" class="btn btn-primary waves-effect"
-          (click)='addVipRegistration()'><i class="fa fa-plus-circle m-r-5"></i> New
+        <button type="button" placement="bottom" ngbTooltip="Click to add" class="btn btn-primary waves-effect" (click)='addVipRegistration()'><i
+            class="fa fa-plus-circle m-r-5"></i> New
         </button>
       </div>
     </div>
@@ -34,13 +34,13 @@
         <ngx-datatable-column prop="membershipid" name="Membership Id" [flexGrow]="1"></ngx-datatable-column>
         <ngx-datatable-column prop="state" name="State" [flexGrow]="1"></ngx-datatable-column>
         <ngx-datatable-column prop="price" name="Price" [flexGrow]="1"></ngx-datatable-column>
-        <ngx-datatable-column prop="status" name="Status" [sortable]="false" [flexGrow]="1">
+        <ngx-datatable-column prop="status" name="Status" [sortable]="false" [flexGrow]="0.75" [cellClass]="'text-center'">
           <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
             <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change the status" color="#03ADED"
               switchColor="#fff" size="small" checked></ui-switch>
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="1">
+        <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="1" [cellClass]="'text-center'">
           <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
             <a placement="bottom" ngbTooltip="Click to edit" class="m-r-15 crm-action-edit text-primary" (click)='editVipRegistration()'>
               <i class="fa fa-pencil"></i></a>
@@ -60,8 +60,7 @@
       <label>Membership ID</label>
       <input type="text" class="form-control" placeholder="Membership ID">
     </div>
-    <button (click)="closeMyModal($event)" type="button" placement="top" ngbTooltip="Click to Save"
-      class="btn pull-right btn-primary waves-effect m-b-10">Save</button>
+    <button (click)="closeMyModal($event)" type="button" placement="top" ngbTooltip="Click to Save" class="btn pull-right btn-primary waves-effect m-b-10">Save</button>
   </div>
   <button (click)="closeMyModal($event)" aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>
 </app-modal-animation>

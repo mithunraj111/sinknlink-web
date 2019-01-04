@@ -8,8 +8,8 @@
       <div class="col-md-6 col-sm-6">
         <div class="text-right">
           <label>Search:
-            <input type="search" class="header-search form-control input-sm full-data-search" placeholder="Search for here" 
-            (keyup)='search($event)' placement="bottom" ngbTooltip="Type here to search">
+            <input type="search" class="header-search form-control input-sm full-data-search" placeholder="Search for here"
+              (keyup)='search($event)' placement="bottom" ngbTooltip="Type here to search">
           </label>
         </div>
       </div>
@@ -24,8 +24,8 @@
 <div class="header-block m-t-60">
   <div class="card table-header fixed-table-header">
     <div class="card-body">
-      <ngx-datatable #table class="table table-bordered data-table location-table" [columnMode]="'flex'"
-        [headerHeight]="40" [rowHeight]="40" [rows]='data' [scrollbarV]="true" [scrollbarH]="true">
+      <ngx-datatable #table class="table table-bordered data-table location-table" [columnMode]="'flex'" [headerHeight]="40"
+        [rowHeight]="40" [rows]='data' [scrollbarV]="true" [scrollbarH]="true">
         <ngx-datatable-column prop="pincode" name="Pincode" [flexGrow]="1"></ngx-datatable-column>
         <ngx-datatable-column prop="area" name="Area" [flexGrow]="1"></ngx-datatable-column>
         <ngx-datatable-column prop="state" name="State" [flexGrow]="1"></ngx-datatable-column>
@@ -36,16 +36,15 @@
             <span class="updatedate"> {{data[rowIndex].updateddt}}</span>
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column prop="status" name="Status" [sortable]="false" [flexGrow]="1">
+        <ngx-datatable-column prop="status" name="Status" [sortable]="false" [flexGrow]="1" [cellClass]="'text-center'">
           <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-            <ui-switch class="js-small" placement="top" ngbTooltip="Click to change status" color="#03ADED"
-              switchColor="#fff" size="small" checked></ui-switch>
+            <ui-switch class="js-small" placement="top" ngbTooltip="Click to change status" color="#03ADED" switchColor="#fff"
+              size="small" checked></ui-switch>
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="1">
+        <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="1" [cellClass]="'text-center'">
           <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-            <a placement="top" ngbTooltip="Click to edit location" class="m-r-15 crm-action-edit text-primary"
-              (click)="editLocation(data)">
+            <a placement="top" ngbTooltip="Click to edit location" class="m-r-15 crm-action-edit text-primary" (click)="editLocation(data)">
               <i class="fa fa-pencil"></i></a>
             <a placement="top" ngbTooltip="Click to delete location" class="crm-action-delete text-danger">
               <i class="fa fa-trash"></i></a>
@@ -55,4 +54,4 @@
     </div>
   </div>
 </div>
-<app-add-edit-location [title]="formTitle" [submit]="formSubmit" [locationPage]="locationPage"  ></app-add-edit-location>
+<app-add-edit-location [title]="formTitle" [submit]="formSubmit" [locationPage]="locationPage"></app-add-edit-location>
