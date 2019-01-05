@@ -23,7 +23,7 @@
         <ngx-datatable-column prop="amount" name="Amount" [flexGrow]="0.5"></ngx-datatable-column>
         <ngx-datatable-column prop="mode" name="Mode" [flexGrow]="0.5"></ngx-datatable-column>
         <ngx-datatable-column prop="remarks" name="Remarks" [flexGrow]="0.5"></ngx-datatable-column>
-        <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="1">
+        <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="1" [cellClass]="'text-center'">
           <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
             <a placement="top" ngbTooltip="Click to view payment" class="m-r-15 crm-action-edit text-primary">
               <i class="fa fa-eye"></i>

@@ -34,7 +34,7 @@
             <span class="updatedate"> {{data[rowIndex].updateddt}}</span>
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column prop="status" name="Status" [sortable]="false" [flexGrow]="1" [cellClass]="'text-center'">
+        <ngx-datatable-column prop="status" name="Status" [sortable]="false" [flexGrow]="0.5" [cellClass]="'text-center'">
           <ng-template class="text-center" ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value"
             let-row="row">
             <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="#03ADED"
