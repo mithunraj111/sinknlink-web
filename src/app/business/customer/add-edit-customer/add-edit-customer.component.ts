@@ -4,6 +4,7 @@ import { AppConstant } from 'src/app/app.constants';
 import { NgbDateCustomParserFormatter } from '../../../shared/elements/dateParser';
 import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
+import {animate, style, transition, trigger} from '@angular/animations';
 import { RouterModule } from '@angular/router';
  
 @Component({
@@ -12,6 +13,18 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./add-edit-customer.component.scss'],
   providers: [
     { provide: NgbDateParserFormatter, useClass: NgbDateCustomParserFormatter }
+  ],
+  animations: [
+    trigger('fadeInOutTranslate', [
+      transition(':enter', [
+        style({opacity: 0}),
+        animate('400ms ease-in-out', style({opacity: 1}))
+      ]),
+      transition(':leave', [
+        style({transform: 'translate(0)'}),
+        animate('400ms ease-in-out', style({opacity: 0}))
+      ])
+    ])
   ]
 })
 export class AddEditCustomerComponent implements OnInit {

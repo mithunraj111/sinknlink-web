@@ -953,4 +953,30 @@ button{
     .fa{
         cursor:pointer;
     }
-
+.business-tab {
+    .tab-content{
+        position: static !important;
+        display: contents !important;
+    }
+}
+.business-tab{
+    .nav-tabs{
+        position: fixed;
+        bottom: 75px;
+        right: 25px;
+        li{
+            // color: #ffffff;
+            border-right: 4px solid #435769;
+        }
+    }
+    .nav-item{
+        .nav-link{
+            margin: 0px 0px 2px 0px !important;
+            background:transparent;
+        }
+        .nav-link.active{
+            background: #03ADED;
+            color: #fff;
+        }
+    } 
+}

@@ -17,26 +17,88 @@
       </div>
     </div>
   </div>
-  <div class="col-md-12 col-sm-12">
-    <div class="row">
-      <div class="col-md-9 col-sm-9 p-l-0 p-r-10">
+  <div class="employee-page pos-fixed customer-menu">
+    <div class="col-md-12 col-sm-12 text-center employee-profile m-t-25">
+      <div class="form-group">
+        <label class=" mb-3">
+          <img src="assets/images/employee.jpg" class="img-responsive w-75" alt="employee">
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-10 col-xl-10 col-sm-10">
+      <div class="md-tabs md-right-tabs business-tab">
+        <ngb-tabset>
+          <ngb-tab title="Details">
+            <ng-template ngbTabContent>
+              <div [@fadeInOutTranslate]>
+                <app-customer-business-details></app-customer-business-details>
+              </div>
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab title="Payments">
+            <ng-template ngbTabContent>
+              <div [@fadeInOutTranslate]>
+                <app-customer-payments></app-customer-payments>
+              </div>
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab title="Branches">
+            <ng-template ngbTabContent>
+              <div [@fadeInOutTranslate]>
+                <app-customer-branches></app-customer-branches>
+              </div>
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab title="Settings">
+            <ng-template ngbTabContent>
+              <div [@fadeInOutTranslate]>
+              </div>
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab title="Gigs">
+            <ng-template ngbTabContent>
+              <div [@fadeInOutTranslate]>
+                <app-customer-gigs></app-customer-gigs>
+              </div>
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab title="Coupons">
+            <ng-template ngbTabContent>
+              <div [@fadeInOutTranslate]>
+                <app-customer-coupons></app-customer-coupons>
+              </div>
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab title="Gallery">
+            <ng-template ngbTabContent>
+              <div [@fadeInOutTranslate]>
+                <app-customer-gallery></app-customer-gallery>
+              </div>
+            </ng-template>
+          </ngb-tab>
+        </ngb-tabset>
+      </div>
+    </div>
+    <!-- <div class="col-md-9 col-sm-9 p-l-0 p-r-10">
         <app-customer-business-details *ngIf="activeTab=='details'"></app-customer-business-details>
         <app-customer-payments *ngIf="activeTab=='payments'"></app-customer-payments>
         <app-customer-branches *ngIf="activeTab=='branches'"></app-customer-branches>
         <app-customer-gigs *ngIf="activeTab=='gigs'"></app-customer-gigs>
         <app-customer-coupons *ngIf="activeTab=='coupons'"></app-customer-coupons>
         <app-customer-gallery *ngIf="activeTab=='gallery'"></app-customer-gallery>
-      </div>
-      <div class="col-md-3 col-sm-4">
-        <div class="employee-page pos-fixed customer-menu">
-          <div class="col-md-12 col-sm-12 text-center employee-profile m-t-25">
-            <div class="form-group">
-              <label class=" mb-3">
-                <img src="assets/images/employee.jpg" class="img-responsive w-75" alt="employee">
-              </label>
-            </div>
-            <!-- FLOATING MENU Starts -->
-            <div class="customer-floating-menu">
+      </div> -->
+    <!-- <div class="col-md-3 col-sm-4">
+      <div class="employee-page pos-fixed customer-menu">
+        <div class="col-md-12 col-sm-12 text-center employee-profile m-t-25">
+          <div class="form-group">
+            <label class=" mb-3">
+              <img src="assets/images/employee.jpg" class="img-responsive w-75" alt="employee">
+            </label>
+          </div> -->
+    <!-- FLOATING MENU Starts -->
+    <!-- <div class="customer-floating-menu">
               <button class="btn btn-inverse btn-outline-inverse" [class.btn-inverse-active]="activeTab=='details'" (click)="navigateTo('details');"  >Details</button>
               <button class="btn btn-inverse btn-outline-inverse" [class.btn-inverse-active]="activeTab=='payments'" (click)="navigateTo('payments');">Payments</button>
               <button class="btn btn-inverse btn-outline-inverse" [class.btn-inverse-active]="activeTab=='branches'" (click)="navigateTo('branches');">Branches</button>
@@ -44,12 +106,11 @@
               <button class="btn btn-inverse btn-outline-inverse" [class.btn-inverse-active]="activeTab=='gigs'" (click)="navigateTo('gigs');">Gigs</button>
               <button class="btn btn-inverse btn-outline-inverse" [class.btn-inverse-active]="activeTab=='coupons'" (click)="navigateTo('coupons');">Coupons</button>
               <button class="btn btn-inverse btn-outline-inverse" [class.btn-inverse-active]="activeTab=='gallery'" (click)="navigateTo('gallery');">Gallery</button>
-            </div>
-            <!-- FLOATING MENU ends -->
-          </div>
-        </div>
+            </div> -->
+    <!-- FLOATING MENU ends -->
+    <!-- </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </div>
 
