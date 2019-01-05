@@ -14,6 +14,8 @@ export class AddEditUsersComponent implements OnInit {
   isaddForm = true;
   userid: number;
   buttontext = AppConstant.BUTTON_TXT.SAVE;
+  date_displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
+  date: any;
   constructor(private route: ActivatedRoute, private bootstrapAlertService: BootstrapAlertService) {
     this.route.params.subscribe(params => {
       if (params.id !== undefined) {
@@ -22,6 +24,7 @@ export class AddEditUsersComponent implements OnInit {
         this.buttontext = AppConstant.BUTTON_TXT.UPDATE;
       }
     });
+    this.date = new Date();
   }
   ngOnInit() {
   }

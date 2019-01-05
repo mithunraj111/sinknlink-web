@@ -25,7 +25,11 @@
         <ngx-datatable-column prop="mobileno" name="Mobile No" [flexGrow]="1"></ngx-datatable-column>
         <ngx-datatable-column prop="membershipid" name="Membersip ID" [flexGrow]="1"></ngx-datatable-column>
         <ngx-datatable-column prop="city" name="City" [flexGrow]="1"></ngx-datatable-column>
-        <ngx-datatable-column prop="lastlogin" name='Last Login' [flexGrow]="1"></ngx-datatable-column>
+        <ngx-datatable-column prop="lastlogin" name='Last Login' [flexGrow]="1">
+            <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+              <span>{{date|date:date_displayformat}}</span>
+              </ng-template>
+        </ngx-datatable-column>
         <ngx-datatable-column prop="status" name="Status" [sortable]="false" [flexGrow]="1" [cellClass]="'text-center'">
           <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
             <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="#03ADED"

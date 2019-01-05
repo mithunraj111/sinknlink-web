@@ -10,7 +10,7 @@
       <div class="col-md-6 col-sm-6">
         <div class="text-right p-r-35">
           <div>[Last Commission paid on]</div>
-          <div class="form-control-static">02-dec-2018</div>
+          <div>{{date|date:date_displayformat}}</div>
         </div>
       </div>
     </div>
@@ -23,7 +23,11 @@
           <ngx-datatable-column prop="businessname" name=" Business Name" [flexGrow]="1" [width]="300"></ngx-datatable-column>
           <ngx-datatable-column prop="memberid" name="Membership ID" [flexGrow]="1"></ngx-datatable-column>
           <ngx-datatable-column prop="location" name="Location" [flexGrow]="0.75"></ngx-datatable-column>
-          <ngx-datatable-column prop="enrolldate" name="Enroll Date" [flexGrow]="0.75"></ngx-datatable-column>
+          <ngx-datatable-column prop="enrolldate" name="Enroll Date" [flexGrow]="0.75">
+            <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+              <span>{{date|date:date_displayformat}}</span>
+            </ng-template>
+          </ngx-datatable-column>
           <ngx-datatable-column prop="payment" name="Payment" [flexGrow]="0.75"></ngx-datatable-column>
           <ngx-datatable-column prop="status" name="Status" [sortable]="false" [flexGrow]="0.75" [cellClass]="'text-center'">
             <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">

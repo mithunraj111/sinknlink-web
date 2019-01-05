@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, ViewChild } from '@angular/core';
 import { Http } from '@angular/http';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
+import { AppConstant } from '../../app.constants';
 
 @Component({
   selector: 'app-fo-location',
@@ -21,7 +22,8 @@ export class LocationComponent implements OnInit {
   formSubmit: string;
   locationPage: boolean;
   tempFilter = [];
-
+  date_displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
+  date: any;
   constructor() {
     this.data = [
       { pincode: '600 078', area: 'K.K.Nagar', state: 'TamilNadu', city: 'Chennai', updatedby: 'Admin', updateddt: '26-Dec-2018 15:00' },
@@ -39,6 +41,7 @@ export class LocationComponent implements OnInit {
       { pincode: '600 078', area: 'K.K.Nagar', state: 'TamilNadu', city: 'Chennai', updatedby: 'Admin', updateddt: '26-Dec-2018 15:00' }
     ];
     this.tempFilter = this.data;
+    this.date = new Date();
   }
 
   ngOnInit() { }

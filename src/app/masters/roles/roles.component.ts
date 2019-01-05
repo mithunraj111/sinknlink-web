@@ -1,7 +1,8 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import {Http} from '@angular/http';
+import { Http } from '@angular/http';
 import { Router } from '@angular/router';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
+import { AppConstant } from '../../app.constants';
 
 @Component({
   selector: 'app-roles',
@@ -16,7 +17,8 @@ export class RolesComponent implements OnInit {
   public sortOrder = 'desc';
   tempFilter = [];
   @ViewChild(DatatableComponent) table: DatatableComponent;
-
+  date_displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
+  date: any;
   public rolename: string;
   public userID: string;
   public userProPic: string;
@@ -29,22 +31,24 @@ export class RolesComponent implements OnInit {
 
   @Input('modalDefault') modalDefault: any;
 
-  constructor(private router: Router) { 
-    this.data=[
-      { rolename: 'Admin', dataaccess: 'Team', updatedby: 'Mithun', updateddt: '20-Dec-2018 20:12' },
-      { rolename: 'Operator', dataaccess: 'Team', updatedby: 'Raj', updateddt: '20-Dec-2018 20:12' },
-      { rolename: 'Manager', dataaccess: 'Team', updatedby: 'Mithunraj', updateddt: '20-Dec-2018 20:12' },
-      { rolename: 'Admin', dataaccess: 'Team', updatedby: 'Mithun', updateddt: '20-Dec-2018 20:12' },
-      { rolename: 'Operator', dataaccess: 'Team', updatedby: 'Raj', updateddt: '20-Dec-2018 20:12' },
-      { rolename: 'Manager', dataaccess: 'Team', updatedby: 'Mithunraj', updateddt: '20-Dec-2018 20:12' },
-      { rolename: 'Admin', dataaccess: 'Team', updatedby: 'Mithun', updateddt: '20-Dec-2018 20:12' },
-      { rolename: 'Operator', dataaccess: 'Team', updatedby: 'Mithunraj', updateddt: '20-Dec-2018 20:12' },
-      { rolename: 'Manager', dataaccess: 'Team', updatedby: 'Raj', updateddt: '20-Dec-2018 20:12' },
-      { rolename: 'Admin', dataaccess: 'Team', updatedby: 'Mithun', updateddt: '20-Dec-2018 20:12' },
-      { rolename: 'Operator', dataaccess: 'Team', updatedby: 'Mithunraj', updateddt: '20-Dec-2018 20:12' },
-      { rolename: 'Manager', dataaccess: 'Team', updatedby: 'Raj', updateddt: '20-Dec-2018 20:12' }
+  constructor(private router: Router) {
+    this.data = [
+      { rolename: 'Admin', dataaccess: 'Team', updatedby: 'Mithun' },
+      { rolename: 'Operator', dataaccess: 'Team', updatedby: 'Raj' },
+      { rolename: 'Manager', dataaccess: 'Team', updatedby: 'Mithunraj' },
+      { rolename: 'Admin', dataaccess: 'Team', updatedby: 'Mithun' },
+      { rolename: 'Operator', dataaccess: 'Team', updatedby: 'Raj' },
+      { rolename: 'Manager', dataaccess: 'Team', updatedby: 'Mithunraj' },
+      { rolename: 'Admin', dataaccess: 'Team', updatedby: 'Mithun' },
+      { rolename: 'Operator', dataaccess: 'Team', updatedby: 'Mithunraj' },
+      { rolename: 'Manager', dataaccess: 'Team', updatedby: 'Raj' },
+      { rolename: 'Admin', dataaccess: 'Team', updatedby: 'Mithun' },
+      { rolename: 'Operator', dataaccess: 'Team', updatedby: 'Mithunraj' },
+      { rolename: 'Manager', dataaccess: 'Team', updatedby: 'Raj' }
     ];
     this.tempFilter = this.data;
+    this.date = new Date();
+
   }
 
   ngOnInit() {

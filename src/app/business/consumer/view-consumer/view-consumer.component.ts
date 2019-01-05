@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppConstant } from '../../../app.constants';
 
 @Component({
   selector: 'app-view-consumer',
@@ -6,8 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./view-consumer.component.scss']
 })
 export class ViewConsumerComponent implements OnInit {
+  date_displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
+  date: any;
 
-  constructor() { }
+  constructor() {
+    this.date = new Date();
+  }
 
   ngOnInit() {
   }

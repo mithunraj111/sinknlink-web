@@ -15,26 +15,29 @@ export class DealerComponent implements OnInit {
   tempFilter = [];
   buttontext: string;
   @ViewChild(DatatableComponent) table: DatatableComponent;
-
+  date_displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
+  date: Date;
   constructor(private router: Router) {
     this.data = [
-      { dealername: 'Pavithra', mobileno: '9874563210', id: '89769', city: 'Salem', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' },
-      { dealername: 'Pavithra', mobileno: '9876543210', id: '89769', city: 'Salem', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' },
-      { dealername: 'Pavithra', mobileno: '9876543210', id: '89769', city: 'Salem', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' },
-      { dealername: 'pavi', mobileno: '9517538426', id: '89765', city: 'Salem', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' },
-      { dealername: 'pavi', mobileno: '9874563210', id: '89765', city: 'Salem', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' },
-      { dealername: 'pavi', mobileno: '9876543210', id: '89765', city: 'Salem', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' },
-      { dealername: 'pavi', mobileno: '9517538426', id: '89765', city: 'Salem', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' },
-      { dealername: 'pavi', mobileno: '9874563210', id: '89765', city: 'Salem', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' },
-      { dealername: 'Pavithra', mobileno: '9876543210', id: '89765', city: 'Salem', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' },
-      { dealername: 'Pavithra', mobileno: '9874563210', id: '89765', city: 'Salem', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' },
-      { dealername: 'Pavithra', mobileno: '9876543210', id: '89765', city: 'Salem', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' },
-      { dealername: 'Pavithra', mobileno: '9876543210', id: '89765', city: 'Salem', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' },
-      { dealername: 'Pavithra', mobileno: '9517538426', id: '89765', city: 'Salem', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' },
-      { dealername: 'pavi', mobileno: '9517538426', id: '89765', city: 'Salem', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' },
-      { dealername: 'pavi', mobileno: '9517538426', id: '89765', city: 'Salem', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' }
+      { dealername: 'Pavithra', mobileno: '9874563210', id: '89769', city: 'Salem', updatedby: 'Admin' },
+      { dealername: 'Pavithra', mobileno: '9876543210', id: '89769', city: 'Salem', updatedby: 'Admin' },
+      { dealername: 'Pavithra', mobileno: '9876543210', id: '89769', city: 'Salem', updatedby: 'Admin' },
+      { dealername: 'pavi', mobileno: '9517538426', id: '89765', city: 'Salem', updatedby: 'Admin' },
+      { dealername: 'pavi', mobileno: '9874563210', id: '89765', city: 'Salem', updatedby: 'Admin' },
+      { dealername: 'pavi', mobileno: '9876543210', id: '89765', city: 'Salem', updatedby: 'Admin' },
+      { dealername: 'pavi', mobileno: '9517538426', id: '89765', city: 'Salem', updatedby: 'Admin' },
+      { dealername: 'pavi', mobileno: '9874563210', id: '89765', city: 'Salem', updatedby: 'Admin' },
+      { dealername: 'Pavithra', mobileno: '9876543210', id: '89765', city: 'Salem', updatedby: 'Admin' },
+      { dealername: 'Pavithra', mobileno: '9874563210', id: '89765', city: 'Salem', updatedby: 'Admin' },
+      { dealername: 'Pavithra', mobileno: '9876543210', id: '89765', city: 'Salem', updatedby: 'Admin' },
+      { dealername: 'Pavithra', mobileno: '9876543210', id: '89765', city: 'Salem', updatedby: 'Admin' },
+      { dealername: 'Pavithra', mobileno: '9517538426', id: '89765', city: 'Salem', updatedby: 'Admin' },
+      { dealername: 'pavi', mobileno: '9517538426', id: '89765', city: 'Salem', updatedby: 'Admin' },
+      { dealername: 'pavi', mobileno: '9517538426', id: '89765', city: 'Salem', updatedby: 'Admin' }
     ];
     this.tempFilter = this.data;
+    this.date = new Date();
+
   }
 
   ngOnInit() {

@@ -16,7 +16,8 @@ export class UsersComponent implements OnInit {
   });
   hasBaseDropZoneOver = false;
   hasAnotherDropZoneOver = false;
-
+  date_displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
+  date: any;
   public data: any;
   // public rowsOnPage = 10;
   public filterQuery = '';
@@ -31,22 +32,23 @@ export class UsersComponent implements OnInit {
 
   constructor(private router: Router) {
     this.data = [
-      { fullname: 'Mithunraj', mobileno: '9874563210', role: 'Admin', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' },
-      { fullname: 'Raj', mobileno: '9876543210', role: 'Manager', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' },
-      { fullname: 'Mithunraj', mobileno: '9517538426', role: 'Operator', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' },
-      { fullname: 'Mithunraj', mobileno: '9874563210', role: 'Admin', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' },
-      { fullname: 'Raj', mobileno: '9876543210', role: 'Manager', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' },
-      { fullname: 'Mithunraj', mobileno: '9517538426', role: 'Operator', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' },
-      { fullname: 'Mithunraj', mobileno: '9874563210', role: 'Admin', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' },
-      { fullname: 'Raj', mobileno: '9876543210', role: 'Manager', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' },
-      { fullname: 'Mithunraj', mobileno: '9874563210', role: 'Admin', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' },
-      { fullname: 'Raj', mobileno: '9876543210', role: 'Manager', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' },
-      { fullname: 'Raj', mobileno: '9876543210', role: 'Manager', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' },
-      { fullname: 'Mithunraj', mobileno: '9517538426', role: 'Operator', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' },
-      { fullname: 'Mithunraj', mobileno: '9517538426', role: 'Operator', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' },
-      { fullname: 'Mithunraj', mobileno: '9517538426', role: 'Operator', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' }
+      { fullname: 'Mithunraj', mobileno: '9874563210', role: 'Admin', updatedby: 'Admin' },
+      { fullname: 'Raj', mobileno: '9876543210', role: 'Manager', updatedby: 'Admin' },
+      { fullname: 'Mithunraj', mobileno: '9517538426', role: 'Operator', updatedby: 'Admin' },
+      { fullname: 'Mithunraj', mobileno: '9874563210', role: 'Admin', updatedby: 'Admin' },
+      { fullname: 'Raj', mobileno: '9876543210', role: 'Manager', updatedby: 'Admin' },
+      { fullname: 'Mithunraj', mobileno: '9517538426', role: 'Operator', updatedby: 'Admin' },
+      { fullname: 'Mithunraj', mobileno: '9874563210', role: 'Admin', updatedby: 'Admin' },
+      { fullname: 'Raj', mobileno: '9876543210', role: 'Manager', updatedby: 'Admin' },
+      { fullname: 'Mithunraj', mobileno: '9874563210', role: 'Admin', updatedby: 'Admin' },
+      { fullname: 'Raj', mobileno: '9876543210', role: 'Manager', updatedby: 'Admin' },
+      { fullname: 'Raj', mobileno: '9876543210', role: 'Manager', updatedby: 'Admin' },
+      { fullname: 'Mithunraj', mobileno: '9517538426', role: 'Operator', updatedby: 'Admin' },
+      { fullname: 'Mithunraj', mobileno: '9517538426', role: 'Operator', updatedby: 'Admin' },
+      { fullname: 'Mithunraj', mobileno: '9517538426', role: 'Operator', updatedby: 'Admin' }
     ];
     this.tempFilter = this.data;
+    this.date = new Date();
 
   }
 

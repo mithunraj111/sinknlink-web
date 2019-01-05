@@ -32,7 +32,7 @@
         <ngx-datatable-column name="Updated By" [flexGrow]="1">
           <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
             <span class="updatename">{{data[rowIndex].updatedby}}</span>
-            <span class="updatedate"> {{data[rowIndex].updateddt}}</span>
+            <span class="updatedate">{{date|date:date_displayformat}}</span>
           </ng-template>
         </ngx-datatable-column>
         <ngx-datatable-column prop="status" name="Status" [sortable]="false" [flexGrow]="0.5" [cellClass]="'text-center'">

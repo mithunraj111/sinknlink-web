@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
+import { AppConstant } from '../../app.constants';
 
 @Component({
   selector: 'app-events',
@@ -17,26 +18,29 @@ export class EventsComponent implements OnInit {
   showDetails = false;
   showRegion = false;
   tempFilter = [];
-
-  constructor(private router: Router) { 
-    this.data=[
-      { eventname: 'Moksha events', date: '16-Dec-2018', city:'Chennai', updatedby:'Admin', updateddt:'12-Nov-2018 11:00' },
-      { eventname: 'Hackathon on UAV', date: '16-Dec-2018', city:'Chennai', updatedby:'Admin', updateddt:'12-Nov-2018 11:00' },
-      { eventname: 'TEDxGCT 2018', date: '16-Dec-2018' ,city:'Chennai', updatedby:'Admin', updateddt:'12-Nov-2018 11:00' },
-      { eventname: 'ARM Workshop', date: '16-Dec-2018' , city:'Chennai', updatedby:'Admin', updateddt:'12-Nov-2018 11:00' },
-      { eventname: 'Moksha events', date: '16-Dec-2018', city:'Chennai', updatedby:'Admin', updateddt:'12-Nov-2018 11:00' },
-      { eventname: 'Hackathon on UAV', date: '16-Dec-2018', city:'Chennai', updatedby:'Admin', updateddt:'12-Nov-2018 11:00' },
-      { eventname: 'TEDxGCT 2018', date: '16-Dec-2018' ,city:'Chennai', updatedby:'Admin', updateddt:'12-Nov-2018 11:00' },
-      { eventname: 'TEDxGCT 2018', date: '16-Dec-2018' ,city:'Chennai', updatedby:'Admin', updateddt:'12-Nov-2018 11:00' },
-      { eventname: 'TEDxGCT 2018', date: '16-Dec-2018' ,city:'Chennai', updatedby:'Admin', updateddt:'12-Nov-2018 11:00' },
-      { eventname: 'ARM Workshop', date: '16-Dec-2018' , city:'Chennai', updatedby:'Admin', updateddt:'12-Nov-2018 11:00' },
-      { eventname: 'Mechovation 2k18-19', date: '16-Dec-2018' , city:'Chennai', updatedby:'Admin', updateddt:'12-Nov-2018 11:00' }
+  date_displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
+  date: Date;
+  constructor(private router: Router) {
+    this.data = [
+      { eventname: 'Moksha events', date: '16-Dec-2018', city: 'Chennai', updatedby: 'Admin' },
+      { eventname: 'Hackathon on UAV', date: '16-Dec-2018', city: 'Chennai', updatedby: 'Admin' },
+      { eventname: 'TEDxGCT 2018', date: '16-Dec-2018', city: 'Chennai', updatedby: 'Admin' },
+      { eventname: 'ARM Workshop', date: '16-Dec-2018', city: 'Chennai', updatedby: 'Admin' },
+      { eventname: 'Moksha events', date: '16-Dec-2018', city: 'Chennai', updatedby: 'Admin' },
+      { eventname: 'Hackathon on UAV', date: '16-Dec-2018', city: 'Chennai', updatedby: 'Admin' },
+      { eventname: 'TEDxGCT 2018', date: '16-Dec-2018', city: 'Chennai', updatedby: 'Admin' },
+      { eventname: 'TEDxGCT 2018', date: '16-Dec-2018', city: 'Chennai', updatedby: 'Admin' },
+      { eventname: 'TEDxGCT 2018', date: '16-Dec-2018', city: 'Chennai', updatedby: 'Admin' },
+      { eventname: 'ARM Workshop', date: '16-Dec-2018', city: 'Chennai', updatedby: 'Admin' },
+      { eventname: 'Mechovation 2k18-19', date: '16-Dec-2018', city: 'Chennai', updatedby: 'Admin' }
     ];
     this.tempFilter = this.data;
+    this.date = new Date();
+
   }
 
-  ngOnInit() {}
- openMyModal(event) {
+  ngOnInit() { }
+  openMyModal(event) {
     document.querySelector('#' + event).classList.add('md-show');
   }
   closeMyModal(event) {

@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ViewEncapsulation, ViewChild } from '@angular
 import { Router } from '@angular/router';
 import { ModalDismissReasons, NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
+import { AppConstant } from '../../app.constants';
 
 @Component({
   selector: 'app-donations',
@@ -23,24 +24,26 @@ export class DonationsComponent implements OnInit {
   public userProPic: string;
   openResult: { ariaLabelledBy: string; };
   tempFilter = [];
-
+  date_displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
+  date: Date;
   constructor(private router: Router,
     public modalService: NgbModal, public activeModal: NgbActiveModal) {
     console.log(activeModal)
     this.data = [
-      { charity: 'AARP Foundation', startdate: '02-Nov-2018', enddate: '02-Dec-2018', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' },
-      { charity: 'AWP Foundation', startdate: '02-Nov-2018', enddate: '02-Dec-2018', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' },
-      { charity: 'AWP Foundation', startdate: '02-Nov-2018', enddate: '02-Dec-2018', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' },
-      { charity: 'AWP Foundation', startdate: '02-Nov-2018', enddate: '02-Dec-2018', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' },
-      { charity: 'AWP Foundation', startdate: '02-Nov-2018', enddate: '02-Dec-2018', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' },
-      { charity: 'AWP Foundation', startdate: '02-Nov-2018', enddate: '02-Dec-2018', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' },
-      { charity: 'AWP Foundation', startdate: '02-Nov-2018', enddate: '02-Dec-2018', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' },
-      { charity: 'AWP Foundation', startdate: '02-Nov-2018', enddate: '02-Dec-2018', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' },
-      { charity: 'AWP Foundation', startdate: '02-Nov-2018', enddate: '02-Dec-2018', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' },
-      { charity: 'AWP Foundation', startdate: '02-Nov-2018', enddate: '02-Dec-2018', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' },
-      { charity: 'AWP Foundation', startdate: '02-Nov-2018', enddate: '02-Dec-2018', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' }
+      { charity: 'AARP Foundation', startdate: '02-Nov-2018', enddate: '02-Dec-2018', updatedby: 'Admin' },
+      { charity: 'AWP Foundation', startdate: '02-Nov-2018', enddate: '02-Dec-2018', updatedby: 'Admin' },
+      { charity: 'AWP Foundation', startdate: '02-Nov-2018', enddate: '02-Dec-2018', updatedby: 'Admin' },
+      { charity: 'AWP Foundation', startdate: '02-Nov-2018', enddate: '02-Dec-2018', updatedby: 'Admin' },
+      { charity: 'AWP Foundation', startdate: '02-Nov-2018', enddate: '02-Dec-2018', updatedby: 'Admin' },
+      { charity: 'AWP Foundation', startdate: '02-Nov-2018', enddate: '02-Dec-2018', updatedby: 'Admin' },
+      { charity: 'AWP Foundation', startdate: '02-Nov-2018', enddate: '02-Dec-2018', updatedby: 'Admin' },
+      { charity: 'AWP Foundation', startdate: '02-Nov-2018', enddate: '02-Dec-2018', updatedby: 'Admin' },
+      { charity: 'AWP Foundation', startdate: '02-Nov-2018', enddate: '02-Dec-2018', updatedby: 'Admin' },
+      { charity: 'AWP Foundation', startdate: '02-Nov-2018', enddate: '02-Dec-2018', updatedby: 'Admin' },
+      { charity: 'AWP Foundation', startdate: '02-Nov-2018', enddate: '02-Dec-2018', updatedby: 'Admin', }
     ];
     this.tempFilter = this.data;
+    this.date = new Date();
   }
 
   ngOnInit() {

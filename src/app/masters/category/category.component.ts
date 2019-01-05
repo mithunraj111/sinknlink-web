@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, ViewChild } from '@angular/core';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
+import { AppConstant } from '../../app.constants';
 
 @Component({
   selector: 'app-category',
@@ -18,7 +19,8 @@ export class CategoryComponent implements OnInit {
   formTitle: string;
   formSubmit: string;
   categoryPage: any;
-  
+  date_displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
+  date: any;
   constructor() {
     this.data = [
       { businesscategory: 'Nike', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
@@ -37,6 +39,8 @@ export class CategoryComponent implements OnInit {
       { businesscategory: 'Piece', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' }
     ];
     this.tempFilter = this.data;
+    this.date = new Date();
+
   }
 
   ngOnInit() {
@@ -44,19 +48,19 @@ export class CategoryComponent implements OnInit {
   openMyModal(event) {
     document.querySelector('#' + event).classList.add('md-show');
   }
-  addCategory(){
-    this.categorydtls= {};
-    this.formTitle= 'Add Business Category';
-    this.formSubmit= 'Save';
+  addCategory() {
+    this.categorydtls = {};
+    this.formTitle = 'Add Business Category';
+    this.formSubmit = 'Save';
     this.openMyModal('categorymodal');
-    this.categoryPage =false;
+    this.categoryPage = false;
   }
-  editCategory(data){
-    this.categorydtls= data;
-    this.formTitle= 'Edit Business Category';
-    this.formSubmit= 'Update';
+  editCategory(data) {
+    this.categorydtls = data;
+    this.formTitle = 'Edit Business Category';
+    this.formSubmit = 'Update';
     this.openMyModal('categorymodal');
-     this.categoryPage =true;
+    this.categoryPage = true;
   }
   search(event) {
     const val = event.target.value.toLowerCase();
