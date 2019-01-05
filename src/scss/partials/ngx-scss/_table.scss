@@ -173,7 +173,7 @@ ngx-datatable.data-table {
 
 .expandable {
   datatable-body-cell + datatable-body-cell, datatable-header-cell + datatable-header-cell {
-    width: calc(calc(100% - 50px) / 5) !important;
+    width: calc(calc(100% - 50px) / 5);
   }
   .datatable-body-row, .datatable-header-inner {
     width: 100% !important;

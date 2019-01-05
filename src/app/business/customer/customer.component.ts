@@ -31,52 +31,100 @@ import { Router } from '@angular/router';
   templateUrl: './customer.component.html',
   styleUrls: ['./customer.component.scss']
 })
-  export class CustomerComponent implements OnInit {
+export class CustomerComponent implements OnInit {
+  public expanded: any = {};
+  public data: any;
+  tempFilter = [];
+  @ViewChild(DatatableComponent) table: DatatableComponent;
 
- public data: any;
- tempFilter = [];
- @ViewChild(DatatableComponent) table: DatatableComponent;
+  constructor(private router: Router) {
+    this.data = [
+      {
+        businessname: 'testetstetstetstetstetetstetstet', mobileno: '9874563210', membershipid: '123', city: 'Salem',
+        updatedby: 'Admin', updateddt: '02-Dec-2018 15:00'
+      },
+      {
+        businessname: 'Pavithra', mobileno: '9876543210', membershipid: '89769', city: 'Salem',
+        updatedby: 'Admin', updateddt: '02-Dec-2018 15:00'
+      },
+      {
+        businessname: 'Pavithra', mobileno: '9876543210', membershipid: '89769', city: 'Salem',
+        updatedby: 'Admin', updateddt: '02-Dec-2018 15:00'
+      },
+      {
+        businessname: 'pavi', mobileno: '9517538426', membershipid: '89765', city: 'Salem',
+        updatedby: 'Admin', updateddt: '02-Dec-2018 15:00'
+      },
+      {
+        businessname: 'pavi', mobileno: '9874563210', membershipid: '89765', city: 'Salem',
+        updatedby: 'Admin', updateddt: '02-Dec-2018 15:00'
+      },
+      {
+        businessname: 'pavi', mobileno: '9876543210', membershipid: '89765', city: 'Salem',
+        updatedby: 'Admin', updateddt: '02-Dec-2018 15:00'
+      },
+      {
+        businessname: 'pavi', mobileno: '9517538426', membershipid: '89765', city: 'Salem',
+        updatedby: 'Admin', updateddt: '02-Dec-2018 15:00'
+      },
+      {
+        businessname: 'pavi', mobileno: '9874563210', membershipid: '89765', city: 'Salem',
+        updatedby: 'Admin', updateddt: '02-Dec-2018 15:00'
+      },
+      {
+        businessname: 'Pavithra', mobileno: '9876543210', membershipid: '89765', city: 'Salem',
+        updatedby: 'Admin', updateddt: '02-Dec-2018 15:00'
+      },
+      {
+        businessname: 'Pavithra', mobileno: '9874563210', membershipid: '89765', city: 'Salem',
+        updatedby: 'Admin', updateddt: '02-Dec-2018 15:00'
+      },
+      {
+        businessname: 'Pavithra', mobileno: '9876543210', membershipid: '89765', city: 'Salem',
+        updatedby: 'Admin', updateddt: '02-Dec-2018 15:00'
+      },
+      {
+        businessname: 'Pavithra', mobileno: '9876543210', membershipid: '89765', city: 'Salem',
+        updatedby: 'Admin', updateddt: '02-Dec-2018 15:00'
+      },
+      {
+        businessname: 'Pavithra', mobileno: '9517538426', membershipid: '89765', city: 'Salem',
+        updatedby: 'Admin', updateddt: '02-Dec-2018 15:00'
+      },
+      {
+        businessname: 'pavi', mobileno: '9517538426', membershipid: '89765', city: 'Salem',
+        updatedby: 'Admin', updateddt: '02-Dec-2018 15:00'
+      },
+      {
+        businessname: 'pavi', mobileno: '9517538426', membershipid: '89765', city: 'Salem',
+        updatedby: 'Admin', updateddt: '02-Dec-2018 15:00'
+      }
+    ];
+    this.tempFilter = this.data;
+  }
 
- constructor(private router: Router) {
-   this.data = [
-     { businessname: 'Pavithra', mobileno: '9874563210', membershipid: '89769', city: 'Salem', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' },
-     { businessname: 'Pavithra', mobileno: '9876543210', membershipid: '89769', city: 'Salem', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' },
-     { businessname: 'Pavithra', mobileno: '9876543210', membershipid: '89769', city: 'Salem', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' },
-     { businessname: 'pavi', mobileno: '9517538426', membershipid: '89765', city: 'Salem', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' },
-     { businessname: 'pavi', mobileno: '9874563210', membershipid: '89765', city: 'Salem', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' },
-     { businessname: 'pavi', mobileno: '9876543210', membershipid: '89765', city: 'Salem', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' },
-     { businessname: 'pavi', mobileno: '9517538426', membershipid: '89765', city: 'Salem', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' },
-     { businessname: 'pavi', mobileno: '9874563210', membershipid: '89765', city: 'Salem', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' },
-     { businessname: 'Pavithra', mobileno: '9876543210', membershipid: '89765', city: 'Salem', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' },
-     { businessname: 'Pavithra', mobileno: '9874563210', membershipid: '89765', city: 'Salem', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' },
-     { businessname: 'Pavithra', mobileno: '9876543210', membershipid: '89765', city: 'Salem', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' },
-     { businessname: 'Pavithra', mobileno: '9876543210', membershipid: '89765', city: 'Salem', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' },
-     { businessname: 'Pavithra', mobileno: '9517538426', membershipid: '89765', city: 'Salem', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' },
-     { businessname: 'pavi', mobileno: '9517538426', membershipid: '89765', city: 'Salem', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' },
-     { businessname: 'pavi', mobileno: '9517538426', membershipid: '89765', city: 'Salem', updatedby: 'Admin', updateddt: '02-Dec-2018 15:00' }
-   ];
-   this.tempFilter = this.data;
- }
+  ngOnInit() {
+  }
 
- ngOnInit() {
+  addCustomer() {
+    this.router.navigate(['business/customers/create']);
+  }
+  editCustomer(data) {
+    this.router.navigate(['business/customers/create']);
+  }
+  getRowHeight(row) {
+    return row.height;
+  }
+  // search(event) {
+  //   const val = event.target.value.toLowerCase();
+  //   const temp = this.tempFilter.filter(item => {
+  //     for (const key in item) {
+  //       if (("" + item[key]).toLocaleLowerCase().includes(val)) {
+  //         return ("" + item[key]).toLocaleLowerCase().includes(val);
+  //       }
+  //     }
+  //   });
+  //   this.data = temp;
+  //   this.table.offset = 0;
+  // }
  }
-
- addCustomer() {
-  this.router.navigate(['business/customers/create']);
- }
- editCustomer(data) {
-  this.router.navigate(['business/customers/create']);
-}
- search(event) {
-   const val = event.target.value.toLowerCase();
-   const temp = this.tempFilter.filter(item => {
-     for (let key in item) {
-       if (("" + item[key]).toLocaleLowerCase().includes(val)) {
-         return ("" + item[key]).toLocaleLowerCase().includes(val);
-       }
-     }
-   });
-   this.data = temp;
-   this.table.offset = 0;
- }
-}

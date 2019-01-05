@@ -229,7 +229,15 @@ textarea {
         box-shadow: none;
     }
 }
+.datatable-header-cell[title="Status"]{
+    text-align: center;
+    max-width: 100%;
+}
 
+.datatable-header-cell[title="Action"]{
+    text-align: center;
+    max-width: 100%;
+}
 .table-header{
     .table{
         tr{
@@ -257,6 +265,7 @@ textarea {
             font-family: 'Montserrat', sans-serif;
             font-weight: 500;
             vertical-align: middle;
+           
             &:first-child{
                 padding-left: 5px;
             }    
@@ -276,14 +285,18 @@ textarea {
             .datatable-header-cell{
                 border: 0px solid #d3d5d8;
                 color: #4b5056;
-                padding: 0px 10px;
+                padding: 0px 10px 0 0;
                 font-family: 'Montserrat', sans-serif;
                 font-weight: 600;
                 font-size: 13px;
+                width:100%;
+
                 &:first-child{
-                 padding-left: 5px;
+                 padding-left: 12px;
             }
-            
+            .datatable-header-cell-label {
+                padding: 0.75rem 5px .75rem 3px;
+            }    
         }
     }
 }
@@ -294,20 +307,28 @@ textarea {
     // }
         .datatable-body-row{
             border-bottom:1px solid #d3d5d8;
-                .datatable-body-cell{
-                    border: 0px solid #d3d5d8;
-                    font-size: 13px;
-                    color: #67757c;
-                    padding: 3px 10px;
-                    font-family: 'Montserrat', sans-serif;
-                    font-weight: 500;
-                    display: inline-block;
-                    vertical-align: top;
-                    line-height: 31px;
-                    &:first-child{
-                        padding-left: 5px;
+            .datatable-body-cell{
+                border: 0px solid #d3d5d8;
+                font-size: 13px;
+                color: #67757c;
+                padding: 3px 10px;
+                font-family: 'Poppins', sans-serif;
+                font-weight: 400;
+                display: inline-block;
+                vertical-align: top;
+                width:100%;
+                line-height: 31px;
+
+            &:first-child{
+                 padding-left: 5px;
             }
-       }
+            .datatable-body-cell-label{
+                span{
+                    line-height: normal;
+                    display: block;
+                }
+            }
+        }
         
     }
        
@@ -793,6 +814,9 @@ button{
         overflow: auto;
         height: 62vh !important;
     }
+     .card-block {
+        padding: 0px 5px 0px 15px;
+     }
 }
 .addlocation{
     .form-group{
@@ -866,82 +890,11 @@ button{
         }
     }
 }
-// #pcoded{
-//     &[vertical-nav-type="offcanvas"] {
-//         .table-header{
-//             .data-table{
-//                 .datatable-header{
-//                     width: 100% !important;
-//                     .datatable-header-inner{
-//                         width: 100% !important;
-//                         .datatable-header-cell{
-//                             width: 100% !important;
-//                             padding: 0px 4px !important;
-//                             line-height: 0.7 !important;
-//                             .sort-btn{
-//                                 display: none;
-//                             }
-//                             .datatable-header-cell-label{
-//                                 padding: 0.75rem 0.75rem !important;
-//                             }
-//                         }
-//                     }
-//                 }
-//                 .datatable-body{
-//                     width: 100% !important;
-//                     .datatable-row-wrapper{
-//                         width: 100% !important;
-//                         .datatable-body-row{
-//                             width: 100% !important;
-//                             .datatable-body-cell{
-//                                 width: 100% !important;
-//                             }
-//                         }
-//                     }
-//                 }
-//             }
-//         }
-//     }
-// }
-// .user-table{
-//     .datatable-body-cell:nth-child(5), .datatable-header-cell:nth-child(5), .datatable-body-cell:nth-child(6), .datatable-header-cell:nth-child(6){
-//         text-align: center;
-//     }
-// }
-// .roles-table{
-//     .datatable-body-cell:nth-child(4), .datatable-header-cell:nth-child(4), .datatable-body-cell:nth-child(5), .datatable-header-cell:nth-child(5){
-//         text-align: center;
-//     }
-// }
-// .category-table{
-//     .datatable-body-cell:nth-child(3), .datatable-header-cell:nth-child(3), .datatable-body-cell:nth-child(4), .datatable-header-cell:nth-child(4){
-//         text-align: center;
-//     }
-// }
-// .location-table{
-//     .datatable-body-cell:nth-child(6), .datatable-header-cell:nth-child(6), .datatable-body-cell:nth-child(7), .datatable-header-cell:nth-child(7){
-//         text-align: center;
-//     }
-// }
-// .event-table{
-//     .datatable-body-cell:nth-child(6), .datatable-header-cell:nth-child(6), .datatable-body-cell:nth-child(5), .datatable-header-cell:nth-child(5){
-//         text-align: center;
-//     }
-// }
-// .donation-table{
-//     .datatable-body-cell:nth-child(6), .datatable-header-cell:nth-child(6), .datatable-body-cell:nth-child(5), .datatable-header-cell:nth-child(5){
-//         text-align: center;
-//     }
-// }
-// .vip-number-table{
-//     .datatable-body-cell:nth-child(4), .datatable-header-cell:nth-child(4), .datatable-body-cell:nth-child(5), .datatable-header-cell:nth-child(5){
-//         text-align: center;
-//     }
-// }
+
 .floating-alert{
     .alert{
        margin-right: 33rem;
-       margin-top: 50px;
+       margin-top: -5px;
     //    border:none;
        font-size:14px;
        padding:12px 32px;
@@ -976,7 +929,10 @@ button{
             color:#fff;
         }
     }
-   
+    .pcoded[theme-layout="vertical"] .pcoded-header[pcoded-header-position="fixed"] {
+        position: fixed;
+        z-index: 8;
+     }
      select.form-control:not([size]):not([multiple]){
         height: 38px !important;
     }
@@ -997,21 +953,4 @@ button{
     .fa{
         cursor:pointer;
     }
-    .datatable-header-cell[title="Status"]{
-        text-align: center;
-        padding: 0 !important;
-        .datatable-header-cell-label {
-            padding: .75rem 30px .75rem 2.75rem;
-        }
-    }
 
-    .datatable-header-cell[title="Action"]{
-        text-align: center;
-        padding: 0 !important;
-        .datatable-header-cell-label {
-            padding: .75rem 30px .75rem 2.75rem;
-        }
-    }
-    .ng2-tag-input__text-input[_ngcontent-c20]{
-        font-size:13px;
-    }
