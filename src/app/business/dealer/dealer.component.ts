@@ -44,11 +44,11 @@ export class DealerComponent implements OnInit {
   }
 
   addDealer() {
-    this.router.navigate(['business/dealer/business-details']);
+    this.router.navigate(['business/dealer/create']);
     this.buttontext = AppConstant.BUTTON_TXT.SAVE;
   }
   editDealers(data) {
-    this.router.navigate(['business/dealer/business-details/edit/:id' + 1]);
+    this.router.navigate(['business/dealer/edit/:id' + 1]);
     this.buttontext = AppConstant.BUTTON_TXT.UPDATE;
   }
   search(event) {

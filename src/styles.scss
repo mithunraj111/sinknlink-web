@@ -731,12 +731,6 @@ button{
 // fixed header //
 .fixedheader{
          display:inline;
-    .fixedsearch{
-        right: 150px;
-    }
-    .fixedbutton{
-        right: 10px;
-    }
     .pos-fixed{
         width:77%;
         max-width: 100%;
@@ -783,15 +777,6 @@ button{
                 padding:0;
             }
         }
-    }
-}
-.no-data {
-    position: absolute;
-    top: 80%;
-    left: 37%;
-    z-index: 1;
-    h5{
-        color: #c8c9cb;
     }
 }
 .fixed-table-header{
@@ -870,7 +855,6 @@ button{
         cursor: pointer;
         background: transparent;
         .fa-close{
-            // border: 1px solid black;
             border-radius: 50%;
             width: 25px;
             height: 25px;
@@ -880,22 +864,10 @@ button{
         }
     }
 }
-.customerlist{
-    .table-header{
-        .data-table datatable-header-cell.sortable:before{
-            right:4px;
-        }
-        .data-table datatable-header-cell.sortable:after{
-            right:-1px;
-        }
-    }
-}
-
 .floating-alert{
     .alert{
        margin-right: 33rem;
        margin-top: -5px;
-    //    border:none;
        font-size:14px;
        padding:12px 32px;
    }
@@ -923,59 +895,71 @@ button{
         font-size:15px;
     }
     .close{
-            margin-top:0px;
-            font-size:18px;
-            margin-left:22px;
-            color:#fff;
-        }
+        margin-top:0px;
+        font-size:18px;
+        margin-left:22px;
+        color:#fff;
     }
-    .pcoded[theme-layout="vertical"] .pcoded-header[pcoded-header-position="fixed"] {
-        position: fixed;
-        z-index: 8;
-     }
-     select.form-control:not([size]):not([multiple]){
-        height: 38px !important;
+}
+.pcoded[theme-layout="vertical"] .pcoded-header[pcoded-header-position="fixed"] {
+    position: fixed;
+    z-index: 8;
     }
-    .tag-chips {
-        .ng2-tag-input{
-            width: 90%;
-            line-height: 24px;
-            border: 1px solid #dfe8f1 !important;
-            box-shadow: inset 1px 1px 3px #f6f6f6;
-        }
+    select.form-control:not([size]):not([multiple]){
+    height: 38px !important;
+}
+.tag-chips {
+    .ng2-tag-input{
+        width: 90%;
+        line-height: 24px;
+        border: 1px solid #dfe8f1 !important;
+        box-shadow: inset 1px 1px 3px #f6f6f6;
     }
-    .btn-inverse-active{
-        background-color: #435769 !important;
-        border-color: #435769;
-        box-shadow: none;
-        color: #fff;
+}
+.btn-inverse-active{
+    background-color: #435769 !important;
+    border-color: #435769;
+    box-shadow: none;
+    color: #fff;
+}
+.fa{
+    cursor:pointer;
+}
+.dealer-tab-menu{
+    .nav-tabs{
+        top: 130px;
     }
-    .fa{
-        cursor:pointer;
-    }
-.business-tab {
+}
+.business-tab{
     .tab-content{
         position: static !important;
         display: contents !important;
     }
-}
-.business-tab{
     .nav-tabs{
         position: fixed;
         bottom: 75px;
-        right: 25px;
+        right: 18px;
+        min-width: 169px !important;
         li{
-            // color: #ffffff;
-            border-right: 4px solid #435769;
+            background-color: #435769;
+            // background: transparent;
+            border-radius: 5px 5px 0px 0px;
         }
     }
     .nav-item{
         .nav-link{
-            margin: 0px 0px 2px 0px !important;
-            background:transparent;
+            margin: 0px 0px 5px 0px !important;
+            // background:transparent;
+            border: 1px solid #435769;
+            color: #fff;
+            &:hover{
+                background: #2f3d4a;
+                border-right: none !important;
+            }
         }
         .nav-link.active{
             background: #03ADED;
+            border: 1px solid #03ADED;
             color: #fff;
         }
     } 
