@@ -238,6 +238,14 @@ textarea {
     text-align: center;
     max-width: 100%;
 }
+// .datatable-header-cell[title="Mobile No"]{
+//     text-align: right;
+//     max-width: 100%;
+//     .datatable-header-cell-label[title="Mobile No"]{
+//         padding-right:10px;
+//     }
+// }
+
 .table-header{
     .table{
         tr{
@@ -324,12 +332,11 @@ textarea {
             }
             .datatable-body-cell-label{
                 span{
-                    line-height: normal;
                     display: block;
                 }
             }
         }
-        
+       
     }
        
 }    

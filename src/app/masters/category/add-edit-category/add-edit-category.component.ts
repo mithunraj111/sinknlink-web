@@ -19,8 +19,5 @@ export class AddEditCategoryComponent implements OnInit {
   }
   save() {
     this.bootstrapAlertService.showError('Error Occured');
-    // this.bootstrapAlertService.showInfo('This is an info!');    
-    //  this.bootstrapAlertService.showWarning('This is a warning!');    
-    // this.bootstrapAlertService.showSucccess('Saved Successfully');
-  }
+    }
 }

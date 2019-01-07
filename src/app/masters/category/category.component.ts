@@ -11,15 +11,11 @@ export class CategoryComponent implements OnInit {
   @ViewChild(DatatableComponent) table: DatatableComponent;
   @Output() categorydtls: {};
   public data: any;
-  public rowsOnPage = 8;
-  public filterQuery = '';
-  public sortBy = '';
-  public sortOrder = 'desc';
   tempFilter = [];
   formTitle: string;
   formSubmit: string;
   categoryPage: any;
-  date_displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
+  displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   date: any;
   constructor() {
     this.data = [
@@ -47,6 +43,9 @@ export class CategoryComponent implements OnInit {
   }
   openMyModal(event) {
     document.querySelector('#' + event).classList.add('md-show');
+  }
+  getRowHeight(row) {
+    return row.height;
   }
   addCategory() {
     this.categorydtls = {};

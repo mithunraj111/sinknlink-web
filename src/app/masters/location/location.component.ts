@@ -10,10 +10,6 @@ import { AppConstant } from '../../app.constants';
 })
 export class LocationComponent implements OnInit {
   public data: any;
-  public filterQuery = '';
-  public sortBy = '';
-  public sortOrder = 'desc';
-  public userProPic: string;
   showDetails = false;
   showRegion = false;
   @Output() locationdtls: any = {};
@@ -22,7 +18,7 @@ export class LocationComponent implements OnInit {
   formSubmit: string;
   locationPage: boolean;
   tempFilter = [];
-  date_displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
+  displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   date: any;
   constructor() {
     this.data = [
@@ -49,8 +45,8 @@ export class LocationComponent implements OnInit {
   openMyModal(event) {
     document.querySelector('#' + event).classList.add('md-show');
   }
-  closeMyModal(event) {
-    ((event.target.parentElement.parentElement).parentElement).classList.remove('md-show');
+  getRowHeight(row) {
+    return row.height;
   }
   addLocation() {
     this.locationdtls = {};

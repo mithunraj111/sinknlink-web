@@ -1,3 +1,66 @@
+<!-- <div class="fixedheader">
+  <div class="header-title pos-fixed">
+    <div class="row">
+      <div class="col-md-6">
+        <h2>Role</h2>
+        <p *ngIf="roleid" class="m-b-0">ID: 875643</p>
+      </div>
+      <div class="col-md-6  col-sm-6 save-button text-right p-r-30">
+        <button type="button" placement="bottom" ngbTooltip=" Go back" routerLink="/masters/roles" class="btn pull-right btn-inverse btn-primary waves-effect"><i
+            class="fa fa-arrow-circle-left"></i></button>
+        <button type="button" placement="bottom" ngbTooltip="Click to {{buttontext}} role" (click)="submit()" class="btn pull-right btn-primary waves-effect m-r-10 text-capitalize">{{buttontext}}</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4 col-sm-4 p-l-30">
+        <div class="form-group required row role-input">
+          <label class="col-md-4 p-r-0 col-form-label"><b>Role Name</b></label>
+          <div class="col-md-8 p-l-0 p-r-0">
+            <input type="text" class="header-search form-control input-sm full-data-search" placeholder="Role Name">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-4">
+        <div class="form-group required row">
+          <label class="col-sm-3 p-l-0 p-r-0 col-form-label"><b>Data Access</b></label>
+          <div class="col-sm-9 p-l-0 p-r-0"><select class="form-control" name="select">
+              <option value="opt1">Select Data Access</option>
+              <option value="opt2">All</option>
+              <option value="opt3">Own</option>
+              <option value="opt3">Team</option>
+            </select></div>
+        </div>
+      </div>
+      <div *ngIf="roleid" class="col-md-2 col-sm-2 text-center">
+        <div class="form-group row">
+          <label class="col-sm-6 p-r-0 col-form-label text-right"><b>Status</b><small>*</small></label>
+          <div class="col-sm-4 p-l-0 p-r-0">
+            <ui-switch class="js-small" color="#03ADED" switchColor="#fff" size="small" checked></ui-switch>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="header-block m-t-90">
+  <div class="card table-header fixed-table-header">
+    <div class="card-body">
+      <ngx-datatable #addrolestable class="table table-bordered data-table roles-table" [columns]="columns" [columnMode]="'flex'"
+        [headerHeight]="40" [rowHeight]="40" [rows]='data' [scrollbarV]="true" [scrollbarH]="true">
+        <ngx-datatable-column prop="screenname" name="Screen Name" [flexGrow]="1"></ngx-datatable-column>
+        <ngx-datatable-column prop="availablepermission" name="Available Permissions" [flexGrow]="1"></ngx-datatable-column>
+        <ngx-datatable-column prop="assignedpermission" name="Assigned Permissions" [flexGrow]="1"></ngx-datatable-column>
+        <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="1" [cellClass]="'text-center'">
+          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+            <a placement="bottom" ngbTooltip="Click to edit role " class="m-r-15 crm-action-edit text-primary" (click)="openMyModal('effect-7')"><i
+                class="fa fa-pencil"></i></a>
+          </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
+    </div>
+  </div>
+</div> -->
+
 <div class="fixedheader">
   <div class="header-title pos-fixed">
     <div class="row">
@@ -42,72 +105,43 @@
     </div>
   </div>
 </div>
-<!-- Add edit Roles Datatable -->
 <div class="header-block m-t-90">
-  <div class="card table-header fixed-table-header">
-    <div class="card-body">
-      <ngx-datatable #table class="table table-bordered data-table roles-table" [columns]="columns" [columnMode]="'flex'"
-        [headerHeight]="40" [rowHeight]="40" [rows]='data' [scrollbarV]="true" [scrollbarH]="true">
-        <ngx-datatable-column prop="screenname" name="Screen Name" [flexGrow]="1"></ngx-datatable-column>
-        <ngx-datatable-column prop="availablepermission" name="Available Permissions" [flexGrow]="1"></ngx-datatable-column>
-        <ngx-datatable-column prop="assignedpermission" name="Assigned Permissions" [flexGrow]="1"></ngx-datatable-column>
-        <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="1" [cellClass]="'text-center'">
-          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-            <a placement="bottom" ngbTooltip="Click to edit role " class="m-r-15 crm-action-edit text-primary" (click)="openMyModal('effect-7')"><i
-                class="fa fa-pencil"></i></a>
+  <div class="table-header fixed-table-header">
+    <app-card [classHeader]="true">
+      <ngx-datatable #roletable class="table data-table expandable" [rows]='data' [columnMode]="'flex'" [headerHeight]="50"
+        [rowHeight]="'auto'" [reorderable]="false">
+        <ngx-datatable-column prop="screenname" name="Screen Name" [resizeable]="false">
+          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+            <span>{{row.screenname}}</span>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column prop="dataaccess" name="Available Permissions" [resizeable]="false">
+          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+            <span>{{row.dataaccess}}</span>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column prop="availablepermission" name="Available Permissions" [resizeable]="false">
+          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+            <span>{{row.availablepermission}}</span>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column prop="assignedpermission" name="Assigned Permissions" [resizeable]="false">
+          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+            <span>{{row.assignedpermission}}</span>
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.5" [cellClass]="'text-center action'">
+          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+            <a placement="bottom" ngbTooltip="Click to edit permissions" class="m-r-15 crm-action-edit text-primary"
+              (click)="openMyModal('effect-7')">
+              <i class="fa fa-pencil"></i></a>
           </ng-template>
         </ngx-datatable-column>
       </ngx-datatable>
-    </div>
+    </app-card>
   </div>
 </div>
-<!-- <div class="card table-header fix-header">
-  <div class="card-body">
-    <div class="table-content crm-table">
-      <div class="project-table">
-        <div class="dt-responsive">
-          <div class="table-responsive">
-            <table class="table addrole-table table-striped table-bordered full-data-table" [mfData]="data" #mf="mfDataTable"
-              [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
-              <thead>
-                <tr>
-                  <th>
-                    <mfDefaultSorter by="screenname">Screen Names</mfDefaultSorter>
-                  </th>
-                  <th>
-                    <mfDefaultSorter by="availablepermission">Available Permissions</mfDefaultSorter>
-                  </th>
-                  <th>
-                    <mfDefaultSorter by="assignedpermission">Assigned Permissions</mfDefaultSorter>
-                  </th>
-                  <th class="text-center">Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let items of mf.data; let i = index;">
-                  <td>{{items.screenname}}</td>
-                  <td>{{items.availablepermission}}</td>
-                  <td>{{items.assignedpermission}}</td>
-                  <td class="action-icon text-center">
-                    <a placement="top" ngbTooltip="Click to add permissions" (click)="openMyModal('effect-7')" class="m-r-15 crm-action-edit text-primary"><i
-                      class="fa fa-pencil"></i></a>
-                  </td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr class="page-nav">
-                  <td colspan="12">
-                    <mfBootstrapPaginator class="pagination-main f-right"></mfBootstrapPaginator>
-                  </td>
-                </tr>
-              </tfoot>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div> -->
 <!-- Add Contact Start Model -->
 <div class="modal-size">
   <app-modal-animation [modalID]="'effect-7'" [modalClass]="'md-effect-7'">
