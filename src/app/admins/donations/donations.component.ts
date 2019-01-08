@@ -24,7 +24,8 @@ export class DonationsComponent implements OnInit {
   public userProPic: string;
   openResult: { ariaLabelledBy: string; };
   tempFilter = [];
-  date_displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
+  displaydtimeformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
+  displaydateformat = AppConstant.API_CONFIG.ANG_DATE.displaydate;
   date: Date;
   constructor(private router: Router,
     public modalService: NgbModal, public activeModal: NgbActiveModal) {

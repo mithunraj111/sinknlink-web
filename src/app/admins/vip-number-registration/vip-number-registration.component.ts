@@ -15,7 +15,7 @@ export class VipNumberRegistrationComponent implements OnInit {
 
   constructor(private router: Router) {
     this.data = [
-      { membershipid: 'a111', state: 'Available', price: '100' },
+      { membershipid: 'a111', state: 'Available', price: '10000000' },
       { membershipid: 'b222', state: 'Available', price: '200' },
       { membershipid: 'c333', state: 'Blocked', price: '100' },
       { membershipid: 'd444', state: 'Blocked', price: '100' },

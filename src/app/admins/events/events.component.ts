@@ -18,7 +18,8 @@ export class EventsComponent implements OnInit {
   showDetails = false;
   showRegion = false;
   tempFilter = [];
-  date_displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
+  displaydtimeformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
+  displaydateformat = AppConstant.API_CONFIG.ANG_DATE.displaydate;
   date: Date;
   constructor(private router: Router) {
     this.data = [

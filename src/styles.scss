@@ -238,14 +238,23 @@ textarea {
     text-align: center;
     max-width: 100%;
 }
-// .datatable-header-cell[title="Mobile No"]{
-//     text-align: right;
-//     max-width: 100%;
-//     .datatable-header-cell-label[title="Mobile No"]{
-//         padding-right:10px;
-//     }
-// }
-
+.datatable-header-cell[title="Date"]{
+    text-align: center;
+}
+.datatable-header-cell[title="Start Date"]{
+    text-align: center;
+}
+.datatable-header-cell[title="End Date"]{
+    text-align: center;
+}
+.datatable-header-cell[title="Price"]{
+    text-align: right;
+}
+.table-right-align{
+    .datatable-header-cell-label{
+        padding-right: 10px;
+    }
+}
 .table-header{
     .table{
         tr{
@@ -303,23 +312,20 @@ textarea {
                  padding-left: 12px;
             }
             .datatable-header-cell-label {
-                padding: 0.75rem 5px .75rem 3px;
+                padding: 0.75rem 15px .75rem 3px;
             }    
         }
     }
 }
 
 .datatable-body{
-    // .datatable-row-wrapper {
-    //     padding-left:4px;
-    // }
         .datatable-body-row{
             border-bottom:1px solid #d3d5d8;
             .datatable-body-cell{
                 border: 0px solid #d3d5d8;
                 font-size: 13px;
                 color: #67757c;
-                padding: 3px 10px;
+                padding: 3px 13px;
                 font-family: 'Poppins', sans-serif;
                 font-weight: 400;
                 display: inline-block;

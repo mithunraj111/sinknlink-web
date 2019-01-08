@@ -5,7 +5,7 @@
         <h2>VIP Membership Id</h2>
         <p>VIP membership id status can be checked and blocked.</p>
       </div>
-      <div class="col-md-5 col-sm-6">
+      <div class="col-md-5 col-sm-5">
         <div class="text-right">
           <label>Search:
             <input type="search" (keyup)='search($event)' class="header-search form-control input-sm full-data-search"
@@ -13,12 +13,12 @@
           </label>
         </div>
       </div>
-      <div class="col-md-1 col-sm-1 p-r-30">
+      <div class="col-md-1 col-sm-1 p-r-0 p-l-0">
         <button type="button" placement="bottom" ngbTooltip="Click to block a VIP number" class="btn btn-primary waves-effect"
           (click)='allocateVipNumber()'><i class="fa fa-minus-circle m-r-5"></i> Block
         </button>
       </div>
-      <div class="col-md-1 col-sm-1 p-r-30">
+      <div class="col-md-1 col-sm-1 p-r-0">
         <button type="button" placement="bottom" ngbTooltip="Click to add" class="btn btn-primary waves-effect" (click)='addVipRegistration()'><i
             class="fa fa-plus-circle m-r-5"></i> New
         </button>
@@ -27,29 +27,42 @@
   </div>
 </div>
 <div class="header-block m-t-60">
-  <div class="card table-header fixed-table-header">
-    <div class="card-body">
-      <ngx-datatable #table class="table table-bordered data-table vip-number-table" [columns]="columns" [columnMode]="'flex'"
-        [headerHeight]="40" [rowHeight]="40" [rows]='data' [scrollbarV]="true" [scrollbarH]="true">
-        <ngx-datatable-column prop="membershipid" name="Membership Id" [flexGrow]="1"></ngx-datatable-column>
-        <ngx-datatable-column prop="state" name="State" [flexGrow]="1"></ngx-datatable-column>
-        <ngx-datatable-column prop="price" name="Price" [flexGrow]="1"></ngx-datatable-column>
-        <ngx-datatable-column prop="status" name="Status" [sortable]="false" [flexGrow]="0.75" [cellClass]="'text-center'">
-          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-            <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change the status" color="#03ADED"
+  <div class="table-header fixed-table-header">
+    <app-card [classHeader]="true">
+      <ngx-datatable #vipnoregtable class="table data-table expandable" [rows]='data' [columnMode]="'flex'"
+        [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false">
+        <ngx-datatable-column prop="membershipid" name="Membership Id" [resizeable]="false">
+          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+            <span>{{row.membershipid}}</span>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column prop="state" name="State" [resizeable]="false">
+          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+            <span>{{row.state}}</span>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column prop="price" name="Price" [resizeable]="false" [cellClass]="'text-right p-r-15'">
+          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+            <span>{{row.price|currency : 'INR' : true}}</span>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Status" [sortable]="false" [flexGrow]="0.5" [cellClass]="'text-center status'">
+          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+            <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="#03ADED"
               switchColor="#fff" size="small" checked></ui-switch>
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="1" [cellClass]="'text-center'">
-          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-            <a placement="bottom" ngbTooltip="Click to edit" class="m-r-15 crm-action-edit text-primary" (click)='editVipRegistration()'>
+        <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.5" [cellClass]="'text-center action'">
+          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+            <a placement="bottom" ngbTooltip="Click to edit registration details" class="m-r-15 crm-action-edit text-primary"
+              (click)='editVipRegistration()'>
               <i class="fa fa-pencil"></i></a>
-            <a placement="bottom" ngbTooltip="Click to delete" class="crm-action-delete text-danger">
+            <a placement="bottom" ngbTooltip="Click to delete registration details" class="crm-action-delete text-danger">
               <i class="fa fa-trash"></i></a>
           </ng-template>
         </ngx-datatable-column>
       </ngx-datatable>
-    </div>
+    </app-card>
   </div>
 </div>
 <!-- Modal popup window -->
