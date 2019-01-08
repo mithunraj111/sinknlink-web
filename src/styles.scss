@@ -934,7 +934,7 @@ button{
 }
 .dealer-tab-menu{
     .nav-tabs{
-        top: 130px;
+        top: 44%;
     }
 }
 .business-tab{
@@ -945,28 +945,24 @@ button{
     .nav-tabs{
         position: fixed;
         bottom: 75px;
-        right: 18px;
-        min-width: 169px !important;
+        right: 0px;
+        min-width: 185px !important;
         li{
-            background-color: #435769;
-            // background: transparent;
-            border-radius: 5px 5px 0px 0px;
+            border-radius: 50px 0px 0px 50px;
         }
     }
     .nav-item{
         .nav-link{
             margin: 0px 0px 5px 0px !important;
-            // background:transparent;
             border: 1px solid #435769;
-            color: #fff;
+            border-radius: 50px 0px 0px 50px;
             &:hover{
-                background: #2f3d4a;
                 border-right: none !important;
             }
         }
         .nav-link.active{
-            background: #03ADED;
-            border: 1px solid #03ADED;
+            background: #cccccc;
+            border-radius: 50px 0px 0px 50px;
             color: #fff;
         }
     } 
