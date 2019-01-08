@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppConstant } from '../../../../app.constants';
 
 @Component({
   selector: 'app-customer-branches',
@@ -7,7 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CustomerBranchesComponent implements OnInit {
   data: any[];
-
+  datedisplayformat = AppConstant.API_CONFIG.ANG_DATE.displaydate;
+  date: any;
   constructor() { 
     this.data=[
       { name: 'Mithun', memberid: '001', location: 'Chennai', payment: '10000', duedate: '02/12/2018' },
@@ -16,6 +18,8 @@ export class CustomerBranchesComponent implements OnInit {
       { name: 'Myth', memberid: '004', location: 'velore', payment: '7600', duedate: '23/12/2018' },
       { name: 'Glaurang', memberid: '005', location: 'Tanjore', payment: '9800', duedate: '07/12/2018' }
     ];
+    this.date = new Date();
+
   }
 
   ngOnInit() {

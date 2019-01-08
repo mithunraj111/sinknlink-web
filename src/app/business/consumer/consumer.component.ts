@@ -11,25 +11,25 @@ export class ConsumerComponent implements OnInit {
   data: any[];
   tempFilter = [];
   @ViewChild(DatatableComponent) table: DatatableComponent;
-  date_displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
+  datedisplayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   date: any;
   constructor() {
     this.data = [
-      { fullname: 'Pavithra', mobileno: '9874563210', membershipid: '89769', city: 'Salem' },
-      { fullname: 'Pavithra', mobileno: '9876543210', membershipid: '89769', city: 'Salem' },
-      { fullname: 'Pavithra', mobileno: '9876543210', membershipid: '89769', city: 'Salem' },
-      { fullname: 'pavi', mobileno: '9517538426', membershipid: '89765', city: 'Salem' },
-      { fullname: 'pavi', mobileno: '9874563210', membershipid: '89765', city: 'Salem' },
-      { fullname: 'pavi', mobileno: '9876543210', membershipid: '89765', city: 'Salem' },
-      { fullname: 'pavi', mobileno: '9517538426', membershipid: '89765', city: 'Salem' },
-      { fullname: 'pavi', mobileno: '9874563210', membershipid: '89765', city: 'Salem' },
-      { fullname: 'Pavithra', mobileno: '9876543210', membershipid: '89765', city: 'Salem' },
-      { fullname: 'Pavithra', mobileno: '9874563210', membershipid: '89765', city: 'Salem' },
-      { fullname: 'Pavithra', mobileno: '9876543210', membershipid: '89765', city: 'Salem' },
-      { fullname: 'Pavithra', mobileno: '9876543210', membershipid: '89765', city: 'Salem' },
-      { fullname: 'Pavithra', mobileno: '9517538426', membershipid: '89765', city: 'Salem' },
-      { fullname: 'pavi', mobileno: '9517538426', membershipid: '89765', city: 'Salem' },
-      { fullname: 'pavi', mobileno: '9517538426', membershipid: '89765', city: 'Salem' }
+      { fullname: 'Pavithra', mobileno: '9874563210', membershipid: '89769', city: 'Salem', updatedby: 'Admin' },
+      { fullname: 'Pavithra', mobileno: '9876543210', membershipid: '89769', city: 'Salem', updatedby: 'Admin' },
+      { fullname: 'Pavithra', mobileno: '9876543210', membershipid: '89769', city: 'Salem', updatedby: 'Admin' },
+      { fullname: 'pavi', mobileno: '9517538426', membershipid: '89765', city: 'Salem', updatedby: 'Admin' },
+      { fullname: 'pavi', mobileno: '9874563210', membershipid: '89765', city: 'Salem', updatedby: 'Admin' },
+      { fullname: 'pavi', mobileno: '9876543210', membershipid: '89765', city: 'Salem', updatedby: 'Admin' },
+      { fullname: 'pavi', mobileno: '9517538426', membershipid: '89765', city: 'Salem', updatedby: 'Admin' },
+      { fullname: 'pavi', mobileno: '9874563210', membershipid: '89765', city: 'Salem', updatedby: 'Admin' },
+      { fullname: 'Pavithra', mobileno: '9876543210', membershipid: '89765', city: 'Salem', updatedby: 'Admin' },
+      { fullname: 'Pavithra', mobileno: '9874563210', membershipid: '89765', city: 'Salem', updatedby: 'Admin' },
+      { fullname: 'Pavithra', mobileno: '9876543210', membershipid: '89765', city: 'Salem', updatedby: 'Admin' },
+      { fullname: 'Pavithra', mobileno: '9876543210', membershipid: '89765', city: 'Salem', updatedby: 'Admin' },
+      { fullname: 'Pavithra', mobileno: '9517538426', membershipid: '89765', city: 'Salem', updatedby: 'Admin' },
+      { fullname: 'pavi', mobileno: '9517538426', membershipid: '89765', city: 'Salem', updatedby: 'Admin' },
+      { fullname: 'pavi', mobileno: '9517538426', membershipid: '89765', city: 'Salem', updatedby: 'Admin' }
     ];
     this.tempFilter = this.data;
     this.date = new Date();
@@ -49,5 +49,8 @@ export class ConsumerComponent implements OnInit {
     });
     this.data = temp;
     this.table.offset = 0;
+  }
+  getRowHeight(row) {
+    return row.height;
   }
 }

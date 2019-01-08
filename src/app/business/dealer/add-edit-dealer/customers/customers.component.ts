@@ -9,11 +9,11 @@ import { AppConstant } from '../../../../app.constants';
 })
 export class CustomersComponent implements OnInit {
   public data: any;
-  date_displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydate;
+  datedisplayformat = AppConstant.API_CONFIG.ANG_DATE.displaydate;
   date: any;
   constructor(private router: Router) {
     this.data = [
-      { businessname: 'Pavi', memberid: '001', location: 'Chennai', payment: '10000' },
+      { businessname: 'Pavi', memberid: '001', location: 'Chennai', payment: '10000', },
       { businessname: 'Pavithra', memberid: '002', location: 'Coimbatore', payment: '5000' },
       { businessname: 'Pavithra', memberid: '003', location: 'Madurai', payment: '8000' },
       { businessname: 'Pavithra', memberid: '004', location: 'velore', payment: '7600' },

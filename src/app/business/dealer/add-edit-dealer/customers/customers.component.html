@@ -8,32 +8,44 @@
     <div class="col-md-6 col-sm-6">
       <div class="text-right p-r-35">
         <div>[Last Commission paid on]</div>
-        <div>{{date|date:date_displayformat}}</div>
+        <div>{{date|date:datedisplayformat}}</div>
       </div>
     </div>
   </div>
 </div>
-<div class="customerlist">
-  <div class="card table-header fixed-table-header">
-    <div class="card-body">
-      <ngx-datatable #table class="table table-bordered data-table location-table" [columnMode]="'flex'" [headerHeight]="40"
-        [rowHeight]="40" [rows]='data' [scrollbarV]="true" [scrollbarH]="true">
-        <ngx-datatable-column prop="businessname" name=" Business Name" [flexGrow]="1" [width]="300"></ngx-datatable-column>
-        <ngx-datatable-column prop="memberid" name="Membership ID" [flexGrow]="1"></ngx-datatable-column>
-        <ngx-datatable-column prop="location" name="Location" [flexGrow]="0.75"></ngx-datatable-column>
-        <ngx-datatable-column prop="enrolldate" name="Enroll Date" [flexGrow]="0.75">
-          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-            <span>{{date|date:date_displayformat}}</span>
+<div class="header-block">
+  <div class="table-header fixed-table-header">
+    <app-card [classHeader]="true">
+      <ngx-datatable #customerdltable class="table data-table expandable" [rows]='data' [columnMode]="'flex'"
+        [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false">
+        <!-- Row Detail Template -->
+        <ngx-datatable-column prop="businessname" name=" Business Name" [resizeable]="false">
+          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+            <span>{{row.businessname}}</span>
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column prop="payment" name="Payment" [flexGrow]="0.75"></ngx-datatable-column>
-        <ngx-datatable-column prop="status" name="Status" [sortable]="false" [flexGrow]="0.75" [cellClass]="'text-center'">
-          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-            <ui-switch class="js-small" placement="top" ngbTooltip="Click to change status" color="#03ADED" switchColor="#fff"
-              size="small" checked></ui-switch>
+        <ngx-datatable-column prop="memberid" name="Membership ID" [resizeable]="false">
+          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+            <span>{{row.memberid}}</span>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column prop="location" name=" Location" [resizeable]="false">
+          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+            <span>{{row.location}}</span>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Enroll Date" [resizeable]="false">
+          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+            <span>{{date|date:datedisplayformat}}</span>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Status" [sortable]="false" [flexGrow]="0.5" [cellClass]="'text-center status'">
+          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+            <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="#03ADED"
+              switchColor="#fff" size="small" checked></ui-switch>
           </ng-template>
         </ngx-datatable-column>
       </ngx-datatable>
-    </div>
+    </app-card>
   </div>
 </div>

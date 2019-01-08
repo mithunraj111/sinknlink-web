@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
+import { AppConstant } from '../../../../app.constants';
 
 @Component({
   selector: 'app-customer-gigs',
@@ -10,7 +11,8 @@ export class CustomerGigsComponent implements OnInit {
   data: any[];
   tempFilter = [];
   @ViewChild(DatatableComponent) table: DatatableComponent;
-
+  datedisplayformat = AppConstant.API_CONFIG.ANG_DATE.displaydate;
+  date: any;
   constructor() { 
     this.data=[
       { postname: 'Mithun', posttype: '001', postedby: 'Admin', posteddt: '02/12/2018' },
@@ -20,6 +22,7 @@ export class CustomerGigsComponent implements OnInit {
       { postname: 'Glaurang', posttype: '005', postedby: 'Admin', posteddt: '07/12/2018' }
     ];
     this.tempFilter = this.data;
+    this.date = new Date();
   }
 
   ngOnInit() {

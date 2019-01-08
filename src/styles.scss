@@ -238,6 +238,12 @@ textarea {
     text-align: center;
     max-width: 100%;
 }
+.datatable-header-cell[title="Due Date"]{
+    text-align: center;
+}
+.datatable-header-cell[title="Expires at"]{
+    text-align: center;
+}
 .datatable-header-cell[title="Date"]{
     text-align: center;
 }

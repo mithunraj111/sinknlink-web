@@ -15,7 +15,7 @@ export class DealerComponent implements OnInit {
   tempFilter = [];
   buttontext: string;
   @ViewChild(DatatableComponent) table: DatatableComponent;
-  date_displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
+  datedisplayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   date: Date;
   constructor(private router: Router) {
     this.data = [

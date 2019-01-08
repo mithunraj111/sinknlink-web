@@ -1,9 +1,9 @@
 <div class="fixedheader">
   <div class="header-title pos-fixed">
     <div class="row">
-      <div class="col-md-6 col-sm-6">
-        <h2>Consumer</h2>
-        <p>Create or Update the Consumer details</p>
+      <div class="col-md-5 col-sm-5">
+        <h2>Consumers</h2>
+        <p>Create or Update The Consumer Details</p>
       </div>
       <div class="col-md-6 col-sm-6">
         <div class="text-right">
@@ -17,33 +17,52 @@
   </div>
 </div>
 <div class="header-block m-t-60">
-  <div class="card table-header fixed-table-header">
-    <div class="card-body">
-      <ngx-datatable #table class="table table-bordered data-table location-table" [columnMode]="'flex'" [headerHeight]="40"
-        [rowHeight]="40" [rows]='data' [scrollbarV]="true" [scrollbarH]="true">
-        <ngx-datatable-column prop="fullname" name="Full Name" [flexGrow]="1"></ngx-datatable-column>
-        <ngx-datatable-column prop="mobileno" name="Mobile No" [flexGrow]="1"></ngx-datatable-column>
-        <ngx-datatable-column prop="membershipid" name="Membersip ID" [flexGrow]="1"></ngx-datatable-column>
-        <ngx-datatable-column prop="city" name="City" [flexGrow]="1"></ngx-datatable-column>
-        <ngx-datatable-column prop="lastlogin" name='Last Login' [flexGrow]="1">
-            <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-              <span>{{date|date:date_displayformat}}</span>
-              </ng-template>
+  <div class="table-header fixed-table-header">
+    <app-card [classHeader]="true">
+      <ngx-datatable #consumertable class="table data-table expandable" [rows]='data' [columnMode]="'flex'"
+        [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false">
+        <!-- Row Detail Template -->
+        <ngx-datatable-column prop="fullname" name="Full Name" [resizeable]="false">
+          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+            <span>{{row.fullname}}</span>
+          </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column prop="status" name="Status" [sortable]="false" [flexGrow]="1" [cellClass]="'text-center'">
-          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+        <ngx-datatable-column prop="mobileno" name="Mobile No" [resizeable]="false">
+          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+            <span>{{row.mobileno}}</span>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column prop="membershipid" name="Membership ID" [resizeable]="false">
+          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+            <span>{{row.membershipid}}</span>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column prop="city" name="City" [resizeable]="false">
+          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+            <span>{{row.city}}</span>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column prop="updatedby" name="Updated By" [resizeable]="false">
+          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+            <span class="updatename">{{row.updatedby}}</span>
+            <span class="updatedate"> {{date|date:datedisplayformat}}</span>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Status" [sortable]="false" [flexGrow]="0.5" [cellClass]="'text-center status'">
+          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
             <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="#03ADED"
               switchColor="#fff" size="small" checked></ui-switch>
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="1" [cellClass]="'text-center'">
-          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-            <a placement="bottom" ngbTooltip="Click to view Consumer details" class="m-r-15 m-l-5 crm-action-edit text-primary"
+        <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.5" [cellClass]="'text-center action'">
+          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+
+            <a placement="bottom" ngbTooltip="Click to view Consumer" class="m-r-15 m-l-5 crm-action-edit text-primary"
               [routerLink]="['/business/consumers/view']">
               <i class="fa fa-eye"></i></a>
           </ng-template>
         </ngx-datatable-column>
       </ngx-datatable>
-    </div>
+    </app-card>
   </div>
 </div>

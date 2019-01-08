@@ -7,11 +7,11 @@
                 </div>
                 <div class="form-group row">
                     <label class="col-md-3 col-sm-6 col-form-label text-right">Next due</label>
-                    <span class="col-form-label col-md-9 col-sm-6">02-Dec-2018</span>
+                    <span class="col-form-label col-md-9 col-sm-6">{{date|date:displayformat}}</span>
                 </div>
                 <div class="form-group row">
                     <label class="col-md-3 col-sm-6 col-form-label text-right">Last paid</label>
-                    <span class="col-form-label col-md-9 col-sm-6 f-16">02-Dec-2018</span>
+                    <span class="col-form-label col-md-9 col-sm-6 f-16">{{date|date:displaydateformat}}</span>
                 </div>
                 <div class="form group row">
                     <label class="col-md-3 col-sm-6 col-form-label text-right">Subscription Amount</label>
@@ -61,10 +61,10 @@
 </div>
 <div class="header-title m-t-30 mb-3">
     <div class="row">
-        <div class="col-md-5 col-sm-6">
+        <div class="col-md-6 col-sm-6">
             <h3 class="f-18 text-primary m-l-15">History</h3>
         </div>
-        <div class="col-md-4 col-sm-6 mr-4">
+        <div class="col-md-4 col-sm-6">
             <div class="text-right">
                 <label>Search:
                     <input type="search" class="header-search form-control input-sm full-data-search" placeholder="Search for here"
@@ -72,36 +72,54 @@
                 </label>
             </div>
         </div>
-        <div class="col-md-1 col-sm-1 ml-2">
+        <div class="col-md-2 col-sm-1  p-r-0">
             <button type="button" placement="bottom" ngbTooltip="Click to add payment" class="btn btn-primary waves-effect"
-                (click)='viewpayment()'><i class="fa fa-plus-circle m-r-5"></i> Add Payment
+                (click)='addpayment()'><i class="fa fa-plus-circle m-r-5"></i> New
             </button>
         </div>
     </div>
 </div>
-<div class="card table-header fixed-table-header">
-    <div class="card-body">
-        <ngx-datatable #table class="table table-bordered data-table location-table" [columnMode]="'flex'"
-            [headerHeight]="40" [rowHeight]="40" [rows]='data' [scrollbarV]="true" [scrollbarH]="true">
-            <ngx-datatable-column prop="paiddt" name="Paid Date" [flexGrow]="1"></ngx-datatable-column>
-            <ngx-datatable-column prop="amount" name="Amount" [flexGrow]="1"></ngx-datatable-column>
-            <ngx-datatable-column prop="reference" name="Reference#" [flexGrow]="1"></ngx-datatable-column>
-            <ngx-datatable-column prop="mode" name="Mode" [flexGrow]="1"></ngx-datatable-column>
-            <ngx-datatable-column prop="status" name="Status" [sortable]="false" [flexGrow]="0.5">
-                <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-                    <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="#03ADED"
-                        switchColor="#fff" size="small" checked></ui-switch>
+<!-- <div class="header-block m-t-60"> -->
+<div class="table-header fixed-table-header">
+    <app-card [classHeader]="true">
+        <ngx-datatable #customerpaymttable class="table data-table expandable" [rows]='data' [columnMode]="'flex'"
+            [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false">
+            <!-- Row Detail Template -->
+            <ngx-datatable-column prop="paiddt" name="Paid Date" [resizeable]="false">
+                <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                    <span>{{date|date:datedisplayformat}}</span>
                 </ng-template>
             </ngx-datatable-column>
-            <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.5">
+            <ngx-datatable-column prop="amount" name="Amount" [resizeable]="false">
+                <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                    <span>{{row.amount}}</span>
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column prop="reference" name="Reference#" [resizeable]="false">
+                <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                    <span>{{row.reference}}</span>
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column prop="mode" name="Mode" [resizeable]="false" >
+                <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                    <span>{{row.mode}}</span>
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column prop="status" name="Status" [sortable]="false" [flexGrow]="0.5" [cellClass]="'text-center status'">
                 <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-                    <a placement="bottom" ngbTooltip="Click to edit branch details" class="m-r-15 crm-action-edit text-primary text-center"
+                    <span>{{row.status}}</span>
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.5" [cellClass]="'text-center action'">
+                <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                    <a placement="bottom" ngbTooltip="Click to view payment" class="m-r-15 crm-action-edit text-primary text-center"
                         (click)="viewpayment();"><i class="fa fa-eye"></i></a>
                 </ng-template>
             </ngx-datatable-column>
         </ngx-datatable>
-    </div>
+    </app-card>
 </div>
+<!-- </div> -->
 <!-- View Payment Details PopUp Starts -->
 <div class="modal-size">
     <app-modal-animation [modalID]="'customerpaymentmodal'" [modalClass]="'md-effect-7'">
@@ -133,12 +151,15 @@
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3 col-sm-6 col-form-label">Status</label>
-                        <span class="col-form-label col-md-9 col-sm-6">Active</span>
+                        <div class="col-md-9 col-sm-6">
+                            <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="#03ADED"
+                                switchColor="#fff" size="small" checked></ui-switch>
+                        </div>
                     </div>
                     <div *ngIf="locationPage" class="form-group "></div>
                 </div>
             </div>
-            <button (click)="closeMyModal($event)" type="button" placement="top" ngbTooltip="Click to save payment details"
+            <button *ngIf="showPayment" (click)="closeMyModal($event)" type="button" placement="top" ngbTooltip="Click to save payment details"
                 (click)="save()" class="btn pull-right btn-primary waves-effect m-b-10">Save</button>
         </div>
         <button (click)="closeMyModal($event)" aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>

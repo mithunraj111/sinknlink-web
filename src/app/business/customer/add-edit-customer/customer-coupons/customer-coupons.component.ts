@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
+import { AppConstant } from '../../../../app.constants';
 
 @Component({
   selector: 'app-customer-coupons',
@@ -10,7 +11,8 @@ export class CustomerCouponsComponent implements OnInit {
   data: any[];
   tempFilter = [];
   @ViewChild(DatatableComponent) table: DatatableComponent;
-
+  datedisplayformat = AppConstant.API_CONFIG.ANG_DATE.displaydate;
+  date: any;
   constructor() {
     this.data = [
       { couponcode: 'Asp159', numberofcoupons: '100', claimed: 'Yes', expiresat: '02/12/2018' },
@@ -20,6 +22,8 @@ export class CustomerCouponsComponent implements OnInit {
       { couponcode: 'TTO052', numberofcoupons: '92', claimed: 'Yes', expiresat: '07/12/2018' }
     ];
     this.tempFilter = this.data;
+    this.date = new Date();
+
   }
 
   ngOnInit() {

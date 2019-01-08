@@ -1,28 +1,52 @@
+<!-- <div class="fixedheader m-t-60 mb-3"> -->
 <div class="header-title m-t-60 mb-3">
   <h3 class="f-18 text-primary m-l-15">Branches</h3>
 </div>
-<div class="card table-header fixed-table-header">
-  <div class="card-body">
-    <ngx-datatable #table class="table table-bordered data-table location-table" [columnMode]="'flex'" [headerHeight]="40"
-      [rowHeight]="40" [rows]='data' [scrollbarV]="true" [scrollbarH]="true">
-      <ngx-datatable-column prop="name" name="Name" [flexGrow]="1"></ngx-datatable-column>
-      <ngx-datatable-column prop="memberid" name="MemberID" [flexGrow]="1"></ngx-datatable-column>
-      <ngx-datatable-column prop="location" name="Location" [flexGrow]="1"></ngx-datatable-column>
-      <ngx-datatable-column prop="payment" name="Payment" [flexGrow]="1"></ngx-datatable-column>
-      <ngx-datatable-column prop="duedate" name="Due Date" [flexGrow]="1"></ngx-datatable-column>
-      <ngx-datatable-column prop="status" name="Status" [sortable]="false" [flexGrow]="0.75">
-        <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-          <ui-switch class="js-small" placement="bottom" title="Click to change status" color="#03ADED" switchColor="#fff"
-            size="small" checked></ui-switch>
-        </ng-template>
-      </ngx-datatable-column>
-      <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.75">
-        <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-          <a placement="bottom" title="Click to edit branch details" class="m-r-15 crm-action-edit text-primary">
-            <i class="fa fa-eye"></i>
-          </a>
-        </ng-template>
-      </ngx-datatable-column>
-    </ngx-datatable>
+<!-- </div> -->
+<div class="header-block">
+  <div class="table-header fixed-table-header">
+    <app-card [classHeader]="true">
+      <ngx-datatable #branchtable class="table data-table expandable" [rows]='data' [columnMode]="'flex'"
+        [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false">
+        <!-- Row Detail Template -->
+        <ngx-datatable-column prop="name" name="Name" [resizeable]="false">
+          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+            <span>{{row.name}}</span>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column prop="memberid" name="Membership ID" [resizeable]="false">
+          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+            <span>{{row.memberid}}</span>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column prop="location" name="Location" [resizeable]="false">
+          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+            <span>{{row.location}}</span>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column prop="payment" name="Payment" [resizeable]="false">
+          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+            <span>{{row.payment}}</span>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column prop="duedate" name="Due Date" [resizeable]="false" [cellClass]="'text-center'">
+          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+            <span>{{date|date:datedisplayformat}}</span>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Status" [sortable]="false" [flexGrow]="0.5" [cellClass]="'text-center status'">
+          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+            <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="#03ADED"
+              switchColor="#fff" size="small" checked></ui-switch>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.5" [cellClass]="'text-center action'">
+          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+            <a placement="bottom" ngbTooltip="Click to view branch" class="m-r-15 crm-action-edit text-primary text-center"
+                        (click)="viewpayment();"><i class="fa fa-eye"></i></a>
+          </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
+    </app-card>
   </div>
 </div>
