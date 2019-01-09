@@ -41,18 +41,20 @@
             <span>{{row.state}}</span>
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column prop="price" name="Price" [resizeable]="false" [cellClass]="'text-right p-r-15'">
+        <ngx-datatable-column prop="price" name="Price" [resizeable]="false" headerClass="text-right" [cellClass]="'text-right'">
           <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
             <span>{{row.price|currency : 'INR' : true}}</span>
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="Status" [sortable]="false" [flexGrow]="0.5" [cellClass]="'text-center status'">
+        <ngx-datatable-column name="Status" [sortable]="false" [flexGrow]="0.5" headerClass="text-center" [cellClass]="'text-center'"
+          [resizeable]="false">
           <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
             <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="#03ADED"
               switchColor="#fff" size="small" checked></ui-switch>
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.5" [cellClass]="'text-center action'">
+        <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.5" headerClass="text-center" [cellClass]="'text-center'"
+          [resizeable]="false">
           <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
             <a placement="bottom" ngbTooltip="Click to edit registration details" class="m-r-15 crm-action-edit text-primary"
               (click)='editVipRegistration()'>

@@ -1,59 +1,3 @@
-<!-- <div class="fixedheader">
-  <div class="header-title pos-fixed">
-    <div class="row">
-      <div class="col-md-5 col-sm-5">
-        <h2>Dealers</h2>
-        <p>lorem ipsum dolor sit amet, consectetur adipisicing elit-Dealers</p>
-      </div>
-      <div class="col-md-6 col-sm-6">
-        <div class="text-right">
-          <label>Search:
-            <input type="search" class="header-search form-control input-sm full-data-search" placeholder="Search for here"
-              (keyup)='search($event)' placement="bottom" ngbTooltip="Type here to search">
-          </label>
-        </div>
-      </div>
-      <div class="col-md-1 col-sm-1 p-r-30">
-        <button type="button" placement="bottom" ngbTooltip="Click to add dealer" class="btn btn-primary waves-effect"
-          (click)='addDealer()'><i class="fa fa-plus-circle m-r-5"></i> New
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="header-block m-t-60">
-  <div class="card table-header fixed-table-header">
-    <div class="card-body">
-      <ngx-datatable #table class="table table-bordered data-table location-table" [columnMode]="'flex'" [headerHeight]="40"
-        [rowHeight]="40" [rows]='data' [scrollbarV]="true" [scrollbarH]="true">
-        <ngx-datatable-column prop="dealername" name="Dealer Name" [flexGrow]="1"></ngx-datatable-column>
-        <ngx-datatable-column prop="mobileno" name="Mobile No" [flexGrow]="1"></ngx-datatable-column>
-        <ngx-datatable-column prop="id" name="ID" [flexGrow]="1"></ngx-datatable-column>
-        <ngx-datatable-column prop="city" name="City" [flexGrow]="1"></ngx-datatable-column>
-        <ngx-datatable-column name="Updated By" [flexGrow]="1">
-          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-            <span class="updatename">{{data[rowIndex].updatedby}}</span>
-            <span class="updatedate">{{date|date:date_displayformat}}</span>
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column prop="status" name="Status" [sortable]="false" [flexGrow]="0.75" [cellClass]="'text-center'">
-          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-            <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="#03ADED"
-              switchColor="#fff" size="small" checked></ui-switch>
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.75" [cellClass]="'text-center'">
-          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-            <a placement="bottom" ngbTooltip="Click to edit dealer" class="m-r-15 crm-action-edit text-primary" (click)="editDealers()">
-              <i class="fa fa-pencil"></i></a>
-            <a placement="bottom" ngbTooltip="Click to delete dealer" class="crm-action-delete text-danger">
-              <i class="fa fa-trash"></i></a>
-          </ng-template>
-        </ngx-datatable-column>
-      </ngx-datatable>
-    </div>
-  </div>
-</div> -->
 <div class="fixedheader">
   <div class="header-title pos-fixed">
     <div class="row">
@@ -71,7 +15,7 @@
       </div>
       <div class="col-md-1 col-sm-1 p-r-0">
         <button type="button" placement="bottom" ngbTooltip="Click to add dealer" class="btn btn-primary waves-effect"
-        (click)='addDealer()'><i class="fa fa-plus-circle m-r-5"></i> New
+          (click)='addDealer()'><i class="fa fa-plus-circle m-r-5"></i> New
         </button>
       </div>
     </div>
@@ -117,7 +61,7 @@
         </ngx-datatable-column>
         <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.5" [cellClass]="'text-center action'">
           <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-            <a placement="bottom" ngbTooltip="Click to edit dealer" class="m-r-15 crm-action-edit text-primary"  (click)="editDealers()">
+            <a placement="bottom" ngbTooltip="Click to edit dealer" class="m-r-15 crm-action-edit text-primary" (click)="editDealers()">
               <i class="fa fa-pencil"></i></a>
             <a placement="bottom" ngbTooltip="Click to delete dealer" class="crm-action-delete text-danger">
               <i class="fa fa-trash"></i></a>

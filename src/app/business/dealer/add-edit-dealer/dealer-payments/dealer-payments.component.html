@@ -19,12 +19,13 @@
       <ngx-datatable #dealerpaymttable class="table data-table expandable" [rows]='data' [columnMode]="'flex'"
         [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false">
         <!-- Row Detail Template -->
-        <ngx-datatable-column name=" Payment Date" [resizeable]="false">
+        <ngx-datatable-column name=" Payment Date" [resizeable]="false" headerClass="text-center" [cellClass]="'text-center'">
           <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
             <span>{{date|date:datedisplayformat}}</span>
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column prop="amount" name="Amount" [resizeable]="false">
+        <ngx-datatable-column prop="amount" name="Amount" headerClass="text-right" [cellClass]="'text-right'"
+          [resizeable]="false">
           <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
             <span>{{row.amount}}</span>
           </ng-template>
@@ -39,7 +40,8 @@
             <span>{{row.remarks}}</span>
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column prop="status" name="Status" [sortable]="false" [flexGrow]="0.5" [cellClass]="'text-center status'">
+        <ngx-datatable-column prop="status" name="Status" [sortable]="false" [flexGrow]="0.5" headerClass="text-center"
+          [cellClass]="'text-center'" [resizeable]="false">
           <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
             <span>{{row.status}}</span>
           </ng-template>
