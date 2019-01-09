@@ -177,29 +177,11 @@
           </div>
         </div>
         <div class="form-group row required">
-          <label class="col-md-3 col-sm-6 col-form-label text-right">Customer Status</label>
-          <div class="col-md-9 col-sm-6">
-            <select name="select" class="form-control p-1 location-title">
-              <option value="opt1">Active</option>
-              <option value="opt2">Inactive</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-group row required">
           <label class="col-md-3 col-sm-6 col-form-label text-right">Payment Status</label>
           <div class="col-md-9 col-sm-6">
             <select name="select" class="form-control p-1 location-title">
               <option value="opt1">Paid</option>
               <option value="opt2">Due</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-group row required">
-          <label class="col-md-3 col-sm-6 col-form-label text-right">Terms and Conditions</label>
-          <div class="col-md-9 col-sm-6">
-            <select name="select" class="form-control p-1 location-title">
-              <option value="opt1">Agree</option>
-              <option value="opt2">Decline</option>
             </select>
           </div>
         </div>
@@ -220,6 +202,19 @@
               <option value="opt2">Monthly</option>
               <option value="opt3">Yearly</option>
             </select>
+          </div>
+        </div>
+        <div class="form-group row required">
+          <label class="col-md-3 col-sm-6 col-form-label text-right">Customer Status</label>
+          <div class="col-md-9 col-sm-6">
+            <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="#03ADED"
+              switchColor="#fff" size="small" checked></ui-switch>
+          </div>
+        </div>
+        <div class="form-group border-checkbox-section">
+          <div class="border-checkbox-group border-checkbox-group-primary">
+            <input class="border-checkbox" type="checkbox" id="detailst&c">
+            <label class="border-checkbox-label" for="detailst&c">I agree to the <b>Terms and Conditions</b></label>
           </div>
         </div>
       </div>

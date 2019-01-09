@@ -117,7 +117,7 @@
         </ngx-datatable-column>
         <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.5" [cellClass]="'text-center action'">
           <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-            <a placement="bottom" ngbTooltip="Click to edit dealer" class="m-r-15 crm-action-edit text-primary" (click)="editCustomer(data)">
+            <a placement="bottom" ngbTooltip="Click to edit dealer" class="m-r-15 crm-action-edit text-primary"  (click)="editDealers()">
               <i class="fa fa-pencil"></i></a>
             <a placement="bottom" ngbTooltip="Click to delete dealer" class="crm-action-delete text-danger">
               <i class="fa fa-trash"></i></a>

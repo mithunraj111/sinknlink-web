@@ -331,7 +331,7 @@ textarea {
                 border: 0px solid #d3d5d8;
                 font-size: 13px;
                 color: #67757c;
-                padding: 3px 13px;
+                padding: 3px 10px;
                 font-family: 'Poppins', sans-serif;
                 font-weight: 400;
                 display: inline-block;
@@ -978,4 +978,9 @@ button{
             color: #fff;
         }
     } 
+}
+.table-padding{
+    .datatable-body-cell-label{
+        padding: 3px 15px !important;
+    }
 }

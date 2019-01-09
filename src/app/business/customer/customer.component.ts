@@ -17,10 +17,12 @@ export class CustomerComponent implements OnInit {
   @ViewChild(DatatableComponent) table: DatatableComponent;
   displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   date: any;
+  buttontext: string;
+  
   constructor(private router: Router) {
     this.data = [
       {
-        businessname: 'testetstetstetstetstetetstetstet', mobileno: '9874563210', membershipid: '123', city: 'Salem',
+        businessname: 'test', mobileno: '9874563210', membershipid: '123', city: 'Salem',
         updatedby: 'Admin', updateddt: '02-Dec-2018 15:00'
       },
       {
@@ -90,9 +92,11 @@ export class CustomerComponent implements OnInit {
 
   addCustomer() {
     this.router.navigate(['business/customers/create']);
+    this.buttontext = AppConstant.BUTTON_TXT.SAVE;
   }
   editCustomer(data) {
-    this.router.navigate(['business/customers/create']);
+    this.router.navigate(['business/customers/edit/:id'+1]);
+    this.buttontext = AppConstant.BUTTON_TXT.UPDATE;
   }
   getRowHeight(row) {
     return row.height;
