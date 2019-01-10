@@ -52,7 +52,7 @@
     </div>
   </div>
 </div>
-<div class="header-title m-t-40 mb-3">
+<div class="header-title addeditpage m-t-40 mb-3">
   <div class="row">
     <div class="col-md-6 col-sm-6">
       <h3 class="f-18 text-primary m-l-15 p-t-10">History</h3>
@@ -78,7 +78,7 @@
             <span>{{row.couponcode}}</span>
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column prop="numberofcoupons" name="No of coupon" [resizeable]="false">
+        <ngx-datatable-column prop="numberofcoupons" name="No. of coupons" [resizeable]="false">
           <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
             <span>{{row.numberofcoupons}}</span>
           </ng-template>
@@ -88,18 +88,18 @@
             <span>{{row.claimed}}</span>
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column prop="expiresat" name="Expires at" [resizeable]="false" [cellClass]="'text-center'">
+        <ngx-datatable-column prop="expiresat" name="Expires at" [resizeable]="false" [cellClass]="'text-center'" headerClass="text-right">
           <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
             <span>{{date|date:datedisplayformat}}</span>
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="Status" [sortable]="false" [flexGrow]="0.5" [cellClass]="'text-center'">
+        <ngx-datatable-column name="Status" [sortable]="false" [flexGrow]="0.5" [cellClass]="'text-center'" headerClass="text-right">
           <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
             <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="#03ADED"
               switchColor="#fff" size="small" checked></ui-switch>
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.5" [cellClass]="'text-center'">
+        <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.5" [cellClass]="'text-center'" headerClass="text-right">
           <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
             <a placement="bottom" ngbTooltip="Click to edit coupons" class="m-r-15 crm-action-edit text-primary">
               <i class="fa fa-pencil"></i></a>

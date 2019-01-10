@@ -15,11 +15,11 @@ export class CustomerCouponsComponent implements OnInit {
   date: any;
   constructor() {
     this.data = [
-      { couponcode: 'Asp159', numberofcoupons: '100', claimed: 'Yes', expiresat: '02/12/2018' },
-      { couponcode: 'YDF752', numberofcoupons: '50', claimed: 'Yes', expiresat: '20/12/2018' },
-      { couponcode: 'FDG987', numberofcoupons: '75', claimed: 'Yes', expiresat: '26/12/2018' },
-      { couponcode: 'TYR247', numberofcoupons: '88', claimed: 'Yes', expiresat: '23/12/2018' },
-      { couponcode: 'TTO052', numberofcoupons: '92', claimed: 'Yes', expiresat: '07/12/2018' }
+      { couponcode: 'Asp159', numberofcoupons: '100', claimed: '12', expiresat: '02/12/2018' },
+      { couponcode: 'YDF752', numberofcoupons: '50', claimed: '46', expiresat: '20/12/2018' },
+      { couponcode: 'FDG987', numberofcoupons: '75', claimed: '73', expiresat: '26/12/2018' },
+      { couponcode: 'TYR247', numberofcoupons: '88', claimed: '34', expiresat: '23/12/2018' },
+      { couponcode: 'TTO052', numberofcoupons: '92', claimed: '67', expiresat: '07/12/2018' }
     ];
     this.tempFilter = this.data;
     this.date = new Date();

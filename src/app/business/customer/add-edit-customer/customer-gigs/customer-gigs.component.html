@@ -58,7 +58,7 @@
     </div>
   </div>
 </div>
-<div class="header-title m-t-40 mb-3">
+<div class="header-title addeditpage m-t-40 mb-3">
   <div class="row">
     <div class="col-md-6 col-sm-6">
       <h3 class="f-18 text-primary m-l-15 p-t-10">History</h3>
@@ -97,13 +97,13 @@
             <span class="updatedate">{{date|date:datedisplayformat}}</span>
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="Status" [sortable]="false" [flexGrow]="0.5" [cellClass]="'text-center status'">
+        <ngx-datatable-column name="Status" [sortable]="false" [flexGrow]="0.5" [cellClass]="'text-center status'" headerClass="text-right">
           <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
             <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="#03ADED"
               switchColor="#fff" size="small" checked></ui-switch>
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.5" [cellClass]="'text-center action'">
+        <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.5" [cellClass]="'text-center action'" headerClass="text-right">
           <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
             <a placement="bottom" ngbTooltip="Click to edit gigs" class="m-r-15 crm-action-edit text-primary">
               <i class="fa fa-pencil"></i></a>

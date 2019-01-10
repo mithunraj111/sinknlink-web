@@ -13,7 +13,8 @@ export class CustomerPaymentsComponent implements OnInit {
   @ViewChild(DatatableComponent) table: DatatableComponent;
   datedisplayformat = AppConstant.API_CONFIG.ANG_DATE.displaydate;
   date: any;
-  showPayment = true;
+  newPayment = true;
+  viewPayment = true;
   constructor() {
     this.data = [
       { amount: '10000', reference: '001', mode: 'NEFT', paiddt: '02/12/2018',status:'Failed' },
@@ -48,11 +49,13 @@ export class CustomerPaymentsComponent implements OnInit {
   }
   viewpayment() {
     this.openMyModal('customerpaymentmodal');
-    this.showPayment = false;
+    this.newPayment = false;
+    this.viewPayment = true;
   }
   addpayment() {
     this.openMyModal('customerpaymentmodal');
-    this.showPayment = true;
+    this.newPayment = true;
+    this.viewPayment= false;
   }
   viewDonationCause() {
     this.openMyModal('donationCauseModal');

@@ -238,24 +238,6 @@ textarea {
     text-align: center;
     max-width: 100%;
 }
-.datatable-header-cell[title="Due Date"]{
-    text-align: center;
-}
-.datatable-header-cell[title="Expires at"]{
-    text-align: center;
-}
-.datatable-header-cell[title="Date"]{
-    text-align: center;
-}
-.datatable-header-cell[title="Start Date"]{
-    text-align: center;
-}
-.datatable-header-cell[title="End Date"]{
-    text-align: center;
-}
-.datatable-header-cell[title="Price"]{
-    text-align: right;
-}
 .table-right-align{
     .datatable-header-cell-label{
         padding-right: 10px;
@@ -965,14 +947,14 @@ button{
             margin: 0px 0px 5px 0px !important;
             border: 1px solid #435769;
             border-radius: 50px 0px 0px 50px;
-            &:hover{
-                border-right: none !important;
-            }
         }
         .nav-link.active{
             background: #cccccc;
             border-radius: 50px 0px 0px 50px;
             color: #fff;
+            &:hover{
+                border-right: 4px solid #03ADED!important;
+            }
         }
     } 
 }
@@ -988,3 +970,16 @@ button{
         color:#6C757D;
     }
  }
+.header-title.addeditpage{
+    width: 100%;
+}
+#pcoded{
+    &[vertical-nav-type="offcanvas"] {
+        .header-title.addeditpage {
+            width: 100%;
+        }
+    }
+} 
+.f-w-300{
+    font-weight: 300 !important;
+}

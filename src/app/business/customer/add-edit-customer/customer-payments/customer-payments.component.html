@@ -1,65 +1,65 @@
 <div class="employee-form">
     <div class="card tenants-page tenants-pages m-b-10">
-        <div class="row p-t-10 p-b-5">
+        <div class="row">
             <div class="col-md-12 col-sm-12">
                 <div class="header-title m-t-60 mb-3">
                     <h3 class="f-18 text-primary m-l-15">Payments</h3>
                 </div>
-                <div class="form-group row">
+                <div class="form-group row mb-0">
                     <label class="col-md-3 col-sm-6 col-form-label text-right">Next due</label>
-                    <span class="col-form-label col-md-9 col-sm-6">{{date|date:displayformat}}</span>
+                    <span class="col-form-label col-md-9 col-sm-6">{{date|date:datedisplayformat}}</span>
                 </div>
-                <div class="form-group row">
+                <div class="form-group row mb-0">
                     <label class="col-md-3 col-sm-6 col-form-label text-right">Last paid</label>
-                    <span class="col-form-label col-md-9 col-sm-6 f-16">{{date|date:displaydateformat}}</span>
+                    <span class="col-form-label col-md-9 col-sm-6 f-16">{{date|date:datedisplayformat}}</span>
                 </div>
                 <div class="form group row border-checkbox-section">
                     <label class="col-md-3 col-sm-6 col-form-label text-right">Subscription Amount</label>
-                    <div class="border-checkbox-group border-checkbox-group-primary col-md-7 col-sm-6 m-l-5 p-t-5">
+                    <div class="border-checkbox-group border-checkbox-group-primary col-md-7 col-sm-6 ml-1 p-t-5">
                         <input class="border-checkbox" type="checkbox" id="checkbox1">
-                        <label class="border-checkbox-label" for="checkbox1">500 + Tax</label>
+                        <label class="border-checkbox-label f-w-300" for="checkbox1">500 + Tax</label>
                     </div>
                 </div>
                 <div class="form group row border-checkbox-section">
                     <label class="col-md-3 col-sm-6 col-form-label text-right">Association Branch</label>
-                    <div class="border-checkbox-group border-checkbox-group-primary col-md-7 col-sm-6 m-l-5 p-t-5">
+                    <div class="border-checkbox-group border-checkbox-group-primary col-md-7 col-sm-6 ml-1 p-t-5">
                         <input class="border-checkbox" type="checkbox" id="checkbox2">
-                        <label class="border-checkbox-label" for="checkbox2">1,500 + Tax</label>
+                        <label class="border-checkbox-label f-w-300" for="checkbox2">1,500 + Tax</label>
                     </div>
                 </div>
-                <div class="header-title m-t-60 mb-3">
+                <div class="header-title m-t-20 mb-3">
                     <h3 class="f-18 text-primary m-l-15">Donate for a cause</h3>
                 </div>
                 <div class="form-group row border-checkbox-section">
                     <div class="border-checkbox-group border-checkbox-group-primary col-md-3 text-right col-sm-6 m-l-5 p-t-5">
                         <input class="border-checkbox" type="checkbox" id="checkbox3">
-                        <label class="border-checkbox-label" for="checkbox3">Scan Foundation</label>
+                        <label class="border-checkbox-label" for="checkbox3">Scan Foundation
+                            <a placement="bottom" ngbTooltip="Click to view donation cause" (click)="viewDonationCause();"><i
+                                    class="fa fa-question-circle" aria-hidden="true"></i></a>
+                        </label>
                     </div>
-                    <button type="button" placement="bottom" ngbTooltip="Click to view donation cause" class="col-md-1 btn btn-primary waves-effect p-0 m-l-15 donation-view-button"
-                        (click)="viewDonationCause();">
-                        <i class="fa fa-eye"></i> View
-                    </button>
-                    <div class=" col-md-6 col-sm-6 p-l-0 p-r-20">
-                        <input type="text" class="form-control" style="width: 100% !important;" placeholder="Amount">
+                    <div class=" col-md-8 col-sm-6 p-l-0 p-r-20">
+                        <input type="text" class="form-control" placeholder="Amount">
                     </div>
                 </div>
-                <div class="form-group row">
-                    <label class="col-md-3 col-sm-6 col-form-label text-right">Total</label>
-                    <span class="col-form-label col-md-5 col-sm-6 f-16">{{2450|currency: 'INR' :true}}</span>
-                    <button type="button" placement="bottom" ngbTooltip="Click to pay online" class="col-md-3 btn btn-primary waves-effect p-0">
-                        Pay online
-                    </button>
+                <div class="form-group row m-t-20 payment-button">
+                    <label class="col-md-3 col-sm-6 col-form-label text-right p-t-15">Total</label>
+                    <span class="col-form-label col-md-5 col-sm-6 f-16">{{2450|currency: 'INR' :true}}
+                        <button type="button" placement="bottom" ngbTooltip="Click to pay online" class="btn p-l-5 m-l-15">
+                            Pay online
+                        </button>
+                    </span>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<div class="header-title m-t-30 mb-3">
+<div class="header-title addeditpage m-t-30 mb-3">
     <div class="row">
-        <div class="col-md-6 col-sm-6">
+        <div class="col-md-5 col-sm-6 p-t-10">
             <h3 class="f-18 text-primary m-l-15">History</h3>
         </div>
-        <div class="col-md-4 col-sm-6">
+        <div class="col-md-5 col-sm-6">
             <div class="text-right">
                 <label>Search:
                     <input type="search" class="header-search form-control input-sm full-data-search" placeholder="Search for here"
@@ -67,7 +67,7 @@
                 </label>
             </div>
         </div>
-        <div class="col-md-2 col-sm-1  p-r-0">
+        <div class="col-md-2 col-sm-1 p-l-0 p-r-30 text-right">
             <button type="button" placement="bottom" ngbTooltip="Click to add payment" class="btn btn-primary waves-effect"
                 (click)='addpayment()'><i class="fa fa-plus-circle m-r-5"></i> New
             </button>
@@ -79,6 +79,11 @@
         <ngx-datatable #customerpaymttable class="table data-table expandable" [rows]='data' [columnMode]="'flex'"
             [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false">
             <!-- Row Detail Template -->
+            <ngx-datatable-column prop="reference" name="Reference#" [resizeable]="false">
+                <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                    <span>{{row.reference}}</span>
+                </ng-template>
+            </ngx-datatable-column>
             <ngx-datatable-column prop="paiddt" name="Payment Date" [resizeable]="false" [cellClass]="'text-center'"
                 headerClass="text-center">
                 <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
@@ -90,23 +95,19 @@
                     <span>{{row.amount| currency: 'INR' : true}}</span>
                 </ng-template>
             </ngx-datatable-column>
-            <ngx-datatable-column prop="reference" name="Reference#" [resizeable]="false">
-                <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                    <span>{{row.reference}}</span>
-                </ng-template>
-            </ngx-datatable-column>
-            <ngx-datatable-column prop="mode" name="Mode" [resizeable]="false">
+            <ngx-datatable-column prop="mode" name="Payment Mode" [resizeable]="false">
                 <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                     <span>{{row.mode}}</span>
                 </ng-template>
             </ngx-datatable-column>
             <ngx-datatable-column prop="status" name="Status" [sortable]="false" [resizeable]="false" [flexGrow]="0.5"
-                [cellClass]="'text-center status'">
+                [cellClass]="'text-center status'" headerClass="text-right">
                 <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
                     <span>{{row.status}}</span>
                 </ng-template>
             </ngx-datatable-column>
-            <ngx-datatable-column name="Action" [sortable]="false" [resizeable]="false" [flexGrow]="0.5" [cellClass]="'text-center action'">
+            <ngx-datatable-column name="Action" [sortable]="false" [resizeable]="false" [flexGrow]="0.5" [cellClass]="'text-center action'"
+                headerClass="text-right">
                 <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
                     <a placement="bottom" ngbTooltip="Click to view payment" class="m-r-15 crm-action-edit text-primary text-center"
                         (click)="viewpayment();"><i class="fa fa-eye"></i></a>
@@ -122,7 +123,7 @@
         <div class="form-header">
             <div class="row ">
                 <div class="col-md-12">
-                    <div class="form-group required">
+                    <div class="form-group">
                         <label>Payment date</label>
                         <div class="input-group mb-0">
                             <input class="form-control" placeholder="dd-mm-yyyy" name="dp" [(ngModel)]="modelPopup"
@@ -132,35 +133,29 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group required">
+                    <div class="form-group">
                         <label>Payment amount</label>
                         <input type="text" class="form-control" placeholder="Payment amount">
                     </div>
-                    <div class="form-group required">
+                    <div class="form-group">
                         <label>Mode of payment</label>
                         <select name="select" class="form-control p-1">
-                            <option value="opt1">Select your mode of payment</option>
-                            <option value="opt2">Cheque</option>
+                            <option value="opt1">Mode of payment</option>
+                            <option value="opt2">IMPS</option>
                             <option value="opt3">NEFT</option>
-                            <option value="opt4">PayTM</option>
-                            <option value="opt5">Googletez</option>
                         </select>
                     </div>
-                    <div class="form-group row">
+                    <div class="form-group row" *ngIf="viewPayment">
                         <label class="col-md-3 col-sm-6 col-form-label">Reference</label>
                         <span class="col-form-label col-md-9 col-sm-6">#BD/PM/001</span>
                     </div>
-                    <div class="form-group row">
+                    <div class="form-group row" *ngIf="viewPayment">
                         <label class="col-md-3 col-sm-6 col-form-label">Status</label>
-                        <div class="col-md-9 col-sm-6">
-                            <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="#03ADED"
-                                switchColor="#fff" size="small" checked></ui-switch>
-                        </div>
+                        <span class="col-form-label col-md-9 col-sm-6">Failed</span>
                     </div>
-                    <div *ngIf="locationPage" class="form-group "></div>
                 </div>
             </div>
-            <button *ngIf="showPayment" (click)="closeMyModal($event)" type="button" placement="top" ngbTooltip="Click to save payment details"
+            <button *ngIf="newPayment" (click)="closeMyModal($event)" type="button" placement="top" ngbTooltip="Click to save payment details"
                 (click)="save()" class="btn pull-right btn-primary waves-effect m-b-10">Save</button>
         </div>
         <button (click)="closeMyModal($event)" aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>

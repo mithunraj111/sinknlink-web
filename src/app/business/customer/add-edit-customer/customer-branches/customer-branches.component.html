@@ -1,8 +1,18 @@
-<!-- <div class="fixedheader m-t-60 mb-3"> -->
-<div class="header-title m-t-60 mb-3">
-  <h3 class="f-18 text-primary m-l-15">Branches</h3>
+<div class="header-title addeditpage m-t-60 mb-3">
+  <div class="row">
+    <div class="col-md-6 col-sm-6">
+      <h3 class="f-18 text-primary m-l-15">Branches</h3>
+    </div>
+    <div class="col-md-6 col-sm-6">
+      <div class="text-right m-r-15">
+        <label>Search:
+          <input type="search" class="header-search form-control input-sm full-data-search" placeholder="Search for here"
+            (keyup)='search($event)' placement="bottom" ngbTooltip="Type here to search">
+        </label>
+      </div>
+    </div>
+  </div>
 </div>
-<!-- </div> -->
 <div class="header-block">
   <div class="table-header fixed-table-header">
     <app-card [classHeader]="true">
@@ -34,16 +44,16 @@
             <span>{{date|date:datedisplayformat}}</span>
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="Status" [sortable]="false" [flexGrow]="0.5" [cellClass]="'text-center status'">
+        <ngx-datatable-column name="Status" [sortable]="false" [resizeable]="false" [flexGrow]="0.5" [cellClass]="'text-center status'">
           <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
             <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="#03ADED"
               switchColor="#fff" size="small" checked></ui-switch>
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.5" [cellClass]="'text-center action'">
+        <ngx-datatable-column name="Action" [sortable]="false" [resizeable]="false" [flexGrow]="0.5" [cellClass]="'text-center action'">
           <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
             <a placement="bottom" ngbTooltip="Click to view branch" class="m-r-15 crm-action-edit text-primary text-center"
-                        (click)="viewpayment();"><i class="fa fa-eye"></i></a>
+              (click)="viewpayment();"><i class="fa fa-eye"></i></a>
           </ng-template>
         </ngx-datatable-column>
       </ngx-datatable>
