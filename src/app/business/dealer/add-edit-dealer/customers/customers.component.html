@@ -29,18 +29,17 @@
             <span>{{row.memberid}}</span>
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column prop="location" name=" Location" [resizeable]="false" [cellClass]="'table-padding'">
+        <ngx-datatable-column prop="location" name=" Location" [resizeable]="false">
           <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
             <span>{{row.location}}</span>
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="Enroll Date" headerClass="text-center" [cellClass]="'text-center table-padding'"
-          [resizeable]="false">
+        <ngx-datatable-column name="Enroll Date" headerClass="text-center" [cellClass]="'text-center'" [resizeable]="false">
           <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
             <span class="text-center">{{date|date:datedisplayformat}}</span>
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="Status" [sortable]="false" headerClass="text-center" [cellClass]="'text-center table-padding'"
+        <ngx-datatable-column name="Status" [sortable]="false" headerClass="text-center" [cellClass]="'text-center'"
           [resizeable]="false">
           <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
             <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="#03ADED"

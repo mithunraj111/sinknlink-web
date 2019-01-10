@@ -41,7 +41,7 @@
             <span>{{row.state}}</span>
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column prop="price" name="Price" [resizeable]="false" headerClass="text-right" [cellClass]="'text-right'">
+        <ngx-datatable-column prop="price" name="Price" [resizeable]="false" headerClass="text-right" [cellClass]="'text-right table-padding'">
           <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
             <span>{{row.price|currency : 'INR' : true}}</span>
           </ng-template>
@@ -55,12 +55,21 @@
         </ngx-datatable-column>
         <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.5" headerClass="text-center" [cellClass]="'text-center'"
           [resizeable]="false">
+
           <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-            <a placement="bottom" ngbTooltip="Click to edit registration details" class="m-r-15 crm-action-edit text-primary"
-              (click)='editVipRegistration()'>
-              <i class="fa fa-pencil"></i></a>
-            <a placement="bottom" ngbTooltip="Click to delete registration details" class="crm-action-delete text-danger">
-              <i class="fa fa-trash"></i></a>
+            <div class="row checkbox-column">
+              <div class="border-checkbox-section">
+                <div class="border-checkbox-group border-checkbox-group-primary m-r-15">
+                  <input class="border-checkbox" type="checkbox" id="checkbox2">
+                  <label class="border-checkbox-label" for="checkbox2"></label>
+                </div>
+              </div>
+              <a placement="bottom" ngbTooltip="Click to edit registration details" class="m-r-15 crm-action-edit text-primary"
+                (click)='editVipRegistration()'>
+                <i class="fa fa-pencil"></i></a>
+              <a placement="bottom" ngbTooltip="Click to delete registration details" class="crm-action-delete text-danger">
+                <i class="fa fa-trash"></i></a>
+            </div>
           </ng-template>
         </ngx-datatable-column>
       </ngx-datatable>
@@ -68,14 +77,16 @@
   </div>
 </div>
 <!-- Modal popup window -->
-<app-modal-animation [modalID]="'vipnoregmodal'" [modalClass]="'md-effect-7'">
-  <h3 class="f-26">Block/Allocate</h3>
-  <div class="form-header">
-    <div class="form-group required">
-      <label>Membership ID</label>
-      <input type="text" class="form-control" placeholder="Membership ID">
+<div class="modal-size">
+  <app-modal-animation [modalID]="'vipnoregmodal'" [modalClass]="'md-effect-7'">
+    <h3 class="f-26">Block/Allocate</h3>
+    <div class="form-header">
+      <div class="form-group required">
+        <label>Membership ID</label>
+        <input type="text" class="form-control" placeholder="Membership ID">
+      </div>
+      <button (click)="closeMyModal($event)" type="button" placement="top" ngbTooltip="Click to Save" class="btn pull-right btn-primary waves-effect m-b-10">Save</button>
     </div>
-    <button (click)="closeMyModal($event)" type="button" placement="top" ngbTooltip="Click to Save" class="btn pull-right btn-primary waves-effect m-b-10">Save</button>
-  </div>
-  <button (click)="closeMyModal($event)" aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>
-</app-modal-animation>
+    <button (click)="closeMyModal($event)" aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>
+  </app-modal-animation>
+</div>
