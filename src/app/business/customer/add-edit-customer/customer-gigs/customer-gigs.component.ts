@@ -11,7 +11,7 @@ export class CustomerGigsComponent implements OnInit {
   data: any[];
   tempFilter = [];
   @ViewChild(DatatableComponent) table: DatatableComponent;
-  datedisplayformat = AppConstant.API_CONFIG.ANG_DATE.displaydate;
+  datedisplayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   date: any;
   constructor() { 
     this.data=[

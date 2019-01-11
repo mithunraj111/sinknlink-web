@@ -21,7 +21,7 @@
                     </div>
                 </div>
                 <div class="form group row border-checkbox-section">
-                    <label class="col-md-3 col-sm-6 col-form-label text-right">Association Branch</label>
+                    <label class="col-md-3 col-sm-6 col-form-label text-right">Associated Branch</label>
                     <div class="border-checkbox-group border-checkbox-group-primary col-md-7 col-sm-6 ml-1 p-t-5">
                         <input class="border-checkbox" type="checkbox" id="checkbox2">
                         <label class="border-checkbox-label f-w-300" for="checkbox2">1,500 + Tax</label>
@@ -127,15 +127,15 @@
                         <label>Payment date</label>
                         <div class="input-group mb-0">
                             <input class="form-control" placeholder="dd-mm-yyyy" name="dp" [(ngModel)]="modelPopup"
-                                ngbDatepicker #dp="ngbDatepicker">
-                            <div class="input-group-append bg-default" (click)="dp.toggle()">
+                                ngbDatepicker #dp1="ngbDatepicker" [readonly]="viewPayment">
+                            <div class="input-group-append bg-default" (click)="dp1.toggle()">
                                 <span class="fa fa-calendar input-group-text"></span>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label>Payment amount</label>
-                        <input type="text" class="form-control" placeholder="Payment amount">
+                        <input type="text" class="form-control" placeholder="Payment amount" [readonly]="viewPayment">
                     </div>
                     <div class="form-group">
                         <label>Mode of payment</label>

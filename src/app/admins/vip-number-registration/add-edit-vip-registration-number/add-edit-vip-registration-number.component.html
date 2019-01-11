@@ -3,7 +3,7 @@
     <div class="header-title m-b-15 pos-fixed">
       <div class="row">
         <div class="col-md-6 col-sm-6">
-          <h2 class="add-tenant mt-0">VIP Membership Id</h2>
+          <h2 class="add-tenant mt-0">VIP Membership ID</h2>
           <p *ngIf="eventid" class="m-b-0">ID: 875643</p>
         </div>
         <div class="col-md-3 col-sm-6 save-button text-right p-r-30">
@@ -42,20 +42,17 @@
                 <input type="text" class="form-control" placeholder="End">
               </div>
             </div>
-            <div class="form-group row required">
-              <label class="col-md-3 col-sm-6 col-form-label text-right">Status</label>
-              <div class="col-md-9 col-sm-6">
-                <select name="select" class="form-control p-1 placeholder-align">
-                  <option value="opt1">Status</option>
-                  <option value="opt2">Available</option>
-                  <option value="opt3">Blocked</option>
-                </select>
-              </div>
-            </div>
             <div class="form-group row ">
               <label class="col-md-3 col-sm-6 col-form-label text-right">Block for</label>
               <div class="col-md-9 col-sm-6">
-                <input type="text" class="form-control" placeholder="Membership id">
+                <input type="text" class="form-control" placeholder="Membership ID">
+              </div>
+            </div>
+            <div class="form-group row required">
+              <label class="col-md-3 col-sm-6 col-form-label text-right">Status</label>
+              <div class="col-md-9 col-sm-6">
+                <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="#03ADED"
+                  switchColor="#fff" size="small" checked></ui-switch>
               </div>
             </div>
           </div>

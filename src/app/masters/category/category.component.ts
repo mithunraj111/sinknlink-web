@@ -19,20 +19,16 @@ export class CategoryComponent implements OnInit {
   date: any;
   constructor() {
     this.data = [
-      { businesscategory: 'Mercadona supermarkets', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
-      { businesscategory: ' Reliance Industries Ltd', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
-      { businesscategory: ' Reliance Industries Ltd', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
-      { businesscategory: ' Reliance Industries Ltd', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
-      { businesscategory: ' Reliance Industries Ltd', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
-      { businesscategory: ' Reliance Industries Ltd', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
-      { businesscategory: 'Mercadona supermarkets', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
-      { businesscategory: 'Mercadona supermarkets', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
-      { businesscategory: 'Mercadona supermarkets', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
-      { businesscategory: 'Mercadona supermarkets', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
-      { businesscategory: 'Reliance Industries Ltd', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
-      { businesscategory: 'Reliance Industries Ltd', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
-      { businesscategory: 'Reliance Industries Ltd', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
-      { businesscategory: 'Reliance Industries Ltd', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' }
+      { businesscategory: 'Restaurants', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
+      { businesscategory: 'Electronics', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
+      { businesscategory: 'Shopping', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
+      { businesscategory: 'Cinemas', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
+      { businesscategory: 'Travel', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
+      { businesscategory: 'Taxi', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
+      { businesscategory: 'Spa and saloon', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
+      { businesscategory: 'Automobiles', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
+      { businesscategory: 'Hospitals', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
+      { businesscategory: 'Training institutes', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' }
     ];
     this.tempFilter = this.data;
     this.date = new Date();

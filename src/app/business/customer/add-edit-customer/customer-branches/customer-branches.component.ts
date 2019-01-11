@@ -12,11 +12,11 @@ export class CustomerBranchesComponent implements OnInit {
   date: any;
   constructor() { 
     this.data=[
-      { name: 'Mithun', memberid: '001', location: 'Chennai', payment: '10000', duedate: '02/12/2018' },
-      { name: 'Raj', memberid: '002', location: 'Coimbatore', payment: '5000', duedate: '20/12/2018' },
-      { name: 'Mithunraj', memberid: '003', location: 'Madurai', payment: '8000', duedate: '26/12/2018' },
-      { name: 'Myth', memberid: '004', location: 'velore', payment: '7600', duedate: '23/12/2018' },
-      { name: 'Glaurang', memberid: '005', location: 'Tanjore', payment: '9800', duedate: '07/12/2018' }
+      { name: 'Mithun', membershipid: '001', location: 'Chennai', payment: '10000', duedate: '02/12/2018' },
+      { name: 'Raj', membershipid: '002', location: 'Coimbatore', payment: '5000', duedate: '20/12/2018' },
+      { name: 'Mithunraj', membershipid: '003', location: 'Madurai', payment: '8000', duedate: '26/12/2018' },
+      { name: 'Myth', membershipid: '004', location: 'velore', payment: '7600', duedate: '23/12/2018' },
+      { name: 'Glaurang', membershipid: '005', location: 'Tanjore', payment: '9800', duedate: '07/12/2018' }
     ];
     this.date = new Date();
 

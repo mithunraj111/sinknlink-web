@@ -10,7 +10,20 @@ export class CustomerBusinessDetailsComponent implements OnInit {
   formSubmit: string;
   socialidPage: boolean;
   socialiddtls: {};
-
+  workDays = [
+    { value: 'Monday', label: 'Monday' },
+    { value: 'Tuesday', label: 'Tuesday' },
+    { value: 'Wednesday', label: 'Wednesday' },
+    { value: 'Thursday', label: 'Thursday' },
+    { value: 'Friday', label: 'Friday' },
+    { value: 'Saturday', label: 'Saturday' },
+    { value: 'Sunday', label: 'Sunday' },
+  ];
+  paymentMethods = [
+    { value: 'NEFT', label: 'NEFT' },
+    { value: 'Card', label: 'Card' },
+    { value: 'Cheque', label: 'Cheque' },
+  ];
   constructor() { }
 
   ngOnInit() {
@@ -28,6 +41,9 @@ export class CustomerBusinessDetailsComponent implements OnInit {
     this.formSubmit = 'Update';
     this.openMyModal('socialidmodal');
     this.socialidPage = true;
+  }
+  openMap(){
+    this.openMyModal('mapmodal');
   }
   openMyModal(event) {
     document.querySelector('#' + event).classList.add('md-show');

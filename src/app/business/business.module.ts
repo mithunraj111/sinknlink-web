@@ -25,6 +25,9 @@ import { DealerPaymentsComponent } from './dealer/add-edit-dealer/dealer-payment
 import { CustomerGalleryComponent } from './customer/add-edit-customer/customer-gallery/customer-gallery.component';
 import { ViewConsumerComponent } from './consumer/view-consumer/view-consumer.component';
 import { CustomerSettingsComponent } from './customer/add-edit-customer/customer-settings/customer-settings.component';
+import { AgmCoreModule } from '@agm/core';
+import { GoogleMapComponent } from '../map/google-map/google-map.component';
+import { SelectModule } from 'ng-select';
 
 
 @NgModule({
@@ -39,7 +42,9 @@ import { CustomerSettingsComponent } from './customer/add-edit-customer/customer
     UiSwitchModule,
     AccordionModule,
     TagInputModule,
-    FileUploadModule
+    FileUploadModule,
+    SelectModule,
+    AgmCoreModule.forRoot({apiKey: 'AIzaSyCE0nvTeHBsiQIrbpMVTe489_O5mwyqofk'})
   ],
   declarations: [
     CustomerComponent,
@@ -57,7 +62,8 @@ import { CustomerSettingsComponent } from './customer/add-edit-customer/customer
     DealerPaymentsComponent,
     ViewConsumerComponent,
     CustomerGalleryComponent,
-    CustomerSettingsComponent
+    CustomerSettingsComponent,
+    GoogleMapComponent
   ]
 })
 export class BusinessModule { }

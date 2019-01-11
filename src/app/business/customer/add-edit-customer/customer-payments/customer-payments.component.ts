@@ -15,6 +15,7 @@ export class CustomerPaymentsComponent implements OnInit {
   date: any;
   newPayment = true;
   viewPayment = true;
+  noEdit = true;
   constructor() {
     this.data = [
       { amount: '10000', reference: '001', mode: 'NEFT', paiddt: '02/12/2018',status:'Failed' },
@@ -51,11 +52,13 @@ export class CustomerPaymentsComponent implements OnInit {
     this.openMyModal('customerpaymentmodal');
     this.newPayment = false;
     this.viewPayment = true;
+    this.noEdit = true;
   }
   addpayment() {
     this.openMyModal('customerpaymentmodal');
     this.newPayment = true;
     this.viewPayment= false;
+    this.noEdit = false;
   }
   viewDonationCause() {
     this.openMyModal('donationCauseModal');

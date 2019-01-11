@@ -13,10 +13,9 @@
           <div class="col-md-9 col-sm-6">
             <select name="select" class="form-control p-1 placeholder-align">
               <option value="opt1">Business Type</option>
-              <option value="opt2">Business Type 1</option>
-              <option value="opt3">Business Type 2</option>
-              <option value="opt4">Business Type 3</option>
-              <option value="opt5">Business Type 4</option>
+              <option value="opt2">Registered</option>
+              <option value="opt3">Indivdual</option>
+              <option value="opt5">Government</option>
             </select>
           </div>
         </div>
@@ -29,8 +28,8 @@
         <div class="form-group row required placeholder-text">
           <label class="col-md-3 col-sm-6 col-form-label text-right">Mobile number</label>
           <div class="col-md-9 col-sm-6">
-            <tag-input class="tag-chips" [(ngModel)]="itemsAsObjects" [secondaryPlaceholder]="'Mobile number'"
-              [identifyBy]="'id'" [displayBy]="'name'"></tag-input>
+            <tag-input class="tag-chips" [(ngModel)]="itemsAsObjects1" [secondaryPlaceholder]="'Mobile number'"
+              [identifyBy]="'id1'" [displayBy]="'name'"></tag-input>
           </div>
         </div>
         <div class="form-group row required">
@@ -42,8 +41,8 @@
         <div class="form-group row required">
           <label class="col-md-3 col-sm-6 col-form-label text-right">Phone</label>
           <div class="col-md-9 col-sm-6">
-            <tag-input class="tag-chips" [(ngModel)]="itemsAsObjects" [secondaryPlaceholder]="'Phone number'"
-              [identifyBy]="'id'" [displayBy]="'name'"></tag-input>
+            <tag-input class="tag-chips" [(ngModel)]="itemsAsObjects2" [secondaryPlaceholder]="'Phone number'"
+              [identifyBy]="'id2'" [displayBy]="'name'"></tag-input>
           </div>
         </div>
         <div class="form-group row required">
@@ -61,8 +60,8 @@
         <div class="form-group row required">
           <label class="col-md-3 col-sm-6 col-form-label text-right">Sub category</label>
           <div class="col-md-9 col-sm-6">
-            <tag-input class="tag-chips" [(ngModel)]="itemsAsObjects" [secondaryPlaceholder]="'Sub Category'"
-              [identifyBy]="'id'" [displayBy]="'name'"></tag-input>
+            <tag-input class="tag-chips" [(ngModel)]="itemsAsObjects3" [secondaryPlaceholder]="'Sub Category'"
+              [identifyBy]="'id3'" [displayBy]="'name'"></tag-input>
           </div>
         </div>
         <div class="form-group row">
@@ -73,7 +72,9 @@
         </div>
         <div class="form-group row required">
           <div class="col-md-3 col-sm-6 col-form-label text-right">
-            <label>Geo Address</label><br />
+            <label>Geo Address
+              <i class="fa fa-globe" (click)="openMap()" aria-hidden="true"></i>
+            </label>
           </div>
           <div class="col-md-9 col-sm-6">
             <input type="text" class="form-control m-b-10" placeholder="Latitude">
@@ -92,14 +93,12 @@
             </select>
           </div>
         </div>
-        <div class="form-group row required donation-header">
+        <div class="form-group row required">
           <label class="col-md-3 col-sm-6 col-form-label text-right">Work days</label>
           <div class="col-md-9 col-sm-6">
             <div class="input-box">
-              <tag-input [ngClass]="'tag-select p-r-5'" theme='bootstrap' [placeholder]="'+'" [maxItems]="7" [addOnBlur]="true"
-                [clearOnBlur]="true" [secondaryPlaceholder]="'Select work days'">
-                <tag-input-dropdown [autocompleteItems]="autocompleteItems"></tag-input-dropdown>
-              </tag-input>
+              <ng-select [ngClass]="'ng-select'" [options]="workDays" [multiple]="true">
+              </ng-select>
             </div>
           </div>
         </div>
@@ -114,10 +113,8 @@
           <label class="col-md-3 col-sm-6 col-form-label text-right">Payment methods</label>
           <div class="col-md-9 col-sm-6">
             <div class="input-box">
-              <tag-input [ngClass]="'tag-select p-r-5'" theme='bootstrap' [placeholder]="'+'" [maxItems]="5" [addOnBlur]="true"
-                [clearOnBlur]="true" [secondaryPlaceholder]="'Select payment methods'">
-                <tag-input-dropdown [autocompleteItems]="autocompleteItems"></tag-input-dropdown>
-              </tag-input>
+              <ng-select [ngClass]="'ng-select'" [options]="paymentMethods" [multiple]="true">
+              </ng-select>
             </div>
           </div>
         </div>
@@ -125,7 +122,7 @@
           <label class="col-md-3 col-sm-6 col-form-label text-right">Delivery method</label>
           <div class="col-md-9 col-sm-6">
             <select name="select" class="form-control p-1 placeholder-align">
-              <option value="opt1">delivery method</option>
+              <option value="opt1">Delivery method</option>
               <option value="opt2">Method 1</option>
               <option value="opt3">Method 2</option>
               <option value="opt4">Method 3</option>
@@ -220,4 +217,13 @@
       </div>
     </div>
   </div>
+</div>
+<div class="modal-size select-input addlocation">
+  <app-modal-animation [modalID]="'mapmodal'" [modalClass]="'md-effect-7'">
+    <h3 class="f-26">Social ID</h3>
+    <app-card [title]="'Styled Map'" [classHeader]="true">
+      <agm-map></agm-map>
+    </app-card>
+    <button (click)="closeMyModal($event)" aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>
+  </app-modal-animation>
 </div>
