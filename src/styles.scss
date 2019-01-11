@@ -765,7 +765,7 @@ button{
             .ng2-tag-input{
                 padding:0px !important;
                 border: 1px solid #DFE8F1 !important;
-                margin-right:58px;
+                margin-right:52px;
             }
         }
         ::placeholder{
@@ -804,17 +804,7 @@ button{
         padding: 0px 5px 0px 15px;
      }
 }
-.addlocation{
-    .form-group{
-        .tag-select{
-            .ng-pristine{
-                font-size: 14px !important;
-                font-family: inherit !important;
-                color: #3b4650;
-            }
-        }
-    }
-}
+
 .tag-wrapper{
     height: 15px;
     line-height: 15px;
@@ -982,4 +972,22 @@ button{
 } 
 .f-w-300{
     font-weight: 300 !important;
+}
+.location-page{
+    .input-tag{
+        .tag-select {
+            .ng2-tag-input{
+                padding:0px !important;
+                border: 1px solid #cccccc !important;
+            }
+        }
+        ::placeholder{
+            font-size:14px;
+            color:#495057;
+        }
+        .ng2-tag-input__text-input{
+            font-family: inherit !important;
+            margin-left:-8px;
+        }
+    }
 }

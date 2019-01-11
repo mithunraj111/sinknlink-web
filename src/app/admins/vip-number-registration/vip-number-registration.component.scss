@@ -1,13 +1,17 @@
 .checkbox-column{
-.border-checkbox-section {
-    .border-checkbox-group {
-    display: block;
-    line-height: normal;
-    margin-left: 15px;
-    }
-    .border-checkbox-label {
-        padding-left:10px;
-        height:auto;
+    .border-checkbox-section {
+        .border-checkbox-group {
+            display: block;
+            line-height: normal;
+            margin-left: 16px;
+                .border-checkbox-label:before {
+                    width:17px;
+                    height:17px;
+                }
+            }
+        .border-checkbox-label {
+            padding-left:10px;
+            height:auto;
         }
     }
 }

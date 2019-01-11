@@ -2,7 +2,7 @@
   <div class="header-title pos-fixed">
     <div class="row">
       <div class="col-md-5 col-sm-5">
-        <h2>VIP Membership Id</h2>
+        <h2>VIP Number Registration</h2>
         <p>VIP membership id status can be checked and blocked.</p>
       </div>
       <div class="col-md-5 col-sm-5">
@@ -15,7 +15,7 @@
       </div>
       <div class="col-md-1 col-sm-1 p-r-0 p-l-0">
         <button type="button" placement="bottom" ngbTooltip="Click to block a VIP number" class="btn btn-primary waves-effect"
-          (click)='allocateVipNumber()'><i class="fa fa-minus-circle m-r-5"></i> Block
+          (click)='allocateVipNumber()'><i class="fa fa-minus-circle m-r-5"></i> Action
         </button>
       </div>
       <div class="col-md-1 col-sm-1 p-r-0">
@@ -30,10 +30,10 @@
   <div class="table-header fixed-table-header">
     <app-card [classHeader]="true">
       <ngx-datatable #vipnoregtable class="table data-table expandable" [rows]='data' [columnMode]="'flex'"
-        [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false">
-        <ngx-datatable-column prop="membershipid" name="Membership Id" [resizeable]="false">
+        [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false" [selected]="selected" [selectionType]="'checkbox'">
+        <ngx-datatable-column prop="fancycode" name="Fancy Code" [resizeable]="false">
           <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-            <span>{{row.membershipid}}</span>
+            <span>{{row.fancycode}}</span>
           </ng-template>
         </ngx-datatable-column>
         <ngx-datatable-column prop="state" name="State" [resizeable]="false">
@@ -41,7 +41,7 @@
             <span>{{row.state}}</span>
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column prop="price" name="Price" [resizeable]="false" headerClass="text-right" [cellClass]="'text-right table-padding'">
+        <ngx-datatable-column prop="price" name="Price" [resizeable]="false" headerClass="text-right" [cellClass]="'text-right'">
           <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
             <span>{{row.price|currency : 'INR' : true}}</span>
           </ng-template>
@@ -55,13 +55,12 @@
         </ngx-datatable-column>
         <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.5" headerClass="text-center" [cellClass]="'text-center'"
           [resizeable]="false">
-
           <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
             <div class="row checkbox-column">
               <div class="border-checkbox-section">
                 <div class="border-checkbox-group border-checkbox-group-primary m-r-15">
-                  <input class="border-checkbox" type="checkbox" id="checkbox2">
-                  <label class="border-checkbox-label" for="checkbox2"></label>
+                  <input class="border-checkbox" type="checkbox" id={{rowIndex}}>
+                  <label class="border-checkbox-label" for="{{rowIndex}}"></label>
                 </div>
               </div>
               <a placement="bottom" ngbTooltip="Click to edit registration details" class="m-r-15 crm-action-edit text-primary"

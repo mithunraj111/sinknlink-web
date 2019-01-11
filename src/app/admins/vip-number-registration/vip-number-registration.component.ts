@@ -12,29 +12,32 @@ export class VipNumberRegistrationComponent implements OnInit {
   data: any[];
   @ViewChild(DatatableComponent) table: DatatableComponent;
   tempFilter = [];
+  selected = [];
+  rows = [];
 
   constructor(private router: Router) {
     this.data = [
-      { membershipid: 'a111', state: 'Available', price: '10000000' },
-      { membershipid: 'b222', state: 'Available', price: '200' },
-      { membershipid: 'c333', state: 'Blocked', price: '100' },
-      { membershipid: 'd444', state: 'Blocked', price: '100' },
-      { membershipid: 'e555', state: 'Blocked', price: '100' },
-      { membershipid: 'f666', state: 'Available', price: '200' },
-      { membershipid: 'g777', state: 'Blocked', price: '500' },
-      { membershipid: 'h888', state: 'Available', price: '100' },
-      { membershipid: 'i999', state: 'Available', price: '200' },
-      { membershipid: 'j000', state: 'Available', price: '200' },
-      { membershipid: 'a111', state: 'Available', price: '100' },
-      { membershipid: 'b222', state: 'Available', price: '200' },
-      { membershipid: 'c333', state: 'Blocked', price: '100' },
-      { membershipid: 'd444', state: 'Blocked', price: '100' },
-      { membershipid: 'e555', state: 'Blocked', price: '100' },
-      { membershipid: 'f666', state: 'Available', price: '200' },
-      { membershipid: 'g777', state: 'Blocked', price: '500' },
-      { membershipid: 'h888', state: 'Available', price: '100' },
-      { membershipid: 'i999', state: 'Available', price: '200' },
-      { membershipid: 'j000', state: 'Available', price: '200' }
+      { fancycode: 'a111', state: 'Available', price: '10000000' },
+      { fancycode: 'b222', state: 'Available', price: '200' },
+      { fancycode: 'c333', state: 'Blocked', price: '100' },
+      { fancycode: 'd444', state: 'Blocked', price: '100' },
+      { fancycode: 'd444', state: 'Blocked', price: '100' },
+      { fancycode: 'e555', state: 'Blocked', price: '100' },
+      { fancycode: 'f666', state: 'Available', price: '200' },
+      { fancycode: 'g777', state: 'Blocked', price: '500' },
+      { fancycode: 'h888', state: 'Available', price: '100' },
+      { fancycode: 'i999', state: 'Available', price: '200' },
+      { fancycode: 'j000', state: 'Available', price: '200' },
+      { fancycode: 'a111', state: 'Available', price: '100' },
+      { fancycode: 'b222', state: 'Available', price: '200' },
+      { fancycode: 'c333', state: 'Blocked', price: '100' },
+      { fancycode: 'd444', state: 'Blocked', price: '100' },
+      { fancycode: 'e555', state: 'Blocked', price: '100' },
+      { fancycode: 'f666', state: 'Available', price: '200' },
+      { fancycode: 'g777', state: 'Blocked', price: '500' },
+      { fancycode: 'h888', state: 'Available', price: '100' },
+      { fancycode: 'i999', state: 'Available', price: '200' },
+      { fancycode: 'j000', state: 'Available', price: '200' }
     ];
     this.tempFilter = this.data;
   }
@@ -67,4 +70,5 @@ export class VipNumberRegistrationComponent implements OnInit {
     this.data = temp;
     this.table.offset = 0;
   }
+
 }

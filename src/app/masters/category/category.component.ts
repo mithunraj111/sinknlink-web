@@ -19,20 +19,20 @@ export class CategoryComponent implements OnInit {
   date: any;
   constructor() {
     this.data = [
-      { businesscategory: 'Nike', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
-      { businesscategory: 'Piece', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
-      { businesscategory: 'Nike', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
-      { businesscategory: 'Piece', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
-      { businesscategory: 'Nike', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
-      { businesscategory: 'Piece', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
-      { businesscategory: 'Nike', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
-      { businesscategory: 'Piece', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
-      { businesscategory: 'Nike', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
-      { businesscategory: 'Piece', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
-      { businesscategory: 'Nike', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
-      { businesscategory: 'Piece', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
-      { businesscategory: 'Nike', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
-      { businesscategory: 'Piece', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' }
+      { businesscategory: 'Mercadona supermarkets', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
+      { businesscategory: ' Reliance Industries Ltd', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
+      { businesscategory: ' Reliance Industries Ltd', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
+      { businesscategory: ' Reliance Industries Ltd', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
+      { businesscategory: ' Reliance Industries Ltd', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
+      { businesscategory: ' Reliance Industries Ltd', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
+      { businesscategory: 'Mercadona supermarkets', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
+      { businesscategory: 'Mercadona supermarkets', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
+      { businesscategory: 'Mercadona supermarkets', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
+      { businesscategory: 'Mercadona supermarkets', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
+      { businesscategory: 'Reliance Industries Ltd', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
+      { businesscategory: 'Reliance Industries Ltd', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
+      { businesscategory: 'Reliance Industries Ltd', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
+      { businesscategory: 'Reliance Industries Ltd', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' }
     ];
     this.tempFilter = this.data;
     this.date = new Date();
