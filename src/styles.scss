@@ -1002,3 +1002,13 @@ button{
         padding-bottom: 0px !important;
     }
  }
+ #pcoded{
+    &[vertical-nav-type="offcanvas"] {
+        .header-title.consumer-header {
+            width: 95%;
+            .text-right{
+                padding-right:10px;
+            }
+        }
+    }
+}

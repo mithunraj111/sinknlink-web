@@ -17,81 +17,99 @@
       </div>
     </div>
   </div>
-  <div class="col-md-12 col-sm-12">
-    <div class="row">
-      <div class="col-md-9 col-sm-9 p-l-0 p-r-10">
-        <div class="employee-form">
-          <div class="card tenants-page tenants-pages m-b-10 m-t-60">
-            <div class="row p-t-10 p-b-5">
-              <label class="col-md-3 col-sm-6 col-form-label text-right">Location</label>
-              <div class="col-md-6 col-sm-6 m-t-5">
-                <span class="f-15">K.K.Nagar<br />Chennai<br />TamilNadu<br />600 078</span>
-              </div>
-            </div>
-            <div class="row p-t-10 p-b-5">
-              <label class="col-md-3 col-sm-6 col-form-label text-right">Address</label>
-              <div class="col-md-6 col-sm-6 m-t-5">
-                <span class="f-15">K.K.Nagar<br />Chennai<br />TamilNadu<br />600 078</span>
-              </div>
-            </div>
-            <div class="row p-t-10 p-b-5">
-              <label class="col-md-3 col-sm-6 col-form-label text-right">Mobile</label>
-              <div class="col-md-6 col-sm-6 m-t-5">
-                <span class="f-15">8056190532</span>
-              </div>
-            </div>
-            <div class="row p-t-10 p-b-5">
-              <label class="col-md-3 col-sm-6 col-form-label text-right">Email</label>
-              <div class="col-md-6 col-sm-6 m-t-5">
-                <span class="f-15">mithunarunachalam12@gmail.com</span>
-              </div>
-            </div>
-            <div class="row p-t-10 p-b-5">
-              <label class="col-md-3 col-sm-6 col-form-label text-right">Social Ids</label>
-              <div class="col-md-6 col-sm-6 m-t-5">
-                <span class="f-15">Facebook id<br />Twitter id<br />Google id<br />Instagram id</span>
-              </div>
-            </div>
-            <div class="row p-t-10 p-b-5">
-              <label class="col-md-3 col-sm-6 col-form-label text-right">Linked mailid</label>
-              <div class="col-md-6 col-sm-6 m-t-5">
-                <span class="f-15">mithunarunachalam12@gmail.com</span>
-              </div>
-            </div>
-            <div class="row p-t-10 p-b-5">
-              <label class="col-md-3 col-sm-6 col-form-label text-right">Signup date</label>
-              <div class="col-md-6 col-sm-6 m-t-5">
-                <span class="f-15">{{date|date:date_displayformat}}</span>
-              </div>
-            </div>
-            <div class="row p-t-10 p-b-5">
-              <label class="col-md-3 col-sm-6 col-form-label text-right">Last login date</label>
-              <div class="col-md-6 col-sm-6 m-t-5">
-                <span class="f-15">{{date|date:date_displayformat}}</span>
-              </div>
-            </div>
-          </div>
-        </div>
+  <div class="employee-page pos-fixed consumer-menu">
+    <div class="col-md-12 col-sm-12 text-center employee-profile m-t-25">
+      <div class="form-group">
+        <label class=" mb-3">
+          <img src="assets/images/employee.jpg" class="img-responsive w-75" alt="employee">
+        </label>
       </div>
-      <div class="col-md-3 col-sm-4">
-        <div class="employee-page pos-fixed customer-menu">
-          <div class="col-md-12 col-sm-12 text-center employee-profile m-t-25">
-            <div class="form-group">
-              <label class="custom-file mb-3">
-                <img src="assets/images/employee.jpg" class="img-responsive w-75" alt="employee">
-                <input type="file" ng2FileSelect [uploader]="uploader" multiple class="custom-file-input">
-                <span class="custom-file-control"></span>
-              </label>
-            </div>
-            <!-- FLOATING MENU Starts -->
-            <div class="customer-floating-menu">
-              <button class="btn btn-inverse btn-outline-inverse ">Coupons</button>
-              <button class="btn btn-inverse btn-outline-inverse">Review</button>
-              <button class="btn btn-inverse btn-outline-inverse">Favourites</button>
-            </div>
-            <!-- FLOATING MENU ends -->
-          </div>
-        </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-10 col-xl-10 col-sm-10">
+      <div class="md-tabs md-right-tabs business-tab dealer-tab-menu">
+        <ngb-tabset>
+          <ngb-tab title="Details">
+            <ng-template ngbTabContent>
+              <div [@fadeInOutTranslate]>
+                <div class="employee-form">
+                  <div class="card tenants-page tenants-pages m-b-10 m-t-60">
+                    <div class="row p-t-10 p-b-5">
+                      <label class="col-md-3 col-sm-6 col-form-label text-right">Location</label>
+                      <div class="col-md-6 col-sm-6 m-t-5">
+                        <span class="f-15">K.K.Nagar<br />Chennai<br />TamilNadu<br />600078</span>
+                      </div>
+                    </div>
+                    <div class="row p-t-10 p-b-5">
+                      <label class="col-md-3 col-sm-6 col-form-label text-right">Address</label>
+                      <div class="col-md-6 col-sm-6 m-t-5">
+                        <span class="f-15">K.K.Nagar<br />Chennai<br />TamilNadu<br />600078</span>
+                      </div>
+                    </div>
+                    <div class="row p-t-10 p-b-5">
+                      <label class="col-md-3 col-sm-6 col-form-label text-right">Mobile</label>
+                      <div class="col-md-6 col-sm-6 m-t-5">
+                        <span class="f-15">8056190532</span>
+                      </div>
+                    </div>
+                    <div class="row p-t-10 p-b-5">
+                      <label class="col-md-3 col-sm-6 col-form-label text-right">Email</label>
+                      <div class="col-md-6 col-sm-6 m-t-5">
+                        <span class="f-15">mithunarunachalam12@gmail.com</span>
+                      </div>
+                    </div>
+                    <div class="row p-t-10 p-b-5">
+                      <label class="col-md-3 col-sm-6 col-form-label text-right">Social Ids</label>
+                      <div class="col-md-6 col-sm-6 m-t-5">
+                        <span class="f-15">Facebook id<br />Twitter id<br />Google id<br />Instagram id</span>
+                      </div>
+                    </div>
+                    <div class="row p-t-10 p-b-5">
+                      <label class="col-md-3 col-sm-6 col-form-label text-right">Linked mailid</label>
+                      <div class="col-md-6 col-sm-6 m-t-5">
+                        <span class="f-15">mithunarunachalam12@gmail.com</span>
+                      </div>
+                    </div>
+                    <div class="row p-t-10 p-b-5">
+                      <label class="col-md-3 col-sm-6 col-form-label text-right">Signup date</label>
+                      <div class="col-md-6 col-sm-6 m-t-5">
+                        <span class="f-15">{{date|date:date_displayformat}}</span>
+                      </div>
+                    </div>
+                    <div class="row p-t-10 p-b-5">
+                      <label class="col-md-3 col-sm-6 col-form-label text-right">Last login date</label>
+                      <div class="col-md-6 col-sm-6 m-t-5">
+                        <span class="f-15">{{date|date:date_displayformat}}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab title="Coupons">
+            <ng-template ngbTabContent>
+              <div [@fadeInOutTranslate]>
+
+              </div>
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab title="Reviews">
+            <ng-template ngbTabContent>
+              <div [@fadeInOutTranslate]>
+
+              </div>
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab title="Favourites">
+            <ng-template ngbTabContent>
+              <div [@fadeInOutTranslate]>
+
+              </div>
+            </ng-template>
+          </ngb-tab>
+        </ngb-tabset>
       </div>
     </div>
   </div>
