@@ -9,7 +9,6 @@ import { HttpModule } from '@angular/http';
 import { DataTableModule } from 'angular2-datatable';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UiSwitchModule } from 'ng2-ui-switch';
-import { AccordionModule } from '../ui-elements/basic/accordion/accordion.module';
 import { TagInputModule } from 'ngx-chips';
 import { FileUploadModule } from 'ng2-file-upload';
 import { AddEditCustomerComponent } from './customer/add-edit-customer/add-edit-customer.component';
@@ -25,8 +24,6 @@ import { DealerPaymentsComponent } from './dealer/add-edit-dealer/dealer-payment
 import { CustomerGalleryComponent } from './customer/add-edit-customer/customer-gallery/customer-gallery.component';
 import { ViewConsumerComponent } from './consumer/view-consumer/view-consumer.component';
 import { CustomerSettingsComponent } from './customer/add-edit-customer/customer-settings/customer-settings.component';
-import { AgmCoreModule } from '@agm/core';
-import { GoogleMapComponent } from '../map/google-map/google-map.component';
 import { SelectModule } from 'ng-select';
 
 
@@ -40,11 +37,9 @@ import { SelectModule } from 'ng-select';
     FormsModule,
     ReactiveFormsModule,
     UiSwitchModule,
-    AccordionModule,
     TagInputModule,
     FileUploadModule,
-    SelectModule,
-    AgmCoreModule.forRoot({apiKey: 'AIzaSyCE0nvTeHBsiQIrbpMVTe489_O5mwyqofk'})
+    SelectModule
   ],
   declarations: [
     CustomerComponent,
@@ -62,8 +57,7 @@ import { SelectModule } from 'ng-select';
     DealerPaymentsComponent,
     ViewConsumerComponent,
     CustomerGalleryComponent,
-    CustomerSettingsComponent,
-    GoogleMapComponent
+    CustomerSettingsComponent
   ]
 })
 export class BusinessModule { }

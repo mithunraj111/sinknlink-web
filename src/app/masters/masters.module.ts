@@ -7,7 +7,6 @@ import { MastersRoutingModule } from './masters-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { UiSwitchModule } from 'ng2-ui-switch';
 import { LocationComponent } from './location/location.component';
-import { AccordionModule } from '../ui-elements/basic/accordion/accordion.module';
 import { CategoryComponent } from './category/category.component';
 import { AddEditCategoryComponent } from './category/add-edit-category/add-edit-category.component';
 import { AddEditLocationComponent } from './location/add-edit-location/add-edit-location.component';
@@ -23,7 +22,6 @@ import { TagInputModule } from 'ngx-chips';
     FormsModule,
     ReactiveFormsModule,
     UiSwitchModule,
-    AccordionModule,
     TagInputModule
   ],
   declarations: [
