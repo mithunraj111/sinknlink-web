@@ -17,6 +17,7 @@ import {AccordionDirective} from './accordion/accordion.directive';
 import { CategoryService } from '../services/masters/category.service';
 import { HttpHandlerService } from '../services/http-handler.service';
 import { LocalStorageService } from '../services/local-storage.service';
+import { LoginService } from '../services/auth/login.service';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -64,7 +65,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     }, NgbActiveModal,
     HttpHandlerService,
     LocalStorageService,
-    CategoryService
+    CategoryService,
+    LoginService
   ]
 })
 export class SharedModule { }

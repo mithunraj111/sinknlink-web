@@ -30,6 +30,9 @@ export const AppConstant = Object.freeze({
       displaydate: 'dd-MMM-yyyy',
     },
     API_URL: {
+      AUTH: {
+        LOGIN: 'auth/sigin'
+      },
       MASTERS: {
         CATEGORY: {
           CREATE: 'masters/category/create',
