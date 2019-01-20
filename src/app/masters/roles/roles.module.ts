@@ -7,7 +7,6 @@ import { HttpModule } from '@angular/http';
 import { UiSwitchModule } from 'ng2-ui-switch';
 import { DataTableModule } from 'angular2-datatable';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-// import { DataFilterPipe } from '../../shared/elements/data-filter.pipe';
 import { AddrolesComponent } from './addroles/addroles.component';
 import { SelectModule } from 'ng-select';
 import { SelectOptionService } from '../../shared/elements/select-option.service';

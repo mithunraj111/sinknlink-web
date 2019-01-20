@@ -1,36 +1,37 @@
 <div class="modal-size">
-  <app-modal-animation [modalID]="'categorymodal'" [modalClass]="'md-effect-7'">
-    <h3 class="f-26">{{title}}</h3>
-    <div class="form-header">
-      <div class="row ">
-        <div class="col-md-12">
-          <div class="form-group required">
-            <label>Business Category Name</label>
-            <input type="text" class="form-control" placeholder=" Business Category Name">
-          </div>
-          <div *ngIf="categoryPage" class="form-group">
-            <label>Status <small>*</small></label>
-            <div class="form-radio">
-              <form>
-                <div class="radio radio-inline">
-                  <label>
-                    <input type="radio" name="radio" checked="checked">
+    <app-modal-animation [modalID]="'categorymodal'" [modalClass]="'md-effect-7'">
+        <h3 class="f-26">{{formTitle}}</h3>
+
+        <div class="form-header">
+            <form [formGroup]="categoryForm">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group required">
+                            <label>Business Category Name</label>
+                            <input type="text" class="form-control" name="categoryname" formControlName="categoryname" placeholder=" Business Category Name">
+                        </div>
+                        <div class="form-group" *ngIf="categoryObj?.categoryid">
+                            <label>Status <small>*</small></label>
+                            <div class="form-radio">
+                                <div class="radio radio-inline">
+                                    <label>
+                    <input type="radio" class="form-control" [value]="true" name="status" formControlName="status">
                     <i class="helper"></i>Active
                   </label>
-                </div>
-                <div class="radio radio-inline">
-                  <label>
-                    <input type="radio" name="radio">
+                                </div>
+                                <div class="radio radio-inline">
+                                    <label>
+                    <input type="radio" class="form-control" [value]="false" name="status" formControlName="status">
                     <i class="helper"></i>Inactive
                   </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </form>
-            </div>
-          </div>
+                <button type="button" placement="top" (click)="saveOrUpdateCategory()" ngbTooltip="Click to {{buttonTxt}} business category" class="btn pull-right btn-primary waves-effect m-b-10">{{buttonTxt}}</button>
+            </form>
         </div>
-      </div>
-      <button type="button" placement="top" (click)="save()" ngbTooltip="Click to {{submit}} business category" class="btn pull-right btn-primary waves-effect m-b-10">{{submit}}</button>
-    </div>
-    <button (click)="closeMyModal($event)" aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>
-  </app-modal-animation>
+        <button aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>
+    </app-modal-animation>
 </div>

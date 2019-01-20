@@ -1,21 +1,23 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {NgbModule,NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import {ToggleFullScreenDirective} from './fullscreen/toggle-fullscreen.directive';
+import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToggleFullScreenDirective } from './fullscreen/toggle-fullscreen.directive';
+import { HttpClientModule } from '@angular/common/http';
+import { PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface, PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { TitleComponent } from '../layout/admin/title/title.component';
+import { CardComponent } from './card/card.component';
+import { CardToggleDirective } from './card/card-toggle.directive';
+import { ModalAnimationComponent } from './modal-animation/modal-animation.component';
+import { SpinnerComponent } from './spinner/spinner.component';
+import { ClickOutsideModule } from 'ng-click-outside';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import {AccordionAnchorDirective} from './accordion/accordionanchor.directive';
 import {AccordionLinkDirective} from './accordion/accordionlink.directive';
 import {AccordionDirective} from './accordion/accordion.directive';
-import {HttpClientModule} from '@angular/common/http';
-import {PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface, PerfectScrollbarModule} from 'ngx-perfect-scrollbar';
-import {TitleComponent} from '../layout/admin/title/title.component';
-import {CardComponent} from './card/card.component';
-import {CardToggleDirective} from './card/card-toggle.directive';
-import {ModalBasicComponent} from './modal-basic/modal-basic.component';
-import {ModalAnimationComponent} from './modal-animation/modal-animation.component';
-import {SpinnerComponent} from './spinner/spinner.component';
-import {ClickOutsideModule} from 'ng-click-outside';
-import { DataFilterPipe } from '../shared/elements/data-filter.pipe';
-import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { CategoryService } from '../services/masters/category.service';
+import { HttpHandlerService } from '../services/http-handler.service';
+import { LocalStorageService } from '../services/local-storage.service';
+
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
 };
@@ -39,11 +41,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     PerfectScrollbarModule,
     TitleComponent,
     CardComponent,
-    ModalBasicComponent,
     ModalAnimationComponent,
     SpinnerComponent,
     ClickOutsideModule,
-    DataFilterPipe,
     NgxDatatableModule
   ],
   declarations: [
@@ -54,16 +54,17 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     CardToggleDirective,
     TitleComponent,
     CardComponent,
-    ModalBasicComponent,
     ModalAnimationComponent,
-    SpinnerComponent,
-    DataFilterPipe
+    SpinnerComponent
   ],
   providers: [
     {
       provide: PERFECT_SCROLLBAR_CONFIG,
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
-    },NgbActiveModal 
+    }, NgbActiveModal,
+    HttpHandlerService,
+    LocalStorageService,
+    CategoryService
   ]
 })
 export class SharedModule { }

@@ -28,10 +28,6 @@ const routes: Routes = [
       {
         path: 'admins',
         loadChildren: './admins/admins.module#AdminsModule'
-      },
-      {
-        path: 'user',
-        loadChildren: './user/user.module#UserModule'
       }
     ]
   },

@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, ViewChild } from '@angular/core';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { AppConstant } from '../../app.constants';
+import { CategoryService } from '../../services/masters/category.service';
 
 @Component({
   selector: 'app-category',
@@ -9,53 +10,54 @@ import { AppConstant } from '../../app.constants';
 })
 export class CategoryComponent implements OnInit {
   @ViewChild(DatatableComponent) table: DatatableComponent;
-  @Output() categorydtls: {};
+  @Output() categoryObj= {} as any;
   public data: any;
   tempFilter = [];
-  formTitle: string;
-  formSubmit: string;
   categoryPage: any;
   displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
-  date: any;
-  constructor() {
-    this.data = [
-      { businesscategory: 'Restaurants', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
-      { businesscategory: 'Electronics', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
-      { businesscategory: 'Shopping', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
-      { businesscategory: 'Cinemas', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
-      { businesscategory: 'Travel', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
-      { businesscategory: 'Taxi', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
-      { businesscategory: 'Spa and saloon', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
-      { businesscategory: 'Automobiles', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
-      { businesscategory: 'Hospitals', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' },
-      { businesscategory: 'Training institutes', updateddt: '26-Dec-2018 15:00', updatedby: 'Admin' }
-    ];
-    this.tempFilter = this.data;
-    this.date = new Date();
-
+  categoryList = [];
+  constructor(private categoryService: CategoryService) {
+    this.tempFilter = this.categoryList;
   }
 
   ngOnInit() {
+    this.getCategories();
   }
-  openMyModal(event) {
+
+  // API call to get the category list
+
+  getCategories() {
+    const condition = {
+      status: 'Active'
+    };
+    this.categoryService.list(condition).subscribe((res) => {
+      const response = JSON.parse(res._body);
+      if (response.status) {
+        this.categoryList = response.data;
+      }
+    });
+  }
+  openCategoryModal(event) {
     document.querySelector('#' + event).classList.add('md-show');
+  }
+  closeCategoryModal(event) {
+    ((event.target.parentElement.parentElement).parentElement).classList.remove('md-show');
   }
   getRowHeight(row) {
     return row.height;
   }
   addCategory() {
-    this.categorydtls = {};
-    this.formTitle = 'Add Business Category';
-    this.formSubmit = 'Save';
-    this.openMyModal('categorymodal');
-    this.categoryPage = false;
+    this.categoryObj = {};
+    this.openCategoryModal('categorymodal');
   }
   editCategory(data) {
-    this.categorydtls = data;
-    this.formTitle = 'Edit Business Category';
-    this.formSubmit = 'Update';
-    this.openMyModal('categorymodal');
-    this.categoryPage = true;
+    this.categoryObj = data;
+    this.openCategoryModal('categorymodal');
+  }
+
+  notifyCategoryEntry(event) {
+    this.getCategories();
+    this.closeCategoryModal('categorymodal');
   }
   search(event) {
     const val = event.target.value.toLowerCase();

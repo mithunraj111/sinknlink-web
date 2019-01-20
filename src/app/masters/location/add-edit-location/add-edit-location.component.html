@@ -1,59 +1,57 @@
 <div class="modal-size  addlocation">
-  <app-modal-animation [modalID]="'locationmodal'" [modalClass]="'md-effect-7'">
-    <h3 class="f-26">{{title}}</h3>
-    <div class="form-header">
-      <div class="row ">
-        <div class="col-md-12">
-          <div class="form-group required">
-            <label>Pincode</label>
-            <input type="text" class="form-control" placeholder="Pincode">
-          </div>
-          <div class="form-group required">
-            <label>Area</label>
-            <input type="text" class="form-control" placeholder="Area">
-          </div>
-          <div class="form-group required">
-            <label>State</label>
-            <select name="select" class="form-control p-1">
+    <app-modal-animation [modalID]="'locationmodal'" [modalClass]="'md-effect-7'">
+        <h3 class="f-26">{{title}}</h3>
+        <form>
+            <div class="form-header">
+                <div class="row ">
+                    <div class="col-md-12">
+                        <div class="form-group required">
+                            <label>Pincode</label>
+                            <input type="text" class="form-control" placeholder="Pincode">
+                        </div>
+                        <div class="form-group required">
+                            <label>Area</label>
+                            <input type="text" class="form-control" placeholder="Area">
+                        </div>
+                        <div class="form-group required">
+                            <label>State</label>
+                            <select name="select" class="form-control p-1">
               <option value="opt1">Select your state</option>
               <option value="opt2">TamilNadu</option>
               <option value="opt3">Kerala</option>
               <option value="opt4">Andrapradesh</option>
               <option value="opt5">Karnataka</option>
             </select>
-          </div>
-          <div class="form-group required location-page">
-            <label>City</label>
-            <div class="input-tag">
-            <tag-input [ngClass]="'tag-select'" theme='bootstrap' [placeholder]="'Select your city'" [maxItems]="1"
-              [ngModel]="[]" [addOnBlur]="true" [clearOnBlur]="true" [secondaryPlaceholder]="'Select your city'">
-            </tag-input>
-            </div>
-          </div>
-          <div *ngIf="locationPage" class="form-group ">
-            <label>Status <small>*</small></label>
-            <div class="form-radio">
-              <form>
-                <div class="radio radio-inline">
-                  <label>
+                        </div>
+                        <div class="form-group required location-page">
+                            <label>City</label>
+                            <div class="input-tag">
+                                <tag-input [ngClass]="'tag-select'" theme='bootstrap' [placeholder]="'Select your city'" [maxItems]="1" [ngModel]="[]" [addOnBlur]="true" [clearOnBlur]="true" [secondaryPlaceholder]="'Select your city'">
+                                </tag-input>
+                            </div>
+                        </div>
+                        <div *ngIf="locationPage" class="form-group ">
+                            <label>Status <small>*</small></label>
+                            <div class="form-radio">
+                                <div class="radio radio-inline">
+                                    <label>
                     <input type="radio" name="radio" checked="checked">
                     <i class="helper"></i>Active
                   </label>
-                </div>
-                <div class="radio radio-inline">
-                  <label>
+                                </div>
+                                <div class="radio radio-inline">
+                                    <label>
                     <input type="radio" name="radio">
                     <i class="helper"></i>Inactive
                   </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </form>
+                <button (click)="closeMyModal($event)" type="button" placement="top" ngbTooltip="Click to {{submit}} locations " (click)="save()" class="btn pull-right btn-primary waves-effect m-b-10">{{submit}}</button>
             </div>
-          </div>
-        </div>
-      </div>
-      <button (click)="closeMyModal($event)" type="button" placement="top" ngbTooltip="Click to {{submit}} locations "
-        (click)="save()" class="btn pull-right btn-primary waves-effect m-b-10">{{submit}}</button>
-    </div>
-    <button (click)="closeMyModal($event)" aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>
-  </app-modal-animation>
+        </form>
+        <button (click)="closeMyModal($event)" aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>
+    </app-modal-animation>
 </div>
