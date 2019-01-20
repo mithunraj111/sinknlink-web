@@ -18,7 +18,7 @@ export const AppConstant = Object.freeze({
       ADD: 'Add Business Category',
       UPDATE: 'Update Business Category'
     }
-  }
+  },
   // Status
   STATUS_ACTIVE: 'Active',
   STATUS_INACTIVE: 'Inactive',
@@ -35,22 +35,22 @@ export const AppConstant = Object.freeze({
       },
       MASTERS: {
         CATEGORY: {
-          CREATE: 'masters/category/create',
-          LIST: 'masters/category',
-          GETBYID: 'masters/category/',
-          UPDATE: 'masters/category/edit/'
+          CREATE: 'category/create',
+          LIST: 'category',
+          GETBYID: 'category/',
+          UPDATE: 'category/edit/'
         },
         LOCATION: {
-          CREATE: 'masters/location/create',
-          LIST: 'masters/location',
-          GETBYID: 'masters/location/',
-          UPDATE: 'masters/location/edit/'
+          CREATE: 'location/create',
+          LIST: 'location',
+          GETBYID: 'location/',
+          UPDATE: 'location/edit/'
         },
         LOOKUP: {
-          CREATE: 'masters/lookup/create',
-          LIST: 'masters/lookup',
-          GETBYID: 'masters/lookup/',
-          UPDATE: 'masters/lookup/edit/'
+          CREATE: 'lookup/create',
+          LIST: 'lookup',
+          GETBYID: 'lookup/',
+          UPDATE: 'lookup/edit/'
         }
       }
     }

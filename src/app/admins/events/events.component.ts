@@ -48,10 +48,10 @@ export class EventsComponent implements OnInit {
     ((event.target.parentElement.parentElement).parentElement).classList.remove('md-show');
   }
   addEvents() {
-    this.router.navigate(['admins/events/create']);
+    this.router.navigate(['admins/event/create']);
   }
   editEvents(data) {
-    this.router.navigate(['admins/events/edit/' + 1]);
+    this.router.navigate(['admins/event/edit/' + 1]);
   }
   search(event) {
     const val = event.target.value.toLowerCase();

@@ -70,7 +70,7 @@ export class AddEditCategoryComponent implements OnInit, OnChanges {
         this.categoryService.update(formdata, this.categoryObj.categoryid).subscribe(res => {
           const response = JSON.parse(res._body);
           if (response.status) {
-            this.notifyCategoryEntry({ update: true, data: response.data });
+            this.notifyCategoryEntry.next({ update: true, data: response.data });
           } else {
           }
         });
@@ -81,7 +81,7 @@ export class AddEditCategoryComponent implements OnInit, OnChanges {
         this.categoryService.create(formdata).subscribe((res) => {
           const response = JSON.parse(res._body);
           if (response.status) {
-            this.notifyCategoryEntry({ add: true, data: response.data });
+            this.notifyCategoryEntry.next({ add: true, data: response.data });
           } else {
 
           }

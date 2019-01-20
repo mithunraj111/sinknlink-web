@@ -11,9 +11,9 @@ import { ModalAnimationComponent } from './modal-animation/modal-animation.compo
 import { SpinnerComponent } from './spinner/spinner.component';
 import { ClickOutsideModule } from 'ng-click-outside';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
-import {AccordionAnchorDirective} from './accordion/accordionanchor.directive';
-import {AccordionLinkDirective} from './accordion/accordionlink.directive';
-import {AccordionDirective} from './accordion/accordion.directive';
+import { AccordionAnchorDirective } from './accordion/accordionanchor.directive';
+import { AccordionLinkDirective } from './accordion/accordionlink.directive';
+import { AccordionDirective } from './accordion/accordion.directive';
 import { CategoryService } from '../services/masters/category.service';
 import { HttpHandlerService } from '../services/http-handler.service';
 import { LocalStorageService } from '../services/local-storage.service';

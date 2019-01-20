@@ -20,23 +20,23 @@ const routes: Routes = [
         component: EventsComponent
       },
       {
-        path: 'events/create',
+        path: 'event/create',
         component: AddEditEventsComponent
       },
       {
-        path: 'events/edit/:id',
-        component: AddEditEventsComponent      
+        path: 'event/edit/:id',
+        component: AddEditEventsComponent
       },
       {
         path: 'donations',
         component: DonationsComponent
-      }, 
+      },
       {
-        path: 'donations/create',
+        path: 'donation/create',
         component: AddEditDonationsComponent,
       },
       {
-        path: 'donations/edit/:id',
+        path: 'donation/edit/:id',
         component: AddEditDonationsComponent,
       },
       {
@@ -52,17 +52,7 @@ const routes: Routes = [
         component: AddEditVipRegistrationNumberComponent,
       }
     ],
-  },
-  // {
-  //   path: '',
-  //   component: DonationsComponent,
-  //   data: {
-  //     title: 'Donations',
-  //     icon: 'ti-settings',
-  //     caption: 'donations',
-  //     status: true
-  //   }
-  // },
+  }
 ]
 
 @NgModule({

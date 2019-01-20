@@ -75,10 +75,10 @@ export class DonationsComponent implements OnInit {
     this.hasAnotherDropZoneOver = e;
   }
   addDonations() {
-    this.router.navigate(['admins/donations/create']);
+    this.router.navigate(['admins/donation/create']);
   }
   editDonations(data) {
-    this.router.navigate(['admins/donations/edit/' + 1]);
+    this.router.navigate(['admins/donation/edit/' + 1]);
   }
   search(event) {
     const val = event.target.value.toLowerCase();

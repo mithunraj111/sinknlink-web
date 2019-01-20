@@ -112,7 +112,7 @@ const MENUITEMS = [
           }
         ]
       },
-      { 
+      {
         state: 'reports',
         short_label: 'R',
         name: 'Reports',

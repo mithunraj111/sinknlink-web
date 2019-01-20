@@ -8,7 +8,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
 import { MenuItems } from './shared/menu-items/menu-items';
 import { MastersComponent } from './masters/masters.component';
-import { AdminsComponent } from './admins/admins.component';
 import { BootstrapAlertService, BootstrapAlertModule } from 'ngx-bootstrap-alert-service';
 import { BusinessComponent } from './business/business.component';
 
@@ -17,9 +16,6 @@ import { BusinessComponent } from './business/business.component';
     AppComponent,
     AdminComponent,
     AuthComponent,
-    MastersComponent,
-    AdminsComponent,
-    BusinessComponent
   ],
   imports: [
     BrowserModule,
