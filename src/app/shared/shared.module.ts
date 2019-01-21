@@ -15,9 +15,8 @@ import { AccordionAnchorDirective } from './accordion/accordionanchor.directive'
 import { AccordionLinkDirective } from './accordion/accordionlink.directive';
 import { AccordionDirective } from './accordion/accordion.directive';
 import { CategoryService } from '../services/masters/category.service';
-import { HttpHandlerService } from '../services/http-handler.service';
-import { LocalStorageService } from '../services/local-storage.service';
 import { LoginService } from '../services/auth/login.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -30,6 +29,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     HttpClientModule,
     PerfectScrollbarModule,
     ClickOutsideModule,
+    ReactiveFormsModule
   ],
   exports: [
     NgbModule,
@@ -63,8 +63,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       provide: PERFECT_SCROLLBAR_CONFIG,
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
     }, NgbActiveModal,
-    HttpHandlerService,
-    LocalStorageService,
     CategoryService,
     LoginService
   ]

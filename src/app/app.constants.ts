@@ -24,6 +24,14 @@ export const AppConstant = Object.freeze({
   STATUS_INACTIVE: 'Inactive',
   STATUS_AVAILABLE: 'Available',
 
+  // Validation Messages
+  VALIDATION: {
+    LOGIN: {
+      mobileno: { required: 'Please enter mobile number' },
+      password: { required: 'Please enter password' }
+    }
+  },
+
   API_CONFIG: {
     ANG_DATE: {
       displaydtime: 'dd-MMM-yyyy HH:mm',
@@ -31,7 +39,8 @@ export const AppConstant = Object.freeze({
     },
     API_URL: {
       AUTH: {
-        LOGIN: 'auth/sigin'
+        LOGIN: 'auth/signin',
+        FORGOTPWD: 'auth/forgotpassword'
       },
       MASTERS: {
         CATEGORY: {
@@ -51,6 +60,12 @@ export const AppConstant = Object.freeze({
           LIST: 'lookup',
           GETBYID: 'lookup/',
           UPDATE: 'lookup/edit/'
+        },
+        USER: {
+          CREATE: 'user/create',
+          LIST: 'user',
+          GETBYID: 'user/',
+          UPDATE: 'user/edit/'
         }
       }
     }

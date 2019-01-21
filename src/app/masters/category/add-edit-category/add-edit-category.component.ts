@@ -35,7 +35,6 @@ export class AddEditCategoryComponent implements OnInit, OnChanges {
     this.categoryObj = {};
   }
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes.categoryObj);
     if (!_.isUndefined(changes.categoryObj) && !_.isEmpty(changes.categoryObj.currentValue)) {
       this.buttonTxt = AppConstant.BUTTON_TXT.UPDATE;
       this.formTitle = AppConstant.FORM_TITLE.CATEGORY.UPDATE;

@@ -8,6 +8,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
 import { MenuItems } from './shared/menu-items/menu-items';
 import { BootstrapAlertService, BootstrapAlertModule } from 'ngx-bootstrap-alert-service';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
+import { CommonService } from './services/common.service';
+import { HttpHandlerService } from './services/http-handler.service';
+import { LocalStorageService } from './services/local-storage.service';
 
 
 @NgModule({
@@ -21,9 +26,16 @@ import { BootstrapAlertService, BootstrapAlertModule } from 'ngx-bootstrap-alert
     BrowserAnimationsModule,
     AppRoutingModule,
     SharedModule,
-    BootstrapAlertModule
+    BootstrapAlertModule,
+    ReactiveFormsModule,
+    HttpModule
   ],
-  providers: [MenuItems, BootstrapAlertService],
+  providers: [
+    MenuItems,
+    BootstrapAlertService,
+    HttpHandlerService,
+    LocalStorageService,
+    CommonService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -12,8 +12,7 @@
                 </div>
                 <div class="col-md-12 col-lg-6 pull-right">
                     <div class="login-card card-block">
-                        <form class="md-float-material">
-
+                        <form class="md-float-material" [formGroup]="loginForm">
                             <div class="auth-box">
                                 <div class="row m-b-10">
                                     <div class="col-md-12">
@@ -21,12 +20,15 @@
                                     </div>
                                 </div>
 
+                                <div *ngIf="errMessage" class="alert alert-danger">
+                                    <strong>{{errMessage}}</strong>
+                                </div>
                                 <div class="input-group">
-                                    <input type="mobile number" class="form-control" placeholder="Mobile Number">
+                                    <input type="text" class="form-control" name="mobileno" formControlName="mobileno" placeholder="Mobile Number">
                                     <span class="md-line"></span>
                                 </div>
                                 <div class="input-group">
-                                    <input type="password" class="form-control" placeholder="Password">
+                                    <input type="password" class="form-control" name="password" formControlName="password" placeholder="Password">
                                     <span class="md-line"></span>
                                 </div>
                                 <div class="row m-t-25 text-left">
@@ -38,7 +40,7 @@
                                 </div>
                                 <div class="row m-t-30">
                                     <div class="col-md-12">
-                                        <button type="button" routerLink="/dashboard" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20">Sign
+                                        <button type="button" (click)="login()" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20">Sign
                       in</button>
                                     </div>
                                 </div>
