@@ -10,7 +10,7 @@ import { CategoryService } from '../../services/masters/category.service';
 })
 export class CategoryComponent implements OnInit {
   @ViewChild(DatatableComponent) table: DatatableComponent;
-  @Output() categoryObj= {} as any;
+  @Output() categoryObj = {} as any;
   public data: any;
   tempFilter = [];
   categoryPage: any;

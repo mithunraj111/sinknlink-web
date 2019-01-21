@@ -282,7 +282,7 @@ h6 {
             border-radius: 0 0 0 7px;
             right: 10px;
             top: 18px;
-            display: inline-block;
+            display: block;
             float: right;
             padding: 7px 0;
             position: absolute;
@@ -300,14 +300,14 @@ h6 {
                 &.icofont.icofont-spinner-alt-5 {
                     display: none;
 
-                    &:before {
-                        // content: "";
-                        // background-image: url('../../assets/images/load.png');
-                        // display: inline-block;
-                        // width: 20px;
-                        // height: 20px;
-                        // background-size: cover;
-                    }
+                    // &:before {
+                    //     content: "";
+                    //     background-image: url('../../assets/images/load.png');
+                    //     display: inline-block;
+                    //     width: 20px;
+                    //     height: 20px;
+                    //     background-size: cover;
+                    // }
                 }
             }
 
@@ -322,17 +322,17 @@ h6 {
                 }
             }
 
-            &:hover {
-                // .card-option {
-                //     width: 145px;
-                // }
-                //
-                // li {
-                //     &:first-child {
-                //         display: none;
-                //     }
-                // }
-            }
+            // &:hover {
+            //     .card-option {
+            //         width: 145px;
+            //     }
+                
+            //     li {
+            //         &:first-child {
+            //             display: none;
+            //         }
+            //     }
+            // }
         }
 
         span {
@@ -647,7 +647,7 @@ h6 {
 }
 
 .card-block ul li.list-inline-item {
-    display: inline-block;
+    display: block;
     float: left;
 }
 /*======= Typography css end ========*/
@@ -1067,14 +1067,12 @@ button.close {
         margin: -7px 0 0 -15px;
         width: 30px;
         height: 20px;
-        background: url("../assets/images/tooltip/tooltip1.svg") center center no-repeat;
         background-size: 100%;
     }
 }
 
 .tooltip-content3 {
     position: absolute;
-    background: url("../assets/images/tooltip/shape1.svg") center bottom no-repeat;
     background-size: 100% 100%;
     z-index: 9999;
     width: 200px;
@@ -1200,7 +1198,7 @@ button.close {
         padding: 40px;
         -webkit-transform: translate3d(0, 100%, 0);
         transform: translate3d(0, 100%, 0);
-        webkit-transition: -webkit-transform 0.3s;
+        -webkit-transition: -webkit-transform 0.3s;
         transition: transform 0.3s;
     }
 }
@@ -2351,9 +2349,9 @@ ul.list-contacts .list-group-item {
         margin-bottom: 20px;
     }
 
-    .pagination li {
-        // margin-right: 0 !important;
-    }
+    // .pagination li {
+       // margin-right: 0 !important;
+    // }
 }
 
 .table button {
@@ -2490,7 +2488,7 @@ img.comment-img {
 }
 
 .author {
-    display: inline-block;
+    display: block;
     float: right;
 
     a {
@@ -5486,9 +5484,9 @@ a[data-toggle="lightbox"] .img-fluid {
     }
 }
 @media only screen and (max-width:575px) {
-    .dt-bootstrap4 > div:last-child {
-        // display: none;
-    }
+    // .dt-bootstrap4 > div:last-child {
+    //     display: none;
+    // }
 
     .card .card-header .card-header-right.job-compney-btn {
         position: relative;

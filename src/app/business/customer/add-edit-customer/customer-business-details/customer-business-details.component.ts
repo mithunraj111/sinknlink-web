@@ -42,7 +42,7 @@ export class CustomerBusinessDetailsComponent implements OnInit {
     this.openMyModal('socialidmodal');
     this.socialidPage = true;
   }
-  openMap(){
+  openMap() {
     this.openMyModal('mapmodal');
   }
   openMyModal(event) {
