@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { RolesComponent } from './roles.component';
-import { AddrolesComponent } from './addroles/addroles.component';
+import { AddEditRoleComponent } from './add-edit-role/add-edit-role.component';
 
 const routes: Routes = [
   {
@@ -16,7 +16,7 @@ const routes: Routes = [
   },
   {
     path: 'create',
-    component: AddrolesComponent,
+    component: AddEditRoleComponent,
     data: {
       title: 'Add Roles',
       icon: 'ti-settings',
@@ -26,7 +26,7 @@ const routes: Routes = [
   },
   {
     path: 'edit/:id',
-    component: AddrolesComponent,
+    component: AddEditRoleComponent,
   }
 ];
 

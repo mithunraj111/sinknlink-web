@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, ViewEncapsulation, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { ModalDismissReasons, NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { AppConstant } from '../../app.constants';
+import { DonationService } from 'src/app/services/admin/donation.service';
 
 @Component({
   selector: 'app-donations',
@@ -11,74 +11,31 @@ import { AppConstant } from '../../app.constants';
   styleUrls: ['./donations.component.scss']
 })
 export class DonationsComponent implements OnInit {
-  hasBaseDropZoneOver = false;
-  hasAnotherDropZoneOver = false;
-  @Input('modalDefault') modalDefault: any;
   @ViewChild(DatatableComponent) table: DatatableComponent;
-  closeResult: string;
-  // ariaLabelledBy:string;
-  public data: any;
-  public filterQuery = '';
-  public sortBy = '';
-  public sortOrder = 'desc';
-  public userProPic: string;
-  openResult: { ariaLabelledBy: string; };
   tempFilter = [];
   displaydtimeformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   displaydateformat = AppConstant.API_CONFIG.ANG_DATE.displaydate;
-  date: Date;
-  constructor(private router: Router,
-    public modalService: NgbModal, public activeModal: NgbActiveModal) {
-    console.log(activeModal)
-    this.data = [
-      { charity: 'AARP Foundation', startdate: '02-Nov-2018', enddate: '02-Dec-2018', updatedby: 'Admin' },
-      { charity: 'AWP Foundation', startdate: '02-Nov-2018', enddate: '02-Dec-2018', updatedby: 'Admin' },
-      { charity: 'AWP Foundation', startdate: '02-Nov-2018', enddate: '02-Dec-2018', updatedby: 'Admin' },
-      { charity: 'AWP Foundation', startdate: '02-Nov-2018', enddate: '02-Dec-2018', updatedby: 'Admin' },
-      { charity: 'AWP Foundation', startdate: '02-Nov-2018', enddate: '02-Dec-2018', updatedby: 'Admin' },
-      { charity: 'AWP Foundation', startdate: '02-Nov-2018', enddate: '02-Dec-2018', updatedby: 'Admin' },
-      { charity: 'AWP Foundation', startdate: '02-Nov-2018', enddate: '02-Dec-2018', updatedby: 'Admin' },
-      { charity: 'AWP Foundation', startdate: '02-Nov-2018', enddate: '02-Dec-2018', updatedby: 'Admin' },
-      { charity: 'AWP Foundation', startdate: '02-Nov-2018', enddate: '02-Dec-2018', updatedby: 'Admin' },
-      { charity: 'AWP Foundation', startdate: '02-Nov-2018', enddate: '02-Dec-2018', updatedby: 'Admin' },
-      { charity: 'AWP Foundation', startdate: '02-Nov-2018', enddate: '02-Dec-2018', updatedby: 'Admin', }
-    ];
-    this.tempFilter = this.data;
-    this.date = new Date();
+  donationList = [];
+  constructor(private router: Router, private donationService: DonationService) {
   }
 
   ngOnInit() {
+    this.getDonations();
   }
-  open(content) {
-    this.modalService.open(content);
+  getDonations() {
+    this.donationService.list({}).subscribe(res => {
+      const response = JSON.parse(res._body);
+      if (response.status) {
+        this.donationList = response.data;
+        this.tempFilter = this.donationList;
+      }
+    });
   }
-  close(content) {
-    this.activeModal.close()
-  }
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
-    }
-  }
-  openMyModal(event) {
-    document.querySelector('#' + event).classList.add('md-show');
-  }
-  fileOverBase(e: any): void {
-    this.hasBaseDropZoneOver = e;
-  }
-
-  fileOverAnother(e: any): void {
-    this.hasAnotherDropZoneOver = e;
-  }
-  addDonations() {
+  addDonation() {
     this.router.navigate(['admins/donation/create']);
   }
-  editDonations(data) {
-    this.router.navigate(['admins/donation/edit/' + 1]);
+  editDonation(data) {
+    this.router.navigate(['admins/donation/edit/' + data.donationid]);
   }
   search(event) {
     const val = event.target.value.toLowerCase();
@@ -89,7 +46,7 @@ export class DonationsComponent implements OnInit {
         }
       }
     });
-    this.data = temp;
+    this.donationList = temp;
     this.table.offset = 0;
   }
 }

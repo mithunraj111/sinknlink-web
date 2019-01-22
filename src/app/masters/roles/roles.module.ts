@@ -7,7 +7,7 @@ import { HttpModule } from '@angular/http';
 import { UiSwitchModule } from 'ng2-ui-switch';
 import { DataTableModule } from 'angular2-datatable';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AddrolesComponent } from './addroles/addroles.component';
+import { AddEditRoleComponent } from './add-edit-role/add-edit-role.component';
 import { SelectModule } from 'ng-select';
 import { SelectOptionService } from '../../shared/elements/select-option.service';
 
@@ -23,8 +23,8 @@ import { SelectOptionService } from '../../shared/elements/select-option.service
     UiSwitchModule,
     SelectModule
   ],
-  declarations: [RolesComponent, AddrolesComponent],
-  bootstrap: [RolesComponent, AddrolesComponent],
+  declarations: [RolesComponent, AddEditRoleComponent],
+  bootstrap: [],
   providers: [SelectOptionService]
 })
 export class RolesModule { }
