@@ -67,6 +67,12 @@ export const AppConstant = Object.freeze({
           LIST: 'user',
           GETBYID: 'user/',
           UPDATE: 'user/edit/'
+        },
+        ROLE: {
+          CREATE: 'role/create',
+          LIST: 'role',
+          GETBYID: 'role/',
+          UPDATE: 'role/edit/'
         }
       }
     }

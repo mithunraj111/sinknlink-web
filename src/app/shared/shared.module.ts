@@ -19,6 +19,9 @@ import { LoginService } from '../services/auth/login.service';
 import { ForgotPasswordService } from '../services/auth/forgotpassword.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DonationService } from '../services/admin/donation.service';
+import { RoleService } from '../services/masters/role.service';
+import { UserService } from '../services/masters/user.service';
+import { LocationService } from '../services/masters/location.service';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -68,7 +71,10 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     CategoryService,
     LoginService,
     ForgotPasswordService,
-    DonationService
+    DonationService,
+    LocationService,
+    UserService,
+    RoleService
   ]
 })
 export class SharedModule { }
