@@ -16,6 +16,7 @@ import { AccordionLinkDirective } from './accordion/accordionlink.directive';
 import { AccordionDirective } from './accordion/accordion.directive';
 import { CategoryService } from '../services/masters/category.service';
 import { LoginService } from '../services/auth/login.service';
+import { ForgotPasswordService } from '../services/auth/forgotpassword.service';
 import { ReactiveFormsModule } from '@angular/forms';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -64,7 +65,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
     }, NgbActiveModal,
     CategoryService,
-    LoginService
+    LoginService,
+    ForgotPasswordService
   ]
 })
 export class SharedModule { }

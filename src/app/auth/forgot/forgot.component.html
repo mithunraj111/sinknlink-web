@@ -5,7 +5,7 @@
       <div class="col-sm-12">
         <!-- Authentication card start -->
         <div class="login-card card-block auth-body mr-auto ml-auto">
-          <form class="md-float-material">
+          <form class="md-float-material" [formGroup]="forgotPasswordForm" (ngSubmit)="sendSMS()">
             <div class="text-center">
               <!-- <img src="assets/images/fo-log.png" alt="Business Directory"> -->
               <h2>BUSINESS DIRECTORY</h2>
@@ -16,14 +16,19 @@
                   <h3 class="text-left">Recover your password</h3>
                 </div>
               </div>
-
+              <div *ngIf="errMessage" class="alert alert-danger">
+                <strong>{{errMessage}}</strong>
+              </div>
+              <div *ngIf="sucMessage" class="alert alert-success">
+                <strong>{{sucMessage}}</strong>
+              </div>
               <div class="input-group">
-                <input class="form-control" placeholder="Mobile Number">
+                <input class="form-control" formControlName="mobileno" type="text" placeholder="Mobile Number">
                 <span class="md-line"></span>
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <button type="button" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20">Submit</button>
+                  <button [disabled]="validatingUser" type="submit" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20">{{validatingUser == true ? 'Verifying user..,' : 'Submit'}}</button>
                 </div>
               </div>
 

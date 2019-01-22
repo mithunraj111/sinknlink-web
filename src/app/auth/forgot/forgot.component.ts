@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { CommonService } from '../../services/common.service';
+import { ForgotPasswordService } from '../../services/auth/forgotpassword.service';
+import { AppConstant } from 'src/app/app.constants';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-forgot',
@@ -7,9 +12,43 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ForgotComponent implements OnInit {
 
-  constructor() { }
+  forgotPasswordForm: FormGroup;
+  forgotPasswordErrObj = AppConstant.VALIDATION.FORGOTPASSWORD;
+  errMessage;
+  sucMessage;
+  validatingUser;
+
+  constructor(private commonService: CommonService,
+    private fb: FormBuilder, private router: Router, private forgotPasswordService: ForgotPasswordService) {
+    this.forgotPasswordForm = this.fb.group({
+      mobileno: [null, Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(10)])]
+    });
+  }
 
   ngOnInit() {
+  }
+
+  sendSMS() {
+    if (this.forgotPasswordForm.status === 'INVALID') {
+      this.errMessage = this.commonService.getFormErrorMessage(this.forgotPasswordForm, this.forgotPasswordErrObj);
+    } else {
+      this.validatingUser = true;
+      this.forgotPasswordService.sendPassword(this.forgotPasswordForm.value).subscribe(res => {
+        const response = JSON.parse(res._body);
+        if (response.status) {
+          this.errMessage = "";
+          this.sucMessage = response.message;
+          this.validatingUser = false;
+          window.setTimeout(() => {
+            this.router.navigate(['/auth/login']);
+          }, 2000);
+        } else {
+          this.sucMessage = "";
+          this.errMessage = response.message;
+          this.validatingUser = false;
+        }
+      });
+    }
   }
 
 }
