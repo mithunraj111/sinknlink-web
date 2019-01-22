@@ -24,20 +24,6 @@ export const AppConstant = Object.freeze({
   STATUS_INACTIVE: 'Inactive',
   STATUS_AVAILABLE: 'Available',
 
-  // Validation Messages
-  VALIDATION: {
-    LOGIN: {
-      mobileno: { required: 'Please enter mobile number' },
-      password: { required: 'Please enter password' }
-    },
-    FORGOTPASSWORD: {
-      mobileno: {
-        required: 'Mobile number is required',
-        minlength: 'Mobile number is not valid',
-        maxlength: 'Mobile number is not valid'
-      }
-    }
-  },
 
   API_CONFIG: {
     ANG_DATE: {

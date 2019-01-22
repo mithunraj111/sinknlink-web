@@ -16,6 +16,7 @@ export class CategoryComponent implements OnInit {
   categoryPage: any;
   displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   categoryList = [];
+
   constructor(private categoryService: CategoryService) {
     this.tempFilter = this.categoryList;
   }
@@ -28,12 +29,18 @@ export class CategoryComponent implements OnInit {
 
   getCategories() {
     const condition = {
-      status: 'Active'
+      //limit: 'Active'
     };
-    this.categoryService.list(condition).subscribe((res) => {
+    let query = 'limit=11' + '&offset=' + this.categoryList.length;
+    this.categoryService.list(condition, query).subscribe((res) => {
       const response = JSON.parse(res._body);
       if (response.status) {
-        this.categoryList = response.data;
+        if (this.categoryList.length != 0) {
+          this.categoryList = this.categoryList.concat(response.data);
+          this.categoryList = [...this.categoryList];
+        } else {
+          this.categoryList = response.data;
+        }
       }
     });
   }

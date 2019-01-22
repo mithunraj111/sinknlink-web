@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CommonService } from '../../services/common.service';
 import { ForgotPasswordService } from '../../services/auth/forgotpassword.service';
-import { AppConstant } from 'src/app/app.constants';
 import { Router } from '@angular/router';
+import { AppMessages } from 'src/app/app-messages';
 
 @Component({
   selector: 'app-forgot',
@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 export class ForgotComponent implements OnInit {
 
   forgotPasswordForm: FormGroup;
-  forgotPasswordErrObj = AppConstant.VALIDATION.FORGOTPASSWORD;
+  forgotPasswordErrObj = AppMessages.VALIDATION.FORGOTPASSWORD;
   errMessage;
   sucMessage;
   validatingUser;

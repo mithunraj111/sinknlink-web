@@ -62,7 +62,7 @@ export class AddEditCategoryComponent implements OnInit, OnChanges {
       let data = this.categoryForm.value;
       let formdata = {} as any;
       formdata.categoryname = data.categoryname;
-      formdata.updatedby = '';
+      formdata.updatedby = this.userstoragedata.fullname;
       formdata.updateddt = new Date();
       if (!_.isUndefined(this.categoryObj) && !_.isUndefined(this.categoryObj.categoryid) && !_.isEmpty(this.categoryObj)) {
         formdata.status = data.status ? AppConstant.STATUS_ACTIVE : AppConstant.STATUS_INACTIVE;
@@ -75,7 +75,7 @@ export class AddEditCategoryComponent implements OnInit, OnChanges {
         });
       } else {
         formdata.status = AppConstant.STATUS_ACTIVE;
-        formdata.createdby = '';
+        formdata.createdby = this.userstoragedata.fullname;
         formdata.createddt = new Date();
         this.categoryService.create(formdata).subscribe((res) => {
           const response = JSON.parse(res._body);

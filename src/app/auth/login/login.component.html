@@ -12,7 +12,7 @@
                 </div>
                 <div class="col-md-12 col-lg-6 pull-right">
                     <div class="login-card card-block">
-                        <form class="md-float-material" [formGroup]="loginForm">
+                        <form class="md-float-material" [formGroup]="loginForm" (ngSubmit)="login()">
                             <div class="auth-box">
                                 <div class="row m-b-10">
                                     <div class="col-md-12">
@@ -40,7 +40,7 @@
                                 </div>
                                 <div class="row m-t-30">
                                     <div class="col-md-12">
-                                        <button type="button" (click)="login()" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20">Sign
+                                        <button type="submit" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20">Sign
                       in</button>
                                     </div>
                                 </div>

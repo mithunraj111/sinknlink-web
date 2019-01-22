@@ -9,8 +9,8 @@ export class CategoryService {
     constructor(private httpHandler: HttpHandlerService) {
         this.endpoint = AppConstant.API_END_POINT;
     }
-    list(data): Observable<any> {
-        return this.httpHandler.POST(this.endpoint + AppConstant.API_CONFIG.API_URL.MASTERS.CATEGORY.LIST, data);
+    list(data, query): Observable<any> {
+        return this.httpHandler.POST(this.endpoint + AppConstant.API_CONFIG.API_URL.MASTERS.CATEGORY.LIST + '?' + query, data);
     }
     create(data): Observable<any> {
         return this.httpHandler.POST(this.endpoint + AppConstant.API_CONFIG.API_URL.MASTERS.CATEGORY.CREATE, data);
