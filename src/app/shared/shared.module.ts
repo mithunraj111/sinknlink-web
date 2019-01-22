@@ -18,6 +18,7 @@ import { CategoryService } from '../services/masters/category.service';
 import { LoginService } from '../services/auth/login.service';
 import { ForgotPasswordService } from '../services/auth/forgotpassword.service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DonationService } from '../services/admin/donation.service';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -66,7 +67,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     }, NgbActiveModal,
     CategoryService,
     LoginService,
-    ForgotPasswordService
+    ForgotPasswordService,
+    DonationService
   ]
 })
 export class SharedModule { }

@@ -6,6 +6,7 @@
         <p>VIP number status can be checked and blocked.</p>
       </div>
       <div class="col-md-5 col-sm-5">
+
         <div class="text-right">
           <label>Search:
             <input type="search" (keyup)='search($event)' class="header-search form-control input-sm full-data-search"
@@ -14,17 +15,21 @@
         </div>
       </div>
       <div class="col-md-1 col-sm-1 p-r-0 p-l-0">
-        <button type="button" placement="bottom" ngbTooltip="Click to block a VIP number" class="btn btn-primary waves-effect"
-          (click)='allocateVipNumber()'><i class="fa fa-minus-circle m-r-5"></i> Action
-        </button>
+        <div ngbDropdown class="dropdown-primary">
+          <button ngbDropdownToggle class="btn btn-primary waves-effect waves-light " type="button">Action</button>
+          <div ngbDropdownMenu>
+            <a class="dropdown-item waves-light waves-effect" (click)='blockVipNumber()'>Block</a>
+            <a class="dropdown-item waves-light waves-effect" (click)='allocateVipNumber()'>Allocate</a>
+          </div>
+        </div>
       </div>
       <div class="col-md-1 col-sm-1 p-r-0">
         <button type="button" placement="bottom" ngbTooltip="Click to add" class="btn btn-primary waves-effect" (click)='addVipRegistration()'><i
             class="fa fa-plus-circle m-r-5"></i> New
         </button>
-      </div>
     </div>
   </div>
+</div>
 </div>
 <div class="header-block m-t-60">
   <div class="table-header fixed-table-header">
@@ -78,7 +83,7 @@
 <!-- Modal popup window -->
 <div class="modal-size">
   <app-modal-animation [modalID]="'vipnoregmodal'" [modalClass]="'md-effect-7'">
-    <h3 class="f-26">Block/Allocate</h3>
+    <h3 class="f-26">{{formTitle}}</h3>
     <div class="form-header">
       <div class="form-group required">
         <label>Membership ID</label>

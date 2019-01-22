@@ -35,6 +35,14 @@ export const AppConstant = Object.freeze({
         LOGIN: 'auth/signin',
         FORGOTPWD: 'auth/forgotpassword'
       },
+      ADMIN: {
+        DONATION: {
+          CREATE: 'donation/create',
+          LIST: 'donation',
+          GETBYID: 'donation/',
+          UPDATE: 'donation/edit/'
+        }
+      },
       MASTERS: {
         CATEGORY: {
           CREATE: 'category/create',

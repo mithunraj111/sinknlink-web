@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
@@ -14,7 +14,8 @@ export class VipNumberRegistrationComponent implements OnInit {
   tempFilter = [];
   selected = [];
   rows = [];
-
+  formTitle: string;
+  blocklist: string;
   constructor(private router: Router) {
     this.data = [
       { fancycode: 'a111', state: 'Available', price: '10000000' },
@@ -49,8 +50,14 @@ export class VipNumberRegistrationComponent implements OnInit {
   closeMyModal(event) {
     ((event.target.parentElement.parentElement).parentElement).classList.remove('md-show');
   }
+  blockVipNumber() {
+    this.openMyModal('vipnoregmodal');
+    this.formTitle = 'Block';
+
+  }
   allocateVipNumber() {
     this.openMyModal('vipnoregmodal');
+    this.formTitle = 'Allocate';
   }
   addVipRegistration() {
     this.router.navigate(['admins/vipnumberregistration/create']);
