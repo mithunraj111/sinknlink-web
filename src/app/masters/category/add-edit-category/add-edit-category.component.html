@@ -8,28 +8,32 @@
                     <div class="col-md-12">
                         <div class="form-group required">
                             <label>Business Category Name</label>
-                            <input type="text" class="form-control" name="categoryname" formControlName="categoryname" placeholder=" Business Category Name">
+                            <input type="text" class="form-control" name="categoryname" formControlName="categoryname"
+                                placeholder="Business Category Name">
                         </div>
                         <div class="form-group" *ngIf="categoryObj?.categoryid">
                             <label>Status <small>*</small></label>
                             <div class="form-radio">
                                 <div class="radio radio-inline">
                                     <label>
-                    <input type="radio" class="form-control" [value]="true" name="status" formControlName="status">
-                    <i class="helper"></i>Active
-                  </label>
+                                        <input type="radio" class="form-control" [value]="true" name="status"
+                                            formControlName="status">
+                                        <i class="helper"></i>Active
+                                    </label>
                                 </div>
                                 <div class="radio radio-inline">
                                     <label>
-                    <input type="radio" class="form-control" [value]="false" name="status" formControlName="status">
-                    <i class="helper"></i>Inactive
-                  </label>
+                                        <input type="radio" class="form-control" [value]="false" name="status"
+                                            formControlName="status">
+                                        <i class="helper"></i>Inactive
+                                    </label>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <button type="button" placement="top" (click)="saveOrUpdateCategory()" ngbTooltip="Click to {{buttonTxt}} business category" class="btn pull-right btn-primary waves-effect m-b-10">{{buttonTxt}}</button>
+                <button type="button" placement="top" (click)="saveOrUpdateCategory()" ngbTooltip="Click to {{buttonTxt}} business category"
+                    class="btn pull-right btn-primary waves-effect m-b-10">{{buttonTxt}}</button>
             </form>
         </div>
         <button aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>

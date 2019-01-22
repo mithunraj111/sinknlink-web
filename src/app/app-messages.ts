@@ -33,6 +33,24 @@ export const AppMessages = Object.freeze({
       amount: {
         required: 'Preferred amount is required',
       }
+    },
+    LOCATION: {
+      pincode: {
+        required: 'Pincode is required',
+        maxlength: 'Pincode should be lesser than 10 characters',
+        pattern: 'Should contain only numbers'
+      },
+      area: {
+        required: 'Area is required',
+        maxlength: 'Area should be lesser than 50 characters'
+      },
+      state: {
+        required: 'State is required',
+      },
+      city: {
+        required: 'City is required',
+        maxlength: 'City should be lesser than 50 characters'
+      }
     }
   },
 });

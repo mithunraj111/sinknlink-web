@@ -45,6 +45,9 @@ h1, h2, h3, h4, h5, h6 {
 .m-t-90{
     margin-top:90px;
 }
+.m-r-15{
+    margin-right: 15px !important;
+}
 .m-r-30{
     margin-right:30px !important;
 }
@@ -856,6 +859,7 @@ button{
     }
 }
 .floating-alert{
+    z-index: 10000 !important;
     .alert{
        margin-right: 33rem;
        margin-top:50px;
@@ -870,7 +874,7 @@ button{
     .alert-danger{
         background-color:#FF5371;
         color:#fff;
-        border-color:#FF5371;
+        border-color:rgb(145, 142, 142);
         font-size:15px;
     }
     .alert-info{
