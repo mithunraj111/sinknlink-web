@@ -13,6 +13,30 @@ export const AppMessages = Object.freeze({
         maxlength: 'Mobile number is not valid'
       }
     },
+    USER: {
+      fullname: {
+        required: 'Please enter full name',
+        minlength: 'please enter full name atleast 3 characters',
+        maxlength: 'Please enter full name between 50 characters',
+        pattern: 'Please enter valid name',
+      },
+      mobileno: {
+        required: 'Please enter mobile number',
+        minlength: 'Please enter atleast 8 digits mobile number',
+        maxlength: 'Please enter mobile number within 12 digits ',
+        pattern: 'Please enter valid mobile number',
+      },
+      rolename: {
+        required: 'Please select role',
+        minlength: 'Please enter rolename atleast 3 characters',
+        maxlength: 'Please enter rolename within 50 characters',
+      },
+      password: {
+        required: 'Please enter password',
+        minlength: 'Please enter password atleast 8 characters',
+        maxlength: 'Please enter password within 30 characters',
+      }
+    },
     DONATION: {
       charityname: {
         required: 'Charity name is required',

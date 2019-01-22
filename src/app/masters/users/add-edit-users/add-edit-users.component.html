@@ -6,7 +6,7 @@
         <p *ngIf="userid" class="m-b-0">ID:87567</p>
       </div>
       <div class="col-md-6 col-sm-6 save-button text-right p-r-30">
-        <button type="button" placement="bottom" ngbTooltip="Click to {{buttontext}} user" (click)="submit()" class="btn btn-primary waves-effect m-r-10 text-capitalize">{{buttontext}}</button>
+        <button type="button" placement="bottom" ngbTooltip="Click to {{buttontext}} user" (click)="saveupdateuser()" class="btn btn-primary waves-effect m-r-10 text-capitalize">{{buttontext}}</button>
         <button type="button" placement="bottom" ngbTooltip="Go back" routerLink="/masters/users" class="btn btn-inverse btn-primary waves-effect"><i
             class="fa fa-arrow-circle-left"></i></button>
       </div>
@@ -21,70 +21,71 @@
         <div class="card tenants-page tenants-pages m-b-10 m-t-50">
           <div class="row p-t-10 p-b-5">
             <div class="col-md-12 col-sm-12">
-              <div class="form-group row required">
-                <label class="col-md-3 col-sm-6 col-form-label text-right">User Name</label>
-                <div class="col-md-6 col-sm-6 p-r-0">
-                  <input type="text" class="form-control" placeholder="User Name">
-                </div>
-              </div>
-
-              <div class="form-group row required">
-                <label class="col-md-3 col-sm-6 col-form-label text-right">Mobile No</label>
-                <div class="col-md-6 col-sm-6 p-r-0">
-                  <input type="text" class="form-control" placeholder="Mobile No">
-                </div>
-              </div>
-
-              <div class="form-group row required">
-                <label class="col-md-3 col-sm-6 col-form-label text-right">Role</label>
-                <div class="col-md-6 col-sm-6 p-r-0">
-                  <select name="select" class="form-control users-list">
-                    <option value="opt1">Select Role</option>
-                    <option value="opt2">Admin</option>
-                    <option value="opt2">Manager</option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="form-group row required">
-                <label class="col-md-3 col-sm-6 col-form-label text-right">Password</label>
-                <div class="col-md-6 col-sm-6 p-r-0">
-                  <input type="password" style="width:100% !important" class="form-control" placeholder="Password">
-                </div>
-                <div class="col-md-3 col-sm-6 generate-button">
-                  <button type="button" placement="top" ngbTooltip="Click to Generate" class="btn btn-primary waves-effect">Generate</button>
-                </div>
-              </div>
-
-              <div *ngIf="userid">
+              <form [formGroup]="userForm">
                 <div class="form-group row required">
-                  <label class="col-md-3 col-sm-6 col-form-label text-right">Status</label>
-                  <div class="col-md-9 col-sm-6">
-                    <ui-switch class="js-small" color="#03ADED" switchColor="#fff" size="small" checked></ui-switch>
+                  <label class="col-md-3 col-sm-6 col-form-label text-right">Full Name</label>
+                  <div class="col-md-6 col-sm-6 p-r-0">
+                    <input type="text" class="form-control" name="fullname" formControlName="fullname" placeholder="Full Name">
                   </div>
                 </div>
 
-                <div class="form-group row">
-                  <label class="col-md-3 col-sm-6 col-form-label text-right">Last Login</label>
-                  <div class="col-md-6 col-sm-6 m-t-5">
-                    <span class="f-13">{{date|date:displayformat}}</span>
+                <div class="form-group row required">
+                  <label class="col-md-3 col-sm-6 col-form-label text-right">Mobile No</label>
+                  <div class="col-md-6 col-sm-6 p-r-0">
+                    <input type="text" class="form-control" name="mobile no" formControlName="mobileno" placeholder="Mobile No">
                   </div>
                 </div>
-                <div class="form-group row">
-                  <label class="col-md-3 col-sm-6 col-form-label text-right">Created By</label>
-                  <div class="col-md-3 col-sm-6 m-t-5 pr-4">
-                    <span class="f-15">Admin</span><br>
-                    <span class="text-align f-12">{{date|date:displayformat}}</span>
+
+                <div class="form-group row required">
+                  <label class="col-md-3 col-sm-6 col-form-label text-right">Role</label>
+                  <div class="col-md-6 col-sm-6 p-r-0">
+                    <select name="select" class="form-control users-list" formControlName="rolename">
+                      <option>1</option>
+                      <option>2</option>
+                    </select>
                   </div>
                 </div>
-                <div class="form-group row">
-                  <label class="col-md-3 col-sm-6 col-form-label text-right">Updated By</label>
-                  <div class="col-md-6 col-sm-6 m-t-5">
-                    <span class="f-15">Pavithra</span><br>
-                    <span class="text-align f-12">{{date|date:displayformat}}</span>
+
+                <div class="form-group row required">
+                  <label class="col-md-3 col-sm-6 col-form-label text-right">Password</label>
+                  <div class="col-md-6 col-sm-6 p-r-0">
+                    <input type="password" style="width:100% !important" class="form-control" name="password" formControlName="password" placeholder="Password">
+                  </div>
+                  <div class="col-md-3 col-sm-6 generate-button">
+                    <button type="button" placement="top" ngbTooltip="Click to Generate" class="btn btn-primary waves-effect">Generate</button>
                   </div>
                 </div>
-              </div>
+
+                <div *ngIf="userid">
+                  <div class="form-group row required">
+                    <label class="col-md-3 col-sm-6 col-form-label text-right">Status</label>
+                    <div class="col-md-9 col-sm-6">
+                      <ui-switch class="js-small" color="#03ADED" switchColor="#fff" size="small" checked></ui-switch>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <label class="col-md-3 col-sm-6 col-form-label text-right">Last Login</label>
+                    <div class="col-md-6 col-sm-6 m-t-5">
+                      <span class="f-13">{{date|date:displayformat}}</span>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-md-3 col-sm-6 col-form-label text-right">Created By</label>
+                    <div class="col-md-3 col-sm-6 m-t-5 pr-4">
+                      <span class="f-15">Admin</span><br>
+                      <span class="text-align f-12">{{date|date:displayformat}}</span>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-md-3 col-sm-6 col-form-label text-right">Updated By</label>
+                    <div class="col-md-6 col-sm-6 m-t-5">
+                      <span class="f-15">Pavithra</span><br>
+                      <span class="text-align f-12">{{date|date:displayformat}}</span>
+                    </div>
+                  </div>
+                </div>
+              </form>
             </div>
           </div>
         </div>
