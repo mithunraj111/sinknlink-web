@@ -25,10 +25,8 @@ export class AddEditUserComponent implements OnInit {
   errMessage;
   buttontext = AppConstant.BUTTON_TXT.SAVE;
   displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
-  date: any;
   userstoragedata = {} as any;
-  @Output() notifyUserEntry: EventEmitter<any> = new EventEmitter();
-  @Input() userObj = {} as any;
+  userObj = {} as any;
   constructor(private route: ActivatedRoute,
     private bootstrapAlertService: BootstrapAlertService,
     private fb: FormBuilder,
@@ -44,7 +42,6 @@ export class AddEditUserComponent implements OnInit {
         this.getUserDetails();
       }
     });
-    this.date = new Date();
     this.userstoragedata = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER);
   }
   ngOnInit() {
@@ -130,8 +127,6 @@ export class AddEditUserComponent implements OnInit {
       const response = JSON.parse(res._body);
       if (response.status) {
         this.roleList = response.data;
-      } else {
-        this.roleList = [];
       }
     });
   }

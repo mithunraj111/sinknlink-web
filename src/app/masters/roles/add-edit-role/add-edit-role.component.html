@@ -8,7 +8,7 @@
             <div class="col-md-6  col-sm-6 save-button text-right p-r-30">
                 <button type="button" placement="bottom" ngbTooltip=" Go back" routerLink="/masters/roles" class="btn pull-right btn-inverse btn-primary waves-effect"><i
             class="fa fa-arrow-circle-left"></i></button>
-                <button type="button" placement="bottom" ngbTooltip="Click to {{buttontext}} role" (click)="submit()" class="btn pull-right btn-primary waves-effect m-r-10 text-capitalize">{{buttontext}}</button>
+                <button type="button" placement="bottom" ngbTooltip="Click to {{buttontext}} role" (click)="saveOrUpdateRole()" class="btn pull-right btn-primary waves-effect m-r-10 text-capitalize">{{buttontext}}</button>
             </div>
         </div>
         <div class="row">
@@ -56,15 +56,15 @@
                         <span>{{row.permissions}}</span>
                     </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column prop="assignedpermission" name="Granted Permissions" [resizeable]="false">
+                <ngx-datatable-column prop="assignedpermissions" name="Granted Permissions" [resizeable]="false">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                        <span>{{row.assignedpermission}}</span>
+                        <span>{{row.assignedpermissions}}</span>
                     </ng-template>
                 </ngx-datatable-column>
 
                 <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.5" headerClass="text-center" [cellClass]="'text-center'" [resizeable]="false">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                        <a placement="bottom" ngbTooltip="Click to edit permissions" class="m-r-15 crm-action-edit text-primary" (click)="openMyModal('effect-7')">
+                        <a placement="bottom" ngbTooltip="Click to edit permissions" class="m-r-15 crm-action-edit text-primary" (click)="openPermissionModal('permission',row,rowIndex)">
                             <i class="fa fa-pencil"></i></a>
                     </ng-template>
                 </ngx-datatable-column>
@@ -74,17 +74,17 @@
 </div>
 <!-- Add Contact Start Model -->
 <div class="modal-size">
-    <app-modal-animation [modalID]="'effect-7'" [modalClass]="'md-effect-7'">
+    <app-modal-animation [modalID]="'permission'" [modalClass]="'md-effect-7'">
         <h3 class="f-26">Permissions</h3>
         <div class="form-header">
             <div class="form-group required row">
                 <label class="col-sm-12">Permissions</label>
                 <div class="col-sm-12">
-                    <ng-select [ngClass]="'ng-select'" [options]="simpleOption" [multiple]="true" placeholder="Permissions"></ng-select>
+                    <ng-select [ngClass]="'ng-select'" [(ngModel)]="permissions" [options]="permissionList" [multiple]="true" placeholder="Permissions"></ng-select>
                 </div>
             </div>
-            <button type="button" placement="top" ngbTooltip="Click to save permissions" class="btn pull-right btn-primary waves-effect m-b-10">Save</button>
+            <button type="button" (click)="updatePermissions()" placement="top" ngbTooltip="Click to save permissions" class="btn pull-right btn-primary waves-effect m-b-10">Save</button>
         </div>
-        <button (click)="closeMyModal($event)" aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>
+        <button (click)="closePermissionModal($event)" aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>
     </app-modal-animation>
 </div>
