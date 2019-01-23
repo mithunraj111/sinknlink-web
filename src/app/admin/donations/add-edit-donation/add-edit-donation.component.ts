@@ -27,6 +27,8 @@ export class AddEditDonationComponent implements OnInit {
   errMessage;
   donationErrObj = AppMessages.VALIDATION.DONATION;
   donationObj = {} as any;
+  validatingDonation;
+
   constructor(private route: ActivatedRoute, private fb: FormBuilder,
     private bootstrapAlertService: BootstrapAlertService,
     private localStorageService: LocalStorageService, private commonService: CommonService,
@@ -52,7 +54,7 @@ export class AddEditDonationComponent implements OnInit {
       enddate: [null, Validators.compose([Validators.required])],
       amount: [''],
       causeremarks: ['', Validators.compose([Validators.maxLength(500)])],
-      status: [''],
+      status: [true],
     });
   }
 
@@ -64,11 +66,11 @@ export class AddEditDonationComponent implements OnInit {
       return false;
     }
     else {
+      this.validatingDonation = true;
       let data = this.donationForm.value;
       let formdata = {} as any;
       formdata.charityname = data.charityname;
       formdata.causeremarks = data.causeremarks;
-      formdata.status = data.status;
       formdata.startdate = data.startdate.year + '-' + data.startdate.month + '-' + data.startdate.day;
       formdata.enddate = data.enddate.year + '-' + data.enddate.month + '-' + data.enddate.day;
       formdata.updatedby = this.userstoragedata.fullname;
@@ -78,9 +80,12 @@ export class AddEditDonationComponent implements OnInit {
         this.donationService.update(formdata, this.donationObj.donationid).subscribe(res => {
           const response = JSON.parse(res._body);
           if (response.status) {
+            this.validatingDonation = false;
             this.bootstrapAlertService.showSucccess(response.message);
           } else {
             this.bootstrapAlertService.showError(response.message);
+            this.validatingDonation = true;
+
           }
         }, err => {
           this.bootstrapAlertService.showError(err.message);
@@ -115,7 +120,7 @@ export class AddEditDonationComponent implements OnInit {
           enddate: [{ year: date.getFullYear(), month: date.getMonth() + 1, day: date.getUTCDate() }, Validators.compose([Validators.required])],
           amount: [this.donationObj.amount],
           causeremarks: [this.donationObj.causeremarks, Validators.compose([Validators.maxLength(500)])],
-          status: [this.donationObj.status]
+          status: [this.donationObj.status === AppConstant.STATUS_ACTIVE ? true : false, Validators.compose([Validators.required])]
         });
       }
     }, err => {
