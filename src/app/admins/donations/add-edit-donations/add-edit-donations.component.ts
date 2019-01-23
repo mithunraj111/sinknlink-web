@@ -35,6 +35,7 @@ export class AddEditDonationsComponent implements OnInit {
       if (params.id !== undefined) {
         this.isaddForm = false;
         this.donationid = params.id;
+        this.getIdDonation();
         this.buttontext = AppConstant.BUTTON_TXT.UPDATE;
       }
     });
@@ -47,10 +48,10 @@ export class AddEditDonationsComponent implements OnInit {
   initForm() {
     this.donationForm = this.fb.group({
       charityname: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
-      startdate: [null, Validators.compose([Validators.required])],
+      startdate: [new Date(), Validators.compose([Validators.required])],
       enddate: [null, Validators.compose([Validators.required])],
-      amount: [null, Validators.compose([Validators.required])],
-      causeremarks: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(500)])],
+      amount: [''],
+      causeremarks: ['', Validators.compose([Validators.minLength(1), Validators.maxLength(500)])],
       status: [''],
     });
   }
@@ -66,8 +67,10 @@ export class AddEditDonationsComponent implements OnInit {
       let data = this.donationForm.value;
       let formdata = {} as any;
       formdata.charityname = data.charityname;
-      formdata.startdate = new Date(data.startdate.year, data.startdate.month, data.startdate.day);
-      formdata.enddate = new Date(data.startdate.year, data.startdate.month, data.startdate.day);
+      formdata.causeremarks = data.causeremarks;
+      formdata.status = data.status;
+      formdata.startdate = data.startdate.year + '-' + data.startdate.month + '-' + data.startdate.day;
+      formdata.enddate = data.enddate.year + '-' + data.enddate.month + '-' + data.enddate.day;
       formdata.updatedby = this.userstoragedata.fullname;
       formdata.updateddt = new Date();
       if (!_.isUndefined(this.donationObj) && !_.isUndefined(this.donationObj.donationid) && !_.isEmpty(this.donationObj)) {
@@ -99,6 +102,25 @@ export class AddEditDonationsComponent implements OnInit {
       }
 
     }
+  }
+  getIdDonation() {
+    this.donationService.byId(this.donationid).subscribe((res) => {
+      const response = JSON.parse(res._body);
+      if (response.status) {
+        this.donationObj = response.data;
+        let date = new Date(this.donationObj.startdate);
+        this.donationForm = this.fb.group({
+          charityname: [this.donationObj.charityname, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
+          startdate: [{ year: date.getFullYear(), month: date.getMonth() + 1, day: date.getUTCDate() }, Validators.compose([Validators.required])],
+          enddate: [{ year: date.getFullYear(), month: date.getMonth() + 1, day: date.getUTCDate() }, Validators.compose([Validators.required])],
+          amount: [this.donationObj.amount],
+          causeremarks: [this.donationObj.causeremarks, Validators.compose([Validators.minLength(1), Validators.maxLength(500)])],
+          status: [this.donationObj.status]
+        });
+      }
+    }, err => {
+      this.bootstrapAlertService.showError(err.message);
+    });
   }
 
 }

@@ -50,13 +50,10 @@ export const AppMessages = Object.freeze({
         required: 'End date is required'
       },
       causeremarks: {
-        required: 'Cause is required',
         minlength: 'Cause atleast more than 1 characters',
         maxlength: 'Cause should be within 500 characters'
       },
-      amount: {
-        required: 'Preferred amount is required',
-      }
+
     },
     LOCATION: {
       pincode: {

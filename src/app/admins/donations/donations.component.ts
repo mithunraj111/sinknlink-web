@@ -23,7 +23,8 @@ export class DonationsComponent implements OnInit {
     this.getDonations();
   }
   getDonations() {
-    this.donationService.list({}).subscribe(res => {
+    console.log(this.donationList );
+    this.donationService.list({status:'Active'}).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
         this.donationList = response.data;
