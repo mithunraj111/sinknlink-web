@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnChanges,SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AppMessages } from '../../../app-messages';
@@ -17,6 +17,7 @@ export class AddEditLocationComponent implements OnInit, OnChanges {
   locationForm: FormGroup;
   locationErrObj = AppMessages.VALIDATION.LOCATION;
   errMessage;
+  locationid: number;
   formTitle = AppConstant.FORM_TITLE.CATEGORY.ADD;
   buttonTxt = AppConstant.BUTTON_TXT.SAVE;
   @Output() notifyLocationEntry: EventEmitter<any> = new EventEmitter();
@@ -49,19 +50,26 @@ export class AddEditLocationComponent implements OnInit, OnChanges {
       this.buttonTxt = AppConstant.BUTTON_TXT.UPDATE;
       this.formTitle = AppConstant.FORM_TITLE.LOCATION.UPDATE;
       this.locationObj = changes.locationObj.currentValue;
+      this.locationForm = this.fb.group({
+        pincode: [this.locationObj.pincode, Validators.compose([Validators.required, Validators.maxLength(10), Validators.pattern('^[0-9]*$')])],
+        area: [this.locationObj.area, Validators.compose([Validators.required, Validators.maxLength(50)])],
+        state: [this.locationObj.state, Validators.required],
+        city: [this.locationObj.city, Validators.compose([Validators.required, Validators.maxLength(50)])],
+        status: [this.locationObj.status]
+      });
     } else {
       this.initForm();
       this.buttonTxt = AppConstant.BUTTON_TXT.SAVE;
       this.formTitle = AppConstant.FORM_TITLE.LOCATION.ADD;
     }
+    console.log(this.locationObj.status);
   }
+
   closeMyModal(event) {
     ((event.target.parentElement.parentElement).parentElement).classList.remove('md-show');
   }
 
   saveOrUpdateLocation() {
-    console.log(this.locationForm);
-    console.log(this.bootstrapAlertService.showSucccess);
     if (this.locationForm.status === 'INVALID') {
       this.errMessage = this.commonService.getFormErrorMessage(this.locationForm, this.locationErrObj);
       this.bootstrapAlertService.showError(this.errMessage);
@@ -75,8 +83,9 @@ export class AddEditLocationComponent implements OnInit, OnChanges {
       formdata.city = data.city;
       formdata.updatedby = this.userstoragedata.fullname;
       formdata.updateddt = new Date();
+      console.log(this.locationForm.status);
       if (!_.isUndefined(this.locationObj) && !_.isUndefined(this.locationObj.locationid) && !_.isEmpty(this.locationObj)) {
-        formdata.status = data.status ? AppConstant.STATUS_ACTIVE : AppConstant.STATUS_INACTIVE;
+        formdata.status = data.status;
         this.locationService.update(formdata, this.locationObj.locationid).subscribe(res => {
           const response = JSON.parse(res._body);
           if (response.status) {
