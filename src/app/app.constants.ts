@@ -57,6 +57,10 @@ export const AppConstant = Object.freeze({
           LIST: 'event',
           GETBYID: 'event/',
           UPDATE: 'event/edit/'
+        },
+        FANCYNO: {
+          CREATE: 'fancyno/create',
+          LIST: 'fancyno'
         }
       },
       MASTERS: {

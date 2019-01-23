@@ -13,6 +13,17 @@ export const AppMessages = Object.freeze({
         maxlength: 'Mobile number is not valid'
       }
     },
+    FANCYNUMBER: {
+      startnumber: {
+        required: 'Please enter a start number'
+      },
+      endnumber: {
+        min: 'End Number should be greater than start number'
+      },
+      cost: {
+        required: 'Cost is required'
+      }
+    },
     USER: {
       fullname: {
         required: 'Please enter full name',

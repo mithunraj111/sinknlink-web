@@ -23,6 +23,7 @@ import { RoleService } from '../services/masters/role.service';
 import { UserService } from '../services/masters/user.service';
 import { LocationService } from '../services/masters/location.service';
 import { LookupService } from '../services/admin/lookup.service';
+import { FancyNumberService } from '../services/admin/fancynumber.service';
 import { EventService } from '../services/admin/event.service';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -78,7 +79,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     UserService,
     RoleService,
     LookupService,
-    EventService
+    EventService,
+    FancyNumberService
   ]
 })
 export class SharedModule { }
