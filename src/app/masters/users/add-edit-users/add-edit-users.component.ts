@@ -8,7 +8,7 @@ import { LocalStorageService } from '../../../services/local-storage.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AppMessages } from '../../../app-messages';
 import { UserService } from '../../../services/masters/user.service';
-
+import { RoleService } from '../../../services/masters/role.service';
 
 
 @Component({
@@ -20,6 +20,7 @@ export class AddEditUsersComponent implements OnInit {
   isaddForm = true;
   userid: number;
   userForm: FormGroup;
+  roleList: any = [];
   userErrObj = AppMessages.VALIDATION.USER;
   errMessage;
   buttontext = AppConstant.BUTTON_TXT.SAVE;
@@ -30,12 +31,13 @@ export class AddEditUsersComponent implements OnInit {
   @Input() userObj = {} as any;
   constructor(private route: ActivatedRoute, private bootstrapAlertService: BootstrapAlertService,
     private fb: FormBuilder, private commonService: CommonService, private localStorageService: LocalStorageService,
-    private userService: UserService ) {
+    private userService: UserService, private roleService: RoleService) {
     this.route.params.subscribe(params => {
       if (params.id !== undefined) {
         this.isaddForm = false;
         this.userid = params.id;
         this.buttontext = AppConstant.BUTTON_TXT.UPDATE;
+        this.getIdEditUser();
       }
     });
     this.date = new Date();
@@ -43,7 +45,7 @@ export class AddEditUsersComponent implements OnInit {
   }
   ngOnInit() {
     this.initForm();
-    console.log(this.userForm);
+    this.getRoleList();
   }
 
   initForm() {
@@ -57,7 +59,8 @@ export class AddEditUsersComponent implements OnInit {
     });
     this.userObj = {};
   }
-  saveupdateuser() {
+  saveOrUpdateUser() {
+    console.log(this.userForm.value);
     if (this.userForm.status === 'INVALID') {
       this.errMessage = this.commonService.getFormErrorMessage(this.userForm, this.userErrObj);
       this.bootstrapAlertService.showError(this.errMessage);
@@ -67,7 +70,7 @@ export class AddEditUsersComponent implements OnInit {
       let formdata = {} as any;
       formdata.fullname = data.fullname;
       formdata.mobileno = data.mobileno;
-      formdata.roleid = data.rolename;
+      formdata.roleid = Number(data.rolename);
       formdata.password = data.password;
       formdata.updatedby = this.userstoragedata.fullname;
       formdata.updateddt = new Date();
@@ -77,6 +80,7 @@ export class AddEditUsersComponent implements OnInit {
           const response = JSON.parse(res._body);
           if (response.status) {
             this.bootstrapAlertService.showSucccess(response.message);
+            this.initForm();
           } else {
             this.bootstrapAlertService.showError(response.message);
           }
@@ -91,6 +95,7 @@ export class AddEditUsersComponent implements OnInit {
           const response = JSON.parse(res._body);
           if (response.status) {
             this.bootstrapAlertService.showSucccess(response.message);
+            this.initForm();
           } else {
             this.bootstrapAlertService.showError(response.message);
           }
@@ -99,5 +104,32 @@ export class AddEditUsersComponent implements OnInit {
         });
       }
     }
+  }
+  getIdEditUser() {
+    this.userService.byId(this.userid).subscribe(res => {
+      const response = JSON.parse(res._body);
+      if (response.status) {
+        this.userObj = response.data;
+        this.userForm = this.fb.group({
+          fullname: [this.userObj.fullname, Validators.compose([Validators.required, Validators.minLength(1),
+          Validators.maxLength(50), Validators.pattern('^[a-zA-Z]*$')])],
+          mobileno: [this.userObj.mobileno, Validators.compose([Validators.required, Validators.minLength(8),
+          Validators.maxLength(12), Validators.pattern('^[0-9]*$')])],
+          rolename: [this.userObj.rolename, Validators.compose([Validators.required])],
+          password: [this.userObj.password, Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(30)])],
+        });
+      }
+    });
+  }
+  getRoleList() {
+    this.roleService.list({ status: AppConstant.STATUS_ACTIVE }).subscribe(res => {
+      const response = JSON.parse(res._body);
+      if (response.status) {
+        this.roleList = response.data;
+        console.log(this.roleList);
+      } else {
+        this.roleList = [];
+      }
+    });
   }
 }

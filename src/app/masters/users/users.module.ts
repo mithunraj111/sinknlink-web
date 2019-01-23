@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../../shared/shared.module';
 import { AddEditUsersComponent } from './add-edit-users/add-edit-users.component';
 import { UiSwitchModule } from 'ng2-ui-switch';
+import { SelectModule } from 'ng-select';
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import { UiSwitchModule } from 'ng2-ui-switch';
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
-    UiSwitchModule
+    UiSwitchModule,
+    SelectModule
   ],
   declarations: [UsersComponent, AddEditUsersComponent],
   bootstrap: [UsersComponent]

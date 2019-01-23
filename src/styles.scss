@@ -1016,3 +1016,19 @@ button{
         }
     }
 }
+
+// user //
+
+.role-dropdown{
+    select{
+    font-size: 13px;
+    display: block;
+    float: none;
+    background: #fff;
+    padding: 6px 12px;
+    color: #2b2f33;
+    border: 1px solid #dfe8f1;
+    box-shadow: inset 1px 1px 3px #f6f6f6;
+    width: 100%;
+    }
+}
