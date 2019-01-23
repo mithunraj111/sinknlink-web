@@ -14,11 +14,8 @@
                     </div>
                     <div class="form-group required">
                         <label>State</label>
-                        <select name="select" class="form-control p-1" formControlName="state">
-                            <option value="TamilNadu">TamilNadu</option>
-                            <option value="Kerala">Kerala</option>
-                            <option value="Andrapradesh">Andrapradesh</option>
-                            <option value="Karnataka">Karnataka</option>
+                        <select name="select" class="form-control" formControlName="state" placeholder="Select state">
+                            <option *ngFor='let state of stateList' [label]="state" [value]="state"></option>
                         </select>
                     </div>
                     <div class="form-group required location-page">
@@ -43,7 +40,9 @@
                         </div>
                     </div>
                 </div>
-                <button (click)="closeMyModal($event)" type="button" placement="top" ngbTooltip="Click to {{buttonTxt}} location" (click)="saveOrUpdateLocation()" class="btn pull-right btn-primary waves-effect m-b-10 m-r-15">{{buttonTxt}}</button>
+                <button (click)="closeMyModal($event)" type="button" placement="top" (click)="saveOrUpdateLocation()" 
+                    ngbTooltip="Click to {{buttonTxt}} location" class="btn pull-right btn-primary waves-effect 
+                    m-b-10 m-r-15" [disabled]="validatingLocation" >{{buttonTxt}}</button>
             </div>
         </form>
         <button (click)="closeMyModal($event)" aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>

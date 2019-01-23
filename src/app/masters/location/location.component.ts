@@ -50,7 +50,7 @@ export class LocationComponent implements OnInit {
 
   // API call to get the location list
   getLocations() {
-    this.locationService.list({}).subscribe((res) => {
+    this.locationService.list({status: 'Active'}).subscribe((res) => {
       const response = JSON.parse(res._body);
       if (response.status) {
         this.locationList = response.data;

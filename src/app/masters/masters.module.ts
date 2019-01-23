@@ -11,6 +11,7 @@ import { CategoryComponent } from './category/category.component';
 import { AddEditCategoryComponent } from './category/add-edit-category/add-edit-category.component';
 import { AddEditLocationComponent } from './location/add-edit-location/add-edit-location.component';
 import { TagInputModule } from 'ngx-chips';
+import { SelectModule } from 'ng-select';
 
 @NgModule({
   imports: [
@@ -22,7 +23,8 @@ import { TagInputModule } from 'ngx-chips';
     FormsModule,
     ReactiveFormsModule,
     UiSwitchModule,
-    TagInputModule
+    TagInputModule,
+    SelectModule
   ],
   declarations: [
     LocationComponent,
