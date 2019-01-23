@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AdminComponent } from './layout/admin/admin.component';
+import { MainComponent } from './layout/main/main.component';
 import { AuthComponent } from './layout/auth/auth.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: AdminComponent,
+    component: MainComponent,
     children: [
       {
         path: '',
@@ -26,8 +26,8 @@ const routes: Routes = [
         loadChildren: './business/business.module#BusinessModule'
       },
       {
-        path: 'admins',
-        loadChildren: './admins/admins.module#AdminsModule'
+        path: 'admin',
+        loadChildren: './admin/admin.module#AdminModule'
       }
     ]
   },

@@ -3,9 +3,9 @@ import {animate, AUTO_STYLE, state, style, transition, trigger} from '@angular/a
 import {MenuItems} from '../../shared/menu-items/menu-items';
 
 @Component({
-  selector: 'app-admin',
-  templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.scss'],
+  selector: 'app-main',
+  templateUrl: './main.component.html',
+  styleUrls: ['./main.component.scss'],
   animations: [
     trigger('notificationBottom', [
       state('an-off, void',
@@ -64,7 +64,7 @@ import {MenuItems} from '../../shared/menu-items/menu-items';
     ])
   ]
 })
-export class AdminComponent implements OnInit {
+export class MainComponent implements OnInit {
   public navType: string;
   public themeLayout: string;
   public verticalPlacement: string;

@@ -88,7 +88,7 @@ const MENUITEMS = [
         ]
       },
       {
-        state: 'admins',
+        state: 'admin',
         short_label: 'A',
         name: 'Admin',
         type: 'sub',

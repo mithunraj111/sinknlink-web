@@ -45,6 +45,18 @@ export const AppConstant = Object.freeze({
           LIST: 'donation',
           GETBYID: 'donation/',
           UPDATE: 'donation/edit/'
+        },
+        LOOKUP: {
+          CREATE: 'lookup/create',
+          LIST: 'lookup',
+          GETBYID: 'lookup/',
+          UPDATE: 'lookup/edit/'
+        },
+        EVENT: {
+          CREATE: 'event/create',
+          LIST: 'event',
+          GETBYID: 'event/',
+          UPDATE: 'event/edit/'
         }
       },
       MASTERS: {
@@ -59,12 +71,6 @@ export const AppConstant = Object.freeze({
           LIST: 'location',
           GETBYID: 'location/',
           UPDATE: 'location/edit/'
-        },
-        LOOKUP: {
-          CREATE: 'lookup/create',
-          LIST: 'lookup',
-          GETBYID: 'lookup/',
-          UPDATE: 'lookup/edit/'
         },
         USER: {
           CREATE: 'user/create',

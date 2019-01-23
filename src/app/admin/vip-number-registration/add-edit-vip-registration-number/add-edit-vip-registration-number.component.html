@@ -1,0 +1,61 @@
+<div class="addeditpage">
+    <div class="fixedheader">
+        <div class="header-title m-b-15 pos-fixed">
+            <div class="row">
+                <div class="col-md-6 col-sm-6">
+                    <h2 class="add-tenant mt-0">VIP Membership ID</h2>
+                    <p *ngIf="eventid" class="m-b-0">ID: 875643</p>
+                </div>
+                <div class="col-md-3 col-sm-6 save-button text-right p-r-30">
+                    <button type="button" placement="bottom" ngbTooltip="Click to save" (click)="submit()" class="btn btn-primary waves-effect m-r-10 text-capitalize">Save
+          </button>
+                    <button type="button" placement="bottom" ngbTooltip="Go back" routerLink="/admin/vipnumberregistration" class="btn btn-inverse btn-primary waves-effect"><i class="fa fa-arrow-circle-left"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-md-12 col-sm-12">
+    <div class="row">
+        <div class="col-md-12 col-sm-8 p-l-0">
+            <div class="employee-form">
+                <div class="card tenants-page tenants-pages m-b-10 m-t-60">
+                    <div class="col-md-12 col-sm-12 p-t-10">
+                        <div class="form-group row required">
+                            <label class="col-md-3 col-sm-6 col-form-label text-right">State</label>
+                            <div class="col-md-9 col-sm-6">
+                                <select name="select" class="form-control p-1 placeholder-align">
+                  <option value="opt1">Select State</option>
+                  <option value="opt2">TamilNadu</option>
+                  <option value="opt3">Kerala</option>
+                  <option value="opt4">Andrapradesh</option>
+                  <option value="opt5">Karnataka</option>
+                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row required">
+                            <label class="col-md-3 col-sm-6 col-form-label text-right">VIP number</label>
+                            <div class="col-md-9 col-sm-6">
+                                <div class="row"></div>
+                                <input type="text" class="form-control m-b-10" placeholder="Start">
+                                <input type="text" class="form-control" placeholder="End">
+                            </div>
+                        </div>
+                        <div class="form-group row ">
+                            <label class="col-md-3 col-sm-6 col-form-label text-right">Block for</label>
+                            <div class="col-md-9 col-sm-6">
+                                <input type="text" class="form-control" placeholder="Membership ID">
+                            </div>
+                        </div>
+                        <div class="form-group row required">
+                            <label class="col-md-3 col-sm-6 col-form-label text-right">Status</label>
+                            <div class="col-md-9 col-sm-6">
+                                <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="#03ADED" switchColor="#fff" size="small" checked></ui-switch>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

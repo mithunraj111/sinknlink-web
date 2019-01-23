@@ -2,7 +2,7 @@ import { Component, OnInit, Input, ViewEncapsulation, ViewChild } from '@angular
 import { Router } from '@angular/router';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { AppConstant } from '../../app.constants';
-import { DonationService } from 'src/app/services/admin/donation.service';
+import { DonationService } from '../../services/admin/donation.service';
 
 @Component({
   selector: 'app-donations',
@@ -23,8 +23,7 @@ export class DonationsComponent implements OnInit {
     this.getDonations();
   }
   getDonations() {
-    console.log(this.donationList );
-    this.donationService.list({status:'Active'}).subscribe(res => {
+    this.donationService.list({}).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
         this.donationList = response.data;
@@ -33,17 +32,17 @@ export class DonationsComponent implements OnInit {
     });
   }
   addDonation() {
-    this.router.navigate(['admins/donation/create']);
+    this.router.navigate(['admin/donation/create']);
   }
   editDonation(data) {
-    this.router.navigate(['admins/donation/edit/' + data.donationid]);
+    this.router.navigate(['admin/donation/edit/' + data.donationid]);
   }
   search(event) {
     const val = event.target.value.toLowerCase();
     const temp = this.tempFilter.filter(item => {
-      for (let key in item) {
-        if (("" + item[key]).toLocaleLowerCase().includes(val)) {
-          return ("" + item[key]).toLocaleLowerCase().includes(val);
+      for (const key in item) {
+        if (('' + item[key]).toLocaleLowerCase().includes(val)) {
+          return ('' + item[key]).toLocaleLowerCase().includes(val);
         }
       }
     });

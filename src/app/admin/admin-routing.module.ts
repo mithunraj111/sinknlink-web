@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { EventsComponent } from './events/events.component';
 import { DonationsComponent } from './donations/donations.component';
-import { AddEditEventsComponent } from './events/add-edit-events/add-edit-events.component';
-import { AddEditDonationsComponent } from './donations/add-edit-donations/add-edit-donations.component';
+import { AddEditEventComponent } from './events/add-edit-event/add-edit-event.component';
+import { AddEditDonationComponent } from './donations/add-edit-donation/add-edit-donation.component';
 import { VipNumberRegistrationComponent } from './vip-number-registration/vip-number-registration.component';
 import { AddEditVipRegistrationNumberComponent } from './vip-number-registration/add-edit-vip-registration-number/add-edit-vip-registration-number.component';
 
@@ -11,7 +11,7 @@ const routes: Routes = [
   {
     path: '',
     data: {
-      title: 'Admins',
+      title: 'Admin',
       status: false
     },
     children: [
@@ -21,11 +21,11 @@ const routes: Routes = [
       },
       {
         path: 'event/create',
-        component: AddEditEventsComponent
+        component: AddEditEventComponent
       },
       {
         path: 'event/edit/:id',
-        component: AddEditEventsComponent
+        component: AddEditEventComponent
       },
       {
         path: 'donations',
@@ -33,11 +33,11 @@ const routes: Routes = [
       },
       {
         path: 'donation/create',
-        component: AddEditDonationsComponent,
+        component: AddEditDonationComponent,
       },
       {
         path: 'donation/edit/:id',
-        component: AddEditDonationsComponent,
+        component: AddEditDonationComponent,
       },
       {
         path: 'vipnumberregistration',
@@ -59,4 +59,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class AdminsRoutingModule { }
+export class AdminRoutingModule { }

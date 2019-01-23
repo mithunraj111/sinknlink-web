@@ -8,15 +8,15 @@ const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
 
 @Component({
-  selector: 'app-add-edit-events',
-  templateUrl: './add-edit-events.component.html',
+  selector: 'app-add-edit-event',
+  templateUrl: './add-edit-event.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: ['./add-edit-events.component.scss'],
+  styleUrls: ['./add-edit-event.component.scss'],
   providers: [
     { provide: NgbDateParserFormatter, useClass: NgbDateCustomParserFormatter }
   ]
 })
-export class AddEditEventsComponent implements OnInit {
+export class AddEditEventComponent implements OnInit {
   uploader: FileUploader = new FileUploader({
     url: URL,
     isHTML5: true

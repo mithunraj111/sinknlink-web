@@ -11,14 +11,14 @@ import { AppMessages } from '../../../app-messages';
 import { DonationService } from '../../../services/admin/donation.service';
 import * as _ from 'lodash';
 @Component({
-  selector: 'app-add-edit-donations',
-  templateUrl: './add-edit-donations.component.html',
-  styleUrls: ['./add-edit-donations.component.scss'],
+  selector: 'app-add-edit-donation',
+  templateUrl: './add-edit-donation.component.html',
+  styleUrls: ['./add-edit-donation.component.scss'],
   providers: [
     { provide: NgbDateParserFormatter, useClass: NgbDateCustomParserFormatter }
   ]
 })
-export class AddEditDonationsComponent implements OnInit {
+export class AddEditDonationComponent implements OnInit {
   userstoragedata = {} as any;
   isaddForm = true;
   donationid: number;
@@ -51,7 +51,7 @@ export class AddEditDonationsComponent implements OnInit {
       startdate: [new Date(), Validators.compose([Validators.required])],
       enddate: [null, Validators.compose([Validators.required])],
       amount: [''],
-      causeremarks: ['', Validators.compose([Validators.minLength(1), Validators.maxLength(500)])],
+      causeremarks: ['', Validators.compose([Validators.maxLength(500)])],
       status: [''],
     });
   }
@@ -114,7 +114,7 @@ export class AddEditDonationsComponent implements OnInit {
           startdate: [{ year: date.getFullYear(), month: date.getMonth() + 1, day: date.getUTCDate() }, Validators.compose([Validators.required])],
           enddate: [{ year: date.getFullYear(), month: date.getMonth() + 1, day: date.getUTCDate() }, Validators.compose([Validators.required])],
           amount: [this.donationObj.amount],
-          causeremarks: [this.donationObj.causeremarks, Validators.compose([Validators.minLength(1), Validators.maxLength(500)])],
+          causeremarks: [this.donationObj.causeremarks, Validators.compose([Validators.maxLength(500)])],
           status: [this.donationObj.status]
         });
       }

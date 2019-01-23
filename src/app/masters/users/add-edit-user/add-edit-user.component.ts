@@ -12,11 +12,11 @@ import { RoleService } from '../../../services/masters/role.service';
 
 
 @Component({
-  selector: 'app-add-edit-users',
-  templateUrl: './add-edit-users.component.html',
-  styleUrls: ['./add-edit-users.component.scss']
+  selector: 'app-add-edit-user',
+  templateUrl: './add-edit-user.component.html',
+  styleUrls: ['./add-edit-user.component.scss']
 })
-export class AddEditUsersComponent implements OnInit {
+export class AddEditUserComponent implements OnInit {
   isaddForm = true;
   userid: number;
   userForm: FormGroup;
@@ -29,15 +29,19 @@ export class AddEditUsersComponent implements OnInit {
   userstoragedata = {} as any;
   @Output() notifyUserEntry: EventEmitter<any> = new EventEmitter();
   @Input() userObj = {} as any;
-  constructor(private route: ActivatedRoute, private bootstrapAlertService: BootstrapAlertService,
-    private fb: FormBuilder, private commonService: CommonService, private localStorageService: LocalStorageService,
-    private userService: UserService, private roleService: RoleService) {
+  constructor(private route: ActivatedRoute,
+    private bootstrapAlertService: BootstrapAlertService,
+    private fb: FormBuilder,
+    private commonService: CommonService,
+    private localStorageService: LocalStorageService,
+    private userService: UserService,
+    private roleService: RoleService) {
     this.route.params.subscribe(params => {
       if (params.id !== undefined) {
         this.isaddForm = false;
         this.userid = params.id;
         this.buttontext = AppConstant.BUTTON_TXT.UPDATE;
-        this.getIdEditUser();
+        this.getUserDetails();
       }
     });
     this.date = new Date();
@@ -55,12 +59,12 @@ export class AddEditUsersComponent implements OnInit {
       mobileno: [null, Validators.compose([Validators.required, Validators.minLength(8),
       Validators.maxLength(12), Validators.pattern('^[0-9]*$')])],
       rolename: [null, Validators.compose([Validators.required])],
+      status: [true],
       password: [null, Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(30)])],
     });
     this.userObj = {};
   }
   saveOrUpdateUser() {
-    console.log(this.userForm.value);
     if (this.userForm.status === 'INVALID') {
       this.errMessage = this.commonService.getFormErrorMessage(this.userForm, this.userErrObj);
       this.bootstrapAlertService.showError(this.errMessage);
@@ -95,7 +99,6 @@ export class AddEditUsersComponent implements OnInit {
           const response = JSON.parse(res._body);
           if (response.status) {
             this.bootstrapAlertService.showSucccess(response.message);
-            this.initForm();
           } else {
             this.bootstrapAlertService.showError(response.message);
           }
@@ -105,7 +108,7 @@ export class AddEditUsersComponent implements OnInit {
       }
     }
   }
-  getIdEditUser() {
+  getUserDetails() {
     this.userService.byId(this.userid).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
@@ -116,6 +119,7 @@ export class AddEditUsersComponent implements OnInit {
           mobileno: [this.userObj.mobileno, Validators.compose([Validators.required, Validators.minLength(8),
           Validators.maxLength(12), Validators.pattern('^[0-9]*$')])],
           rolename: [this.userObj.rolename, Validators.compose([Validators.required])],
+          status: [this.userObj.status === AppConstant.STATUS_ACTIVE ? true : false, Validators.compose([Validators.required])],
           password: [this.userObj.password, Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(30)])],
         });
       }
@@ -126,7 +130,6 @@ export class AddEditUsersComponent implements OnInit {
       const response = JSON.parse(res._body);
       if (response.status) {
         this.roleList = response.data;
-        console.log(this.roleList);
       } else {
         this.roleList = [];
       }

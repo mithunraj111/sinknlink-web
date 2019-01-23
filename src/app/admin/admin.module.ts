@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { AdminsRoutingModule } from './admins-routing.module';
+import { AdminRoutingModule } from './admin-routing.module';
 import { EventsComponent } from './events/events.component';
 import { DonationsComponent } from './donations/donations.component';
 import { SharedModule } from '../shared/shared.module';
@@ -10,8 +9,8 @@ import { DataTableModule } from 'angular2-datatable';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UiSwitchModule } from 'ng2-ui-switch';
 import { TagInputModule } from 'ngx-chips';
-import { AddEditDonationsComponent } from './donations/add-edit-donations/add-edit-donations.component';
-import { AddEditEventsComponent } from './events/add-edit-events/add-edit-events.component';
+import { AddEditDonationComponent } from './donations/add-edit-donation/add-edit-donation.component';
+import { AddEditEventComponent } from './events/add-edit-event/add-edit-event.component';
 import { FileUploadModule } from 'ng2-file-upload';
 import { VipNumberRegistrationComponent } from './vip-number-registration/vip-number-registration.component';
 import { AddEditVipRegistrationNumberComponent } from './vip-number-registration/add-edit-vip-registration-number/add-edit-vip-registration-number.component';
@@ -19,7 +18,7 @@ import { AddEditVipRegistrationNumberComponent } from './vip-number-registration
 @NgModule({
   imports: [
     CommonModule,
-    AdminsRoutingModule,
+    AdminRoutingModule,
     SharedModule,
     HttpModule,
     DataTableModule,
@@ -31,9 +30,9 @@ import { AddEditVipRegistrationNumberComponent } from './vip-number-registration
   ],
   declarations: [EventsComponent,
     DonationsComponent,
-    AddEditDonationsComponent,
-    AddEditEventsComponent,
+    AddEditDonationComponent,
+    AddEditEventComponent,
     VipNumberRegistrationComponent,
     AddEditVipRegistrationNumberComponent]
 })
-export class AdminsModule { }
+export class AdminModule { }

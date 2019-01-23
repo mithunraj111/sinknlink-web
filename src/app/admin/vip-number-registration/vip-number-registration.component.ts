@@ -60,10 +60,10 @@ export class VipNumberRegistrationComponent implements OnInit {
     this.formTitle = 'Allocate';
   }
   addVipRegistration() {
-    this.router.navigate(['admins/vipnumberregistration/create']);
+    this.router.navigate(['admin/vipnumberregistration/create']);
   }
   editVipRegistration() {
-    this.router.navigate(['admins/vipnumberregistration/edit' + 1]);
+    this.router.navigate(['admin/vipnumberregistration/edit' + 1]);
   }
   search(event) {
     const val = event.target.value.toLowerCase();

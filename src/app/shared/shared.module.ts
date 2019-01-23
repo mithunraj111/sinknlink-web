@@ -4,7 +4,7 @@ import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToggleFullScreenDirective } from './fullscreen/toggle-fullscreen.directive';
 import { HttpClientModule } from '@angular/common/http';
 import { PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface, PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
-import { TitleComponent } from '../layout/admin/title/title.component';
+import { TitleComponent } from '../layout/main/title/title.component';
 import { CardComponent } from './card/card.component';
 import { CardToggleDirective } from './card/card-toggle.directive';
 import { ModalAnimationComponent } from './modal-animation/modal-animation.component';
@@ -23,6 +23,7 @@ import { RoleService } from '../services/masters/role.service';
 import { UserService } from '../services/masters/user.service';
 import { LocationService } from '../services/masters/location.service';
 import { LookupService } from '../services/admin/lookup.service';
+import { EventService } from '../services/admin/event.service';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -76,7 +77,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     LocationService,
     UserService,
     RoleService,
-    LookupService
+    LookupService,
+    EventService
   ]
 })
 export class SharedModule { }

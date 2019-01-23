@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AdminComponent } from './layout/admin/admin.component';
+import { MainComponent } from './layout/main/main.component';
 import { AuthComponent } from './layout/auth/auth.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
@@ -18,7 +18,7 @@ import { LocalStorageService } from './services/local-storage.service';
 @NgModule({
   declarations: [
     AppComponent,
-    AdminComponent,
+    MainComponent,
     AuthComponent,
   ],
   imports: [
