@@ -12,7 +12,8 @@ import { LookupService } from '../../../services/admin/lookup.service';
 })
 export class AddEditRoleComponent implements OnInit {
 
-  public data: any;
+  rolename: string;
+  dataaccess = 'All';
   roleid: number;
   isaddForm = true;
   buttontext = AppConstant.BUTTON_TXT.SAVE;
@@ -40,7 +41,7 @@ export class AddEditRoleComponent implements OnInit {
     this.lookupService.list({ refkey: 'app_screens', status: AppConstant.STATUS_ACTIVE }).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
-        this.screensList = response.data;
+        this.screensList = JSON.parse(response.data[0].refvalue);
       }
     });
   }

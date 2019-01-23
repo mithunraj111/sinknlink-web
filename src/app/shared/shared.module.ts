@@ -22,6 +22,7 @@ import { DonationService } from '../services/admin/donation.service';
 import { RoleService } from '../services/masters/role.service';
 import { UserService } from '../services/masters/user.service';
 import { LocationService } from '../services/masters/location.service';
+import { LookupService } from '../services/admin/lookup.service';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -74,7 +75,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     DonationService,
     LocationService,
     UserService,
-    RoleService
+    RoleService,
+    LookupService
   ]
 })
 export class SharedModule { }

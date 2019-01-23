@@ -17,6 +17,10 @@ export const AppConstant = Object.freeze({
     CATEGORY: {
       ADD: 'Add Business Category',
       UPDATE: 'Update Business Category'
+    },
+    LOCATION: {
+      ADD: 'Add Location',
+      UPDATE: 'Update Location'
     }
   },
   // Status

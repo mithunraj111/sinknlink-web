@@ -1,6 +1,6 @@
 <div class="modal-size addlocation">
     <app-modal-animation [modalID]="'locationmodal'" [modalClass]="'md-effect-7'">
-        <h3 class="f-26">{{title}}</h3>
+        <h3 class="f-26">{{formTitle}}</h3>
         <form [formGroup]="locationForm">
             <div class="form-header">
                 <div class="col-md-12">
@@ -26,26 +26,25 @@
                         <label>City</label>
                         <input type="text" class="form-control" placeholder="City" formControlName="city">
                     </div>
-                    <div *ngIf="locationPage" class="form-group ">
+                    <div *ngIf="locationObj?.locationid" class="form-group ">
                         <label>Status <small>*</small></label>
                         <div class="form-radio">
                             <div class="radio radio-inline">
                                 <label>
-                                    <input type="radio" name="radio" checked="checked" formControlName="status">
+                                    <input type="radio" name="radio" formControlName="status">
                                     <i class="helper"></i>Active
                                 </label>
                             </div>
                             <div class="radio radio-inline">
                                 <label>
-                                    <input type="radio" name="radio">
+                                    <input type="radio" name="radio" formControlName="status">
                                     <i class="helper"></i>Inactive
                                 </label>
                             </div>
                         </div>
                     </div>
                 </div>
-                <button (click)="closeMyModal($event)" type="button" placement="top" ngbTooltip="Click to {{submit}} locations "
-                    (click)="saveOrUpdateLocation()" class="btn pull-right btn-primary waves-effect m-b-10 m-r-15">{{submit}}</button>
+                <button (click)="closeMyModal($event)" type="button" placement="top" ngbTooltip="Click to {{buttonTxt}} location" (click)="saveOrUpdateLocation()" class="btn pull-right btn-primary waves-effect m-b-10 m-r-15">{{buttonTxt}}</button>
             </div>
         </form>
         <button (click)="closeMyModal($event)" aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>
