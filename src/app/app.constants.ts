@@ -60,7 +60,8 @@ export const AppConstant = Object.freeze({
         },
         FANCYNO: {
           CREATE: 'fancyno/create',
-          LIST: 'fancyno'
+          LIST: 'fancyno',
+          EDIT: 'fancyno/edit'
         }
       },
       MASTERS: {

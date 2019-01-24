@@ -34,7 +34,7 @@
 <div class="header-block m-t-60">
   <div class="table-header fixed-table-header">
     <app-card [classHeader]="true">
-      <ngx-datatable #vipnoregtable class="table data-table expandable" [rows]='data' [columnMode]="'flex'"
+      <ngx-datatable [loadingIndicator]="true" #vipnoregtable class="table data-table expandable" [rows]='data' [columnMode]="'flex'"
         [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false" [selected]="selected" [selectionType]="'checkbox'">
         <ngx-datatable-column prop="fancycode" name="Fancy Code" [resizeable]="false">
           <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
@@ -54,15 +54,15 @@
         <ngx-datatable-column name="Status" [sortable]="false" [flexGrow]="0.5" headerClass="text-center" [cellClass]="'text-center'"
           [resizeable]="false">
           <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-            <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="#03ADED"
-              switchColor="#fff" size="small" checked></ui-switch>
+            <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="#03ADED" (change)="changeStatus(row.fancynoid,row.status)"
+              switchColor="#fff" size="small" [disabled]="row.fancynostatus == 'Blocked' || row.fancynostatus == 'NA'" [checked]="row.status == 'Active'"></ui-switch>
           </ng-template>
         </ngx-datatable-column>
         <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.5" headerClass="text-center" [cellClass]="'text-center'"
           [resizeable]="false">
           <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
             <div class="row checkbox-column">
-              <div class="border-checkbox-section">
+              <div *ngIf="row.fancynostatus == 'Available'" class="border-checkbox-section">
                 <div class="border-checkbox-group border-checkbox-group-primary m-r-15">
                   <input class="border-checkbox" type="checkbox" id={{rowIndex}}>
                   <label class="border-checkbox-label" for="{{rowIndex}}"></label>

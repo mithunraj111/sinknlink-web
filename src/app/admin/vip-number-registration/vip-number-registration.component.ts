@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { FancyNumberService } from 'src/app/services/admin/fancynumber.service';
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
+import { AppConstant } from 'src/app/app.constants';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
   selector: 'app-vip-number-registration',
@@ -18,7 +20,7 @@ export class VipNumberRegistrationComponent implements OnInit {
   rows = [];
   formTitle: string;
   blocklist: string;
-  constructor(private fancynumberService: FancyNumberService,private router: Router,private bootstrapAlertService: BootstrapAlertService) {
+  constructor(private localStorageService: LocalStorageService, private fancynumberService: FancyNumberService, private router: Router, private bootstrapAlertService: BootstrapAlertService) {
     this.data = [
     ];
     this.tempFilter = this.data;
@@ -53,8 +55,21 @@ export class VipNumberRegistrationComponent implements OnInit {
   addVipRegistration() {
     this.router.navigate(['admin/vipnumberregistration/create']);
   }
-  editVipRegistration() {
-    this.router.navigate(['admin/vipnumberregistration/edit' + 1]);
+  changeStatus(pk, status) {
+    let data = {
+      fancynoid: pk,
+      status: status == 'Active' ? 'InActive' : 'Active',
+      updateddt: new Date(),
+      updatedby: this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER).fullname
+    }
+    this.fancynumberService.editNumber(data, pk).subscribe(res => {
+      const response = JSON.parse(res._body);
+      if (response.status) {
+        this.bootstrapAlertService.showSucccess(response.message);
+      } else {
+        this.bootstrapAlertService.showError(response.message);
+      }
+    })
   }
   search(event) {
     const val = event.target.value.toLowerCase();
