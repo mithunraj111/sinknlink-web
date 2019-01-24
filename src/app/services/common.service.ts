@@ -1,12 +1,19 @@
 import { Injectable } from '@angular/core';
 import { FormGroup, FormControl, FormArray } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { HttpHandlerService } from './http-handler.service';
 import * as _ from 'lodash';
+import { AppConstant } from '../app.constants';
 
 @Injectable({
     providedIn: 'root'
 })
 export class CommonService {
-    constructor() {
+
+    apiEndPoint: string;
+
+    constructor(private httpHandler: HttpHandlerService) {
+        this.apiEndPoint = AppConstant.API_END_POINT;
     }
     public getFormErrorMessage(formGroupObj: FormGroup, errorObj: any) {
         for (const key in formGroupObj.controls) {
@@ -54,4 +61,9 @@ export class CommonService {
 
         }
     }
+
+    getLookUp(refkey:any): Observable<any>{
+        return this.httpHandler.POST(this.apiEndPoint + AppConstant.API_CONFIG.API_URL.ADMIN.LOOKUP.LIST, refkey);        
+    }
+
 }

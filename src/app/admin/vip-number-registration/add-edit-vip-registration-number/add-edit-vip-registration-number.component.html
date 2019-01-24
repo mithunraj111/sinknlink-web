@@ -7,7 +7,9 @@
                     <p *ngIf="eventid" class="m-b-0">ID: 875643</p>
                 </div>
                 <div class="col-md-3 col-sm-6 save-button text-right p-r-30">
-                    <button type="button" [disabled]="creatingNumbers                                                                                                                                                                                                                                   " placement="bottom" ngbTooltip="Click to save" (click)="submit()" class="btn btn-primary waves-effect m-r-10 text-capitalize">{{creatingNumbers == true ? 'Saving Numbers..' : 'Save'}}
+                    <button type="button" [disabled]="creatingNumbers                                                                                                                                                                                                                                   "
+                        placement="bottom" ngbTooltip="Click to save" (click)="submit()" class="btn btn-primary waves-effect m-r-10 text-capitalize">{{creatingNumbers
+                        == true ? 'Saving Numbers..' : 'Save'}}
                     </button>
                     <button type="button" placement="bottom" ngbTooltip="Go back" routerLink="/admin/vipnumberregistration"
                         class="btn btn-inverse btn-primary waves-effect"><i class="fa fa-arrow-circle-left"></i></button>
@@ -27,10 +29,7 @@
                             <div class="col-md-9 col-sm-6">
                                 <select name="select" class="form-control p-1 placeholder-align" formControlName="statecode">
                                     <option value="opt1">Select State</option>
-                                    <option value="opt2">TamilNadu</option>
-                                    <option value="opt3">Kerala</option>
-                                    <option value="opt4">Andrapradesh</option>
-                                    <option value="opt5">Karnataka</option>
+                                    <option *ngFor="let state of statelists" value="state">{{state}}</option>
                                 </select>
                             </div>
                         </div>
@@ -38,14 +37,15 @@
                             <label class="col-md-3 col-sm-6 col-form-label text-right">VIP number</label>
                             <div class="col-md-9 col-sm-6">
                                 <div class="row"></div>
-                                <input formControlName="startnumber" type="number" class="form-control m-b-10" placeholder="Start">
+                                <input formControlName="startnumber" type="number" class="form-control m-b-10"
+                                    placeholder="Start">
                                 <input formControlName="endnumber" type="number" class="form-control" placeholder="End">
                             </div>
                         </div>
                         <div class="form-group row ">
                             <label class="col-md-3 col-sm-6 col-form-label text-right">Number Cost</label>
                             <div class="col-md-9 col-sm-6">
-                                <input type="text" class="form-control" formControlName="cost" placeholder="Cost">
+                                <input type="number" class="form-control" formControlName="price" placeholder="Cost">
                             </div>
                         </div>
                         <div class="form-group row required">

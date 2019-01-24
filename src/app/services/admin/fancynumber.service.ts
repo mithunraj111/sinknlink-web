@@ -12,4 +12,8 @@ export class FancyNumberService {
     addNumbers(data): Observable<any> {
         return this.httpHandler.POST(this.endpoint + AppConstant.API_CONFIG.API_URL.ADMIN.FANCYNO.CREATE, data);
     }
+    getList(data:any):Observable<any>{
+        console.log('Inside get list');
+        return this.httpHandler.POST(this.endpoint + AppConstant.API_CONFIG.API_URL.ADMIN.FANCYNO.LIST, data);
+    }
 }

@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
+import { FancyNumberService } from 'src/app/services/admin/fancynumber.service';
+import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
 
 @Component({
   selector: 'app-vip-number-registration',
@@ -16,34 +18,23 @@ export class VipNumberRegistrationComponent implements OnInit {
   rows = [];
   formTitle: string;
   blocklist: string;
-  constructor(private router: Router) {
+  constructor(private fancynumberService: FancyNumberService,private router: Router,private bootstrapAlertService: BootstrapAlertService) {
     this.data = [
-      { fancycode: 'a111', state: 'Available', price: '10000000' },
-      { fancycode: 'b222', state: 'Available', price: '200' },
-      { fancycode: 'c333', state: 'Blocked', price: '100' },
-      { fancycode: 'd444', state: 'Blocked', price: '100' },
-      { fancycode: 'd444', state: 'Blocked', price: '100' },
-      { fancycode: 'e555', state: 'Blocked', price: '100' },
-      { fancycode: 'f666', state: 'Available', price: '200' },
-      { fancycode: 'g777', state: 'Blocked', price: '500' },
-      { fancycode: 'h888', state: 'Available', price: '100' },
-      { fancycode: 'i999', state: 'Available', price: '200' },
-      { fancycode: 'j000', state: 'Available', price: '200' },
-      { fancycode: 'a111', state: 'Available', price: '100' },
-      { fancycode: 'b222', state: 'Available', price: '200' },
-      { fancycode: 'c333', state: 'Blocked', price: '100' },
-      { fancycode: 'd444', state: 'Blocked', price: '100' },
-      { fancycode: 'e555', state: 'Blocked', price: '100' },
-      { fancycode: 'f666', state: 'Available', price: '200' },
-      { fancycode: 'g777', state: 'Blocked', price: '500' },
-      { fancycode: 'h888', state: 'Available', price: '100' },
-      { fancycode: 'i999', state: 'Available', price: '200' },
-      { fancycode: 'j000', state: 'Available', price: '200' }
     ];
     this.tempFilter = this.data;
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.fancynumberService.getList({}).subscribe(res => {
+      const response = JSON.parse(res._body);
+      if (response.status) {
+        this.data = response.data;
+        // console.log(response);
+      } else {
+        this.bootstrapAlertService.showError(response.message);
+      }
+    })
+  }
   openMyModal(event) {
     document.querySelector('#' + event).classList.add('md-show');
   }

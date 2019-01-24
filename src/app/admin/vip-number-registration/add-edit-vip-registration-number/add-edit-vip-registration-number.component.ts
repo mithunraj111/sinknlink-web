@@ -20,6 +20,7 @@ export class AddEditVipRegistrationNumberComponent implements OnInit {
   errMessage;
   sucMessage;
   creatingNumbers = false;
+  statelists = [];
 
   constructor(private bootstrapAlertService: BootstrapAlertService, private commonService: CommonService,
     private fb: FormBuilder, private router: Router, private fancynumberService: FancyNumberService, private localStorageService: LocalStorageService) {
@@ -28,11 +29,20 @@ export class AddEditVipRegistrationNumberComponent implements OnInit {
       startnumber: ['0', [Validators.required]],
       endnumber: [""],
       status: [true],
-      cost: [null, [Validators.required]]
+      price: [null, [Validators.required]]
     });
   }
 
   ngOnInit() {
+    this.commonService.getLookUp({ refkey: "biz_states", status: "Active" }).subscribe(res => {
+      const response = JSON.parse(res._body);
+      if (response.status) {
+        this.statelists = JSON.parse(response.data[0].refvalue);
+        console.log(response);
+      } else {
+        this.bootstrapAlertService.showError(response.message);
+      }
+    })
   }
   submit() {
     if (this.vipForm.valid) {

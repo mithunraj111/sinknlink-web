@@ -38,12 +38,12 @@
         [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false" [selected]="selected" [selectionType]="'checkbox'">
         <ngx-datatable-column prop="fancycode" name="Fancy Code" [resizeable]="false">
           <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-            <span>{{row.fancycode}}</span>
+            <span>{{row.fancyno}}</span>
           </ng-template>
         </ngx-datatable-column>
         <ngx-datatable-column prop="state" name="State" [resizeable]="false">
           <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-            <span>{{row.state}}</span>
+            <span>{{row.fancynostatus}}</span>
           </ng-template>
         </ngx-datatable-column>
         <ngx-datatable-column prop="price" name="Price" [resizeable]="false" headerClass="text-right" [cellClass]="'text-right'">
@@ -68,9 +68,9 @@
                   <label class="border-checkbox-label" for="{{rowIndex}}"></label>
                 </div>
               </div>
-              <a placement="bottom" ngbTooltip="Click to edit registration details" class="m-r-15 crm-action-edit text-primary"
+              <!-- <a placement="bottom" ngbTooltip="Click to edit registration details" class="m-r-15 crm-action-edit text-primary"
                 (click)='editVipRegistration()'>
-                <i class="fa fa-pencil"></i></a>
+                <i class="fa fa-pencil"></i></a> -->
               <a placement="bottom" ngbTooltip="Click to delete registration details" class="crm-action-delete text-danger">
                 <i class="fa fa-trash"></i></a>
             </div>
