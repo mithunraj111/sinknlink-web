@@ -40,15 +40,9 @@
                 <div class="form-group row required role-dropdown">
                   <label class="col-md-3 col-sm-6 col-form-label text-right">Role</label>
                   <div class="col-md-6 col-sm-6 p-r-0">
-                    <select name="select" formControlName="rolename" placeholder="Select Role">
+                    <select name="select" placeholder="Select Role" formControlName="rolename">
                       <option *ngFor="let role of roleList" [value]="role.roleid">{{role.rolename}}</option>
                     </select>
-                    <!-- <ng-select [ngClass]="'ng-select'" [options]="roleList" formControlName="rolename" bindValue='roleid'>
-                        <ng-template #optionTemplate let-option="option">
-                            <div class="{{option.rolename.toLowerCase()}}"></div>
-                          {{option.rolename}}
-                        </ng-template>
-                      </ng-select> -->
                   </div>
                 </div>
 
@@ -57,9 +51,10 @@
                   <div class="col-md-6 col-sm-6 p-r-0">
                     <input type="password" style="width:100% !important" class="form-control" name="password"
                       formControlName="password" placeholder="Password">
+                      <span *ngIf='generatepwd'> Your Password is : {{pwd}} </span>
                   </div>
                   <div class="col-md-3 col-sm-6 generate-button">
-                    <button type="button" placement="top" ngbTooltip="Click to Generate" class="btn btn-primary waves-effect">Generate</button>
+                    <button type="button"  placement="top" ngbTooltip="Click to Generate" (click)="generatepassword()" class="btn btn-primary waves-effect">Generate</button>
                   </div>
                 </div>
 
@@ -67,28 +62,28 @@
                   <div class="form-group row required">
                     <label class="col-md-3 col-sm-6 col-form-label text-right">Status</label>
                     <div class="col-md-9 col-sm-6">
-                      <ui-switch class="js-small" color="#03ADED" switchColor="#fff" size="small" checked></ui-switch>
+                      <ui-switch class="js-small" formControlName="status" color="#03ADED" switchColor="#fff" size="small" checked></ui-switch>
                     </div>
                   </div>
 
                   <div class="form-group row">
                     <label class="col-md-3 col-sm-6 col-form-label text-right">Last Login</label>
                     <div class="col-md-6 col-sm-6 m-t-5">
-                      <span class="f-13">{{date|date:displayformat}}</span>
+                      <span class="f-13">{{userObj.lastlogin|date:displayformat}}</span>
                     </div>
                   </div>
                   <div class="form-group row">
                     <label class="col-md-3 col-sm-6 col-form-label text-right">Created By</label>
                     <div class="col-md-3 col-sm-6 m-t-5 pr-4">
                       <span class="f-15">{{userObj.createdby}}</span><br>
-                      <span class="text-align f-12">{{date|date:displayformat}}</span>
+                      <span class="text-align f-12">{{userObj.createddt|date:displayformat}}</span>
                     </div>
                   </div>
                   <div class="form-group row">
                     <label class="col-md-3 col-sm-6 col-form-label text-right">Updated By</label>
                     <div class="col-md-6 col-sm-6 m-t-5">
                       <span class="f-15">{{userObj.updatedby}}</span><br>
-                      <span class="text-align f-12">{{date|date:displayformat}}</span>
+                      <span class="text-align f-12">{{userObj.updateddt|date:displayformat}}</span>
                     </div>
                   </div>
                 </div>

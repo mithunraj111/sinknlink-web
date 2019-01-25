@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AppConstant } from '../../../app.constants';
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
 import { CommonService } from '../../../services/common.service';
@@ -19,6 +19,8 @@ import { RoleService } from '../../../services/masters/role.service';
 export class AddEditUserComponent implements OnInit {
   isaddForm = true;
   userid: number;
+  pwd: any;
+  generatepwd = false;
   userForm: FormGroup;
   roleList: any = [];
   userErrObj = AppMessages.VALIDATION.USER;
@@ -28,6 +30,7 @@ export class AddEditUserComponent implements OnInit {
   userstoragedata = {} as any;
   userObj = {} as any;
   constructor(private route: ActivatedRoute,
+    private router: Router,
     private bootstrapAlertService: BootstrapAlertService,
     private fb: FormBuilder,
     private commonService: CommonService,
@@ -53,8 +56,8 @@ export class AddEditUserComponent implements OnInit {
     this.userForm = this.fb.group({
       fullname: [null, Validators.compose([Validators.required, Validators.minLength(1),
       Validators.maxLength(50), Validators.pattern('^[a-zA-Z]*$')])],
-      mobileno: [null, Validators.compose([Validators.required, Validators.minLength(8),
-      Validators.maxLength(12), Validators.pattern('^[0-9]*$')])],
+      mobileno: [null, Validators.compose([Validators.required, Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$'),
+      Validators.maxLength(13)])],
       rolename: [null, Validators.compose([Validators.required])],
       status: [true],
       password: [null, Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(30)])],
@@ -81,7 +84,7 @@ export class AddEditUserComponent implements OnInit {
           const response = JSON.parse(res._body);
           if (response.status) {
             this.bootstrapAlertService.showSucccess(response.message);
-            this.initForm();
+            this.router.navigate(['/masters/users/']);
           } else {
             this.bootstrapAlertService.showError(response.message);
           }
@@ -96,6 +99,7 @@ export class AddEditUserComponent implements OnInit {
           const response = JSON.parse(res._body);
           if (response.status) {
             this.bootstrapAlertService.showSucccess(response.message);
+            this.router.navigate(['/masters/users/']);
           } else {
             this.bootstrapAlertService.showError(response.message);
           }
@@ -113,12 +117,13 @@ export class AddEditUserComponent implements OnInit {
         this.userForm = this.fb.group({
           fullname: [this.userObj.fullname, Validators.compose([Validators.required, Validators.minLength(1),
           Validators.maxLength(50), Validators.pattern('^[a-zA-Z]*$')])],
-          mobileno: [this.userObj.mobileno, Validators.compose([Validators.required, Validators.minLength(8),
-          Validators.maxLength(12), Validators.pattern('^[0-9]*$')])],
-          rolename: [this.userObj.rolename, Validators.compose([Validators.required])],
+          mobileno: [ this.userObj.mobileno, Validators.compose([Validators.required,
+          Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$'), Validators.maxLength(13)])],
+          rolename: [this.userObj.roleid, Validators.compose([Validators.required])],
           status: [this.userObj.status === AppConstant.STATUS_ACTIVE ? true : false, Validators.compose([Validators.required])],
           password: [this.userObj.password, Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(30)])],
         });
+        console.log(this.userObj.status);
       }
     });
   }
@@ -129,5 +134,10 @@ export class AddEditUserComponent implements OnInit {
         this.roleList = response.data;
       }
     });
+  }
+  generatepassword() {
+    this.pwd = Math.floor(Math.random() * 9000000000) + 1000000000;
+    this.userForm.controls['password'].setValue(this.pwd.toString());
+    this.generatepwd = true;
   }
 }
