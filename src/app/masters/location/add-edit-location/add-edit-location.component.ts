@@ -45,13 +45,9 @@ export class AddEditLocationComponent implements OnInit, OnChanges {
       const response = JSON.parse(res._body);
       if (response.status) {
         this.stateList = JSON.parse(response.data[0].refvalue);
-        // this.stateList = response.data;
       } else {
         this.stateList = [];
       }
-    console.log(response.data[0].refvalue);
-    console.log(this.stateList);
-    console.log(response.data);
     });
   }
   initForm() {
@@ -83,7 +79,6 @@ export class AddEditLocationComponent implements OnInit, OnChanges {
       this.buttonTxt = AppConstant.BUTTON_TXT.SAVE;
       this.formTitle = AppConstant.FORM_TITLE.LOCATION.ADD;
     }
-    console.log(this.locationObj);
   }
 
   closeMyModal(event) {
@@ -96,7 +91,6 @@ export class AddEditLocationComponent implements OnInit, OnChanges {
       this.bootstrapAlertService.showError(this.errMessage);
       return false;
     } else {
-      this.validatingLocation = true;
       let data = this.locationForm.value;
       let formdata = {} as any;
       formdata.pincode = data.pincode;
@@ -105,19 +99,19 @@ export class AddEditLocationComponent implements OnInit, OnChanges {
       formdata.city = data.city;
       formdata.updatedby = this.userstoragedata.fullname;
       formdata.updateddt = new Date();
-      console.log(this.locationForm.status);
       if (!_.isUndefined(this.locationObj) && !_.isUndefined(this.locationObj.locationid) && !_.isEmpty(this.locationObj)) {
         formdata.status = data.status;
         this.locationService.update(formdata, this.locationObj.locationid).subscribe(res => {
           const response = JSON.parse(res._body);
           if (response.status) {
-            this.validatingLocation = false;
             this.bootstrapAlertService.showSucccess(response.message);
+            this.notifyLocationEntry.emit(response.data);
+            // this.closeMyModal('locationmodal');
           } else {
             this.bootstrapAlertService.showError(response.message);
-            this.validatingLocation = true;
           }
         }, err => {
+          this.validatingLocation = false;
           this.bootstrapAlertService.showError(err.message);
         });
       } else {
@@ -125,14 +119,16 @@ export class AddEditLocationComponent implements OnInit, OnChanges {
         formdata.createdby = this.userstoragedata.fullname;
         formdata.createddt = new Date();
         this.locationService.create(formdata).subscribe((res) => {
+          this.validatingLocation = false;
           const response = JSON.parse(res._body);
           if (response.status) {
             this.bootstrapAlertService.showSucccess(response.message);
-              this.closeMyModal('locationmodal');
-              this.validatingLocation = false;
+            this.notifyLocationEntry.emit(response.data);
+            this.closeMyModal('locationmodal');
+            console.log('inside if');
           } else {
+            console.log('inside else');
             this.bootstrapAlertService.showError(response.message);
-            this.validatingLocation = true;
           }
         }, err => {
           this.bootstrapAlertService.showError(err.message);

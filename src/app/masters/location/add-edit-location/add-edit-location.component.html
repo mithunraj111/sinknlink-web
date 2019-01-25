@@ -33,8 +33,8 @@
                             </div>
                             <div class="radio radio-inline">
                                 <label>
-                                    <input type="radio" value='Inactive' formControlName="status">
-                                    <i class="helper"></i>Inactive
+                                    <input type="radio" value='InActive' formControlName="status">
+                                    <i class="helper"></i>InActive
                                 </label>
                             </div>
                         </div>
@@ -42,7 +42,7 @@
                 </div>
                 <button (click)="closeMyModal($event)" type="button" placement="top" (click)="saveOrUpdateLocation()" 
                     ngbTooltip="Click to {{buttonTxt}} location" class="btn pull-right btn-primary waves-effect 
-                    m-b-10 m-r-15" [disabled]="validatingLocation" >{{buttonTxt}}</button>
+                    m-b-10 m-r-15" [disabled]="validatingLocation" >{{validatingLocation == true ? 'Saving..' : 'Save'}}</button>
             </div>
         </form>
         <button (click)="closeMyModal($event)" aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>
