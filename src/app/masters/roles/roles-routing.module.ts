@@ -18,15 +18,21 @@ const routes: Routes = [
     path: 'create',
     component: AddEditRoleComponent,
     data: {
-      title: 'Add Roles',
+      title: 'Add Role',
       icon: 'ti-settings',
-      caption: 'add roles',
+      caption: 'add role',
       status: false
     }
   },
   {
     path: 'edit/:id',
     component: AddEditRoleComponent,
+    data: {
+      title: 'Edit Role',
+      icon: 'ti-settings',
+      caption: 'edit role',
+      status: false
+    }
   }
 ];
 

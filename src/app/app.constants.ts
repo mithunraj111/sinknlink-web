@@ -27,8 +27,10 @@ export const AppConstant = Object.freeze({
   STATUS_ACTIVE: 'Active',
   STATUS_INACTIVE: 'Inactive',
   STATUS_AVAILABLE: 'Available',
+  STATUS_DELETED: 'Deleted',
 
-
+  // Default Data
+  DEFAULT_DATA_ACCESS: 'All',
   API_CONFIG: {
     ANG_DATE: {
       displaydtime: 'dd-MMM-yyyy HH:mm',

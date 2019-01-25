@@ -2,6 +2,9 @@
 export const AppMessages = Object.freeze({
   // Validation Messages
   VALIDATION: {
+    COMMON: {
+      DELETE_SUCCESS: 'Deleted Successfully'
+    },
     LOGIN: {
       mobileno: { required: 'Please enter mobile number' },
       password: { required: 'Please enter password' }

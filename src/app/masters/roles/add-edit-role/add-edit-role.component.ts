@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AppConstant } from '../../../app.constants';
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
 import { RoleService } from '../../../services/masters/role.service';
@@ -14,10 +14,9 @@ import * as _ from 'lodash';
 export class AddEditRoleComponent implements OnInit {
 
   rolename: string;
-  status = AppConstant.STATUS_ACTIVE;
-  dataaccess = 'All';
+  status = true;
+  dataaccess = AppConstant.DEFAULT_DATA_ACCESS;
   roleid: number;
-  isaddForm = true;
   buttontext = AppConstant.BUTTON_TXT.SAVE;
   screensList = [];
   permissionList = [];
@@ -30,14 +29,15 @@ export class AddEditRoleComponent implements OnInit {
     private bootstrapAlertService: BootstrapAlertService,
     private roleService: RoleService,
     private lookupService: LookupService,
-    private localStorageService: LocalStorageService
+    private localStorageService: LocalStorageService,
+    private router: Router
   ) {
     this.userstoragedata = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER);
     this.route.params.subscribe(params => {
       if (params.id !== undefined) {
-        this.isaddForm = false;
         this.roleid = params.id;
         this.buttontext = AppConstant.BUTTON_TXT.UPDATE;
+        this.getRoleDetail(this.roleid);
       }
     });
   }
@@ -51,16 +51,32 @@ export class AddEditRoleComponent implements OnInit {
       const response = JSON.parse(res._body);
       if (response.status) {
         this.screensList = JSON.parse(response.data[0].refvalue);
+        if (this.roleid) {
+          const self = this;
+          _.map(this.roleObj.uiactions, function (item, idx) {
+            const data = _.find(self.screensList, { screencode: item.screencode });
+            if (!_.isUndefined(data)) {
+              const index = _.indexOf(self.screensList, data);
+              self.screensList[index].assignedpermissions = item.assignedpermissions;
+            }
+            if (idx + 1 === self.roleObj.uiactions.length) {
+              self.screensList = [...self.screensList];
+            }
+          });
+        }
       }
     });
   }
   openPermissionModal(event, data, rowindex) {
+    this.permissions = [];
+    this.permissionList = [];
     const self = this;
     this.index = rowindex;
     _.each(data.permissions, function (item, index) {
       self.permissionList.push({ value: item, label: item });
       if (index + 1 === data.permissions.length) {
         self.permissionList = [...self.permissionList];
+        self.permissions = data.assignedpermissions;
         document.querySelector('#' + event).classList.add('md-show');
       }
     });
@@ -74,10 +90,10 @@ export class AddEditRoleComponent implements OnInit {
     return row.height;
   }
   closePermissionModal(event) {
-    document.querySelector('#' + event).classList.remove('md-show');
+    ((event.target.parentElement.parentElement).parentElement).classList.remove('md-show');
   }
   saveOrUpdateRole() {
-    let formdata = {} as any;
+    const formdata = {} as any;
     formdata.rolename = this.rolename;
     formdata.dataaccess = this.dataaccess;
     formdata.uiactions = this.screensList;
@@ -89,6 +105,7 @@ export class AddEditRoleComponent implements OnInit {
         const response = JSON.parse(res._body);
         if (response.status) {
           this.bootstrapAlertService.showSucccess(response.message);
+          this.router.navigate(['/roles']);
         } else {
           this.bootstrapAlertService.showError(response.message);
         }
@@ -103,6 +120,7 @@ export class AddEditRoleComponent implements OnInit {
         const response = JSON.parse(res._body);
         if (response.status) {
           this.bootstrapAlertService.showSucccess(response.message);
+          this.router.navigate(['/roles']);
         } else {
           this.bootstrapAlertService.showError(response.message);
         }
@@ -111,6 +129,18 @@ export class AddEditRoleComponent implements OnInit {
         this.bootstrapAlertService.showError(error.message);
       });
     }
+  }
+
+  getRoleDetail(id) {
+    this.roleService.byId(id).subscribe((res) => {
+      const response = JSON.parse(res._body);
+      if (response.status) {
+        this.roleObj = response.data;
+        this.rolename = response.data.rolename;
+        this.dataaccess = response.data.dataaccess;
+        this.status = response.data.status === AppConstant.STATUS_ACTIVE ? true : false;
+      }
+    });
   }
 }
 

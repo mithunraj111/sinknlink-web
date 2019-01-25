@@ -5,6 +5,7 @@ import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { UserService } from 'src/app/services/masters/user.service';
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { AppMessages } from 'src/app/app-messages';
 
 @Component({
   selector: 'app-users',
@@ -13,13 +14,9 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 })
 export class UsersComponent implements OnInit {
   displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
-  date: any;
-  public data: any;
   tempFilter = [];
   userList = [];
-  buttontext: string;
   @ViewChild(DatatableComponent) table: DatatableComponent;
-
   constructor(private router: Router, private userService: UserService,
     private bootstrapAlertService: BootstrapAlertService, private localStorageService: LocalStorageService) {
   }
@@ -28,13 +25,11 @@ export class UsersComponent implements OnInit {
     this.getUsers();
   }
 
-  addUsers() {
+  addUser() {
     this.router.navigate(['masters/users/create']);
-    this.buttontext = AppConstant.BUTTON_TXT.SAVE;
   }
-  editUsers(data) {
-    this.router.navigate(['masters/users/edit/' + data.userid]);
-    this.buttontext = AppConstant.BUTTON_TXT.UPDATE;
+  editUser(id) {
+    this.router.navigate(['masters/users/edit/' + id]);
   }
 
   getUsers() {
@@ -52,8 +47,7 @@ export class UsersComponent implements OnInit {
 
   changeStatus(id, status, deleted) {
     let data = {
-      userid: id,
-      status: deleted == true ? 'deleted' : status == 'Active' ? 'InActive' : 'Active',
+      status: deleted ? AppConstant.STATUS_DELETED : status == AppConstant.STATUS_ACTIVE ? AppConstant.STATUS_INACTIVE : AppConstant.STATUS_ACTIVE,
       updateddt: new Date(),
       updatedby: this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER).fullname
     };
@@ -62,15 +56,14 @@ export class UsersComponent implements OnInit {
       if (response.status) {
         if (deleted) {
           this.getUsers();
-          this.bootstrapAlertService.showSucccess('Deleted Successfully');
-        }
-        else {
+          this.bootstrapAlertService.showSucccess('#' + id + ' ' + AppMessages.VALIDATION.COMMON.DELETE_SUCCESS);
+        } else {
           this.bootstrapAlertService.showSucccess(response.message);
         }
       } else {
         this.bootstrapAlertService.showError(response.message);
       }
-    })
+    });
   }
 
   search(event) {
