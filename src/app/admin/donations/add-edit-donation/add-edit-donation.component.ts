@@ -50,7 +50,7 @@ export class AddEditDonationComponent implements OnInit {
   initForm() {
     this.donationForm = this.fb.group({
       charityname: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
-      startdate: [new Date(), Validators.compose([Validators.required])],
+      startdate: [null, Validators.compose([Validators.required])],
       enddate: [null, Validators.compose([Validators.required])],
       amount: [''],
       causeremarks: ['', Validators.compose([Validators.maxLength(500)])],
@@ -75,19 +75,27 @@ export class AddEditDonationComponent implements OnInit {
       formdata.enddate = data.enddate.year + '-' + data.enddate.month + '-' + data.enddate.day;
       formdata.updatedby = this.userstoragedata.fullname;
       formdata.updateddt = new Date();
+      formdata.amount = [];
+      if (data.amount.length > 0) {
+        data.amount.forEach(element => {
+          formdata.amount.push(element.value);
+        });
+        formdata.amount = JSON.stringify(formdata.amount);
+      } else {
+        formdata.amount = "0"
+      }
       if (!_.isUndefined(this.donationObj) && !_.isUndefined(this.donationObj.donationid) && !_.isEmpty(this.donationObj)) {
         formdata.status = data.status ? AppConstant.STATUS_ACTIVE : AppConstant.STATUS_INACTIVE;
         this.donationService.update(formdata, this.donationObj.donationid).subscribe(res => {
           const response = JSON.parse(res._body);
           if (response.status) {
-            this.validatingDonation = false;
             this.bootstrapAlertService.showSucccess(response.message);
           } else {
             this.bootstrapAlertService.showError(response.message);
-            this.validatingDonation = true;
 
           }
         }, err => {
+          this.validatingDonation = false;
           this.bootstrapAlertService.showError(err.message);
         });
       } else {
@@ -113,12 +121,23 @@ export class AddEditDonationComponent implements OnInit {
       const response = JSON.parse(res._body);
       if (response.status) {
         this.donationObj = response.data;
-        let date = new Date(this.donationObj.startdate);
+        let s_date = new Date(this.donationObj.startdate);
+        let e_date = new Date(this.donationObj.enddate);
+        let amount;
+        if (this.donationObj.amount == "0") {
+          amount = []
+        } else {
+          amount = [];
+          let data = JSON.parse(this.donationObj.amount);
+          data.forEach(element => {
+            amount.push({ display: element, value: element })
+          });
+        }
         this.donationForm = this.fb.group({
           charityname: [this.donationObj.charityname, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
-          startdate: [{ year: date.getFullYear(), month: date.getMonth() + 1, day: date.getUTCDate() }, Validators.compose([Validators.required])],
-          enddate: [{ year: date.getFullYear(), month: date.getMonth() + 1, day: date.getUTCDate() }, Validators.compose([Validators.required])],
-          amount: [this.donationObj.amount],
+          startdate: [{ year: s_date.getFullYear(), month: s_date.getMonth() + 1, day: s_date.getUTCDate() }, Validators.compose([Validators.required])],
+          enddate: [{ year: e_date.getFullYear(), month: e_date.getMonth() + 1, day: e_date.getUTCDate() }, Validators.compose([Validators.required])],
+          amount: [amount],
           causeremarks: [this.donationObj.causeremarks, Validators.compose([Validators.maxLength(500)])],
           status: [this.donationObj.status === AppConstant.STATUS_ACTIVE ? true : false, Validators.compose([Validators.required])]
         });
