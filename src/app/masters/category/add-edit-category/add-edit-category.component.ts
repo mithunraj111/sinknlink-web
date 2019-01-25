@@ -5,6 +5,8 @@ import { LocalStorageService } from '../../../services/local-storage.service';
 import { AppConstant } from '../../../app.constants';
 import * as _ from 'lodash';
 import { CategoryService } from '../../../services/masters/category.service';
+import { CommonService } from '../../../services/common.service';
+import { AppMessages } from 'src/app/app-messages';
 @Component({
   selector: 'app-add-edit-category',
   templateUrl: './add-edit-category.component.html',
@@ -17,9 +19,12 @@ export class AddEditCategoryComponent implements OnInit, OnChanges {
   buttonTxt = AppConstant.BUTTON_TXT.SAVE;
   @Output() notifyCategoryEntry: EventEmitter<any> = new EventEmitter();
   @Input() categoryObj = {} as any;
+  categoryErrObj = AppMessages.VALIDATION.CATEGORY;
+  errMessage;
   constructor(private bootstrapAlertService: BootstrapAlertService,
     private localStorageService: LocalStorageService,
-    private fb: FormBuilder, private categoryService: CategoryService) {
+    private fb: FormBuilder, private categoryService: CategoryService,
+    private commonService: CommonService) {
     this.userstoragedata = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER);
   }
 
@@ -29,8 +34,8 @@ export class AddEditCategoryComponent implements OnInit, OnChanges {
 
   initForm() {
     this.categoryForm = this.fb.group({
-      categoryname: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
-      status: [''],
+      categoryname: [null, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])],
+      status: [AppConstant.STATUS_ACTIVE],
     });
     this.categoryObj = {};
   }
@@ -41,8 +46,8 @@ export class AddEditCategoryComponent implements OnInit, OnChanges {
       this.categoryObj = changes.categoryObj.currentValue;
       this.categoryForm = this.fb.group({
         categoryname: [this.categoryObj.categoryname,
-        Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
-        status: [this.categoryObj.status === AppConstant.STATUS_ACTIVE ? true : false, Validators.required],
+        Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])],
+        status: [this.categoryObj.status, Validators.required],
       });
     } else {
       this.initForm();
@@ -51,16 +56,13 @@ export class AddEditCategoryComponent implements OnInit, OnChanges {
     }
   }
   saveOrUpdateCategory() {
-    console.log('saveOrUpdateCategory');
-    let errorMessage: any;
-
-    console.log(this.categoryForm.status);
     if (this.categoryForm.status === 'INVALID') {
-      console.log(this.categoryForm.status);
+      this.errMessage = this.commonService.getFormErrorMessage(this.categoryForm, this.categoryErrObj);
+      this.bootstrapAlertService.showError(this.errMessage);
       return false;
     } else {
-      let data = this.categoryForm.value;
-      let formdata = {} as any;
+      const data = this.categoryForm.value;
+      const formdata = {} as any;
       formdata.categoryname = data.categoryname;
       formdata.updatedby = this.userstoragedata.fullname;
       formdata.updateddt = new Date();
@@ -70,7 +72,9 @@ export class AddEditCategoryComponent implements OnInit, OnChanges {
           const response = JSON.parse(res._body);
           if (response.status) {
             this.notifyCategoryEntry.next({ update: true, data: response.data });
+            this.bootstrapAlertService.showSucccess(response.message);
           } else {
+            this.bootstrapAlertService.showError(response.message);
           }
         });
       } else {
@@ -80,9 +84,10 @@ export class AddEditCategoryComponent implements OnInit, OnChanges {
         this.categoryService.create(formdata).subscribe((res) => {
           const response = JSON.parse(res._body);
           if (response.status) {
+            this.bootstrapAlertService.showSucccess(response.message);
             this.notifyCategoryEntry.next({ add: true, data: response.data });
           } else {
-
+            this.bootstrapAlertService.showError(response.message);
           }
         }, err => {
         });

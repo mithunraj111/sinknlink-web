@@ -16,6 +16,13 @@ export const AppMessages = Object.freeze({
         maxlength: 'Mobile number is not valid'
       }
     },
+    CATEGORY: {
+      categoryname: {
+        required: 'Please enter category name',
+        minlength: 'Please enter category name atleast 3 characters',
+        maxlength: 'Please enter category name within 50 characters'
+      }
+    },
     FANCYNUMBER: {
       startnumber: {
         required: 'Please enter a start number'

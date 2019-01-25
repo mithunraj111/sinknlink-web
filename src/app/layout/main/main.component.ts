@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {animate, AUTO_STYLE, state, style, transition, trigger} from '@angular/animations';
-import {MenuItems} from '../../shared/menu-items/menu-items';
+import { animate, AUTO_STYLE, state, style, transition, trigger } from '@angular/animations';
+import { MenuItems } from '../../shared/menu-items/menu-items';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { AppConstant } from 'src/app/app.constants';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main',
@@ -54,12 +57,12 @@ import {MenuItems} from '../../shared/menu-items/menu-items';
     ]),
     trigger('fadeInOutTranslate', [
       transition(':enter', [
-        style({opacity: 0}),
-        animate('400ms ease-in-out', style({opacity: 1}))
+        style({ opacity: 0 }),
+        animate('400ms ease-in-out', style({ opacity: 1 }))
       ]),
       transition(':leave', [
-        style({transform: 'translate(0)'}),
-        animate('400ms ease-in-out', style({opacity: 0}))
+        style({ transform: 'translate(0)' }),
+        animate('400ms ease-in-out', style({ opacity: 0 }))
       ])
     ])
   ]
@@ -118,8 +121,9 @@ export class MainComponent implements OnInit {
   public itemBorder: boolean;
 
   public config: any;
-
-  constructor(public menuItems: MenuItems) {
+  userstoragedata = {} as any;
+  constructor(public menuItems: MenuItems, private route: Router,
+    private lstorageService: LocalStorageService) {
     this.navType = 'st2';
     this.themeLayout = 'vertical';
     this.verticalPlacement = 'left';
@@ -187,6 +191,8 @@ export class MainComponent implements OnInit {
 
   ngOnInit() {
     this.setBackgroundPattern('pattern1');
+    this.userstoragedata = this.lstorageService.getItem(AppConstant.LOCALSTORAGE.USER);
+
     /*document.querySelector('body').classList.remove('dark');*/
   }
 
@@ -391,4 +397,9 @@ export class MainComponent implements OnInit {
     this.headerFixedMargin = this.isHeaderChecked === true ? '56px' : '';
   }
 
+  logout() {
+    this.lstorageService.removeItem(AppConstant.LOCALSTORAGE.USER);
+    this.lstorageService.removeItem(AppConstant.LOCALSTORAGE.ISAUTHENTICATED);
+    this.route.navigate(['auth/login']);
+  }
 }

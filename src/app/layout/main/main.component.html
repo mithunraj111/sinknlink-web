@@ -26,7 +26,7 @@
                         <li (clickOutside)="notificationOutsideClick('profile')" class="user-profile header-notification" [ngClass]="profileNotificationClass" (click)="toggleProfileNotification()">
                             <a href="javascript:">
                                 <img src="assets/images/avatar-4.jpg" class="img-radius" alt="User-Profile-Image">
-                                <span>John Doe</span>
+                                <span>{{userstoragedata.fullname}}</span>
                                 <i class="ti-angle-down"></i>
                             </a>
 
@@ -37,7 +37,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a [routerLink]="['/auth/login']">
+                                    <a>
                                         <i class="fa fa-sign-out"></i> Logout
                                     </a>
                                 </li>

@@ -10,7 +10,11 @@ export class CategoryService {
         this.endpoint = AppConstant.API_END_POINT;
     }
     list(data, query): Observable<any> {
-        return this.httpHandler.POST(this.endpoint + AppConstant.API_CONFIG.API_URL.MASTERS.CATEGORY.LIST + '?' + query, data);
+        let url = this.endpoint + AppConstant.API_CONFIG.API_URL.MASTERS.CATEGORY.LIST;
+        if (query != '') {
+            url = url + '?' + query;
+        }
+        return this.httpHandler.POST(url, data);
     }
     create(data): Observable<any> {
         return this.httpHandler.POST(this.endpoint + AppConstant.API_CONFIG.API_URL.MASTERS.CATEGORY.CREATE, data);

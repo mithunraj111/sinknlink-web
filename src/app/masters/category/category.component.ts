@@ -2,7 +2,7 @@ import { Component, OnInit, Output, ViewChild } from '@angular/core';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { AppConstant } from '../../app.constants';
 import { CategoryService } from '../../services/masters/category.service';
-
+import * as _ from 'lodash';
 @Component({
   selector: 'app-category',
   templateUrl: './category.component.html',
@@ -18,7 +18,7 @@ export class CategoryComponent implements OnInit {
   categoryList = [];
 
   constructor(private categoryService: CategoryService) {
-    this.tempFilter = this.categoryList;
+    
   }
 
   ngOnInit() {
@@ -29,18 +29,19 @@ export class CategoryComponent implements OnInit {
 
   getCategories() {
     const condition = {
-      //limit: 'Active'
+      // limit: 'Active'
     };
-    let query = 'limit=11' + '&offset=' + this.categoryList.length;
-    this.categoryService.list(condition, query).subscribe((res) => {
+    // let query = 'limit=11' + '&offset=' + this.categoryList.length;
+    this.categoryService.list(condition, '').subscribe((res) => {
       const response = JSON.parse(res._body);
       if (response.status) {
         if (this.categoryList.length != 0) {
-          this.categoryList = this.categoryList.concat(response.data);
+          this.categoryList = this.categoryList.concat(response.data.rows);
           this.categoryList = [...this.categoryList];
         } else {
-          this.categoryList = response.data;
+          this.categoryList = response.data.rows;
         }
+        this.tempFilter = this.categoryList;
       }
     });
   }
@@ -48,7 +49,8 @@ export class CategoryComponent implements OnInit {
     document.querySelector('#' + event).classList.add('md-show');
   }
   closeCategoryModal(event) {
-    ((event.target.parentElement.parentElement).parentElement).classList.remove('md-show');
+    console.log((event.target.parentElement.parentElement));
+    (event.target.parentElement.parentElement).classList.remove('md-show');
   }
   getRowHeight(row) {
     return row.height;
@@ -63,7 +65,15 @@ export class CategoryComponent implements OnInit {
   }
 
   notifyCategoryEntry(event) {
-    this.getCategories();
+    let existData = {} as any;
+    existData = _.find(this.categoryList, { categoryid: event.data.categoryid });
+    if (existData === undefined) {
+      this.categoryList = [event, ...this.categoryList];
+    } else {
+      const index = _.indexOf(this.categoryList, existData);
+      this.categoryList[index] = event.data;
+      this.categoryList = [...this.categoryList];
+    }
     this.closeCategoryModal('categorymodal');
   }
   search(event) {
