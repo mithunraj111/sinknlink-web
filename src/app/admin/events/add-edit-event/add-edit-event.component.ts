@@ -1,11 +1,14 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AppConstant } from '../../../app.constants';
 import { NgbDateCustomParserFormatter } from '../../../shared/elements/dateParser';
 import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { CommonService } from 'src/app/services/common.service';
+import { AppMessages } from 'src/app/app-messages';
 
 @Component({
   selector: 'app-add-edit-event',
@@ -27,17 +30,37 @@ export class AddEditEventComponent implements OnInit {
   eventid: number;
   buttontext = AppConstant.BUTTON_TXT.SAVE;
 
-  constructor(private route: ActivatedRoute,private bootstrapAlertService: BootstrapAlertService) {
-    this.route.params.subscribe(params => {
-      if (params.id !== undefined) {
-        this.isaddForm = false;
-        this.eventid = params.id;
-        this.buttontext = AppConstant.BUTTON_TXT.UPDATE;
-      }
+  eventForm: FormGroup;
+  eventErrObj = AppMessages.VALIDATION.EVENT;
+  errMessage;
+  sucMessage;
+  processingEvent;
+  statelists = [];
+
+  constructor(private route: ActivatedRoute, private bootstrapAlertService: BootstrapAlertService, private commonService: CommonService,
+    private fb: FormBuilder, private router: Router) {
+
+    this.eventForm = this.fb.group({
+      eventname: [null, [Validators.required]],
+      locationid: [null, [Validators.required]],
+      eventdate: [null, [Validators.required]],
+      eventexpirydt: [null, [Validators.required]],
+      address: [null, [Validators.required]],
+      description: [null, [Validators.required]]
     });
+
   }
 
   ngOnInit() {
+    this.commonService.getLookUp({ refkey: "biz_states", status: "Active" }).subscribe(res => {
+      const response = JSON.parse(res._body);
+      if (response.status) {
+        this.statelists = JSON.parse(response.data[0].refvalue);
+        console.log(response);
+      } else {
+        this.bootstrapAlertService.showError(response.message);
+      }
+    })
   }
 
   fileOverBase(e: any): void {
@@ -55,19 +78,20 @@ export class AddEditEventComponent implements OnInit {
 
       reader.readAsDataURL(event.target.files[0]); // read file as data url
 
-      reader.onload = (event) => { // called once readAsDataURL is completed
-        // this.url = event.target.result;
+      reader.onload = (event) => { 
 
       }
-      console.log(event.target.result);
     }
   }
 
 
-  submit(){
-    // this.bootstrapAlertService.showError('Error Occured');
-    this.bootstrapAlertService.showInfo('This is an info!');    
-    //  this.bootstrapAlertService.showWarning('This is a warning!');    
-    // this.bootstrapAlertService.showSucccess('Saved Successfully');
-}
+  submit() {
+
+    if (!this.eventForm.valid) {
+      this.bootstrapAlertService.showError(this.commonService.getFormErrorMessage(this.eventForm, this.eventErrObj));
+    } else {
+      console.log(this.eventForm.value);
+    }
+  
+  }
 }

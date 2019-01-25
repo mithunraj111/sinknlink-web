@@ -24,6 +24,26 @@ export const AppMessages = Object.freeze({
         required: 'Cost is required'
       }
     },
+    EVENT: {
+      eventname: {
+        required: 'Event name is required'
+      },
+      locationid: {
+        required: 'Location is required'
+      },
+      eventdate: {
+        required: 'Event start date is requried'
+      },
+      eventexpirydt: {
+        required: 'Event end date is requried'
+      },
+      address: {
+        required: 'Address is requried'
+      },
+      description: {
+        required: 'Description is requried'
+      }
+    },
     USER: {
       fullname: {
         required: 'Please enter full name',

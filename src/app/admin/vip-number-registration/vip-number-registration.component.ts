@@ -31,7 +31,7 @@ export class VipNumberRegistrationComponent implements OnInit {
       const response = JSON.parse(res._body);
       if (response.status) {
         this.data = response.data;
-        // console.log(response);
+        this.tempFilter = this.data;
       } else {
         this.bootstrapAlertService.showError(response.message);
       }

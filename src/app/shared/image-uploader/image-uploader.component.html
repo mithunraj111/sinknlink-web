@@ -1,0 +1,22 @@
+<div class="container p-4">
+    <div class="row">
+        <div class="col-sm-12 col-md-4 ">
+            <div class="dropbox">
+                <input type="file" multiple (change)="selectedImg($event.target.name, $event.target.files)"
+                    accept="image/*" class="input-file">
+                <p>Drag your file(s) here to begin
+                    <br>or click to browse
+                </p>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-8 imagePicked">
+
+        </div>
+    </div>
+    <div class="row ">
+        <div class="col"></div>
+        <div class="col text-right align-self-end">
+            <button>Upload</button>
+        </div>
+    </div>
+</div>
