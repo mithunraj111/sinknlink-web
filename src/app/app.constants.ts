@@ -28,6 +28,7 @@ export const AppConstant = Object.freeze({
   STATUS_INACTIVE: 'Inactive',
   STATUS_AVAILABLE: 'Available',
   STATUS_DELETED: 'Deleted',
+  STATUS_INVALID: 'INVALID',
 
   // Default Data
   DEFAULT_DATA_ACCESS: 'All',

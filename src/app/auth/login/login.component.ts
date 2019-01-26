@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
   login() {
-    if (this.loginForm.status === 'INVALID') {
+    if (this.loginForm.status === AppConstant.STATUS_INVALID) {
       this.errMessage = this.commonService.getFormErrorMessage(this.loginForm, this.loginErrObj);
       return false;
     } else {

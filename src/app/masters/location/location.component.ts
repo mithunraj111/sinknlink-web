@@ -5,6 +5,7 @@ import { LocationService } from '../../services/masters/location.service';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
 import { AddEditLocationComponent } from './add-edit-location/add-edit-location.component';
+import { AppMessages } from '../../app-messages';
 
 @Component({
   selector: 'app-fo-location',
@@ -18,9 +19,11 @@ export class LocationComponent implements OnInit {
   tempFilter = [];
   locationList = [];
   displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
+  userstoragedata = {} as any;
   constructor(private locationService: LocationService,
     private localStorageService: LocalStorageService,
     private bootstrapAlertService: BootstrapAlertService) {
+    this.userstoragedata = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER);
   }
 
   ngOnInit() {
@@ -44,9 +47,9 @@ export class LocationComponent implements OnInit {
   search(event) {
     const val = event.target.value.toLowerCase();
     const temp = this.tempFilter.filter(item => {
-      for (let key in item) {
-        if (("" + item[key]).toLocaleLowerCase().includes(val)) {
-          return ("" + item[key]).toLocaleLowerCase().includes(val);
+      for (const key in item) {
+        if (('' + item[key]).toLocaleLowerCase().includes(val)) {
+          return ('' + item[key]).toLocaleLowerCase().includes(val);
         }
       }
     });
@@ -65,24 +68,23 @@ export class LocationComponent implements OnInit {
     });
   }
   changeStatus(status, id, deleted) {
-    let data = {
-      locationid: id,
-      status: deleted == true ? 'deleted' : status == 'Active' ? "InActive" : "Active",
+    const data = {
+      status: deleted ? AppConstant.STATUS_DELETED : status == AppConstant.STATUS_ACTIVE ? AppConstant.STATUS_INACTIVE : AppConstant.STATUS_ACTIVE,
       updateddt: new Date(),
-      updatedby: this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER).fullname
-    }
+      updatedby: this.userstoragedata.fullname
+    };
     this.locationService.update(data, id).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
         // this.getLocations();
         if (deleted) {
-          this.bootstrapAlertService.showSucccess("Location data deleted successfully");
+          this.bootstrapAlertService.showSucccess('#' + id + ' ' + AppMessages.VALIDATION.COMMON.DELETE_SUCCESS);
         } else {
           this.bootstrapAlertService.showSucccess(response.message);
         }
       } else {
         this.bootstrapAlertService.showError(response.message);
       }
-    })
+    });
   }
 }

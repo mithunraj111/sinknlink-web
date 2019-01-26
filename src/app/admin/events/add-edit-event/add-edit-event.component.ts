@@ -9,6 +9,7 @@ import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CommonService } from 'src/app/services/common.service';
 import { AppMessages } from 'src/app/app-messages';
+import { LookupService } from 'src/app/services/admin/lookup.service';
 
 @Component({
   selector: 'app-add-edit-event',
@@ -38,7 +39,7 @@ export class AddEditEventComponent implements OnInit {
   statelists = [];
 
   constructor(private route: ActivatedRoute, private bootstrapAlertService: BootstrapAlertService, private commonService: CommonService,
-    private fb: FormBuilder, private router: Router) {
+    private fb: FormBuilder, private router: Router, private lookupService: LookupService) {
 
     this.eventForm = this.fb.group({
       eventname: [null, [Validators.required]],
@@ -52,15 +53,14 @@ export class AddEditEventComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.commonService.getLookUp({ refkey: "biz_states", status: "Active" }).subscribe(res => {
+    this.lookupService.list({ refkey: 'biz_states', status: AppConstant.STATUS_ACTIVE }).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
         this.statelists = JSON.parse(response.data[0].refvalue);
-        console.log(response);
       } else {
         this.bootstrapAlertService.showError(response.message);
       }
-    })
+    });
   }
 
   fileOverBase(e: any): void {
@@ -78,7 +78,7 @@ export class AddEditEventComponent implements OnInit {
 
       reader.readAsDataURL(event.target.files[0]); // read file as data url
 
-      reader.onload = (event) => { 
+      reader.onload = (event) => {
 
       }
     }
@@ -92,6 +92,6 @@ export class AddEditEventComponent implements OnInit {
     } else {
       console.log(this.eventForm.value);
     }
-  
+
   }
 }

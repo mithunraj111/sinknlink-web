@@ -20,7 +20,6 @@ import * as _ from 'lodash';
 })
 export class AddEditDonationComponent implements OnInit {
   userstoragedata = {} as any;
-  isaddForm = true;
   donationid: number;
   buttontext = AppConstant.BUTTON_TXT.SAVE;
   donationForm: FormGroup;
@@ -28,14 +27,12 @@ export class AddEditDonationComponent implements OnInit {
   donationErrObj = AppMessages.VALIDATION.DONATION;
   donationObj = {} as any;
   validatingDonation;
-
   constructor(private route: ActivatedRoute, private fb: FormBuilder,
     private bootstrapAlertService: BootstrapAlertService,
     private localStorageService: LocalStorageService, private commonService: CommonService,
     private donationService: DonationService) {
     this.route.params.subscribe(params => {
       if (params.id !== undefined) {
-        this.isaddForm = false;
         this.donationid = params.id;
         this.getIdDonation();
         this.buttontext = AppConstant.BUTTON_TXT.UPDATE;
@@ -59,13 +56,11 @@ export class AddEditDonationComponent implements OnInit {
   }
 
   saveOrUpdateDonation() {
-    let errorMessage: any;
-    if (this.donationForm.status === 'INVALID') {
+    if (this.donationForm.status === AppConstant.STATUS_INVALID) {
       this.errMessage = this.commonService.getFormErrorMessage(this.donationForm, this.donationErrObj);
       this.bootstrapAlertService.showError(this.errMessage);
       return false;
-    }
-    else {
+    } else {
       this.validatingDonation = true;
       let data = this.donationForm.value;
       let formdata = {} as any;
@@ -82,7 +77,7 @@ export class AddEditDonationComponent implements OnInit {
         });
         formdata.amount = JSON.stringify(formdata.amount);
       } else {
-        formdata.amount = "0"
+        formdata.amount = "0";
       }
       if (!_.isUndefined(this.donationObj) && !_.isUndefined(this.donationObj.donationid) && !_.isEmpty(this.donationObj)) {
         formdata.status = data.status ? AppConstant.STATUS_ACTIVE : AppConstant.STATUS_INACTIVE;
@@ -92,7 +87,6 @@ export class AddEditDonationComponent implements OnInit {
             this.bootstrapAlertService.showSucccess(response.message);
           } else {
             this.bootstrapAlertService.showError(response.message);
-
           }
         }, err => {
           this.validatingDonation = false;
@@ -121,11 +115,11 @@ export class AddEditDonationComponent implements OnInit {
       const response = JSON.parse(res._body);
       if (response.status) {
         this.donationObj = response.data;
-        let s_date = new Date(this.donationObj.startdate);
-        let e_date = new Date(this.donationObj.enddate);
+        let s_date = this.commonService.parseDate(this.donationObj.startdate);
+        let e_date = this.commonService.parseDate(this.donationObj.enddate);
         let amount;
         if (this.donationObj.amount == "0") {
-          amount = []
+          amount = [];
         } else {
           amount = [];
           let data = JSON.parse(this.donationObj.amount);
@@ -135,8 +129,8 @@ export class AddEditDonationComponent implements OnInit {
         }
         this.donationForm = this.fb.group({
           charityname: [this.donationObj.charityname, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
-          startdate: [{ year: s_date.getFullYear(), month: s_date.getMonth() + 1, day: s_date.getUTCDate() }, Validators.compose([Validators.required])],
-          enddate: [{ year: e_date.getFullYear(), month: e_date.getMonth() + 1, day: e_date.getUTCDate() }, Validators.compose([Validators.required])],
+          startdate: [s_date, Validators.compose([Validators.required])],
+          enddate: [e_date, Validators.compose([Validators.required])],
           amount: [amount],
           causeremarks: [this.donationObj.causeremarks, Validators.compose([Validators.maxLength(500)])],
           status: [this.donationObj.status === AppConstant.STATUS_ACTIVE ? true : false, Validators.compose([Validators.required])]

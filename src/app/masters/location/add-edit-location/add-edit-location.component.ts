@@ -86,7 +86,7 @@ export class AddEditLocationComponent implements OnInit, OnChanges {
   }
 
   saveOrUpdateLocation() {
-    if (this.locationForm.status === 'INVALID') {
+    if (this.locationForm.status === AppConstant.STATUS_INVALID) {
       this.errMessage = this.commonService.getFormErrorMessage(this.locationForm, this.locationErrObj);
       this.bootstrapAlertService.showError(this.errMessage);
       return false;
@@ -106,7 +106,6 @@ export class AddEditLocationComponent implements OnInit, OnChanges {
           if (response.status) {
             this.bootstrapAlertService.showSucccess(response.message);
             this.notifyLocationEntry.emit(response.data);
-            // this.closeMyModal('locationmodal');
           } else {
             this.bootstrapAlertService.showError(response.message);
           }
@@ -125,9 +124,7 @@ export class AddEditLocationComponent implements OnInit, OnChanges {
             this.bootstrapAlertService.showSucccess(response.message);
             this.notifyLocationEntry.emit(response.data);
             this.closeMyModal('locationmodal');
-            console.log('inside if');
           } else {
-            console.log('inside else');
             this.bootstrapAlertService.showError(response.message);
           }
         }, err => {
