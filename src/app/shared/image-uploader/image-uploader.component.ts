@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, Output, EventEmitter } from '@angular/core';
+// import { EventEmitter } from 'selenium-webdriver';
 
 @Component({
     selector: 'app-image-uploadaer',
@@ -8,10 +9,9 @@ import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 })
 export class ImageUploaderComponent implements OnInit {
 
-    @Input() modalClass: string;
+    @Output() imageAdded: EventEmitter<any> = new EventEmitter();
 
-    totalImages;
-    images;
+    images:any = [];
 
     constructor() { }
 
@@ -22,9 +22,6 @@ export class ImageUploaderComponent implements OnInit {
     selectedImg(one, files) {
 
         var a = this;
-
-        this.totalImages = files.length;
-        this.images = [];
 
         for (let index = 0; index < files.length; index++) {
             const file = files[index];
@@ -40,12 +37,15 @@ export class ImageUploaderComponent implements OnInit {
                 let imageFile = document.createElement("img");
                 let imageContainer = document.createElement("span");
 
+                let id = Math.ceil(Math.random() * 1234124);
 
+                this.images.push({ image: file, id: (id + 1).toString() });
 
                 var reader = new FileReader();
                 reader.onload = function (e) {
-                    imageContainer.setAttribute("id", Math.ceil(Math.random() * 1234124).toString());
+                    imageContainer.setAttribute("id", id.toString());
                     imageFile.setAttribute("src", reader.result.toString());
+                    imageFile.setAttribute("id", (id + 1).toString());
                     imageFile.addEventListener("click", a.removeSelectedImg);
                     imageContainer.appendChild(imageFile);
                     reader.abort();
@@ -54,9 +54,24 @@ export class ImageUploaderComponent implements OnInit {
                 location[0].appendChild(imageContainer);
             }
         }
+
+        this.imageAdded.emit(this.images);
+
     }
 
-    removeSelectedImg(doc) {
-        console.log(doc);
+    removeSelectedImg(el) {
+        let element = document.getElementById(el.target.id);
+        element.parentNode.removeChild(element);
+
+        // console.log(this);
+
+        // for (let index = 0; index < this.images.length; index++) {
+        //     const element = this.images[index];
+        //     if(element.id == el.target.id){
+        //         this.images.splice(index,1);
+        //     }
+        // }
+
+        // this.imageAdded.emit(this.images);
     }
 }

@@ -90,6 +90,7 @@
         <h2 class="add-tenant mb-3">Photos</h2>
     </div>
     <div class="card">
-        <app-image-uploadaer></app-image-uploadaer>
+        <!-- (imageAdded)="imageAdded" -->
+        <app-image-uploadaer (imageAdded)="imageAdded($event)"></app-image-uploadaer>
     </div>
 </div>

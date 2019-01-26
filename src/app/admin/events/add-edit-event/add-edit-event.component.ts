@@ -1,10 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FileUploader } from 'ng2-file-upload';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppConstant } from '../../../app.constants';
 import { NgbDateCustomParserFormatter } from '../../../shared/elements/dateParser';
 import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
-const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CommonService } from 'src/app/services/common.service';
@@ -21,12 +19,7 @@ import { LookupService } from 'src/app/services/admin/lookup.service';
   ]
 })
 export class AddEditEventComponent implements OnInit {
-  uploader: FileUploader = new FileUploader({
-    url: URL,
-    isHTML5: true
-  });
-  hasBaseDropZoneOver = false;
-  hasAnotherDropZoneOver = false;
+
   isaddForm = true;
   eventid: number;
   buttontext = AppConstant.BUTTON_TXT.SAVE;
@@ -37,6 +30,8 @@ export class AddEditEventComponent implements OnInit {
   sucMessage;
   processingEvent;
   statelists = [];
+
+  images: any = [];
 
   constructor(private route: ActivatedRoute, private bootstrapAlertService: BootstrapAlertService, private commonService: CommonService,
     private fb: FormBuilder, private router: Router, private lookupService: LookupService) {
@@ -63,26 +58,11 @@ export class AddEditEventComponent implements OnInit {
     });
   }
 
-  fileOverBase(e: any): void {
-    this.hasBaseDropZoneOver = e;
-  }
 
-  fileOverAnother(e: any): void {
-    this.hasAnotherDropZoneOver = e;
-  }
-
-  url = '';
-  onSelectFile(event) {
-    if (event.target.files && event.target.files[0]) {
-      var reader = new FileReader();
-
-      reader.readAsDataURL(event.target.files[0]); // read file as data url
-
-      reader.onload = (event) => {
-
-      }
-    }
-  }
+  imageAdded(files) {
+    this.images = files;
+    console.log(this.images);
+  };
 
 
   submit() {
