@@ -6,6 +6,7 @@ import { RoleService } from '../../../services/masters/role.service';
 import { LookupService } from '../../../services/admin/lookup.service';
 import { LocalStorageService } from '../../../services/local-storage.service';
 import * as _ from 'lodash';
+import { AppMessages } from 'src/app/app-messages';
 @Component({
   selector: 'app-add-edit-role',
   templateUrl: './add-edit-role.component.html',
@@ -24,6 +25,9 @@ export class AddEditRoleComponent implements OnInit {
   index;
   userstoragedata = {} as any;
   roleObj = {} as any;
+  roleErrObj = AppMessages.VALIDATION.ROLES;
+  disableButton = false;
+  permissionModal = false;
   constructor(
     private route: ActivatedRoute,
     private bootstrapAlertService: BootstrapAlertService,
@@ -77,6 +81,7 @@ export class AddEditRoleComponent implements OnInit {
       if (index + 1 === data.permissions.length) {
         self.permissionList = [...self.permissionList];
         self.permissions = data.assignedpermissions;
+        self.permissionModal = true;
         document.querySelector('#' + event).classList.add('md-show');
       }
     });
@@ -90,44 +95,62 @@ export class AddEditRoleComponent implements OnInit {
     return row.height;
   }
   closePermissionModal(event) {
-    ((event.target.parentElement.parentElement).parentElement).classList.remove('md-show');
+    this.permissionModal = false;
   }
   saveOrUpdateRole() {
-    const formdata = {} as any;
-    formdata.rolename = this.rolename;
-    formdata.dataaccess = this.dataaccess;
-    formdata.uiactions = this.screensList;
-    formdata.updatedby = this.userstoragedata.fullname;
-    formdata.updateddt = new Date();
-    if (!_.isUndefined(this.roleObj) && !_.isUndefined(this.roleObj.roleid) && !_.isEmpty(this.roleObj)) {
-      formdata.status = this.status ? AppConstant.STATUS_ACTIVE : AppConstant.STATUS_INACTIVE;
-      this.roleService.update(formdata, this.roleObj.roleid).subscribe(res => {
-        const response = JSON.parse(res._body);
-        if (response.status) {
-          this.bootstrapAlertService.showSucccess(response.message);
-          this.router.navigate(['/roles']);
-        } else {
-          this.bootstrapAlertService.showError(response.message);
-        }
-      }, err => {
-        this.bootstrapAlertService.showError(err.message);
-      });
+
+    if (_.isEmpty(this.rolename) || _.isUndefined(this.rolename) || _.isNull(this.rolename)) {
+      this.bootstrapAlertService.showError(this.roleErrObj.rolename.required);
+      return false;
+    }
+    if (this.rolename.length > 50) {
+      this.bootstrapAlertService.showError(this.roleErrObj.rolename.maxlength);
+      return false;
+    } else if (_.isEmpty(this.dataaccess) || _.isUndefined(this.dataaccess) || _.isNull(this.dataaccess)) {
+      this.bootstrapAlertService.showError(this.roleErrObj.dataaccess);
+      return false;
     } else {
-      formdata.status = AppConstant.STATUS_ACTIVE;
-      formdata.createdby = this.userstoragedata.fullname;
-      formdata.createddt = new Date();
-      this.roleService.create(formdata).subscribe((res) => {
-        const response = JSON.parse(res._body);
-        if (response.status) {
-          this.bootstrapAlertService.showSucccess(response.message);
-          this.router.navigate(['/roles']);
-        } else {
-          this.bootstrapAlertService.showError(response.message);
-        }
-      }, err => {
-        const error = JSON.parse(err._body);
-        this.bootstrapAlertService.showError(error.message);
-      });
+      this.disableButton = true;
+      const formdata = {} as any;
+      formdata.rolename = this.rolename;
+      formdata.dataaccess = this.dataaccess;
+      formdata.uiactions = this.screensList;
+      formdata.updatedby = this.userstoragedata.fullname;
+      formdata.updateddt = new Date();
+      if (!_.isUndefined(this.roleObj) && !_.isUndefined(this.roleObj.roleid) && !_.isEmpty(this.roleObj)) {
+        formdata.status = this.status ? AppConstant.STATUS_ACTIVE : AppConstant.STATUS_INACTIVE;
+        this.roleService.update(formdata, this.roleObj.roleid).subscribe(res => {
+          const response = JSON.parse(res._body);
+          if (response.status) {
+            this.bootstrapAlertService.showSucccess(response.message);
+            this.router.navigate(['/masters/roles']);
+          } else {
+            this.disableButton = false;
+            this.bootstrapAlertService.showError(response.message);
+          }
+        }, err => {
+          this.disableButton = false;
+          this.bootstrapAlertService.showError(err.message);
+        });
+      } else {
+        formdata.status = AppConstant.STATUS_ACTIVE;
+        formdata.createdby = this.userstoragedata.fullname;
+        formdata.createddt = new Date();
+        this.roleService.create(formdata).subscribe((res) => {
+          const response = JSON.parse(res._body);
+          if (response.status) {
+            this.bootstrapAlertService.showSucccess(response.message);
+            this.router.navigate(['/masters/roles']);
+          } else {
+            this.disableButton = false;
+            this.bootstrapAlertService.showError(response.message);
+          }
+        }, err => {
+          this.disableButton = false;
+          const error = JSON.parse(err._body);
+          this.bootstrapAlertService.showError(error.message);
+        });
+      }
     }
   }
 

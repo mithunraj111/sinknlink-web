@@ -8,7 +8,7 @@
             <div class="col-md-6  col-sm-6 save-button text-right p-r-30">
                 <button type="button" placement="bottom" ngbTooltip=" Go back" routerLink="/masters/roles" class="btn pull-right btn-inverse btn-primary waves-effect"><i
             class="fa fa-arrow-circle-left"></i></button>
-                <button type="button" placement="bottom" ngbTooltip="Click to {{buttontext}} role" (click)="saveOrUpdateRole()" class="btn pull-right btn-primary waves-effect m-r-10 text-capitalize">{{buttontext}}</button>
+                <button type="button" placement="bottom" ngbTooltip="Click to {{buttontext}} role" (click)="saveOrUpdateRole()" [disabled]='disableButton' class="btn pull-right btn-primary waves-effect m-r-10 text-capitalize">{{buttontext}}</button>
             </div>
         </div>
         <div class="row">
@@ -16,7 +16,7 @@
                 <div class="form-group required row role-input">
                     <label class="col-md-4 p-r-0 col-form-label"><b>Role Name</b></label>
                     <div class="col-md-8 p-l-0 p-r-0">
-                        <input type="text" class="header-search form-control input-sm full-data-search" placeholder="Role Name" [(ngModel)]="rolename">
+                        <input type="text" class="header-search form-control input-sm full-data-search" placeholder="Role Name" [(ngModel)]="rolename" maxlength=50>
                     </div>
                 </div>
             </div>
@@ -58,7 +58,7 @@
                 </ngx-datatable-column>
                 <ngx-datatable-column prop="assignedpermissions" name="Granted Permissions" [resizeable]="false">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                        <span>{{row.assignedpermissions}}</span>
+                        <span>{{row.assignedpermissions?row.assignedpermissions:'-'}}</span>
                     </ng-template>
                 </ngx-datatable-column>
 
@@ -73,7 +73,7 @@
     </div>
 </div>
 <!-- Add Contact Start Model -->
-<div class="modal-size">
+<div class="modal-size" [hidden]='!permissionModal'>
     <app-modal-animation [modalID]="'permission'" [modalClass]="'md-effect-7'">
         <h3 class="f-26">Permissions</h3>
         <div class="form-header">

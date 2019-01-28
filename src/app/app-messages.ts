@@ -113,6 +113,11 @@ export const AppMessages = Object.freeze({
         required: 'Please enter your city',
         maxlength: 'City should be lesser than 50 characters'
       }
+    },
+    ROLES: {
+      rolename: { required: 'Please enter role name', maxlength: 'Role name should be within should be within 50 characters' },
+      dataaccess: 'Please select dataaccess',
+      permissions: 'Please assign permission'
     }
   },
 });
