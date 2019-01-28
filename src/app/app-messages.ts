@@ -85,7 +85,8 @@ export const AppMessages = Object.freeze({
         maxlength: 'Charity name should be within 50 characters'
       },
       startdate: {
-        required: 'Start date is required'
+        required: 'Start date is required',
+        max: 'Start Date should be smaller than End Date'
       },
       enddate: {
         required: 'End date is required'

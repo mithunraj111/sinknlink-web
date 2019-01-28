@@ -65,11 +65,10 @@ export class AddEditDonationComponent implements OnInit {
     let data = this.donationForm.value;
     let startdt = data.startdate.year + '-' + data.startdate.month + '-' + data.startdate.day;
     let enddt = data.enddate.year + '-' + data.enddate.month + '-' + data.enddate.day;
-    if (startdt < enddt) {
-      this.bootstrapAlertService.showError(AppConstant.GREATERDATE.STARTDATE);
+    if (new Date(enddt) < new Date(startdt)) {
+      this.bootstrapAlertService.showError(AppMessages.VALIDATION.DONATION.startdate.max);
       return false;
-    }
-    else {
+    } else {
       this.validatingDonation = true;
       let formdata = {} as any;
       formdata.charityname = data.charityname;

@@ -23,10 +23,6 @@ export const AppConstant = Object.freeze({
       UPDATE: 'Update Location'
     }
   },
-  //
-  GREATERDATE:{
-    STARTDATE:'Start Date should be smaller than End Date'
-  },
   // Status
   STATUS_ACTIVE: 'Active',
   STATUS_INACTIVE: 'Inactive',
