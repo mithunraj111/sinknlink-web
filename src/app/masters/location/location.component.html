@@ -53,8 +53,7 @@
                 </ngx-datatable-column>
                 <ngx-datatable-column name="Status" [sortable]="false" [flexGrow]="0.5" headerClass="text-center" [cellClass]="'text-center'" [resizeable]="false">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                        <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="#03ADED" switchColor="#fff" size="small" 
-                            [checked]="row.status == 'Active'" (change)="changeStatus(row.status,row.locationid)"></ui-switch>
+                        <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="#03ADED" switchColor="#fff" size="small" [checked]="row.status == 'Active'" (change)="changeStatus(row.status,row.locationid)"></ui-switch>
                     </ng-template>
                 </ngx-datatable-column>
                 <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.5" headerClass="text-center" [cellClass]="'text-center'" [resizeable]="false">
@@ -69,4 +68,4 @@
         </app-card>
     </div>
 </div>
-<app-add-edit-location #locationModal [locationObj]="locationObj" (notifyLocationEntry)= "getLocations()" ></app-add-edit-location>
+<app-add-edit-location [locationObj]="locationObj" (notifyLocationEntry)="notifyLocationEntry($event)"></app-add-edit-location>

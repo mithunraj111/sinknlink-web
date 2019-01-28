@@ -1,4 +1,4 @@
-<div class="modal-size addlocation employee-form" [hidden]="hideLocation">
+<div class="modal-size addlocation employee-form">
     <app-modal-animation [modalID]="'locationmodal'" [modalClass]="'md-effect-7'">
         <h3 class="f-26">{{formTitle}}</h3>
         <form [formGroup]="locationForm">
@@ -40,12 +40,10 @@
                         </div>
                     </div>
                 </div>
-                <button (click)="closeMyModal($event)" type="button" placement="top" (click)="saveOrUpdateLocation()"
-                    ngbTooltip="Click to {{buttonTxt}} location" class="btn pull-right btn-primary waves-effect 
-                    m-b-10 m-r-15"
-                    [disabled]="validatingLocation">{{buttonTxt}}</button>
+                <button type="button" placement="top" (click)="saveOrUpdateLocation()" ngbTooltip="Click to {{buttonTxt}} location" class="btn pull-right btn-primary waves-effect 
+                    m-b-10 m-r-15" [disabled]="validatingLocation">{{buttonTxt}}</button>
             </div>
         </form>
-        <button (click)="closeMyModal($event)" aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>
+        <button (click)="close('locationmodal')" aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>
     </app-modal-animation>
 </div>

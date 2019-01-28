@@ -26,7 +26,6 @@ export class AddEditLocationComponent implements OnInit, OnChanges {
   @Input() locationObj = {} as any;
   userstoragedata = {} as any;
   stateList = [];
-  hideLocation: boolean;
   constructor(
     private bootstrapAlertService: BootstrapAlertService,
     private commonService: CommonService,
@@ -34,7 +33,7 @@ export class AddEditLocationComponent implements OnInit, OnChanges {
     private localStorageService: LocalStorageService,
     private locationService: LocationService,
     private lookupService: LookupService) {
-      this.userstoragedata = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER);
+    this.userstoragedata = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER);
   }
 
   ngOnInit() {
@@ -81,19 +80,23 @@ export class AddEditLocationComponent implements OnInit, OnChanges {
       this.formTitle = AppConstant.FORM_TITLE.LOCATION.ADD;
     }
   }
+  close(event) {
 
-  closeMyModal(event) {
-    ((event.target.parentElement.parentElement).parentElement).classList.remove('md-show');
+    this.notifyLocationEntry.emit({ close: true });
   }
-
+  callParent(data) {
+    setTimeout(() => {
+      this.notifyLocationEntry.emit(data);
+    }, 5000);
+  }
   saveOrUpdateLocation() {
     if (this.locationForm.status === AppConstant.STATUS_INVALID) {
       this.errMessage = this.commonService.getFormErrorMessage(this.locationForm, this.locationErrObj);
       this.bootstrapAlertService.showError(this.errMessage);
       return false;
     } else {
-      let data = this.locationForm.value;
-      let formdata = {} as any;
+      const data = this.locationForm.value;
+      const formdata = {} as any;
       formdata.pincode = data.pincode;
       formdata.area = data.area;
       formdata.state = data.state;
@@ -107,7 +110,7 @@ export class AddEditLocationComponent implements OnInit, OnChanges {
           if (response.status) {
             this.validatingLocation = true;
             this.bootstrapAlertService.showSucccess(response.message);
-            this.notifyLocationEntry.emit(response.data);
+            this.callParent({ update: false, data: response.data });
           } else {
             this.bootstrapAlertService.showError(response.message);
           }
@@ -123,10 +126,9 @@ export class AddEditLocationComponent implements OnInit, OnChanges {
           this.validatingLocation = false;
           const response = JSON.parse(res._body);
           if (response.status) {
-            this.hideLocation = true;
             this.validatingLocation = true;
             this.bootstrapAlertService.showSucccess(response.message);
-            this.notifyLocationEntry.emit(response.data);
+            this.callParent({ update: true, data: response.data });
           } else {
             this.bootstrapAlertService.showError(response.message);
           }

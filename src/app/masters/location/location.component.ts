@@ -33,6 +33,10 @@ export class LocationComponent implements OnInit {
   openLocationModal(event) {
     document.querySelector('#' + event).classList.add('md-show');
   }
+  closeLocationModal(event) {
+    console.log(event);
+    document.querySelector('#' + event).classList.remove('md-show');
+  }
   getRowHeight(row) {
     return row.height;
   }
@@ -85,5 +89,14 @@ export class LocationComponent implements OnInit {
         this.bootstrapAlertService.showError(response.message);
       }
     });
+  }
+  notifyLocationEntry(event) {
+    if (!event.close) {
+      this.getLocations();
+      this.closeLocationModal('locationmodal');
+    } else {
+      this.closeLocationModal('locationmodal');
+    }
+
   }
 }
