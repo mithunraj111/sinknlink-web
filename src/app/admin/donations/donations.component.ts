@@ -40,26 +40,30 @@ export class DonationsComponent implements OnInit {
 
     });
   }
-  changeStatus(id, status, deleted) {
-    const data = {
-      status: deleted ? AppConstant.STATUS_DELETED : status == AppConstant.STATUS_ACTIVE ? AppConstant.STATUS_INACTIVE : AppConstant.STATUS_ACTIVE,
+  updateDonationStatus(data, index, flag) {
+    const updateObj = {
       updateddt: new Date(),
-      updatedby: this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER).fullname
+      updatedby: this.userstoragedata.fullname,
+      status: flag ? AppConstant.STATUS_DELETED :
+        (data.status === AppConstant.STATUS_ACTIVE ? AppConstant.STATUS_INACTIVE : AppConstant.STATUS_ACTIVE)
     };
-    this.donationService.update(data, id).subscribe(res => {
+    this.donationService.update(updateObj, data.donationid).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
-        if (deleted) {
-          this.getDonations();
-          this.bootstrapAlertService.showSucccess('#' + id + ' ' + AppMessages.VALIDATION.COMMON.DELETE_SUCCESS);
+        if (flag) {
+          this.bootstrapAlertService.showSucccess('#' + data.donationid + ' ' + AppMessages.VALIDATION.COMMON.DELETE_SUCCESS);
+          this.donationList.splice(index, 1);
         } else {
           this.bootstrapAlertService.showSucccess(response.message);
+          this.donationList[index] = response.data;
         }
+        this.donationList = [...this.donationList];
       } else {
         this.bootstrapAlertService.showError(response.message);
       }
     });
   }
+  
   addDonation() {
     this.router.navigate(['admin/donation/create']);
   }
