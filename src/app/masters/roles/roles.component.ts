@@ -60,7 +60,7 @@ export class RolesComponent implements OnInit {
     this.table.offset = 0;
   }
 
-  updateRoleStatus(data, flag) {
+  updateRoleStatus(data, index, flag) {
     const updateObj = {
       updateddt: new Date(),
       updatedby: this.userstoragedata.fullname,
@@ -70,12 +70,14 @@ export class RolesComponent implements OnInit {
     this.roleService.update(updateObj, data.roleid).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
-        this.getRoles();
         if (flag) {
           this.bootstrapAlertService.showSucccess('#' + data.roleid + ' ' + AppMessages.VALIDATION.COMMON.DELETE_SUCCESS);
+          this.rolesList.splice(index, 1);
         } else {
           this.bootstrapAlertService.showSucccess(response.message);
+          this.rolesList[index] = response.data;
         }
+        this.rolesList = [...this.rolesList];
       } else {
         this.bootstrapAlertService.showError(response.message);
       }

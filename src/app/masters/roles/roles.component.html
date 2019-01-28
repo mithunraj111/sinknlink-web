@@ -42,14 +42,14 @@
                 </ngx-datatable-column>
                 <ngx-datatable-column name="Status" [sortable]="false" [flexGrow]="0.5" headerClass="text-center" [cellClass]="'text-center'" [resizeable]="false">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                        <ui-switch class="js-small" placement="bottom" (change)="updateRoleStatus(row,false)" [checked]="row.status == 'Active'" ngbTooltip="Click to change status" color="#03ADED" switchColor="#fff" size="small" checked></ui-switch>
+                        <ui-switch class="js-small" placement="bottom" (change)="updateRoleStatus(row,rowIndex,false)" [checked]="row.status == 'Active'" ngbTooltip="Click to change status" color="#03ADED" switchColor="#fff" size="small" checked></ui-switch>
                     </ng-template>
                 </ngx-datatable-column>
                 <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.5" headerClass="text-center" [cellClass]="'text-center'" [resizeable]="false">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                         <a placement="bottom" ngbTooltip="Click to edit role" class="m-r-15 crm-action-edit text-primary" (click)='editRole(row.roleid)'>
                             <i class="fa fa-pencil"></i></a>
-                        <a placement="bottom" ngbTooltip="Click to delete role" class="crm-action-delete text-danger" (click)="updateRoleStatus(row,true)">
+                        <a placement="bottom" ngbTooltip="Click to delete role" class="crm-action-delete text-danger" (click)="updateRoleStatus(row,rowIndex,true)">
                             <i class="fa fa-trash"></i></a>
                     </ng-template>
                 </ngx-datatable-column>
