@@ -15,6 +15,7 @@
                     <div class="form-group required">
                         <label>State</label>
                         <select name="select" class="form-control" formControlName="state" placeholder="Select state">
+                            <option value="">"Select state"</option>
                             <option *ngFor='let state of stateList' [label]="state" [value]="state"></option>
                         </select>
                     </div>
@@ -34,7 +35,7 @@
                             <div class="radio radio-inline">
                                 <label>
                                     <input type="radio" value='InActive' formControlName="status">
-                                    <i class="helper"></i>InActive
+                                    <i class="helper"></i>Inactive
                                 </label>
                             </div>
                         </div>
@@ -42,7 +43,7 @@
                 </div>
                 <button (click)="closeMyModal($event)" type="button" placement="top" (click)="saveOrUpdateLocation()" 
                     ngbTooltip="Click to {{buttonTxt}} location" class="btn pull-right btn-primary waves-effect 
-                    m-b-10 m-r-15" [disabled]="validatingLocation" >{{validatingLocation == true ? 'Saving..' : 'Save'}}</button>
+                    m-b-10 m-r-15" [disabled]="validatingLocation" >{{buttonTxt}}</button>
             </div>
         </form>
         <button (click)="closeMyModal($event)" aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>

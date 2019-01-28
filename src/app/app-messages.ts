@@ -98,19 +98,19 @@ export const AppMessages = Object.freeze({
     },
     LOCATION: {
       pincode: {
-        required: 'Pincode is required',
+        required: 'Please enter Pincode',
         maxlength: 'Pincode should be lesser than 10 characters',
-        pattern: 'Should contain only numbers'
+        pattern: 'Pincode should contain only numbers'
       },
       area: {
-        required: 'Area is required',
+        required: 'Please enter area name',
         maxlength: 'Area should be lesser than 50 characters'
       },
       state: {
-        required: 'State is required',
+        required: 'Please enter state name',
       },
       city: {
-        required: 'City is required',
+        required: 'Please enter your city',
         maxlength: 'City should be lesser than 50 characters'
       }
     }
