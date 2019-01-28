@@ -26,6 +26,7 @@ export class AddEditLocationComponent implements OnInit, OnChanges {
   @Input() locationObj = {} as any;
   userstoragedata = {} as any;
   stateList = [];
+  hideLocation: boolean;
   constructor(
     private bootstrapAlertService: BootstrapAlertService,
     private commonService: CommonService,
@@ -104,6 +105,7 @@ export class AddEditLocationComponent implements OnInit, OnChanges {
         this.locationService.update(formdata, this.locationObj.locationid).subscribe(res => {
           const response = JSON.parse(res._body);
           if (response.status) {
+            this.validatingLocation = true;
             this.bootstrapAlertService.showSucccess(response.message);
             this.notifyLocationEntry.emit(response.data);
           } else {
@@ -121,9 +123,10 @@ export class AddEditLocationComponent implements OnInit, OnChanges {
           this.validatingLocation = false;
           const response = JSON.parse(res._body);
           if (response.status) {
+            this.hideLocation = true;
+            this.validatingLocation = true;
             this.bootstrapAlertService.showSucccess(response.message);
             this.notifyLocationEntry.emit(response.data);
-            this.closeMyModal('locationmodal');
           } else {
             this.bootstrapAlertService.showError(response.message);
           }

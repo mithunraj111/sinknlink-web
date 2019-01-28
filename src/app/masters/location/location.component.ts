@@ -76,7 +76,6 @@ export class LocationComponent implements OnInit {
     this.locationService.update(data, id).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
-        // this.getLocations();
         if (deleted) {
           this.bootstrapAlertService.showSucccess('#' + id + ' ' + AppMessages.VALIDATION.COMMON.DELETE_SUCCESS);
         } else {

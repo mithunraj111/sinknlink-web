@@ -1,8 +1,8 @@
-<div class="modal-size addlocation">
+<div class="modal-size addlocation employee-form" [hidden]="hideLocation">
     <app-modal-animation [modalID]="'locationmodal'" [modalClass]="'md-effect-7'">
         <h3 class="f-26">{{formTitle}}</h3>
         <form [formGroup]="locationForm">
-            <div class="form-header">
+            <div class="form-header pt-2">
                 <div class="col-md-12">
                     <div class="form-group required">
                         <label>Pincode</label>
@@ -14,10 +14,9 @@
                     </div>
                     <div class="form-group required">
                         <label>State</label>
-                        <select name="select" class="form-control" formControlName="state" placeholder="Select state">
-                            <option value="">"Select state"</option>
-                            <option *ngFor='let state of stateList' [label]="state" [value]="state"></option>
-                        </select>
+                        <div class="input-box">
+                            <ng-select [ngClass]="'ng-select'" formControlName="state" [options]="stateList" placeholder="Select state"></ng-select>
+                        </div>
                     </div>
                     <div class="form-group required location-page">
                         <label>City</label>
@@ -41,9 +40,10 @@
                         </div>
                     </div>
                 </div>
-                <button (click)="closeMyModal($event)" type="button" placement="top" (click)="saveOrUpdateLocation()" 
+                <button (click)="closeMyModal($event)" type="button" placement="top" (click)="saveOrUpdateLocation()"
                     ngbTooltip="Click to {{buttonTxt}} location" class="btn pull-right btn-primary waves-effect 
-                    m-b-10 m-r-15" [disabled]="validatingLocation" >{{buttonTxt}}</button>
+                    m-b-10 m-r-15"
+                    [disabled]="validatingLocation">{{buttonTxt}}</button>
             </div>
         </form>
         <button (click)="closeMyModal($event)" aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>

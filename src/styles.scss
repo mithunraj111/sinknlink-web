@@ -999,13 +999,21 @@ button{
     width: 90%;
     max-width: 100%;
     border-radius: 2px;
-    border: 1px solid #dfe8f1;
+    border: 1px solid #cccccc;
     box-shadow: inset 1px 1px 3px #f6f6f6;
     .multiple{
         border: none !important;
         padding-bottom: 0px !important;
     }
- }
+    .single{
+        background: transparent !important;
+        padding: 4px 0px !important;
+        color: #757575 !important;
+        .placeholder{
+            color: #757575 !important;
+        }
+    }
+}
  #pcoded{
     &[vertical-nav-type="offcanvas"] {
         .header-title.consumer-header {
