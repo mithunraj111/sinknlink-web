@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AppConstant } from '../../../app.constants';
 import { NgbDateCustomParserFormatter } from '../../../shared/elements/dateParser';
 import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
@@ -30,7 +30,8 @@ export class AddEditDonationComponent implements OnInit {
   constructor(private route: ActivatedRoute, private fb: FormBuilder,
     private bootstrapAlertService: BootstrapAlertService,
     private localStorageService: LocalStorageService, private commonService: CommonService,
-    private donationService: DonationService) {
+    private donationService: DonationService, private router: Router,
+  ) {
     this.route.params.subscribe(params => {
       if (params.id !== undefined) {
         this.donationid = params.id;
@@ -60,14 +61,21 @@ export class AddEditDonationComponent implements OnInit {
       this.errMessage = this.commonService.getFormErrorMessage(this.donationForm, this.donationErrObj);
       this.bootstrapAlertService.showError(this.errMessage);
       return false;
-    } else {
+    }
+    let data = this.donationForm.value;
+    let startdt = data.startdate.year + '-' + data.startdate.month + '-' + data.startdate.day;
+    let enddt = data.enddate.year + '-' + data.enddate.month + '-' + data.enddate.day;
+    if (startdt < enddt) {
+      this.bootstrapAlertService.showError(AppConstant.GREATERDATE.STARTDATE);
+      return false;
+    }
+    else {
       this.validatingDonation = true;
-      let data = this.donationForm.value;
       let formdata = {} as any;
       formdata.charityname = data.charityname;
       formdata.causeremarks = data.causeremarks;
-      formdata.startdate = data.startdate.year + '-' + data.startdate.month + '-' + data.startdate.day;
-      formdata.enddate = data.enddate.year + '-' + data.enddate.month + '-' + data.enddate.day;
+      formdata.startdate = startdt;
+      formdata.enddate = enddt;
       formdata.updatedby = this.userstoragedata.fullname;
       formdata.updateddt = new Date();
       formdata.amount = [];
@@ -85,6 +93,8 @@ export class AddEditDonationComponent implements OnInit {
           const response = JSON.parse(res._body);
           if (response.status) {
             this.bootstrapAlertService.showSucccess(response.message);
+            this.router.navigate(['/admin/donations/']);
+
           } else {
             this.bootstrapAlertService.showError(response.message);
           }
@@ -100,10 +110,12 @@ export class AddEditDonationComponent implements OnInit {
           const response = JSON.parse(res._body);
           if (response.status) {
             this.bootstrapAlertService.showSucccess(response.message);
+            this.router.navigate(['/admin/donations/']);
           } else {
             this.bootstrapAlertService.showError(response.message);
           }
         }, err => {
+          this.validatingDonation = false;
           this.bootstrapAlertService.showError(err.message);
         });
       }
