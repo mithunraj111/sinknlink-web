@@ -56,10 +56,11 @@ export class CommonService {
         }
     }
 
-    parseDate(data,toTimeStamp?) {
-        var date = new Date(data);
-        if(toTimeStamp) return this.ngbDateParserFormatter.format(data);
-        else return this.ngbDateParserFormatter.parse(date.getFullYear() + '-' + date.getMonth() + 1 + '-' + date.getUTCDate());
+    parseDate(dateString) {
+        const date = new Date(dateString);
+        return this.ngbDateParserFormatter.parse(date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getUTCDate());
     }
-
+    formatDate(ngbdateString) {
+        return this.ngbDateParserFormatter.format(ngbdateString);
+    }
 }

@@ -62,15 +62,15 @@ export class AddEditDonationComponent implements OnInit {
       this.bootstrapAlertService.showError(this.errMessage);
       return false;
     }
-    let data = this.donationForm.value;
-    let startdt = data.startdate.year + '-' + data.startdate.month + '-' + data.startdate.day;
-    let enddt = data.enddate.year + '-' + data.enddate.month + '-' + data.enddate.day;
+    const data = this.donationForm.value;
+    const startdt = this.commonService.formatDate(data.startdate);
+    const enddt = this.commonService.formatDate(data.enddate);
     if (new Date(enddt) < new Date(startdt)) {
       this.bootstrapAlertService.showError(AppMessages.VALIDATION.DONATION.startdate.max);
       return false;
     } else {
       this.validatingDonation = true;
-      let formdata = {} as any;
+      const formdata = {} as any;
       formdata.charityname = data.charityname;
       formdata.causeremarks = data.causeremarks;
       formdata.startdate = startdt;
@@ -93,7 +93,6 @@ export class AddEditDonationComponent implements OnInit {
           if (response.status) {
             this.bootstrapAlertService.showSucccess(response.message);
             this.router.navigate(['/admin/donations/']);
-
           } else {
             this.bootstrapAlertService.showError(response.message);
           }
@@ -135,11 +134,12 @@ export class AddEditDonationComponent implements OnInit {
           amount = [];
           let data = JSON.parse(this.donationObj.amount);
           data.forEach(element => {
-            amount.push({ display: element, value: element })
+            amount.push({ display: element, value: element });
           });
         }
         this.donationForm = this.fb.group({
-          charityname: [this.donationObj.charityname, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
+          charityname: [this.donationObj.charityname,
+          Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
           startdate: [s_date, Validators.compose([Validators.required])],
           enddate: [e_date, Validators.compose([Validators.required])],
           amount: [amount],
