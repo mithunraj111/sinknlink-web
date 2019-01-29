@@ -1,3 +1,154 @@
-<p>
-  dashboard works test!
-</p>
+<div class="page-body">
+  <div class="row">
+    <!-- order-card start -->
+    <div class="col-md-6 col-xl-3">
+      <div class="card bg-c-blue order-card">
+        <div class="card-block">
+          <h6 class="m-b-20">Orders Received</h6>
+          <h2 class="text-right"><i class="ti-shopping-cart f-left"></i><span>486</span></h2>
+          <p class="m-b-0">Completed Orders<span class="f-right">351</span></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 col-xl-3">
+      <div class="card bg-c-green order-card">
+        <div class="card-block">
+          <h6 class="m-b-20">Total Sales</h6>
+          <h2 class="text-right"><i class="ti-tag f-left"></i><span>1641</span></h2>
+          <p class="m-b-0">This Month<span class="f-right">213</span></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 col-xl-3">
+      <div class="card bg-c-yellow order-card">
+        <div class="card-block">
+          <h6 class="m-b-20">Revenue</h6>
+          <h2 class="text-right"><i class="ti-reload f-left"></i><span>$42,562</span></h2>
+          <p class="m-b-0">This Month<span class="f-right">$5,032</span></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 col-xl-3">
+      <div class="card bg-c-pink order-card">
+        <div class="card-block">
+          <h6 class="m-b-20">Total Profit</h6>
+          <h2 class="text-right"><i class="ti-wallet f-left"></i><span>$9,562</span></h2>
+          <p class="m-b-0">This Month<span class="f-right">$542</span></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-8 col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h5>Analytics</h5>
+        </div>
+        <div class="card-block">
+          <div id="analythics-graph" style="height:365px"></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 col-xl-4">
+      <div class="card project-task">
+        <div class="card-header">
+          <div class="card-header-left ">
+            <h5>Audience by country</h5>
+          </div>
+        </div>
+        <div class="card-block p-b-10">
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>country</th>
+                  <th>Statistic</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div class="task-contain">
+                      <h6 class="bg-c-blue d-inline-block text-center">IN</h6>
+                      <p class="d-inline-block m-l-20">India</p>
+                    </div>
+                  </td>
+                  <td>
+                    <p class="d-inline-block m-r-20">80%</p>
+                    <div class="progress d-inline-block">
+                      <div class="progress-bar bg-c-blue" role="progressbar" aria-valuemin="0" aria-valuemax="100"
+                        style="width:80%">
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="task-contain">
+                      <h6 class="bg-c-pink d-inline-block text-center">NY</h6>
+                      <p class="d-inline-block m-l-20">New York</p>
+                    </div>
+                  </td>
+                  <td>
+                    <p class="d-inline-block m-r-20">60%</p>
+                    <div class="progress d-inline-block">
+                      <div class="progress-bar bg-c-pink" role="progressbar" aria-valuemin="0" aria-valuemax="100"
+                        style="width:60%">
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="task-contain">
+                      <h6 class="bg-c-yellow d-inline-block text-center">UK</h6>
+                      <p class="d-inline-block m-l-20">England</p>
+                    </div>
+                  </td>
+                  <td>
+                    <p class="d-inline-block m-r-20">50%</p>
+                    <div class="progress d-inline-block">
+                      <div class="progress-bar bg-c-yellow" role="progressbar" aria-valuemin="0" aria-valuemax="100"
+                        style="width:50%">
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="task-contain">
+                      <h6 class="bg-c-green d-inline-block text-center">BZ</h6>
+                      <p class="d-inline-block m-l-20">Brazil</p>
+                    </div>
+                  </td>
+                  <td>
+                    <p class="d-inline-block m-r-20">20%</p>
+                    <div class="progress d-inline-block">
+                      <div class="progress-bar bg-c-green" role="progressbar" aria-valuemin="0" aria-valuemax="100"
+                        style="width:20%">
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="task-contain">
+                      <h6 class="bg-c-blue d-inline-block text-center">SA</h6>
+                      <p class="d-inline-block m-l-20">Africa</p>
+                    </div>
+                  </td>
+                  <td>
+                    <p class="d-inline-block m-r-20">50%</p>
+                    <div class="progress d-inline-block">
+                      <div class="progress-bar bg-c-blue" role="progressbar" aria-valuemin="0" aria-valuemax="100"
+                        style="width:50%">
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
