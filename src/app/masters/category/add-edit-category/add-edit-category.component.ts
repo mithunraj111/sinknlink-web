@@ -22,6 +22,8 @@ export class AddEditCategoryComponent implements OnInit, OnChanges {
   categoryErrObj = AppMessages.VALIDATION.CATEGORY;
   categoryid: number;
   errMessage;
+  categoryimgfile: any;
+  categoryfile: any;
   constructor(private bootstrapAlertService: BootstrapAlertService,
     private localStorageService: LocalStorageService,
     private fb: FormBuilder, private categoryService: CategoryService,
@@ -39,6 +41,14 @@ export class AddEditCategoryComponent implements OnInit, OnChanges {
     setTimeout(() => {
       this.notifyCategoryEntry.emit(data);
     }, 5000);
+  }
+  onFile(event, type) {
+    const reader = new FileReader();
+    this.categoryimgfile = event.target.files[0];
+    reader.onload = ((e) => {
+      this.categoryfile = e.target['result'];
+    });
+    reader.readAsDataURL(event.target.files[0]);
   }
   initForm() {
     this.categoryForm = this.fb.group({
@@ -69,13 +79,17 @@ export class AddEditCategoryComponent implements OnInit, OnChanges {
       this.bootstrapAlertService.showError(this.errMessage);
       return false;
     } else {
-      const data = this.categoryForm.value;
-      const formdata = {} as any;
-      formdata.categoryname = data.categoryname;
-      formdata.updatedby = this.userstoragedata.fullname;
-      formdata.updateddt = new Date();
+      const formdata = new FormData();
+      const data = {} as any;
+      data.categoryname = this.categoryForm.value.categoryname;
+      data.updatedby = this.userstoragedata.fullname;
+      data.updateddt = new Date();
+      if (this.categoryimgfile) {
+        formdata.append('categoryimg', this.categoryimgfile);
+      }
       if (!_.isUndefined(this.categoryObj) && !_.isUndefined(this.categoryObj.categoryid) && !_.isEmpty(this.categoryObj)) {
-        formdata.status = data.status;
+        data.status = data.status;
+        formdata.append('formData', JSON.stringify(data));
         this.categoryService.update(formdata, this.categoryObj.categoryid).subscribe(res => {
           const response = JSON.parse(res._body);
           if (response.status) {
@@ -86,9 +100,10 @@ export class AddEditCategoryComponent implements OnInit, OnChanges {
           }
         });
       } else {
-        formdata.status = AppConstant.STATUS_ACTIVE;
-        formdata.createdby = this.userstoragedata.fullname;
-        formdata.createddt = new Date();
+        data.status = AppConstant.STATUS_ACTIVE;
+        data.createdby = this.userstoragedata.fullname;
+        data.createddt = new Date();
+        formdata.append('formData', JSON.stringify(data));
         this.categoryService.create(formdata).subscribe((res) => {
           const response = JSON.parse(res._body);
           if (response.status) {
