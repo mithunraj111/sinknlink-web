@@ -20,6 +20,7 @@ export class AddEditCategoryComponent implements OnInit, OnChanges {
   @Output() notifyCategoryEntry: EventEmitter<any> = new EventEmitter();
   @Input() categoryObj = {} as any;
   categoryErrObj = AppMessages.VALIDATION.CATEGORY;
+  categoryid: number;
   errMessage;
   constructor(private bootstrapAlertService: BootstrapAlertService,
     private localStorageService: LocalStorageService,
@@ -31,11 +32,18 @@ export class AddEditCategoryComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.initForm();
   }
-
+  close(event) {
+    this.notifyCategoryEntry.emit({ close: true });
+  }
+  callParent(data) {
+    setTimeout(() => {
+      this.notifyCategoryEntry.emit(data);
+    }, 5000);
+  }
   initForm() {
     this.categoryForm = this.fb.group({
       categoryname: [null, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])],
-      status: [AppConstant.STATUS_ACTIVE],
+      status: [''],
     });
     this.categoryObj = {};
   }
@@ -47,7 +55,7 @@ export class AddEditCategoryComponent implements OnInit, OnChanges {
       this.categoryForm = this.fb.group({
         categoryname: [this.categoryObj.categoryname,
         Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])],
-        status: [this.categoryObj.status, Validators.required],
+        status: [this.categoryObj.status],
       });
     } else {
       this.initForm();
@@ -67,11 +75,11 @@ export class AddEditCategoryComponent implements OnInit, OnChanges {
       formdata.updatedby = this.userstoragedata.fullname;
       formdata.updateddt = new Date();
       if (!_.isUndefined(this.categoryObj) && !_.isUndefined(this.categoryObj.categoryid) && !_.isEmpty(this.categoryObj)) {
-        formdata.status = data.status ? AppConstant.STATUS_ACTIVE : AppConstant.STATUS_INACTIVE;
+        formdata.status = data.status;
         this.categoryService.update(formdata, this.categoryObj.categoryid).subscribe(res => {
           const response = JSON.parse(res._body);
           if (response.status) {
-            this.notifyCategoryEntry.next({ update: true, data: response.data });
+            this.callParent({ update: false, data: response.data });
             this.bootstrapAlertService.showSucccess(response.message);
           } else {
             this.bootstrapAlertService.showError(response.message);
@@ -85,14 +93,14 @@ export class AddEditCategoryComponent implements OnInit, OnChanges {
           const response = JSON.parse(res._body);
           if (response.status) {
             this.bootstrapAlertService.showSucccess(response.message);
-            this.notifyCategoryEntry.next({ add: true, data: response.data });
+            // this.notifyCategoryEntry.next({ add: true, data: response.data });
+            this.callParent({ update: true, data: response.data });
           } else {
             this.bootstrapAlertService.showError(response.message);
           }
         }, err => {
         });
       }
-
     }
   }
 }

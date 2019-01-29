@@ -15,14 +15,14 @@
                             <div class="form-radio">
                                 <div class="radio radio-inline">
                                     <label>
-                                        <input type="radio" class="form-control" [value]="'Active'" name="status"
+                                        <input type="radio" class="form-control" value="Active"
                                             formControlName="status">
                                         <i class="helper"></i>Active
                                     </label>
                                 </div>
                                 <div class="radio radio-inline">
                                     <label>
-                                        <input type="radio" class="form-control" [value]="'Inactive'" name="status"
+                                        <input type="radio" class="form-control" value="Inactive"
                                             formControlName="status">
                                         <i class="helper"></i>Inactive
                                     </label>
@@ -34,6 +34,6 @@
                 <button type="button" placement="top" (click)="saveOrUpdateCategory()" ngbTooltip="Click to {{buttonTxt}} business category" class="btn pull-right btn-primary waves-effect m-b-10">{{buttonTxt}}</button>
             </form>
         </div>
-        <button aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>
+        <button aria-label="Close" (click)="close('categorymodal')" class="md-close-btn"><i class="fa fa-close"></i></button>
     </app-modal-animation>
 </div>

@@ -3,6 +3,9 @@ import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { AppConstant } from '../../app.constants';
 import { CategoryService } from '../../services/masters/category.service';
 import * as _ from 'lodash';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
+import { AppMessages } from '../../app-messages';
 @Component({
   selector: 'app-category',
   templateUrl: './category.component.html',
@@ -16,27 +19,48 @@ export class CategoryComponent implements OnInit {
   categoryPage: any;
   displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   categoryList = [];
-
-  constructor(private categoryService: CategoryService) {
-    
+  userstoragedata = {} as any;
+  constructor(private categoryService: CategoryService,
+    private localStorageService: LocalStorageService,
+    private bootstrapAlertService: BootstrapAlertService) {
+    this.userstoragedata = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER);
   }
-
   ngOnInit() {
     this.getCategories();
   }
-
+  updateCategoryStatus(data, index, flag) {
+    const updateObj = {
+      updateddt: new Date(),
+      updatedby: this.userstoragedata.fullname,
+      status: flag ? AppConstant.STATUS_DELETED :
+        (data.status === AppConstant.STATUS_ACTIVE ? AppConstant.STATUS_INACTIVE : AppConstant.STATUS_ACTIVE)
+    };
+    this.categoryService.update(updateObj, data.categoryid).subscribe(res => {
+      const response = JSON.parse(res._body);
+      if (response.status) {
+        if (flag) {
+          this.bootstrapAlertService.showSucccess('#' + data.categoryid + ' ' + AppMessages.VALIDATION.COMMON.DELETE_SUCCESS);
+          this.categoryList.splice(index, 1);
+          this.getCategories();
+        } else {
+          this.bootstrapAlertService.showSucccess(response.message);
+          this.categoryList[index] = response.data;
+        }
+        this.categoryList = [...this.categoryList];
+      } else {
+        this.bootstrapAlertService.showError(response.message);
+      }
+    });
+  }
   // API call to get the category list
-
   getCategories() {
     const condition = {
-      // limit: 'Active'
     };
-    // let query = 'limit=11' + '&offset=' + this.categoryList.length;
     this.categoryService.list(condition, '').subscribe((res) => {
       const response = JSON.parse(res._body);
       if (response.status) {
         if (this.categoryList.length != 0) {
-          this.categoryList = this.categoryList.concat(response.data.rows);
+          this.categoryList = response.data.rows;
           this.categoryList = [...this.categoryList];
         } else {
           this.categoryList = response.data.rows;
@@ -49,8 +73,7 @@ export class CategoryComponent implements OnInit {
     document.querySelector('#' + event).classList.add('md-show');
   }
   closeCategoryModal(event) {
-    console.log((event.target.parentElement.parentElement));
-    (event.target.parentElement.parentElement).classList.remove('md-show');
+    document.querySelector('#' + event).classList.remove('md-show');
   }
   getRowHeight(row) {
     return row.height;
@@ -63,19 +86,6 @@ export class CategoryComponent implements OnInit {
     this.categoryObj = data;
     this.openCategoryModal('categorymodal');
   }
-
-  notifyCategoryEntry(event) {
-    let existData = {} as any;
-    existData = _.find(this.categoryList, { categoryid: event.data.categoryid });
-    if (existData === undefined) {
-      this.categoryList = [event, ...this.categoryList];
-    } else {
-      const index = _.indexOf(this.categoryList, existData);
-      this.categoryList[index] = event.data;
-      this.categoryList = [...this.categoryList];
-    }
-    this.closeCategoryModal('categorymodal');
-  }
   search(event) {
     const val = event.target.value.toLowerCase();
     const temp = this.tempFilter.filter(item => {
@@ -85,8 +95,16 @@ export class CategoryComponent implements OnInit {
         }
       }
     });
-    this.data = temp;
+    this.categoryList = temp;
     this.table.offset = 0;
+  }
+  notifyCategoryEntry(event) {
+    if (!event.close) {
+      this.getCategories();
+      this.closeCategoryModal('categorymodal');
+    } else {
+      this.closeCategoryModal('categorymodal');
+    }
   }
 }
 

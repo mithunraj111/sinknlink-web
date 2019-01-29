@@ -81,7 +81,6 @@ export class AddEditLocationComponent implements OnInit, OnChanges {
     }
   }
   close(event) {
-
     this.notifyLocationEntry.emit({ close: true });
   }
   callParent(data) {

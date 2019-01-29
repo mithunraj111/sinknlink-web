@@ -71,25 +71,6 @@ export class LocationComponent implements OnInit {
       }
     });
   }
-  // changeStatus(status, id, deleted) {
-  //   const data = {
-  //     status: deleted ? AppConstant.STATUS_DELETED : status == AppConstant.STATUS_ACTIVE ? AppConstant.STATUS_INACTIVE : AppConstant.STATUS_ACTIVE,
-  //     updateddt: new Date(),
-  //     updatedby: this.userstoragedata.fullname
-  //   };
-  //   this.locationService.update(data, id).subscribe(res => {
-  //     const response = JSON.parse(res._body);
-  //     if (response.status) {
-  //       if (deleted) {
-  //         this.bootstrapAlertService.showSucccess('#' + id + ' ' + AppMessages.VALIDATION.COMMON.DELETE_SUCCESS);
-  //       } else {
-  //         this.bootstrapAlertService.showSucccess(response.message);
-  //       }
-  //     } else {
-  //       this.bootstrapAlertService.showError(response.message);
-  //     }
-  //   });
-  // }
   updateLocationStatus(data, index, flag) {
     const updateObj = {
       updateddt: new Date(),
