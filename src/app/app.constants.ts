@@ -67,6 +67,12 @@ export const AppConstant = Object.freeze({
           EDIT: 'fancyno/edit'
         }
       },
+      COMMON:{
+        DOCUMENT:{
+          CREATE:'document/create',
+          UPDATE:'document/edit'
+        }
+      },
       MASTERS: {
         CATEGORY: {
           CREATE: 'category/create',

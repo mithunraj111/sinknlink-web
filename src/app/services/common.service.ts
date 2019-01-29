@@ -3,6 +3,12 @@ import { FormGroup, FormControl, FormArray } from '@angular/forms';
 import * as _ from 'lodash';
 import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 
+interface NgbDateFormat {
+    year:number,
+    month:number,
+    day:number
+}
+
 @Injectable({
     providedIn: 'root'
 })
@@ -60,7 +66,7 @@ export class CommonService {
         const date = new Date(dateString);
         return this.ngbDateParserFormatter.parse(date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getUTCDate());
     }
-    formatDate(ngbdateString) {
-        return this.ngbDateParserFormatter.format(ngbdateString);
+    formatDate(dateObj:NgbDateFormat) {
+        return new Date(dateObj.year,dateObj.month - 1, dateObj.day);
     }
 }

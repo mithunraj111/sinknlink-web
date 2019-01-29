@@ -2,10 +2,10 @@
     <div class="row">
         <div class="col-sm-12 col-md-4 ">
             <div class="dropbox">
-                <input type="file" (change)="selectedImg($event.target.name, $event.target.files)"
+                <input type="file" [disabled]="disablePicker" (change)="selectedImg($event.target.name, $event.target.files)"
                     accept="image/*" class="input-file">
                 <p>Drag your file(s) here to begin
-                    <br>or click to browse
+                    <br>or click to browse {{extimage}}
                 </p>
             </div>
         </div>
@@ -13,10 +13,8 @@
 
         </div>
     </div>
-    <div class="row ">
-        <div class="col"></div>
-        <div class="col text-right align-self-end">
-            <button>Upload</button>
-        </div>
+    <div class="row">
+        {{extimage}}
+        {{images}}
     </div>
 </div>

@@ -21,4 +21,13 @@ export class EventService {
     byId(id): Observable<any> {
         return this.httpHandler.GET(this.endpoint + AppConstant.API_CONFIG.API_URL.ADMIN.EVENT.GETBYID + id);
     }
+    getLocations(data): Observable<any> {
+        return this.httpHandler.POST(this.endpoint + AppConstant.API_CONFIG.API_URL.MASTERS.LOCATION.LIST, data);
+    }
+    addDocument(data):Observable<any>{
+        return this.httpHandler.POST(this.endpoint + AppConstant.API_CONFIG.API_URL.COMMON.DOCUMENT.CREATE, data);
+    }
+    updateDocument(data):Observable<any>{
+        return this.httpHandler.POST(this.endpoint + AppConstant.API_CONFIG.API_URL.COMMON.DOCUMENT.CREATE, data);
+    }
 }

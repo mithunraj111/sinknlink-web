@@ -8,14 +8,15 @@
             <div class="col-md-6 col-sm-6">
                 <div class="text-right">
                     <label>Search:
-            <input type="search" class="header-search form-control input-sm full-data-search" placeholder="Search for here"
-              (keyup)='search($event)' placement="bottom" ngbTooltip="Type here to search">
-          </label>
+                        <input type="search" class="header-search form-control input-sm full-data-search" placeholder="Search for here"
+                            (keyup)='search($event)' placement="bottom" ngbTooltip="Type here to search">
+                    </label>
                 </div>
             </div>
             <div class="col-md-1 col-sm-1 p-r-0">
-                <button type="button" placement="bottom" ngbTooltip="Click to add event" class="btn btn-primary waves-effect" (click)='addEvent()'><i class="fa fa-plus-circle m-r-5"></i> New
-        </button>
+                <button type="button" placement="bottom" ngbTooltip="Click to add event" class="btn btn-primary waves-effect"
+                    (click)='addEvent()'><i class="fa fa-plus-circle m-r-5"></i> New
+                </button>
             </div>
         </div>
     </div>
@@ -23,13 +24,15 @@
 <div class="header-block m-t-60">
     <div class="table-header fixed-table-header">
         <app-card [classHeader]="true">
-            <ngx-datatable #eventtable class="table data-table expandable" [rows]='eventsList' [columnMode]="'flex'" [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false">
+            <ngx-datatable #eventtable class="table data-table expandable" [rows]='eventsList' [columnMode]="'flex'"
+                [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false">
                 <ngx-datatable-column prop="eventname" name="Event Name" [resizeable]="false">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                         <span>{{row.eventname}}</span>
                     </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column prop="date" name="Date" data-type='date' [resizeable]="false" headerClass="text-center" [cellClass]="'text-center'">
+                <ngx-datatable-column prop="date" name="Date" data-type='date' [resizeable]="false" headerClass="text-center"
+                    [cellClass]="'text-center'">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                         <span>{{row.eventdate|date:displaydateformat}}</span>
                     </ng-template>
@@ -45,16 +48,22 @@
                         <span class="updatedate"> {{row.updateddt|date:displaydtimeformat}}</span>
                     </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column name="Status" [sortable]="false" [flexGrow]="0.5" [resizeable]="false" headerClass="text-center" [cellClass]="'text-center status'" [resizeable]="false">
+                <ngx-datatable-column name="Status" [sortable]="false" [flexGrow]="0.5" [resizeable]="false"
+                    headerClass="text-center" [cellClass]="'text-center status'" [resizeable]="false">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                        <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="#03ADED" switchColor="#fff" size="small" checked></ui-switch>
+                        <ui-switch (change)="updateEvent(row.eventid,row.status)" class="js-small" placement="bottom"
+                            ngbTooltip="Click to change status" color="#03ADED" switchColor="#fff" size="small"
+                            [checked]="row.status == 'Active'"></ui-switch>
                     </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.5" [resizeable]="false" headerClass="text-center" [cellClass]="'text-center action'" [resizeable]="false">
+                <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.5" [resizeable]="false"
+                    headerClass="text-center" [cellClass]="'text-center action'" [resizeable]="false">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                        <a placement="bottom" ngbTooltip="Click to edit event details" class="m-r-15 crm-action-edit text-primary" (click)='editUsers()'>
+                        <a placement="bottom" ngbTooltip="Click to edit event details" class="m-r-15 crm-action-edit text-primary"
+                            (click)='editEvent(row.eventid)'>
                             <i class="fa fa-pencil"></i></a>
-                        <a placement="bottom" ngbTooltip="Click to delete event" class="crm-action-delete text-danger">
+                        <a placement="bottom" (click)="updateEvent(row.eventid,row.status,true)" ngbTooltip="Click to delete event"
+                            class="crm-action-delete text-danger">
                             <i class="fa fa-trash"></i></a>
                     </ng-template>
                 </ngx-datatable-column>

@@ -3,6 +3,8 @@ import { Router, NavigationExtras } from '@angular/router';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { AppConstant } from '../../app.constants';
 import { EventService } from '../../services/admin/event.service';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
 
 @Component({
   selector: 'app-events',
@@ -16,12 +18,12 @@ export class EventsComponent implements OnInit {
   eventsList = [];
   displaydtimeformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   displaydateformat = AppConstant.API_CONFIG.ANG_DATE.displaydate;
-  constructor(private router: Router, private eventService: EventService) {
+  constructor(private router: Router, private bootstrapAlertService: BootstrapAlertService, private eventService: EventService, private localStorageService: LocalStorageService, ) {
   }
 
   ngOnInit() {
     this.getEvents();
-   }
+  }
   openMyModal(event) {
     document.querySelector('#' + event).classList.add('md-show');
   }
@@ -54,5 +56,21 @@ export class EventsComponent implements OnInit {
     });
     this.eventsList = temp;
     this.table.offset = 0;
+  }
+  updateEvent(pk, status, isDeleted?) {
+    let data = {
+      eventid: pk,
+      status: isDeleted == true ? AppConstant.STATUS_DELETED : status == AppConstant.STATUS_ACTIVE ? AppConstant.STATUS_INACTIVE : AppConstant.STATUS_ACTIVE,
+      updateddt: new Date(),
+      updatedby: this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER).fullname
+    }
+    this.eventService.update(data, pk).subscribe(res => {
+      let response = JSON.parse(res._body);
+      if (response.status) { this.getEvents(); this.bootstrapAlertService.showSucccess(response.message); }
+      else this.bootstrapAlertService.showError(response.message);
+    }, err => {
+      console.log(err);
+    });
+    console.log(data);
   }
 }

@@ -24,7 +24,11 @@ export class AddEditEventComponent implements OnInit {
 
   isaddForm = true;
   eventid: number;
+  edit:boolean = false;
   buttontext = AppConstant.BUTTON_TXT.SAVE;
+  status: boolean = true;
+
+  savingEvent: boolean = false;
 
   eventForm: FormGroup;
   eventErrObj = AppMessages.VALIDATION.EVENT;
@@ -34,9 +38,18 @@ export class AddEditEventComponent implements OnInit {
   statelists = [];
 
   images: any = [];
+  existing_image:any = [];
 
-  constructor(private localStorageService: LocalStorageService, private route: ActivatedRoute, private bootstrapAlertService: BootstrapAlertService, private commonService: CommonService,
-    private fb: FormBuilder, private eventService: EventService, private router: Router, private lookupService: LookupService) {
+  constructor(private localStorageService: LocalStorageService, private bootstrapAlertService: BootstrapAlertService, private commonService: CommonService,
+    private fb: FormBuilder, private route: ActivatedRoute, private eventService: EventService, private router: Router, private lookupService: LookupService) {
+
+    this.route.params.subscribe(params => {
+      if (params.id !== undefined) {
+        this.eventid = params.id;
+        this.buttontext = AppConstant.BUTTON_TXT.UPDATE;
+        this.getEventDetail(this.eventid);
+      }
+    })
 
     this.eventForm = this.fb.group({
       eventname: [null, [Validators.required]],
@@ -44,19 +57,43 @@ export class AddEditEventComponent implements OnInit {
       eventdate: [null, [Validators.required]],
       eventexpirydt: [null, [Validators.required]],
       address: [null, [Validators.required]],
-      description: [null, [Validators.required]]
+      description: [null, [Validators.required]],
+      status: ['Active']
     });
 
   }
 
   ngOnInit() {
-    this.lookupService.list({ refkey: 'biz_states', status: AppConstant.STATUS_ACTIVE }).subscribe(res => {
+    this.eventService.getLocations({ status: AppConstant.STATUS_ACTIVE }).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
-        this.statelists = JSON.parse(response.data[0].refvalue);
+        this.statelists = response.data;
       } else {
         this.bootstrapAlertService.showError(response.message);
       }
+    }, err => {
+      console.log(err);
+    });
+  }
+
+  getEventDetail(id) {
+    this.eventService.byId(id).subscribe(res => {
+      let response = JSON.parse(res._body);
+      this.eventForm.setValue({
+        eventname: response.data.eventname,
+        locationid: response.data.locationid,
+        eventdate: this.commonService.parseDate(response.data.eventdate),
+        eventexpirydt: this.commonService.parseDate(response.data.eventexpirydt),
+        address: response.data.address,
+        description: response.data.description,
+        status: response.data.status == AppConstant.STATUS_ACTIVE ? true : false
+      });
+      this.existing_image = [];
+      this.existing_image = response.data.gallery;
+      console.log(this.existing_image);
+    }, err => {
+      this.savingEvent = false;
+      console.log(err);
     });
   }
 
@@ -67,19 +104,61 @@ export class AddEditEventComponent implements OnInit {
 
 
   addEvent() {
+    this.savingEvent = true;
 
+    if (this.edit) {
+      this.updateEvent();
+    } else {
+      if (!this.eventForm.valid) {
+        this.savingEvent = false;
+        this.bootstrapAlertService.showError(this.commonService.getFormErrorMessage(this.eventForm, this.eventErrObj));
+      } else {
+        let form_data = this.eventForm.value;
+
+        let data = form_data;
+
+        data["eventdate"] = this.commonService.formatDate(data["eventdate"]);
+        data["eventexpirydt"] = this.commonService.formatDate(data["eventexpirydt"]);
+        data["createddt"] = new Date();
+        data["createdby"] = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER).fullname;
+
+        let formData = new FormData();
+
+        for (let index = 0; index < this.images.length; index++) {
+          const element = this.images[index];
+          formData.append("files", element.image);
+        }
+
+        formData.append("data", JSON.stringify(data));
+
+        this.eventService.create(formData).subscribe(res => {
+          this.savingEvent = false;
+          let response = JSON.parse(res._body);
+          if (response.status) this.bootstrapAlertService.showSucccess(response.message);
+          else this.bootstrapAlertService.showError(response.message);
+        }, err => {
+          this.savingEvent = false;
+          console.log(err);
+        });
+
+      }
+    }
+
+  }
+
+  updateEvent() {
     if (!this.eventForm.valid) {
+      this.savingEvent = false;
       this.bootstrapAlertService.showError(this.commonService.getFormErrorMessage(this.eventForm, this.eventErrObj));
     } else {
       let form_data = this.eventForm.value;
 
       let data = form_data;
 
-      data["eventdate"] = "2019-01-28T09:46:13.880Z";
-      data["eventexpirydt"] = "2019-01-28T09:46:13.880Z";
+      data["eventdate"] = this.commonService.formatDate(data["eventdate"]);
+      data["eventexpirydt"] = this.commonService.formatDate(data["eventexpirydt"]);
       data["createddt"] = new Date();
       data["createdby"] = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER).fullname;
-      data["locationid"] = 123;
 
       let formData = new FormData();
 
@@ -91,13 +170,15 @@ export class AddEditEventComponent implements OnInit {
       formData.append("data", JSON.stringify(data));
 
       this.eventService.create(formData).subscribe(res => {
-        this.bootstrapAlertService.showSucccess(res.message);
+        this.savingEvent = false;
+        let response = JSON.parse(res._body);
+        if (response.status) this.bootstrapAlertService.showSucccess(response.message);
+        else this.bootstrapAlertService.showError(response.message);
       }, err => {
-        // this.bootstrapAlertService.showError(res.message);
+        this.savingEvent = false;
         console.log(err);
-      })
+      });
 
     }
-
   }
 }

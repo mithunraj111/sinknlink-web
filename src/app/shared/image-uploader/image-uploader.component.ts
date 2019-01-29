@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, Output, EventEmitter, Input, SimpleChange, OnChanges } from '@angular/core';
 // import { EventEmitter } from 'selenium-webdriver';
 
 @Component({
@@ -7,16 +7,29 @@ import { Component, OnInit, ViewEncapsulation, Output, EventEmitter } from '@ang
     styleUrls: ['./image-uploader.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class ImageUploaderComponent implements OnInit {
+export class ImageUploaderComponent implements OnInit, OnChanges {
 
     @Output() imageAdded: EventEmitter<any> = new EventEmitter();
 
-    images:any = [];
+    @Input() disablePicker: boolean = false;
+    @Input() extimage: any = [1,2,3];
+
+    images: any = [];
 
     constructor() { }
 
     ngOnInit() {
 
+    }
+
+    ngOnChanges(changes: { [propName: string]: SimpleChange }) {
+        if (changes['disablePicker'] && changes['disablePicker'].previousValue != changes['disablePicker'].currentValue) {
+            console.log(this.disablePicker);
+        }
+        if (changes['extimage'] && changes['extimage'].previousValue != changes['extimage'].currentValue) {
+            console.log(this.extimage);
+        }
+        console.log(changes);
     }
 
     selectedImg(one, files) {
@@ -46,14 +59,14 @@ export class ImageUploaderComponent implements OnInit {
                     imageContainer.setAttribute("id", id.toString());
                     imageFile.setAttribute("src", reader.result.toString());
                     imageFile.setAttribute("id", (id + 1).toString());
-                    imageFile.addEventListener("click", (el:any)=>{
+                    imageFile.addEventListener("click", (el: any) => {
 
                         let element = document.getElementById(el.target.id);
                         element.parentNode.removeChild(element);
                         for (let index = 0; index < a.images.length; index++) {
                             const element = a.images[index];
-                            if(element.id == el.target.id){
-                                a.images.splice(index,1);
+                            if (element.id == el.target.id) {
+                                a.images.splice(index, 1);
                             }
                         }
                         a.imageAdded.emit(a.images);
@@ -70,7 +83,7 @@ export class ImageUploaderComponent implements OnInit {
 
     }
 
-    removeSelectedImg(el ) {
+    removeSelectedImg(el) {
         let element = document.getElementById(el.target.id);
         element.parentNode.removeChild(element);
 
