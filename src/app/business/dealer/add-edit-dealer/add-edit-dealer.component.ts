@@ -2,23 +2,13 @@ import { Component, OnInit, Input } from '@angular/core';
 import { AppConstant } from '../../../app.constants';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
-import {animate, style, transition, trigger} from '@angular/animations';
-
+import { fadeInOutTranslate } from '../../../../assets/animations/fadeInOutTranslate';
 @Component({
   selector: 'app-add-edit-dealer',
   templateUrl: './add-edit-dealer.component.html',
   styleUrls: ['./add-edit-dealer.component.scss'],
   animations: [
-    trigger('fadeInOutTranslate', [
-      transition(':enter', [
-        style({opacity: 0}),
-        animate('400ms ease-in-out', style({opacity: 1}))
-      ]),
-      transition(':leave', [
-        style({transform: 'translate(0)'}),
-        animate('400ms ease-in-out', style({opacity: 0}))
-      ])
-    ])
+    fadeInOutTranslate
   ]
 })
 export class AddEditDealerComponent implements OnInit {
