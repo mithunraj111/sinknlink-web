@@ -1,6 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { AppConstant } from '../../app.constants';
+import { ConsumerService } from '../../services/business/consumer.service';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
 
 @Component({
   selector: 'app-consumer',
@@ -8,35 +11,17 @@ import { AppConstant } from '../../app.constants';
   styleUrls: ['./consumer.component.scss']
 })
 export class ConsumerComponent implements OnInit {
-  data: any[];
+  consumersList: any[] = [];
   tempFilter = [];
   @ViewChild(DatatableComponent) table: DatatableComponent;
   datedisplayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   date: any;
-  constructor() {
-    this.data = [
-      { fullname: 'Pavithra', mobileno: '9874563210', membershipid: '89769', city: 'Salem', updatedby: 'Admin' },
-      { fullname: 'Pavithra', mobileno: '9876543210', membershipid: '89769', city: 'Salem', updatedby: 'Admin' },
-      { fullname: 'Pavithra', mobileno: '9876543210', membershipid: '89769', city: 'Salem', updatedby: 'Admin' },
-      { fullname: 'pavi', mobileno: '9517538426', membershipid: '89765', city: 'Salem', updatedby: 'Admin' },
-      { fullname: 'pavi', mobileno: '9874563210', membershipid: '89765', city: 'Salem', updatedby: 'Admin' },
-      { fullname: 'pavi', mobileno: '9876543210', membershipid: '89765', city: 'Salem', updatedby: 'Admin' },
-      { fullname: 'pavi', mobileno: '9517538426', membershipid: '89765', city: 'Salem', updatedby: 'Admin' },
-      { fullname: 'pavi', mobileno: '9874563210', membershipid: '89765', city: 'Salem', updatedby: 'Admin' },
-      { fullname: 'Pavithra', mobileno: '9876543210', membershipid: '89765', city: 'Salem', updatedby: 'Admin' },
-      { fullname: 'Pavithra', mobileno: '9874563210', membershipid: '89765', city: 'Salem', updatedby: 'Admin' },
-      { fullname: 'Pavithra', mobileno: '9876543210', membershipid: '89765', city: 'Salem', updatedby: 'Admin' },
-      { fullname: 'Pavithra', mobileno: '9876543210', membershipid: '89765', city: 'Salem', updatedby: 'Admin' },
-      { fullname: 'Pavithra', mobileno: '9517538426', membershipid: '89765', city: 'Salem', updatedby: 'Admin' },
-      { fullname: 'pavi', mobileno: '9517538426', membershipid: '89765', city: 'Salem', updatedby: 'Admin' },
-      { fullname: 'pavi', mobileno: '9517538426', membershipid: '89765', city: 'Salem', updatedby: 'Admin' }
-    ];
-    this.tempFilter = this.data;
-    this.date = new Date();
+  constructor(private consumerService: ConsumerService,private bootstrapAlertService:BootstrapAlertService, private localStorageService:LocalStorageService) {
 
   }
 
   ngOnInit() {
+    this.getConsumers();
   }
   search(event) {
     const val = event.target.value.toLowerCase();
@@ -47,8 +32,33 @@ export class ConsumerComponent implements OnInit {
         }
       }
     });
-    this.data = temp;
+    this.consumersList = temp;
     this.table.offset = 0;
+  }
+  getConsumers(){
+    this.consumerService.list({}).subscribe(res => {
+      const response = JSON.parse(res._body);
+      if (response.status) {
+        this.consumersList = response.data;
+        this.tempFilter = this.consumersList;
+      }
+    });
+  }
+  updateConsumer(pk, status, isDeleted?) {
+    let data = {
+      consumerid: pk,
+      status: isDeleted == true ? AppConstant.STATUS_DELETED : status == AppConstant.STATUS_ACTIVE ? AppConstant.STATUS_INACTIVE : AppConstant.STATUS_ACTIVE,
+      updateddt: new Date(),
+      updatedby: this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER).fullname
+    }
+    this.consumerService.update(data, pk).subscribe(res => {
+      let response = JSON.parse(res._body);
+      if (response.status) { this.getConsumers(); this.bootstrapAlertService.showSucccess(response.message); }
+      else this.bootstrapAlertService.showError(response.message);
+    }, err => {
+      console.log(err);
+    });
+    console.log(data);
   }
   getRowHeight(row) {
     return row.height;
