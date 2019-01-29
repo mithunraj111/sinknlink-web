@@ -53,14 +53,14 @@
                 </ngx-datatable-column>
                 <ngx-datatable-column name="Status" [sortable]="false" [flexGrow]="0.5" [cellClass]="'text-center status'">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                        <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="#03ADED" switchColor="#fff" size="small" checked></ui-switch>
+                        <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="#03ADED" switchColor="#fff" size="small" [checked]="row.status == 'Active'" (change)="updateDealerStatus(row,rowIndex,false)"></ui-switch>
                     </ng-template>
                 </ngx-datatable-column>
                 <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.5" [cellClass]="'text-center action'">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                         <a placement="bottom" ngbTooltip="Click to edit dealer" class="m-r-15 crm-action-edit text-primary" (click)="editDealer(row.dealerid)">
                             <i class="fa fa-pencil"></i></a>
-                        <a placement="bottom" ngbTooltip="Click to delete dealer" class="crm-action-delete text-danger">
+                        <a placement="bottom" ngbTooltip="Click to delete dealer" class="crm-action-delete text-danger" (click)="updateDealerStatus(row,rowIndex,true)">
                             <i class="fa fa-trash"></i></a>
                     </ng-template>
                 </ngx-datatable-column>

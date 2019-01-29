@@ -4,13 +4,13 @@ import { Router } from '@angular/router';
 import { AppConstant } from '../../app.constants';
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
 import { LocalStorageService } from '../../services/local-storage.service';
-import { DealerService } from 'src/app/services/business/dealer.service';
+import { DealerService } from '../../services/business/dealer.service';
+import { AppMessages } from '../../app-messages';
 
 
 @Component({
   selector: 'app-dealer',
-  templateUrl: './dealer.component.html',
-  styleUrls: ['./dealer.component.scss']
+  templateUrl: './dealer.component.html'
 })
 export class DealerComponent implements OnInit {
 
@@ -58,5 +58,29 @@ export class DealerComponent implements OnInit {
     });
     this.dealerList = temp;
     this.table.offset = 0;
+  }
+
+  updateDealerStatus(data, index, flag) {
+    const updateObj = {
+      updateddt: new Date(),
+      updatedby: this.userstoragedata.fullname,
+      status: flag ? AppConstant.STATUS_DELETED :
+        (data.status === AppConstant.STATUS_ACTIVE ? AppConstant.STATUS_INACTIVE : AppConstant.STATUS_ACTIVE)
+    };
+    this.dealerService.update(updateObj, data.dealerid).subscribe(res => {
+      const response = JSON.parse(res._body);
+      if (response.status) {
+        if (flag) {
+          this.bootstrapAlertService.showSucccess('#' + data.dealerid + ' ' + AppMessages.VALIDATION.COMMON.DELETE_SUCCESS);
+          this.dealerList.splice(index, 1);
+        } else {
+          this.bootstrapAlertService.showSucccess(response.message);
+          this.dealerList[index] = response.data;
+        }
+        this.dealerList = [...this.dealerList];
+      } else {
+        this.bootstrapAlertService.showError(response.message);
+      }
+    });
   }
 }
