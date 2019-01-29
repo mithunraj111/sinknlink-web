@@ -67,10 +67,10 @@ export const AppConstant = Object.freeze({
           EDIT: 'fancyno/edit'
         }
       },
-      COMMON:{
-        DOCUMENT:{
-          CREATE:'document/create',
-          UPDATE:'document/edit'
+      COMMON: {
+        DOCUMENT: {
+          CREATE: 'document/create',
+          UPDATE: 'document/edit'
         }
       },
       MASTERS: {
@@ -97,6 +97,20 @@ export const AppConstant = Object.freeze({
           LIST: 'role',
           GETBYID: 'role/',
           UPDATE: 'role/edit/'
+        }
+      },
+      BUSINESS: {
+        DEALER: {
+          CREATE: 'dealer/create',
+          LIST: 'dealer',
+          GETBYID: 'dealer/',
+          UPDATE: 'dealer/edit/'
+        },
+        CONSUMER: {
+          GETBYID: 'consumer/',
+          CREATE: 'consumer/create',
+          LIST: 'consumer',
+          UPDATE: 'consumer/edit/'
         }
       }
     }

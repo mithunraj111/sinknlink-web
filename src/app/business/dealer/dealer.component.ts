@@ -2,6 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { Router } from '@angular/router';
 import { AppConstant } from '../../app.constants';
+import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
+import { LocalStorageService } from '../../services/local-storage.service';
+import { DealerService } from 'src/app/services/business/dealer.service';
 
 
 @Component({
@@ -11,56 +14,49 @@ import { AppConstant } from '../../app.constants';
 })
 export class DealerComponent implements OnInit {
 
-  public data: any;
+  dealerList = [];
   tempFilter = [];
   buttontext: string;
   @ViewChild(DatatableComponent) table: DatatableComponent;
   datedisplayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
-  date: Date;
-  constructor(private router: Router) {
-    this.data = [
-      { dealername: 'Pavithra', mobileno: '9874563210', id: '89769', city: 'Salem', updatedby: 'Admin' },
-      { dealername: 'Pavithra', mobileno: '9876543210', id: '89769', city: 'Salem', updatedby: 'Admin' },
-      { dealername: 'Pavithra', mobileno: '9876543210', id: '89769', city: 'Salem', updatedby: 'Admin' },
-      { dealername: 'pavi', mobileno: '9517538426', id: '89765', city: 'Salem', updatedby: 'Admin' },
-      { dealername: 'pavi', mobileno: '9874563210', id: '89765', city: 'Salem', updatedby: 'Admin' },
-      { dealername: 'pavi', mobileno: '9876543210', id: '89765', city: 'Salem', updatedby: 'Admin' },
-      { dealername: 'pavi', mobileno: '9517538426', id: '89765', city: 'Salem', updatedby: 'Admin' },
-      { dealername: 'pavi', mobileno: '9874563210', id: '89765', city: 'Salem', updatedby: 'Admin' },
-      { dealername: 'Pavithra', mobileno: '9876543210', id: '89765', city: 'Salem', updatedby: 'Admin' },
-      { dealername: 'Pavithra', mobileno: '9874563210', id: '89765', city: 'Salem', updatedby: 'Admin' },
-      { dealername: 'Pavithra', mobileno: '9876543210', id: '89765', city: 'Salem', updatedby: 'Admin' },
-      { dealername: 'Pavithra', mobileno: '9876543210', id: '89765', city: 'Salem', updatedby: 'Admin' },
-      { dealername: 'Pavithra', mobileno: '9517538426', id: '89765', city: 'Salem', updatedby: 'Admin' },
-      { dealername: 'pavi', mobileno: '9517538426', id: '89765', city: 'Salem', updatedby: 'Admin' },
-      { dealername: 'pavi', mobileno: '9517538426', id: '89765', city: 'Salem', updatedby: 'Admin' }
-    ];
-    this.tempFilter = this.data;
-    this.date = new Date();
+  userstoragedata = {} as any;
+  constructor(private router: Router,
+    private dealerService: DealerService,
+    private bootstrapAlertService: BootstrapAlertService,
+    private localStorageService: LocalStorageService) {
+    this.userstoragedata = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER);
 
   }
 
   ngOnInit() {
+    this.getDealersList();
+  }
+  getDealersList() {
+    this.dealerService.list({}).subscribe(res => {
+      const response = JSON.parse(res._body);
+      if (response.status) {
+        this.dealerList = response.data;
+        this.tempFilter = this.dealerList;
+      }
+    });
   }
 
   addDealer() {
     this.router.navigate(['business/dealer/create']);
-    this.buttontext = AppConstant.BUTTON_TXT.SAVE;
   }
-  editDealers(data) {
-    this.router.navigate(['business/dealer/edit/:id' + 1]);
-    this.buttontext = AppConstant.BUTTON_TXT.UPDATE;
+  editDealer(id) {
+    this.router.navigate(['business/dealer/edit/' + id]);
   }
   search(event) {
     const val = event.target.value.toLowerCase();
     const temp = this.tempFilter.filter(item => {
-      for (let key in item) {
-        if (("" + item[key]).toLocaleLowerCase().includes(val)) {
-          return ("" + item[key]).toLocaleLowerCase().includes(val);
+      for (const key in item) {
+        if (('' + item[key]).toLocaleLowerCase().includes(val)) {
+          return ('' + item[key]).toLocaleLowerCase().includes(val);
         }
       }
     });
-    this.data = temp;
+    this.dealerList = temp;
     this.table.offset = 0;
   }
 }
