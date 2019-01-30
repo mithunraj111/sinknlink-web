@@ -4,6 +4,7 @@ import { AppConstant } from '../../app.constants';
 import { ConsumerService } from '../../services/business/consumer.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-consumer',
@@ -16,7 +17,7 @@ export class ConsumerComponent implements OnInit {
   @ViewChild(DatatableComponent) table: DatatableComponent;
   datedisplayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   date: any;
-  constructor(private consumerService: ConsumerService,private bootstrapAlertService:BootstrapAlertService, private localStorageService:LocalStorageService) {
+  constructor(private router:Router, private consumerService: ConsumerService,private bootstrapAlertService:BootstrapAlertService, private localStorageService:LocalStorageService) {
 
   }
 
@@ -58,7 +59,9 @@ export class ConsumerComponent implements OnInit {
     }, err => {
       console.log(err);
     });
-    console.log(data);
+  }
+  viewCustomer(id){
+    this.router.navigate(['business/consumers/view/' + id]);
   }
   getRowHeight(row) {
     return row.height;

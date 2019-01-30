@@ -98,7 +98,7 @@ const routes: Routes = [
         component: CustomerGalleryComponent
       },
       {
-        path: 'consumers/view',
+        path: 'consumers/view/:id',
         component: ViewConsumerComponent
       },
     ],

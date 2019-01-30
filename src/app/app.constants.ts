@@ -111,6 +111,12 @@ export const AppConstant = Object.freeze({
           CREATE: 'consumer/create',
           LIST: 'consumer',
           UPDATE: 'consumer/edit/'
+        },
+        CONSUMERCOUPON:{
+          GETBYID: 'consumercoupon/',
+          CREATE: 'consumercoupon/create',
+          LIST: 'consumercoupon',
+          UPDATE: 'consumercoupon/edit/'
         }
       }
     }

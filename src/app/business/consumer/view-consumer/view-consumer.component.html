@@ -10,7 +10,7 @@
         </div>
         <div class="col-md-6 col-sm-6 save-button text-right p-r-30">
           <button type="button" placement="bottom" ngbTooltip="Go back" routerLink="/business/consumers" class="btn btn-inverse btn-primary waves-effect"><i
-            class="fa fa-arrow-circle-left"></i></button>
+              class="fa fa-arrow-circle-left"></i></button>
         </div>
       </div>
     </div>
@@ -34,27 +34,33 @@
                 <div class="employee-form">
                   <div class="card tenants-page tenants-pages m-b-10 m-t-60">
                     <div class="row p-t-10 p-b-5">
+                      <label class="col-md-3 col-sm-6 col-form-label text-right">Name</label>
+                      <div class="col-md-6 col-sm-6 m-t-5">
+                        <span class="f-15">{{consumer?.fullname || '-'}}</span>
+                      </div>
+                    </div>
+                    <div class="row p-t-10 p-b-5">
                       <label class="col-md-3 col-sm-6 col-form-label text-right">Location</label>
                       <div class="col-md-6 col-sm-6 m-t-5">
-                        <span class="f-15">K.K.Nagar<br />Chennai<br />TamilNadu<br />600078</span>
+                        <span class="f-15">{{consumer?.location || '-'}}</span>
                       </div>
                     </div>
                     <div class="row p-t-10 p-b-5">
                       <label class="col-md-3 col-sm-6 col-form-label text-right">Address</label>
                       <div class="col-md-6 col-sm-6 m-t-5">
-                        <span class="f-15">K.K.Nagar<br />Chennai<br />TamilNadu<br />600078</span>
+                        <span class="f-15">{{consumer?.address || '-'}} </span>
                       </div>
                     </div>
                     <div class="row p-t-10 p-b-5">
                       <label class="col-md-3 col-sm-6 col-form-label text-right">Mobile</label>
                       <div class="col-md-6 col-sm-6 m-t-5">
-                        <span class="f-15">8056190532</span>
+                        <span class="f-15">{{consumer?.mobileno || '-'}}</span>
                       </div>
                     </div>
                     <div class="row p-t-10 p-b-5">
                       <label class="col-md-3 col-sm-6 col-form-label text-right">Email</label>
                       <div class="col-md-6 col-sm-6 m-t-5">
-                        <span class="f-15">mithunarunachalam12@gmail.com</span>
+                        <span class="f-15">{{consumer?.emailid || '-'}}</span>
                       </div>
                     </div>
                     <div class="row p-t-10 p-b-5">
@@ -64,21 +70,21 @@
                       </div>
                     </div>
                     <div class="row p-t-10 p-b-5">
-                      <label class="col-md-3 col-sm-6 col-form-label text-right">Linked mailid</label>
+                      <label class="col-md-3 col-sm-6 col-form-label text-right">Linked Membership Id</label>
                       <div class="col-md-6 col-sm-6 m-t-5">
-                        <span class="f-15">mithunarunachalam12@gmail.com</span>
+                        <span class="f-15">{{consumer?.membershipid || '-'}}</span>
                       </div>
                     </div>
                     <div class="row p-t-10 p-b-5">
                       <label class="col-md-3 col-sm-6 col-form-label text-right">Signup date</label>
                       <div class="col-md-6 col-sm-6 m-t-5">
-                        <span class="f-15">{{date|date:date_displayformat}}</span>
+                        <span class="f-15">{{consumer?.createddt|date:date_displayformat}}</span>
                       </div>
                     </div>
                     <div class="row p-t-10 p-b-5">
                       <label class="col-md-3 col-sm-6 col-form-label text-right">Last login date</label>
                       <div class="col-md-6 col-sm-6 m-t-5">
-                        <span class="f-15">{{date|date:date_displayformat}}</span>
+                        <span class="f-15">{{consumer?.user?.lastlogin|date:date_displayformat}}</span>
                       </div>
                     </div>
                   </div>
@@ -89,7 +95,41 @@
           <ngb-tab title="Coupons">
             <ng-template ngbTabContent>
               <div [@fadeInOutTranslate]>
-
+                <div class="header-block m-t-60">
+                  <div class="table-header fixed-table-header">
+                    <app-card [classHeader]="true">
+                      <ngx-datatable #eventtable class="table data-table expandable" [rows]='consumerCouponsList'
+                        [columnMode]="'flex'" [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false">
+                        <ngx-datatable-column prop="bizname" name="Business Name" [resizeable]="false">
+                          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                            <span>{{row.coupon.business.bizname}}</span>
+                          </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column prop="couponcode" name="Date" name="Coupon Code" [resizeable]="false"
+                          headerClass="text-center" [cellClass]="'text-center'">
+                          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                            <span>{{row.coupon.couponcode}}</span>
+                          </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column prop="shortdesc" name="Description" [resizeable]="false">
+                          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                            <span>{{row.coupon.shortdesc}}</span>
+                          </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column prop="claimedon" name="Claimed On" [resizeable]="false">
+                          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                            <span class="updatedate"> {{row.updateddt|date:displaydtimeformat}}</span>
+                          </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column prop="expirydt" name="Expiry Date" [resizeable]="false">
+                          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                            <span class="updatedate"> {{row.coupon.expirydt|date:displaydtimeformat}}</span>
+                          </ng-template>
+                        </ngx-datatable-column>
+                      </ngx-datatable>
+                    </app-card>
+                  </div>
+                </div>
               </div>
             </ng-template>
           </ngb-tab>
