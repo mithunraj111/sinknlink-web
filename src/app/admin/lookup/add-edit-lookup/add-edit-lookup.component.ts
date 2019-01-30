@@ -4,10 +4,10 @@ import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { LocalStorageService } from '../../../services/local-storage.service';
 import { AppConstant } from '../../../app.constants';
-import * as _ from 'lodash';
 import { CommonService } from '../../../services/common.service';
 import { AppMessages } from 'src/app/app-messages';
 import { LookupService } from 'src/app/services/admin/lookup.service';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-add-edit-lookup',
@@ -23,8 +23,7 @@ export class AddEditLookupComponent implements OnInit, OnChanges {
   @Input() lookupObj = {} as any;
   errMessage;
   lookupErrObj = AppMessages.VALIDATION.LOOKUP;
-  refid: number;
-  datatypeList = [];
+  datatypeList = AppConstant.DATATYPES;
   constructor(
     private router: Router,
     private bootstrapAlertService: BootstrapAlertService,
@@ -37,13 +36,12 @@ export class AddEditLookupComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.initForm();
-    this.getlookupList();
   }
   initForm() {
     this.lookupForm = this.fb.group({
-      keyname: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(100)])],
-      keyvalue: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(100)])],
-      keydesc: [null, Validators.compose([Validators.maxLength(100)])],
+      refname: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(100)])],
+      refvalue: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(100)])],
+      // keydesc: [null, Validators.compose([Validators.maxLength(100)])],
       datatype: [null, Validators.required],
       defaultvalue: ['N', Validators.required],
       status: ['']
@@ -56,10 +54,11 @@ export class AddEditLookupComponent implements OnInit, OnChanges {
       this.formTitle = AppConstant.FORM_TITLE.LOOKUP.UPDATE;
       this.lookupObj = changes.lookupObj.currentValue;
       this.lookupForm = this.fb.group({
-        keyname: [this.lookupObj.refkey, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(100)])],
-        keyvalue: [this.lookupObj.refvalue, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(100)])],
-        keydesc: [this.lookupObj.keydesc, Validators.compose([Validators.maxLength(100)])],
+        refname: [this.lookupObj.refname, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(100)])],
+        refvalue: [this.lookupObj.refvalue, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(100)])],
+        // keydesc: [this.lookupObj.keydesc, Validators.compose([Validators.maxLength(100)])],
         datatype: [this.lookupObj.datatype, Validators.required],
+        status: [this.lookupObj.status, Validators.required]
       });
     } else {
       this.initForm();
@@ -83,14 +82,14 @@ export class AddEditLookupComponent implements OnInit, OnChanges {
     } else {
       const data = this.lookupForm.value;
       const formdata = {} as any;
-      formdata.refkey = data.keyname;
-      formdata.refvalue = data.keyvalue;
-      formdata.keydesc = data.keydesc;
+      // formdata.refkey = data.refkey;
+      formdata.refname = data.refname;
+      formdata.refvalue = data.refvalue;
       formdata.datatype = data.datatype;
       formdata.updatedby = this.userstoragedata.fullname;
       formdata.updateddt = new Date();
       if (!_.isUndefined(this.lookupObj) && !_.isUndefined(this.lookupObj.refid) && !_.isEmpty(this.lookupObj)) {
-        formdata.status = data.status ? AppConstant.STATUS_ACTIVE : AppConstant.STATUS_INACTIVE;
+        formdata.status = data.status;
         this.lookupService.update(formdata, this.lookupObj.refid).subscribe(res => {
           const response = JSON.parse(res._body);
           if (response.status) {
@@ -119,13 +118,5 @@ export class AddEditLookupComponent implements OnInit, OnChanges {
         });
       }
     }
-  }
-  getlookupList() {
-    this.lookupService.list({ status: AppConstant.STATUS_ACTIVE }).subscribe(res => {
-      const response = JSON.parse(res._body);
-      if (response.status) {
-        this.datatypeList = response.data;
-      }
-    });
   }
 }

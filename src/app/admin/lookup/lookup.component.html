@@ -24,14 +24,13 @@
 <div class="header-block m-t-60">
     <div class="table-header fixed-table-header">
         <app-card [classHeader]="true">
-            <ngx-datatable #lookuptable class="table data-table expandable" [rows]='lookupList' [columnMode]="'flex'"
-                [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false">
-                <ngx-datatable-column prop="keyname" name="Name" [resizeable]="false">
+            <ngx-datatable #lookuptable class="table data-table expandable" [rows]='lookupList' [columnMode]="'flex'" [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false">
+                <ngx-datatable-column prop="refname" name="Name" [resizeable]="false">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                        <span>{{row.refkey}}</span>
+                        <span>{{row.refname}}</span>
                     </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column prop="keyvalue" name="Value" [resizeable]="false">
+                <ngx-datatable-column prop="refvalue" name="Value" [resizeable]="false">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                         <span>{{row.refvalue}}</span>
                     </ng-template>
@@ -43,11 +42,9 @@
                     </ng-template>
                 </ngx-datatable-column>
 
-                <ngx-datatable-column name="Is Default?" [sortable]="false" headerClass="text-center" [cellClass]="'text-center'"
-                    [resizeable]="false">
+                <ngx-datatable-column name="Is Default?" [sortable]="false" headerClass="text-center" [cellClass]="'text-center'" [resizeable]="false">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                        <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="#03ADED"
-                            switchColor="#fff" size="small" checked></ui-switch>
+                        <span>{{row.isdefault==='Y'?'Yes':'No'}}</span>
                     </ng-template>
                 </ngx-datatable-column>
 
@@ -57,20 +54,16 @@
                         <span class="updatedate"> {{row.updateddt|date:displayformat}}</span>
                     </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column name="Status" [sortable]="false" [flexGrow]="0.5" headerClass="text-center"
-                    [cellClass]="'text-center'" [resizeable]="false">
+                <ngx-datatable-column name="Status" [sortable]="false" [flexGrow]="0.5" headerClass="text-center" [cellClass]="'text-center'" [resizeable]="false">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                        <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="#03ADED"
-                            switchColor="#fff" size="small" [checked]="row.status == 'Active'" (change)="updateLookupStatus(row, rowIndex, false)"></ui-switch>
+                        <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="#03ADED" switchColor="#fff" size="small" [checked]="row.status == 'Active'" (change)="updateLookupStatus(row, rowIndex, false)"></ui-switch>
                     </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.5" headerClass="text-center"
-                    [cellClass]="'text-center'" [resizeable]="false">
+                <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.5" headerClass="text-center" [cellClass]="'text-center'" [resizeable]="false">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                         <a placement="bottom" ngbTooltip="Click to edit lookup" (click)="editLookup(row)" class="m-r-15 crm-action-edit text-primary">
                             <i class="fa fa-pencil"></i></a>
-                        <a placement="bottom" ngbTooltip="Click to delete lookup" (click)="updateLookupStatus(row, rowIndex, true)"
-                            class="crm-action-delete text-danger">
+                        <a placement="bottom" ngbTooltip="Click to delete lookup" (click)="updateLookupStatus(row, rowIndex, true)" class="crm-action-delete text-danger">
                             <i class="fa fa-trash"></i></a>
                     </ng-template>
                 </ngx-datatable-column>

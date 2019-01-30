@@ -56,7 +56,6 @@ export class LookupComponent implements OnInit {
     this.openLookupModal('lookupmodal');
   }
   editLookup(data) {
-    console.log(data)
     this.lookupObj = data;
     this.openLookupModal('lookupmodal');
   }

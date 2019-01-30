@@ -33,7 +33,11 @@ export const AppConstant = Object.freeze({
   STATUS_AVAILABLE: 'Available',
   STATUS_DELETED: 'Deleted',
   STATUS_INVALID: 'INVALID',
-
+  // Datatypes array
+  DATATYPES: [
+    { label: 'String', value: 'String' },
+    { label: 'Integer', value: 'Integer' },
+    { label: 'Float', value: 'Float' }],
   // Default Data
   DEFAULT_DATA_ACCESS: 'All',
   API_CONFIG: {
