@@ -21,6 +21,10 @@ export const AppConstant = Object.freeze({
     LOCATION: {
       ADD: 'Add Location',
       UPDATE: 'Update Location'
+    },
+    LOOKUP: {
+      ADD: 'Add Lookup',
+      UPDATE: 'Update Lookup'
     }
   },
   // Status

@@ -115,6 +115,25 @@ export const AppMessages = Object.freeze({
         maxlength: 'City should be lesser than 50 characters'
       }
     },
+    LOOKUP: {
+      keyname: {
+        required: 'Please enter key name'
+      },
+      keyvalue: {
+        required: 'Please enter key value',
+        minlength: 'Lookup value atleast 1 character',
+        maxlength: 'Lookup value not more than 100 characters'
+      },
+      keydesc: {
+        maxlength: 'Description not more than 100 characters',
+      },
+      datatype: {
+        required: 'Please select datatype',
+      },
+      defaultvalue: {
+        required: 'Please select default flag',
+      }
+    },
     ROLES: {
       rolename: {
         required: 'Please enter role name',

@@ -12,9 +12,12 @@ import { TagInputModule } from 'ngx-chips';
 import { AddEditDonationComponent } from './donations/add-edit-donation/add-edit-donation.component';
 import { AddEditEventComponent } from './events/add-edit-event/add-edit-event.component';
 import { FileUploadModule } from 'ng2-file-upload';
-import { ImageUploaderComponent } from '../shared/image-uploader/image-uploader.component'
+import { ImageUploaderComponent } from '../shared/image-uploader/image-uploader.component';
 import { VipNumberRegistrationComponent } from './vip-number-registration/vip-number-registration.component';
 import { AddEditVipRegistrationNumberComponent } from './vip-number-registration/add-edit-vip-registration-number/add-edit-vip-registration-number.component';
+import { LookupComponent } from './lookup/lookup.component';
+import { SelectModule } from 'ng-select';
+import { AddEditLookupComponent } from './lookup/add-edit-lookup/add-edit-lookup.component';
 
 @NgModule({
   imports: [
@@ -27,7 +30,8 @@ import { AddEditVipRegistrationNumberComponent } from './vip-number-registration
     ReactiveFormsModule,
     UiSwitchModule,
     TagInputModule,
-    FileUploadModule
+    FileUploadModule,
+    SelectModule
   ],
   declarations: [EventsComponent,
     DonationsComponent,
@@ -35,6 +39,8 @@ import { AddEditVipRegistrationNumberComponent } from './vip-number-registration
     AddEditEventComponent,
     ImageUploaderComponent,
     VipNumberRegistrationComponent,
-    AddEditVipRegistrationNumberComponent]
+    AddEditVipRegistrationNumberComponent,
+    LookupComponent,
+    AddEditLookupComponent]
 })
 export class AdminModule { }
