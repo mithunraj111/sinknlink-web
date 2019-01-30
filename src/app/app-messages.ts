@@ -21,7 +21,8 @@ export const AppMessages = Object.freeze({
         required: 'Please enter category name',
         minlength: 'Please enter category name atleast 3 characters',
         maxlength: 'Please enter category name within 50 characters'
-      }
+      },
+      categoryimg: 'Please upload a photo'
     },
     FANCYNUMBER: {
       startnumber: {

@@ -82,6 +82,7 @@ export class AddEditCategoryComponent implements OnInit, OnChanges {
     }
   }
   saveOrUpdateCategory() {
+    console.log(this.categoryimgfile);
     console.log(this.categoryForm);
     if (this.categoryForm.status === AppConstant.STATUS_INVALID) {
       this.errMessage = this.commonService.getFormErrorMessage(this.categoryForm, this.categoryErrObj);
@@ -94,9 +95,13 @@ export class AddEditCategoryComponent implements OnInit, OnChanges {
       data.categoryimg = this.categoryForm.value.categoryimg;
       data.updatedby = this.userstoragedata.fullname;
       data.updateddt = new Date();
-      if (this.categoryimgfile) {
+      if (!_.isUndefined(this.categoryimgfile) && !_.isEmpty(this.categoryimgfile)) {
         formdata.append('categoryimg', this.categoryimgfile);
+      } else {
+        this.bootstrapAlertService.showError(this.categoryErrObj.categoryimg);
+        return false;
       }
+      console.log(this.categoryimgfile);
       if (!_.isUndefined(this.categoryObj) && !_.isUndefined(this.categoryObj.categoryid) && !_.isEmpty(this.categoryObj)) {
         data.status = data.status;
         formdata.append('formData', JSON.stringify(data));
