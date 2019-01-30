@@ -19,7 +19,7 @@
     <div class="row">
         <div class="col-md-10 col-xl-10 col-sm-10">
             <div class="md-tabs md-right-tabs p-t-10 business-tab dealer-tab-menu">
-                <ngb-tabset #deleartabs>
+                <ngb-tabset #deleartabs (tabChange)="onTabChange($event)">
                     <ngb-tab title="Details" id='1'>
                         <ng-template ngbTabContent>
                             <div [@fadeInOutTranslate]>
@@ -30,7 +30,7 @@
                     <ngb-tab title="Customers" id='2'>
                         <ng-template ngbTabContent>
                             <div [@fadeInOutTranslate]>
-                                <app-customers></app-customers>
+                                <app-customers [dealerid]="dealerid"></app-customers>
                             </div>
                         </ng-template>
                     </ngb-tab>

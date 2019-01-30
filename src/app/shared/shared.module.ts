@@ -27,6 +27,7 @@ import { FancyNumberService } from '../services/admin/fancynumber.service';
 import { EventService } from '../services/admin/event.service';
 import { DealerService } from '../services/business/dealer.service';
 import { ConsumerService } from '../services/business/consumer.service';
+import { CustomerService } from '../services/business/customer.service';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -84,7 +85,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     EventService,
     FancyNumberService,
     DealerService,
-    ConsumerService
+    ConsumerService,
+    CustomerService
   ]
 })
 export class SharedModule { }

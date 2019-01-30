@@ -1,31 +1,36 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, ViewChild, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { AppConstant } from '../../../../app.constants';
+import { CustomerService } from 'src/app/services/business/customer.service';
+import { DatatableComponent } from '@swimlane/ngx-datatable';
 
 @Component({
   selector: 'app-customers',
   templateUrl: './customers.component.html',
   styleUrls: ['./customers.component.scss']
 })
-export class CustomersComponent implements OnInit {
-  public data: any;
+export class DealerCustomersComponent implements OnChanges, OnInit {
+  public dealerCustomers: any = [];
+  @ViewChild(DatatableComponent) customertable: DatatableComponent;
+  @Input() dealerid = {} as any;
   datedisplayformat = AppConstant.API_CONFIG.ANG_DATE.displaydate;
-  date: any;
-  constructor(private router: Router) {
-    this.data = [
-      { businessname: 'Pavi', membershipid: '001', location: 'Chennai', payment: '10000', },
-      { businessname: 'Pavithra', membershipid: '002', location: 'Coimbatore', payment: '5000' },
-      { businessname: 'Pavithra', membershipid: '003', location: 'Madurai', payment: '8000' },
-      { businessname: 'Pavithra', membershipid: '004', location: 'velore', payment: '7600' },
-      { businessname: 'Pavithra', membershipid: '005', location: 'Tanjore', payment: '9800' },
-      { businessname: 'Pavithra', membershipid: '001', location: 'Chennai', payment: '10000' },
+  constructor(private customerService: CustomerService) {
 
-    ];
-    this.date = new Date();
 
   }
 
   ngOnInit() {
   }
-
+  ngOnChanges(changes: SimpleChanges) {
+    this.getCustomers(changes.dealerid.currentValue);
+  }
+  getCustomers(dealerid) {
+    if (dealerid != undefined) {
+      this.customerService.list({ dealerid: Number(dealerid) }).subscribe((res) => {
+        const response = JSON.parse(res._body);
+        if (response.status) {
+          this.dealerCustomers = response.data;
+        }
+      });
+    }
+  }
 }

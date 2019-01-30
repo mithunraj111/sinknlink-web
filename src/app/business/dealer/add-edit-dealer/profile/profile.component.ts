@@ -17,7 +17,6 @@ import * as _ from 'lodash';
 export class DealerProfileComponent implements OnInit {
   dealerid: number;
   date_displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydate;
-  date: Date;
   dealerProfileForm: FormGroup;
   dealerProfileErrObj = AppMessages.VALIDATION.DEALER.PROFILE;
   userstoragedata = {} as any;
@@ -34,9 +33,9 @@ export class DealerProfileComponent implements OnInit {
     this.route.params.subscribe(params => {
       if (params.id !== undefined) {
         this.dealerid = params.id;
+        this.getDealerDetails(this.dealerid);
       }
     });
-    this.date = new Date();
   }
 
   ngOnInit() {
@@ -49,9 +48,10 @@ export class DealerProfileComponent implements OnInit {
       contactperson: [null, Validators.required],
       mobileno: [null, Validators.required],
       phoneno: [null, Validators.required],
-      locationid: ['', Validators.required],
+      locationid: [null, Validators.required],
       address: [''],
       commissionpercent: [15],
+      status: [true, Validators.required]
     });
   }
   getLocationList() {
@@ -74,11 +74,13 @@ export class DealerProfileComponent implements OnInit {
       return false;
     } else {
       const data = this.dealerProfileForm.value;
-      const formdata = {...data} as any;
+      const formdata = { ...data } as any;
+      formdata.locationid = Number(data.locationid);
+      formdata.commissionpercent = Number(data.commissionpercent);
       formdata.updatedby = this.userstoragedata.fullname;
       formdata.updateddt = new Date();
       if (!_.isUndefined(this.dealerProfileObj) && !_.isUndefined(this.dealerProfileObj.dealerid) && !_.isEmpty(this.dealerProfileObj)) {
-        formdata.status = data.status;
+        formdata.status = data.status ? AppConstant.STATUS_ACTIVE : AppConstant.STATUS_INACTIVE;
         this.dealerService.update(formdata, this.dealerProfileObj.dealerid).subscribe(res => {
           const response = JSON.parse(res._body);
           if (response.status) {
@@ -107,4 +109,27 @@ export class DealerProfileComponent implements OnInit {
       }
     }
   }
+  generateEditForm() {
+    this.dealerProfileForm = this.fb.group({
+      dealername: [this.dealerProfileObj.dealername, Validators.required],
+      contactperson: [this.dealerProfileObj.contactperson, Validators.required],
+      mobileno: [this.dealerProfileObj.mobileno, Validators.required],
+      phoneno: [this.dealerProfileObj.phoneno, Validators.required],
+      locationid: [this.dealerProfileObj.locationid.toString(), Validators.required],
+      address: [this.dealerProfileObj.address],
+      commissionpercent: [this.dealerProfileObj.commissionpercent, Validators.required],
+      status: [this.dealerProfileObj.status === AppConstant.STATUS_ACTIVE ? true : false, Validators.required]
+    });
+  }
+  getDealerDetails(id) {
+    this.dealerid = id;
+    this.dealerService.byId(id).subscribe((res) => {
+      const response = JSON.parse(res._body);
+      if (response.status) {
+        this.dealerProfileObj = response.data;
+        this.generateEditForm();
+      }
+    });
+  }
+
 }
