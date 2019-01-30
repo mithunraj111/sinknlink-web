@@ -81,6 +81,7 @@ export class CategoryComponent implements OnInit {
   addCategory() {
     this.categoryObj = {};
     this.openCategoryModal('categorymodal');
+
   }
   editCategory(data) {
     this.categoryObj = data;

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, OnChanges, SimpleChanges, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, OnChanges, SimpleChanges, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { LocalStorageService } from '../../../services/local-storage.service';
@@ -7,6 +7,7 @@ import * as _ from 'lodash';
 import { CategoryService } from '../../../services/masters/category.service';
 import { CommonService } from '../../../services/common.service';
 import { AppMessages } from 'src/app/app-messages';
+
 @Component({
   selector: 'app-add-edit-category',
   templateUrl: './add-edit-category.component.html',
@@ -19,6 +20,7 @@ export class AddEditCategoryComponent implements OnInit, OnChanges {
   buttonTxt = AppConstant.BUTTON_TXT.SAVE;
   @Output() notifyCategoryEntry: EventEmitter<any> = new EventEmitter();
   @Input() categoryObj = {} as any;
+  @ViewChild ('categoryimage') categoryimage: ElementRef;
   categoryErrObj = AppMessages.VALIDATION.CATEGORY;
   categoryid: number;
   errMessage;
@@ -36,11 +38,15 @@ export class AddEditCategoryComponent implements OnInit, OnChanges {
   }
   close(event) {
     this.notifyCategoryEntry.emit({ close: true });
+    this.categoryimage.nativeElement.value = "";
+    this.categoryfile = '';
   }
   callParent(data) {
     setTimeout(() => {
       this.notifyCategoryEntry.emit(data);
     }, 5000);
+    this.categoryimage.nativeElement.value = "";
+    this.categoryfile = '';
   }
   onFile(event, type) {
     const reader = new FileReader();
@@ -53,6 +59,7 @@ export class AddEditCategoryComponent implements OnInit, OnChanges {
   initForm() {
     this.categoryForm = this.fb.group({
       categoryname: [null, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])],
+      categoryimg: [''],
       status: [''],
     });
     this.categoryObj = {};
@@ -65,6 +72,7 @@ export class AddEditCategoryComponent implements OnInit, OnChanges {
       this.categoryForm = this.fb.group({
         categoryname: [this.categoryObj.categoryname,
         Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])],
+        categoryimg: [this.categoryObj.categoryimg],
         status: [this.categoryObj.status],
       });
     } else {
@@ -74,6 +82,7 @@ export class AddEditCategoryComponent implements OnInit, OnChanges {
     }
   }
   saveOrUpdateCategory() {
+    console.log(this.categoryForm);
     if (this.categoryForm.status === AppConstant.STATUS_INVALID) {
       this.errMessage = this.commonService.getFormErrorMessage(this.categoryForm, this.categoryErrObj);
       this.bootstrapAlertService.showError(this.errMessage);
@@ -82,6 +91,7 @@ export class AddEditCategoryComponent implements OnInit, OnChanges {
       const formdata = new FormData();
       const data = {} as any;
       data.categoryname = this.categoryForm.value.categoryname;
+      data.categoryimg = this.categoryForm.value.categoryimg;
       data.updatedby = this.userstoragedata.fullname;
       data.updateddt = new Date();
       if (this.categoryimgfile) {
@@ -108,7 +118,6 @@ export class AddEditCategoryComponent implements OnInit, OnChanges {
           const response = JSON.parse(res._body);
           if (response.status) {
             this.bootstrapAlertService.showSucccess(response.message);
-            // this.notifyCategoryEntry.next({ add: true, data: response.data });
             this.callParent({ update: true, data: response.data });
           } else {
             this.bootstrapAlertService.showError(response.message);

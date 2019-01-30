@@ -99,7 +99,7 @@ export const AppMessages = Object.freeze({
     },
     LOCATION: {
       pincode: {
-        required: 'Please enter Pincode',
+        required: 'Please enter pincode',
         maxlength: 'Pincode should be lesser than 10 characters',
         pattern: 'Pincode should contain only numbers'
       },
@@ -108,15 +108,18 @@ export const AppMessages = Object.freeze({
         maxlength: 'Area should be lesser than 50 characters'
       },
       state: {
-        required: 'Please enter state name',
+        required: 'Please select state',
       },
       city: {
-        required: 'Please enter your city',
+        required: 'Please enter city',
         maxlength: 'City should be lesser than 50 characters'
       }
     },
     ROLES: {
-      rolename: { required: 'Please enter role name', maxlength: 'Role name should be within should be within 50 characters' },
+      rolename: { 
+        required: 'Please enter role name', 
+        maxlength: 'Role name should be within should be within 50 characters' 
+      },
       dataaccess: 'Please select dataaccess',
       permissions: 'Please assign permission'
     }
