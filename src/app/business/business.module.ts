@@ -20,7 +20,7 @@ import { CustomerBusinessDetailsComponent } from './customer/add-edit-customer/c
 import { AddEditDealerComponent } from './dealer/add-edit-dealer/add-edit-dealer.component';
 import { DealerProfileComponent } from './dealer/add-edit-dealer/profile/profile.component';
 import { DealerCustomersComponent } from './dealer/add-edit-dealer/customers/customers.component';
-import { DealerPaymentsComponent } from './dealer/add-edit-dealer/dealer-payments/dealer-payments.component';
+import { DealerPaymentsComponent } from './dealer/add-edit-dealer/payments/payments.component';
 import { CustomerGalleryComponent } from './customer/add-edit-customer/customer-gallery/customer-gallery.component';
 import { ViewConsumerComponent } from './consumer/view-consumer/view-consumer.component';
 import { CustomerSettingsComponent } from './customer/add-edit-customer/customer-settings/customer-settings.component';

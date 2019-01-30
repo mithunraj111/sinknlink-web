@@ -4,9 +4,8 @@ import { CustomerService } from 'src/app/services/business/customer.service';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 
 @Component({
-  selector: 'app-customers',
-  templateUrl: './customers.component.html',
-  styleUrls: ['./customers.component.scss']
+  selector: 'app-dealer-customers',
+  templateUrl: './customers.component.html'
 })
 export class DealerCustomersComponent implements OnChanges, OnInit {
   public dealerCustomers: any = [];

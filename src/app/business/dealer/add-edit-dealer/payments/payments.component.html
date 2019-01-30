@@ -1,0 +1,54 @@
+<div class="header-title addeditpage m-t-40 mb-3">
+    <div class="row">
+        <div class="col-md-6 col-sm-6">
+            <h3 class="f-18 text-primary m-l-15 p-t-10">Payments</h3>
+        </div>
+        <div class="col-md-6 col-sm-6 p-r-40">
+            <div class="text-right">
+                <label>Search:
+          <input type='text' class="header-search form-control input-sm full-data-search" placeholder='Search for here'
+            (keyup)='search($event)' placement="bottom" ngbTooltip="Type here to search" />
+        </label>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="header-block">
+    <div class="table-header fixed-table-header">
+        <app-card [classHeader]="true">
+            <ngx-datatable #dealerpaymttable class="table data-table expandable" [rows]='dealerPayments' [columnMode]="'flex'" [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false">
+                <!-- Row Detail Template -->
+                <ngx-datatable-column name="Payment Date" [resizeable]="false">
+                    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                        <span>{{row.paymentdate|date:datedisplayformat}}</span>
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column prop="totalamount" name="Amount" headerClass="text-right" [cellClass]="'text-right table-padding'" [resizeable]="false">
+                    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                        <span>{{row.totalamount|currency : 'INR' : true}}</span>
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Reference" [resizeable]="false">
+                    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                        <span>{{row.paymentref|date:datedisplayformat}}</span>
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column prop="paymentmode" name=" Mode" [resizeable]="false">
+                    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                        <span>{{row.paymentmode}}</span>
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column prop="remarks" name=" Remarks" [resizeable]="false">
+                    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                        <span>{{row.remarks}}</span>
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column prop="status" name="Status" [sortable]="false" [flexGrow]="0.5" headerClass="text-center" [cellClass]="'text-center'" [resizeable]="false">
+                    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                        <span>{{row.status}}</span>
+                    </ng-template>
+                </ngx-datatable-column>
+            </ngx-datatable>
+        </app-card>
+    </div>
+</div>

@@ -30,14 +30,14 @@
                     <ngb-tab title="Customers" id='2'>
                         <ng-template ngbTabContent>
                             <div [@fadeInOutTranslate]>
-                                <app-customers [dealerid]="dealerid"></app-customers>
+                                <app-dealer-customers [dealerid]="dealerid"></app-dealer-customers>
                             </div>
                         </ng-template>
                     </ngb-tab>
                     <ngb-tab title="Payments" id='3'>
                         <ng-template ngbTabContent>
                             <div [@fadeInOutTranslate]>
-                                <app-dealer-payments></app-dealer-payments>
+                                <app-dealer-payments [dealerid]="dealerid"></app-dealer-payments>
                             </div>
                         </ng-template>
                     </ngb-tab>
