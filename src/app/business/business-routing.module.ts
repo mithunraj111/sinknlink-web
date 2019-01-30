@@ -10,7 +10,7 @@ import { CustomerGigsComponent } from './customer/add-edit-customer/customer-gig
 import { CustomerBusinessDetailsComponent } from './customer/add-edit-customer/customer-business-details/customer-business-details.component';
 import { CustomerCouponsComponent } from './customer/add-edit-customer/customer-coupons/customer-coupons.component';
 import { AddEditDealerComponent } from './dealer/add-edit-dealer/add-edit-dealer.component';
-import { DealerBusinessDetailsComponent } from './dealer/add-edit-dealer/dealer-business-details/dealer-business-details.component';
+import { DealerProfileComponent } from './dealer/add-edit-dealer/profile/profile.component';
 import { CustomersComponent } from './dealer/add-edit-dealer/customers/customers.component';
 import { DealerPaymentsComponent } from './dealer/add-edit-dealer/dealer-payments/dealer-payments.component';
 import { CustomerPaymentsComponent } from './customer/add-edit-customer/customer-payments/customer-payments.component';
@@ -71,11 +71,11 @@ const routes: Routes = [
       },
       {
         path: 'dealer/business-details',
-        component: DealerBusinessDetailsComponent
+        component: DealerProfileComponent
       },
       {
         path: 'dealer/business-details/edit/:id',
-        component: DealerBusinessDetailsComponent
+        component: DealerProfileComponent
       },
       {
         path: 'dealer/customers',
@@ -86,8 +86,8 @@ const routes: Routes = [
         component: DealerPaymentsComponent
       },
       {
-        path: 'dealer/dealer-business-details',
-        component: DealerBusinessDetailsComponent
+        path: 'dealer/profile',
+        component: DealerProfileComponent
       },
       {
         path: 'customers/payment_details',

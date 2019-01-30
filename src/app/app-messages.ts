@@ -116,12 +116,23 @@ export const AppMessages = Object.freeze({
       }
     },
     ROLES: {
-      rolename: { 
-        required: 'Please enter role name', 
-        maxlength: 'Role name should be within should be within 50 characters' 
+      rolename: {
+        required: 'Please enter role name',
+        maxlength: 'Role name should be within should be within 50 characters'
       },
       dataaccess: 'Please select dataaccess',
       permissions: 'Please assign permission'
+    },
+    DEALER: {
+      PROFILE: {
+        dealername: { required: 'Please enter dealer name' },
+        contactperson: { required: 'Please enter contact person name' },
+        mobileno: { required: 'Please enter mobile number' },
+        phoneno: { required: 'Please enter phone number' },
+        locationid: { required: 'Please select location' },
+        address: { required: 'Please enter address' },
+        commissionpercent: { required: 'Please enter commission percent' },
+      }
     }
   },
 });

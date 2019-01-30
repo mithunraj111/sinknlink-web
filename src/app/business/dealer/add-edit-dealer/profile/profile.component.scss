@@ -1,0 +1,21 @@
+.last-paid {
+    input {
+        outline: none;
+        background-image: -webkit-gradient(linear, left top, left bottom, from(#20aee3), to(#20aee3)), -webkit-gradient(linear, left top, left bottom, from(#b1b8bb), to(#b1b8bb));
+        background-image: -webkit-linear-gradient(#20aee3, #20aee3), -webkit-linear-gradient(#b1b8bb, #b1b8bb);
+        background-image: -o-linear-gradient(#20aee3, #20aee3), -o-linear-gradient(#b1b8bb, #b1b8bb);
+        background-image: linear-gradient(#20aee3, #20aee3), linear-gradient(#DFE8F1, #DFE8F1);
+        background-size: 0 2px, 100% 1px;
+        background-repeat: no-repeat;
+        background-position: center bottom, center calc(100% - 1px);
+        background-color: transparent;
+        margin-left: 0px;
+        border: 0;
+    }
+}
+
+.form-control-static {
+    font-size: 13px;
+    padding-right: 3px;
+    padding-top: 9px;
+}

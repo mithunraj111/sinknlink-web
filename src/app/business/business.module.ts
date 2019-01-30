@@ -18,7 +18,7 @@ import { CustomerGigsComponent } from './customer/add-edit-customer/customer-gig
 import { CustomerCouponsComponent } from './customer/add-edit-customer/customer-coupons/customer-coupons.component';
 import { CustomerBusinessDetailsComponent } from './customer/add-edit-customer/customer-business-details/customer-business-details.component';
 import { AddEditDealerComponent } from './dealer/add-edit-dealer/add-edit-dealer.component';
-import { DealerBusinessDetailsComponent } from './dealer/add-edit-dealer/dealer-business-details/dealer-business-details.component';
+import { DealerProfileComponent } from './dealer/add-edit-dealer/profile/profile.component';
 import { CustomersComponent } from './dealer/add-edit-dealer/customers/customers.component';
 import { DealerPaymentsComponent } from './dealer/add-edit-dealer/dealer-payments/dealer-payments.component';
 import { CustomerGalleryComponent } from './customer/add-edit-customer/customer-gallery/customer-gallery.component';
@@ -52,7 +52,7 @@ import { SelectModule } from 'ng-select';
     CustomerCouponsComponent,
     CustomerBusinessDetailsComponent,
     AddEditDealerComponent,
-    DealerBusinessDetailsComponent,
+    DealerProfileComponent,
     CustomersComponent,
     DealerPaymentsComponent,
     ViewConsumerComponent,
