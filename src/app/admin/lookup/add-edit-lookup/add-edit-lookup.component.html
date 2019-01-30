@@ -1,7 +1,7 @@
 <!-- Add Contact Start Model -->
 <div class="modal-size">
   <app-modal-animation [modalID]="'lookupmodal'" [modalClass]="'md-effect-7'">
-    <h3 class="f-26">Add Lookup</h3>
+    <h3 class="f-26">{{formTitle}}</h3>
     <form [formGroup]="lookupForm">
       <div class="form-header pt-2">
         <div class="col-lg-12 col-md-12">
@@ -30,13 +30,13 @@
               <div class="radio radio-inline">
                 <label>
                   <input type="radio" value="Yes" formControlName="defaultvalue">
-                  <i class="helper"></i>YES
+                  <i class="helper"></i>Yes
                 </label>
               </div>
               <div class="radio radio-inline">
                 <label>
                   <input type="radio" value="No" formControlName="defaultvalue">
-                  <i class="helper"></i>NO
+                  <i class="helper"></i>No
                 </label>
               </div>
             </div>
@@ -59,7 +59,7 @@
               </div>
             </div>
           </div>
-          <button type="button" (click)="saveOrUpdateLookup()" placement="top" ngbTooltip="Click to save look up" class="btn pull-right btn-primary waves-effect m-b-10">Save</button>
+          <button type="button" (click)="saveOrUpdateLookup()" placement="top" ngbTooltip="Click to save lookup" class="btn f-15 pull-right btn-primary waves-effect m-b-10">{{buttonTxt}}</button>
         </div>
       </div>
     </form>

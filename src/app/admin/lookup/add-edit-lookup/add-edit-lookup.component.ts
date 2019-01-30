@@ -55,10 +55,9 @@ export class AddEditLookupComponent implements OnInit, OnChanges {
       this.buttonTxt = AppConstant.BUTTON_TXT.UPDATE;
       this.formTitle = AppConstant.FORM_TITLE.LOOKUP.UPDATE;
       this.lookupObj = changes.lookupObj.currentValue;
-      console.log(this.lookupObj);
       this.lookupForm = this.fb.group({
-        keyname: [this.lookupObj.keyname, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(100)])],
-        keyvalue: [this.lookupObj.keyvalue, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(100)])],
+        keyname: [this.lookupObj.refkey, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(100)])],
+        keyvalue: [this.lookupObj.refvalue, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(100)])],
         keydesc: [this.lookupObj.keydesc, Validators.compose([Validators.maxLength(100)])],
         datatype: [this.lookupObj.datatype, Validators.required],
       });

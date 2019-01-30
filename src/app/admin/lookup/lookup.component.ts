@@ -14,6 +14,7 @@ import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
   styleUrls: ['./lookup.component.scss']
 })
 export class LookupComponent implements OnInit {
+  displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   @ViewChild(DatatableComponent) table: DatatableComponent;
   @Output()
   lookupObj = {} as any;
@@ -55,6 +56,7 @@ export class LookupComponent implements OnInit {
     this.openLookupModal('lookupmodal');
   }
   editLookup(data) {
+    console.log(data)
     this.lookupObj = data;
     this.openLookupModal('lookupmodal');
   }
@@ -88,5 +90,17 @@ export class LookupComponent implements OnInit {
         this.bootstrapAlertService.showError(response.message);
       }
     });
+  }
+  search(event) {
+    const val = event.target.value.toLowerCase();
+    const temp = this.tempFilter.filter(item => {
+      for (const key in item) {
+        if (('' + item[key]).toLocaleLowerCase().includes(val)) {
+          return ('' + item[key]).toLocaleLowerCase().includes(val);
+        }
+      }
+    });
+    this.lookupList = temp;
+    this.table.offset = 0;
   }
 }
