@@ -15,13 +15,20 @@ export class ViewConsumerComponent implements OnInit {
   date: any;
 
   consumer: any = {};
-  consumerCouponsList:any[] = [];
+  consumerCouponsList: any[] = [];
+  consumerFavs: any = {
+    business: [],
+    category: [],
+    location: []
+  };
 
   constructor(private route: ActivatedRoute, private consumerService: ConsumerService) {
     this.date = new Date();
     this.route.params.subscribe(params => {
-      this.getConsumer(params.id);
-      this.getConsumerCoupon(params.id);
+      let id = params.id;
+      this.getConsumer(id);
+      this.getConsumerCoupon(id);
+      this.getConsumerFavs(id);
     });
   }
 
@@ -38,12 +45,41 @@ export class ViewConsumerComponent implements OnInit {
   }
 
   getConsumerCoupon(id) {
-    this.consumerService.couponsList({ consumerid: parseInt(id) }).subscribe(res => {
+    this.consumerService.consumerCouponsList({ consumerid: parseInt(id) }).subscribe(res => {
       let response = JSON.parse(res._body);
       this.consumerCouponsList = response.data;
     }, err => {
       console.log(err);
     })
+  }
+
+  getConsumerFavs(id) {
+    this.consumerService.consumerFavs({ consumerid: parseInt(id) }).subscribe(res => {
+      let response = JSON.parse(res._body);
+      this.consumerFavs = this.groupFavs(response.data);
+    }, err => {
+      console.log(err);
+    })
+  }
+
+  groupFavs(data) {
+    let groups = {
+      business: [],
+      category: [],
+      location: []
+    }
+    data.forEach(element => {
+      if (parseInt(element.membershipid)) {
+        groups.business.push(element)
+      }
+      if (parseInt(element.locationid)) {
+        groups.location.push(element)
+      }
+      if (parseInt(element.categoryid)) {
+        groups.category.push(element)
+      }
+    });
+    return groups;
   }
 
 }
