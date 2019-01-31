@@ -21,6 +21,8 @@ export class LookupComponent implements OnInit {
   userstoragedata = {} as any;
   lookupList = [];
   tempFilter = [];
+  selectedKeyType: any = AppConstant.LOOKUP[0].value;
+  keylist = AppConstant.LOOKUP;
   constructor(private lookupService: LookupService,
     private router: Router,
     private bootstrapAlertService: BootstrapAlertService,
@@ -29,19 +31,34 @@ export class LookupComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getLookup();
+    this.getLookupList(AppConstant.LOOKUP[0]);
   }
 
-  getLookup() {
-    this.lookupService.list({}).subscribe((res) => {
-      const response = JSON.parse(res._body);
-      if (response.status) {
-        this.lookupList = response.data;
-        this.tempFilter = this.lookupList;
-      }
-    });
+  getLookupList(selected?) {
+    this.lookupList = [];
+    let condition = {} as any;
+    if (selected !== undefined && selected.value !== undefined) {
+      condition = {
+        refkey: selected.value
+      };
+    } else if (selected !== undefined) {
+      condition = {
+        refkey: selected
+      };
+    } else {
+      condition = {};
+    }
+    this.lookupService.list(condition)
+      .subscribe(res => {
+        const response = JSON.parse(res._body);
+        if (res.status) {
+          this.lookupList = response.data;
+          this.tempFilter = this.lookupList;
+        }
+      }, err => {
+        console.log(err);
+      });
   }
-
   openLookupModal(event) {
     document.querySelector('#' + event).classList.add('md-show');
   }
@@ -60,12 +77,8 @@ export class LookupComponent implements OnInit {
     this.openLookupModal('lookupmodal');
   }
   notifyLookupEntry(event) {
-    if (!event.close) {
-      this.getLookup();
-      this.closeLookupModal('lookupmodal');
-    } else {
-      this.closeLookupModal('lookupmodal');
-    }
+    this.getLookupList(this.selectedKeyType);
+    this.closeLookupModal('lookupmodal');
   }
   updateLookupStatus(data, index, flag) {
     const updateObj = {

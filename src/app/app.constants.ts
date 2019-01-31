@@ -37,8 +37,17 @@ export const AppConstant = Object.freeze({
   DATATYPES: [
     { label: 'String', value: 'String' },
     { label: 'Integer', value: 'Integer' },
+    { label: 'Object', value: 'Object' },
     { label: 'Float', value: 'Float' }],
   // Default Data
+  LOOKUP: [
+    { label: 'Business Delivery Methods', value: 'biz_deliverymethods' },
+    { label: 'Business Member Type', value: 'biz_membertype' },
+    { label: 'States', value: 'biz_states' },
+    { label: 'Payment Methods', value: 'biz_paymentmethods' },
+    { label: 'Business Type', value: 'biz_businesstype' },
+    { label: 'Testing', value: 'app_test' }
+  ],
   DEFAULT_DATA_ACCESS: 'All',
   API_CONFIG: {
     ANG_DATE: {

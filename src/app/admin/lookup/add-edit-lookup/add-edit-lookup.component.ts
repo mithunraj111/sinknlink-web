@@ -21,9 +21,11 @@ export class AddEditLookupComponent implements OnInit, OnChanges {
   buttonTxt = AppConstant.BUTTON_TXT.SAVE;
   @Output() notifyLookupEntry: EventEmitter<any> = new EventEmitter();
   @Input() lookupObj = {} as any;
+  @Input() selectedKeyType: any = 'Lookup';
   errMessage;
   lookupErrObj = AppMessages.VALIDATION.LOOKUP;
   datatypeList = AppConstant.DATATYPES;
+  keylist = AppConstant.LOOKUP;
   constructor(
     private router: Router,
     private bootstrapAlertService: BootstrapAlertService,
@@ -37,6 +39,36 @@ export class AddEditLookupComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.initForm();
   }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (!_.isUndefined(changes.selectedKeyType) && !_.isUndefined(changes.selectedKeyType.currentValue)) {
+      this.selectedKeyType = changes.selectedKeyType.currentValue;
+    }
+    if (!_.isUndefined(changes.lookupObj) && !_.isEmpty(changes.lookupObj.currentValue)
+      && !_.isUndefined(changes.lookupObj.currentValue.refid)) {
+      this.buttonTxt = AppConstant.BUTTON_TXT.UPDATE;
+      this.formTitle = AppConstant.FORM_TITLE.LOOKUP.UPDATE;
+      this.lookupObj = changes.lookupObj.currentValue;
+      let selectedValue: any;
+      const key = this.selectedKeyType;
+      selectedValue = _.find(this.keylist, function (obj: any) {
+        if (obj.value === key) { return obj; }
+      });
+      this.formTitle = 'EDIT ' + selectedValue.label;
+      this.lookupForm = this.fb.group({
+        refname: [this.lookupObj.refname, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(100)])],
+        refvalue: [this.lookupObj.refvalue, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(100)])],
+        // keydesc: [this.lookupObj.keydesc, Validators.compose([Validators.maxLength(100)])],
+        datatype: [this.lookupObj.datatype, Validators.required],
+        defaultvalue: [this.lookupObj.isdefault, Validators.required],
+        status: [this.lookupObj.status, Validators.required]
+      });
+    } else {
+      this.initForm();
+      this.buttonTxt = AppConstant.BUTTON_TXT.SAVE;
+      //  this.formTitle = AppConstant.FORM_TITLE.LOOKUP.ADD;
+    }
+  }
   initForm() {
     this.lookupForm = this.fb.group({
       refname: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(100)])],
@@ -47,24 +79,13 @@ export class AddEditLookupComponent implements OnInit, OnChanges {
       status: ['']
     });
     this.lookupObj = {};
-  }
-  ngOnChanges(changes: SimpleChanges): void {
-    if (!_.isUndefined(changes.lookupObj) && !_.isEmpty(changes.lookupObj.currentValue)) {
-      this.buttonTxt = AppConstant.BUTTON_TXT.UPDATE;
-      this.formTitle = AppConstant.FORM_TITLE.LOOKUP.UPDATE;
-      this.lookupObj = changes.lookupObj.currentValue;
-      this.lookupForm = this.fb.group({
-        refname: [this.lookupObj.refname, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(100)])],
-        refvalue: [this.lookupObj.refvalue, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(100)])],
-        // keydesc: [this.lookupObj.keydesc, Validators.compose([Validators.maxLength(100)])],
-        datatype: [this.lookupObj.datatype, Validators.required],
-        status: [this.lookupObj.status, Validators.required]
-      });
-    } else {
-      this.initForm();
-      this.buttonTxt = AppConstant.BUTTON_TXT.SAVE;
-      this.formTitle = AppConstant.FORM_TITLE.LOOKUP.ADD;
-    }
+    let selectedValue: any;
+    const key = this.selectedKeyType;
+    selectedValue = _.find(this.keylist, function (obj: any) {
+      if (obj.value === key) { return obj; }
+    });
+    this.formTitle = 'ADD ' + selectedValue.label;
+    this.buttonTxt = AppConstant.BUTTON_TXT.SAVE;
   }
   close(event) {
     this.notifyLookupEntry.emit({ close: true });
@@ -82,10 +103,11 @@ export class AddEditLookupComponent implements OnInit, OnChanges {
     } else {
       const data = this.lookupForm.value;
       const formdata = {} as any;
-      // formdata.refkey = data.refkey;
+      formdata.refkey = this.selectedKeyType;
       formdata.refname = data.refname;
       formdata.refvalue = data.refvalue;
       formdata.datatype = data.datatype;
+      formdata.isdefault = data.defaultvalue;
       formdata.updatedby = this.userstoragedata.fullname;
       formdata.updateddt = new Date();
       if (!_.isUndefined(this.lookupObj) && !_.isUndefined(this.lookupObj.refid) && !_.isEmpty(this.lookupObj)) {
