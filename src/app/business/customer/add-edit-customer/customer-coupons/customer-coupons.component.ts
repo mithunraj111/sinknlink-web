@@ -1,43 +1,75 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, SimpleChanges, OnChanges } from '@angular/core';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { AppConstant } from '../../../../app.constants';
+import { AppMessages } from 'src/app/app-messages';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
+import { CouponService } from 'src/app/services/business/coupon.service';
 
 @Component({
   selector: 'app-customer-coupons',
-  templateUrl: './customer-coupons.component.html',
-  styleUrls: ['./customer-coupons.component.scss']
+  templateUrl: './customer-coupons.component.html'
 })
-export class CustomerCouponsComponent implements OnInit {
-  data: any[];
+export class CustomerCouponsComponent implements OnInit, OnChanges {
+  couponList = [];
   tempFilter = [];
   @ViewChild(DatatableComponent) table: DatatableComponent;
-  datedisplayformat = AppConstant.API_CONFIG.ANG_DATE.displaydate;
-  date: any;
-  constructor() {
-    this.data = [
-      { couponcode: 'Asp159', numberofcoupons: '100', claimed: '12', expiresat: '02/12/2018' },
-      { couponcode: 'YDF752', numberofcoupons: '50', claimed: '46', expiresat: '20/12/2018' },
-      { couponcode: 'FDG987', numberofcoupons: '75', claimed: '73', expiresat: '26/12/2018' },
-      { couponcode: 'TYR247', numberofcoupons: '88', claimed: '34', expiresat: '23/12/2018' },
-      { couponcode: 'TTO052', numberofcoupons: '92', claimed: '67', expiresat: '07/12/2018' }
-    ];
-    this.tempFilter = this.data;
-    this.date = new Date();
-
+  datedisplayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
+  userstoragedata = {} as any;
+  constructor(private couponService: CouponService,
+    private localStorageService: LocalStorageService,
+    private bootstrapAlertService: BootstrapAlertService) {
   }
-
   ngOnInit() {
+    this.userstoragedata = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER);
+  }
+  ngOnChanges(changes: SimpleChanges) {
+    this.getCouponList(changes.customerid.currentValue);
+  }
+  getCouponList(customerid) {
+    if (customerid) {
+      this.couponService.list({ membershipid: customerid }).subscribe(res => {
+        const response = JSON.parse(res._body);
+        if (response.status) {
+          this.couponList = response.data;
+          this.tempFilter = this.couponList;
+        }
+      });
+    }
   }
   search(event) {
     const val = event.target.value.toLowerCase();
     const temp = this.tempFilter.filter(item => {
-      for (let key in item) {
-        if (("" + item[key]).toLocaleLowerCase().includes(val)) {
-          return ("" + item[key]).toLocaleLowerCase().includes(val);
+      for (const key in item) {
+        if (('' + item[key]).toLocaleLowerCase().includes(val)) {
+          return ('' + item[key]).toLocaleLowerCase().includes(val);
         }
       }
     });
-    this.data = temp;
+    this.couponList = temp;
     this.table.offset = 0;
+  }
+  updateCouponStatus(data, index, flag) {
+    const updateObj = {
+      updateddt: new Date(),
+      updatedby: this.userstoragedata.fullname,
+      status: flag ? AppConstant.STATUS_DELETED :
+        (data.status === AppConstant.STATUS_ACTIVE ? AppConstant.STATUS_INACTIVE : AppConstant.STATUS_ACTIVE)
+    };
+    this.couponService.update(updateObj, data.couponid).subscribe(res => {
+      const response = JSON.parse(res._body);
+      if (response.status) {
+        if (flag) {
+          this.bootstrapAlertService.showSucccess('#' + data.couponid + ' ' + AppMessages.VALIDATION.COMMON.DELETE_SUCCESS);
+          this.couponList.splice(index, 1);
+        } else {
+          this.bootstrapAlertService.showSucccess(response.message);
+          this.couponList[index] = response.data;
+        }
+        this.couponList = [...this.couponList];
+      } else {
+        this.bootstrapAlertService.showError(response.message);
+      }
+    });
   }
 }

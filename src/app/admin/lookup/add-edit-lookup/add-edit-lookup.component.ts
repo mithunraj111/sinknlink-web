@@ -21,7 +21,7 @@ export class AddEditLookupComponent implements OnInit, OnChanges {
   buttonTxt = AppConstant.BUTTON_TXT.SAVE;
   @Output() notifyLookupEntry: EventEmitter<any> = new EventEmitter();
   @Input() lookupObj = {} as any;
-  @Input() selectedKeyType: any = 'Lookup';
+  @Input() selectedKeyType: string ;
   errMessage;
   lookupErrObj = AppMessages.VALIDATION.LOOKUP;
   datatypeList = AppConstant.DATATYPES;
@@ -58,7 +58,6 @@ export class AddEditLookupComponent implements OnInit, OnChanges {
       this.lookupForm = this.fb.group({
         refname: [this.lookupObj.refname, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(100)])],
         refvalue: [this.lookupObj.refvalue, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(100)])],
-        // keydesc: [this.lookupObj.keydesc, Validators.compose([Validators.maxLength(100)])],
         datatype: [this.lookupObj.datatype, Validators.required],
         defaultvalue: [this.lookupObj.isdefault, Validators.required],
         status: [this.lookupObj.status, Validators.required]
@@ -66,14 +65,12 @@ export class AddEditLookupComponent implements OnInit, OnChanges {
     } else {
       this.initForm();
       this.buttonTxt = AppConstant.BUTTON_TXT.SAVE;
-      //  this.formTitle = AppConstant.FORM_TITLE.LOOKUP.ADD;
     }
   }
   initForm() {
     this.lookupForm = this.fb.group({
       refname: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(100)])],
       refvalue: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(100)])],
-      // keydesc: [null, Validators.compose([Validators.maxLength(100)])],
       datatype: [null, Validators.required],
       defaultvalue: ['N', Validators.required],
       status: ['']

@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild, Output } from '@angular/core';
-import { Router } from '@angular/router';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { AppConstant } from '../../app.constants';
 import { LookupService } from '../../services/admin/lookup.service';
@@ -10,21 +9,18 @@ import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
 
 @Component({
   selector: 'app-lookup',
-  templateUrl: './lookup.component.html',
-  styleUrls: ['./lookup.component.scss']
+  templateUrl: './lookup.component.html'
 })
 export class LookupComponent implements OnInit {
   displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   @ViewChild(DatatableComponent) table: DatatableComponent;
-  @Output()
-  lookupObj = {} as any;
+  @Output() lookupObj = {} as any;
   userstoragedata = {} as any;
   lookupList = [];
   tempFilter = [];
   selectedKeyType: any = AppConstant.LOOKUP[0].value;
   keylist = AppConstant.LOOKUP;
   constructor(private lookupService: LookupService,
-    private router: Router,
     private bootstrapAlertService: BootstrapAlertService,
     private localstorageService: LocalStorageService) {
     this.userstoragedata = this.localstorageService.getItem(AppConstant.LOCALSTORAGE.USER);
@@ -45,11 +41,8 @@ export class LookupComponent implements OnInit {
       condition = {
         refkey: selected
       };
-    } else {
-      condition = {};
     }
-    this.lookupService.list(condition)
-      .subscribe(res => {
+    this.lookupService.list(condition).subscribe(res => {
         const response = JSON.parse(res._body);
         if (res.status) {
           this.lookupList = response.data;

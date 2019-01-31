@@ -1,42 +1,76 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnChanges, SimpleChanges } from '@angular/core';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { AppConstant } from '../../../../app.constants';
+import { GigsService } from 'src/app/services/business/gigs.service';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
+import { AppMessages } from 'src/app/app-messages';
 
 @Component({
   selector: 'app-customer-gigs',
   templateUrl: './customer-gigs.component.html',
   styleUrls: ['./customer-gigs.component.scss']
 })
-export class CustomerGigsComponent implements OnInit {
-  data: any[];
+export class CustomerGigsComponent implements OnInit, OnChanges {
+  gigsList = [];
   tempFilter = [];
   @ViewChild(DatatableComponent) table: DatatableComponent;
   datedisplayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
-  date: any;
-  constructor() { 
-    this.data=[
-      { postname: 'Mithun', posttype: '001', postedby: 'Admin', posteddt: '02/12/2018' },
-      { postname: 'Raj', posttype: '002', postedby: 'Admin', posteddt: '20/12/2018' },
-      { postname: 'Mithunraj', posttype: '003', postedby: 'Admin', posteddt: '26/12/2018' },
-      { postname: 'Myth', posttype: '004', postedby: 'Admin', posteddt: '23/12/2018' },
-      { postname: 'Glaurang', posttype: '005', postedby: 'Admin', posteddt: '07/12/2018' }
-    ];
-    this.tempFilter = this.data;
-    this.date = new Date();
+  userstoragedata = {} as any;
+  constructor(private gigService: GigsService,
+    private localStorageService: LocalStorageService,
+    private bootstrapAlertService: BootstrapAlertService) {
   }
-
   ngOnInit() {
+    this.userstoragedata = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER);
+  }
+  ngOnChanges(changes: SimpleChanges) {
+    this.getgigsList(changes.customerid.currentValue);
+  }
+  getgigsList(customerid) {
+    if (customerid) {
+      this.gigService.list({ membershipid: customerid }).subscribe(res => {
+        const response = JSON.parse(res._body);
+        if (response.status) {
+          this.gigsList = response.data;
+          this.tempFilter = this.gigsList;
+        }
+      });
+    }
   }
   search(event) {
     const val = event.target.value.toLowerCase();
     const temp = this.tempFilter.filter(item => {
-      for (let key in item) {
-        if (("" + item[key]).toLocaleLowerCase().includes(val)) {
-          return ("" + item[key]).toLocaleLowerCase().includes(val);
+      for (const key in item) {
+        if (('' + item[key]).toLocaleLowerCase().includes(val)) {
+          return ('' + item[key]).toLocaleLowerCase().includes(val);
         }
       }
     });
-    this.data = temp;
+    this.gigsList = temp;
     this.table.offset = 0;
+  }
+  updategigStatus(data, index, flag) {
+    const updateObj = {
+      updateddt: new Date(),
+      updatedby: this.userstoragedata.fullname,
+      status: flag ? AppConstant.STATUS_DELETED :
+        (data.status === AppConstant.STATUS_ACTIVE ? AppConstant.STATUS_INACTIVE : AppConstant.STATUS_ACTIVE)
+    };
+    this.gigService.update(updateObj, data.gigid).subscribe(res => {
+      const response = JSON.parse(res._body);
+      if (response.status) {
+        if (flag) {
+          this.bootstrapAlertService.showSucccess('#' + data.gigid + ' ' + AppMessages.VALIDATION.COMMON.DELETE_SUCCESS);
+          this.gigsList.splice(index, 1);
+        } else {
+          this.bootstrapAlertService.showSucccess(response.message);
+          this.gigsList[index] = response.data;
+        }
+        this.gigsList = [...this.gigsList];
+      } else {
+        this.bootstrapAlertService.showError(response.message);
+      }
+    });
   }
 }

@@ -1,119 +1,117 @@
 <div class="addeditpage">
-  <div class="fixedheader">
-    <div class="header-title m-b-15 pos-fixed">
-      <div class="row">
-        <div class="col-md-6 col-sm-6">
-          <h2>Customer</h2>
-          <p class="m-b-0" *ngIf="customerid">
-            <i class="fa fa-pencil"></i> Membership ID: 875643
-          </p>
-        </div>
-        <div class="col-md-6 col-sm-6 save-button text-right p-r-30">
-          <button type="button" placement="bottom" ngbTooltip="Click To {{buttontext}} Customer Details" (click)="submit()"
-            class="btn btn-primary waves-effect m-r-10 text-capitalize">{{buttontext}}</button>
-          <button type="button" placement="bottom" ngbTooltip="Go back" routerLink="/business/customers" class="btn btn-inverse btn-primary waves-effect"><i
+    <div class="fixedheader">
+        <div class="header-title m-b-15 pos-fixed">
+            <div class="row">
+                <div class="col-md-6 col-sm-6">
+                    <h2>Customer</h2>
+                    <p class="m-b-0" *ngIf="customerid">
+                        <i class="fa fa-pencil"></i> Membership ID: 875643
+                    </p>
+                </div>
+                <div class="col-md-6 col-sm-6 save-button text-right p-r-30">
+                    <button type="button" placement="bottom" ngbTooltip="Click To {{buttontext}} Customer Details" (click)="submit()" class="btn btn-primary waves-effect m-r-10 text-capitalize">{{buttontext}}</button>
+                    <button type="button" placement="bottom" ngbTooltip="Go back" routerLink="/business/customers" class="btn btn-inverse btn-primary waves-effect"><i
               class="fa fa-arrow-circle-left"></i></button>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-  <div class="employee-page pos-fixed customer-menu">
-    <div class="col-md-12 col-sm-12 text-center employee-profile m-t-25">
-      <div class="form-group">
-        <label class=" mb-3">
+    <div class="employee-page pos-fixed customer-menu">
+        <div class="col-md-12 col-sm-12 text-center employee-profile m-t-25">
+            <div class="form-group">
+                <label class=" mb-3">
           <img src="assets/images/employee.jpg" class="img-responsive w-75" alt="employee">
         </label>
-      </div>
+            </div>
+        </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-md-10 col-xl-10 col-sm-10">
-      <div class="md-tabs md-right-tabs business-tab">
-        <ngb-tabset>
-          <ngb-tab title="Details">
-            <ng-template ngbTabContent>
-              <div [@fadeInOutTranslate]>
-                <app-customer-business-details></app-customer-business-details>
-              </div>
-            </ng-template>
-          </ngb-tab>
-          <ngb-tab title="Payments">
-            <ng-template ngbTabContent>
-              <div [@fadeInOutTranslate]>
-                <app-customer-payments></app-customer-payments>
-              </div>
-            </ng-template>
-          </ngb-tab>
-          <ngb-tab title="Branches">
-            <ng-template ngbTabContent>
-              <div [@fadeInOutTranslate]>
-                <app-customer-branches></app-customer-branches>
-              </div>
-            </ng-template>
-          </ngb-tab>
-          <ngb-tab title="Settings">
-            <ng-template ngbTabContent>
-              <div [@fadeInOutTranslate]>
-                <app-customer-settings></app-customer-settings>
-              </div>
-            </ng-template>
-          </ngb-tab>
-          <ngb-tab title="Gigs">
-            <ng-template ngbTabContent>
-              <div [@fadeInOutTranslate]>
-                <app-customer-gigs></app-customer-gigs>
-              </div>
-            </ng-template>
-          </ngb-tab>
-          <ngb-tab title="Coupons">
-            <ng-template ngbTabContent>
-              <div [@fadeInOutTranslate]>
-                <app-customer-coupons></app-customer-coupons>
-              </div>
-            </ng-template>
-          </ngb-tab>
-          <ngb-tab title="Gallery">
-            <ng-template ngbTabContent>
-              <div [@fadeInOutTranslate]>
-                <app-customer-gallery></app-customer-gallery>
-              </div>
-            </ng-template>
-          </ngb-tab>
-        </ngb-tabset>
-      </div>
+    <div class="row">
+        <div class="col-md-10 col-xl-10 col-sm-10">
+            <div class="md-tabs md-right-tabs business-tab">
+                <ngb-tabset>
+                    <ngb-tab title="Details">
+                        <ng-template ngbTabContent>
+                            <div [@fadeInOutTranslate]>
+                                <app-customer-business-details></app-customer-business-details>
+                            </div>
+                        </ng-template>
+                    </ngb-tab>
+                    <ngb-tab title="Payments">
+                        <ng-template ngbTabContent>
+                            <div [@fadeInOutTranslate]>
+                                <app-customer-payments></app-customer-payments>
+                            </div>
+                        </ng-template>
+                    </ngb-tab>
+                    <ngb-tab title="Branches">
+                        <ng-template ngbTabContent>
+                            <div [@fadeInOutTranslate]>
+                                <app-customer-branches></app-customer-branches>
+                            </div>
+                        </ng-template>
+                    </ngb-tab>
+                    <ngb-tab title="Settings">
+                        <ng-template ngbTabContent>
+                            <div [@fadeInOutTranslate]>
+                                <app-customer-settings></app-customer-settings>
+                            </div>
+                        </ng-template>
+                    </ngb-tab>
+                    <ngb-tab title="Gigs">
+                        <ng-template ngbTabContent>
+                            <div [@fadeInOutTranslate]>
+                                <app-customer-gigs></app-customer-gigs>
+                            </div>
+                        </ng-template>
+                    </ngb-tab>
+                    <ngb-tab title="Coupons">
+                        <ng-template ngbTabContent>
+                            <div [@fadeInOutTranslate]>
+                                <app-customer-coupons></app-customer-coupons>
+                            </div>
+                        </ng-template>
+                    </ngb-tab>
+                    <ngb-tab title="Gallery">
+                        <ng-template ngbTabContent>
+                            <div [@fadeInOutTranslate]>
+                                <app-customer-gallery></app-customer-gallery>
+                            </div>
+                        </ng-template>
+                    </ngb-tab>
+                </ngb-tabset>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 <!-- SOCIAL ID POPUP Starts -->
 <div class="modal-size select-input addlocation">
-  <app-modal-animation [modalID]="'socialidmodal'" [modalClass]="'md-effect-7'">
-    <h3 class="f-26">Social ID</h3>
-    <div class="form-header">
-      <div class="row ">
-        <div class="col-md-12">
-          <div class="form-group">
-            <label>Facebook</label>
-            <input type="text" class="form-control" placeholder="Facebook ID">
-          </div>
-          <div class="form-group">
-            <label>Twitter</label>
-            <input type="text" class="form-control" placeholder="Twitter ID">
-          </div>
-          <div class="form-group">
-            <label>Google</label>
-            <input type="text" class="form-control" placeholder="Google ID">
-          </div>
-          <div class="form-group">
-            <label>Instagram</label>
-            <input type="text" class="form-control" placeholder="Instagram ID">
-          </div>
+    <app-modal-animation [modalID]="'socialidmodal'" [modalClass]="'md-effect-7'">
+        <h3 class="f-26">Social ID</h3>
+        <div class="form-header">
+            <div class="row ">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Facebook</label>
+                        <input type="text" class="form-control" placeholder="Facebook ID">
+                    </div>
+                    <div class="form-group">
+                        <label>Twitter</label>
+                        <input type="text" class="form-control" placeholder="Twitter ID">
+                    </div>
+                    <div class="form-group">
+                        <label>Google</label>
+                        <input type="text" class="form-control" placeholder="Google ID">
+                    </div>
+                    <div class="form-group">
+                        <label>Instagram</label>
+                        <input type="text" class="form-control" placeholder="Instagram ID">
+                    </div>
+                </div>
+            </div>
+            <button (click)="closeMyModal($event)" type="button" placement="top" ngbTooltip="Click to {{submit}} locations " (click)="save()" class="btn pull-right btn-primary waves-effect m-b-10">Save</button>
         </div>
-      </div>
-      <button (click)="closeMyModal($event)" type="button" placement="top" ngbTooltip="Click to {{submit}} locations "
-        (click)="save()" class="btn pull-right btn-primary waves-effect m-b-10">Save</button>
-    </div>
-    <button (click)="closeMyModal($event)" aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>
-  </app-modal-animation>
+        <button (click)="closeMyModal($event)" aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>
+    </app-modal-animation>
 </div>
 <!-- SOCIAL ID POPUP Ends -->

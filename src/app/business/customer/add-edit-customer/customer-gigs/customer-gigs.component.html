@@ -1,117 +1,60 @@
-<div class="header-title m-t-60 mb-3">
-  <h3 class="f-18 text-primary m-l-15">Gigs</h3>
-</div>
-<div class="employee-form">
-  <div class="card tenants-page tenants-pages m-b-10">
-    <div class="row p-t-10 p-b-5">
-      <div class="col-md-12 col-sm-12">
-        <div class="form-group row required">
-          <label class="col-md-3 col-sm-6 col-form-label text-right">Post Name</label>
-          <div class="col-md-9 col-sm-6">
-            <input type="text" class="form-control" placeholder="Post name">
-          </div>
-        </div>
-        <div class="form-group row required">
-          <label class="col-md-3 col-sm-6 col-form-label text-right">Post Type</label>
-          <div class="col-md-9 col-sm-6">
-            <select name="select" class="form-control p-1 placeholder-align">
-              <option value="opt1">Post Type</option>
-              <option value="opt2">Type 1</option>
-              <option value="opt3">Type 2</option>
-              <option value="opt4">Type 3</option>
-              <option value="opt5">Type 4</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-group row required">
-          <label class="col-md-3 col-sm-6 col-form-label text-right">Salary</label>
-          <div class="col-md-9 col-sm-6">
-            <input type="text" class="form-control" placeholder="Salary">
-          </div>
-        </div>
-        <div class="form-group row required">
-          <label class="col-md-3 col-sm-6 col-form-label text-right">Contact Person</label>
-          <div class="col-md-9 col-sm-6">
-            <input type="text" class="form-control" placeholder="Contact Person">
-          </div>
-        </div>
-        <div class="form-group row required">
-          <label class="col-md-3 col-sm-6 col-form-label text-right">Contact Phone</label>
-          <div class="col-md-9 col-sm-6">
-            <input type="text" class="form-control" placeholder="Contact phone">
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-md-3 col-sm-6 col-form-label text-right">Details</label>
-          <div class="col-md-9 col-sm-6">
-            <textarea class="form-control" placeholder="Details of posts"></textarea>
-          </div>
-        </div>
-        <div class="form-group row required">
-          <label class="col-md-3 col-sm-6 col-form-label text-right">Status</label>
-          <div class="col-md-9 col-sm-6">
-            <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="#03ADED"
-            switchColor="#fff" size="small" checked></ui-switch>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<!-- <div class="header-title m-t-60 mb-3">
+    <h3 class="f-18 text-primary m-l-15">Gigs</h3>
+</div> -->
+
 <div class="header-title addeditpage m-t-40 mb-3">
-  <div class="row">
-    <div class="col-md-6 col-sm-6">
-      <h3 class="f-18 text-primary m-l-15 p-t-10">History</h3>
-    </div>
-    <div class="col-md-6 col-sm-6 p-r-40">
-      <div class="text-right">
-        <label>Search:
+    <div class="row">
+        <div class="col-md-6 col-sm-6">
+            <h3 class="f-18 text-primary m-l-15 p-t-10">History</h3>
+        </div>
+        <div class="col-md-6 col-sm-6 p-r-40">
+            <div class="text-right">
+                <label>Search:
           <input type='text' class="header-search form-control input-sm full-data-search" placeholder='Search for here'
             (keyup)='search($event)' placement="bottom" ngbTooltip="Type here to search" />
         </label>
-      </div>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 <div class="header-block">
-  <div class="table-header fixed-table-header">
-    <app-card [classHeader]="true">
-      <ngx-datatable #gigstable class="table data-table expandable" [rows]='data' [columnMode]="'flex'"
-        [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false">
-        <!-- Row Detail Template -->
-        <ngx-datatable-column prop="postname" name="Post Name" [resizeable]="false">
-          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-            <span>{{row.postname}}</span>
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column prop="posttype" name="Post Type" [resizeable]="false">
-          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-            <span>{{row.posttype}}</span>
-          </ng-template>
-        </ngx-datatable-column>
+    <div class="table-header fixed-table-header">
+        <app-card [classHeader]="true">
+            <ngx-datatable #gigstable class="table data-table expandable" [rows]='gigsList' [columnMode]="'flex'" [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false">
+                <!-- Row Detail Template -->
+                <ngx-datatable-column prop="postname" name="Post Name" [resizeable]="false">
+                    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                        <span>{{row.postname}}</span>
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column prop="posttype" name="Post Type" [resizeable]="false">
+                    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                        <span>{{row.posttype}}</span>
+                    </ng-template>
+                </ngx-datatable-column>
 
-        <ngx-datatable-column name="Posted By" [resizeable]="false">
-          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-            <span class="updatename">{{row.postedby}}</span>
-            <span class="updatedate">{{date|date:datedisplayformat}}</span>
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="Status" [sortable]="false" [flexGrow]="0.5" [cellClass]="'text-center status'" headerClass="text-right">
-          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-            <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="#03ADED"
-              switchColor="#fff" size="small" checked></ui-switch>
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.5" [cellClass]="'text-center action'" headerClass="text-right">
-          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-            <a placement="bottom" ngbTooltip="Click to edit gigs" class="m-r-15 crm-action-edit text-primary">
-              <i class="fa fa-pencil"></i></a>
-            <a placement="bottom" ngbTooltip="Click to delete gigs" class="crm-action-delete text-danger">
-              <i class="fa fa-trash"></i></a>
-          </ng-template>
-        </ngx-datatable-column>
-      </ngx-datatable>
-    </app-card>
-  </div>
+                <ngx-datatable-column name="Posted By" [resizeable]="false">
+                    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                        <span class="updatename">{{row.updatedby}}</span>
+                        <span class="updatedate">{{row.updateddt|date:datedisplayformat}}</span>
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Status" [sortable]="false" [flexGrow]="0.5" [cellClass]="'text-center status'" headerClass="text-right">
+                    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                        <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="#03ADED" switchColor="#fff" size="small" [checked]="row.status == 'Active'" (change)="updategigStatus(row,rowIndex,false)"></ui-switch>
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.5" [cellClass]="'text-center action'" headerClass="text-right">
+                    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                        <a placement="bottom" ngbTooltip="Click to edit gigs" class="m-r-15 crm-action-edit text-primary">
+                            <i class="fa fa-pencil"></i></a>
+                        <a placement="bottom" ngbTooltip="Click to delete gigs" class="crm-action-delete text-danger" (click)="updategigStatus(row,rowIndex,true)">
+                            <i class="fa fa-trash"></i></a>
+                    </ng-template>
+                </ngx-datatable-column>
+            </ngx-datatable>
+        </app-card>
+    </div>
 </div>
+<!-- <app-add-edit-gig></app-add-edit-gig> -->
