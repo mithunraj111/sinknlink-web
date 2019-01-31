@@ -37,7 +37,6 @@ export class DonationsComponent implements OnInit {
       } else {
         this.bootstrapAlertService.showError(response.message);
       }
-
     });
   }
   updateDonationStatus(data, index, flag) {

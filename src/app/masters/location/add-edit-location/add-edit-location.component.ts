@@ -44,7 +44,11 @@ export class AddEditLocationComponent implements OnInit, OnChanges {
     this.lookupService.list({ refkey: 'biz_states', status: AppConstant.STATUS_ACTIVE }).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
-        this.stateList = JSON.parse(response.data[0].refvalue);
+        response.data.map(item => {
+          item.label = item.refname;
+          item.value = item.refvalue;
+        });
+        this.stateList = response.data;
       } else {
         this.stateList = [];
       }
