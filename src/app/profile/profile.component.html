@@ -1,0 +1,96 @@
+<div class="fixedheader">
+  <div class="header-title m-b-15  pos-fixed">
+    <div class="row">
+      <div class="col-md-6 col-sm-6">
+        <h2>Profile</h2>
+        <!-- <p *ngIf="userObj?.userid" class="m-b-0">ID:{{userObj?.userid}}</p> -->
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-md-12 col-sm-12">
+  <div class="row">
+    <div class="col-md-9 col-sm-9 p-l-0 p-r-10">
+      <div class="user-form">
+
+        <div class="card tenants-page tenants-pages m-b-10 m-t-50">
+          <div class="row p-t-10 p-b-5">
+            <div class="col-md-12 col-sm-12">
+              <form [formGroup]="userForm">
+                <div class="form-group row required">
+                  <label class="col-md-3 col-sm-6 col-form-label text-right">Full Name</label>
+                  <div class="col-md-6 col-sm-6 p-r-0">
+                    <input type="text" class="form-control" name="fullname" formControlName="fullname" placeholder="Full Name">
+                  </div>
+                </div>
+
+                <div class="form-group row required">
+                  <label class="col-md-3 col-sm-6 col-form-label text-right">Mobile No</label>
+                  <div class="col-md-6 col-sm-6 p-r-0">
+                    <span >{{userObj?.mobileno}}</span>
+                  </div>
+                </div>
+
+                <div class="form-group row required role-dropdown">
+                  <label class="col-md-3 col-sm-6 col-form-label text-right">Role</label>
+                  <div class="col-md-6 col-sm-6 p-r-0">
+                    <span>{{userObj?.role}}</span>
+                  </div>
+                </div>
+
+                <div class="form-group row required">
+                  <label class="col-md-3 col-sm-6 col-form-label text-right">Password</label>
+                  <div class="col-md-6 col-sm-6 p-r-0">
+                    <input type="password" style="width:100% !important" class="form-control" name="password"
+                      formControlName="password" placeholder="Password">
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 c0l-sm-3 m-t-50">
+      <!-- <div class="page-body">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="cover-profile">
+                  <div class="profile-bg-img">
+                    <div class="card-block user-info">
+                      <div class="col-md-12">
+                        <div class="media-left">
+                          <a href="#" class="profile-image">
+                            <img class="user-img img-radius" src="../../assets/images/avatar-4.jpg" alt="avatar-4">
+                          </a>
+                        </div>
+                        <div class="media-body row">
+                          <div class="col-lg-12">
+                            <div class="user-title">
+                              <h2>Josephin Villa</h2>
+                              <span class="text-white">Web designer</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> -->
+      <div class="profile-page">
+        <div class="col-md-12 col-sm-12 text-center employee-profile m-t-25">
+          <div class="form-group">
+            <label>
+              <img src="assets/images/avatar-4.jpg" class="img-responsive w-100" alt="avatar-4">
+            </label>
+          </div>
+          <div class="profile-button">
+            <button type="button" placement="bottom" ngbTooltip="Click to upload" class="btn btn-primary waves-effect m-r-10 text-capitalize">Upload</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

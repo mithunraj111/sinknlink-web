@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { MainComponent } from './layout/main/main.component';
 import { AuthComponent } from './layout/auth/auth.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   {
@@ -28,6 +29,10 @@ const routes: Routes = [
       {
         path: 'admin',
         loadChildren: './admin/admin.module#AdminModule'
+      },
+      {
+        path:'profile',
+        component: ProfileComponent
       }
     ]
   },

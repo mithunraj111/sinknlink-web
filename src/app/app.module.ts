@@ -13,6 +13,7 @@ import { HttpModule } from '@angular/http';
 import { CommonService } from './services/common.service';
 import { HttpHandlerService } from './services/http-handler.service';
 import { LocalStorageService } from './services/local-storage.service';
+import { ProfileComponent } from './profile/profile.component';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { LocalStorageService } from './services/local-storage.service';
     AppComponent,
     MainComponent,
     AuthComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
