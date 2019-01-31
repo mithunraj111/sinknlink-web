@@ -3,6 +3,7 @@ import { AppConstant } from '../../../app.constants';
 import { fadeInOutTranslate } from '../../../../assets/animations/fadeInOutTranslate';
 import { ActivatedRoute } from '@angular/router';
 import { ConsumerService } from 'src/app/services/business/consumer.service';
+import * as Lodash from 'lodash';
 
 @Component({
   selector: 'app-view-consumer',
@@ -14,13 +15,24 @@ export class ViewConsumerComponent implements OnInit {
   date_displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   date: any;
 
+  // For Consumer Details.
   consumer: any = {};
+
+  // For Consumer Coupons
   consumerCouponsList: any[] = [];
+  
+  // For Consumer Coupon Favs
   consumerFavs: any = {
     business: [],
     category: [],
     location: []
   };
+
+  // For Reviews
+  reviewedBiz: any = [];
+  reviews: any = {};
+  selectedReview:number;
+  bizReview:any = [];
 
   constructor(private route: ActivatedRoute, private consumerService: ConsumerService) {
     this.date = new Date();
@@ -29,6 +41,7 @@ export class ViewConsumerComponent implements OnInit {
       this.getConsumer(id);
       this.getConsumerCoupon(id);
       this.getConsumerFavs(id);
+      this.getConsumerReviews(id);
     });
   }
 
@@ -60,6 +73,32 @@ export class ViewConsumerComponent implements OnInit {
     }, err => {
       console.log(err);
     })
+  }
+
+  getConsumerReviews(id) {
+    this.consumerService.consumerReviews({ consumerid: parseInt(id) }).subscribe(res => {
+      let response = JSON.parse(res._body);
+
+      let businesses = [];
+      let reviews = {};
+
+      if (response.data.length > 0) {
+        response.data.forEach(element => {
+          if (Lodash.find(businesses, function (o) { return o.membershipid == element.membershipid }) == undefined) businesses.push({ membershipid: element.membershipid, bizname: element.business.bizname });
+        });
+        reviews = Lodash.groupBy(response.data, 'membershipid');
+        this.reviewedBiz = businesses;
+        this.reviews = reviews;
+
+      }
+    }, err => {
+      console.log(err);
+    })
+  }
+
+  showReviewFor(id){
+    this.bizReview = this.reviews[id].sort(function(a, b){return a.reviewid - b.reviewid})[0];
+    console.log(this.bizReview);
   }
 
   groupFavs(data) {

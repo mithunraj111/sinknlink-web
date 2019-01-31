@@ -138,6 +138,12 @@ export const AppConstant = Object.freeze({
           LIST: 'consumerfavorites',
           UPDATE: 'consumerfavorites/edit/'
         },
+        REVIEWS: {
+          GETBYID: 'review/',
+          CREATE: 'review/create',
+          LIST: 'review',
+          UPDATE: 'review/edit/'
+        },
         CUSTOMER: {
           GETBYID: 'business/',
           CREATE: 'business/create',
