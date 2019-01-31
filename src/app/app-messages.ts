@@ -117,10 +117,10 @@ export const AppMessages = Object.freeze({
       }
     },
     LOOKUP: {
-      keyname: {
+      refname: {
         required: 'Please enter key name'
       },
-      keyvalue: {
+      refvalue: {
         required: 'Please enter key value',
         minlength: 'Lookup value atleast 1 character',
         maxlength: 'Lookup value not more than 100 characters'
