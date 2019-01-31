@@ -149,6 +149,18 @@ export const AppConstant = Object.freeze({
           CREATE: 'business/create',
           LIST: 'business',
           UPDATE: 'business/edit/'
+        },
+        GIGS: {
+          GETBYID: 'gigs/',
+          CREATE: 'gigs/create',
+          LIST: 'gigs',
+          UPDATE: 'gigs/edit/'
+        },
+        COUPONS: {
+          GETBYID: 'coupon/',
+          CREATE: 'coupon/create',
+          LIST: 'coupon',
+          UPDATE: 'coupon/edit/'
         }
       }
     }

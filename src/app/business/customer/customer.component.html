@@ -1,74 +1,68 @@
 <div class="fixedheader">
-  <div class="header-title pos-fixed">
-    <div class="row">
-      <div class="col-md-5 col-sm-5">
-        <h2>Customers</h2>
-        <p>Create or Update The Customer Details</p>
-      </div>
-      <div class="col-md-6 col-sm-6">
-        <div class="text-right">
-          <label>Search:
+    <div class="header-title pos-fixed">
+        <div class="row">
+            <div class="col-md-5 col-sm-5">
+                <h2>Customers</h2>
+                <p>Create or Update The Customer Details</p>
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <div class="text-right">
+                    <label>Search:
             <input type="search" class="header-search form-control input-sm full-data-search" placeholder="Search for here"
               (keyup)='search($event)' placement="bottom" ngbTooltip="Type here to search">
           </label>
-        </div>
-      </div>
-      <div class="col-md-1 col-sm-1 p-r-0">
-        <button type="button" placement="bottom" ngbTooltip="Click to add customer" class="btn btn-primary waves-effect"
-          (click)='addCustomer()'><i class="fa fa-plus-circle m-r-5"></i> New
+                </div>
+            </div>
+            <div class="col-md-1 col-sm-1 p-r-0">
+                <button type="button" placement="bottom" ngbTooltip="Click to add customer" class="btn btn-primary waves-effect" (click)='addCustomer()'><i class="fa fa-plus-circle m-r-5"></i> New
         </button>
-      </div>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 <div class="header-block m-t-60">
-  <div class="table-header fixed-table-header">
-    <app-card [classHeader]="true">
-      <ngx-datatable #customertable class="table data-table expandable" [rows]='data' [columnMode]="'flex'"
-        [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false">
-        <!-- Row Detail Template -->
-        <ngx-datatable-column prop="businessname" name="Business Name" [resizeable]="false">
-          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-            <span>{{row.businessname}}</span>
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column prop="mobileno" name="Mobile No" [resizeable]="false">
-          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-            <span>{{row.mobileno}}</span>
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column prop="membershipid" name="Membership ID" [resizeable]="false">
-          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-            <span>{{row.membershipid}}</span>
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column prop="city" name="City" [resizeable]="false">
-          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-            <span>{{row.city}}</span>
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column prop="updatedby" name="Updated By" [resizeable]="false">
-          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-            <span class="updatename">{{row.updatedby}}</span>
-            <span class="updatedate"> {{date|date:displayformat}}</span>
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="Status" [sortable]="false" [flexGrow]="0.5" [resizeable]="false" [cellClass]="'text-center status'">
-          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-            <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="#03ADED"
-              switchColor="#fff" size="small" checked></ui-switch>
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.5" [resizeable]="false" [cellClass]="'text-center action'">
-          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-            <a placement="bottom" ngbTooltip="Click to edit customer" class="m-r-15 crm-action-edit text-primary"
-              (click)="editCustomer()">
-              <i class="fa fa-pencil"></i></a>
-            <a placement="bottom" ngbTooltip="Click to delete customer" class="crm-action-delete text-danger">
-              <i class="fa fa-trash"></i></a>
-          </ng-template>
-        </ngx-datatable-column>
-      </ngx-datatable>
-    </app-card>
-  </div>
+    <div class="table-header fixed-table-header">
+        <app-card [classHeader]="true">
+            <ngx-datatable #customertable class="table data-table expandable" [rows]='data' [columnMode]="'flex'" [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false">
+                <!-- Row Detail Template -->
+                <ngx-datatable-column prop="businessname" name="Business Name" [resizeable]="false">
+                    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                        <span>{{row.businessname}}</span>
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column prop="mobileno" name="Mobile No" [resizeable]="false">
+                    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                        <span>{{row.mobileno}}</span>
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column prop="membershipid" name="Membership ID" [resizeable]="false">
+                    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                        <span>{{row.membershipid}}</span>
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column prop="city" name="City" [resizeable]="false">
+                    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                        <span>{{row.city}}</span>
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column prop="updatedby" name="Updated By" [resizeable]="false">
+                    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                        <span class="updatename">{{row.updatedby}}</span>
+                        <span class="updatedate"> {{date|date:displayformat}}</span>
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Status" [sortable]="false" [flexGrow]="0.5" [resizeable]="false" [cellClass]="'text-center status'">
+                    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                        <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="#03ADED" switchColor="#fff" size="small" checked></ui-switch>
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.5" [resizeable]="false" [cellClass]="'text-center action'">
+                    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                        <a placement="bottom" ngbTooltip="Click to edit customer" class="m-r-15 crm-action-edit text-primary" (click)="editCustomer()">
+                            <i class="fa fa-pencil"></i></a>
+                    </ng-template>
+                </ngx-datatable-column>
+            </ngx-datatable>
+        </app-card>
+    </div>
 </div>
