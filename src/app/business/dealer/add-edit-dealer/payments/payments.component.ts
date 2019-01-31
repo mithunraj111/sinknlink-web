@@ -28,12 +28,33 @@ export class DealerPaymentsComponent implements OnChanges, OnInit {
         const response = JSON.parse(res._body);
         if (response.status) {
           this.dealerPayments = response.data;
+          this.tempFilter = this.dealerPayments;
+
         }
       });
     }
   }
+  openPaymentModal(event) {
+    document.querySelector('#' + event).classList.add('md-show');
+  }
+  close(event) {
+    document.querySelector('#' + event).classList.remove('md-show');
+  }
   viewPayment(data) {
     this.paymentDetail = data;
+    console.log(this.paymentDetail);
+    this.openPaymentModal('paymentDetailModal');
   }
-
+  search(event) {
+    const val = event.target.value.toLowerCase();
+    const temp = this.tempFilter.filter(item => {
+      for (const key in item) {
+        if (('' + item[key]).toLocaleLowerCase().includes(val)) {
+          return ('' + item[key]).toLocaleLowerCase().includes(val);
+        }
+      }
+    });
+    this.dealerPayments = temp;
+    this.table.offset = 0;
+  }
 }

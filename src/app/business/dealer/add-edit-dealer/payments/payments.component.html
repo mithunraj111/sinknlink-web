@@ -6,9 +6,9 @@
         <div class="col-md-6 col-sm-6 p-r-40">
             <div class="text-right">
                 <label>Search:
-          <input type='text' class="header-search form-control input-sm full-data-search" placeholder='Search for here'
-            (keyup)='search($event)' placement="bottom" ngbTooltip="Type here to search" />
-        </label>
+                    <input type='text' class="header-search form-control input-sm full-data-search" placeholder='Search for here'
+                        (keyup)='search($event)' placement="bottom" ngbTooltip="Type here to search" />
+                </label>
             </div>
         </div>
     </div>
@@ -16,14 +16,16 @@
 <div class="header-block">
     <div class="table-header fixed-table-header">
         <app-card [classHeader]="true">
-            <ngx-datatable #dealerpaymttable class="table data-table expandable" [rows]='dealerPayments' [columnMode]="'flex'" [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false">
+            <ngx-datatable #dealerpaymttable class="table data-table expandable" [rows]='dealerPayments' [columnMode]="'flex'"
+                [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false">
                 <!-- Row Detail Template -->
                 <ngx-datatable-column name="Payment Date" [resizeable]="false">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                         <span>{{row.paymentdate|date:datedisplayformat}}</span>
                     </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column prop="totalamount" name="Amount" headerClass="text-right" [cellClass]="'text-right table-padding'" [resizeable]="false">
+                <ngx-datatable-column prop="totalamount" name="Amount" headerClass="text-right" [cellClass]="'text-right table-padding'"
+                    [resizeable]="false">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                         <span>{{row.totalamount|currency : 'INR' : true}}</span>
                     </ng-template>
@@ -38,7 +40,8 @@
                         <span>{{row.paymentmode}}</span>
                     </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column prop="paymentstatus" name="Status" [flexGrow]="0.5" headerClass="text-center" [cellClass]="'text-center'" [resizeable]="false">
+                <ngx-datatable-column prop="paymentstatus" name="Status" [flexGrow]="0.5" headerClass="text-center"
+                    [cellClass]="'text-center'" [resizeable]="false">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                         <span>{{row.paymentstatus}}</span>
                     </ng-template>
@@ -52,4 +55,59 @@
             </ngx-datatable>
         </app-card>
     </div>
+</div>
+
+<!-- View payment modal -->
+
+<div class="modal-size addlocation employee-form">
+    <app-modal-animation [modalID]="'paymentDetailModal'" [modalClass]="'md-effect-7'">
+        <h3 class="f-26 p-t-10 p-b-10">View Payment Details</h3>
+        <div class="form-header pt-2">
+            <div class="col-md-12 tenants-page p-b-10">
+                <div class="row p-t-10 p-b-5">
+                    <label class="col-md-4 col-sm-6 col-form-label text-right">Reference :</label>
+                    <div class="col-md-6 col-sm-6 m-t-5">
+                        <span class="f-15">{{paymentDetail?.paymentref || '-'}}</span>
+                    </div>
+                </div>
+                <div class="row p-t-10 p-b-5">
+                    <label class="col-md-4 col-sm-6 col-form-label text-right">Payment Date :</label>
+                    <div class="col-md-6 col-sm-6 m-t-5">
+                        <span class="f-15">{{paymentDetail?.paymentdate |date:datedisplayformat || '-'}}</span>
+                    </div>
+                </div>
+                <div class="row p-t-10 p-b-5">
+                    <label class="col-md-4 col-sm-6 col-form-label text-right">Payment Mode :</label>
+                    <div class="col-md-6 col-sm-6 m-t-5">
+                        <span class="f-15">{{paymentDetail?.paymentmode || '-'}}</span>
+                    </div>
+                </div>
+                <div class="row p-t-10 p-b-5">
+                    <label class="col-md-4 col-sm-6 col-form-label text-right">Amount :</label>
+                    <div class="col-md-6 col-sm-6 m-t-5">
+                        <span class="f-15">{{paymentDetail?.amount|currency : 'INR' : true || '-'}}</span>
+                    </div>
+                </div>
+                <div class="row p-t-10 p-b-5">
+                    <label class="col-md-4 col-sm-6 col-form-label text-right">Donation :</label>
+                    <div class="col-md-6 col-sm-6 m-t-5">
+                        <span class="f-15">{{paymentDetail?.donation|currency : 'INR' : true || '-'}}</span>
+                    </div>
+                </div>
+                <div class="row p-t-10 p-b-5">
+                    <label class="col-md-4 col-sm-6 col-form-label text-right">Tax :</label>
+                    <div class="col-md-6 col-sm-6 m-t-5">
+                        <span class="f-15">{{paymentDetail?.taxes|currency : 'INR' : true || '-'}}</span>
+                    </div>
+                </div>
+                <div class="row p-t-10 p-b-5">
+                    <label class="col-md-4 col-sm-6 col-form-label text-right">Total Amount :</label>
+                    <div class="col-md-6 col-sm-6 m-t-5">
+                        <span class="f-15">{{paymentDetail?.totalamount|currency : 'INR' : true || '-'}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button (click)="close('paymentDetailModal')" aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>
+    </app-modal-animation>
 </div>
