@@ -35,16 +35,17 @@ export class CategoryComponent implements OnInit {
       status: flag ? AppConstant.STATUS_DELETED :
         (data.status === AppConstant.STATUS_ACTIVE ? AppConstant.STATUS_INACTIVE : AppConstant.STATUS_ACTIVE)
     };
-    this.categoryService.update(updateObj, data.categoryid).subscribe(res => {
+    const formData = new FormData();
+    formData.append('formData', JSON.stringify(updateObj));
+    this.categoryService.update(formData, data.categoryid).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
         if (flag) {
           this.bootstrapAlertService.showSucccess('#' + data.categoryid + ' ' + AppMessages.VALIDATION.COMMON.DELETE_SUCCESS);
           this.categoryList.splice(index, 1);
-          this.getCategories();
         } else {
           this.bootstrapAlertService.showSucccess(response.message);
-          this.categoryList[index] = response.data;
+          this.categoryList[index].status = response.data.status;
         }
         this.categoryList = [...this.categoryList];
       } else {
@@ -59,12 +60,7 @@ export class CategoryComponent implements OnInit {
     this.categoryService.list(condition, '').subscribe((res) => {
       const response = JSON.parse(res._body);
       if (response.status) {
-        if (this.categoryList.length != 0) {
-          this.categoryList = response.data.rows;
-          this.categoryList = [...this.categoryList];
-        } else {
-          this.categoryList = response.data.rows;
-        }
+        this.categoryList = response.data;
         this.tempFilter = this.categoryList;
       }
     });

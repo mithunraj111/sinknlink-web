@@ -97,9 +97,9 @@ export class AddEditCategoryComponent implements OnInit, OnChanges {
       if (_.isUndefined(this.categoryfile) || _.isNull(this.categoryfile)) {
         this.bootstrapAlertService.showError(this.categoryErrObj.categoryimg);
         return false;
+      } else {
+        formdata.append('categoryimg', this.categoryimgfile);
       }
-      console.log(this.categoryimgfile);
-      formdata.append('categoryimg', this.categoryimgfile);
       const data = {} as any;
       data.categoryname = this.categoryForm.value.categoryname;
       data.categoryimg = this.categoryForm.value.categoryimg;
