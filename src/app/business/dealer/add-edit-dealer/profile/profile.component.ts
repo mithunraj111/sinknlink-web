@@ -48,9 +48,9 @@ export class DealerProfileComponent implements OnInit {
       contactperson: [null, Validators.required],
       mobileno: [null, Validators.required],
       phoneno: [null, Validators.required],
-      locationid: [null, Validators.required],
+      locationid: ['', Validators.required],
       address: [''],
-      commissionpercent: [15],
+      commissionpercent: [null, Validators.required],
       status: [true, Validators.required]
     });
   }
@@ -60,7 +60,7 @@ export class DealerProfileComponent implements OnInit {
       if (response.status) {
         response.data.map(item => {
           item.label = item.area + ' ( ' + item.pincode + ' )';
-          item.value = item.locationid;
+          item.value = item.locationid.toString();
         });
         this.locationList = response.data;
       }
