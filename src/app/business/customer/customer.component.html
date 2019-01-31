@@ -23,7 +23,7 @@
 <div class="header-block m-t-60">
     <div class="table-header fixed-table-header">
         <app-card [classHeader]="true">
-            <ngx-datatable #customertable class="table data-table expandable" [rows]='data' [columnMode]="'flex'" [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false">
+            <ngx-datatable #customertable class="table data-table expandable" [rows]='customerList' [columnMode]="'flex'" [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false">
                 <!-- Row Detail Template -->
                 <ngx-datatable-column prop="businessname" name="Business Name" [resizeable]="false">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
