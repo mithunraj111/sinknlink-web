@@ -25,7 +25,6 @@ export class DashboardComponent implements OnInit {
           'autoGridCount': false,
           'labelFunction': function (value) {
             return '$' + Math.round(value) + 'M';
-
           }
         }, {
           'id': 'v2',
@@ -51,13 +50,11 @@ export class DashboardComponent implements OnInit {
           'lineThickness': 0,
           'lineColor': '#FF5370 ',
           'type': 'smoothedLine',
-          'title': 'Search Count',
+          'title': 'Search count',
           'useLineColorForBulletBorder': true,
           'valueField': 'count',
           'balloonText': '[[title]]<br /><b style="font-size: 130%">[[value]]</b>'
-        }
-
-        ],
+        }],
         'chartCursor': {
           'pan': true,
           'valueLineEnabled': true,
@@ -83,27 +80,42 @@ export class DashboardComponent implements OnInit {
         },
         'dataProvider': [{
           'date': '2019-01-01',
+          'name': 0,
           'count': 0,
+
         }, {
-          'date': '2018-01-02',
-          'count': 20,
+          'date': '2019-01-02',
+          'name': 0,
+          'count': 0,
+
         }, {
           'date': '2019-01-03',
+          'name': 0,
           'count': 0,
+
         }, {
           'date': '2019-01-04',
+          'name': 30,
           'count': 0,
+
         }, {
           'date': '2019-01-05',
-          'count': 0,
+          'name': 0,
+          'count': 20,
+
         }, {
           'date': '2019-01-06',
-          'count': 20,
+          'name': 25,
+          'count': 0,
+
         }, {
           'date': '2019-01-07',
+          'name': 0,
           'count': 0,
+
         }]
       });
     });
+
   }
 }
