@@ -20,7 +20,7 @@ export class AddEditCategoryComponent implements OnInit, OnChanges {
   buttonTxt = AppConstant.BUTTON_TXT.SAVE;
   @Output() notifyCategoryEntry: EventEmitter<any> = new EventEmitter();
   @Input() categoryObj = {} as any;
-  @ViewChild ('categoryimage') categoryimage: ElementRef;
+  @ViewChild('categoryimage') categoryimage: ElementRef;
   categoryErrObj = AppMessages.VALIDATION.CATEGORY;
   categoryid: number;
   errMessage;
@@ -37,16 +37,18 @@ export class AddEditCategoryComponent implements OnInit, OnChanges {
     this.initForm();
   }
   close(event) {
+    this.categoryimage.nativeElement.value = '';
+    this.categoryfile = null;
+    this.categoryimgfile = null;
     this.notifyCategoryEntry.emit({ close: true });
-    this.categoryimage.nativeElement.value = "";
-    this.categoryfile = '';
   }
   callParent(data) {
+    this.categoryimage.nativeElement.value = '';
+    this.categoryfile = null;
+    this.categoryimgfile = null;
     setTimeout(() => {
       this.notifyCategoryEntry.emit(data);
     }, 5000);
-    this.categoryimage.nativeElement.value = "";
-    this.categoryfile = '';
   }
   onFile(event, type) {
     const reader = new FileReader();
@@ -75,6 +77,10 @@ export class AddEditCategoryComponent implements OnInit, OnChanges {
         categoryimg: [this.categoryObj.categoryimg],
         status: [this.categoryObj.status],
       });
+      // FIX:Move this to constant file
+      if (this.categoryObj.categoryimage) {
+        this.categoryfile = 'http://localhost:2000/' + this.categoryObj.categoryimage.docurl;
+      }
     } else {
       this.initForm();
       this.buttonTxt = AppConstant.BUTTON_TXT.SAVE;
@@ -82,26 +88,23 @@ export class AddEditCategoryComponent implements OnInit, OnChanges {
     }
   }
   saveOrUpdateCategory() {
-    console.log(this.categoryimgfile);
-    console.log(this.categoryForm);
     if (this.categoryForm.status === AppConstant.STATUS_INVALID) {
       this.errMessage = this.commonService.getFormErrorMessage(this.categoryForm, this.categoryErrObj);
       this.bootstrapAlertService.showError(this.errMessage);
       return false;
     } else {
       const formdata = new FormData();
+      if (_.isUndefined(this.categoryfile) || _.isNull(this.categoryfile)) {
+        this.bootstrapAlertService.showError(this.categoryErrObj.categoryimg);
+        return false;
+      }
+      console.log(this.categoryimgfile);
+      formdata.append('categoryimg', this.categoryimgfile);
       const data = {} as any;
       data.categoryname = this.categoryForm.value.categoryname;
       data.categoryimg = this.categoryForm.value.categoryimg;
       data.updatedby = this.userstoragedata.fullname;
       data.updateddt = new Date();
-      if (!_.isUndefined(this.categoryimgfile) && !_.isEmpty(this.categoryimgfile)) {
-        formdata.append('categoryimg', this.categoryimgfile);
-      } else {
-        this.bootstrapAlertService.showError(this.categoryErrObj.categoryimg);
-        return false;
-      }
-      console.log(this.categoryimgfile);
       if (!_.isUndefined(this.categoryObj) && !_.isUndefined(this.categoryObj.categoryid) && !_.isEmpty(this.categoryObj)) {
         data.status = data.status;
         formdata.append('formData', JSON.stringify(data));

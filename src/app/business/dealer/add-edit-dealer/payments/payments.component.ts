@@ -9,6 +9,7 @@ import { PaymentsService } from 'src/app/services/common/payments.service';
 })
 export class DealerPaymentsComponent implements OnChanges, OnInit {
   dealerPayments = [];
+  paymentDetail = {} as any;
   tempFilter = [];
   @Input() dealerid = {} as any;
   @ViewChild(DatatableComponent) table: DatatableComponent;
@@ -30,7 +31,9 @@ export class DealerPaymentsComponent implements OnChanges, OnInit {
         }
       });
     }
-
+  }
+  viewPayment(data) {
+    this.paymentDetail = data;
   }
 
 }
