@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, SimpleChanges, OnChanges } from '@angular/core';
+import { Component, OnInit, ViewChild, SimpleChanges, OnChanges, Input } from '@angular/core';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { AppConstant } from '../../../../app.constants';
 import { AppMessages } from 'src/app/app-messages';
@@ -16,6 +16,7 @@ export class CustomerCouponsComponent implements OnInit, OnChanges {
   @ViewChild(DatatableComponent) table: DatatableComponent;
   datedisplayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   userstoragedata = {} as any;
+  @Input() customerid: number;
   constructor(private couponService: CouponService,
     private localStorageService: LocalStorageService,
     private bootstrapAlertService: BootstrapAlertService) {

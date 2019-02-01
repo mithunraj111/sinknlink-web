@@ -7,7 +7,6 @@ import { ConsumerComponent } from './consumer/consumer.component';
 import { AddEditCustomerComponent } from './customer/add-edit-customer/add-edit-customer.component'
 import { CustomerBranchesComponent } from './customer/add-edit-customer/customer-branches/customer-branches.component';
 import { CustomerGigsComponent } from './customer/add-edit-customer/customer-gigs/customer-gigs.component';
-import { CustomerBusinessDetailsComponent } from './customer/add-edit-customer/customer-business-details/customer-business-details.component';
 import { CustomerCouponsComponent } from './customer/add-edit-customer/customer-coupons/customer-coupons.component';
 import { AddEditDealerComponent } from './dealer/add-edit-dealer/add-edit-dealer.component';
 import { CustomerPaymentsComponent } from './customer/add-edit-customer/customer-payments/customer-payments.component';
@@ -33,10 +32,6 @@ const routes: Routes = [
       {
         path: 'customers/edit/:id',
         component: AddEditCustomerComponent
-      },
-      {
-        path: 'customers/business_details',
-        component: CustomerBusinessDetailsComponent
       },
       {
         path: 'customers/branches',

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, ViewChild, OnChanges, SimpleChanges, Input, Output } from '@angular/core';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { AppConstant } from '../../../../app.constants';
 import { GigsService } from 'src/app/services/business/gigs.service';
@@ -17,6 +17,8 @@ export class CustomerGigsComponent implements OnInit, OnChanges {
   @ViewChild(DatatableComponent) table: DatatableComponent;
   datedisplayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   userstoragedata = {} as any;
+  @Input() customerid: number;
+  @Output() gigObj = {} as any;
   constructor(private gigService: GigsService,
     private localStorageService: LocalStorageService,
     private bootstrapAlertService: BootstrapAlertService) {

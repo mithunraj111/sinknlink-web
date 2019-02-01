@@ -1,7 +1,10 @@
 <!-- <div class="header-title m-t-60 mb-3">
     <h3 class="f-18 text-primary m-l-15">Gigs</h3>
 </div> -->
+<button (click)="showGigForm=true">
+  Add
 
+</button>
 <div class="header-title addeditpage m-t-40 mb-3">
     <div class="row">
         <div class="col-md-6 col-sm-6">
@@ -57,4 +60,4 @@
         </app-card>
     </div>
 </div>
-<!-- <app-add-edit-gig></app-add-edit-gig> -->
+<app-add-edit-gig [gigObj]="gigObj" [(visible)]="showGigForm"></app-add-edit-gig>

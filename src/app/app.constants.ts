@@ -47,6 +47,17 @@ export const AppConstant = Object.freeze({
     { label: 'Payment Method', value: 'biz_paymentmethods' },
     { label: 'Business Type', value: 'biz_businesstype' }
   ],
+
+  // Workdays Data
+  WORKDAYS: [
+    { value: 'Monday', label: 'Monday' },
+    { value: 'Tuesday', label: 'Tuesday' },
+    { value: 'Wednesday', label: 'Wednesday' },
+    { value: 'Thursday', label: 'Thursday' },
+    { value: 'Friday', label: 'Friday' },
+    { value: 'Saturday', label: 'Saturday' },
+    { value: 'Sunday', label: 'Sunday' },
+  ],
   DEFAULT_DATA_ACCESS: 'All',
   API_CONFIG: {
     ANG_DATE: {
