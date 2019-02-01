@@ -55,7 +55,7 @@ export class AddEditUserComponent implements OnInit {
   initForm() {
     this.userForm = this.fb.group({
       fullname: [null, Validators.compose([Validators.required, Validators.minLength(1),
-      Validators.maxLength(50), Validators.pattern('^[a-zA-Z]*$')])],
+      Validators.maxLength(50), Validators.pattern('^[a-zA-Z ]*$')])],
       mobileno: [null, Validators.compose([Validators.required, Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$'),
       Validators.maxLength(13)])],
       rolename: [null, Validators.compose([Validators.required])],
@@ -116,14 +116,13 @@ export class AddEditUserComponent implements OnInit {
         this.userObj = response.data;
         this.userForm = this.fb.group({
           fullname: [this.userObj.fullname, Validators.compose([Validators.required, Validators.minLength(1),
-          Validators.maxLength(50), Validators.pattern('^[a-zA-Z]*$')])],
+          Validators.maxLength(50), Validators.pattern('^[a-zA-Z ]*$')])],
           mobileno: [ this.userObj.mobileno, Validators.compose([Validators.required,
           Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$'), Validators.maxLength(13)])],
-          rolename: [this.userObj.roleid, Validators.compose([Validators.required])],
+          rolename: [this.userObj.roleid.toString(), Validators.compose([Validators.required])],
           status: [this.userObj.status === AppConstant.STATUS_ACTIVE ? true : false, Validators.compose([Validators.required])],
           password: [this.userObj.password, Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(30)])],
         });
-        console.log(this.userObj.status);
       }
     });
   }
@@ -133,7 +132,7 @@ export class AddEditUserComponent implements OnInit {
       const response = JSON.parse(res._body);
       if (response.status) {
         response.data.map( item => {
-          item.value = item.roleid;
+          item.value = item.roleid.toString();
           item.label = item.rolename; 
         })
         this.roleList = response.data;
