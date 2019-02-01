@@ -48,8 +48,11 @@ export class LocationComponent implements OnInit {
     this.locationObj = data;
     this.openLocationModal('locationmodal');
   }
-  search(event) {
-    const val = event.target.value.toLowerCase();
+  search(event?) {
+    let val = '';
+    if( event != null && event!= undefined){
+      val = event.target.value.toLowerCase();
+    }
     const temp = this.tempFilter.filter(item => {
       for (const key in item) {
         if (('' + item[key]).toLocaleLowerCase().includes(val)) {

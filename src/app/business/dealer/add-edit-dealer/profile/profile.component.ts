@@ -45,13 +45,13 @@ export class DealerProfileComponent implements OnInit {
   initForm() {
     this.dealerProfileForm = this.fb.group({
       dealername: [null, Validators.required],
-      contactperson: [null, Validators.required],
       mobileno: [null, Validators.required],
-      phoneno: [null, Validators.required],
+      contactperson: [null, Validators.required],
+      phoneno: [null],
       locationid: ['', Validators.required],
       address: [''],
       commissionpercent: [null, Validators.required],
-      status: [true, Validators.required]
+      status: [true]
     });
   }
   getLocationList() {
@@ -114,7 +114,7 @@ export class DealerProfileComponent implements OnInit {
       dealername: [this.dealerProfileObj.dealername, Validators.required],
       contactperson: [this.dealerProfileObj.contactperson, Validators.required],
       mobileno: [this.dealerProfileObj.mobileno, Validators.required],
-      phoneno: [this.dealerProfileObj.phoneno, Validators.required],
+      phoneno: [this.dealerProfileObj.phoneno],
       locationid: [this.dealerProfileObj.locationid.toString(), Validators.required],
       address: [this.dealerProfileObj.address],
       commissionpercent: [this.dealerProfileObj.commissionpercent, Validators.required],

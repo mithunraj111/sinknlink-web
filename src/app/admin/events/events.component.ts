@@ -45,8 +45,11 @@ export class EventsComponent implements OnInit {
   editEvent(id) {
     this.router.navigate(['admin/event/edit/' + id]);
   }
-  search(event) {
-    const val = event.target.value.toLowerCase();
+  search(event?) {
+    let val = '';
+    if (event != null && event != undefined)  {
+      val = event.target.value.toLowerCase();
+    }
     const temp = this.tempFilter.filter(item => {
       for (const key in item) {
         if (('' + item[key]).toLocaleLowerCase().includes(val)) {

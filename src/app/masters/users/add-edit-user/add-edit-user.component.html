@@ -26,35 +26,36 @@
                 <div class="form-group row required">
                   <label class="col-md-3 col-sm-6 col-form-label text-right">Full Name</label>
                   <div class="col-md-6 col-sm-6 p-r-0">
-                    <input type="text" class="form-control" name="fullname" formControlName="fullname" placeholder="Full Name">
+                    <input type="text" class="form-control" formControlName="fullname" placeholder="Full Name">
                   </div>
                 </div>
 
                 <div class="form-group row required">
                   <label class="col-md-3 col-sm-6 col-form-label text-right">Mobile No</label>
                   <div class="col-md-6 col-sm-6 p-r-0">
-                    <input type="text" class="form-control" name="mobile no" formControlName="mobileno" placeholder="Mobile No">
+                    <input type="text" class="form-control" formControlName="mobileno" placeholder="Mobile No"
+                      [readonly]="userObj?.userid">
                   </div>
                 </div>
 
                 <div class="form-group row required role-dropdown">
                   <label class="col-md-3 col-sm-6 col-form-label text-right">Role</label>
                   <div class="col-md-6 col-sm-6 p-r-0">
-                    <select name="select" placeholder="Select Role" formControlName="rolename">
-                      <option *ngFor="let role of roleList" [value]="role.roleid">{{role.rolename}}</option>
-                    </select>
+                    <ng-select [ngClass]="'ng-select'" placeholder="Select Role" formControlName="rolename" [options]="roleList">
+                    </ng-select>
                   </div>
                 </div>
 
                 <div class="form-group row required">
                   <label class="col-md-3 col-sm-6 col-form-label text-right">Password</label>
                   <div class="col-md-6 col-sm-6 p-r-0">
-                    <input type="password" style="width:100% !important" class="form-control" name="password"
-                      formControlName="password" placeholder="Password">
-                      <span *ngIf='generatepwd'> Your Password is : {{pwd}} </span>
+                    <input type="password" style="width:100% !important" class="form-control" value={{pwd}}
+                      formControlName="password" placeholder="Password" [readonly]="userObj?.userid">
+                      <span *ngIf='generatepwd'> Password : {{pwd}} </span>
                   </div>
                   <div class="col-md-3 col-sm-6 generate-button">
-                    <button type="button"  placement="top" ngbTooltip="Click to Generate" (click)="generatepassword()" class="btn btn-primary waves-effect">Generate</button>
+                    <button type="button"  placement="top" ngbTooltip="Click to Generate" (click)="generatepassword()" 
+                      class="btn btn-primary waves-effect" [disabled]="userObj?.userid">Generate</button>
                   </div>
                 </div>
 

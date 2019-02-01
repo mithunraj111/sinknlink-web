@@ -8,14 +8,16 @@
             <div class="col-md-6 col-sm-6">
                 <div class="text-right">
                     <label>Search:
-            <input type="search" class="header-search form-control input-sm full-data-search" placeholder="Search for here"
-              (keyup)='search($event)' placement="bottom" ngbTooltip="Type here to search">
-          </label>
+                        <input #categorySearch type="text" class="header-search form-control input-sm full-data-search" placeholder="Search for here"
+                            (keyup)='search($event)' placement="bottom" ngbTooltip="Type here to search">
+                        <button type="button" class="btn search-close" (click)="categorySearch.value='';search();"><i class="fa fa-close"></i></button>
+                    </label>
                 </div>
             </div>
             <div class="col-md-1 col-sm-1 p-r-0">
-                <button type="button" placement="bottom" ngbTooltip="Click to add business category" class="btn btn-primary waves-effect" (click)='addCategory()'><i class="fa fa-plus-circle m-r-5"></i> New
-        </button>
+                <button type="button" placement="bottom" ngbTooltip="Click to add business category" class="btn btn-primary waves-effect"
+                    (click)='addCategory()'><i class="fa fa-plus-circle m-r-5"></i> New
+                </button>
             </div>
         </div>
     </div>
@@ -23,7 +25,8 @@
 <div class="header-block m-t-60">
     <div class="table-header fixed-table-header">
         <app-card [classHeader]="true">
-            <ngx-datatable #categorytable class="table data-table expandable" [rows]='categoryList' [columnMode]="'flex'" [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false">
+            <ngx-datatable #categorytable class="table data-table expandable" [rows]='categoryList' [columnMode]="'flex'"
+                [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false">
                 <!-- Row Detail Template -->
                 <ngx-datatable-column prop="categoryname" name="Business category" [resizeable]="false">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
@@ -36,17 +39,22 @@
                         <span class="updatedate"> {{row.updateddt|date:displayformat}}</span>
                     </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column name="Status" [sortable]="false" [flexGrow]="0.5" headerClass="text-center" [cellClass]="'text-center'" [resizeable]="false">
+                <ngx-datatable-column name="Status" [sortable]="false" [flexGrow]="0.5" headerClass="text-center"
+                    [cellClass]="'text-center'" [resizeable]="false">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                        <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="#03ADED" switchColor="#fff" size="small"
-                        (change)="updateCategoryStatus(row,rowIndex,false)" [checked]="row.status == 'Active'" ></ui-switch>
+                        <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="#03ADED"
+                            switchColor="#fff" size="small" (change)="updateCategoryStatus(row,rowIndex,false)"
+                            [checked]="row.status == 'Active'"></ui-switch>
                     </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.5" headerClass="text-center" [cellClass]="'text-center'" [resizeable]="false">
+                <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.5" headerClass="text-center"
+                    [cellClass]="'text-center'" [resizeable]="false">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                        <a placement="bottom" ngbTooltip="Click to edit business category" class="m-r-15 crm-action-edit text-primary" (click)='editCategory(row)'>
+                        <a placement="bottom" ngbTooltip="Click to edit business category" class="m-r-15 crm-action-edit text-primary"
+                            (click)='editCategory(row)'>
                             <i class="fa fa-pencil"></i></a>
-                        <a placement="bottom" (click)="updateCategoryStatus(row,rowIndex,true)" ngbTooltip="Click to delete business category" class="crm-action-delete text-danger">
+                        <a placement="bottom" (click)="updateCategoryStatus(row,rowIndex,true)" ngbTooltip="Click to delete business category"
+                            class="crm-action-delete text-danger">
                             <i class="fa fa-trash"></i></a>
                     </ng-template>
                 </ngx-datatable-column>

@@ -62,15 +62,18 @@ export class DonationsComponent implements OnInit {
       }
     });
   }
-  
+
   addDonation() {
     this.router.navigate(['admin/donation/create']);
   }
   editDonation(data) {
     this.router.navigate(['admin/donation/edit/' + data.donationid]);
   }
-  search(event) {
-    const val = event.target.value.toLowerCase();
+  search(event?) {
+    let val = '';
+    if (event != null && event != undefined)  {
+      val = event.target.value.toLowerCase();
+    }
     const temp = this.tempFilter.filter(item => {
       for (const key in item) {
         if (('' + item[key]).toLocaleLowerCase().includes(val)) {

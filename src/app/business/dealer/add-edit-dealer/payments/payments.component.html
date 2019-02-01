@@ -19,7 +19,7 @@
             <ngx-datatable #dealerpaymttable class="table data-table expandable" [rows]='dealerPayments' [columnMode]="'flex'"
                 [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false">
                 <!-- Row Detail Template -->
-                <ngx-datatable-column name="Payment Date" [resizeable]="false">
+                <ngx-datatable-column prop="paymentdate" name="Payment Date" [resizeable]="false">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                         <span>{{row.paymentdate|date:datedisplayformat}}</span>
                     </ng-template>
@@ -30,7 +30,7 @@
                         <span>{{row.totalamount|currency : 'INR' : true}}</span>
                     </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column name="Reference" [resizeable]="false">
+                <ngx-datatable-column prop="paymentref" name="Reference" [resizeable]="false">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                         <span>{{row.paymentref}}</span>
                     </ng-template>

@@ -1046,3 +1046,10 @@ button{
         margin-left: 10px;
     }
 }
+.search-close:focus{
+    box-shadow: none !important;
+}
+.search-close{
+    position: relative;
+    right: 12%;
+}

@@ -12,9 +12,9 @@
                         </div>
                     </div>
                     <div class="form-group row required">
-                        <label class="col-md-3 col-sm-6 col-form-label text-right">Phone No</label>
+                        <label class="col-md-3 col-sm-6 col-form-label text-right">Mobile No</label>
                         <div class="col-md-9 col-sm-6">
-                            <input type="text" class="form-control" placeholder="Phone No" formControlName="phoneno">
+                            <input type="text" class="form-control" placeholder="Mobile No" formControlName="mobileno">
                         </div>
                     </div>
                     <div class="form-group row required">
@@ -23,10 +23,10 @@
                             <input type="text" class="form-control" placeholder="Contact Person" formControlName="contactperson">
                         </div>
                     </div>
-                    <div class="form-group row required">
-                        <label class="col-md-3 col-sm-6 col-form-label text-right">Mobile No</label>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-sm-6 col-form-label text-right">Phone No</label>
                         <div class="col-md-9 col-sm-6">
-                            <input type="text" class="form-control" placeholder="Mobile No" formControlName="mobileno">
+                            <input type="text" class="form-control" placeholder="Phone No" formControlName="phoneno">
                         </div>
                     </div>
                     <div class="form-group row required">
@@ -36,13 +36,13 @@
                             </ng-select>
                         </div>
                     </div>
-                    <div class="form-group row required">
+                    <div class="form-group row">
                         <label class="col-md-3 col-sm-6 col-form-label text-right">Address</label>
                         <div class="col-md-9 col-sm-6">
                             <textarea rows="4" cols="4" class="form-control" formControlName="address" placeholder="Address"></textarea>
                         </div>
                     </div>
-                    <div class="form-group row">
+                    <div class="form-group row required">
                         <label class="col-md-3 col-sm-6 col-form-label text-right">Commission (%)</label>
                         <div class="col-md-9 col-sm-6">
                             <input type="text" class="form-control" placeholder="Commission (%)" formControlName="commissionpercent">
@@ -56,7 +56,7 @@
                             </div>
                         </div>
                     </div>
-                    <div *ngIf="dealerid" class="form-group row required">
+                    <div *ngIf="dealerid" class="form-group row">
                         <label class="col-md-3 col-sm-6 col-form-label text-right">Status</label>
                         <div class="col-md-9 col-sm-6">
                             <ui-switch class="js-small" color="#03ADED" switchColor="#fff" formControlName="status" size="small"></ui-switch>
