@@ -9,7 +9,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UiSwitchModule } from 'ng2-ui-switch';
 import { TagInputModule } from 'ngx-chips';
 import { SelectModule } from 'ng-select';
-import { FileUploadModule } from 'ng2-file-upload';
 
 @NgModule({
   imports: [
@@ -23,7 +22,7 @@ import { FileUploadModule } from 'ng2-file-upload';
     UiSwitchModule,
     TagInputModule,
     SelectModule,
-    FileUploadModule
+    
 
   ],
   declarations: [ProfileComponent]

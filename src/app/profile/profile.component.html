@@ -1,96 +1,117 @@
 <div class="fixedheader">
   <div class="header-title m-b-15  pos-fixed">
     <div class="row">
-      <div class="col-md-6 col-sm-6">
-        <h2>Profile</h2>
-        <!-- <p *ngIf="userObj?.userid" class="m-b-0">ID:{{userObj?.userid}}</p> -->
+      <div class="col-md-4 col-sm-4">
+        <h2>User Profile</h2>
+      </div>
+      <div class="col-md-8 col-sm-8 save-button text-right p-r-30">
+        <button type="button" placement="bottom" ngbTooltip="Click to update profile" (click)="changeProfile()" class="btn btn-primary waves-effect m-r-10 text-capitalize">
+          Update</button>
+        <button type="button" placement="bottom" ngbTooltip="Click to change password" (click)="updatePassword()" class="btn btn-primary waves-effect m-r-10 text-capitalize">Change
+          Password</button>
       </div>
     </div>
   </div>
 </div>
 <div class="col-md-12 col-sm-12">
   <div class="row">
-    <div class="col-md-9 col-sm-9 p-l-0 p-r-10">
+    <div class="col-md-8 col-sm-8 p-l-0 p-r-10">
       <div class="user-form">
-
-        <div class="card tenants-page tenants-pages m-b-10 m-t-50">
-          <div class="row p-t-10 p-b-5">
-            <div class="col-md-12 col-sm-12">
-              <form [formGroup]="userForm">
-                <div class="form-group row required">
+        <form [formGroup]="profileForm">
+          <div class="card tenants-page tenants-pages m-b-10 m-t-50">
+            <div class="row p-t-10 p-b-5">
+              <div class="col-md-12 col-sm-12">
+                <div class="form-group row">
                   <label class="col-md-3 col-sm-6 col-form-label text-right">Full Name</label>
                   <div class="col-md-6 col-sm-6 p-r-0">
                     <input type="text" class="form-control" name="fullname" formControlName="fullname" placeholder="Full Name">
                   </div>
                 </div>
 
-                <div class="form-group row required">
+                <div class="form-group row">
                   <label class="col-md-3 col-sm-6 col-form-label text-right">Mobile No</label>
                   <div class="col-md-6 col-sm-6 p-r-0">
-                    <span >{{userObj?.mobileno}}</span>
+                    <span>{{userObj?.mobileno}}</span>
                   </div>
                 </div>
 
-                <div class="form-group row required role-dropdown">
+                <div class="form-group row role-dropdown">
                   <label class="col-md-3 col-sm-6 col-form-label text-right">Role</label>
                   <div class="col-md-6 col-sm-6 p-r-0">
-                    <span>{{userObj?.role}}</span>
+                    <span>{{userObj.role?.rolename}}</span>
                   </div>
                 </div>
-
-                <div class="form-group row required">
-                  <label class="col-md-3 col-sm-6 col-form-label text-right">Password</label>
-                  <div class="col-md-6 col-sm-6 p-r-0">
-                    <input type="password" style="width:100% !important" class="form-control" name="password"
-                      formControlName="password" placeholder="Password">
+                <div class="form-group row">
+                  <label class="col-md-3 col-sm-6 col-form-label text-right">Last Login</label>
+                  <div class="col-md-6 col-sm-6 m-t-5">
+                    <span>{{userObj.lastlogin|date:displayformat}}</span>
                   </div>
                 </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-3 c0l-sm-3 m-t-50">
-      <!-- <div class="page-body">
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="cover-profile">
-                  <div class="profile-bg-img">
-                    <div class="card-block user-info">
-                      <div class="col-md-12">
-                        <div class="media-left">
-                          <a href="#" class="profile-image">
-                            <img class="user-img img-radius" src="../../assets/images/avatar-4.jpg" alt="avatar-4">
-                          </a>
-                        </div>
-                        <div class="media-body row">
-                          <div class="col-lg-12">
-                            <div class="user-title">
-                              <h2>Josephin Villa</h2>
-                              <span class="text-white">Web designer</span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                <div class="row p-t-10 p-b-5">
+                  <label class="col-md-3 col-sm-6 col-form-label text-right">Email</label>
+                  <div class="col-md-6 col-sm-6 m-t-5">
+                    <span class="f-15">{{userObj.consumer?.emailid}}</span>
+                  </div>
+                </div>
+                <div class="row p-t-10 p-b-5">
+                  <label class="col-md-3 col-sm-6 col-form-label text-right">Address</label>
+                  <div class="col-md-6 col-sm-6 m-t-5">
+                    <span class="f-15">{{userObj.consumer?.address}} </span>
+                  </div>
+                </div>
+                <div class="row p-t-10 p-b-5">
+                  <label class="col-md-3 col-sm-6 col-form-label text-right">Location</label>
+                  <div class="col-md-6 col-sm-6 m-t-5">
+                    <span class="f-15">{{userObj.consumer?.location}}</span>
+                  </div>
+                </div>
+                <div class="row p-t-10 p-b-5">
+                  <label class="col-md-3 col-sm-6 col-form-label text-right">Social Ids</label>
+                  <div class="col-md-6 col-sm-6 m-t-5">
+                    <span class="f-15">Facebook id<br />Twitter id<br />Google id<br />Instagram id</span>
                   </div>
                 </div>
               </div>
             </div>
-          </div> -->
-      <div class="profile-page">
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="col-md-4 c0l-sm-4 m-t-50">
+      <div>
         <div class="col-md-12 col-sm-12 text-center employee-profile m-t-25">
           <div class="form-group">
-            <label>
-              <img src="assets/images/avatar-4.jpg" class="img-responsive w-100" alt="avatar-4">
+            <label class="custom-file mb-3 profile-page">
+              <img src="assets/images/avatar-4.jpg" class="img-responsive w-50" alt="employee">
+              <input type="file" ng2FileSelect [uploader]="uploader" multiple class="custom-file-input">
+              <span class="custom-file-control"></span>
             </label>
-          </div>
-          <div class="profile-button">
-            <button type="button" placement="bottom" ngbTooltip="Click to upload" class="btn btn-primary waves-effect m-r-10 text-capitalize">Upload</button>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
+<!-- modal -->
+<div class="modal-size addlocation employee-form">
+  <app-modal-animation [modalID]="'profilemodal'" [modalClass]="'md-effect-7'">
+    <h3 class="f-26">Change password</h3>
+    <form [formGroup]="profileForm">
+      <div class="form-header pt-2">
+        <div class="col-md-12">
+          <div class="form-group required">
+            <label>New password</label>
+            <input type="password" class="form-control" placeholder="New password" formControlName="newpassword">
+          </div>
+          <div class="form-group required">
+            <label>Confirm password</label>
+            <input type="password" class="form-control" placeholder="Confirm password" formControlName="confirmpassword">
+          </div>
+        </div>
+        <button type="button" placement="top" (click)="changePassword()" ngbTooltip="Click to save password" class="btn pull-right btn-primary waves-effect 
+                  m-b-10 m-r-15">Update</button>
+      </div>
+    </form>
+    <button (click)="closePassword()" aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>
+  </app-modal-animation>
 </div>

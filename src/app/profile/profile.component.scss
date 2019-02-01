@@ -20,12 +20,16 @@
    font-size: 13px;
    font-family: 'Montserrat', sans-serif;
 }
-.user-info{
-    top:0px;
-}
 .customer-menu{
     right: -25px;
 } 
 .profile-page{
-    width:260px;
+    width:108%;
+    bottom:15px;
+}
+.profile-button{
+    button{
+        padding-right:40px;
+        padding-left:35px;
+    }
 }
