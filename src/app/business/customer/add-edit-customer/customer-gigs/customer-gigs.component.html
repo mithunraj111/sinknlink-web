@@ -1,22 +1,19 @@
 <!-- <div class="header-title m-t-60 mb-3">
     <h3 class="f-18 text-primary m-l-15">Gigs</h3>
 </div> -->
-<button (click)="showGigForm=true">
-  Add
-
-</button>
 <div class="header-title addeditpage m-t-40 mb-3">
     <div class="row">
         <div class="col-md-6 col-sm-6">
             <h3 class="f-18 text-primary m-l-15 p-t-10">History</h3>
         </div>
-        <div class="col-md-6 col-sm-6 p-r-40">
+        <div class="col-md-4 col-sm-4 p-r-40">
             <div class="text-right">
-                <label>Search:
-          <input type='text' class="header-search form-control input-sm full-data-search" placeholder='Search for here'
-            (keyup)='search($event)' placement="bottom" ngbTooltip="Type here to search" />
-        </label>
+                <label> Search :<input type='text' class="header-search form-control input-sm full-data-search" placeholder='Search for here'
+            (keyup)='search($event)' placement="bottom" ngbTooltip="Type here to search" /></label>
             </div>
+        </div>
+        <div class="col-md-2 col-sm-2 p-r-0">
+            <button type="button" placement="bottom" ngbTooltip="Click to add gig" class="btn btn-primary waves-effect" (click)='addGig()'><i class="fa fa-plus-circle m-r-5"></i> New</button>
         </div>
     </div>
 </div>
@@ -60,4 +57,4 @@
         </app-card>
     </div>
 </div>
-<app-add-edit-gig [gigObj]="gigObj" [(visible)]="showGigForm"></app-add-edit-gig>
+<app-add-edit-gig [gigObj]="gigObj" [customerid]="customerid" (notifyGigChange)="notifyGigChange($event)"></app-add-edit-gig>

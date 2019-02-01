@@ -25,6 +25,10 @@ export const AppConstant = Object.freeze({
     LOOKUP: {
       ADD: 'Add Lookup',
       UPDATE: 'Update Lookup'
+    },
+    GIG: {
+      ADD: 'Add Gig Detail',
+      UPDATE: 'Update Gig Detail'
     }
   },
   // Status
@@ -57,6 +61,11 @@ export const AppConstant = Object.freeze({
     { value: 'Friday', label: 'Friday' },
     { value: 'Saturday', label: 'Saturday' },
     { value: 'Sunday', label: 'Sunday' },
+  ],
+  // POST_TYPES
+  POST_TYPES: [
+    { value: 'Full-time', label: 'Full-time' },
+    { value: 'Part-time', label: 'Part-time' }
   ],
   DEFAULT_DATA_ACCESS: 'All',
   API_CONFIG: {

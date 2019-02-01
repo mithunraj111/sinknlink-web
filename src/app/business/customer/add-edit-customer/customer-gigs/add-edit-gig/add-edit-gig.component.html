@@ -1,62 +1,50 @@
 <div class="modal-size">
     <app-modal-animation [modalID]="'gigmodal'" [modalClass]="'md-effect-7'">
+        <h3 class="f-26">{{formTitle}}</h3>
         <form [formGroup]="gigForm">
-            <div class="employee-form">
-                <div class="card tenants-page tenants-pages m-b-10">
-                    <div class="row p-t-10 p-b-5">
-                        <div class="col-md-12 col-sm-12">
-                            <div class="form-group row required">
-                                <label class="col-md-3 col-sm-6 col-form-label text-right">Post Name</label>
-                                <div class="col-md-9 col-sm-6">
-                                    <input type="text" class="form-control" placeholder="Post name" formControlName="postname">
-                                </div>
+            <div class="form-header pt-2">
+                <div class="col-lg-12 col-md-12">
+                    <div class="form-group required">
+                        <label>Post Name</label>
+                        <input type="text" class="form-control" placeholder="Post Name" formControlName="postname">
+                    </div>
+                    <div class="form-group required">
+                        <label>Post Type</label>
+                        <div class="input-box">
+                            <ng-select [ngClass]="'ng-select'" formControlName="posttype" [options]="posttypes" placeholder="Select Post type"></ng-select>
+                        </div>
+                    </div>
+                    <div class="form-group required">
+                        <label>Salary</label>
+                        <input type="text" class="form-control" placeholder="Salary" formControlName="salary">
+                    </div>
+                    <div class="form-group required">
+                        <label>Contact Person</label>
+                        <input type="text" class="form-control" placeholder="Contact Person" formControlName="contactperson">
+                    </div>
+                    <div class="form-group required">
+                        <label>Contact Mobile</label>
+                        <input type="text" class="form-control" placeholder="Contact Mobile" formControlName="contactmobile">
+                    </div>
+                    <div class="form-group">
+                        <label>Details </label>
+                        <textarea class="form-control" rows="5" cols="50" formControlName="description"></textarea>
+                    </div>
+                    <div class="form-group" *ngIf="gigObj?.gigid">
+                        <label>Status <small>*</small></label>
+                        <div class="form-radio">
+                            <div class="radio radio-inline">
+                                <label> <input type="radio" value="Active" formControlName="status"><i class="helper"></i>Active</label>
                             </div>
-                            <div class="form-group row required">
-                                <label class="col-md-3 col-sm-6 col-form-label text-right">Post Type</label>
-                                <div class="col-md-9 col-sm-6">
-                                </div>
-                            </div>
-                            <div class="form-group row required">
-                                <label class="col-md-3 col-sm-6 col-form-label text-right">Salary</label>
-                                <div class="col-md-9 col-sm-6">
-                                    <input type="text" class="form-control" placeholder="Salary" formControlName="salary">
-                                </div>
-                            </div>
-                            <div class="form-group row required">
-                                <label class="col-md-3 col-sm-6 col-form-label text-right">Contact Person</label>
-                                <div class="col-md-9 col-sm-6">
-                                    <input type="text" class="form-control" placeholder="Contact Person" formControlName="contactmobile">
-                                </div>
-                            </div>
-                            <div class="form-group row required">
-                                <label class="col-md-3 col-sm-6 col-form-label text-right">Contact Phone</label>
-                                <div class="col-md-9 col-sm-6">
-                                    <input type="text" class="form-control" placeholder="Contact phone" formControlName="contactmobile">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-3 col-sm-6 col-form-label text-right">Details</label>
-                                <div class="col-md-9 col-sm-6">
-                                    <textarea class="form-control" placeholder="Details of posts" formControlName="description"></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group row required">
-                                <label class="col-md-3 col-sm-6 col-form-label text-right">Status</label>
-                                <div class="col-md-9 col-sm-6">
-                                    <div class="form-radio">
-                                        <div class="radio radio-inline">
-                                            <label><input type="radio" value="Active" formControlName="status"><i class="helper"></i>Active</label>
-                                        </div>
-                                        <div class="radio radio-inline">
-                                            <label><input type="radio" value="Inactive" formControlName="status"><i class="helper"></i>Inactive</label>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="radio radio-inline">
+                                <label><input type="radio" value="Inactive" formControlName="status"><i class="helper"></i>Inactive</label>
                             </div>
                         </div>
                     </div>
+                    <button type="button" (click)="saveOrUpdateGig()" placement="top" ngbTooltip="Click to save lookup" class="btn f-15 pull-right btn-primary waves-effect m-b-10">{{buttonTxt}}</button>
                 </div>
             </div>
         </form>
+        <button (click)="close()" aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>
     </app-modal-animation>
 </div>

@@ -1,6 +1,6 @@
 
 
-import { Component, OnInit, Input, SimpleChanges, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges, OnChanges, Output, EventEmitter } from '@angular/core';
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AppConstant } from '../../../../../app.constants';
@@ -16,7 +16,12 @@ export class AddEditGigComponent implements OnInit, OnChanges {
     gigErrObj = {} as any;
     @Input() gigObj = {} as any;
     userstoragedata = {} as any;
-    @Input() visible = false;
+    @Input() customerid: number;
+    @Output() notifyGigChange: EventEmitter<any> = new EventEmitter();
+
+    buttonTxt;
+    formTitle;
+    posttypes = AppConstant.POST_TYPES;
     constructor(private bootstrapAlertService: BootstrapAlertService,
         private commonService: CommonService,
         private gigsService: BusinessService.GigsService,
@@ -42,17 +47,19 @@ export class AddEditGigComponent implements OnInit, OnChanges {
     }
 
     ngOnChanges(changes: SimpleChanges): void {
-        console.log(changes);
-        if (!_.isUndefined(changes.visible) && !_.isUndefined(changes.visible.currentValue)) {
-            if (this.visible) {
-                document.querySelector('#gigmodal').classList.add('md-show');
-            } else {
-                document.querySelector('#gigmodal').classList.remove('md-show');
-            }
+        if (!_.isUndefined(changes.gigObj) && !_.isEmpty(changes.gigObj.currentValue)
+            && !_.isUndefined(changes.gigObj.currentValue.refid)) {
+            this.buttonTxt = AppConstant.BUTTON_TXT.UPDATE;
+            this.formTitle = AppConstant.FORM_TITLE.GIG.UPDATE;
+            this.gigObj = changes.gigObj.currentValue;
+        } else {
+            this.initGigForm();
+            this.formTitle = AppConstant.FORM_TITLE.GIG.ADD;
+            this.buttonTxt = AppConstant.BUTTON_TXT.SAVE;
         }
 
     }
-    saveOrUpdateLocation() {
+    saveOrUpdateGig() {
         let errMessage: any;
         if (this.gigForm.status === AppConstant.STATUS_INVALID) {
             errMessage = this.commonService.getFormErrorMessage(this.gigForm, this.gigErrObj);
@@ -61,6 +68,7 @@ export class AddEditGigComponent implements OnInit, OnChanges {
         } else {
             const data = this.gigForm.value;
             const formdata = { ...data } as any;
+            formdata.membershipid = this.customerid;
             formdata.updatedby = this.userstoragedata.fullname;
             formdata.updateddt = new Date();
             if (!_.isUndefined(this.gigObj) && !_.isUndefined(this.gigObj.gigid) && !_.isEmpty(this.gigObj)) {
@@ -91,5 +99,8 @@ export class AddEditGigComponent implements OnInit, OnChanges {
                 });
             }
         }
+    }
+    close() {
+        this.notifyGigChange.next({ close: true });
     }
 }

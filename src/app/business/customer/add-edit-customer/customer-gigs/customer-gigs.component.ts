@@ -75,4 +75,23 @@ export class CustomerGigsComponent implements OnInit, OnChanges {
       }
     });
   }
+  addGig() {
+    this.openGigModal();
+  }
+  editGig(data) {
+    this.gigObj = data;
+    this.openGigModal();
+  }
+  notifyGigChange(event) {
+    if (event.close) {
+      this.closeGigModal();
+    }
+  }
+
+  openGigModal() {
+    document.querySelector('#gigmodal').classList.add('md-show');
+  }
+  closeGigModal() {
+    document.querySelector('#gigmodal').classList.remove('md-show');
+  }
 }
