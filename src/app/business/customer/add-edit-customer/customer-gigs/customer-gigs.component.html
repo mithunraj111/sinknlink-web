@@ -8,8 +8,11 @@
         </div>
         <div class="col-md-4 col-sm-4 p-r-40">
             <div class="text-right">
-                <label> Search :<input type='text' class="header-search form-control input-sm full-data-search" placeholder='Search for here'
-            (keyup)='search($event)' placement="bottom" ngbTooltip="Type here to search" /></label>
+                <label> Search :
+                    <input #gigsSearch type='text' class="header-search form-control input-sm full-data-search" placeholder='Search for here'
+                        (keyup)='search($event)' placement="bottom" ngbTooltip="Type here to search" />
+                    <button type="button" class="btn search-close" (click)="gigsSearch.value='';search();"><i class="fa fa-close"</button>
+                </label>
             </div>
         </div>
         <div class="col-md-2 col-sm-2 p-r-0">

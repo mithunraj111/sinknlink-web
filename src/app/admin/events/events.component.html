@@ -40,7 +40,7 @@
                 </ngx-datatable-column>
                 <ngx-datatable-column prop="city" name="City" [resizeable]="false">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                        <span>{{row.city}}</span>
+                        <span>{{row.location?.city}}</span>
                     </ng-template>
                 </ngx-datatable-column>
                 <ngx-datatable-column prop="updatedby" name="Updated By" [resizeable]="false">

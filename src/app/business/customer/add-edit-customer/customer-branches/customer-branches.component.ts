@@ -19,10 +19,24 @@ export class CustomerBranchesComponent implements OnInit {
       { name: 'Glaurang', membershipid: '005', location: 'Tanjore', payment: '9800', duedate: '07/12/2018' }
     ];
     this.date = new Date();
-
   }
 
   ngOnInit() {
   }
 
+  // search(event?) {
+  //   let val = '';
+  //   if( event != null && event != undefined ){
+  //     val = event.target.value.toLowerCase();
+  //   }
+  //   const temp = this.tempFilter.filter(item => {
+  //     for (const key in item) {
+  //       if (('' + item[key]).toLocaleLowerCase().includes(val)) {
+  //         return ('' + item[key]).toLocaleLowerCase().includes(val);
+  //       }
+  //     }
+  //   });
+  //   this.dealerList = temp;
+  //   this.table.offset = 0;
+  // }
 }

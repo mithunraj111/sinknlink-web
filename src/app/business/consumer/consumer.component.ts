@@ -24,8 +24,11 @@ export class ConsumerComponent implements OnInit {
   ngOnInit() {
     this.getConsumers();
   }
-  search(event) {
-    const val = event.target.value.toLowerCase();
+  search(event?) {
+    let val = '';
+    if( event != null && event != undefined){
+      val = event.target.value.toLowerCase();
+    }
     const temp = this.tempFilter.filter(item => {
       for (let key in item) {
         if (("" + item[key]).toLocaleLowerCase().includes(val)) {
