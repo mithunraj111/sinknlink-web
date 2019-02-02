@@ -15,6 +15,8 @@ import { HttpHandlerService } from './services/http-handler.service';
 import { LocalStorageService } from './services/local-storage.service';
 import { ProfileComponent } from './profile/profile.component';
 import { FileUploadModule } from 'ng2-file-upload';
+import { SelectModule } from 'ng-select';
+import { TagInputModule } from 'ngx-chips';
 
 
 @NgModule({
@@ -32,7 +34,9 @@ import { FileUploadModule } from 'ng2-file-upload';
     BootstrapAlertModule,
     ReactiveFormsModule,
     HttpModule,
-    FileUploadModule
+    FileUploadModule,
+    SelectModule,
+    TagInputModule
   ],
   providers: [
     MenuItems,

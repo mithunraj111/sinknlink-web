@@ -110,6 +110,21 @@ export const AppMessages = Object.freeze({
         required: 'Please enter confirm password',
         minlength: 'Please enter password atleast 8 characters',
         maxlength: 'Please enter password within 30 characters',
+      },
+      fullname: {
+        required: 'Please enter full name',
+        minlength: 'please enter full name atleast 3 characters',
+        maxlength: 'Please enter full name between 50 characters',
+        pattern: 'Please enter valid name',
+
+      },
+      emailid: {
+        pattern: 'Please enter a valid email',
+        maxlength: 'Please enter emailid within 100 characters',
+      },
+      address: {
+        minlength: 'please enter address atleast 1 characters',
+        maxlength: 'Please enter address should be within 100 characters',
       }
     },
     LOCATION: {

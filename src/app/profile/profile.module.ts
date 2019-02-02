@@ -8,7 +8,6 @@ import { DataTableModule } from 'angular2-datatable';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UiSwitchModule } from 'ng2-ui-switch';
 import { TagInputModule } from 'ngx-chips';
-import { SelectModule } from 'ng-select';
 
 @NgModule({
   imports: [
@@ -21,8 +20,6 @@ import { SelectModule } from 'ng-select';
     ReactiveFormsModule,
     UiSwitchModule,
     TagInputModule,
-    SelectModule,
-    
 
   ],
   declarations: [ProfileComponent]
