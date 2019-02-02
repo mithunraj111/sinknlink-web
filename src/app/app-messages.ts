@@ -43,7 +43,8 @@ export const AppMessages = Object.freeze({
         required: 'Location is required'
       },
       eventdate: {
-        required: 'Event start date is requried'
+        required: 'Event start date is requried',
+        max: 'Start Date should be smaller than End Date'
       },
       eventexpirydt: {
         required: 'Event end date is requried'

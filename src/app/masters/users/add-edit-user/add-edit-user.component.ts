@@ -127,7 +127,6 @@ export class AddEditUserComponent implements OnInit {
     });
   }
   getRoleList() {
-    console.log(this.roleList);
     this.roleService.list({ status: AppConstant.STATUS_ACTIVE }).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {

@@ -5,20 +5,25 @@
                 <h2>Lookup</h2>
                 <p>Define your Lookup descriptions and permissions</p>
             </div>
-            <div class="col-md-3 col-sm-5">
-                <ng-select [ngClass]="'ng-select'" [(ngModel)]="selectedKeyType" [options]="keylist" (selected)="getLookupList($event)" placeholder="Select KeyType"></ng-select>
-            </div>
-
-            <div class="col-md-3 col-sm-6">
-                <div class="text-right">
-                    <label>Search:
-                        <input #lookupSearch type="text" class="header-search form-control input-sm full-data-search" placeholder="Search for here"
-                            (keyup)='search($event)' placement="bottom" ngbTooltip="Type here to search">
-                            <button type="button" class="btn search-close" (click)="lookupSearch.value='';search();"><i class="fa fa-close"></i></button>
-                    </label>
+            <div class="col-md-6 col-sm-5">
+                <div class="row">
+                    <div class="col-md-6">
+                        <ng-select [ngClass]="'ng-select'" [(ngModel)]="selectedKeyType" [options]="keylist" (selected)="getLookupList($event)"
+                            placeholder="Select KeyType"></ng-select>
+                    </div>
+                    <div class="col-md-6 col-sm-6 p-r-0 p-l-0">
+                        <div class="text-right">
+                            <label>Search:
+                                <input #lookupSearch type="text" class="header-search form-control input-sm full-data-search"
+                                    placeholder="Search for here" (keyup)='search($event)' placement="bottom"
+                                    ngbTooltip="Type here to search">
+                                <button type="button" class="btn search-close" (click)="lookupSearch.value='';search();"><i
+                                        class="fa fa-close"></i></button>
+                            </label>
+                        </div>
+                    </div>
                 </div>
             </div>
-
             <div class="col-md-1 col-sm-1 p-r-0">
                 <button type="button" placement="bottom" ngbTooltip="Click to add lookup" (click)='addLookup()' class="btn btn-primary waves-effect"><i
                         class="fa fa-plus-circle m-r-5"></i> New

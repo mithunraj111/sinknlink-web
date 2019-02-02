@@ -24,12 +24,6 @@ export class EventsComponent implements OnInit {
   ngOnInit() {
     this.getEvents();
   }
-  openMyModal(event) {
-    document.querySelector('#' + event).classList.add('md-show');
-  }
-  closeMyModal(event) {
-    ((event.target.parentElement.parentElement).parentElement).classList.remove('md-show');
-  }
   getEvents() {
     this.eventService.list({}).subscribe(res => {
       const response = JSON.parse(res._body);
@@ -72,8 +66,6 @@ export class EventsComponent implements OnInit {
       if (response.status) { this.getEvents(); this.bootstrapAlertService.showSucccess(response.message); }
       else this.bootstrapAlertService.showError(response.message);
     }, err => {
-      console.log(err);
     });
-    console.log(data);
   }
 }
