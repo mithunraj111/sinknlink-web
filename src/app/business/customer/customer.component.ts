@@ -11,8 +11,7 @@ import { AppMessages } from '../../app-messages';
 
 @Component({
   selector: 'app-customer',
-  templateUrl: './customer.component.html',
-  styleUrls: ['./customer.component.scss']
+  templateUrl: './customer.component.html'
 })
 export class CustomerComponent implements OnInit {
   tempFilter = [];
@@ -20,11 +19,11 @@ export class CustomerComponent implements OnInit {
   customerList = [];
   @ViewChild(DatatableComponent) table: DatatableComponent;
   displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
-  constructor(private router: Router, 
+  constructor(private router: Router,
     private customerService: CustomerService,
     private localStorageService: LocalStorageService,
     private bootstrapAlertService: BootstrapAlertService) {
-      this.userstoragedata = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER);
+    this.userstoragedata = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER);
   }
 
   ngOnInit() {
@@ -52,7 +51,7 @@ export class CustomerComponent implements OnInit {
   }
   search(event?) {
     let val = '';
-    if( event != null && event != undefined ){
+    if (event != null && event != undefined) {
       val = event.target.value.toLowerCase();
     }
     const temp = this.tempFilter.filter(item => {
@@ -65,12 +64,12 @@ export class CustomerComponent implements OnInit {
     this.customerList = temp;
     this.table.offset = 0;
   }
-  updateCustomerStatus(data, index, flag){
+  updateCustomerStatus(data, index, flag) {
     const updateObj = {
       updateddt: new Date(),
       updatedby: this.userstoragedata.fullname,
       status: flag ? AppConstant.STATUS_DELETED :
-        (data.status=== AppConstant.STATUS_ACTIVE ? AppConstant.STATUS_INACTIVE: AppConstant.STATUS_ACTIVE)
+        (data.status === AppConstant.STATUS_ACTIVE ? AppConstant.STATUS_INACTIVE : AppConstant.STATUS_ACTIVE)
     };
     this.customerService.update(updateObj, data.membershipid).subscribe(res => {
       const response = JSON.parse(res._body);

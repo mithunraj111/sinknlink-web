@@ -166,6 +166,22 @@ export const AppMessages = Object.freeze({
         address: { required: 'Please enter address' },
         commissionpercent: { required: 'Please enter commission percent' },
       }
+    },
+    GIG: {
+      postname: { required: 'Please enter post name', maxlength: '' },
+      posttype: { required: 'Please select post type' },
+      salary: { required: 'Please enter salary range' },
+      contactperson: { required: 'Please enter contact mobile' },
+      contactmobile: { required: 'Please enter contact mobile' },
+      description: { required: 'Please select status' }
+    },
+    COUPON: {
+      couponcode: { required: 'Please enter coupon code', maxlength: '' },
+      shortdesc: { required: 'Please enter coupon title', maxlength: '' },
+      noofcoupons: { required: 'Please enter number of coupons' },
+      expirydt: { required: 'Please select expiry date' },
+      description: { required: 'Please enter description', maxlength: '' },
+      status: { required: 'Please select status' },
     }
   },
 });

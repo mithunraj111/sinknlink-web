@@ -29,6 +29,10 @@ export const AppConstant = Object.freeze({
     GIG: {
       ADD: 'Add Gig Detail',
       UPDATE: 'Update Gig Detail'
+    },
+    COUPON: {
+      ADD: 'Add Coupon',
+      UPDATE: 'Update Coupon'
     }
   },
   // Status

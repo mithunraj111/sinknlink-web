@@ -9,7 +9,7 @@
                     </p>
                 </div>
                 <div class="col-md-6 col-sm-6 save-button text-right p-r-30">
-                    <button type="button" placement="bottom" ngbTooltip="Click To {{buttonText}} Customer Details" (click)="submit()" class="btn btn-primary waves-effect m-r-10 text-capitalize">{{buttonText}}</button>
+                    <button type="button" placement="bottom" ngbTooltip="Click To {{buttonText}} Customer Details" (click)="saveOrUpdate()" class="btn btn-primary waves-effect m-r-10 text-capitalize">{{buttonText}}</button>
                     <button type="button" placement="bottom" ngbTooltip="Go back" routerLink="/business/customers" class="btn btn-inverse btn-primary waves-effect"><i
               class="fa fa-arrow-circle-left"></i></button>
                 </div>
@@ -28,8 +28,8 @@
     <div class="row">
         <div class="col-md-10 col-xl-10 col-sm-10">
             <div class="md-tabs md-right-tabs business-tab">
-                <ngb-tabset>
-                    <ngb-tab title="Details">
+                <ngb-tabset #customertabs (tabChange)="onTabChange($event)">
+                    <ngb-tab title="Details" id='1'>
                         <ng-template ngbTabContent>
                             <div [@fadeInOutTranslate]>
                                 <form [formGroup]="customerprofile">
@@ -46,12 +46,10 @@
                                                     <div class="form-group row required">
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Business type</label>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <select name="select" class="form-control p-1 placeholder-align" formControlName="businesstype">
-                                <option value="opt1">Business Type</option>
-                                <option value="opt2">Registered</option>
-                                <option value="opt3">Indivdual</option>
-                                <option value="opt5">Government</option>
-                              </select>
+                                                            <div class="input-box">
+                                                                <ng-select [ngClass]="'ng-select'" [options]="businesstypes" formControlName="businesstype">
+                                                                </ng-select>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="form-group row required">
@@ -81,19 +79,16 @@
                                                     <div class="form-group row required">
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Category</label>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <select name="select" class="form-control p-1 placeholder-align" formControlName="category">
-                                <option value="opt1">Select category</option>
-                                <option value="opt2">TamilNadu</option>
-                                <option value="opt3">Kerala</option>
-                                <option value="opt4">Andrapradesh</option>
-                                <option value="opt5">Karnataka</option>
-                              </select>
+                                                            <div class="input-box">
+                                                                <ng-select [ngClass]="'ng-select'" [options]="categoryList" formControlName="category">
+                                                                </ng-select>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="form-group row required">
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Sub category</label>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <tag-input class="tag-chips" [(ngModel)]="itemsAsObjects3" [secondaryPlaceholder]="'Sub Category'" [identifyBy]="'id3'" [displayBy]="'name'" formControlName="subcategory"></tag-input>
+                                                            <tag-input class="tag-chips" [secondaryPlaceholder]="'Sub Category'" [identifyBy]="'tags'" [displayBy]="'name'" formControlName="subcategory"></tag-input>
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
@@ -116,13 +111,7 @@
                                                     <div class="form-group row required">
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Location</label>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <select name="select" class="form-control p-1 placeholder-align" formControlName="location">
-                                <option value="opt1">Select Location</option>
-                                <option value="opt2">TamilNadu</option>
-                                <option value="opt3">Kerala</option>
-                                <option value="opt4">Andrapradesh</option>
-                                <option value="opt5">Karnataka</option>
-                              </select>
+
                                                         </div>
                                                     </div>
                                                     <div class="form-group row required">
@@ -153,13 +142,8 @@
                                                     <div class="form-group row required">
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Delivery method</label>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <select name="select" class="form-control p-1 placeholder-align" formControlName="deliverymethod">
-                                <option value="opt1">Delivery method</option>
-                                <option value="opt2">Method 1</option>
-                                <option value="opt3">Method 2</option>
-                                <option value="opt4">Method 3</option>
-                                <option value="opt5">Method 4</option>
-                              </select>
+                                                            <ng-select [ngClass]="'ng-select'" [options]="deliveryMethods" [multiple]="true" formControlName="deliverymethods">
+                                                            </ng-select>
                                                         </div>
                                                     </div>
                                                     <div class="form-group row required">
@@ -198,8 +182,8 @@
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Registration Date</label>
                                                         <div class="col-md-9 col-sm-6">
                                                             <div class="input-group">
-                                                                <input class="form-control" placeholder="dd-mm-yyyy" name="dp" [(ngModel)]="modelPopup" ngbDatepicker #dp="ngbDatepicker" formControlName="registrationdate">
-                                                                <div class="input-group-append bg-default" (click)="dp.toggle()">
+                                                                <input class="form-control" placeholder="dd-mm-yyyy" name="regdt" ngbDatepicker #regdt="ngbDatepicker" formControlName="registrationdate">
+                                                                <div class="input-group-append bg-default" (click)="regdt.toggle()">
                                                                     <span class="fa fa-calendar input-group-text"></span>
                                                                 </div>
                                                             </div>
@@ -208,29 +192,22 @@
                                                     <div class="form-group row required">
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Payment Status</label>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <select name="select" class="form-control p-1 placeholder-align" formControlName="paymentstatus">
-                                <option value="opt1">Paid</option>
-                                <option value="opt2">Due</option>
-                              </select>
+                                                            <ng-select [ngClass]="'ng-select'" [options]="deliveryMethods" formControlName="deliverymethods">
+                                                            </ng-select>
                                                         </div>
                                                     </div>
                                                     <div class="form-group row required">
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Member type</label>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <select name="select" class="form-control p-1 placeholder-align" formControlName="membertype">
-                                <option value="opt1">Paid member</option>
-                                <option value="opt2">Free member</option>
-                              </select>
+                                                            <ng-select [ngClass]="'ng-select'" [options]="membershiptypes" formControlName="deliverymethods">
+                                                            </ng-select>
                                                         </div>
                                                     </div>
                                                     <div class="form-group row required">
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Payment tenure</label>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <select name="select" class="form-control p-1 placeholder-align" formControlName="paymenttenure">
-                                <option value="opt1">Weekly</option>
-                                <option value="opt2">Monthly</option>
-                                <option value="opt3">Yearly</option>
-                              </select>
+                                                            <ng-select [ngClass]="'ng-select'" [options]="paymenttenures" formControlName="deliverymethods">
+                                                            </ng-select>
                                                         </div>
                                                     </div>
                                                     <div class="form-group row required">
@@ -253,42 +230,42 @@
                             </div>
                         </ng-template>
                     </ngb-tab>
-                    <ngb-tab title="Payments">
+                    <ngb-tab title="Payments" id='2'>
                         <ng-template ngbTabContent>
                             <div [@fadeInOutTranslate]>
                                 <app-customer-payments></app-customer-payments>
                             </div>
                         </ng-template>
                     </ngb-tab>
-                    <ngb-tab title="Branches">
+                    <ngb-tab title="Branches" id='3'>
                         <ng-template ngbTabContent>
                             <div [@fadeInOutTranslate]>
                                 <app-customer-branches></app-customer-branches>
                             </div>
                         </ng-template>
                     </ngb-tab>
-                    <ngb-tab title="Settings">
+                    <ngb-tab title="Settings" id='4'>
                         <ng-template ngbTabContent>
                             <div [@fadeInOutTranslate]>
                                 <app-customer-settings></app-customer-settings>
                             </div>
                         </ng-template>
                     </ngb-tab>
-                    <ngb-tab title="Gigs">
+                    <ngb-tab title="Gigs" id='5'>
                         <ng-template ngbTabContent>
                             <div [@fadeInOutTranslate]>
                                 <app-customer-gigs [customerid]="customerid"></app-customer-gigs>
                             </div>
                         </ng-template>
                     </ngb-tab>
-                    <ngb-tab title="Coupons">
+                    <ngb-tab title="Coupons" id='6'>
                         <ng-template ngbTabContent>
                             <div [@fadeInOutTranslate]>
                                 <app-customer-coupons [customerid]="customerid"></app-customer-coupons>
                             </div>
                         </ng-template>
                     </ngb-tab>
-                    <ngb-tab title="Gallery">
+                    <ngb-tab title="Gallery" id='7'>
                         <ng-template ngbTabContent>
                             <div [@fadeInOutTranslate]>
                                 <app-customer-gallery></app-customer-gallery>
