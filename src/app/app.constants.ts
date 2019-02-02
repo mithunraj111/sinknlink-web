@@ -1,7 +1,7 @@
 import { environment } from '../environments/environment';
 
 export const AppConstant = Object.freeze({
-  API_END_POINT: environment.baseURL,
+  API_END_POINT: environment.host + ':' + environment.port + environment.baseurl,
   LOCALSTORAGE: {
     STR_PREFIX: 'bd20190404-',
     TOKEN: 'token',
@@ -55,7 +55,12 @@ export const AppConstant = Object.freeze({
     { label: 'Payment Method', value: 'biz_paymentmethods' },
     { label: 'Business Type', value: 'biz_businesstype' }
   ],
-
+  PAYMENT_TENURES: [
+    { label: 'Monthly', value: '1' },
+    { label: 'Quarterly', value: '3' },
+    { label: 'Half Yearly', value: '6' },
+    { label: 'Yearly', value: '12' }
+  ],
   // Workdays Data
   WORKDAYS: [
     { value: 'Monday', label: 'Monday' },

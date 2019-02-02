@@ -28,11 +28,11 @@
     <div class="row">
         <div class="col-md-10 col-xl-10 col-sm-10">
             <div class="md-tabs md-right-tabs business-tab">
-                <ngb-tabset #customertabs (tabChange)="onTabChange($event)">
+                <ngb-tabset #customertabs (tabChange)="onCustomerTabChange($event)">
                     <ngb-tab title="Details" id='1'>
                         <ng-template ngbTabContent>
                             <div [@fadeInOutTranslate]>
-                                <form [formGroup]="customerprofile">
+                                <form [formGroup]="customerForm">
                                     <div class="employee-form">
                                         <div class="card tenants-page tenants-pages m-b-10 m-t-60">
                                             <div class="row p-t-10 p-b-5">
@@ -40,14 +40,14 @@
                                                     <div class="form-group row required">
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Business name</label>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <input type="text" class="form-control" placeholder="Business name" formControlName="businessname">
+                                                            <input type="text" class="form-control" placeholder="Business name" formControlName="bizname">
                                                         </div>
                                                     </div>
                                                     <div class="form-group row required">
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Business type</label>
                                                         <div class="col-md-9 col-sm-6">
                                                             <div class="input-box">
-                                                                <ng-select [ngClass]="'ng-select'" [options]="businesstypes" formControlName="businesstype">
+                                                                <ng-select [ngClass]="'ng-select'" [options]="businesstypes" formControlName="biztype">
                                                                 </ng-select>
                                                             </div>
                                                         </div>
@@ -61,13 +61,13 @@
                                                     <div class="form-group row required placeholder-text">
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Mobile number</label>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <tag-input class="tag-chips" [secondaryPlaceholder]="'Mobile number'" [identifyBy]="'id1'" [displayBy]="'name'" formControlName="mobileno"></tag-input>
+                                                            <tag-input class="tag-chips" [secondaryPlaceholder]="'Mobile number'" [identifyBy]="'id1'" [displayBy]="'name'" formControlName="contactmobile"></tag-input>
                                                         </div>
                                                     </div>
                                                     <div class="form-group row required">
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Email address</label>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <input type="text" class="form-control" placeholder="Email address" formControlName="email">
+                                                            <input type="text" class="form-control" placeholder="Email address" formControlName="contactemail">
                                                         </div>
                                                     </div>
                                                     <div class="form-group row required">
@@ -80,7 +80,7 @@
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Category</label>
                                                         <div class="col-md-9 col-sm-6">
                                                             <div class="input-box">
-                                                                <ng-select [ngClass]="'ng-select'" [options]="categoryList" formControlName="category">
+                                                                <ng-select [ngClass]="'ng-select'" [options]="categoryList" formControlName="categoryid">
                                                                 </ng-select>
                                                             </div>
                                                         </div>
@@ -88,13 +88,13 @@
                                                     <div class="form-group row required">
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Sub category</label>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <tag-input class="tag-chips" [secondaryPlaceholder]="'Sub Category'" [identifyBy]="'tags'" [displayBy]="'name'" formControlName="subcategory"></tag-input>
+                                                            <tag-input class="tag-chips" [secondaryPlaceholder]="'Sub Category'" [identifyBy]="'tags'" [displayBy]="'name'" formControlName="tags"></tag-input>
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Postal address</label>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <textarea rows="3" cols="3" class="form-control" placeholder="Postal address" formControlName="address"></textarea>
+                                                            <textarea rows="3" cols="3" class="form-control" placeholder="Postal address" formControlName="postaladdress"></textarea>
                                                         </div>
                                                     </div>
                                                     <div class="form-group row required">
@@ -111,7 +111,10 @@
                                                     <div class="form-group row required">
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Location</label>
                                                         <div class="col-md-9 col-sm-6">
-
+                                                            <div class="input-box">
+                                                                <ng-select [ngClass]="'ng-select'" [options]="locationList" formControlName="locationid">
+                                                                </ng-select>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="form-group row required">
@@ -134,7 +137,7 @@
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Payment methods</label>
                                                         <div class="col-md-9 col-sm-6">
                                                             <div class="input-box">
-                                                                <ng-select [ngClass]="'ng-select'" [options]="paymentMethods" [multiple]="true" formControlName="paymentmethods">
+                                                                <ng-select [ngClass]="'ng-select'" [options]="paymentMethods" [multiple]="true" formControlName="acceptedpayments">
                                                                 </ng-select>
                                                             </div>
                                                         </div>
@@ -142,7 +145,7 @@
                                                     <div class="form-group row required">
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Delivery method</label>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <ng-select [ngClass]="'ng-select'" [options]="deliveryMethods" [multiple]="true" formControlName="deliverymethods">
+                                                            <ng-select [ngClass]="'ng-select'" [options]="deliveryMethods" [multiple]="true" formControlName="deliveryoptions">
                                                             </ng-select>
                                                         </div>
                                                     </div>
@@ -182,7 +185,7 @@
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Registration Date</label>
                                                         <div class="col-md-9 col-sm-6">
                                                             <div class="input-group">
-                                                                <input class="form-control" placeholder="dd-mm-yyyy" name="regdt" ngbDatepicker #regdt="ngbDatepicker" formControlName="registrationdate">
+                                                                <input class="form-control" placeholder="dd-mm-yyyy" name="regdt" ngbDatepicker #regdt="ngbDatepicker" formControlName="regdate">
                                                                 <div class="input-group-append bg-default" (click)="regdt.toggle()">
                                                                     <span class="fa fa-calendar input-group-text"></span>
                                                                 </div>
@@ -192,21 +195,21 @@
                                                     <div class="form-group row required">
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Payment Status</label>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <ng-select [ngClass]="'ng-select'" [options]="deliveryMethods" formControlName="deliverymethods">
+                                                            <ng-select [ngClass]="'ng-select'" [options]="paymentStatus" formControlName="paymentstatus">
                                                             </ng-select>
                                                         </div>
                                                     </div>
                                                     <div class="form-group row required">
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Member type</label>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <ng-select [ngClass]="'ng-select'" [options]="membershiptypes" formControlName="deliverymethods">
+                                                            <ng-select [ngClass]="'ng-select'" [options]="memberTypes" formControlName="membershiptype">
                                                             </ng-select>
                                                         </div>
                                                     </div>
                                                     <div class="form-group row required">
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Payment tenure</label>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <ng-select [ngClass]="'ng-select'" [options]="paymenttenures" formControlName="deliverymethods">
+                                                            <ng-select [ngClass]="'ng-select'" [options]="paymentTenures" formControlName="paymenttenure">
                                                             </ng-select>
                                                         </div>
                                                     </div>

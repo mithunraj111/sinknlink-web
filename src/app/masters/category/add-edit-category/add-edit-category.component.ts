@@ -35,8 +35,6 @@ export class AddEditCategoryComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.initForm();
-    // console.log(this.categoryObj.categoryimage.docurl);
-    // console.log(this.categoryObj.categoryimage.value.docurl);
   }
   close(event) {
     this.categoryimage.nativeElement.value = '';
@@ -79,7 +77,7 @@ export class AddEditCategoryComponent implements OnInit, OnChanges {
         categoryimg: [this.categoryObj.categoryimg],
         status: [this.categoryObj.status],
       });
-      // FIX:Move this to constant file
+      // FIXME: Move this to constant file
       if (this.categoryObj.categoryimage) {
         this.categoryfile = 'http://localhost:2000/' + this.categoryObj.categoryimage.docurl;
       }
@@ -107,7 +105,7 @@ export class AddEditCategoryComponent implements OnInit, OnChanges {
       data.categoryimg = this.categoryForm.value.categoryimg;
       data.updatedby = this.userstoragedata.fullname;
       data.updateddt = new Date();
-      // data.categoryfile = this.categoryForm.value.categoryimage.docurl;
+      data.categoryfile = this.categoryForm.value.categoryimage.docurl;
       if (!_.isUndefined(this.categoryObj) && !_.isUndefined(this.categoryObj.categoryid) && !_.isEmpty(this.categoryObj)) {
         data.status = data.status;
         formdata.append('formData', JSON.stringify(data));

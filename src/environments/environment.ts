@@ -4,7 +4,9 @@
 
 export const environment = {
   production: false,
-  baseURL : 'http://13.233.72.134:3000/bd/'
+  host: 'http://13.233.72.134',
+  port: 3000,
+  baseurl: '/bd/'
 };
 
 /*
