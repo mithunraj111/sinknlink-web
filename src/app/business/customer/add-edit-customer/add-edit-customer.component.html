@@ -4,8 +4,8 @@
             <div class="row">
                 <div class="col-md-6 col-sm-6">
                     <h2>Customer</h2>
-                    <p class="m-b-0" *ngIf="customerid">
-                        <i class="fa fa-pencil"></i> Membership ID: 875643
+                    <p class="m-b-0" *ngIf="customerObj?.membershipid">
+                        <i class="fa fa-pencil"></i> Membership ID: {{customerObj?.membershipid}}
                     </p>
                 </div>
                 <div class="col-md-6 col-sm-6 save-button text-right p-r-30">
@@ -216,12 +216,12 @@
                                                     <div class="form-group row required">
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Customer Status</label>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="#03ADED" switchColor="#fff" size="small" checked formControlName="customerstatus"></ui-switch>
+                                                            <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="#03ADED" switchColor="#fff" size="small" formControlName="status"></ui-switch>
                                                         </div>
                                                     </div>
                                                     <div class="form-group border-checkbox-section col-md-7 col-sm-7 m-l-10">
                                                         <div class="border-checkbox-group border-checkbox-group-primary pull-right">
-                                                            <input class="border-checkbox" type="checkbox" id="detailst&c" formControlName="termsandcond">
+                                                            <input class="border-checkbox" type="checkbox" id="detailst&c" formControlName="tncagreed">
                                                             <label class="border-checkbox-label" for="detailst&c">I agree to the Terms and Conditions</label>
                                                         </div>
                                                     </div>
@@ -257,14 +257,14 @@
                     <ngb-tab title="Gigs" id='5'>
                         <ng-template ngbTabContent>
                             <div [@fadeInOutTranslate]>
-                                <app-customer-gigs [customerid]="customerid"></app-customer-gigs>
+                                <app-customer-gigs [customerObj]="customerObj"></app-customer-gigs>
                             </div>
                         </ng-template>
                     </ngb-tab>
                     <ngb-tab title="Coupons" id='6'>
                         <ng-template ngbTabContent>
                             <div [@fadeInOutTranslate]>
-                                <app-customer-coupons [customerid]="customerid"></app-customer-coupons>
+                                <app-customer-coupons [customerObj]="customerObj"></app-customer-coupons>
                             </div>
                         </ng-template>
                     </ngb-tab>

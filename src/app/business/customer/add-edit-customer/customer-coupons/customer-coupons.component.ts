@@ -14,14 +14,12 @@ export class CustomerCouponsComponent implements OnInit, OnChanges {
   couponList = [];
   tempFilter = [];
   @ViewChild(DatatableComponent) table: DatatableComponent;
-  datedisplayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
+  datedisplayformat = AppConstant.API_CONFIG.ANG_DATE.displaydate;
   userstoragedata = {} as any;
-  @Input() customerid: number;
+  @Input() customerObj = {} as any;
   @Output() couponObj = {} as any;
   couponForm: FormGroup;
   couponErrObj = AppMessages.VALIDATION.COUPON;
-  // @Input() couponObj = {} as any;
-  // @Output() notifyCouponChange: EventEmitter<any> = new EventEmitter();
   constructor(private bootstrapAlertService: BootstrapAlertService,
     private commonService: CommonService,
     private couponService: BusinessService.CouponService,
@@ -43,11 +41,11 @@ export class CustomerCouponsComponent implements OnInit, OnChanges {
     });
   }
   ngOnChanges(changes: SimpleChanges) {
-    this.getCouponList(changes.customerid.currentValue);
+    this.getCouponList(changes.customerObj.currentValue);
   }
-  getCouponList(customerid) {
-    if (customerid) {
-      this.couponService.list({ membershipid: customerid }).subscribe(res => {
+  getCouponList(customerObj) {
+    if (!_.isEmpty(customerObj)) {
+      this.couponService.list({ membershipid: customerObj.membershipid }).subscribe(res => {
         const response = JSON.parse(res._body);
         if (response.status) {
           this.couponList = response.data;
@@ -81,11 +79,11 @@ export class CustomerCouponsComponent implements OnInit, OnChanges {
     this.updateCoupon(updateObj, index, flag);
   }
   updateCoupon(data, index, flag) {
-    this.couponService.update(data, data.couponid).subscribe(res => {
+    this.couponService.update(data, this.couponObj.couponid).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
         if (flag) {
-          this.bootstrapAlertService.showSucccess('#' + data.couponid + ' ' + AppMessages.VALIDATION.COMMON.DELETE_SUCCESS);
+          this.bootstrapAlertService.showSucccess('#' + this.couponObj.couponid + ' ' + AppMessages.VALIDATION.COMMON.DELETE_SUCCESS);
           this.couponList.splice(index, 1);
         } else {
           this.bootstrapAlertService.showSucccess(response.message);
@@ -106,7 +104,7 @@ export class CustomerCouponsComponent implements OnInit, OnChanges {
     } else {
       const data = this.couponForm.value;
       const formdata = { ...data } as any;
-      formdata.membershipid = this.customerid;
+      formdata.membershipid = this.customerObj.membershipid;
       formdata.noofcoupons = Number(data.noofcoupons);
       formdata.expirydt = this.commonService.formatDate(data.expirydt);
       formdata.updatedby = this.userstoragedata.fullname;
@@ -134,5 +132,7 @@ export class CustomerCouponsComponent implements OnInit, OnChanges {
   }
   editCoupon(data) {
     this.couponObj = data;
+    this.couponObj.expirydt = this.commonService.parseDate(new Date(this.couponObj.expirydt));
+    this.couponForm.patchValue(this.couponObj);
   }
 }

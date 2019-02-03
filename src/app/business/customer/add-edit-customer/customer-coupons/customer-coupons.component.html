@@ -93,7 +93,7 @@
                 </ngx-datatable-column>
                 <ngx-datatable-column prop="consumercoupons" name="Claimed" [resizeable]="false">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                        <span>{{row.consumercoupons.length}}</span>
+                        <span>{{row.consumercoupons?.length}}</span>
                     </ng-template>
                 </ngx-datatable-column>
                 <ngx-datatable-column prop="expirydt" name="Expires at" [resizeable]="false" [cellClass]="'text-center'" headerClass="text-right">

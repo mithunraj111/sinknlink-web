@@ -16,7 +16,7 @@ export class CustomerGigsComponent implements OnInit, OnChanges {
   @ViewChild(DatatableComponent) table: DatatableComponent;
   datedisplayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   userstoragedata = {} as any;
-  @Input() customerid: number;
+  @Input() customerObj = {} as any;
   gigForm: FormGroup;
   gigErrObj = AppMessages.VALIDATION.GIG;
   gigObj = {} as any;
@@ -44,11 +44,12 @@ export class CustomerGigsComponent implements OnInit, OnChanges {
     this.gigObj = {};
   }
   ngOnChanges(changes: SimpleChanges) {
-    this.getgigsList(changes.customerid.currentValue);
+    console.log(changes);
+    this.getgigsList(changes.customerObj.currentValue);
   }
-  getgigsList(customerid) {
-    if (customerid) {
-      this.gigsService.list({ membershipid: customerid }).subscribe(res => {
+  getgigsList(customerObj) {
+    if (!_.isEmpty(customerObj)) {
+      this.gigsService.list({ membershipid: customerObj.membershipid }).subscribe(res => {
         const response = JSON.parse(res._body);
         if (response.status) {
           this.gigsList = response.data;
@@ -82,11 +83,11 @@ export class CustomerGigsComponent implements OnInit, OnChanges {
     this.updateGig(updateObj, index, flag);
   }
   updateGig(data, index, flag) {
-    this.gigsService.update(data, data.gigid).subscribe(res => {
+    this.gigsService.update(data, this.gigObj.gigid).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
         if (flag) {
-          this.bootstrapAlertService.showSucccess('#' + data.gigid + ' ' + AppMessages.VALIDATION.COMMON.DELETE_SUCCESS);
+          this.bootstrapAlertService.showSucccess('#' + this.gigObj.gigid + ' ' + AppMessages.VALIDATION.COMMON.DELETE_SUCCESS);
           this.gigsList.splice(index, 1);
         } else {
           this.bootstrapAlertService.showSucccess(response.message);
@@ -101,6 +102,7 @@ export class CustomerGigsComponent implements OnInit, OnChanges {
   }
   editGig(data) {
     this.gigObj = data;
+    this.gigForm.patchValue(this.gigObj);
   }
 
   saveOrUpdateGig() {
@@ -112,7 +114,7 @@ export class CustomerGigsComponent implements OnInit, OnChanges {
     } else {
       const data = this.gigForm.value;
       const formdata = { ...data } as any;
-      formdata.membershipid = this.customerid;
+      formdata.membershipid = this.customerObj.membershipid;
       formdata.updatedby = this.userstoragedata.fullname;
       formdata.updateddt = new Date();
       if (!_.isUndefined(this.gigObj) && !_.isUndefined(this.gigObj.gigid) && !_.isEmpty(this.gigObj)) {

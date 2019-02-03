@@ -22,7 +22,7 @@ import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
 export class AddEditCustomerComponent implements OnInit {
   customerForm: FormGroup;
   formTitle: string;
-  buttonText: 'Save';
+  buttonText = AppConstant.BUTTON_TXT.SAVE;
   socialidPage: boolean;
   socialiddtls: {};
   workDays = AppConstant.WORKDAYS;
@@ -36,7 +36,7 @@ export class AddEditCustomerComponent implements OnInit {
   deliveryMethods = [];
   locationList = [];
   paymentTenures = AppConstant.PAYMENT_TENURES;
-  paymentStatus = AppConstant.PAYMENT_TENURES;
+  paymentStatus = AppConstant.PAYMENT_STATUS;
   customerid;
   userstoragedata = {} as any;
   customerErrObj = {} as any;
@@ -48,10 +48,16 @@ export class AddEditCustomerComponent implements OnInit {
     private localStorageService: LocalStorageService,
     private customerService: BusinessService.CustomerService,
     private bootstrapAlertService: BootstrapAlertService,
-    private locationService: MasterService.LocationService
+    private locationService: MasterService.LocationService,
+    private route: ActivatedRoute
   ) {
     this.userstoragedata = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER);
-
+    this.route.params.subscribe(params => {
+      if (params.id !== undefined) {
+        this.customerid = params.id;
+        this.getCustomerDetail();
+      }
+    });
   }
 
   ngOnInit() {
@@ -59,6 +65,17 @@ export class AddEditCustomerComponent implements OnInit {
     this.getLookUps();
     this.getCategoryList();
     this.getLocationList();
+  }
+  getCustomerDetail() {
+    this.customerService.byId(this.customerid).subscribe(res => {
+      const response = JSON.parse(res._body);
+      if (response.status) {
+        if (response.data != null) {
+          this.customerObj = response.data;
+          this.generateEditForm();
+        }
+      }
+    });
   }
   getLocationList() {
     this.locationService.list({ status: AppConstant.STATUS_ACTIVE }).subscribe(res => {
@@ -76,15 +93,17 @@ export class AddEditCustomerComponent implements OnInit {
     this.lookupService.list({ status: AppConstant.STATUS_ACTIVE }).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
-        response.data.map(item => {
-          item.value = item.refvalue;
-          item.label = item.refvalue;
-        });
-        let groupedData = _.groupBy(response.data, 'refkey');
-        this.memberTypes = _.get(groupedData, 'biz_membertype');
-        this.businesstypes = _.get(groupedData, 'biz_businesstype');
-        this.paymentMethods = _.get(groupedData, 'biz_paymentmethods');
-        this.deliveryMethods = _.get(groupedData, 'biz_deliverymethods');
+        if (response.data.length > 0) {
+          response.data.map(item => {
+            item.value = item.refvalue;
+            item.label = item.refvalue;
+          });
+          let groupedData = _.groupBy(response.data, 'refkey');
+          this.memberTypes = _.get(groupedData, 'biz_membertype');
+          this.businesstypes = _.get(groupedData, 'biz_businesstype');
+          this.paymentMethods = _.get(groupedData, 'biz_paymentmethods');
+          this.deliveryMethods = _.get(groupedData, 'biz_deliverymethods');
+        }
       }
     });
   }
@@ -125,10 +144,10 @@ export class AddEditCustomerComponent implements OnInit {
       paymentstatus: [null, Validators.compose([])],
       membershiptype: [null, Validators.compose([])],
       paymenttenure: [null, Validators.compose([])],
-      customerstatus: [null, Validators.compose([])],
-      termsandcond: [null, Validators.compose([])]
+      status: [true, Validators.compose([])],
+      tncagreed: [null, Validators.compose([])]
     });
-    this.buttonText = 'Save';
+    this.buttonText = AppConstant.BUTTON_TXT.SAVE;
   }
   addSocialId() {
     this.socialiddtls = {};
@@ -148,7 +167,7 @@ export class AddEditCustomerComponent implements OnInit {
   closeSocialIdModal(event) {
     ((event.target.parentElement.parentElement).parentElement).classList.remove('md-show');
   }
-  saveOrUpdateBusniess() {
+  saveOrUpdateBusiness() {
     let errMessage: any;
     if (!this.customerForm.valid) {
       errMessage = this.commonService.getFormErrorMessage(this.customerForm, this.customerErrObj);
@@ -157,7 +176,10 @@ export class AddEditCustomerComponent implements OnInit {
     } else {
       const data = this.customerForm.value;
       const formdata = { ...data } as any;
+      formdata.workhours = data.starttime + '-' + data.endtime;
       formdata.locationid = Number(data.locationid);
+      formdata.categoryid = Number(data.categoryid);
+      formdata.regdate = this.commonService.formatDate(data.regdate);
       formdata.updatedby = this.userstoragedata.fullname;
       formdata.updateddt = new Date();
       if (!_.isUndefined(this.customerObj) && !_.isEmpty(this.customerObj) && !_.isUndefined(this.customerObj.membershipid)) {
@@ -190,11 +212,11 @@ export class AddEditCustomerComponent implements OnInit {
         });
       }
     }
-  };
+  }
   saveOrUpdate() {
     switch (this.customertabs.activeId) {
       case '1':
-        this.saveOrUpdateBusniess();
+        this.saveOrUpdateBusiness();
         break;
       case '5':
         if (this.gigComponent.gigForm.touched) {
@@ -209,5 +231,14 @@ export class AddEditCustomerComponent implements OnInit {
   }
   onCustomerTabChange(event) {
     this.customerObj = this.customerObj;
+  }
+
+  generateEditForm() {
+    this.customerObj.categoryid = this.customerObj.categoryid.toString();
+    this.customerObj.locationid = this.customerObj.locationid.toString();
+    this.customerObj.regdate = this.commonService.parseDate(this.customerObj.regdate);
+    this.customerObj.status = (this.customerObj.status === AppConstant.STATUS_ACTIVE ? true : false);
+    this.customerForm.patchValue(this.customerObj);
+    this.buttonText = AppConstant.BUTTON_TXT.UPDATE;
   }
 }

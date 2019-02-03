@@ -61,6 +61,10 @@ export const AppConstant = Object.freeze({
     { label: 'Half Yearly', value: '6' },
     { label: 'Yearly', value: '12' }
   ],
+  PAYMENT_STATUS: [
+    { label: 'Paid', value: 'Paid' },
+    { label: 'Due', value: 'Due' }
+  ],
   // Workdays Data
   WORKDAYS: [
     { value: 'Monday', label: 'Monday' },
