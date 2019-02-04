@@ -61,7 +61,7 @@
                                                     <div class="form-group row required placeholder-text">
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Mobile number</label>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <tag-input class="tag-chips" [secondaryPlaceholder]="'Mobile number'" [identifyBy]="'id1'" [displayBy]="'name'" formControlName="contactmobile"></tag-input>
+                                                            <tag-input class="tag-chips" [secondaryPlaceholder]="'Mobile number'" placeholder="Mobile number" formControlName="contactmobile"></tag-input>
                                                         </div>
                                                     </div>
                                                     <div class="form-group row required">
@@ -71,16 +71,16 @@
                                                         </div>
                                                     </div>
                                                     <div class="form-group row required">
-                                                        <label class="col-md-3 col-sm-6 col-form-label text-right">Phone</label>
+                                                        <label class="col-md-3 col-sm-6 col-form-label text-right">Phone Number</label>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <tag-input class="tag-chips" [secondaryPlaceholder]="'Phone number'" [identifyBy]="'id2'" [displayBy]="'name'" formControlName="phoneno"></tag-input>
+                                                            <tag-input class="tag-chips" [secondaryPlaceholder]="'Phone number'" placeholder="Phone number" formControlName="phoneno"></tag-input>
                                                         </div>
                                                     </div>
                                                     <div class="form-group row required">
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Category</label>
                                                         <div class="col-md-9 col-sm-6">
                                                             <div class="input-box">
-                                                                <ng-select [ngClass]="'ng-select'" [options]="categoryList" formControlName="categoryid">
+                                                                <ng-select [ngClass]="'ng-select'" [options]="categoryList" formControlName="categoryid" placeholder="Select Category">
                                                                 </ng-select>
                                                             </div>
                                                         </div>
@@ -88,7 +88,7 @@
                                                     <div class="form-group row required">
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Sub category</label>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <tag-input class="tag-chips" [secondaryPlaceholder]="'Sub Category'" [identifyBy]="'tags'" [displayBy]="'name'" formControlName="tags"></tag-input>
+                                                            <tag-input class="tag-chips" [secondaryPlaceholder]="'Sub Category'" formControlName="tags" placeholder="Sub category"></tag-input>
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
@@ -104,15 +104,15 @@
                               </label>
                                                         </div>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <input type="text" class="form-control m-b-10" placeholder="Latitude" formControlName="latitude">
-                                                            <input type="text" class="form-control" placeholder="Longitude" formControlName="longitude">
+                                                            <input type="text" class="form-control m-b-10" placeholder="Latitude" formControlName="lat">
+                                                            <input type="text" class="form-control" placeholder="Longitude" formControlName="lng">
                                                         </div>
                                                     </div>
                                                     <div class="form-group row required">
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Location</label>
                                                         <div class="col-md-9 col-sm-6">
                                                             <div class="input-box">
-                                                                <ng-select [ngClass]="'ng-select'" [options]="locationList" formControlName="locationid">
+                                                                <ng-select [ngClass]="'ng-select'" [options]="locationList" formControlName="locationid" placeholder="Select Location">
                                                                 </ng-select>
                                                             </div>
                                                         </div>
@@ -121,7 +121,7 @@
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Work days</label>
                                                         <div class="col-md-9 col-sm-6">
                                                             <div class="input-box">
-                                                                <ng-select [ngClass]="'ng-select'" [options]="workDays" [multiple]="true" formControlName="workdays">
+                                                                <ng-select [ngClass]="'ng-select'" [options]="workDays" [multiple]="true" formControlName="workdays" placeholder="Select Work Days">
                                                                 </ng-select>
                                                             </div>
                                                         </div>
@@ -153,7 +153,7 @@
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Social ID's</label>
                                                         <div class="col-md-9 col-sm-6">
                                                             <div class="input-group">
-                                                                <input type="text" class="form-control w-75" placeholder="Social ID's" readonly>
+                                                                <input type="text" class="form-control w-75" placeholder="Social ID's" readonly formControlName="socialids">
                                                                 <div class="input-group-append bg-default" (click)='addSocialId();'>
                                                                     <span class="fa fa-plus input-group-text"></span>
                                                                 </div>
@@ -285,29 +285,29 @@
 <div class="modal-size select-input addlocation">
     <app-modal-animation [modalID]="'socialidmodal'" [modalClass]="'md-effect-7'">
         <h3 class="f-26">Social ID</h3>
-        <div class="form-header">
+        <form class="form-header" [formGroup]="socailIdForm">
             <div class="row ">
                 <div class="col-md-12">
                     <div class="form-group">
                         <label>Facebook</label>
-                        <input type="text" class="form-control" placeholder="Facebook ID">
+                        <input type="text" class="form-control" formControlName="fb" placeholder="Facebook ID">
                     </div>
                     <div class="form-group">
                         <label>Twitter</label>
-                        <input type="text" class="form-control" placeholder="Twitter ID">
+                        <input type="text" class="form-control" formControlName="twitter" placeholder="Twitter ID">
                     </div>
                     <div class="form-group">
                         <label>Google</label>
-                        <input type="text" class="form-control" placeholder="Google ID">
+                        <input type="text" class="form-control" formControlName="gmail" placeholder="Google ID">
                     </div>
                     <div class="form-group">
                         <label>Instagram</label>
-                        <input type="text" class="form-control" placeholder="Instagram ID">
+                        <input type="text" class="form-control" formControlName="instagram" placeholder="Instagram ID">
                     </div>
                 </div>
             </div>
-            <button (click)="closeSocialIdModal($event)" type="button" placement="top" ngbTooltip="Click to {{buttonText}} locations " (click)="save()" class="btn pull-right btn-primary waves-effect m-b-10">{{buttonText}}</button>
-        </div>
+            <button (click)="updateSocialId($event)" type="button" placement="top" ngbTooltip="Click to {{buttonText}} locations " class="btn pull-right btn-primary waves-effect m-b-10">{{buttonText}}</button>
+        </form>
         <button (click)="closeSocialIdModal($event)" aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>
     </app-modal-animation>
 </div>

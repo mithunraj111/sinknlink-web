@@ -4,9 +4,9 @@ import * as _ from 'lodash';
 import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 
 interface NgbDateFormat {
-    year:number,
-    month:number,
-    day:number
+    year: number,
+    month: number,
+    day: number
 }
 
 @Injectable({
@@ -64,9 +64,10 @@ export class CommonService {
 
     parseDate(dateString) {
         const date = new Date(dateString);
-        return this.ngbDateParserFormatter.parse(date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getUTCDate());
+        console.log(date);
+        return this.ngbDateParserFormatter.parse(date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate());
     }
-    formatDate(dateObj:NgbDateFormat) {
-        return new Date(dateObj.year,dateObj.month - 1, dateObj.day);
+    formatDate(dateObj: NgbDateFormat) {
+        return new Date(dateObj.year, (dateObj.month - 1), dateObj.day);
     }
 }

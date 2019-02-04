@@ -10,6 +10,7 @@ import { CustomerCouponsComponent } from './customer-coupons/customer-coupons.co
 import { CustomerGigsComponent } from './customer-gigs/customer-gigs.component';
 import * as _ from 'lodash';
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
+import { AppMessages } from 'src/app/app-messages';
 @Component({
   selector: 'app-add-edit-customer',
   templateUrl: './add-edit-customer.component.html',
@@ -21,6 +22,7 @@ import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
 })
 export class AddEditCustomerComponent implements OnInit {
   customerForm: FormGroup;
+  socailIdForm: FormGroup;
   formTitle: string;
   buttonText = AppConstant.BUTTON_TXT.SAVE;
   socialidPage: boolean;
@@ -39,7 +41,7 @@ export class AddEditCustomerComponent implements OnInit {
   paymentStatus = AppConstant.PAYMENT_STATUS;
   customerid;
   userstoragedata = {} as any;
-  customerErrObj = {} as any;
+  customerErrObj = AppMessages.VALIDATION.BUSINESS;
   customerObj = {} as any;
   constructor(private fb: FormBuilder,
     private categoryService: MasterService.CategoryService,
@@ -128,24 +130,31 @@ export class AddEditCustomerComponent implements OnInit {
       contactemail: [null, Validators.compose([])],
       phoneno: [null, Validators.compose([])],
       categoryid: [null, Validators.compose([])],
-      tags: [null, Validators.compose([])],
-      postaladdress: [null, Validators.compose([])],
-      latitude: [null, Validators.compose([])],
-      longitude: [null, Validators.compose([])],
+      tags: [[], Validators.compose([])],
+      postaladdress: ['', Validators.compose([])],
+      lat: [null, Validators.compose([])],
+      lng: [null, Validators.compose([])],
       locationid: [null, Validators.compose([])],
       workdays: [null, Validators.compose([])],
-      starttime: [null, Validators.compose([])],
-      endtime: [null, Validators.compose([])],
-      acceptedpayments: [null, Validators.compose([])],
-      deliveryoptions: [null, Validators.compose([])],
+      starttime: [null, Validators.required],
+      endtime: [null, Validators.required],
+      acceptedpayments: [null, Validators.required],
+      deliveryoptions: [null, Validators.required],
       taxno: [null, Validators.compose([])],
-      website: [null, Validators.compose([])],
-      regdate: [null, Validators.compose([])],
+      website: [''],
+      socialids: [''],
+      regdate: [new Date(), Validators.required],
       paymentstatus: [null, Validators.compose([])],
       membershiptype: [null, Validators.compose([])],
       paymenttenure: [null, Validators.compose([])],
-      status: [true, Validators.compose([])],
-      tncagreed: [null, Validators.compose([])]
+      status: [true, Validators.required],
+      tncagreed: [false, Validators.required]
+    });
+    this.socailIdForm = this.fb.group({
+      fb: [null],
+      gmail: [null],
+      twitter: [null],
+      instagram: [null],
     });
     this.buttonText = AppConstant.BUTTON_TXT.SAVE;
   }
@@ -167,8 +176,15 @@ export class AddEditCustomerComponent implements OnInit {
   closeSocialIdModal(event) {
     ((event.target.parentElement.parentElement).parentElement).classList.remove('md-show');
   }
+  updateSocialId(event) {
+    let socialids = this.socailIdForm.value.fb + ',' + this.socailIdForm.value.twitter + ',' +
+      this.socailIdForm.value.gmail + ',' + this.socailIdForm.value.instagram;
+    this.customerForm.controls['socialids'].setValue(socialids);
+    this.closeSocialIdModal(event);
+  }
   saveOrUpdateBusiness() {
     let errMessage: any;
+    console.log(this.customerForm);
     if (!this.customerForm.valid) {
       errMessage = this.commonService.getFormErrorMessage(this.customerForm, this.customerErrObj);
       this.bootstrapAlertService.showError(errMessage);
@@ -182,6 +198,18 @@ export class AddEditCustomerComponent implements OnInit {
       formdata.regdate = this.commonService.formatDate(data.regdate);
       formdata.updatedby = this.userstoragedata.fullname;
       formdata.updateddt = new Date();
+      formdata.contactmobile = _.map(data.contactmobile, _.property('value'));
+      formdata.tags = _.map(data.tags, _.property('value'));
+      formdata.tncagreed = data.tncagreed ? 'Y' : 'N';
+      formdata.socialids = this.socailIdForm.value;
+      formdata.workhours = {
+        starttime: data.starttime,
+        endtime: data.endtime
+      };
+      formdata.geoaddress = {
+        lat: data.lat,
+        lng: data.lng
+      };
       if (!_.isUndefined(this.customerObj) && !_.isEmpty(this.customerObj) && !_.isUndefined(this.customerObj.membershipid)) {
         formdata.status = data.status ? AppConstant.STATUS_ACTIVE : AppConstant.STATUS_INACTIVE;
         this.customerService.update(formdata, this.customerObj.membershipid).subscribe(res => {
@@ -237,8 +265,30 @@ export class AddEditCustomerComponent implements OnInit {
     this.customerObj.categoryid = this.customerObj.categoryid.toString();
     this.customerObj.locationid = this.customerObj.locationid.toString();
     this.customerObj.regdate = this.commonService.parseDate(this.customerObj.regdate);
+    this.customerObj.starttime = this.customerObj.workhours.starttime;
+    this.customerObj.endtime = this.customerObj.workhours.endtime;
+    if (this.customerObj.geoaddress) {
+      this.customerObj.lat = this.customerObj.geoaddress.lat;
+      this.customerObj.lng = this.customerObj.geoaddress.lng;
+    }
+    this.customerObj.contactmobile = _.map(this.customerObj.contactmobile, function (item) {
+      return {
+        value: item,
+        display: item
+      };
+    });
+    this.customerObj.tags = _.map(this.customerObj.tags, function (item) {
+      return {
+        value: item,
+        display: item
+      };
+    });
+    this.customerObj.tncagreed = this.customerObj.tncagreed === 'Y' ? true : false;
     this.customerObj.status = (this.customerObj.status === AppConstant.STATUS_ACTIVE ? true : false);
     this.customerForm.patchValue(this.customerObj);
+    if (this.customerObj.socialids != null) {
+      this.socailIdForm.patchValue(this.customerObj.socialids);
+    }
     this.buttonText = AppConstant.BUTTON_TXT.UPDATE;
   }
 }
