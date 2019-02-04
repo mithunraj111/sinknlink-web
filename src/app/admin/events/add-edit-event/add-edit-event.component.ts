@@ -14,7 +14,6 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 @Component({
   selector: 'app-add-edit-event',
   templateUrl: './add-edit-event.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./add-edit-event.component.scss'],
   providers: [
     { provide: NgbDateParserFormatter, useClass: NgbDateCustomParserFormatter }
