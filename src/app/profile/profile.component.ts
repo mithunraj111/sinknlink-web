@@ -41,7 +41,8 @@ export class ProfileComponent implements OnInit {
     this.initForm();
     this.userProfileForm();
     this.getLocationList();
-    this.socialIdForm();
+    this.socialidForm();
+    this.getsocialid();
   }
   initForm() {
     this.passwordForm = this.fb.group({
@@ -60,7 +61,7 @@ export class ProfileComponent implements OnInit {
       socialid: ['']
     });
   }
-  socialIdForm() {
+  socialidForm() {
     this.socialForm = this.fb.group({
       facebookid: [''],
       twitterid: [''],
@@ -97,18 +98,18 @@ export class ProfileComponent implements OnInit {
     });
   }
   getUser() {
-    this.userService.byId(this.userstoragedata.userid).subscribe(res => {
+this.userService.byId(this.userstoragedata.userid).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
         this.userObj = response.data;
-        console.log(this.userObj)
         this.profileForm = this.fb.group({
           fullname: [this.userObj.fullname, Validators.compose([Validators.required, Validators.minLength(1),
           Validators.maxLength(50), Validators.pattern('^[a-zA-Z]*$')])],
           emailid: [this.userObj.consumer.emailid, Validators.compose([Validators.pattern('([a-z0-9&_\.-]*[@][a-z0-9]+((\.[a-z]{2,3})?\.[a-z]{2,3}))'), Validators.maxLength(100)])],
           address: [this.userObj.consumer.address, Validators.compose([Validators.minLength(1), Validators.maxLength(100)])],
           locationid: [this.userObj.consumer.locationid.toString(), Validators.compose([])],
-          socialid: [this.userObj.consumer.socialid]
+          socialid: [this.socialForm.value.facebookid + ',' + this.socialForm.value.twitterid + ',' +
+          this.socialForm.value.googleid + ',' + this.socialForm.value.instagramid]
         });
         this.socialForm = this.fb.group({
           facebookid: [this.userObj.consumer.socialid.facebookid],
@@ -117,6 +118,8 @@ export class ProfileComponent implements OnInit {
           instagramid: [this.userObj.consumer.socialid.instagramid]
         })
       }
+     console.log(this.socialForm.value.facebookid + ',' + this.socialForm.value.twitterid + ',' +
+     this.socialForm.value.googleid + ',' + this.socialForm.value.instagramid)
     });
   }
   changeProfile() {
@@ -133,6 +136,7 @@ export class ProfileComponent implements OnInit {
       formdata.emailid = data.emailid;
       formdata.address = data.address;
       formdata.locationid = Number(data.locationid);
+      formdata.socialid = this.socialForm.value;
       this.userService.update(formdata, this.userstoragedata.userid).subscribe(res => {
         const response = JSON.parse(res._body);
         if (response.status) {
@@ -150,6 +154,7 @@ export class ProfileComponent implements OnInit {
     document.querySelector('#' + event).classList.add('md-show');
   }
   closeProfileModal(event) {
+    // ((event.target.parentElement.parentElement).parentElement).classList.remove('md-show');
     document.querySelector('#' + event).classList.remove('md-show');
   }
   updatePassword() {
@@ -178,26 +183,10 @@ export class ProfileComponent implements OnInit {
       }
     });
   }
-  getSocialId() {
-    let formdata = {} as any;
-    let data = this.socialForm.value;
-    console.log(formdata.socialid)
-    formdata.updatedby = this.userstoragedata.fullname;
-    formdata.updateddt = new Date();
-    formdata.socialid = data.facebookid;
-    
-    this.userService.update(formdata, this.userstoragedata.userid).subscribe(res => {
-      const response = JSON.parse(res._body);
-      if (response.status) {
-        this.bootstrapAlertService.showSucccess(response.message);
+  getsocialid() {    
 
-      } else {
-        this.bootstrapAlertService.showError(response.message);
-      }
-    }, err => {
-      this.bootstrapAlertService.showError(err.message);
-    });
-
-
+    let socialids = this.socialForm.value.facebookid + ',' + this.socialForm.value.twitterid + ',' +
+    this.socialForm.value.googleid + ',' + this.socialForm.value.instagramid;
+    this.profileForm.controls['socialid'].setValue(socialids);
   }
 }

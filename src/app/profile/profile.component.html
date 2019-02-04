@@ -68,10 +68,11 @@
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-md-3 col-sm-6 col-form-label text-right">Social ID</label>
+                  <label class="col-md-3 col-sm-6 col-form-label text-right">Social ID's</label>
                   <div class="col-md-6 col-sm-6 p-r-0">
                     <div class="input-group">
-                      <input type="text" class="form-control w-75" placeholder="Social ID's" formControlName="socialid" readonly>
+                      <input type="text" class="form-control w-75" formControlName="socialid" placeholder="Social ID's"
+                        readonly>
                       <div class="input-group-append bg-default" (click)='addSocialId();'>
                         <span class="fa fa-plus input-group-text"></span>
                       </div>
@@ -122,44 +123,34 @@
     <button (click)="closePassword()" aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>
   </app-modal-animation>
 </div>
-<div class="modal-size select-input addlocation">
-  <app-modal-animation [modalID]="'socialidmodal'" [modalClass]="'md-effect-7'">
-    <h3 class="f-26">Social ID</h3>
-    <form [formGroup]="socialForm">
-      <div class="form-header">
-        <div class="row ">
+
+  <div class="modal-size addlocation employee-form">
+    <app-modal-animation [modalID]="'socialidmodal'" [modalClass]="'md-effect-7'">
+      <h3 class="f-26">SocialID</h3>
+      <form [formGroup]="socialForm">
+        <div class="form-header pt-2">
           <div class="col-md-12">
             <div class="form-group">
-              <label>Facebook</label>
-              <div class="input-box">
-                <tag-input [ngClass]="'tag-select'" theme='bootstrap' [placeholder]="'+'" [maxItems]="5" [addOnBlur]="true"
-                  [clearOnBlur]="true" [secondaryPlaceholder]="'Facebook ID'" name="amount" formControlName="facebookid">
-                </tag-input>
-              </div>
+              <label>Facebook ID</label>
+              <input type="text" class="form-control" placeholder="Facebook ID" formControlName="facebookid">
             </div>
             <div class="form-group">
-              <label>Twitter</label>
-              <tag-input [ngClass]="'tag-select'" theme='bootstrap' [placeholder]="'+'" [maxItems]="5" [addOnBlur]="true"
-                [clearOnBlur]="true" [secondaryPlaceholder]="'Twitter ID'" name="amount" formControlName="twitterid">
-              </tag-input>
+              <label>Twitter ID</label>
+              <input type="text" class="form-control" placeholder="Twitter ID" formControlName="twitterid">
             </div>
             <div class="form-group">
-              <label>Google</label>
-              <tag-input [ngClass]="'tag-select'" theme='bootstrap' [placeholder]="'+'" [maxItems]="5" [addOnBlur]="true"
-                [clearOnBlur]="true" [secondaryPlaceholder]="'Google ID'" name="amount" formControlName="googleid">
-              </tag-input>
+              <label>Google ID</label>
+              <input type="text" class="form-control" placeholder="Google ID" formControlName="googleid">
             </div>
             <div class="form-group">
-              <label>Instagram</label>
-              <tag-input [ngClass]="'tag-select'" theme='bootstrap' [placeholder]="'+'" [maxItems]="5" [addOnBlur]="true"
-                [clearOnBlur]="true" [secondaryPlaceholder]="'Instagram ID'" name="amount" formControlName="instagramid">
-              </tag-input>
+              <label>Instagram ID</label>
+              <input type="text" class="form-control" placeholder="Instagram ID" formControlName="instagramid">
             </div>
           </div>
+          <button type="button" placement="top" (click)="getsocialid()" ngbTooltip="Click to update social id" class="btn pull-right btn-primary waves-effect 
+                  m-b-10 m-r-15">Update</button>
         </div>
-        <button (click)="getSocialId()" type="button" placement="top" ngbTooltip="Click to update socialid's " class="btn pull-right btn-primary waves-effect m-b-10">Update</button>
-      </div>
-    </form>
-    <button (click)="closeSocialIdModal()" aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>
-  </app-modal-animation>
-</div>
+      </form>
+      <button (click)="closeSocialIdModal()" aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>
+    </app-modal-animation>
+  </div>
