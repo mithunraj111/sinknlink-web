@@ -31,9 +31,13 @@ const routes: Routes = [
         loadChildren: './admin/admin.module#AdminModule'
       },
       {
-        path:'profile',
+        path: 'profile',
         component: ProfileComponent
-      }
+      },
+      {
+        path: 'reports',
+        loadChildren: './reports/reports.module#ReportsModule'
+      },
     ]
   },
   {

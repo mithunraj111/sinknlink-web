@@ -17,6 +17,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { FileUploadModule } from 'ng2-file-upload';
 import { SelectModule } from 'ng-select';
 import { TagInputModule } from 'ngx-chips';
+import { DataTableModule } from 'angular2-datatable';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { TagInputModule } from 'ngx-chips';
     HttpModule,
     FileUploadModule,
     SelectModule,
-    TagInputModule
+    TagInputModule,
+    DataTableModule
   ],
   providers: [
     MenuItems,

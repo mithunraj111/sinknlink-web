@@ -117,7 +117,13 @@ const MENUITEMS = [
         short_label: 'R',
         name: 'Reports',
         type: 'sub',
-        icon: 'ti-agenda',
+        icon: 'ti-files',
+        children: [
+          {
+            state: 'area-categories',
+            name: 'Area & Categories'
+          },
+        ]
       }
     ],
   },

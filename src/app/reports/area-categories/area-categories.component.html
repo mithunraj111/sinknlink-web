@@ -1,0 +1,172 @@
+<div class="fixedheader">
+  <div class="report-title pos-fixed">
+    <div class="row">
+      <div class="col-md-12 col-sm-12">
+        <h2>Area & Categories</h2>
+        <p>Area & Categories reports download</p>
+      </div>
+
+      <div class="col-lg-12 col-md-12">
+        <div class="row">
+          <div class="col-md-4 col-sm-4 p-r-5">
+            <div class="form-group">
+              <label>From Date: </label>
+              <div class="input-group">
+                <input class="form-control" placeholder="dd-mm-yyyy" name="dp" ngbDatepicker #dp="ngbDatepicker"
+                  formControlName="fromdate">
+                <div class="input-group-append" (click)="dp.toggle()">
+                  <span class="fa fa-calendar input-group-text"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-4 p-l-0 p-r-5">
+            <div class="form-group">
+              <label>To Date: </label>
+              <div class="input-group">
+                <input class="form-control" placeholder="dd-mm-yyyy" name="dp" ngbDatepicker #dp="ngbDatepicker"
+                  formControlName="todate">
+                <div class="input-group-append" (click)="dp.toggle()">
+                  <span class="fa fa-calendar input-group-text"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-4 m-t-25">
+            <button type="button" placement="bottom" ngbTooltip="Click to generate report" class="btn btn-primary generate-button waves-effect">
+              Generate Report
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 reports p-l-0 p-r-0">
+  <div class="row">
+    <div class="col-lg-6 col-md-12 p-r-5">
+      <div class="header-block">
+        <div class="table-header report-table">
+          <app-card [classHeader]="true" [title]="'Area Wise Business Counts'">
+            <div class="row">
+              <div class="col-sm-12 header-title">
+                <label class="dt-cust-search f-right">
+                  <div class="form-group">
+                    <!-- <label>Search: </label> -->
+                    <input type='text' class="form-control input-sm report-search" placeholder='Search for here'
+                      (keyup)='updateFilter($event)' />
+                    <button type="button" placement="bottom" ngbTooltip="Click to download reports" class="btn btn-primary waves-effect download-btn"><i
+                        class="fa fa-download m-r-5"></i>
+                    </button>
+                  </div>
+                </label>
+              </div>
+            </div>
+            <!-- <div class="row">
+              <div class="col-xs-12 col-sm-12 col-sm-12 col-md-6">
+                <div class="show-length">
+                  <label>Show
+                    <select class="form-control input-sm">
+                      <option value="10">10</option>
+                      <option value="25">25</option>
+                      <option value="50">50</option>
+                      <option value="100">100</option>
+                    </select>
+                    entries</label>
+                </div>
+              </div>
+              <div class="col-xs-12 col-sm-12 col-md-6 search-length">
+                <div class="form-group">
+                  <label>Search:
+                    <input type='text' class="form-control input-sm m-l-10" placeholder='Search for here' (keyup)='updateFilter($event)' />
+                  </label>
+                </div>
+              </div>
+            </div> -->
+            <ngx-datatable #areatable class="table data-table expandable" [rows]='areaList' [columnMode]="'flex'"
+              [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false">
+              <!-- Row Detail Template -->
+              <ngx-datatable-column prop="area" name="Area" [resizeable]="false">
+                <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                  <span>{{row.area}}</span>
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column prop="pincode" name="Pincode" [resizeable]="false">
+                <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                  <span>{{row.pincode}}</span>
+                </ng-template>
+              </ngx-datatable-column>
+
+              <ngx-datatable-column prop="businesscount" name="Business Count" [resizeable]="false">
+                <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                  <span>{{row.businesscount}}</span>
+                </ng-template>
+              </ngx-datatable-column>
+
+            </ngx-datatable>
+          </app-card>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-md-12 p-l-5">
+      <div class="header-block">
+        <div class="table-header report-table">
+          <app-card [classHeader]="true" [title]="'Category Wise Business Counts'">
+            <div class="row">
+              <div class="col-sm-12 header-title">
+                <label class="dt-cust-search f-right">
+                  <div class="form-group">
+                    <!-- <label>Search: </label> -->
+                    <input type='text' class="form-control input-sm report-search" placeholder='Search for here'
+                      (keyup)='updateFilter($event)' />
+                    <button type="button" placement="bottom" ngbTooltip="Click to download reports" class="btn btn-primary waves-effect download-btn"><i
+                        class="fa fa-download m-r-5"></i>
+                    </button>
+                  </div>
+
+                </label>
+
+              </div>
+            </div>
+            <!-- <div class="row">
+                <div class="col-xs-12 col-sm-12 col-sm-12 col-md-6">
+                  <div class="show-length">
+                    <label>Show
+                      <select class="form-control input-sm">
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                      </select>
+                      entries</label>
+                  </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 search-length">
+                  <div class="form-group">
+                    <label>Search:
+                      <input type='text' class="form-control input-sm m-l-10" placeholder='Search for here' (keyup)='updateFilter($event)' />
+                    </label>
+                  </div>
+                </div>
+              </div> -->
+            <ngx-datatable #categoriestable class="table data-table expandable" [rows]='categoriesList' [columnMode]="'flex'"
+              [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false">
+              <!-- Row Detail Template -->
+              <ngx-datatable-column prop="categoryname" name="Category Name" [resizeable]="false">
+                <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                  <span>{{row.categoryname}}</span>
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column prop="businesscount" name="Business Count" [resizeable]="false">
+                <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                  <span>{{row.businesscount}}</span>
+                </ng-template>
+              </ngx-datatable-column>
+
+            </ngx-datatable>
+          </app-card>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
