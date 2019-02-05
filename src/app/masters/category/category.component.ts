@@ -1,9 +1,8 @@
 import { Component, OnInit, Output, ViewChild } from '@angular/core';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { AppConstant } from '../../app.constants';
-import { CategoryService } from '../../services/masters/category.service';
+import { MasterService, BaseService } from '../../services';
 import * as _ from 'lodash';
-import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
 import { AppMessages } from '../../app-messages';
 @Component({
@@ -11,7 +10,7 @@ import { AppMessages } from '../../app-messages';
   templateUrl: './category.component.html',
   styleUrls: ['./category.component.scss']
 })
-export class CategoryComponent implements OnInit {
+export class CategoryComponent extends BaseService implements OnInit {
   @ViewChild(DatatableComponent) table: DatatableComponent;
   @Output() categoryObj = {} as any;
   public data: any;
@@ -19,11 +18,9 @@ export class CategoryComponent implements OnInit {
   categoryPage: any;
   displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   categoryList = [];
-  userstoragedata = {} as any;
-  constructor(private categoryService: CategoryService,
-    private localStorageService: LocalStorageService,
+  constructor(private categoryService: MasterService.CategoryService,
     private bootstrapAlertService: BootstrapAlertService) {
-    this.userstoragedata = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER);
+    super();
   }
   ngOnInit() {
     this.getCategories();
@@ -85,7 +82,7 @@ export class CategoryComponent implements OnInit {
   }
   search(event?) {
     let val = '';
-    if( event != null && event!= undefined){
+    if (event != null && event != undefined) {
       val = event.target.value.toLowerCase();
     }
     const temp = this.tempFilter.filter(item => {

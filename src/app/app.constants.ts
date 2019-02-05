@@ -1,6 +1,7 @@
 import { environment } from '../environments/environment';
 
 export const AppConstant = Object.freeze({
+  IMG_BASE_URL: environment.host + ':' + environment.port,
   API_END_POINT: environment.host + ':' + environment.port + environment.baseurl,
   LOCALSTORAGE: {
     STR_PREFIX: 'bd20190404-',

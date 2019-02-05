@@ -28,6 +28,7 @@ export class ProfileComponent implements OnInit {
   locationList = [];
   userimgfile: any;
   userfile: any;
+  fileUrl = AppConstant.IMG_BASE_URL;
   @ViewChild('userimage') userimage: ElementRef;
 
   constructor(private fb: FormBuilder, private roleService: RoleService,
@@ -87,8 +88,9 @@ export class ProfileComponent implements OnInit {
     let data = this.passwordForm.value;
     formdata.updatedby = this.userstoragedata.fullname;
     formdata.updateddt = new Date();
-    formdata.password = data.newpassword;
     formdata.password = data.confirmpassword;
+    const formData = new FormData();
+    formData.append('formData', formdata);
     this.userService.update(formdata, this.userstoragedata.userid).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
@@ -106,20 +108,37 @@ export class ProfileComponent implements OnInit {
       const response = JSON.parse(res._body);
       if (response.status) {
         this.userObj = response.data;
+        if (this.userObj.profileimg != null) {
+          this.userfile = this.fileUrl + '/' + this.userObj.profileimg.docurl;
+          console.log(this.userfile);
+        }
+        let consumer = {
+          emailid: '',
+          locationid: '',
+          socialid: null,
+          address: ''
+        } as any;
+        consumer = this.userObj.consumer == null ? consumer : this.userObj.consumer;
         this.profileForm = this.fb.group({
           fullname: [this.userObj.fullname, Validators.compose([Validators.required, Validators.minLength(1),
           Validators.maxLength(50), Validators.pattern('^[a-zA-Z]*$')])],
-          emailid: [this.userObj.consumer.emailid, Validators.compose([Validators.pattern('([a-z0-9&_\.-]*[@][a-z0-9]+((\.[a-z]{2,3})?\.[a-z]{2,3}))'), Validators.maxLength(100)])],
-          address: [this.userObj.consumer.address, Validators.compose([Validators.minLength(1), Validators.maxLength(100)])],
-          locationid: [this.userObj.consumer.locationid.toString(), Validators.compose([])],
-          socialid: [this.userObj.consumer.socialid.facebookid + "," + this.userObj.consumer.socialid.twitterid + "," + this.userObj.consumer.socialid.googleid + "," + this.userObj.consumer.socialid.instagramid]
+          emailid: [consumer.emailid,
+          Validators.compose([Validators.pattern('([a-z0-9&_\.-]*[@][a-z0-9]+((\.[a-z]{2,3})?\.[a-z]{2,3}))'), Validators.maxLength(100)])],
+          address: [consumer.address, Validators.compose([Validators.minLength(1), Validators.maxLength(100)])],
+          locationid: [consumer.locationid == null ? '' : consumer.locationid.toString(), Validators.compose([])],
+          socialid: ['']
         });
+        if (consumer.socialid != null) {
+          const socialids = consumer.socialid.facebookid + ',' + consumer.socialid.twitterid + ',' +
+            consumer.socialid.googleid + ',' + consumer.socialid.instagramid;
+          this.profileForm.controls['socialid'].setValue(socialids);
+        }
         this.socialForm = this.fb.group({
           facebookid: [this.userObj.consumer.socialid.facebookid],
           twitterid: [this.userObj.consumer.socialid.twitterid],
           googleid: [this.userObj.consumer.socialid.googleid],
           instagramid: [this.userObj.consumer.socialid.instagramid]
-        })
+        });
       }
     });
   }
@@ -129,7 +148,6 @@ export class ProfileComponent implements OnInit {
       this.bootstrapAlertService.showError(this.errMessage);
       return false;
     } else {
-
       let data = {} as any;
       data.updatedby = this.userstoragedata.fullname;
       data.updateddt = new Date();
@@ -138,10 +156,15 @@ export class ProfileComponent implements OnInit {
       data.address = this.socialForm.value.address;
       data.locationid = Number(this.socialForm.value.locationid);
       data.socialid = this.socialForm.value;
-      data.userfile = this.profileForm.value.userimage.docurl;
-      console.log(this.profileForm.value.userimage.docurl)
-
-      this.userService.update(data, this.userstoragedata.userid).subscribe(res => {
+      const formData = new FormData();
+      if (this.userObj.profileimg != null && this.userObj.profileimg.docid) {
+        data.docid = this.userObj.profileimg.docid;
+      }
+      if (this.userimgfile) {
+        formData.append('profileimg', this.userimgfile);
+      }
+      formData.append('formData', JSON.stringify(data));
+      this.userService.update(formData, this.userstoragedata.userid).subscribe(res => {
         const response = JSON.parse(res._body);
         if (response.status) {
           this.bootstrapAlertService.showSucccess(response.message);
@@ -180,8 +203,6 @@ export class ProfileComponent implements OnInit {
       this.userfile = e.target['result'];
     });
     reader.readAsDataURL(event.target.files[0]);
-    console.log(this.userfile)
-    console.log(this.userimgfile)
   }
   getLocationList() {
     this.locationService.list({}).subscribe((res) => {

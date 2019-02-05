@@ -1,19 +1,20 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { FormGroup, FormControl, FormArray } from '@angular/forms';
 import * as _ from 'lodash';
 import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 
 interface NgbDateFormat {
-    year: number,
-    month: number,
-    day: number
+    year: number;
+    month: number;
+    day: number;
 }
-
+export let InjectorInstance: Injector;
 @Injectable({
     providedIn: 'root'
 })
 export class CommonService {
-    constructor(private ngbDateParserFormatter: NgbDateParserFormatter) {
+    constructor(private ngbDateParserFormatter: NgbDateParserFormatter, private injector: Injector) {
+        InjectorInstance = this.injector;
     }
     public getFormErrorMessage(formGroupObj: FormGroup, errorObj: any) {
         for (const key in formGroupObj.controls) {
