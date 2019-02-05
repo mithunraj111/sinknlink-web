@@ -1,4 +1,4 @@
-<form>
+<form [formGroup]="settingForm">
     <div class="employee-form">
         <div class="card tenants-page tenants-pages m-b-10 m-t-60">
             <div class="row p-t-10 p-b-5">
@@ -6,26 +6,26 @@
                     <div class="form-group row">
                         <label class="col-md-3 col-sm-6 col-form-label text-right">Business search</label>
                         <div class="col-md-9 col-sm-6">
-                            <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="#03ADED" switchColor="#fff" size="small" checked></ui-switch>
+                            <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="#03ADED" switchColor="#fff" size="small" formControlName="bizsearch"></ui-switch>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3 col-sm-6 col-form-label text-right">Chat support</label>
                         <div class="col-md-9 col-sm-6">
-                            <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="#03ADED" switchColor="#fff" size="small" checked></ui-switch>
+                            <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="#03ADED" switchColor="#fff" size="small" formControlName="chatyn"></ui-switch>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3 col-sm-6 col-form-label text-right">Business hours</label>
                         <div class="col-md-9 col-sm-6">
-                            <input class="form-control m-b-10" type="time">
-                            <input class="form-control" type="time">
+                            <input class="form-control m-b-10" type="time" formControlName="starttime">
+                            <input class="form-control" type="time" formControlName="endtime">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3 col-sm-6 col-form-label text-right">Open now</label>
                         <div class="col-md-9 col-sm-6">
-                            <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="#03ADED" switchColor="#fff" size="small" checked></ui-switch>
+                            <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="#03ADED" switchColor="#fff" size="small" formControlName="openyn"></ui-switch>
                         </div>
                     </div>
                 </div>

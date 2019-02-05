@@ -8,6 +8,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MasterService, CommonService, LocalStorageService, AdminService, BusinessService } from '../../../services';
 import { CustomerCouponsComponent } from './customer-coupons/customer-coupons.component';
 import { CustomerGigsComponent } from './customer-gigs/customer-gigs.component';
+import { CustomerSettingsComponent } from './customer-settings/customer-settings.component';
 import * as _ from 'lodash';
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
 import { AppMessages } from 'src/app/app-messages';
@@ -25,11 +26,10 @@ export class AddEditCustomerComponent implements OnInit {
   socailIdForm: FormGroup;
   formTitle: string;
   buttonText = AppConstant.BUTTON_TXT.SAVE;
-  socialidPage: boolean;
-  socialiddtls: {};
   workDays = AppConstant.WORKDAYS;
   @ViewChild(CustomerCouponsComponent) couponComponent: CustomerCouponsComponent;
   @ViewChild(CustomerGigsComponent) gigComponent: CustomerGigsComponent;
+  @ViewChild(CustomerSettingsComponent) settingsComponent: CustomerSettingsComponent;
   @ViewChild('customertabs') customertabs: NgbTabset;
   paymentMethods = [];
   categoryList = [];
@@ -159,16 +159,7 @@ export class AddEditCustomerComponent implements OnInit {
     this.buttonText = AppConstant.BUTTON_TXT.SAVE;
   }
   addSocialId() {
-    this.socialiddtls = {};
-    this.formTitle = 'Add Social Id';
     this.openSocialIdModal('socialidmodal');
-    this.socialidPage = false;
-  }
-  editSocialId(data) {
-    this.socialiddtls = data;
-    this.formTitle = 'Edit Social Id';
-    this.openSocialIdModal('socialidmodal');
-    this.socialidPage = true;
   }
   openSocialIdModal(event) {
     document.querySelector('#' + event).classList.add('md-show');
@@ -246,6 +237,9 @@ export class AddEditCustomerComponent implements OnInit {
       case '1':
         this.saveOrUpdateBusiness();
         break;
+      case '4':
+        this.settingsComponent.updateSettings(this.customerObj);
+        break;
       case '5':
         if (this.gigComponent.gigForm.touched) {
           this.gigComponent.saveOrUpdateGig();
@@ -255,6 +249,7 @@ export class AddEditCustomerComponent implements OnInit {
         if (this.couponComponent.couponForm.touched) {
           this.couponComponent.saveOrUpdateCoupon();
         }
+        break;
     }
   }
   onCustomerTabChange(event) {

@@ -31,6 +31,7 @@ import { CustomerService } from '../services/business/customer.service';
 import { PaymentsService } from '../services/common/payments.service';
 import { CouponService } from '../services/business/coupon.service';
 import { GigsService } from '../services/business/gigs.service';
+import { SettingService } from '../services/masters';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -92,7 +93,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     CustomerService,
     PaymentsService,
     CouponService,
-    GigsService
+    GigsService,
+    SettingService
   ]
 })
 export class SharedModule { }

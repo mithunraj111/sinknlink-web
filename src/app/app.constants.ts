@@ -147,6 +147,13 @@ export const AppConstant = Object.freeze({
           GETBYID: 'user/',
           UPDATE: 'user/edit/'
         },
+        SETTINGS: {
+          CREATE: 'settings/create',
+          LIST: 'settings',
+          GETBYID: 'settings/',
+          UPDATE: 'settings/edit/',
+          BULKUPDATE: 'settings/bulkupdate'
+        },
         ROLE: {
           CREATE: 'role/create',
           LIST: 'role',
