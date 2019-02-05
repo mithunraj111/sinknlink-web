@@ -52,7 +52,7 @@
                 <ngx-datatable-column name="Status" [sortable]="false" [flexGrow]="0.5" [resizeable]="false"
                     headerClass="text-center" [cellClass]="'text-center status'" [resizeable]="false">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                        <ui-switch (change)="updateEvent(row.eventid,row.status)" class="js-small" placement="bottom"
+                        <ui-switch (change)="updateEvent(row,rowIndex,false)" class="js-small" placement="bottom"
                             ngbTooltip="Click to change status" color="#03ADED" switchColor="#fff" size="small"
                             [checked]="row.status == 'Active'"></ui-switch>
                     </ng-template>
@@ -63,7 +63,7 @@
                         <a placement="bottom" ngbTooltip="Click to edit event details" class="m-r-15 crm-action-edit text-primary"
                             (click)='editEvent(row.eventid)'>
                             <i class="fa fa-pencil"></i></a>
-                        <a placement="bottom" (click)="updateEvent(row.eventid,row.status,true)" ngbTooltip="Click to delete event"
+                        <a placement="bottom" (click)="updateEvent(row,rowIndex,true)" ngbTooltip="Click to delete event"
                             class="crm-action-delete text-danger">
                             <i class="fa fa-trash"></i></a>
                     </ng-template>

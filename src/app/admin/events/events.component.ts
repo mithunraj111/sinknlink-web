@@ -5,6 +5,7 @@ import { AppConstant } from '../../app.constants';
 import { EventService } from '../../services/admin/event.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
+import { AppMessages } from 'src/app/app-messages';
 
 @Component({
   selector: 'app-events',
@@ -18,7 +19,13 @@ export class EventsComponent implements OnInit {
   eventsList = [];
   displaydtimeformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   displaydateformat = AppConstant.API_CONFIG.ANG_DATE.displaydate;
-  constructor(private router: Router, private bootstrapAlertService: BootstrapAlertService, private eventService: EventService, private localStorageService: LocalStorageService, ) {
+  userstoragedata = {} as any;
+  constructor(private router: Router,
+    private bootstrapAlertService: BootstrapAlertService,
+    private eventService: EventService,
+    private localStorageService: LocalStorageService) {
+    this.userstoragedata = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER);
+
   }
 
   ngOnInit() {
@@ -54,18 +61,30 @@ export class EventsComponent implements OnInit {
     this.eventsList = temp;
     this.table.offset = 0;
   }
-  updateEvent(pk, status, isDeleted?) {
-    let data = {
-      eventid: pk,
-      status: isDeleted == true ? AppConstant.STATUS_DELETED : status == AppConstant.STATUS_ACTIVE ? AppConstant.STATUS_INACTIVE : AppConstant.STATUS_ACTIVE,
+  updateEvent(data,index,flag) {
+    console.log(data.eventid);
+    const updateObj = {
       updateddt: new Date(),
-      updatedby: this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER).fullname
+      updatedby: this.userstoragedata.fullname,
+      status: flag == true ? AppConstant.STATUS_DELETED : 
+        data.status == AppConstant.STATUS_ACTIVE ? AppConstant.STATUS_INACTIVE : AppConstant.STATUS_ACTIVE
     }
-    this.eventService.update(data, pk).subscribe(res => {
-      let response = JSON.parse(res._body);
-      if (response.status) { this.getEvents(); this.bootstrapAlertService.showSucccess(response.message); }
-      else this.bootstrapAlertService.showError(response.message);
-    }, err => {
+    const formData = new FormData();
+    formData.append('formData', JSON.stringify(updateObj));
+    this.eventService.update(formData, data.eventid).subscribe(res => {
+      const response = JSON.parse(res._body);
+      if (response.status) { 
+        if (flag) {
+          this.bootstrapAlertService.showSucccess(AppMessages.VALIDATION.COMMON.DELETE_SUCCESS);
+          this.eventsList.splice(index, 1);
+        } else {
+        this.bootstrapAlertService.showSucccess(response.message);
+        this.eventsList[index].status = response.data.status;
+        }
+        this.eventsList = [...this.eventsList];
+      } else {
+        this.bootstrapAlertService.showError(response.message);
+      }
     });
   }
 }

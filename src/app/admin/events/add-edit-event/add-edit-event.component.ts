@@ -10,6 +10,7 @@ import { AppMessages } from 'src/app/app-messages';
 import { LookupService } from 'src/app/services/admin/lookup.service';
 import { EventService } from 'src/app/services/admin/event.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { Alert } from 'selenium-webdriver';
 
 @Component({
   selector: 'app-add-edit-event',
@@ -127,13 +128,14 @@ export class AddEditEventComponent implements OnInit {
     let data = form_data;
     data.eventdate = this.commonService.formatDate(data.eventdate);
     data.eventexpirydt = this.commonService.formatDate(data.eventexpirydt);
+    data.status = data.status?AppConstant.STATUS_ACTIVE:AppConstant.STATUS_INACTIVE;
     if (new Date(data.eventexpirydt) < new Date(data.eventdate)) {
       this.savingEvent = false;
       this.bootstrapAlertService.showError(AppMessages.VALIDATION.EVENT.eventdate.max);
       return false;
     }
     if (this.edit) {
-      this.updateEvent();
+      this.updateEvent(data);
     } else {
       data.createddt = new Date();
       data.createdby = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER).fullname;
@@ -158,13 +160,8 @@ export class AddEditEventComponent implements OnInit {
       });
     }
   }
-  updateEvent() {
-      let form_data = this.eventForm.value;
-      let data = form_data;
-      data.eventdate = this.commonService.formatDate(data.eventdate);
-      data.eventexpirydt = this.commonService.formatDate(data.eventexpirydt);
-      data.createddt = new Date();
-      data.createdby = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER).fullname;
+  updateEvent(data) {
+    
       let formData = new FormData();
       for (let index = 0; index < this.images.length; index++) {
         const element = this.images[index];
@@ -176,6 +173,7 @@ export class AddEditEventComponent implements OnInit {
         let response = JSON.parse(res._body);
         if (response.status) {
           this.bootstrapAlertService.showSucccess(response.message);
+          this.router.navigate(['/admin/events/']);
         } else {
           this.bootstrapAlertService.showError(response.message);
         }

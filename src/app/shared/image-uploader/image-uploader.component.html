@@ -5,16 +5,18 @@
                 <input type="file" [disabled]="disablePicker" (change)="selectedImg($event.target.name, $event.target.files)"
                     accept="image/*" class="input-file">
                 <p>Drag your file(s) here to begin
-                    <br>or click to browse {{extimage}}
+                    <br>or click to browse
                 </p>
             </div>
         </div>
         <div class="col-sm-12 col-md-8 imagePicked">
-
+            <div *ngFor="let img of extimage">
+                <img src="http://localhost:2000/{{img.docurl}}">
+                <button aria-label="Close" class="photo-close-btn"><i class="fa fa-close fa-close"></i></button>
+            </div>
         </div>
     </div>
     <div class="row">
-        {{extimage}}
-        {{images}}
+        
     </div>
 </div>

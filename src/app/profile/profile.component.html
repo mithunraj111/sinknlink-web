@@ -91,7 +91,7 @@
           <div class="form-group">
             <label class="custom-file mb-3 profile-page">
               <img *ngIf="userfile!=undefined && userfile!=null" [src]="userfile" class="img-responsive w-50" alt="">
-              <input #userimage type="file" name="userimg" (change)="onFile($event)"  multiple class="custom-file-input">
+              <input #userimage type="file" name="userimg" (change)="onFile($event)" class="custom-file-input">
               <span class="custom-file-control"></span>
             </label>
           </div>

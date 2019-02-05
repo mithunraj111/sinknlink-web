@@ -843,9 +843,9 @@ button{
     }
     .photo-close-btn {
         border: 0;
-        position: absolute;
-        top: -5px;
-        right: 5px;
+        position: relative;
+        top: -54px;
+        right: 54px;
         cursor: pointer;
         background: transparent;
         .fa-close{
