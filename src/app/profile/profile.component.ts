@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { RoleService } from '../services/masters/role.service';
 import { AppConstant } from '../app.constants';
@@ -26,6 +26,10 @@ export class ProfileComponent implements OnInit {
   errMessage;
   profileErrObj = AppMessages.VALIDATION.PROFILE;
   locationList = [];
+  userimgfile: any;
+  userfile: any;
+  @ViewChild('userimage') userimage: ElementRef;
+
   constructor(private fb: FormBuilder, private roleService: RoleService,
     private localStorageService: LocalStorageService,
     private userService: UserService,
@@ -98,7 +102,7 @@ export class ProfileComponent implements OnInit {
     });
   }
   getUser() {
-this.userService.byId(this.userstoragedata.userid).subscribe(res => {
+    this.userService.byId(this.userstoragedata.userid).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
         this.userObj = response.data;
@@ -108,8 +112,7 @@ this.userService.byId(this.userstoragedata.userid).subscribe(res => {
           emailid: [this.userObj.consumer.emailid, Validators.compose([Validators.pattern('([a-z0-9&_\.-]*[@][a-z0-9]+((\.[a-z]{2,3})?\.[a-z]{2,3}))'), Validators.maxLength(100)])],
           address: [this.userObj.consumer.address, Validators.compose([Validators.minLength(1), Validators.maxLength(100)])],
           locationid: [this.userObj.consumer.locationid.toString(), Validators.compose([])],
-          socialid: [this.socialForm.value.facebookid + ',' + this.socialForm.value.twitterid + ',' +
-          this.socialForm.value.googleid + ',' + this.socialForm.value.instagramid]
+          socialid: [this.userObj.consumer.socialid.facebookid + "," + this.userObj.consumer.socialid.twitterid + "," + this.userObj.consumer.socialid.googleid + "," + this.userObj.consumer.socialid.instagramid]
         });
         this.socialForm = this.fb.group({
           facebookid: [this.userObj.consumer.socialid.facebookid],
@@ -118,8 +121,6 @@ this.userService.byId(this.userstoragedata.userid).subscribe(res => {
           instagramid: [this.userObj.consumer.socialid.instagramid]
         })
       }
-     console.log(this.socialForm.value.facebookid + ',' + this.socialForm.value.twitterid + ',' +
-     this.socialForm.value.googleid + ',' + this.socialForm.value.instagramid)
     });
   }
   changeProfile() {
@@ -128,16 +129,19 @@ this.userService.byId(this.userstoragedata.userid).subscribe(res => {
       this.bootstrapAlertService.showError(this.errMessage);
       return false;
     } else {
-      let formdata = {} as any;
-      let data = this.profileForm.value;
-      formdata.updatedby = this.userstoragedata.fullname;
-      formdata.updateddt = new Date();
-      formdata.fullname = data.fullname;
-      formdata.emailid = data.emailid;
-      formdata.address = data.address;
-      formdata.locationid = Number(data.locationid);
-      formdata.socialid = this.socialForm.value;
-      this.userService.update(formdata, this.userstoragedata.userid).subscribe(res => {
+
+      let data = {} as any;
+      data.updatedby = this.userstoragedata.fullname;
+      data.updateddt = new Date();
+      data.fullname = this.socialForm.value.fullname;
+      data.emailid = this.socialForm.value.emailid;
+      data.address = this.socialForm.value.address;
+      data.locationid = Number(this.socialForm.value.locationid);
+      data.socialid = this.socialForm.value;
+      data.userfile = this.profileForm.value.userimage.docurl;
+      console.log(this.profileForm.value.userimage.docurl)
+
+      this.userService.update(data, this.userstoragedata.userid).subscribe(res => {
         const response = JSON.parse(res._body);
         if (response.status) {
           this.bootstrapAlertService.showSucccess(response.message);
@@ -154,7 +158,6 @@ this.userService.byId(this.userstoragedata.userid).subscribe(res => {
     document.querySelector('#' + event).classList.add('md-show');
   }
   closeProfileModal(event) {
-    // ((event.target.parentElement.parentElement).parentElement).classList.remove('md-show');
     document.querySelector('#' + event).classList.remove('md-show');
   }
   updatePassword() {
@@ -170,6 +173,16 @@ this.userService.byId(this.userstoragedata.userid).subscribe(res => {
     this.closeProfileModal('socialidmodal');
 
   }
+  onFile(event, type) {
+    const reader = new FileReader();
+    this.userimgfile = event.target.files[0];
+    reader.onload = ((e) => {
+      this.userfile = e.target['result'];
+    });
+    reader.readAsDataURL(event.target.files[0]);
+    console.log(this.userfile)
+    console.log(this.userimgfile)
+  }
   getLocationList() {
     this.locationService.list({}).subscribe((res) => {
       const response = JSON.parse(res._body);
@@ -183,10 +196,9 @@ this.userService.byId(this.userstoragedata.userid).subscribe(res => {
       }
     });
   }
-  getsocialid() {    
-
+  getsocialid() {
     let socialids = this.socialForm.value.facebookid + ',' + this.socialForm.value.twitterid + ',' +
-    this.socialForm.value.googleid + ',' + this.socialForm.value.instagramid;
+      this.socialForm.value.googleid + ',' + this.socialForm.value.instagramid;
     this.profileForm.controls['socialid'].setValue(socialids);
   }
 }
