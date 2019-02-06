@@ -75,7 +75,7 @@
               <!-- <a placement="bottom" ngbTooltip="Click to edit registration details" class="m-r-15 crm-action-edit text-primary"
                 (click)='editVipRegistration()'>
                 <i class="fa fa-pencil"></i></a> -->
-              <a placement="bottom" ngbTooltip="Click to delete registration details" class="crm-action-delete text-danger">
+              <a (click)="changeStatus(row.fancyid,row.status,true)" placement="bottom" ngbTooltip="Click to delete registration details" class="crm-action-delete text-danger">
                 <i class="fa fa-trash"></i></a>
             </div>
           </ng-template>

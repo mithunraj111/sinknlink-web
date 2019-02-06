@@ -20,7 +20,7 @@ export class VipNumberRegistrationComponent implements OnInit {
   formTitle: string;
   blocklist: string;
 
-  condition: any = { fancynostatus: AppConstant.STATUS_AVAILABLE, status: AppConstant.STATUS_ACTIVE };
+  condition: any = { fancynostatus: AppConstant.STATUS_AVAILABLE };
 
   selectedBiz;
   selectedFancyNos = [];
@@ -64,8 +64,8 @@ export class VipNumberRegistrationComponent implements OnInit {
   openMyModal(event) {
     document.querySelector('#' + event).classList.add('md-show');
   }
-  closeMyModal(event) {
-    ((event.target.parentElement.parentElement).parentElement).classList.remove('md-show');
+  closeMyModal(event?) {
+    document.getElementsByClassName("md-show")[0].classList.remove('md-show');
   }
   blockVipNumber() {
     this.selectedBiz = "";
@@ -116,6 +116,8 @@ export class VipNumberRegistrationComponent implements OnInit {
       this.fancynumberService.blockNumbers(data).subscribe(res => {
         const response = JSON.parse(res._body);
         if (response.status) {
+          this.getAvailableList();
+          this.closeMyModal();
           this.bootstrapAlertService.showSucccess(response.message);
         } else {
           this.bootstrapAlertService.showError(response.message);
@@ -132,6 +134,8 @@ export class VipNumberRegistrationComponent implements OnInit {
         }).subscribe(res => {
           const response = JSON.parse(res._body);
           if (response.status) {
+            this.closeMyModal();
+            this.getAvailableList();
             this.bootstrapAlertService.showSucccess(response.message);
           } else {
             this.bootstrapAlertService.showError(response.message);
@@ -143,19 +147,22 @@ export class VipNumberRegistrationComponent implements OnInit {
     // this.getAvailableList();
 
   }
+
   addVipRegistration() {
     this.router.navigate(['admin/vipnumberregistration/create']);
   }
-  changeStatus(pk, status) {
+  changeStatus(pk, status, deleted?) {
     let data = {
       fancyid: pk,
-      status: status == 'Active' ? 'InActive' : 'Active',
+      status: deleted == true ? AppConstant.STATUS_DELETED : status == AppConstant.STATUS_ACTIVE ? AppConstant.STATUS_INACTIVE : AppConstant.STATUS_ACTIVE,
       updateddt: new Date(),
       updatedby: this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER).fullname
     }
     this.fancynumberService.editNumber(data, pk).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
+        this.closeMyModal();
+        this.getAvailableList();
         this.bootstrapAlertService.showSucccess(response.message);
       } else {
         this.bootstrapAlertService.showError(response.message);

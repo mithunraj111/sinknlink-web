@@ -29,7 +29,7 @@ export class AddEditVipRegistrationNumberComponent implements OnInit {
     private localStorageService: LocalStorageService,
     private lookupService: LookupService) {
     this.vipForm = this.fb.group({
-      statecode: [''],
+      statecode: ['',[Validators.required]],
       startnumber: ['0', [Validators.required]],
       endnumber: [''],
       status: [true],
@@ -60,20 +60,25 @@ export class AddEditVipRegistrationNumberComponent implements OnInit {
       data['startnumber'] = parseInt(data['startnumber']);
       data['endnumber'] = parseInt(data['endnumber']) || 0;
 
-      this.fancynumberService.addNumbers(data).subscribe(res => {
-        const response = JSON.parse(res._body);
-        if (response.status) {
-          this.creatingNumbers = false;
-          this.bootstrapAlertService.showSucccess(response.message);
-        } else {
-          this.creatingNumbers = false;
-          this.bootstrapAlertService.showError(response.message);
-        }
-      },err=>{
-        let response = JSON.parse(err._body);
-        this.bootstrapAlertService.showError(response.message);
+      if ((data['endnumber']-data['startnumber']) < 0) {
         this.creatingNumbers = false;
-      });
+        this.bootstrapAlertService.showError('VIP Number range not valid');
+      } else {
+        this.fancynumberService.addNumbers(data).subscribe(res => {
+          const response = JSON.parse(res._body);
+          if (response.status) {
+            this.creatingNumbers = false;
+            this.bootstrapAlertService.showSucccess(response.message);
+          } else {
+            this.creatingNumbers = false;
+            this.bootstrapAlertService.showError(response.message);
+          }
+        }, err => {
+          let response = JSON.parse(err._body);
+          this.bootstrapAlertService.showError(response.message);
+          this.creatingNumbers = false;
+        });
+      }
     } else {
       this.bootstrapAlertService.showError(this.commonService.getFormErrorMessage(this.vipForm, this.vipErrObj));
     }

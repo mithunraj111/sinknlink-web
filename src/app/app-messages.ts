@@ -25,13 +25,13 @@ export const AppMessages = Object.freeze({
       categoryimg: 'Please upload a photo'
     },
     FANCYNUMBER: {
+      statecode: {
+        required: 'Please select state'
+      },
       startnumber: {
         required: 'Please enter a start number'
       },
-      endnumber: {
-        min: 'End Number should be greater than start number'
-      },
-      cost: {
+      price: {
         required: 'Cost is required'
       }
     },
