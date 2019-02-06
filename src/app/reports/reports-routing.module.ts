@@ -11,7 +11,7 @@ const routes: Routes = [
     },
     children: [
       {
-        path: 'area-categories',
+        path: 'areacategories',
         component: AreaCategoriesComponent
       },
     ],

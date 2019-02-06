@@ -120,7 +120,7 @@ const MENUITEMS = [
         icon: 'ti-files',
         children: [
           {
-            state: 'area-categories',
+            state: 'areacategories',
             name: 'Area & Categories'
           },
         ]

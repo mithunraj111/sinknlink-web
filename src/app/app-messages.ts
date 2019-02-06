@@ -99,6 +99,11 @@ export const AppMessages = Object.freeze({
       },
 
     },
+    AREACATEGORIES: {
+      fromdate: {
+        max: 'Fromdate should be smaller than todate'
+      }
+    },
     PROFILE: {
       newpassword: {
         required: 'Please enter new password',

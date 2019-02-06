@@ -7,6 +7,7 @@ import { SelectModule } from 'ng-select';
 
 import { ReportsRoutingModule } from './reports-routing.module';
 import { AreaCategoriesComponent } from './area-categories/area-categories.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -15,7 +16,9 @@ import { AreaCategoriesComponent } from './area-categories/area-categories.compo
     DataTableModule,
     SharedModule,
     SelectModule,
-    UiSwitchModule
+    UiSwitchModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   declarations: [AreaCategoriesComponent]
 })
