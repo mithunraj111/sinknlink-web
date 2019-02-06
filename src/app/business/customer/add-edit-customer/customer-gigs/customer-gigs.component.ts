@@ -44,7 +44,6 @@ export class CustomerGigsComponent implements OnInit, OnChanges {
     this.gigObj = {};
   }
   ngOnChanges(changes: SimpleChanges) {
-    console.log(changes);
     this.getgigsList(changes.customerObj.currentValue);
   }
   getgigsList(customerObj) {

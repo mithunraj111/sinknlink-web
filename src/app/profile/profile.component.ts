@@ -85,13 +85,12 @@ export class ProfileComponent implements OnInit {
       return false;
     }
     let formdata = {} as any;
-    let data = this.passwordForm.value;
     formdata.updatedby = this.userstoragedata.fullname;
     formdata.updateddt = new Date();
-    formdata.password = data.confirmpassword;
+    formdata.password = this.passwordForm.value.confirmpassword;
     const formData = new FormData();
-    formData.append('formData', formdata);
-    this.userService.update(formdata, this.userstoragedata.userid).subscribe(res => {
+    formData.append('formData', JSON.stringify(formdata));
+    this.userService.update(formData, this.userstoragedata.userid).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
         this.bootstrapAlertService.showSucccess(response.message);
@@ -110,7 +109,6 @@ export class ProfileComponent implements OnInit {
         this.userObj = response.data;
         if (this.userObj.profileimg != null) {
           this.userfile = this.fileUrl + '/' + this.userObj.profileimg.docurl;
-          console.log(this.userfile);
         }
         let consumer = {
           emailid: '',
@@ -196,7 +194,7 @@ export class ProfileComponent implements OnInit {
     this.closeProfileModal('socialidmodal');
 
   }
-  onFile(event, type) {
+  onFile(event) {
     const reader = new FileReader();
     this.userimgfile = event.target.files[0];
     reader.onload = ((e) => {
