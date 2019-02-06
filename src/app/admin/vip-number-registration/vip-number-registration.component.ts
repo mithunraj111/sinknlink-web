@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
-import { CurrencyPipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { FancyNumberService } from 'src/app/services/admin/fancynumber.service';
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
 import { AppConstant } from 'src/app/app.constants';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
+import * as Lodash from 'lodash';
 
 @Component({
   selector: 'app-vip-number-registration',
@@ -16,10 +16,18 @@ export class VipNumberRegistrationComponent implements OnInit {
   data: any[];
   @ViewChild(DatatableComponent) table: DatatableComponent;
   tempFilter = [];
-  selected = [];
   rows = [];
   formTitle: string;
   blocklist: string;
+
+  condition: any = { fancynostatus: AppConstant.STATUS_AVAILABLE, status: AppConstant.STATUS_ACTIVE };
+
+  selectedBiz;
+  selectedFancyNos = [];
+  blockRemarks:string;
+
+  parentBiz: any = [];
+
   constructor(private localStorageService: LocalStorageService, private fancynumberService: FancyNumberService, private router: Router, private bootstrapAlertService: BootstrapAlertService) {
     this.data = [
     ];
@@ -27,7 +35,23 @@ export class VipNumberRegistrationComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.fancynumberService.getList({}).subscribe(res => {
+    this.getAvailableList();
+    this.fancynumberService.getParentBix({ status: "Active" }).subscribe(res => {
+      const response = JSON.parse(res._body);
+      if (response.status) {
+        this.parentBiz = Lodash.map(response.data, (item) => {
+          return {
+            label: item.bizname + " - " + item.membershipid,
+            value: item.membershipid
+          }
+        })
+      } else {
+        this.bootstrapAlertService.showError(response.message);
+      }
+    });
+  }
+  getAvailableList() {
+    this.fancynumberService.getList(this.condition).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
         this.data = response.data;
@@ -35,7 +59,7 @@ export class VipNumberRegistrationComponent implements OnInit {
       } else {
         this.bootstrapAlertService.showError(response.message);
       }
-    })
+    });
   }
   openMyModal(event) {
     document.querySelector('#' + event).classList.add('md-show');
@@ -44,13 +68,65 @@ export class VipNumberRegistrationComponent implements OnInit {
     ((event.target.parentElement.parentElement).parentElement).classList.remove('md-show');
   }
   blockVipNumber() {
-    this.openMyModal('vipnoregmodal');
+    this.selectedBiz = "";
     this.formTitle = 'Block';
-
+    if (this.selectedFancyNos.length > 0) this.openMyModal('vipnoregmodal');
+    else this.bootstrapAlertService.showError("Select atleast one VIP Number");
   }
   allocateVipNumber() {
-    this.openMyModal('vipnoregmodal');
+    this.selectedBiz = "";
     this.formTitle = 'Allocate';
+    if (this.selectedFancyNos.length > 0) this.openMyModal('vipnoregmodal');
+    else this.bootstrapAlertService.showError("Select atleast one VIP Number");
+  }
+  blockorallocateNumber() {
+    let mode = this.formTitle;
+    let selectedBiz = this.selectedBiz;
+    let selectedFancyNos = Array.isArray(this.selectedFancyNos) == true ? this.selectedFancyNos : [this.selectedFancyNos];
+
+    let data = {
+      data: []
+    };
+
+    if (mode == 'Block') {
+      if (typeof selectedBiz == "string") {
+        let arr = Lodash.map(selectedFancyNos, (item) => {
+          return {
+            fancynoid: item,
+            fancynostatus: AppConstant.STATUS_BLOCKED,
+            updateddt: new Date(),
+            remarks:this.blockRemarks,
+            updatedby: this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER).fullname
+          }
+        });
+        data.data = arr;
+      } else {
+        let arr = Lodash.map(selectedFancyNos, (item) => {
+          return {
+            fancynoid: item,
+            remarks:this.blockRemarks,
+            fancynostatus: AppConstant.STATUS_BLOCKED,
+            membershipid: selectedBiz,
+            updateddt: new Date(),
+            updatedby: this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER).fullname
+          }
+        });
+        data.data = arr;
+      }
+      this.fancynumberService.blockNumbers(data).subscribe(res => {
+        const response = JSON.parse(res._body);
+        if (response.status) {
+          this.bootstrapAlertService.showSucccess(response.message);
+        } else {
+          this.bootstrapAlertService.showError(response.message);
+        }
+      })
+    } else {
+
+    }
+
+    this.getAvailableList();
+
   }
   addVipRegistration() {
     this.router.navigate(['admin/vipnumberregistration/create']);
@@ -71,9 +147,14 @@ export class VipNumberRegistrationComponent implements OnInit {
       }
     })
   }
+  onNumberSelect(id) {
+    let found = this.selectedFancyNos.find((o) => { return id == o });
+    if (found == undefined) this.selectedFancyNos.push(id);
+    else this.selectedFancyNos.splice(this.selectedFancyNos.indexOf(id), 1);
+  }
   search(event?) {
     let val = '';
-    if(event != null && event!= undefined){
+    if (event != null && event != undefined) {
       val = event.target.value.toLowerCase();
     }
     const temp = this.tempFilter.filter(item => {

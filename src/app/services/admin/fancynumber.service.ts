@@ -18,4 +18,10 @@ export class FancyNumberService {
     editNumber(data: any, pk: string): Observable<any> {
         return this.httpHandler.POST(this.endpoint + AppConstant.API_CONFIG.API_URL.ADMIN.FANCYNO.EDIT + `/${pk}`, data);
     }
+    getParentBix(data): Observable<any> {
+        return this.httpHandler.POST(this.endpoint + AppConstant.API_CONFIG.API_URL.BUSINESS.CUSTOMER.LIST + `?type=` + "getParentBiz", data);
+    }
+    blockNumbers(data): Observable<any> {
+        return this.httpHandler.POST(this.endpoint + AppConstant.API_CONFIG.API_URL.ADMIN.FANCYNO.BLOCK, data);
+    }
 }

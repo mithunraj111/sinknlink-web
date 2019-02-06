@@ -17,13 +17,19 @@ export class LoginComponent implements OnInit {
   errMessage;
   constructor(private localStorageService: LocalStorageService, private commonService: CommonService,
     private fb: FormBuilder, private loginService: LoginService, private router: Router) {
-    this.loginForm = this.fb.group({
+    
+      console.log('Inside constructor....');
+    
+      this.loginForm = this.fb.group({
       mobileno: [null, Validators.compose([Validators.required, Validators.maxLength(13)])],
       password: [null, Validators.required],
     });
   }
 
   ngOnInit() {
+
+    console.log('Inside init....');
+
   }
   login() {
     if (this.loginForm.status === AppConstant.STATUS_INVALID) {

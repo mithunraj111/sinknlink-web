@@ -40,8 +40,10 @@ export const AppConstant = Object.freeze({
   STATUS_ACTIVE: 'Active',
   STATUS_INACTIVE: 'Inactive',
   STATUS_AVAILABLE: 'Available',
+  STATUS_UNAVAILABLE: 'Notavailable',
   STATUS_DELETED: 'Deleted',
   STATUS_INVALID: 'INVALID',
+  STATUS_BLOCKED: 'BLOCKED',
   // Datatypes array
   DATATYPES: [
     { label: 'String', value: 'String' },
@@ -114,7 +116,8 @@ export const AppConstant = Object.freeze({
         FANCYNO: {
           CREATE: 'fancyno/create',
           LIST: 'fancyno',
-          EDIT: 'fancyno/edit'
+          EDIT: 'fancyno/edit',
+          BLOCK: 'fancyno/block'
         }
       },
       COMMON: {

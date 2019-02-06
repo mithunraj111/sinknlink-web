@@ -8,6 +8,7 @@ import { CommonService } from 'src/app/services/common.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { AppConstant } from 'src/app/app.constants';
 import { LookupService } from 'src/app/services/admin/lookup.service';
+import * as Lodash from 'lodash';
 
 @Component({
   selector: 'app-add-edit-vip-registration-number',
@@ -40,7 +41,7 @@ export class AddEditVipRegistrationNumberComponent implements OnInit {
     this.lookupService.list({ refkey: 'biz_states', status: AppConstant.STATUS_ACTIVE }).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
-        this.statelists = JSON.parse(response.data[0].refvalue);
+        this.statelists = Lodash.map(response.data, function (n) { return { label: n.refname, value: n.refvalue } });
       } else {
         this.bootstrapAlertService.showError(response.message);
       }
@@ -68,6 +69,10 @@ export class AddEditVipRegistrationNumberComponent implements OnInit {
           this.creatingNumbers = false;
           this.bootstrapAlertService.showError(response.message);
         }
+      },err=>{
+        let response = JSON.parse(err._body);
+        this.bootstrapAlertService.showError(response.message);
+        this.creatingNumbers = false;
       });
     } else {
       this.bootstrapAlertService.showError(this.commonService.getFormErrorMessage(this.vipForm, this.vipErrObj));
