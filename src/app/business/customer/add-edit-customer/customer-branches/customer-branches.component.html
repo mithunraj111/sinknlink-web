@@ -17,7 +17,7 @@
 <div class="header-block">
     <div class="table-header fixed-table-header">
         <app-card [classHeader]="true">
-            <ngx-datatable #branchtable class="table data-table expandable" [rows]='data' [columnMode]="'flex'" [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false">
+            <ngx-datatable #branchtable class="table data-table expandable" [rows]='branchesList' [columnMode]="'flex'" [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false">
                 <!-- Row Detail Template -->
                 <ngx-datatable-column prop="bizname" name="Name" [resizeable]="false">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
@@ -41,7 +41,7 @@
                 </ngx-datatable-column>
                 <ngx-datatable-column prop="duedate" name="Due Date" [resizeable]="false" [cellClass]="'text-center'">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                        <span>{{date|date:datedisplayformat}}</span>
+                        <span>{{row.updateddt|date:datedisplayformat}}</span>
                     </ng-template>
                 </ngx-datatable-column>
                 <ngx-datatable-column name="Status" [sortable]="false" [resizeable]="false" [flexGrow]="0.5" [cellClass]="'text-center status'">

@@ -51,7 +51,7 @@ export class AddEditCategoryComponent implements OnInit, OnChanges {
       this.notifyCategoryEntry.emit(data);
     }, 5000);
   }
-  onFile(event, type) {
+  onFile(event) {
     const reader = new FileReader();
     this.categoryimgfile = event.target.files[0];
     reader.onload = ((e) => {

@@ -1,8 +1,7 @@
 import { Component, OnInit, ViewChild, Output } from '@angular/core';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { AppConstant } from '../../app.constants';
-import { LookupService } from '../../services/admin/lookup.service';
-import { LocalStorageService } from '../../services/local-storage.service';
+import { AdminService, BaseService } from '../../services';
 import { AppMessages } from '../../app-messages';
 import * as _ from 'lodash';
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
@@ -11,7 +10,7 @@ import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
   selector: 'app-lookup',
   templateUrl: './lookup.component.html'
 })
-export class LookupComponent implements OnInit {
+export class LookupComponent extends BaseService implements OnInit {
   displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   @ViewChild(DatatableComponent) table: DatatableComponent;
   @Output() lookupObj = {} as any;
@@ -20,10 +19,10 @@ export class LookupComponent implements OnInit {
   tempFilter = [];
   selectedKeyType: any = AppConstant.LOOKUP[0].value;
   keylist = AppConstant.LOOKUP;
-  constructor(private lookupService: LookupService,
-    private bootstrapAlertService: BootstrapAlertService,
-    private localstorageService: LocalStorageService) {
-    this.userstoragedata = this.localstorageService.getItem(AppConstant.LOCALSTORAGE.USER);
+  constructor(private lookupService: AdminService.LookupService,
+    private bootstrapAlertService: BootstrapAlertService) {
+      super();
+      super.getScreenDetails('a_lookup');
   }
 
   ngOnInit() {
@@ -43,14 +42,14 @@ export class LookupComponent implements OnInit {
       };
     }
     this.lookupService.list(condition).subscribe(res => {
-        const response = JSON.parse(res._body);
-        if (res.status) {
-          this.lookupList = response.data;
-          this.tempFilter = this.lookupList;
-        }
-      }, err => {
-        console.log(err);
-      });
+      const response = JSON.parse(res._body);
+      if (res.status) {
+        this.lookupList = response.data;
+        this.tempFilter = this.lookupList;
+      }
+    }, err => {
+      console.log(err);
+    });
   }
   openLookupModal(event) {
     document.querySelector('#' + event).classList.add('md-show');
@@ -98,7 +97,7 @@ export class LookupComponent implements OnInit {
   }
   search(event?) {
     let val = '';
-    if(event != null && event != undefined){
+    if (event != null && event != undefined) {
       val = event.target.value.toLowerCase();
     }
     const temp = this.tempFilter.filter(item => {

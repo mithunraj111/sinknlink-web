@@ -1,8 +1,9 @@
-import { Component, OnInit, OnChanges, SimpleChanges, Input } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges, Input, ViewChild } from '@angular/core';
 import { AppConstant } from '../../../../app.constants';
 import { BusinessService, BaseService } from '../../../../services';
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
 import { AppMessages } from 'src/app/app-messages';
+import { DatatableComponent } from '@swimlane/ngx-datatable';
 
 @Component({
   selector: 'app-customer-branches',
@@ -13,6 +14,7 @@ export class CustomerBranchesComponent extends BaseService implements OnInit, On
   tempFilter = [];
   @Input() customerObj = {} as any;
   datedisplayformat = AppConstant.API_CONFIG.ANG_DATE.displaydate;
+  @ViewChild(DatatableComponent) branchtable: DatatableComponent;
   constructor(private customerService: BusinessService.CustomerService,
     private bootstrapAlertService: BootstrapAlertService) {
     super();
@@ -70,6 +72,6 @@ export class CustomerBranchesComponent extends BaseService implements OnInit, On
       }
     });
     this.branchesList = temp;
-    // this.table.offset = 0;
+    this.branchtable.offset = 0;
   }
 }

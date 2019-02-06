@@ -2,9 +2,8 @@ import { Component, OnInit, Input, ViewEncapsulation, ViewChild } from '@angular
 import { Router } from '@angular/router';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { AppConstant } from '../../app.constants';
-import { DonationService } from '../../services/admin/donation.service';
+import { AdminService, BaseService } from '../../services';
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
-import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { AppMessages } from '../../app-messages';
 
 @Component({
@@ -13,16 +12,17 @@ import { AppMessages } from '../../app-messages';
   encapsulation: ViewEncapsulation.None,
   styleUrls: ['./donations.component.scss']
 })
-export class DonationsComponent implements OnInit {
+export class DonationsComponent extends BaseService implements OnInit {
   @ViewChild(DatatableComponent) table: DatatableComponent;
   tempFilter = [];
   displaydtimeformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   displaydateformat = AppConstant.API_CONFIG.ANG_DATE.displaydate;
   donationList = [];
-  userstoragedata = {} as any;
-  constructor(private router: Router, private donationService: DonationService, private bootstrapAlertService: BootstrapAlertService,
-    private localStorageService: LocalStorageService) {
-    this.userstoragedata = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER);
+  constructor(private router: Router,
+    private donationService: AdminService.DonationService,
+    private bootstrapAlertService: BootstrapAlertService) {
+    super();
+    super.getScreenDetails('a_donations');
   }
 
   ngOnInit() {
@@ -71,7 +71,7 @@ export class DonationsComponent implements OnInit {
   }
   search(event?) {
     let val = '';
-    if (event != null && event != undefined)  {
+    if (event != null && event != undefined) {
       val = event.target.value.toLowerCase();
     }
     const temp = this.tempFilter.filter(item => {

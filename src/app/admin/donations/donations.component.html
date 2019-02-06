@@ -15,8 +15,7 @@
                 </div>
             </div>
             <div class="col-md-1 col-sm-1 p-r-0">
-                <button type="button" placement="bottom" ngbTooltip="Click to add donation" class="btn btn-primary waves-effect"
-                    (click)='addDonation()'><i class="fa fa-plus-circle m-r-5"></i> New
+                <button *ngIf="add" type="button" placement="bottom" ngbTooltip="Click to add donation" class="btn btn-primary waves-effect" (click)='addDonation()'><i class="fa fa-plus-circle m-r-5"></i> New
                 </button>
             </div>
         </div>
@@ -25,21 +24,18 @@
 <div class="header-block m-t-60">
     <div class="table-header fixed-table-header">
         <app-card [classHeader]="true">
-            <ngx-datatable #donationtable class="table data-table expandable" [rows]='donationList' [columnMode]="'flex'"
-                [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false">
+            <ngx-datatable #donationtable class="table data-table expandable" [rows]='donationList' [columnMode]="'flex'" [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false">
                 <ngx-datatable-column prop="charityname" name="Charity Name" [resizeable]="false">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                         <span>{{row.charityname}}</span>
                     </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column prop="startdate" name="Start Date" [resizeable]="false" headerClass="text-center"
-                    [cellClass]="'text-center'">
+                <ngx-datatable-column prop="startdate" name="Start Date" [resizeable]="false" headerClass="text-center" [cellClass]="'text-center'">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                         <span>{{row.startdate|date:displaydateformat}}</span>
                     </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column prop="enddate" name="End Date" [resizeable]="false" headerClass="text-center"
-                    [cellClass]="'text-center'">
+                <ngx-datatable-column prop="enddate" name="End Date" [resizeable]="false" headerClass="text-center" [cellClass]="'text-center'">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                         <span>{{row.enddate|date:displaydateformat}}</span>
                     </ng-template>
@@ -50,22 +46,16 @@
                         <span class="updatedate"> {{row.updateddt|date:displaydtimeformat}}</span>
                     </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column name="Status" [sortable]="false" [flexGrow]="0.5" headerClass="text-center"
-                    [cellClass]="'text-center'" [resizeable]="false">
+                <ngx-datatable-column name="Status" [sortable]="false" [flexGrow]="0.5" headerClass="text-center" [cellClass]="'text-center'" [resizeable]="false">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                        <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="#03ADED"
-                            (change)="updateDonationStatus(row, rowIndex, false)" [checked]="row.status == 'Active'"
-                            switchColor="#fff" size="small"></ui-switch>
+                        <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="#03ADED" (change)="updateDonationStatus(row, rowIndex, false)" [checked]="row.status == 'Active'" switchColor="#fff" size="small"></ui-switch>
                     </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.5" headerClass="text-center"
-                    [cellClass]="'text-center'" [resizeable]="false">
+                <ngx-datatable-column *ngIf="edit || delete" name="Action" [sortable]="false" [flexGrow]="0.5" headerClass="text-center" [cellClass]="'text-center'" [resizeable]="false">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                        <a placement="bottom" ngbTooltip="Click to edit donation details" class="m-r-15 crm-action-edit text-primary"
-                            (click)='editDonation(row)'>
+                        <a *ngIf="edit" placement="bottom" ngbTooltip="Click to edit donation details" class="m-r-15 crm-action-edit text-primary" (click)='editDonation(row)'>
                             <i class="fa fa-pencil"></i></a>
-                        <a placement="bottom" (click)="updateDonationStatus(row,rowIndex, true)" ngbTooltip="Click to delete donation details"
-                            class="crm-action-delete text-danger">
+                        <a *ngIf="delete" placement="bottom" (click)="updateDonationStatus(row,rowIndex, true)" ngbTooltip="Click to delete donation details" class="crm-action-delete text-danger">
                             <i class="fa fa-trash"></i></a>
                     </ng-template>
                 </ngx-datatable-column>

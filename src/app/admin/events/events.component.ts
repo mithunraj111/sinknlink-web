@@ -2,8 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { AppConstant } from '../../app.constants';
-import { EventService } from '../../services/admin/event.service';
-import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { BaseService, AdminService } from '../../services';
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
 import { AppMessages } from 'src/app/app-messages';
 
@@ -12,7 +11,7 @@ import { AppMessages } from 'src/app/app-messages';
   templateUrl: './events.component.html',
   styleUrls: ['./events.component.scss']
 })
-export class EventsComponent implements OnInit {
+export class EventsComponent extends BaseService implements OnInit {
 
   @ViewChild(DatatableComponent) table: DatatableComponent;
   tempFilter = [];
@@ -22,9 +21,9 @@ export class EventsComponent implements OnInit {
   userstoragedata = {} as any;
   constructor(private router: Router,
     private bootstrapAlertService: BootstrapAlertService,
-    private eventService: EventService,
-    private localStorageService: LocalStorageService) {
-    this.userstoragedata = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER);
+    private eventService: AdminService.EventService) {
+    super();
+    super.getScreenDetails('a_events');
 
   }
 
@@ -48,7 +47,7 @@ export class EventsComponent implements OnInit {
   }
   search(event?) {
     let val = '';
-    if (event != null && event != undefined)  {
+    if (event != null && event != undefined) {
       val = event.target.value.toLowerCase();
     }
     const temp = this.tempFilter.filter(item => {
@@ -61,25 +60,24 @@ export class EventsComponent implements OnInit {
     this.eventsList = temp;
     this.table.offset = 0;
   }
-  updateEvent(data,index,flag) {
-    console.log(data.eventid);
+  updateEvent(data, index, flag) {
     const updateObj = {
       updateddt: new Date(),
       updatedby: this.userstoragedata.fullname,
-      status: flag == true ? AppConstant.STATUS_DELETED : 
-        data.status == AppConstant.STATUS_ACTIVE ? AppConstant.STATUS_INACTIVE : AppConstant.STATUS_ACTIVE
-    }
+      status: flag ? AppConstant.STATUS_DELETED :
+        data.status === AppConstant.STATUS_ACTIVE ? AppConstant.STATUS_INACTIVE : AppConstant.STATUS_ACTIVE
+    };
     const formData = new FormData();
     formData.append('formData', JSON.stringify(updateObj));
     this.eventService.update(formData, data.eventid).subscribe(res => {
       const response = JSON.parse(res._body);
-      if (response.status) { 
+      if (response.status) {
         if (flag) {
           this.bootstrapAlertService.showSucccess(AppMessages.VALIDATION.COMMON.DELETE_SUCCESS);
           this.eventsList.splice(index, 1);
         } else {
-        this.bootstrapAlertService.showSucccess(response.message);
-        this.eventsList[index].status = response.data.status;
+          this.bootstrapAlertService.showSucccess(response.message);
+          this.eventsList[index].status = response.data.status;
         }
         this.eventsList = [...this.eventsList];
       } else {
