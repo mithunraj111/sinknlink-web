@@ -35,9 +35,9 @@ export class CustomerGigsComponent implements OnInit, OnChanges {
     this.gigForm = this.fb.group({
       postname: [null, Validators.compose([Validators.required, Validators.maxLength(50)])],
       posttype: [null, Validators.required],
-      salary: [null, Validators.required],
+      salary: [null, Validators.compose([Validators.required, Validators.pattern('^[0-9,]*-[0-9,]*$')])],
       contactperson: [null, Validators.compose([Validators.required, Validators.maxLength(50)])],
-      contactmobile: [''],
+      contactmobile: ['', Validators.compose([Validators.required, Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')])],
       description: ['', Validators.maxLength(500)],
       status: [true, Validators.required]
     });

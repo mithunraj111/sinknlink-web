@@ -33,10 +33,10 @@ export class CustomerCouponsComponent implements OnInit, OnChanges {
   initCouponForm() {
     this.couponForm = this.fb.group({
       couponcode: [null, Validators.compose([Validators.required, Validators.maxLength(50)])],
-      shortdesc: [null, Validators.required],
-      noofcoupons: [null, Validators.required],
+      shortdesc: [null, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])],
+      noofcoupons: [null, Validators.compose([Validators.required, Validators.maxLength(11), Validators.pattern('^[0-9]*$')])],
       expirydt: [null, Validators.required],
-      description: ['', Validators.maxLength(500)],
+      description: ['', Validators.compose([Validators.minLength(3), Validators.maxLength(500)])],
       status: [true, Validators.required]
     });
   }

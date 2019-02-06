@@ -179,30 +179,88 @@ export const AppMessages = Object.freeze({
     },
     DEALER: {
       PROFILE: {
-        dealername: { required: 'Please enter dealer name' },
-        contactperson: { required: 'Please enter contact person name' },
-        mobileno: { required: 'Please enter mobile number' },
-        phoneno: { required: 'Please enter phone number' },
-        locationid: { required: 'Please select location' },
-        address: { required: 'Please enter address' },
-        commissionpercent: { required: 'Please enter commission percent' },
+        dealername: { 
+          required: 'Please enter dealer name',
+          maxlength: 'Dealer name should be less than 50 characters'
+        },
+        contactperson: { 
+          required: 'Please enter contact person name',
+          maxlength: 'Contact name should be less than 50 characters'
+        },
+        mobileno: { 
+          required: 'Please enter mobile number',
+          minlength: 'Mobile number should be atleast 10 digits',
+          maxlength: 'Mobile number should be less than 15 digits',
+          pattern: 'Please enter a valid mobile number'
+        },
+        phoneno: { 
+          maxlength: 'Phone number should be less than 15 digits',
+          minlength: 'Phone number should be atleast 10 digits',
+          pattern: 'Please enter a valid phone number'
+        },
+        locationid: { 
+          required: 'Please select location' 
+        },
+        address: { 
+          required: 'Address should be less than 100 characters' 
+        },
+        commissionpercent: { 
+          required: 'Please enter commission percent',
+          max: 'Commision percent should be less than 100 %'
+        },
       }
     },
     GIG: {
-      postname: { required: 'Please enter post name', maxlength: '' },
-      posttype: { required: 'Please select post type' },
-      salary: { required: 'Please enter salary range' },
-      contactperson: { required: 'Please enter contact mobile' },
-      contactmobile: { required: 'Please enter contact mobile' },
-      description: { required: 'Please select status' }
+      postname: { 
+        required: 'Please enter post name', 
+        maxlength: 'Post name should be less than 50 characters' 
+      },
+      posttype: { 
+        required: 'Please select post type',
+      },
+      salary: { 
+        required: 'Please enter salary range',
+        pattern: 'Please enter valid salary range'
+      },
+      contactperson: { 
+        required: 'Please enter contact mobile',
+        maxlength: 'Contact person name should be less than 50 characters'
+      },
+      contactmobile: { 
+        required: 'Please enter contact mobile',
+        pattern: 'Please enter valid mobile number' 
+      },
+      description: { 
+        required: 'Please select status',
+        maxlength: 'Description should be less than 500 characters'
+      }
     },
     COUPON: {
-      couponcode: { required: 'Please enter coupon code', maxlength: '' },
-      shortdesc: { required: 'Please enter coupon title', maxlength: '' },
-      noofcoupons: { required: 'Please enter number of coupons' },
-      expirydt: { required: 'Please select expiry date' },
-      description: { required: 'Please enter description', maxlength: '' },
-      status: { required: 'Please select status' },
+      couponcode: { 
+        required: 'Please enter coupon code', 
+        maxlength: 'Coupon code should be less than 50 characters' 
+      },
+      shortdesc: { 
+        required: 'Please enter coupon title', 
+        maxlength: 'Title should be less than 50 characters',
+        minlength: 'Title should be atleast 3 characters'
+      },
+      noofcoupons: { 
+        required: 'Please enter number of coupons',
+        maxlength: 'Coupon count should be less than 11 digits',
+        pattern: 'Coupon count should contain numbers only'
+      },
+      expirydt: { 
+        required: 'Please select expiry date' 
+      },
+      description: { 
+        required: 'Please enter description', 
+        maxlength: 'Description should be less than 500 characters', 
+        minlength: 'Description should contain atleast 3 characters'
+      },
+      status: { 
+        required: 'Please select status' 
+      }
     },
     BUSINESS: {
       bizname: {
@@ -232,11 +290,10 @@ export const AppMessages = Object.freeze({
         maxlength: 'postal address should be within 100 characters'
       },
       lat: {
-        required: 'Please enter latitude ',
-
+        required: 'Please enter latitude '
       },
       lng: {
-        required: 'Please enter longitude',
+        required: 'Please enter longitude'
       },
       locationid: { required: 'Please select location' },
       workdays: { required: 'Please select work days' },

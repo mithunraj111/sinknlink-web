@@ -97,8 +97,7 @@ export class AddEditUserComponent implements OnInit {
         data.status = AppConstant.STATUS_ACTIVE;
         data.createdby = this.userstoragedata.fullname;
         data.createddt = new Date();
-        formdata.append('formData', JSON.stringify(data));
-        this.userService.create(formdata).subscribe((res) => {
+        this.userService.create(data).subscribe((res) => {
           const response = JSON.parse(res._body);
           if (response.status) {
             this.bootstrapAlertService.showSucccess(response.message);

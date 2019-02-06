@@ -8,7 +8,7 @@
             <div class="col-md-6 col-sm-6">
                 <div class="text-right">
                     <label>Search:
-                        <input #customerSearch type="search" class="header-search form-control input-sm full-data-search" placeholder="Search for here"
+                        <input #customerSearch type="text" class="header-search form-control input-sm full-data-search" placeholder="Search for here"
                             (keyup)='search($event)' placement="bottom" ngbTooltip="Type here to search">
                         <button type="button" class="btn search-close" (click)="customerSearch.value='';search();"><i class="fa fa-close"></i></button>
                     </label>
