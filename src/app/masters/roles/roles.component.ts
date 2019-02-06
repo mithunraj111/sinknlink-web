@@ -2,8 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { AppConstant } from '../../app.constants';
-import { RoleService } from '../../services/masters/role.service';
-import { LocalStorageService } from '../../services/local-storage.service';
+import { LocalStorageService, BaseService, MasterService } from '../../services';
 import { AppMessages } from '../../app-messages';
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
 
@@ -12,18 +11,16 @@ import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
   templateUrl: './roles.component.html',
   styleUrls: ['./roles.component.scss']
 })
-export class RolesComponent implements OnInit {
+export class RolesComponent extends BaseService implements OnInit {
   rolesList = [];
   tempFilter = [];
   @ViewChild(DatatableComponent) table: DatatableComponent;
   displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
-  userstoragedata = {} as any;
   constructor(private router: Router,
-    private roleService: RoleService,
-    private bootstrapAlertService: BootstrapAlertService,
-    private localStorageService: LocalStorageService) {
-    this.userstoragedata = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER);
-
+    private roleService: MasterService.RoleService,
+    private bootstrapAlertService: BootstrapAlertService) {
+    super();
+    super.getScreenDetails('m_roles');
   }
 
   ngOnInit() {
@@ -49,7 +46,7 @@ export class RolesComponent implements OnInit {
   }
   search(event?) {
     let val = '';
-    if( event != null && event!= undefined){
+    if (event != null && event != undefined) {
       val = event.target.value.toLowerCase();
     }
     const temp = this.tempFilter.filter(item => {

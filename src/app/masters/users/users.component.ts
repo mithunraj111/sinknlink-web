@@ -2,9 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppConstant } from '../../app.constants';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
-import { UserService } from 'src/app/services/masters/user.service';
+import { MasterService, LocalStorageService, BaseService } from '../../services';
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
-import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { AppMessages } from 'src/app/app-messages';
 
 @Component({
@@ -12,13 +11,15 @@ import { AppMessages } from 'src/app/app-messages';
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss']
 })
-export class UsersComponent implements OnInit {
+export class UsersComponent extends BaseService implements OnInit {
   displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   tempFilter = [];
   userList = [];
   @ViewChild(DatatableComponent) table: DatatableComponent;
-  constructor(private router: Router, private userService: UserService,
-    private bootstrapAlertService: BootstrapAlertService, private localStorageService: LocalStorageService) {
+  constructor(private router: Router, private userService: MasterService.UserService,
+    private bootstrapAlertService: BootstrapAlertService) {
+    super();
+    super.getScreenDetails('m_users');
   }
 
   ngOnInit() {
@@ -46,10 +47,11 @@ export class UsersComponent implements OnInit {
   }
 
   changeStatus(data, index, flag) {
-    let updateObj = {
-      status: flag ? AppConstant.STATUS_DELETED : status == AppConstant.STATUS_ACTIVE ? AppConstant.STATUS_INACTIVE : AppConstant.STATUS_ACTIVE,
+    const updateObj = {
+      status: flag ? AppConstant.STATUS_DELETED :
+        status === AppConstant.STATUS_ACTIVE ? AppConstant.STATUS_INACTIVE : AppConstant.STATUS_ACTIVE,
       updateddt: new Date(),
-      updatedby: this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER).fullname
+      updatedby: this.userstoragedata.fullname
     };
     const formData = new FormData();
     formData.append('formData', JSON.stringify(updateObj));

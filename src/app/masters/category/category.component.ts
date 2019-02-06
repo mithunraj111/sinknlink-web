@@ -21,6 +21,7 @@ export class CategoryComponent extends BaseService implements OnInit {
   constructor(private categoryService: MasterService.CategoryService,
     private bootstrapAlertService: BootstrapAlertService) {
     super();
+    super.getScreenDetails('m_categories');
   }
   ngOnInit() {
     this.getCategories();

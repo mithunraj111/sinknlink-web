@@ -10,6 +10,7 @@ export const AppConstant = Object.freeze({
     ISAUTHENTICATED: 'isAuthenticated',
     SCREENS: 'scrcodes-'
   },
+  PERMISSION: ['Create', 'View', 'Edit', 'Delete'],
   BUTTON_TXT: {
     SAVE: 'Save',
     UPDATE: 'Update'
