@@ -15,8 +15,7 @@
                 </div>
             </div>
             <div class="col-md-1 col-sm-1 p-r-0">
-                <button type="button" placement="bottom" ngbTooltip="Click to add location" class="btn btn-primary waves-effect"
-                    (click)='addLocation()'><i class="fa fa-plus-circle m-r-5"></i> New
+                <button *ngIf="add" type="button" placement="bottom" ngbTooltip="Click to add location" class="btn btn-primary waves-effect" (click)='addLocation()'><i class="fa fa-plus-circle m-r-5"></i> New
                 </button>
             </div>
         </div>
@@ -25,8 +24,7 @@
 <div class="header-block m-t-60">
     <div class="table-header fixed-table-header">
         <app-card [classHeader]="true">
-            <ngx-datatable #locationtable class="table data-table expandable" [rows]='locationList' [columnMode]="'flex'"
-                [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false">
+            <ngx-datatable #locationtable class="table data-table expandable" [rows]='locationList' [columnMode]="'flex'" [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false">
                 <!-- Row Detail Template -->
                 <ngx-datatable-column prop="pincode" name="Pincode" [resizeable]="false">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
@@ -54,21 +52,16 @@
                         <span class="updatedate"> {{row.updateddt|date:displayformat}}</span>
                     </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column name="Status" [sortable]="false" [flexGrow]="0.5" headerClass="text-center"
-                    [cellClass]="'text-center'" [resizeable]="false">
+                <ngx-datatable-column name="Status" [sortable]="false" [flexGrow]="0.5" headerClass="text-center" [cellClass]="'text-center'" [resizeable]="false">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                        <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="#03ADED"
-                            switchColor="#fff" size="small" [checked]="row.status == 'Active'" (change)="updateLocationStatus(row, rowIndex, false)"></ui-switch>
+                        <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="#03ADED" switchColor="#fff" size="small" [checked]="row.status == 'Active'" (change)="updateLocationStatus(row, rowIndex, false)"></ui-switch>
                     </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.5" headerClass="text-center"
-                    [cellClass]="'text-center'" [resizeable]="false">
+                <ngx-datatable-column *ngIf="edit || delete" name="Action" [sortable]="false" [flexGrow]="0.5" headerClass="text-center" [cellClass]="'text-center'" [resizeable]="false">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                        <a placement="bottom" ngbTooltip="Click to edit location" class="m-r-15 crm-action-edit text-primary"
-                            (click)="editLocation(row)">
+                        <a *ngIf="edit" placement="bottom" ngbTooltip="Click to edit location" class="m-r-15 crm-action-edit text-primary" (click)="editLocation(row)">
                             <i class="fa fa-pencil"></i></a>
-                        <a placement="bottom" (click)="updateLocationStatus(row,rowIndex,true)" ngbTooltip="Click to delete location"
-                            class="crm-action-delete text-danger">
+                        <a *ngIf="delete" placement="bottom" (click)="updateLocationStatus(row,rowIndex,true)" ngbTooltip="Click to delete location" class="crm-action-delete text-danger">
                             <i class="fa fa-trash"></i></a>
                     </ng-template>
                 </ngx-datatable-column>

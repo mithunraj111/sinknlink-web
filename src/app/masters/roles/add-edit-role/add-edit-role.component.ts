@@ -54,20 +54,23 @@ export class AddEditRoleComponent implements OnInit {
     this.lookupService.list({ refkey: 'app_screens', status: AppConstant.STATUS_ACTIVE }).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
-        this.screensList = JSON.parse(response.data[0].refvalue);
-        if (this.roleid) {
-          const self = this;
-          _.map(this.roleObj.uiactions, function (item, idx) {
-            const data = _.find(self.screensList, { screencode: item.screencode });
-            if (!_.isUndefined(data)) {
-              const index = _.indexOf(self.screensList, data);
-              self.screensList[index].assignedpermissions = item.assignedpermissions;
-            }
-            if (idx + 1 === self.roleObj.uiactions.length) {
-              self.screensList = [...self.screensList];
-            }
-          });
+        if (response.data.length != 0) {
+          this.screensList = JSON.parse(response.data[0].refvalue);
+          if (this.roleid) {
+            const self = this;
+            _.map(this.roleObj.uiactions, function (item, idx) {
+              const data = _.find(self.screensList, { screencode: item.screencode });
+              if (!_.isUndefined(data)) {
+                const index = _.indexOf(self.screensList, data);
+                self.screensList[index].assignedpermissions = item.assignedpermissions;
+              }
+              if (idx + 1 === self.roleObj.uiactions.length) {
+                self.screensList = [...self.screensList];
+              }
+            });
+          }
         }
+
       }
     });
   }

@@ -17,19 +17,13 @@ export class LoginComponent implements OnInit {
   errMessage;
   constructor(private localStorageService: LocalStorageService, private commonService: CommonService,
     private fb: FormBuilder, private loginService: LoginService, private router: Router) {
-    
-      console.log('Inside constructor....');
-    
-      this.loginForm = this.fb.group({
+    this.loginForm = this.fb.group({
       mobileno: [null, Validators.compose([Validators.required, Validators.maxLength(13)])],
       password: [null, Validators.required],
     });
   }
 
   ngOnInit() {
-
-    console.log('Inside init....');
-
   }
   login() {
     if (this.loginForm.status === AppConstant.STATUS_INVALID) {
@@ -41,6 +35,7 @@ export class LoginComponent implements OnInit {
         if (response.status) {
           this.localStorageService.addItem(AppConstant.LOCALSTORAGE.USER, response.data);
           this.localStorageService.addItem(AppConstant.LOCALSTORAGE.ISAUTHENTICATED, response.status);
+          this.localStorageService.addItem(AppConstant.LOCALSTORAGE.SCREENS, response.data.role.uiactions);
           this.router.navigate(['dashboard']);
         } else {
           this.errMessage = response.message;

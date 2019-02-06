@@ -173,7 +173,7 @@ export class MainComponent implements OnInit {
 
     this.setMenuAttributes(this.windowWidth);
     this.setHeaderAttributes(this.windowWidth);
-
+    this.menuItems.getAll();
     // dark
     /*this.setLayoutType('dark');*/
 
@@ -400,6 +400,7 @@ export class MainComponent implements OnInit {
   logout() {
     this.lstorageService.removeItem(AppConstant.LOCALSTORAGE.USER);
     this.lstorageService.removeItem(AppConstant.LOCALSTORAGE.ISAUTHENTICATED);
+    this.lstorageService.removeItem(AppConstant.LOCALSTORAGE.SCREENS);
     this.route.navigate(['auth/login']);
   }
 }

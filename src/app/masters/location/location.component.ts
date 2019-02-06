@@ -1,8 +1,7 @@
 import { Component, OnInit, Output, ViewChild } from '@angular/core';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { AppConstant } from '../../app.constants';
-import { LocationService } from '../../services/masters/location.service';
-import { LocalStorageService } from '../../services/local-storage.service';
+import { MasterService,BaseService } from '../../services';
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
 import { AddEditLocationComponent } from './add-edit-location/add-edit-location.component';
 import { AppMessages } from '../../app-messages';
@@ -12,7 +11,7 @@ import { AppMessages } from '../../app-messages';
   templateUrl: './location.component.html',
   styleUrls: ['./location.component.scss']
 })
-export class LocationComponent implements OnInit {
+export class LocationComponent extends BaseService implements OnInit {
   @Output() locationObj: any = {};
   @ViewChild(AddEditLocationComponent) locationModal: AddEditLocationComponent;
   @ViewChild(DatatableComponent) table: DatatableComponent;
@@ -20,14 +19,14 @@ export class LocationComponent implements OnInit {
   locationList = [];
   displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   userstoragedata = {} as any;
-  constructor(private locationService: LocationService,
-    private localStorageService: LocalStorageService,
+  constructor(private locationService: MasterService.LocationService,
     private bootstrapAlertService: BootstrapAlertService) {
-    this.userstoragedata = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER);
+    super();
   }
 
   ngOnInit() {
     this.getLocations();
+    this.getScreenDetails('m_location');
   }
 
   openLocationModal(event) {
@@ -50,7 +49,7 @@ export class LocationComponent implements OnInit {
   }
   search(event?) {
     let val = '';
-    if( event != null && event!= undefined){
+    if (event != null && event != undefined) {
       val = event.target.value.toLowerCase();
     }
     const temp = this.tempFilter.filter(item => {

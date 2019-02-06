@@ -1,15 +1,10 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { RoleService } from '../services/masters/role.service';
 import { AppConstant } from '../app.constants';
-import { LocalStorageService } from '../services/local-storage.service';
-import { UserService } from '../services/masters/user.service';
-import { Router } from '@angular/router';
+import { LocalStorageService,MasterService,CommonService } from '../services';
 import * as _ from 'lodash';
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
-import { CommonService } from '../services/common.service';
 import { AppMessages } from '../app-messages';
-import { LocationService } from '../services/masters';
 
 @Component({
   selector: 'app-profile',
@@ -31,11 +26,12 @@ export class ProfileComponent implements OnInit {
   fileUrl = AppConstant.IMG_BASE_URL;
   @ViewChild('userimage') userimage: ElementRef;
 
-  constructor(private fb: FormBuilder, private roleService: RoleService,
+  constructor(private fb: FormBuilder,
     private localStorageService: LocalStorageService,
-    private userService: UserService,
-    private router: Router, private bootstrapAlertService: BootstrapAlertService, private commonService: CommonService,
-    private locationService: LocationService,
+    private userService: MasterService.UserService,
+    private bootstrapAlertService: BootstrapAlertService,
+    private commonService: CommonService,
+    private locationService: MasterService.LocationService,
 
   ) {
     this.userstoragedata = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER);

@@ -7,7 +7,8 @@ export const AppConstant = Object.freeze({
     STR_PREFIX: 'bd20190404-',
     TOKEN: 'token',
     USER: 'user',
-    ISAUTHENTICATED: 'isAuthenticated'
+    ISAUTHENTICATED: 'isAuthenticated',
+    SCREENS: 'scrcodes-'
   },
   BUTTON_TXT: {
     SAVE: 'Save',
