@@ -49,7 +49,7 @@ export class CustomerBranchesComponent extends BaseService implements OnInit, On
           this.branchesList.splice(index, 1);
         } else {
           this.bootstrapAlertService.showSucccess(response.message);
-          this.branchesList[index] = response.data;
+          this.branchesList[index].status = response.data.status;
         }
         this.branchesList = [...this.branchesList];
       } else {

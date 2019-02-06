@@ -54,7 +54,7 @@ export class DonationsComponent implements OnInit {
           this.donationList.splice(index, 1);
         } else {
           this.bootstrapAlertService.showSucccess(response.message);
-          this.donationList[index] = response.data;
+          this.donationList[index].status = response.data.status;
         }
         this.donationList = [...this.donationList];
       } else {

@@ -90,7 +90,7 @@ export class CustomerGigsComponent implements OnInit, OnChanges {
           this.gigsList.splice(index, 1);
         } else {
           this.bootstrapAlertService.showSucccess(response.message);
-          this.gigsList[index] = response.data;
+          this.gigsList[index].status = response.data.status;
           this.initGigForm();
         }
         this.gigsList = [...this.gigsList];

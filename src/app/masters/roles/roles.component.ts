@@ -78,7 +78,7 @@ export class RolesComponent implements OnInit {
           this.rolesList.splice(index, 1);
         } else {
           this.bootstrapAlertService.showSucccess(response.message);
-          this.rolesList[index] = response.data;
+          this.rolesList[index].status = response.data.status;
         }
         this.rolesList = [...this.rolesList];
       } else {

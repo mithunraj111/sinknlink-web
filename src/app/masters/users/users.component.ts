@@ -72,7 +72,7 @@ export class UsersComponent implements OnInit {
 
   search(event?) {
     let val = '';
-    if( event != null && event!= undefined){
+    if (event != null && event != undefined) {
       val = event.target.value.toLowerCase();
     }
     const temp = this.tempFilter.filter(item => {

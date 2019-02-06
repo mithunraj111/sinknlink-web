@@ -88,7 +88,7 @@ export class LocationComponent extends BaseService implements OnInit {
           this.locationList.splice(index, 1);
         } else {
           this.bootstrapAlertService.showSucccess(response.message);
-          this.locationList[index] = response.data;
+          this.locationList[index].status = response.data.status;
         }
         this.locationList = [...this.locationList];
       } else {

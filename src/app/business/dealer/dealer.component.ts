@@ -78,7 +78,7 @@ export class DealerComponent implements OnInit {
           this.dealerList.splice(index, 1);
         } else {
           this.bootstrapAlertService.showSucccess(response.message);
-          this.dealerList[index] = response.data;
+          this.dealerList[index].status = response.data.status;
         }
         this.dealerList = [...this.dealerList];
       } else {

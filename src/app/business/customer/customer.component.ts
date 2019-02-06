@@ -79,7 +79,7 @@ export class CustomerComponent implements OnInit {
           this.customerList.splice(index, 1);
         } else {
           this.bootstrapAlertService.showSucccess(response.message);
-          this.customerList[index] = response.data;
+          this.customerList[index].status = response.data.status;
         }
         this.customerList = [...this.customerList];
       } else {

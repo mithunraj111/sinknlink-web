@@ -87,7 +87,7 @@ export class CustomerCouponsComponent implements OnInit, OnChanges {
           this.couponList.splice(index, 1);
         } else {
           this.bootstrapAlertService.showSucccess(response.message);
-          this.couponList[index] = response.data;
+          this.couponList[index].status = response.data.status;
         }
         this.couponList = [...this.couponList];
       } else {

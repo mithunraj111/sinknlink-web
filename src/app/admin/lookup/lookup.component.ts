@@ -88,7 +88,7 @@ export class LookupComponent implements OnInit {
           this.lookupList.splice(index, 1);
         } else {
           this.bootstrapAlertService.showSucccess(response.message);
-          this.lookupList[index] = response.data;
+          this.lookupList[index].status = response.data.status;
         }
         this.lookupList = [...this.lookupList];
       } else {
