@@ -200,31 +200,61 @@ export const AppMessages = Object.freeze({
       status: { required: 'Please select status' },
     },
     BUSINESS: {
-      bizname: { required: 'Please enter business name' },
-      biztype: { required: 'Please enter business type' },
-      contactperson: { required: 'Please enter contact person name' },
+      bizname: {
+        required: 'Please enter business name',
+        minlength: 'Business name should be atleast 1 characters',
+        maxlength: 'Business name should be within 50 characters'
+      },
+      biztype: { required: 'Please select business type' },
+      contactperson: {
+        required: 'Please enter contact person name',
+        minlength: 'Contact person should be atleast 1 characters',
+        maxlength: 'Contact person should be within 50 characters'
+      },
       contactmobile: { required: 'Please enter mobile number' },
-      contactemail: { required: 'Please enter email address' },
+      contactemail: {
+        required: 'Please enter email address',
+        pattern: 'Please enter valid email address',
+        maxlength: 'email address should be within 100 characters'
+
+      },
       phoneno: { required: 'Please enter phone number' },
       categoryid: { required: 'Please select category' },
       tags: { required: 'Please enter sub categories' },
-      postaladdress: { required: 'Please enter address' },
-      lat: { required: 'Please enter geo coordinates ' },
-      lng: { required: 'Please enter geo coordinates' },
+      postaladdress: {
+        required: 'Please enter address',
+        minlength: 'postal address should be atleast 1 characters',
+        maxlength: 'postal address should be within 100 characters'
+      },
+      lat: {
+        required: 'Please enter latitude ',
+
+      },
+      lng: {
+        required: 'Please enter longitude',
+      },
       locationid: { required: 'Please select location' },
-      workdays: { required: 'Please select working days' },
-      starttime: { required: 'Please enter work hour ' },
-      endtime: { required: 'Please select work hour' },
+      workdays: { required: 'Please select work days' },
+      starttime: { required: 'Please enter work hours' },
+      endtime: { required: 'Please select work hours' },
       acceptedpayments: { required: 'Please select payment methods' },
-      deliveryoptions: { required: 'Please select delivery options' },
-      taxno: { required: 'Please enter tax number' },
-      website: { required: 'Please select status' },
-      regdate: { required: 'Please select status' },
-      paymentstatus: { required: 'Please select status' },
-      membershiptype: { required: 'Please select status' },
-      paymenttenure: { required: 'Please select status' },
+      deliveryoptions: { required: 'Please select delivery methods' },
+      socialids: { required: 'Please enter socialid' },
+      taxno: {
+        required: 'Please enter tax number',
+        maxlength: 'Tax number should be within 30 characters'
+
+      },
+      website: {
+        required: 'Please enter website',
+        pattern: 'Please enter valid website'
+      },
+      regdate: { required: 'Please select registration date' },
+      paymentstatus: { required: 'Please select payment status' },
+      membershiptype: { required: 'Please select member type' },
+      paymenttenure: { required: 'Please select payment tenture' },
       status: { required: 'Please select status' },
-      tncagreed: { required: 'Please select status' }
+      tncagreed: { required: 'Please select terms and conditions' }
     }
   },
 });
