@@ -24,4 +24,7 @@ export class FancyNumberService {
     blockNumbers(data): Observable<any> {
         return this.httpHandler.POST(this.endpoint + AppConstant.API_CONFIG.API_URL.ADMIN.FANCYNO.BLOCK, data);
     }
+    allocateNumbers(data): Observable<any> {
+        return this.httpHandler.POST(this.endpoint + AppConstant.API_CONFIG.API_URL.ADMIN.FANCYNO.ALLOCATE, data);
+    }
 }

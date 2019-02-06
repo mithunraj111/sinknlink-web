@@ -24,7 +24,7 @@ export class VipNumberRegistrationComponent implements OnInit {
 
   selectedBiz;
   selectedFancyNos = [];
-  blockRemarks:string;
+  blockRemarks: string;
 
   parentBiz: any = [];
 
@@ -92,10 +92,10 @@ export class VipNumberRegistrationComponent implements OnInit {
       if (typeof selectedBiz == "string") {
         let arr = Lodash.map(selectedFancyNos, (item) => {
           return {
-            fancynoid: item,
+            fancyid: item.id,
             fancynostatus: AppConstant.STATUS_BLOCKED,
             updateddt: new Date(),
-            remarks:this.blockRemarks,
+            remarks: this.blockRemarks,
             updatedby: this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER).fullname
           }
         });
@@ -103,8 +103,8 @@ export class VipNumberRegistrationComponent implements OnInit {
       } else {
         let arr = Lodash.map(selectedFancyNos, (item) => {
           return {
-            fancynoid: item,
-            remarks:this.blockRemarks,
+            fancyid: item.id,
+            remarks: this.blockRemarks,
             fancynostatus: AppConstant.STATUS_BLOCKED,
             membershipid: selectedBiz,
             updateddt: new Date(),
@@ -122,10 +122,25 @@ export class VipNumberRegistrationComponent implements OnInit {
         }
       })
     } else {
-
+      if (typeof selectedBiz == "string") {
+        this.bootstrapAlertService.showError("Business is required. Select One");
+      } else {
+        this.fancynumberService.allocateNumbers({
+          "fancynos": selectedFancyNos,
+          "bizid": selectedBiz,
+          "updatedby": this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER).fullname
+        }).subscribe(res => {
+          const response = JSON.parse(res._body);
+          if (response.status) {
+            this.bootstrapAlertService.showSucccess(response.message);
+          } else {
+            this.bootstrapAlertService.showError(response.message);
+          }
+        })
+      }
     }
 
-    this.getAvailableList();
+    // this.getAvailableList();
 
   }
   addVipRegistration() {
@@ -133,7 +148,7 @@ export class VipNumberRegistrationComponent implements OnInit {
   }
   changeStatus(pk, status) {
     let data = {
-      fancynoid: pk,
+      fancyid: pk,
       status: status == 'Active' ? 'InActive' : 'Active',
       updateddt: new Date(),
       updatedby: this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER).fullname
@@ -147,10 +162,10 @@ export class VipNumberRegistrationComponent implements OnInit {
       }
     })
   }
-  onNumberSelect(id) {
+  onNumberSelect(id, no) {
     let found = this.selectedFancyNos.find((o) => { return id == o });
-    if (found == undefined) this.selectedFancyNos.push(id);
-    else this.selectedFancyNos.splice(this.selectedFancyNos.indexOf(id), 1);
+    if (found == undefined) this.selectedFancyNos.push({ id: id, no: no });
+    else this.selectedFancyNos.splice(this.selectedFancyNos.indexOf({ id: id, no: no }), 1);
   }
   search(event?) {
     let val = '';

@@ -117,7 +117,8 @@ export const AppConstant = Object.freeze({
           CREATE: 'fancyno/create',
           LIST: 'fancyno',
           EDIT: 'fancyno/edit',
-          BLOCK: 'fancyno/block'
+          BLOCK: 'fancyno/block',
+          ALLOCATE: 'fancyno/allocate'
         }
       },
       COMMON: {
