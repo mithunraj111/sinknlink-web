@@ -70,16 +70,18 @@ export class AddEditUserComponent implements OnInit {
       this.bootstrapAlertService.showError(this.errMessage);
       return false;
     } else {
-      let data = this.userForm.value;
-      let formdata = {} as any;
-      formdata.fullname = data.fullname;
-      formdata.mobileno = data.mobileno;
-      formdata.roleid = Number(data.rolename);
-      formdata.password = data.password;
-      formdata.updatedby = this.userstoragedata.fullname;
-      formdata.updateddt = new Date();
+      const formdata = new FormData();
+      let dataValue = this.userForm.value;
+      let data = {} as any;
+      data.fullname = dataValue.fullname;
+      data.mobileno = dataValue.mobileno;
+      data.roleid = Number(dataValue.rolename);
+      data.password = dataValue.password;
+      data.updatedby = this.userstoragedata.fullname;
+      data.updateddt = new Date();
       if (!_.isUndefined(this.userObj) && !_.isUndefined(this.userObj.userid) && !_.isEmpty(this.userObj)) {
-        formdata.status = data.status ? AppConstant.STATUS_ACTIVE : AppConstant.STATUS_INACTIVE;
+        data.status = dataValue.status ? AppConstant.STATUS_ACTIVE : AppConstant.STATUS_INACTIVE;
+        formdata.append('formData', JSON.stringify(data));
         this.userService.update(formdata, this.userObj.userid).subscribe(res => {
           const response = JSON.parse(res._body);
           if (response.status) {
@@ -92,9 +94,10 @@ export class AddEditUserComponent implements OnInit {
           this.bootstrapAlertService.showError(err.message);
         });
       } else {
-        formdata.status = AppConstant.STATUS_ACTIVE;
-        formdata.createdby = this.userstoragedata.fullname;
-        formdata.createddt = new Date();
+        data.status = AppConstant.STATUS_ACTIVE;
+        data.createdby = this.userstoragedata.fullname;
+        data.createddt = new Date();
+        formdata.append('formData', JSON.stringify(data));
         this.userService.create(formdata).subscribe((res) => {
           const response = JSON.parse(res._body);
           if (response.status) {

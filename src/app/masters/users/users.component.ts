@@ -45,21 +45,25 @@ export class UsersComponent implements OnInit {
     return row.height;
   }
 
-  changeStatus(id, status, deleted) {
-    let data = {
-      status: deleted ? AppConstant.STATUS_DELETED : status == AppConstant.STATUS_ACTIVE ? AppConstant.STATUS_INACTIVE : AppConstant.STATUS_ACTIVE,
+  changeStatus(data, index, flag) {
+    let updateObj = {
+      status: flag ? AppConstant.STATUS_DELETED : status == AppConstant.STATUS_ACTIVE ? AppConstant.STATUS_INACTIVE : AppConstant.STATUS_ACTIVE,
       updateddt: new Date(),
       updatedby: this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER).fullname
     };
-    this.userService.update(data, id).subscribe(res => {
+    const formData = new FormData();
+    formData.append('formData', JSON.stringify(updateObj));
+    this.userService.update(formData, data.userid).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
-        if (deleted) {
-          this.getUsers();
-          this.bootstrapAlertService.showSucccess('#' + id + ' ' + AppMessages.VALIDATION.COMMON.DELETE_SUCCESS);
+        if (flag) {
+          this.bootstrapAlertService.showSucccess('#' + data.userid + ' ' + AppMessages.VALIDATION.COMMON.DELETE_SUCCESS);
+          this.userList.splice(index, 1);
         } else {
           this.bootstrapAlertService.showSucccess(response.message);
+          this.userList[index].status = response.data.status;
         }
+        this.userList = [...this.userList];
       } else {
         this.bootstrapAlertService.showError(response.message);
       }
