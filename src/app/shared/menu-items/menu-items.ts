@@ -118,6 +118,16 @@ const MENUITEMS = [
         name: 'Customer Detail Report',
         code: 'r_customer'
       },
+      {
+        state: 'consumer',
+        name: 'Consumer Detail Report',
+        code: 'r_consumer'
+      },
+      {
+        state: 'payments',
+        name: 'Payment Report',
+        code: 'r_payments'
+      }
     ]
   }
 ];
