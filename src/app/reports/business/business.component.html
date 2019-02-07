@@ -1,0 +1,156 @@
+<div id="business-header" [ngClass]="configOpenTopBar">
+  <div class="selector-button">
+    <a href="javascript:" placement="left" (click)="toggleTopbar()"></a>
+  </div>
+  <div class="fixedheader w-100">
+    <div class="pos-fixed">
+      <div class="col-md-12 col-sm-12 p-r-0 p-l-0 business-title">
+        <h2>Business</h2>
+        <p>Lorem ipsum lorem ipsum</p>
+      </div>
+
+      <div class="col-lg-12 col-md-12 p-r-0 p-l-0 business-table">
+        <div class="row">
+          <div class="col-md-3 col-sm-3 p-r-5">
+            <div class="form-group">
+              <label>From Date</label>
+              <div class="input-group">
+                <input class="form-control" placeholder="dd-mm-yyyy" name="dp" ngbDatepicker #dp="ngbDatepicker">
+                <div class="input-group-append" (click)="dp.toggle()">
+                  <span class="fa fa-calendar input-group-text"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-3 p-r-5 p-l-5">
+            <div class="form-group">
+              <label>To Date</label>
+              <div class="input-group">
+                <input class="form-control" placeholder="dd-mm-yyyy" name="dp" ngbDatepicker #d="ngbDatepicker">
+                <div class="input-group-append" (click)="d.toggle()">
+                  <span class="fa fa-calendar input-group-text"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-3 p-r-5 p-l-5">
+            <div class="form-group">
+              <label>Membership Type</label>
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Membership Type">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-3 p-l-5">
+            <div class="form-group">
+              <label>Business Type</label>
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Business Type">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-3 p-r-5">
+            <div class="form-group">
+              <label>Category</label>
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Category">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="col-lg-12 col-md-12 col-sm-12 reports p-l-0 p-r-0">
+  <div class="row">
+    <div class="col-lg-12 col-md-12">
+      <div class="header-block">
+        <div class="report-table">
+          <app-card [classHeader]="true" [title]="'Business'">
+            <div class="dt-responsive table-responsive">
+              <div class="row">
+                <div class="col-sm-12 header-title">
+                  <label class="dt-cust-search f-right">
+                    <div class="form-group">
+
+                      <input #areaSearch type='text' class="form-control input-sm report-search" placeholder='Search for here'
+                        (keyup)='search($event)' />
+                      <button type="button" class="btn search-close" (click)="areaSearch.value='';search();"><i class="fa fa-close"></i></button>
+
+                      <button type="button" placement="bottom" ngbTooltip="Click to download reports" class="btn btn-primary waves-effect download-btn"><i
+                          class="fa fa-download m-r-5"></i>
+                      </button>
+                    </div>
+                  </label>
+                </div>
+              </div>
+              <ngx-datatable #businesstable class="table custer-report data-table expandable scroll" [rows]='businessList'
+                [columnMode]="'flex'" [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false" [footerHeight]="50"
+                [scrollbarH]="true" [limit]="10">
+
+                <ngx-datatable-column prop="bizname" name="Biz Name" [resizeable]="false">
+                  <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                    <span>{{row.bizname}}</span>
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column prop="mobileno" name="Mobile Number" [resizeable]="false">
+                  <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                    <span>{{row.mobileno}}</span>
+                  </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column prop="regdate" name="Reg Date" [resizeable]="false" headerClass="text-right"
+                  [cellClass]="'text-right'">
+                  <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                    <span>{{row.regdate}}</span>
+                  </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column prop="membershiptype" name="Membership Type" [resizeable]="false">
+                  <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                    <span>{{row.membershiptype}}</span>
+                  </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column prop="biztype" name="Biz Type" [resizeable]="false">
+                  <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                    <span>{{row.biztype}}</span>
+                  </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column prop="category" name="Category" [resizeable]="false">
+                  <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                    <span>{{row.category}}</span>
+                  </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column prop="paymenttenure" name="Payment Tenure" [resizeable]="false">
+                  <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                    <span>{{row.paymenttenure}}</span>
+                  </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column prop="gigscount" name="Gigs Count" [resizeable]="false">
+                  <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                    <span>{{row.gigscount}}</span>
+                  </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column prop="couponcount" name="Coupon Count" [resizeable]="false">
+                  <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                    <span>{{row.couponcount}}</span>
+                  </ng-template>
+                </ngx-datatable-column>
+
+              </ngx-datatable>
+            </div>
+          </app-card>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

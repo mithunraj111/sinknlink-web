@@ -24,6 +24,9 @@ h1, h2, h3, h4, h5, h6 {
 .m-t-25{
     margin-top:25px;
 }
+.m-t-35{
+    margin-top:35px;
+}
 .m-t-0{
     margin-top:0 !important;
 }
@@ -297,9 +300,9 @@ textarea {
                 &:first-child{
                  padding-left: 0px;
             }
-            .datatable-header-cell-label {
-                padding: 0.75rem 15px .75rem 3px;
-            }    
+            // .datatable-header-cell-label {
+            //     padding: 0.75rem 15px .75rem 3px;
+            // }    
         }
     }
 }
@@ -320,7 +323,7 @@ textarea {
                 line-height: 31px;
 
             &:first-child{
-                 padding-left: 5px;
+                padding-left: 12px;
             }
             .datatable-body-cell-label{
                 span{
@@ -791,14 +794,14 @@ button{
             height: 62vh;
         }
     }
-    //  .datatable-header{
-    //      display: block;
-    // }
-    // .datatable-body{
-    //     display: block;
-    //     overflow: auto;
-    //     height: 62vh !important;
-    // }
+     .datatable-header{
+         display: block;
+    }
+    .datatable-body{
+        display: block;
+        overflow: auto;
+        height: 62vh !important;
+    }
      .card-block {
         padding: 0px 15px 0px 15px;
      }
@@ -1003,7 +1006,7 @@ button{
     }
     .single{
         background: transparent !important;
-        padding: 4px 0px !important;
+        padding: 3px 0px !important;
         color: #757575 !important;
         .placeholder{
             color: #757575 !important;
@@ -1198,23 +1201,127 @@ button{
         border-radius: 0;
     }
 }
-.header-navbar {
-    .navbar-wrapper {
-        .navbar-container{
-            .nav-right{
-                 .user-profile img{
-                    width: 33px;
-                    height: 33px;
-                 }
-            }     
-        }
-    }   
+.business-title{
+    h2{
+        font-size: 20px;
+        text-transform: capitalize;
+        padding: 0;
+        font-weight: 500;
+        margin: 0;
+        color: #03ADED;
+        display: inline-block;
+        font-family: 'Montserrat', sans-serif;
+    }
+    p{
+        font-size: 13px;
+        color: #414C59;
+        text-transform: capitalize;
+        margin-left: 1px;
+    }
 }
-.tag-chips {
-    delete-icon {
-        svg{
-            height: 30px !important;
+.business-table{
+    background: #fff;
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    .form-control{
+        font-size: 13px;
+        display: block;
+        float: none;
+        background: #fff;
+        padding: 6px 12px;
+        color: #2b2f33;
+        border: 1px solid #cccccc;
+        box-shadow: inset 1px 1px 3px #f6f6f6;
+    }
+    label {
+        font-weight: bold;
+        color: #3e4855;
+    }
+    .input-group{
+        margin-bottom: 10px;
+    }
+    .form-group{
+        margin-bottom: 10px;
+    }
+}
+.customer-report{
+        border:1px solid #ffffff !important;
+
+        .datatable-header {
+            border-bottom: 1px solid hsl(216, 6%, 84%);
+            margin-left:0px;
+            width:100% !important;
+            background: #f7f7f7;
+
+                .datatable-header-cell{
+                    border: 0px solid #d3d5d8;
+                    color: #4b5056;
+                    font-family: 'Montserrat', sans-serif;
+                    font-weight: 600;
+                    font-size: 13px;
+                    width:100vw;
+                    overflow: inherit !important;
+
+                    &:first-child{
+                    padding-left: 0px;
+                }   
+            }
+        }
+       .datatable-body-row {
+            border-bottom: 1px solid #d3d5d8;
+        .datatable-body-cell {
+                border: 0px solid #d3d5d8;
+                font-size: 13px;
+                color: #67757c;
+                font-family: 'Poppins', sans-serif;
+                font-weight: 400;
+                width: 100%;
+                white-space: nowrap;
         }
     }
 }
+.payment-report{
+    width:98.5%;
+        .form-group{
+            margin-top: 10px;
+        }
+        .toggle{
+            color: #2b2f33 !important;
+            width:35px !important; 
+        }
+        .generate-button {
+            padding: 7px 15px;
+            border-radius: 0;
+        }
+        .card{
+            margin-bottom: 8px;
+            label {
+                font-weight: bold;
+                color: #3e4855;
+            }
+            .ng-select{
+                width: 100%;
+            }
+        }  
+}
+.payment-table{
+    .card-block {
+        padding: 0px 15px 0;
+    }
+    .form-group{
+        margin-bottom: 5px;
+    }
+    .card-header {
+        padding: 15px 15px 8px 15px;
+    }
+    .header-title{
+        position: relative;
+    }
+}
+
 // report //
+
+.toggle{
+    color: #2b2f33 !important;
+    width:35px !important; 
+}

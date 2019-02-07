@@ -1,0 +1,114 @@
+<form>
+  <div class="fixedheader">
+    <div class="report-title payment-report pos-fixed">
+      <div class="row">
+        <div class="col-md-12 col-sm-12">
+          <h2>Consumer</h2>
+          <p></p>
+        </div>
+
+        <div class="col-lg-12 col-md-12 p-r-0">
+          <div class="card">
+            <div class="row">
+              <div class="col-md-4 col-sm-4 p-r-5">
+                <div class="form-group">
+                  <label>From Date</label>
+                  <div class="input-group">
+                    <input class="form-control" placeholder="dd-mm-yyyy" name="dp" ngbDatepicker #dp="ngbDatepicker">
+                    <div class="input-group-append" (click)="dp.toggle()">
+                      <span class="fa fa-calendar input-group-text"></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 col-sm-4 p-l-0 p-r-5">
+                <div class="form-group">
+                  <label>To Date</label>
+                  <div class="input-group">
+                    <input class="form-control" placeholder="dd-mm-yyyy" name="dp" ngbDatepicker #d="ngbDatepicker">
+                    <div class="input-group-append" (click)="d.toggle()">
+                      <span class="fa fa-calendar input-group-text"></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-3 p-l-0 p-r-5">
+                <div class="form-group">
+                  <label>Area</label>
+                  <div class="input-group">
+                    <ng-select [ngClass]="'ng-select'" placeholder="Select Area"></ng-select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-1 col-sm-1 m-t-35">
+                <button type="button" placement="bottom" ngbTooltip="Click to search" class="btn btn-primary generate-button waves-effect"
+                  (click)="getConsumer()"> <i class="fa fa-search"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+<div class="col-lg-12 col-md-12 col-sm-12 reports p-l-0">
+  <div class="row">
+    <div class="col-lg-12 col-md-12 p-r-5">
+      <div class="header-block">
+        <div class="table-header report-table payment-table">
+          <app-card [classHeader]="true">
+            <div class="row">
+              <div class="col-sm-12 header-title">
+                <label class="dt-cust-search f-right">
+                  <div class="form-group">
+                    <input #areaSearch type='text' class="form-control input-sm report-search" placeholder='Search for here'
+                      (keyup)='search($event)' />
+                    <button type="button" class="btn search-close" (click)="consumerSearch.value='';search();"><i class="fa fa-close"></i></button>
+
+                    <button type="button" placement="bottom" ngbTooltip="Click to download reports" class="btn btn-primary waves-effect download-btn"><i
+                        class="fa fa-download m-r-5"></i>
+                    </button>
+                  </div>
+                </label>
+              </div>
+            </div>
+            <ngx-datatable #consumertable class="table data-table expandable" [rows]='consumerList' [columnMode]="'flex'"
+              [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false" [footerHeight]="50" [limit]="5">
+
+              <ngx-datatable-column prop="date" name="Date" [resizeable]="false" headerClass="text-left"
+              [cellClass]="'text-left'">
+                <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                  <!-- <span>{{row.paymentdt|date:datedisplayformat}}</span> -->
+                  <span>{{row.date}}</span>
+                </ng-template>
+              </ngx-datatable-column>
+
+              <ngx-datatable-column prop="area" name="Area" [resizeable]="false">
+                  <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                    <span>{{row.area}}</span>
+                  </ng-template>
+                </ngx-datatable-column>
+            
+              <ngx-datatable-column prop="location" name="City" [resizeable]="false">
+                  <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                    <!-- <span>{{row.location?.city}}</span> -->
+                    <span>{{row.location}}</span>
+                  </ng-template>
+                </ngx-datatable-column>
+
+              <ngx-datatable-column prop="totalconsumers" name="No.Of Consumers" [resizeable]="false" headerClass="text-right"
+              [cellClass]="'text-right'">
+                <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                  <span>{{row.totalconsumers}}</span>
+                </ng-template>
+              </ngx-datatable-column>
+
+
+            </ngx-datatable>
+          </app-card>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

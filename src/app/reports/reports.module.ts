@@ -8,6 +8,10 @@ import { SelectModule } from 'ng-select';
 import { ReportsRoutingModule } from './reports-routing.module';
 import { AreaCategoriesComponent } from './area-categories/area-categories.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BusinessComponent } from './business/business.component';
+import { PaymentComponent } from './payment/payment.component';
+import { DealerComponent } from './dealer/dealer.component';
+import { ConsumerComponent } from './consumer/consumer.component';
 
 @NgModule({
   imports: [
@@ -20,6 +24,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule
   ],
-  declarations: [AreaCategoriesComponent]
+  declarations: [AreaCategoriesComponent, BusinessComponent, PaymentComponent, DealerComponent, ConsumerComponent]
 })
 export class ReportsModule { }

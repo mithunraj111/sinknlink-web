@@ -30,7 +30,9 @@
             "styles": [
               "node_modules/bootstrap/scss/bootstrap.scss",
               "node_modules/font-awesome-scss/scss/font-awesome.scss",
+              "node_modules/iconfonts/stylesheets/ionicons.scss",
               "src/assets/icon/themify-icons/themify-icons.css",
+              "src/assets/icon/icofont/css/icofont.scss",
               "src/scss/style.scss",
               "src/styles.scss"
             ],

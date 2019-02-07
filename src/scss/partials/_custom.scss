@@ -718,11 +718,12 @@ ngx-datatable.data-table {
     }
     &.sortable {
       &:before, &:after {
-        font-family: 'FontAwesome' !important;
+        font-family: IcoFont!important;
         position: absolute;
-        top: 10px;
+        top: 8px;
         color: #ccc;
-        font-size: 14px;
+        font-size: 20px;
+        font-weight: 500;
       }
     }
   }
@@ -744,11 +745,11 @@ ngx-datatable.data-table {
 .data-table {
   datatable-header-cell.sortable {
     &:after {
-      content: "\f175";
+      content: "\eb53";
       right: 10px;
     }
     &:before {
-      content: "\f176";
+      content: "\eb56";
       right: 16px;
     }
     &.sort-active {
@@ -787,9 +788,9 @@ ngx-datatable.data-table {
       }
     }
     a {
-      padding: 0 6px;
-      border-radius: 3px;
-      margin: 6px 3px;
+      padding: 5px 10px;
+      border-radius: 0px;
+      margin: 0px 0px;
       text-align: center;
       vertical-align: top;
       color: rgba(0, 0, 0, 0.54);
@@ -905,18 +906,18 @@ ngx-datatable.data-table {
 
 .full-data-table {
   .glyphicon {
-    font-family: FontAwesome;
+    font-family: IcoFont!important;
     position: absolute;
     right: 14px;
     top: 0;
 
     &.glyphicon-triangle-bottom:before {
-      content: "\f175";
-      font-size: 14px;
+      content: "\eb53";
+      font-size: 20px;
     }
     &.glyphicon-triangle-top:before {
-      content: "\f176";
-      font-size: 14px;
+      content: "\eb56";
+      font-size: 20px;
     }
   }
   th {
