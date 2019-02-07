@@ -117,6 +117,9 @@ export class MenuItems extends BaseService {
   menuItems = [] as any;
   constructor() {
     super();
+    this.formMenu();
+  }
+  formMenu() {
     this.menuItems = [];
     const groupedMenus = _.groupBy(this.appscreens, 'prntscreencode');
     this.menuItems = [];
@@ -130,10 +133,19 @@ export class MenuItems extends BaseService {
             self.menuItems.push(item);
           } else if (!_.isUndefined(data) && !_.isUndefined(item.children)) {
             let app_child = item.children;
-            item.children = _.map(data, function (actual) {
-              return _.find(app_child, { code: actual.screencode });
+            item.children = [];
+            _.map(data, function (actual) {
+              let hasdata = {} as any;
+              hasdata = _.find(app_child, { code: actual.screencode });
+              if (actual.assignedpermissions != undefined) {
+                if (hasdata != undefined && actual.assignedpermissions.length > 0) {
+                  item.children.push(hasdata);
+                }
+              }
             });
-            self.menuItems.push(item);
+            if (item.children.length > 0) {
+              self.menuItems.push(item);
+            }
           }
         }
         if (len === idx + 1) {

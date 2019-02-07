@@ -23,16 +23,16 @@ export class BaseService {
         let current_screen = {} as any;
         current_screen = _.find(this.appscreens, { screencode: screencode });
 
-        if (_.includes(current_screen.permissions, AppConstant.PERMISSION[0])) {
+        if (_.includes(current_screen.assignedpermissions, AppConstant.PERMISSION[0])) {
             this.add = true;
         }
-        if (_.includes(current_screen.permissions, AppConstant.PERMISSION[1])) {
+        if (_.includes(current_screen.assignedpermissions, AppConstant.PERMISSION[1])) {
             this.view = true;
         }
-        if (_.includes(current_screen.permissions, AppConstant.PERMISSION[2])) {
+        if (_.includes(current_screen.assignedpermissions, AppConstant.PERMISSION[2])) {
             this.edit = true;
         }
-        if (_.includes(current_screen.permissions, AppConstant.PERMISSION[3])) {
+        if (_.includes(current_screen.assignedpermissions, AppConstant.PERMISSION[3])) {
             this.delete = true;
         }
     }
