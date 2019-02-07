@@ -23,8 +23,7 @@ export class EventsComponent extends BaseService implements OnInit {
     private bootstrapAlertService: BootstrapAlertService,
     private eventService: AdminService.EventService) {
     super();
-    super.getScreenDetails('a_events');
-
+    this.getScreenDetails('a_events');
   }
 
   ngOnInit() {

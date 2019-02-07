@@ -20,7 +20,7 @@ export class RolesComponent extends BaseService implements OnInit {
     private roleService: MasterService.RoleService,
     private bootstrapAlertService: BootstrapAlertService) {
     super();
-    super.getScreenDetails('m_roles');
+    this.getScreenDetails('m_roles');
   }
 
   ngOnInit() {

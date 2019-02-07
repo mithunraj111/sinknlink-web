@@ -22,7 +22,7 @@ export class LookupComponent extends BaseService implements OnInit {
   constructor(private lookupService: AdminService.LookupService,
     private bootstrapAlertService: BootstrapAlertService) {
       super();
-      super.getScreenDetails('a_lookup');
+      this.getScreenDetails('a_lookup');
   }
 
   ngOnInit() {

@@ -22,7 +22,7 @@ export class DonationsComponent extends BaseService implements OnInit {
     private donationService: AdminService.DonationService,
     private bootstrapAlertService: BootstrapAlertService) {
     super();
-    super.getScreenDetails('a_donations');
+    this.getScreenDetails('a_donations');
   }
 
   ngOnInit() {

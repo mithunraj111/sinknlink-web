@@ -19,7 +19,7 @@ export class UsersComponent extends BaseService implements OnInit {
   constructor(private router: Router, private userService: MasterService.UserService,
     private bootstrapAlertService: BootstrapAlertService) {
     super();
-    super.getScreenDetails('m_users');
+    this.getScreenDetails('m_users');
   }
 
   ngOnInit() {
