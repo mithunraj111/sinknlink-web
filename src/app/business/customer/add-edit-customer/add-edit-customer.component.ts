@@ -127,10 +127,10 @@ export class AddEditCustomerComponent implements OnInit {
       biztype: [null, Validators.compose([Validators.required])],
       contactperson: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
       contactmobile: [null, Validators.compose([Validators.required])],
-      contactemail: [null, Validators.compose([Validators.required, Validators.pattern('([a-z0-9&_\.-]*[@][a-z0-9]+((\.[a-z]{2,3})?\.[a-z]{2,3}))'), Validators.maxLength(100)])],
-      phoneno: [null, Validators.compose([Validators.required])],
+      contactemail: ['', Validators.compose([ Validators.pattern('([a-z0-9&_\.-]*[@][a-z0-9]+((\.[a-z]{2,3})?\.[a-z]{2,3}))'), Validators.maxLength(100)])],
+      phoneno: [[]],
       categoryid: [null, Validators.compose([Validators.required])],
-      tags: [[], Validators.compose([Validators.required])],
+      tags: [[], Validators.required],
       postaladdress: ['', Validators.compose([Validators.minLength(1), Validators.maxLength(100)])],
       lat: [null, Validators.compose([Validators.required])],
       lng: [null, Validators.compose([Validators.required])],
@@ -140,7 +140,7 @@ export class AddEditCustomerComponent implements OnInit {
       endtime: [null, Validators.required],
       acceptedpayments: [null, Validators.required],
       deliveryoptions: [null, Validators.required],
-      socialids: ['', Validators.required],
+      socialids: [[]],
       taxno: [null, Validators.compose([Validators.required, Validators.maxLength(30)])],
       website: ['', Validators.compose([Validators.required, Validators.maxLength(200), Validators.pattern('((?:https?\:\/\/|www\.)(?:[-a-z0-9]+\.)*[-a-z0-9]+.*)')])],
       regdate: [new Date(), Validators.required],
@@ -158,20 +158,23 @@ export class AddEditCustomerComponent implements OnInit {
     });
     this.buttonText = AppConstant.BUTTON_TXT.SAVE;
   }
-  addSocialId() {
-    this.openSocialIdModal('socialidmodal');
+  openmap(){
+    this.openModal('mapmodal');
   }
-  openSocialIdModal(event) {
+  addSocialId() {
+    this.openModal('socialidmodal');
+  }
+  openModal(event) {
     document.querySelector('#' + event).classList.add('md-show');
   }
-  closeSocialIdModal(event) {
+  closeModal(event) {
     ((event.target.parentElement.parentElement).parentElement).classList.remove('md-show');
   }
-  updateSocialId(event) {
+  update(event) {
     let socialids = this.socailIdForm.value.fb + ',' + this.socailIdForm.value.twitter + ',' +
       this.socailIdForm.value.gmail + ',' + this.socailIdForm.value.instagram;
     this.customerForm.controls['socialids'].setValue(socialids);
-    this.closeSocialIdModal(event);
+    this.closeModal(event);
   }
   saveOrUpdateBusiness() {
     let errMessage: any;

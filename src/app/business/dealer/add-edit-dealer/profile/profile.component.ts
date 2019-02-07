@@ -47,7 +47,7 @@ export class DealerProfileComponent implements OnInit {
       dealername: [null, Validators.compose([Validators.required, Validators.maxLength(50)])],
       mobileno: [null, Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(15), Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')])],
       contactperson: [null, Validators.compose([Validators.required, Validators.maxLength(50)])],
-      phoneno: [null, Validators.compose([ Validators.minLength(10), Validators.maxLength(15), Validators.pattern('^[0-9 ]*$')])],
+      phoneno: ['', Validators.compose([ Validators.maxLength(15), Validators.pattern('^[0-9 ]*$')])],
       locationid: ['', Validators.required],
       address: ['', Validators.maxLength(100)],
       commissionpercent: [null, Validators.compose([Validators.required, Validators.max(100)])],
