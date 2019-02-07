@@ -1,48 +1,54 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, SimpleChanges, OnChanges } from '@angular/core';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { AppConstant } from '../../../../app.constants';
-
+import * as _ from 'lodash';
+import { BusinessService, LocalStorageService, AppCommonService, CommonService } from '../../../../services';
 @Component({
   selector: 'app-customer-payments',
   templateUrl: './customer-payments.component.html',
   styleUrls: ['./customer-payments.component.scss']
 })
-export class CustomerPaymentsComponent implements OnInit {
-  data: any[];
+export class CustomerPaymentsComponent implements OnInit, OnChanges {
+  payHistoryList = [];
   tempFilter = [];
   @ViewChild(DatatableComponent) table: DatatableComponent;
   datedisplayformat = AppConstant.API_CONFIG.ANG_DATE.displaydate;
-  date: any;
   newPayment = true;
   viewPayment = true;
   noEdit = true;
-  constructor() {
-    this.data = [
-      { amount: '10000', reference: '001', mode: 'NEFT', paiddt: '02/12/2018',status:'Failed' },
-      { amount: '20000', reference: '002', mode: 'NEFT', paiddt: '20/12/2018',status:'Failed' },
-      { amount: '120000', reference: '003', mode: 'NEFT', paiddt: '26/12/2018',status:'Credit' },
-      { amount: '4000', reference: '004', mode: 'NEFT', paiddt: '23/12/2018',status:'Credit' },
-      { amount: '9500', reference: '005', mode: 'NEFT', paiddt: '07/12/2018' ,status:'Credit'}
-    ];
-    this.tempFilter = this.data;
-    this.date = new Date();
+  selectedPaymentObj = {} as any;
+  constructor(private paymentService: AppCommonService.PaymentsService) {
   }
 
   ngOnInit() {
   }
+  ngOnChanges(changes: SimpleChanges) {
+    this.getPaymentHistory(changes.customerObj.currentValue);
+  }
+  getPaymentHistory(customerObj) {
+    if (!_.isEmpty(customerObj)) {
+      this.paymentService.list({ membershipid: customerObj.membershipid }).subscribe(res => {
+        const response = JSON.parse(res._body);
+        if (response.status) {
+          this.payHistoryList = response.data;
+          this.tempFilter = this.payHistoryList;
+        }
+      });
+    }
+  }
   search(event?) {
     let val = '';
-    if( event != null && event != undefined ){
+    if (event != null && event != undefined) {
       val = event.target.value.toLowerCase();
     }
     const temp = this.tempFilter.filter(item => {
-      for (let key in item) {
-        if (("" + item[key]).toLocaleLowerCase().includes(val)) {
-          return ("" + item[key]).toLocaleLowerCase().includes(val);
+      for (const key in item) {
+        if (('' + item[key]).toLocaleLowerCase().includes(val)) {
+          return ('' + item[key]).toLocaleLowerCase().includes(val);
         }
       }
     });
-    this.data = temp;
+    this.payHistoryList = temp;
     this.table.offset = 0;
   }
   openMyModal(event) {
@@ -51,16 +57,17 @@ export class CustomerPaymentsComponent implements OnInit {
   closeMyModal(event) {
     ((event.target.parentElement.parentElement).parentElement).classList.remove('md-show');
   }
-  viewpayment() {
+  viewpayment(row) {
     this.openMyModal('customerpaymentmodal');
     this.newPayment = false;
     this.viewPayment = true;
     this.noEdit = true;
+    this.selectedPaymentObj = row;
   }
   addpayment() {
     this.openMyModal('customerpaymentmodal');
     this.newPayment = true;
-    this.viewPayment= false;
+    this.viewPayment = false;
     this.noEdit = false;
   }
   viewDonationCause() {

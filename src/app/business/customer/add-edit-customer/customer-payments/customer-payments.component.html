@@ -69,49 +69,43 @@
             </div>
         </div>
         <div class="col-md-2 col-sm-1 p-l-0 p-r-30 text-right">
-            <button type="button" placement="bottom" ngbTooltip="Click to add payment" class="btn btn-primary waves-effect"
-                (click)='addpayment()'><i class="fa fa-plus-circle m-r-5"></i> New
+            <button type="button" placement="bottom" ngbTooltip="Click to add payment" class="btn btn-primary waves-effect" (click)='addpayment()'><i class="fa fa-plus-circle m-r-5"></i> New
             </button>
         </div>
     </div>
 </div>
 <div class="table-header fixed-table-header">
     <app-card [classHeader]="true">
-        <ngx-datatable #customerpaymttable class="table data-table expandable" [rows]='data' [columnMode]="'flex'"
-            [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false">
+        <ngx-datatable #customerpaymttable class="table data-table expandable" [rows]='data' [columnMode]="'flex'" [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false">
             <!-- Row Detail Template -->
-            <ngx-datatable-column prop="reference" name="Reference#" [resizeable]="false">
+            <ngx-datatable-column prop="paymentref" name="Reference#" [resizeable]="false">
                 <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                    <span>{{row.reference}}</span>
+                    <span>{{row.paymentref}}</span>
                 </ng-template>
             </ngx-datatable-column>
-            <ngx-datatable-column prop="paiddt" name="Payment Date" [resizeable]="false" [cellClass]="'text-center'"
-                headerClass="text-center">
+            <ngx-datatable-column prop="paymentdt" name="Payment Date" [resizeable]="false" [cellClass]="'text-center'" headerClass="text-center">
                 <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                    <span>{{date|date:datedisplayformat}}</span>
+                    <span>{{row.paymentdt|date:datedisplayformat}}</span>
                 </ng-template>
             </ngx-datatable-column>
-            <ngx-datatable-column prop="amount" name="Amount" [resizeable]="false" headerClass="text-right" [cellClass]="'text-right table-padding'">
+            <ngx-datatable-column prop="totalamount" name="Amount" [resizeable]="false" headerClass="text-right" [cellClass]="'text-right table-padding'">
                 <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                    <span>{{row.amount| currency: 'INR' : true}}</span>
+                    <span>{{row.totalamount| currency: 'INR' : true}}</span>
                 </ng-template>
             </ngx-datatable-column>
-            <ngx-datatable-column prop="mode" name="Payment Mode" [resizeable]="false">
+            <ngx-datatable-column prop="paymentmode" name="Payment Mode" [resizeable]="false">
                 <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                    <span>{{row.mode}}</span>
+                    <span>{{row.paymentmode}}</span>
                 </ng-template>
             </ngx-datatable-column>
-            <ngx-datatable-column prop="status" name="Status" [sortable]="false" [resizeable]="false" [flexGrow]="0.5"
-                [cellClass]="'text-center status'" headerClass="text-right">
+            <ngx-datatable-column prop="paymentstatus" name="Status" [sortable]="false" [resizeable]="false" [flexGrow]="0.5" [cellClass]="'text-center status'" headerClass="text-right">
                 <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-                    <span>{{row.status}}</span>
+                    <span>{{row.paymentstatus}}</span>
                 </ng-template>
             </ngx-datatable-column>
-            <ngx-datatable-column name="Action" [sortable]="false" [resizeable]="false" [flexGrow]="0.5" [cellClass]="'text-center action'"
-                headerClass="text-right">
+            <ngx-datatable-column name="Action" [sortable]="false" [resizeable]="false" [flexGrow]="0.5" [cellClass]="'text-center action'" headerClass="text-right">
                 <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-                    <a placement="bottom" ngbTooltip="Click to view payment" class="m-r-15 crm-action-edit text-primary text-center"
-                        (click)="viewpayment();"><i class="fa fa-eye"></i></a>
+                    <a placement="bottom" ngbTooltip="Click to view payment" class="m-r-15 crm-action-edit text-primary text-center" (click)="viewpayment(row);"><i class="fa fa-eye"></i></a>
                 </ng-template>
             </ngx-datatable-column>
         </ngx-datatable>
@@ -127,8 +121,7 @@
                     <div class="form-group">
                         <label>Payment date</label>
                         <div class="input-group mb-0">
-                            <input class="form-control" placeholder="dd-mm-yyyy" name="dp" [(ngModel)]="modelPopup"
-                                ngbDatepicker #dp1="ngbDatepicker" [readonly]="viewPayment">
+                            <input class="form-control" placeholder="dd-mm-yyyy" name="dp" [(ngModel)]="modelPopup" ngbDatepicker #dp1="ngbDatepicker" [readonly]="viewPayment">
                             <div class="input-group-append bg-default" (click)="dp1.toggle()">
                                 <span class="fa fa-calendar input-group-text"></span>
                             </div>
@@ -156,8 +149,7 @@
                     </div>
                 </div>
             </div>
-            <button *ngIf="newPayment" (click)="closeMyModal($event)" type="button" placement="top" ngbTooltip="Click to save payment details"
-                (click)="save()" class="btn pull-right btn-primary waves-effect m-b-10">Save</button>
+            <button *ngIf="newPayment" (click)="closeMyModal($event)" type="button" placement="top" ngbTooltip="Click to save payment details" (click)="save()" class="btn pull-right btn-primary waves-effect m-b-10">Save</button>
         </div>
         <button (click)="closeMyModal($event)" aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>
     </app-modal-animation>

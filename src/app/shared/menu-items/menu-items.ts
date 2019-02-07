@@ -104,9 +104,19 @@ const MENUITEMS = [
     code: 'reports',
     children: [
       {
-        state: 'area-categories',
+        state: 'areacategories',
         name: 'Area & Categories',
-        code: 'r_'
+        code: 'r_areacategories'
+      },
+      {
+        state: 'dealer',
+        name: 'Dealer Report',
+        code: 'r_dealer'
+      },
+      {
+        state: 'customerdetail',
+        name: 'Customer Detail Report',
+        code: 'r_customer'
       },
     ]
   }

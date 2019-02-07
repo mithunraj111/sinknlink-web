@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AppConstant } from '../app.constants';
-import { LocalStorageService,MasterService,CommonService } from '../services';
+import { LocalStorageService, MasterService, CommonService } from '../services';
 import * as _ from 'lodash';
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
 import { AppMessages } from '../app-messages';
@@ -127,12 +127,14 @@ export class ProfileComponent implements OnInit {
             consumer.socialid.googleid + ',' + consumer.socialid.instagramid;
           this.profileForm.controls['socialid'].setValue(socialids);
         }
-        this.socialForm = this.fb.group({
-          facebookid: [this.userObj.consumer.socialid.facebookid],
-          twitterid: [this.userObj.consumer.socialid.twitterid],
-          googleid: [this.userObj.consumer.socialid.googleid],
-          instagramid: [this.userObj.consumer.socialid.instagramid]
-        });
+        if (this.userObj.consumer != null) {
+          this.socialForm = this.fb.group({
+            facebookid: [this.userObj.consumer.socialid.facebookid],
+            twitterid: [this.userObj.consumer.socialid.twitterid],
+            googleid: [this.userObj.consumer.socialid.googleid],
+            instagramid: [this.userObj.consumer.socialid.instagramid]
+          });
+        }
       }
     });
   }
