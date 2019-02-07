@@ -34,8 +34,8 @@
               </div>
             </div>
             <div class="col-md-4 col-sm-4 m-t-25">
-              <button type="button" placement="bottom" ngbTooltip="Click to search" class="btn btn-primary generate-button waves-effect  download-btn"
-                (click)="getAreaCategories()">
+              <button type="button" placement="bottom" ngbTooltip="Click to search"
+                class="btn btn-primary generate-button waves-effect  download-btn" (click)="getAreaCategories()">
                 <i class="fa fa-search"></i>
               </button>
             </div>
@@ -56,12 +56,13 @@
                 <label class="dt-cust-search f-right">
                   <div class="form-group">
                     <!-- <label>Search: </label> -->
-                    <input #areaSearch type='text' class="form-control input-sm report-search" placeholder='Search for here'
-                      (keyup)='search($event)' />
-                    <button type="button" class="btn search-close" (click)="areaSearch.value='';search();"><i class="fa fa-close"></i></button>
+                    <input #areaSearch type='text' class="form-control input-sm report-search"
+                      placeholder='Search for here' (keyup)='search($event)' />
+                    <button type="button" class="btn search-close" (click)="areaSearch.value='';search();"><i
+                        class="fa fa-close"></i></button>
 
-                    <button type="button" placement="bottom" ngbTooltip="Click to download reports" class="btn btn-primary waves-effect download-btn"><i
-                        class="fa fa-download m-r-5"></i>
+                    <button type="button" placement="bottom" ngbTooltip="Click to download reports"
+                      class="btn btn-primary waves-effect download-btn"><i class="fa fa-download m-r-5"></i>
                     </button>
                   </div>
                 </label>
@@ -89,7 +90,7 @@
               </div>
             </div> -->
             <ngx-datatable #areatable class="table data-table expandable" [rows]='areaList' [columnMode]="'flex'"
-              [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false">
+              [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false" [footerHeight]="50" [limit]="10">
               <!-- Row Detail Template -->
               <ngx-datatable-column prop="area" name="Area" [resizeable]="false">
                 <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
@@ -123,12 +124,13 @@
                 <label class="dt-cust-search f-right">
                   <div class="form-group">
                     <!-- <label>Search: </label> -->
-                    <input #categorySearch type='text' class="form-control input-sm report-search" placeholder='Search for here'
-                      (keyup)='search($event)' />
-                    <button type="button" class="btn search-close" (click)="categorySearch.value='';search();"><i class="fa fa-close"></i></button>
+                    <input #categorySearch type='text' class="form-control input-sm report-search"
+                      placeholder='Search for here' (keyup)='search($event)' />
+                    <button type="button" class="btn search-close" (click)="categorySearch.value='';search();"><i
+                        class="fa fa-close"></i></button>
 
-                    <button type="button" placement="bottom" ngbTooltip="Click to download reports" class="btn btn-primary waves-effect download-btn"><i
-                        class="fa fa-download m-r-5"></i>
+                    <button type="button" placement="bottom" ngbTooltip="Click to download reports"
+                      class="btn btn-primary waves-effect download-btn"><i class="fa fa-download m-r-5"></i>
                     </button>
                   </div>
 
@@ -157,8 +159,9 @@
                   </div>
                 </div>
               </div> -->
-            <ngx-datatable #categoriestable class="table data-table expandable" [rows]='categoriesList' [columnMode]="'flex'"
-              [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false">
+            <ngx-datatable #categoriestable class="table data-table expandable" [rows]='categoriesList'
+              [columnMode]="'flex'" [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false" [footerHeight]="50"
+              [limit]="10">
               <!-- Row Detail Template -->
               <ngx-datatable-column prop="categoryname" name="Category Name" [resizeable]="false">
                 <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>

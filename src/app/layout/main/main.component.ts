@@ -122,6 +122,8 @@ export class MainComponent implements OnInit {
 
   public config: any;
   userstoragedata = {} as any;
+  fileUrl = AppConstant.IMG_BASE_URL;
+  userfile: string;
   constructor(public menuItems: MenuItems, private route: Router,
     private lstorageService: LocalStorageService) {
     this.navType = 'st2';
@@ -174,6 +176,14 @@ export class MainComponent implements OnInit {
     this.setMenuAttributes(this.windowWidth);
     this.setHeaderAttributes(this.windowWidth);
     this.menuItems.getAll();
+
+    this.userstoragedata = this.lstorageService.getItem(AppConstant.LOCALSTORAGE.USER);
+    if (this.userstoragedata.profileimg != null) {
+      this.userfile = this.fileUrl + '/' + this.userstoragedata.profileimg.docurl;
+    }
+    else {
+      this.userfile = 'assets/images/avatar-4.jpg';
+    }
     // dark
     /*this.setLayoutType('dark');*/
 
@@ -187,11 +197,11 @@ export class MainComponent implements OnInit {
     // side-bar image
     /*this.setLayoutType('img');*/
 
+
   }
 
   ngOnInit() {
     this.setBackgroundPattern('pattern1');
-    this.userstoragedata = this.lstorageService.getItem(AppConstant.LOCALSTORAGE.USER);
 
     /*document.querySelector('body').classList.remove('dark');*/
   }
@@ -401,7 +411,7 @@ export class MainComponent implements OnInit {
     this.lstorageService.removeItem(AppConstant.LOCALSTORAGE.USER);
     this.lstorageService.removeItem(AppConstant.LOCALSTORAGE.ISAUTHENTICATED);
     this.lstorageService.removeItem(AppConstant.LOCALSTORAGE.SCREENS);
-    this.menuItems.formMenu();
     this.route.navigate(['auth/login']);
   }
+
 }

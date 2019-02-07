@@ -8,24 +8,27 @@
             <div class="col-md-6 col-sm-5">
                 <div class="row">
                     <div class="col-md-6">
-                        <ng-select [ngClass]="'ng-select'" [(ngModel)]="selectedKeyType" [options]="keylist" (selected)="getLookupList($event)" placeholder="Select KeyType"></ng-select>
+                        <ng-select [ngClass]="'ng-select'" [(ngModel)]="selectedKeyType" [options]="keylist"
+                            (selected)="getLookupList($event)" placeholder="Select KeyType"></ng-select>
                     </div>
                     <div class="col-md-6 col-sm-6 p-r-0 p-l-0">
                         <div class="text-right">
                             <label>Search:
-                                <input #lookupSearch type="text" class="header-search form-control input-sm full-data-search"
+                                <input #lookupSearch type="text"
+                                    class="header-search form-control input-sm full-data-search"
                                     placeholder="Search for here" (keyup)='search($event)' placement="bottom"
                                     ngbTooltip="Type here to search">
-                                <button type="button" class="btn search-close" (click)="lookupSearch.value='';search();"><i
-                                        class="fa fa-close"></i></button>
+                                <button type="button" class="btn search-close"
+                                    (click)="lookupSearch.value='';search();"><i class="fa fa-close"></i></button>
                             </label>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-md-1 col-sm-1 p-r-0">
-                <button *ngIf="add" type="button" placement="bottom" ngbTooltip="Click to add lookup" (click)='addLookup()' class="btn btn-primary waves-effect"><i
-                        class="fa fa-plus-circle m-r-5"></i> New
+                <button *ngIf="add" type="button" placement="bottom" ngbTooltip="Click to add lookup"
+                    (click)='addLookup()' class="btn btn-primary waves-effect"><i class="fa fa-plus-circle m-r-5"></i>
+                    New
                 </button>
             </div>
         </div>
@@ -34,7 +37,8 @@
 <div class="header-block m-t-60">
     <div class="table-header fixed-table-header">
         <app-card [classHeader]="true">
-            <ngx-datatable #lookuptable class="table data-table expandable" [rows]='lookupList' [columnMode]="'flex'" [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false">
+            <ngx-datatable #lookuptable class="table data-table expandable" [rows]='lookupList' [columnMode]="'flex'"
+                [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false" [footerHeight]="50" [limit]="10">
                 <ngx-datatable-column prop="refname" name="Name" [resizeable]="false">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                         <span>{{row.refname}}</span>
@@ -52,7 +56,8 @@
                     </ng-template>
                 </ngx-datatable-column>
 
-                <ngx-datatable-column name="Is Default?" [sortable]="false" headerClass="text-center" [cellClass]="'text-center'" [resizeable]="false">
+                <ngx-datatable-column name="Is Default?" [sortable]="false" headerClass="text-center"
+                    [cellClass]="'text-center'" [resizeable]="false">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                         <span>{{row.isdefault==='Y'?'Yes':'No'}}</span>
                     </ng-template>
@@ -64,16 +69,22 @@
                         <span class="updatedate"> {{row.updateddt|date:displayformat}}</span>
                     </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column name="Status" [sortable]="false" [flexGrow]="0.5" headerClass="text-center" [cellClass]="'text-center'" [resizeable]="false">
+                <ngx-datatable-column name="Status" [sortable]="false" [flexGrow]="0.5" headerClass="text-center"
+                    [cellClass]="'text-center'" [resizeable]="false">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                        <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="#03ADED" switchColor="#fff" size="small" [checked]="row.status == 'Active'" (change)="updateLookupStatus(row, rowIndex, false)"></ui-switch>
+                        <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status"
+                            color="#03ADED" switchColor="#fff" size="small" [checked]="row.status == 'Active'"
+                            (change)="updateLookupStatus(row, rowIndex, false)"></ui-switch>
                     </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column *ngIf="edit || delete" name="Action" [sortable]="false" [flexGrow]="0.5" headerClass="text-center" [cellClass]="'text-center'" [resizeable]="false">
+                <ngx-datatable-column *ngIf="edit || delete" name="Action" [sortable]="false" [flexGrow]="0.5"
+                    headerClass="text-center" [cellClass]="'text-center'" [resizeable]="false">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                        <a *ngIf="edit" placement="bottom" ngbTooltip="Click to edit lookup" (click)="editLookup(row)" class="m-r-15 crm-action-edit text-primary">
+                        <a *ngIf="edit" placement="bottom" ngbTooltip="Click to edit lookup" (click)="editLookup(row)"
+                            class="m-r-15 crm-action-edit text-primary">
                             <i class="fa fa-pencil"></i></a>
-                        <a *ngIf="delete" placement="bottom" ngbTooltip="Click to delete lookup" (click)="updateLookupStatus(row, rowIndex, true)" class="crm-action-delete text-danger">
+                        <a *ngIf="delete" placement="bottom" ngbTooltip="Click to delete lookup"
+                            (click)="updateLookupStatus(row, rowIndex, true)" class="crm-action-delete text-danger">
                             <i class="fa fa-trash"></i></a>
                     </ng-template>
                 </ngx-datatable-column>
@@ -81,4 +92,5 @@
         </app-card>
     </div>
 </div>
-<app-add-edit-lookup [lookupObj]="lookupObj" [selectedKeyType]="selectedKeyType" (notifyLookupEntry)="notifyLookupEntry($event)"></app-add-edit-lookup>
+<app-add-edit-lookup [lookupObj]="lookupObj" [selectedKeyType]="selectedKeyType"
+    (notifyLookupEntry)="notifyLookupEntry($event)"></app-add-edit-lookup>

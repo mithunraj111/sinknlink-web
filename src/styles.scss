@@ -791,14 +791,14 @@ button{
             height: 62vh;
         }
     }
-     .datatable-header{
-         display: block;
-    }
-    .datatable-body{
-        display: block;
-        overflow: auto;
-        height: 62vh !important;
-    }
+    //  .datatable-header{
+    //      display: block;
+    // }
+    // .datatable-body{
+    //     display: block;
+    //     overflow: auto;
+    //     height: 62vh !important;
+    // }
      .card-block {
         padding: 0px 15px 0px 15px;
      }
@@ -1197,6 +1197,18 @@ button{
         padding: 7px 20px;
         border-radius: 0;
     }
+}
+.header-navbar {
+    .navbar-wrapper {
+        .navbar-container{
+            .nav-right{
+                 .user-profile img{
+                    width: 33px;
+                    height: 33px;
+                 }
+            }     
+        }
+    }   
 }
 
 // report //

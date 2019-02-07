@@ -6,9 +6,12 @@
                 <p *ngIf="roleid" class="m-b-0">ID: {{roleid}}</p>
             </div>
             <div class="col-md-6  col-sm-6 save-button text-right p-r-30">
-                <button type="button" placement="bottom" ngbTooltip=" Go back" routerLink="/masters/roles" class="btn pull-right btn-inverse btn-primary waves-effect"><i
-            class="fa fa-arrow-circle-left"></i></button>
-                <button type="button" placement="bottom" ngbTooltip="Click to {{buttontext}} role" (click)="saveOrUpdateRole()" [disabled]='disableButton' class="btn pull-right btn-primary waves-effect m-r-10 text-capitalize">{{buttontext}}</button>
+                <button type="button" placement="bottom" ngbTooltip=" Go back" routerLink="/masters/roles"
+                    class="btn pull-right btn-inverse btn-primary waves-effect"><i
+                        class="fa fa-arrow-circle-left"></i></button>
+                <button type="button" placement="bottom" ngbTooltip="Click to {{buttontext}} role"
+                    (click)="saveOrUpdateRole()" [disabled]='disableButton'
+                    class="btn pull-right btn-primary waves-effect m-r-10 text-capitalize">{{buttontext}}</button>
             </div>
         </div>
         <div class="row">
@@ -16,26 +19,29 @@
                 <div class="form-group required row role-input">
                     <label class="col-md-4 p-r-0 col-form-label"><b>Role Name</b></label>
                     <div class="col-md-8 p-l-0 p-r-0">
-                        <input type="text" class="header-search form-control input-sm full-data-search" placeholder="Role Name" [(ngModel)]="rolename" maxlength=50>
+                        <input type="text" class="header-search form-control input-sm full-data-search"
+                            placeholder="Role Name" [(ngModel)]="rolename" maxlength=50>
                     </div>
                 </div>
             </div>
             <div class="col-md-4 col-sm-4">
                 <div class="form-group required row">
                     <label class="col-sm-3 p-l-0 p-r-0 col-form-label"><b>Data Access</b></label>
-                    <div class="col-sm-9 p-l-0 p-r-0"><select class="form-control" name="dataaccess" [(ngModel)]="dataaccess">
-              <option value="">Select Data Access</option>
-              <option value="All">All</option>
-              <option value="Own">Own</option>
-              <option value="Team">Team</option>
-            </select></div>
+                    <div class="col-sm-9 p-l-0 p-r-0"><select class="form-control" name="dataaccess"
+                            [(ngModel)]="dataaccess">
+                            <option value="">Select Data Access</option>
+                            <option value="All">All</option>
+                            <option value="Own">Own</option>
+                            <option value="Team">Team</option>
+                        </select></div>
                 </div>
             </div>
             <div *ngIf="roleid" class="col-md-2 col-sm-2 text-center">
                 <div class="form-group row">
                     <label class="col-sm-6 p-r-0 col-form-label text-right"><b>Status</b><small>*</small></label>
                     <div class="col-sm-4 p-l-0 p-r-0">
-                        <ui-switch class="js-small" color="#03ADED" [(ngModel)]="status" switchColor="#fff" size="small" checked></ui-switch>
+                        <ui-switch class="js-small" color="#03ADED" [(ngModel)]="status" switchColor="#fff" size="small"
+                            checked></ui-switch>
                     </div>
                 </div>
             </div>
@@ -45,7 +51,8 @@
 <div class="header-block">
     <div class="table-header fixed-table-header">
         <app-card [classHeader]="true">
-            <ngx-datatable #addroletable class="table data-table expandable" [rows]='screensList' [columnMode]="'flex'" [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false">
+            <ngx-datatable #addroletable class="table data-table expandable" [rows]='screensList' [columnMode]="'flex'"
+                [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false" [footerHeight]="50" [limit]="10">
                 <ngx-datatable-column prop="screenname" name="Screen Name" [resizeable]="false">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                         <span>{{row.screenname}}</span>
@@ -62,9 +69,12 @@
                     </ng-template>
                 </ngx-datatable-column>
 
-                <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.5" headerClass="text-center" [cellClass]="'text-center'" [resizeable]="false">
+                <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.5" headerClass="text-center"
+                    [cellClass]="'text-center'" [resizeable]="false">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                        <a placement="bottom" ngbTooltip="Click to edit permissions" class="m-r-15 crm-action-edit text-primary" (click)="openPermissionModal('permission',row,rowIndex)">
+                        <a placement="bottom" ngbTooltip="Click to edit permissions"
+                            class="m-r-15 crm-action-edit text-primary"
+                            (click)="openPermissionModal('permission',row,rowIndex)">
                             <i class="fa fa-pencil"></i></a>
                     </ng-template>
                 </ngx-datatable-column>
@@ -80,11 +90,14 @@
             <div class="form-group required row">
                 <label class="col-sm-12">Permissions</label>
                 <div class="col-sm-12">
-                    <ng-select [ngClass]="'ng-select'" [(ngModel)]="permissions" [options]="permissionList" [multiple]="true" placeholder="Permissions"></ng-select>
+                    <ng-select [ngClass]="'ng-select'" [(ngModel)]="permissions" [options]="permissionList"
+                        [multiple]="true" placeholder="Permissions"></ng-select>
                 </div>
             </div>
-            <button type="button" (click)="updatePermissions()" placement="top" ngbTooltip="Click to save permissions" class="btn pull-right btn-primary waves-effect m-b-10">Save</button>
+            <button type="button" (click)="updatePermissions()" placement="top" ngbTooltip="Click to save permissions"
+                class="btn pull-right btn-primary waves-effect m-b-10">Save</button>
         </div>
-        <button (click)="closePermissionModal($event)" aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>
+        <button (click)="closePermissionModal($event)" aria-label="Close" class="md-close-btn"><i
+                class="fa fa-close"></i></button>
     </app-modal-animation>
 </div>
