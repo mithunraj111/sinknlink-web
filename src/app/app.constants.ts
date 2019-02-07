@@ -59,7 +59,8 @@ export const AppConstant = Object.freeze({
     { label: 'Delivery Method', value: 'biz_deliverymethods' },
     { label: 'Member Type', value: 'biz_membertype' },
     { label: 'Payment Method', value: 'biz_paymentmethods' },
-    { label: 'Business Type', value: 'biz_businesstype' }
+    { label: 'Business Type', value: 'biz_businesstype' },
+    { label: 'Business City', value: 'biz_businesscity' }
   ],
   PAYMENT_TENURES: [
     { label: 'Monthly', value: '1' },

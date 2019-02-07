@@ -26,6 +26,8 @@ export class AddEditLocationComponent implements OnInit, OnChanges {
   @Input() locationObj = {} as any;
   userstoragedata = {} as any;
   stateList = [];
+  cityList = [];
+
   constructor(
     private bootstrapAlertService: BootstrapAlertService,
     private commonService: CommonService,
@@ -49,6 +51,18 @@ export class AddEditLocationComponent implements OnInit, OnChanges {
           item.value = item.refvalue;
         });
         this.stateList = response.data;
+      } else {
+        this.stateList = [];
+      }
+    });
+    this.lookupService.list({ refkey: 'biz_businesscity', status: AppConstant.STATUS_ACTIVE }).subscribe(res => {
+      const response = JSON.parse(res._body);
+      if (response.status) {
+        response.data.map(item => {
+          item.label = item.refname;
+          item.value = item.refvalue;
+        });
+        this.cityList = response.data;
       } else {
         this.stateList = [];
       }
