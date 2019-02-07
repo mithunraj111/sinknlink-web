@@ -25,6 +25,7 @@ export class VipNumberRegistrationComponent implements OnInit {
   selectedBiz;
   selectedFancyNos = [];
   blockRemarks: string;
+  currentTab: string = "Available";
 
   parentBiz: any = [];
 
@@ -49,6 +50,13 @@ export class VipNumberRegistrationComponent implements OnInit {
         this.bootstrapAlertService.showError(response.message);
       }
     });
+  }
+  tabChanged(prop) {
+    this.condition = {
+      fancynostatus: prop.nextId
+    }
+    this.currentTab = prop.nextId
+    this.getAvailableList();
   }
   getAvailableList() {
     this.fancynumberService.getList(this.condition).subscribe(res => {
@@ -79,6 +87,8 @@ export class VipNumberRegistrationComponent implements OnInit {
     if (this.selectedFancyNos.length > 0) this.openMyModal('vipnoregmodal');
     else this.bootstrapAlertService.showError("Select atleast one VIP Number");
   }
+
+
   blockorallocateNumber() {
     let mode = this.formTitle;
     let selectedBiz = this.selectedBiz;
@@ -148,6 +158,43 @@ export class VipNumberRegistrationComponent implements OnInit {
 
   }
 
+  unblockNumber(id) {
+    let data = {
+      data: [{
+        fancyid: id,
+        fancynostatus: AppConstant.STATUS_AVAILABLE,
+        updateddt: new Date(),
+        remarks: "Unblocked by user",
+        updatedby: this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER).fullname
+      }]
+    }
+    this.fancynumberService.blockNumbers(data).subscribe(res => {
+      const response = JSON.parse(res._body);
+      if (response.status) {
+        this.getAvailableList();
+        this.bootstrapAlertService.showSucccess(response.message);
+      } else {
+        this.bootstrapAlertService.showError(response.message);
+      }
+    })
+  }
+
+  allocateNumber(fno, fid, bizid) {
+    this.fancynumberService.allocateNumbers({
+      "fancynos": [{ no: fno, id: fid }],
+      "bizid": bizid,
+      "updatedby": this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER).fullname
+    }).subscribe(res => {
+      const response = JSON.parse(res._body);
+      if (response.status) {
+        this.getAvailableList();
+        this.bootstrapAlertService.showSucccess(response.message);
+      } else {
+        this.bootstrapAlertService.showError(response.message);
+      }
+    })
+  }
+
   addVipRegistration() {
     this.router.navigate(['admin/vipnumberregistration/create']);
   }
@@ -161,7 +208,6 @@ export class VipNumberRegistrationComponent implements OnInit {
     this.fancynumberService.editNumber(data, pk).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
-        this.closeMyModal();
         this.getAvailableList();
         this.bootstrapAlertService.showSucccess(response.message);
       } else {
