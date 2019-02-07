@@ -67,7 +67,7 @@ export class EventsComponent extends BaseService implements OnInit {
         data.status === AppConstant.STATUS_ACTIVE ? AppConstant.STATUS_INACTIVE : AppConstant.STATUS_ACTIVE
     };
     const formData = new FormData();
-    formData.append('formData', JSON.stringify(updateObj));
+    formData.append('data', JSON.stringify(updateObj));
     this.eventService.update(formData, data.eventid).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {

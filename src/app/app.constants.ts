@@ -127,7 +127,7 @@ export const AppConstant = Object.freeze({
       COMMON: {
         DOCUMENT: {
           CREATE: 'document/create',
-          UPDATE: 'document/edit'
+          UPDATE: 'document/edit/'
         },
         PAYMENTS: {
           CREATE: 'payment/create',

@@ -96,7 +96,7 @@ export class AddEditEventComponent implements OnInit {
       eventObj.eventdate = this.commonService.parseDate(eventObj.eventdate);
       eventObj.eventexpirydt = this.commonService.parseDate(eventObj.eventexpirydt);
       eventObj.status = response.data.status == AppConstant.STATUS_ACTIVE ? true : false;
-      this.eventForm.patchValue(eventObj);
+
       this.eventForm = this.fb.group({
         eventname: [eventObj.eventname, [Validators.required]],
         locationid: [eventObj.locationid, [Validators.required]],
@@ -135,6 +135,8 @@ export class AddEditEventComponent implements OnInit {
       return false;
     }
     if (this.edit) {
+      data["updateddt"] = new Date();
+      data["updatedby"] = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER).fullname;
       this.updateEvent(data);
     } else {
       data.createddt = new Date();

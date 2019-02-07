@@ -90,6 +90,6 @@
     </div>
     <div class="card">
         <!-- (imageAdded)="imageAdded" -->
-        <app-image-uploadaer (imageAdded)="imageAdded($event)" [disablePicker]="savingEvent" [(extimage)]="existing_image"></app-image-uploadaer>
+        <app-image-uploadaer [editMode]="edit" (imageAdded)="imageAdded($event)" [disablePicker]="savingEvent" [(extimage)]="existing_image"></app-image-uploadaer>
     </div>
 </div>

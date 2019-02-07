@@ -1,4 +1,8 @@
 import { Component, OnInit, ViewEncapsulation, Output, EventEmitter, Input, SimpleChange, OnChanges } from '@angular/core';
+import { DocumentService } from 'src/app/services/common/document.service';
+import { AppConstant } from 'src/app/app.constants';
+import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
+import { LocalStorageService } from 'src/app/services';
 // import { EventEmitter } from 'selenium-webdriver';
 
 @Component({
@@ -12,11 +16,12 @@ export class ImageUploaderComponent implements OnInit, OnChanges {
     @Output() imageAdded: EventEmitter<any> = new EventEmitter();
 
     @Input() disablePicker: boolean = false;
-    @Input() extimage: any = [1,2,3];
+    @Input() extimage: any = [1, 2, 3];
+    @Input() editMode: boolean = false;
 
     images: any = [];
 
-    constructor() { }
+    constructor(private localStorageService: LocalStorageService, private documentService: DocumentService, private bootstrapAlertService: BootstrapAlertService) { }
 
     ngOnInit() {
 
@@ -28,6 +33,9 @@ export class ImageUploaderComponent implements OnInit, OnChanges {
         }
         if (changes['extimage'] && changes['extimage'].previousValue != changes['extimage'].currentValue) {
             console.log(this.extimage);
+        }
+        if (changes['editMode'] && changes['editMode'].previousValue != changes['editMode'].currentValue) {
+
         }
         console.log(changes);
     }
@@ -100,4 +108,23 @@ export class ImageUploaderComponent implements OnInit, OnChanges {
 
         // this.imageAdded.emit(this.images);
     }
+
+    removeDoc(doc) {
+        this.documentService.update({
+            docid: doc.docid,
+            status: AppConstant.STATUS_DELETED,
+            updateddt: new Date(),
+            updatedby: this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER).fullname
+        }, doc.docid).subscribe(res => {
+            let response = JSON.parse(res._body);
+            if (response.status) {
+                this.bootstrapAlertService.showSucccess(response.message);
+            } else {
+                this.bootstrapAlertService.showError(response.message);
+            }
+        }, err => {
+            console.log(err);
+        });
+    }
+
 }

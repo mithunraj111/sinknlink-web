@@ -1,7 +1,9 @@
 
 import { PaymentsService } from './payments.service';
+import { DocumentService } from './document.service';
 
 
 export {
-    PaymentsService
+    PaymentsService,
+    DocumentService
 };

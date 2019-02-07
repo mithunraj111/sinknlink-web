@@ -11,7 +11,7 @@
         </div>
         <div class="col-sm-12 col-md-8 imagePicked">
             <div *ngFor="let img of extimage">
-                <img src="http://localhost:2000/{{img.docurl}}">
+                <img (click)="removeDoc(img)" src="http://localhost:2000/{{img.docurl}}">
                 <button aria-label="Close" class="photo-close-btn"><i class="fa fa-close fa-close"></i></button>
             </div>
         </div>
