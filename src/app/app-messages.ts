@@ -179,87 +179,87 @@ export const AppMessages = Object.freeze({
     },
     DEALER: {
       PROFILE: {
-        dealername: { 
+        dealername: {
           required: 'Please enter dealer name',
           maxlength: 'Dealer name should be less than 50 characters'
         },
-        contactperson: { 
+        contactperson: {
           required: 'Please enter contact person name',
           maxlength: 'Contact name should be less than 50 characters'
         },
-        mobileno: { 
+        mobileno: {
           required: 'Please enter mobile number',
           minlength: 'Mobile number should be atleast 10 digits',
           maxlength: 'Mobile number should be less than 15 digits',
           pattern: 'Please enter a valid mobile number'
         },
-        phoneno: { 
+        phoneno: {
           maxlength: 'Phone number should be less than 15 digits',
           minlength: 'Phone number should be atleast 10 digits',
           pattern: 'Please enter a valid phone number'
         },
-        locationid: { 
-          required: 'Please select location' 
+        locationid: {
+          required: 'Please select location'
         },
-        address: { 
-          required: 'Address should be less than 100 characters' 
+        address: {
+          required: 'Address should be less than 100 characters'
         },
-        commissionpercent: { 
+        commissionpercent: {
           required: 'Please enter commission percent',
           max: 'Commision percent should be less than 100 %'
         },
       }
     },
     GIG: {
-      postname: { 
-        required: 'Please enter post name', 
-        maxlength: 'Post name should be less than 50 characters' 
+      postname: {
+        required: 'Please enter post name',
+        maxlength: 'Post name should be less than 50 characters'
       },
-      posttype: { 
+      posttype: {
         required: 'Please select post type',
       },
-      salary: { 
+      salary: {
         required: 'Please enter salary range',
         pattern: 'Please enter valid salary range'
       },
-      contactperson: { 
+      contactperson: {
         required: 'Please enter contact mobile',
         maxlength: 'Contact person name should be less than 50 characters'
       },
-      contactmobile: { 
+      contactmobile: {
         required: 'Please enter contact mobile',
-        pattern: 'Please enter valid mobile number' 
+        pattern: 'Please enter valid mobile number'
       },
-      description: { 
+      description: {
         required: 'Please select status',
         maxlength: 'Description should be less than 500 characters'
       }
     },
     COUPON: {
-      couponcode: { 
-        required: 'Please enter coupon code', 
-        maxlength: 'Coupon code should be less than 50 characters' 
+      couponcode: {
+        required: 'Please enter coupon code',
+        maxlength: 'Coupon code should be less than 50 characters'
       },
-      shortdesc: { 
-        required: 'Please enter coupon title', 
+      shortdesc: {
+        required: 'Please enter coupon title',
         maxlength: 'Title should be less than 50 characters',
         minlength: 'Title should be atleast 3 characters'
       },
-      noofcoupons: { 
+      noofcoupons: {
         required: 'Please enter number of coupons',
         maxlength: 'Coupon count should be less than 11 digits',
         pattern: 'Coupon count should contain numbers only'
       },
-      expirydt: { 
-        required: 'Please select expiry date' 
+      expirydt: {
+        required: 'Please select expiry date'
       },
-      description: { 
-        required: 'Please enter description', 
-        maxlength: 'Description should be less than 500 characters', 
+      description: {
+        required: 'Please enter description',
+        maxlength: 'Description should be less than 500 characters',
         minlength: 'Description should contain atleast 3 characters'
       },
-      status: { 
-        required: 'Please select status' 
+      status: {
+        required: 'Please select status'
       }
     },
     BUSINESS: {
@@ -317,6 +317,13 @@ export const AppMessages = Object.freeze({
       paymenttenure: { required: 'Please select payment tenture' },
       status: { required: 'Please select status' },
       tncagreed: { required: 'Please select terms and conditions' }
+    },
+    PAYMENTS: {
+      paymentdt: { required: 'Please select paid date' },
+      totalamount: { required: 'Please enter amount' },
+      paymentmode: { required: 'Please select amount' },
+      paymentref: { required: 'Please enter reference number' },
+      remarks: {}
     }
   },
 });
