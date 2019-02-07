@@ -18,21 +18,8 @@ import { CategoryService } from '../services/masters/category.service';
 import { LoginService } from '../services/auth/login.service';
 import { ForgotPasswordService } from '../services/auth/forgotpassword.service';
 import { ReactiveFormsModule } from '@angular/forms';
-import { DonationService } from '../services/admin/donation.service';
-import { RoleService } from '../services/masters/role.service';
-import { UserService } from '../services/masters/user.service';
-import { LocationService } from '../services/masters/location.service';
-import { LookupService } from '../services/admin/lookup.service';
-import { FancyNumberService } from '../services/admin/fancynumber.service';
-import { EventService } from '../services/admin/event.service';
-import { DealerService } from '../services/business/dealer.service';
-import { ConsumerService } from '../services/business/consumer.service';
-import { CustomerService } from '../services/business/customer.service';
-import { PaymentsService } from '../services/common/payments.service';
-import { CouponService } from '../services/business/coupon.service';
-import { GigsService } from '../services/business/gigs.service';
-import { SettingService } from '../services/masters';
-import { DocumentService } from "../services/common";
+import { BusinessService, MasterService, AdminService, AppCommonService } from '../services';
+
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -79,24 +66,24 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       provide: PERFECT_SCROLLBAR_CONFIG,
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
     }, NgbActiveModal,
-    CategoryService,
     LoginService,
     ForgotPasswordService,
-    DonationService,
-    LocationService,
-    UserService,
-    RoleService,
-    LookupService,
-    EventService,
-    FancyNumberService,
-    DealerService,
-    ConsumerService,
-    CustomerService,
-    PaymentsService,
-    CouponService,
-    GigsService,
-    SettingService,
-    DocumentService
+    AdminService.DonationService,
+    AdminService.EventService,
+    AdminService.FancyNumberService,
+    AdminService.LookupService,
+    BusinessService.CouponService,
+    BusinessService.CustomerService,
+    BusinessService.DealerService,
+    BusinessService.GigsService,
+    AppCommonService.DocumentService,
+    AppCommonService.PaymentsService,
+    AppCommonService.ReportService,
+    MasterService.CategoryService,
+    MasterService.LocationService,
+    MasterService.RoleService,
+    MasterService.UserService,
+    MasterService.SettingService
   ]
 })
 export class SharedModule { }

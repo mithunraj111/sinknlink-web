@@ -1,75 +1,71 @@
 <form [formGroup]="areaCategoriesForm">
-  <div class="fixedheader payment-report">
-    <div class="report-title pos-fixed">
-      <div class="row">
-        <div class="col-md-12 col-sm-12">
-          <h2>Area & Categories</h2>
-          <p>Area & Categories Wise Business Count</p>
-        </div>
-
-        <div class="col-lg-12 col-md-12 p-r-0">
-          <div class="card">
+    <div class="fixedheader payment-report">
+        <div class="report-title pos-fixed">
             <div class="row">
-              <div class="col-md-4 col-sm-4 p-r-5">
-                <div class="form-group">
-                  <label>From Date</label>
-                  <div class="input-group">
-                    <input class="form-control" placeholder="dd-mm-yyyy" name="dp" ngbDatepicker #dp="ngbDatepicker"
-                      formControlName="fromdate">
-                    <div class="input-group-append" (click)="dp.toggle()">
-                      <span class="fa fa-calendar input-group-text"></span>
-                    </div>
-                  </div>
+                <div class="col-md-12 col-sm-12">
+                    <h2>Area & Categories</h2>
+                    <p>Area & Categories Wise Business Count</p>
                 </div>
-              </div>
-              <div class="col-md-4 col-sm-4 p-l-0 p-r-5">
-                <div class="form-group">
-                  <label>To Date</label>
-                  <div class="input-group">
-                    <input class="form-control" placeholder="dd-mm-yyyy" name="dp" ngbDatepicker #d="ngbDatepicker"
-                      formControlName="todate">
-                    <div class="input-group-append" (click)="d.toggle()">
-                      <span class="fa fa-calendar input-group-text"></span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-4 col-sm-4 m-t-35">
-                <button type="button" placement="bottom" ngbTooltip="Click to search" class="btn btn-primary generate-button waves-effect  download-btn"
-                  (click)="getAreaCategories()">
+
+                <div class="col-lg-12 col-md-12 p-r-0">
+                    <div class="card">
+                        <div class="row">
+                            <div class="col-md-4 col-sm-4 p-r-5">
+                                <div class="form-group">
+                                    <label>From Date</label>
+                                    <div class="input-group">
+                                        <input class="form-control" placeholder="dd-mm-yyyy" name="dp" ngbDatepicker #dp="ngbDatepicker" formControlName="fromdate">
+                                        <div class="input-group-append" (click)="dp.toggle()">
+                                            <span class="fa fa-calendar input-group-text"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-4 p-l-0 p-r-5">
+                                <div class="form-group">
+                                    <label>To Date</label>
+                                    <div class="input-group">
+                                        <input class="form-control" placeholder="dd-mm-yyyy" name="dp" ngbDatepicker #d="ngbDatepicker" formControlName="todate">
+                                        <div class="input-group-append" (click)="d.toggle()">
+                                            <span class="fa fa-calendar input-group-text"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-4 m-t-35">
+                                <button type="button" placement="bottom" ngbTooltip="Click to search" class="btn btn-primary generate-button waves-effect  download-btn" (click)="getAreaCategories()">
                   <i class="fa fa-search"></i>
                 </button>
-              </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
 </form>
 <div class="col-lg-12 col-md-12 col-sm-12 reports p-l-0 p-r-0">
-  <div class="row">
-    <div class="col-lg-6 col-md-12 p-r-5">
-      <div class="header-block">
-        <div class="table-header report-table">
-          <app-card [classHeader]="true" [title]="'Area'">
-            <div class="row">
-              <div class="col-sm-12 header-title">
-                <label class="dt-cust-search f-right">
+    <div class="row">
+        <div class="col-lg-6 col-md-12 p-r-5">
+            <div class="header-block">
+                <div class="table-header report-table">
+                    <app-card [classHeader]="true" [title]="'Area'">
+                        <div class="row">
+                            <div class="col-sm-12 header-title">
+                                <label class="dt-cust-search f-right">
                   <div class="form-group">
                     <!-- <label>Search: </label> -->
-                    <input #areaSearch type='text' class="form-control input-sm report-search" placeholder='Search for here'
-                      (keyup)='search($event)' />
-                    <button type="button" class="btn search-close" (click)="areaSearch.value='';search();"><i class="fa fa-close"></i></button>
+                                <input #areaSearch type='text' class="form-control input-sm report-search" placeholder='Search for here' (keyup)='search($event)' />
+                                <button type="button" class="btn search-close" (click)="areaSearch.value='';search();"><i class="fa fa-close"></i></button>
 
-                    <button type="button" placement="bottom" ngbTooltip="Click to download reports" class="btn btn-primary waves-effect download-btn"><i
+                                <button type="button" placement="bottom" ngbTooltip="Click to download reports" class="btn btn-primary waves-effect download-btn"><i
                         class="fa fa-download m-r-5"></i>
                     </button>
-                  </div>
-                </label>
-              </div>
-            </div>
-            <!-- <div class="row">
+                            </div>
+                            </label>
+                        </div>
+                </div>
+                <!-- <div class="row">
               <div class="col-xs-12 col-sm-12 col-sm-12 col-md-6">
                 <div class="show-length">
                   <label>Show
@@ -90,94 +86,68 @@
                 </div>
               </div>
             </div> -->
-            <ngx-datatable #areatable class="table data-table expandable" [rows]='areaList' [columnMode]="'flex'"
-              [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false" [footerHeight]="50" [limit]="10">
-              <!-- Row Detail Template -->
-              <ngx-datatable-column prop="area" name="Area" [resizeable]="false">
-                <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                  <span>{{row.area}}</span>
-                </ng-template>
-              </ngx-datatable-column>
-              <ngx-datatable-column prop="pincode" name="Pincode" [resizeable]="false">
-                <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                  <span>{{row.pincode}}</span>
-                </ng-template>
-              </ngx-datatable-column>
+                <ngx-datatable #areatable class="table data-table expandable" [rows]='areaList' [columnMode]="'flex'" [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false" [footerHeight]="50" [limit]="10">
+                    <!-- Row Detail Template -->
+                    <ngx-datatable-column prop="area" name="Area" [resizeable]="false">
+                        <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                            <span>{{row.area}}</span>
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column prop="pincode" name="Pincode" [resizeable]="false">
+                        <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                            <span>{{row.pincode}}</span>
+                        </ng-template>
+                    </ngx-datatable-column>
 
-              <ngx-datatable-column prop="businesscount" name=" Count" [resizeable]="false" headerClass="text-right"
-                [cellClass]="'text-right table-padding'">
-                <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                  <span>{{row.businesscount}}</span>
-                </ng-template>
-              </ngx-datatable-column>
+                    <ngx-datatable-column prop="count" name=" Count" [resizeable]="false" headerClass="text-right" [cellClass]="'text-right table-padding'">
+                        <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                            <span>{{row.count}}</span>
+                        </ng-template>
+                    </ngx-datatable-column>
 
-            </ngx-datatable>
-          </app-card>
+                </ngx-datatable>
+                </app-card>
+            </div>
         </div>
-      </div>
     </div>
     <div class="col-lg-6 col-md-12 p-l-5">
-      <div class="header-block">
-        <div class="table-header report-table">
-          <app-card [classHeader]="true" [title]="'Category'">
-            <div class="row">
-              <div class="col-sm-12 header-title">
-                <label class="dt-cust-search f-right">
+        <div class="header-block">
+            <div class="table-header report-table">
+                <app-card [classHeader]="true" [title]="'Category'">
+                    <div class="row">
+                        <div class="col-sm-12 header-title">
+                            <label class="dt-cust-search f-right">
                   <div class="form-group">
                     <!-- <label>Search: </label> -->
-                    <input #categorySearch type='text' class="form-control input-sm report-search" placeholder='Search for here'
-                      (keyup)='search($event)' />
-                    <button type="button" class="btn search-close" (click)="categorySearch.value='';search();"><i class="fa fa-close"></i></button>
+                            <input #categorySearch type='text' class="form-control input-sm report-search" placeholder='Search for here' (keyup)='search($event)' />
+                            <button type="button" class="btn search-close" (click)="categorySearch.value='';search();"><i class="fa fa-close"></i></button>
 
-                    <button type="button" placement="bottom" ngbTooltip="Click to download reports" class="btn btn-primary waves-effect download-btn"><i
+                            <button type="button" placement="bottom" ngbTooltip="Click to download reports" class="btn btn-primary waves-effect download-btn"><i
                         class="fa fa-download m-r-5"></i>
                     </button>
-                  </div>
+                        </div>
 
-                </label>
+                        </label>
 
-              </div>
+                    </div>
             </div>
-            <!-- <div class="row">
-                <div class="col-xs-12 col-sm-12 col-sm-12 col-md-6">
-                  <div class="show-length">
-                    <label>Show
-                      <select class="form-control input-sm">
-                        <option value="10">10</option>
-                        <option value="25">25</option>
-                        <option value="50">50</option>
-                        <option value="100">100</option>
-                      </select>
-                      entries</label>
-                  </div>
-                </div>
-                <div class="col-xs-12 col-sm-12 col-md-6 search-length">
-                  <div class="form-group">
-                    <label>Search:
-                      <input type='text' class="form-control input-sm m-l-10" placeholder='Search for here' (keyup)='updateFilter($event)' />
-                    </label>
-                  </div>
-                </div>
-              </div> -->
-            <ngx-datatable #categoriestable class="table data-table expandable" [rows]='categoriesList' [columnMode]="'flex'"
-              [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false" [footerHeight]="50" [limit]="10">
-              <!-- Row Detail Template -->
-              <ngx-datatable-column prop="categoryname" name="Category Name" [resizeable]="false">
-                <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                  <span>{{row.categoryname}}</span>
-                </ng-template>
-              </ngx-datatable-column>
-              <ngx-datatable-column prop="businesscount" name=" Count" [resizeable]="false" headerClass="text-right"
-                [cellClass]="'text-right table-padding'">
-                <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                  <span>{{row.businesscount}}</span>
-                </ng-template>
-              </ngx-datatable-column>
+            <ngx-datatable #categoriestable class="table data-table expandable" [rows]='categoriesList' [columnMode]="'flex'" [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false" [footerHeight]="50" [limit]="10">
+                <!-- Row Detail Template -->
+                <ngx-datatable-column prop="categoryname" name="Category Name" [resizeable]="false">
+                    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                        <span>{{row.categoryname}}</span>
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column prop="count" name=" Count" [resizeable]="false" headerClass="text-right" [cellClass]="'text-right table-padding'">
+                    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                        <span>{{row.count}}</span>
+                    </ng-template>
+                </ngx-datatable-column>
 
             </ngx-datatable>
-          </app-card>
+            </app-card>
         </div>
-      </div>
     </div>
-  </div>
+</div>
+</div>
 </div>

@@ -7,6 +7,7 @@ import { CommonService } from '../../services/common.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AppConstant } from '../../app.constants';
 import { AppMessages } from '../../app-messages';
+import { AppCommonService } from 'src/app/services';
 @Component({
   selector: 'app-area-categories',
   templateUrl: './area-categories.component.html',
@@ -20,29 +21,22 @@ export class AreaCategoriesComponent implements OnInit {
   areaCategoriesForm: FormGroup;
   areaCategoriesObj = AppMessages.VALIDATION.AREACATEGORIES;
 
-  areaList = [
-    { area: "Chennai", pincode: "641035", businesscount: "10" },
-    { area: "Coimbatore", pincode: "641035", businesscount: "25" }
-  ];
-  categoriesList = [
-    { categoryname: "Pen", businesscount: "10" },
-    { categoryname: "Ball", businesscount: "15" },
-  ];
-  errMessage: any;
+  areaList = [];
+  categoriesList = [];
   constructor(private bootstrapAlertService: BootstrapAlertService,
-    private commonService: CommonService, private fb: FormBuilder) {
+    private commonService: CommonService, private fb: FormBuilder,
+    private reportService: AppCommonService.ReportService) {
 
   }
 
   ngOnInit() {
     this.initForm();
-    this.getAreaCategories();
   }
   initForm() {
     this.areaCategoriesForm = this.fb.group({
       fromdate: [''],
       todate: ['']
-    })
+    });
   }
   getAreaCategories() {
     const data = this.areaCategoriesForm.value;
@@ -52,7 +46,28 @@ export class AreaCategoriesComponent implements OnInit {
       this.bootstrapAlertService.showError(AppMessages.VALIDATION.AREACATEGORIES.fromdate.max);
       return false;
     }
-
+    const formData = {
+      fromdate: fromdt,
+      todate: todt
+    };
+    this.getAreaList(formData);
+    this.getCategoryList(formData);
   }
 
+  getCategoryList(formData) {
+    this.reportService.getCategoryWiseCount(formData).subscribe(res => {
+      const response = JSON.parse(res._body);
+      if (response.status) {
+        this.categoriesList = response.data;
+      }
+    });
+  }
+  getAreaList(formData) {
+    this.reportService.getAreaWiseCount(formData).subscribe(res => {
+      const response = JSON.parse(res._body);
+      if (response.status) {
+        this.areaList = response.data;
+      }
+    });
+  }
 }
