@@ -39,8 +39,9 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
     this.addPaymentForm = this.fb.group({
       paymentdt: ['', Validators.required],
       totalamount: [null, Validators.required],
-      paymentmode: ['', Validators.required],
       paymentref: ['', Validators.required],
+      paymentmode: ['', Validators.required],
+      
       remarks: ['']
     });
   }

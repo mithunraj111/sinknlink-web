@@ -1325,3 +1325,20 @@ button{
     color: #2b2f33 !important;
     width:35px !important; 
 }
+.header-navbar {
+    .navbar-wrapper {
+        .navbar-container{
+            .nav-right{
+                 .user-profile img{
+                    width: 33px;
+                    height: 33px;
+                 }
+            }
+        }
+    }
+ }
+ .fixed-table{
+    .card-block {
+        padding: 0px 15px 0px 15px;
+     }
+ }

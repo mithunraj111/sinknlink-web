@@ -35,7 +35,7 @@
     </div>
 </div>
 <div class="header-block m-t-60">
-    <div class="table-header fixed-table-header">
+    <div class="table-header fixed-table">
         <app-card [classHeader]="true">
             <ngx-datatable #lookuptable class="table data-table expandable" [rows]='lookupList' [columnMode]="'flex'"
                 [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false" [footerHeight]="50" [limit]="10">
@@ -56,8 +56,7 @@
                     </ng-template>
                 </ngx-datatable-column>
 
-                <ngx-datatable-column name="Is Default?" [sortable]="false" headerClass="text-center"
-                    [cellClass]="'text-center'" [resizeable]="false">
+                <ngx-datatable-column name="Is Default?" [sortable]="false" [resizeable]="false">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                         <span>{{row.isdefault==='Y'?'Yes':'No'}}</span>
                     </ng-template>

@@ -31,12 +31,14 @@
                     <h3 class="f-18 text-primary m-l-15">Donate for a cause</h3>
                 </div>
                 <div class="form-group row border-checkbox-section">
-                    <div class="border-checkbox-group border-checkbox-group-primary col-md-3 text-right col-sm-6 m-l-5 p-t-5">
+                    <div
+                        class="border-checkbox-group border-checkbox-group-primary col-md-3 text-right col-sm-6 m-l-5 p-t-5">
                         <input class="border-checkbox" type="checkbox" id="checkbox3">
                         <label class="border-checkbox-label" for="checkbox3">Scan Foundation
-              <a placement="bottom" ngbTooltip="Click to view donation cause" (click)="viewDonationCause();"><i class="fa fa-question-circle"
-                  aria-hidden="true"></i></a>
-            </label>
+                            <a placement="bottom" ngbTooltip="Click to view donation cause"
+                                (click)="viewDonationCause();"><i class="fa fa-question-circle"
+                                    aria-hidden="true"></i></a>
+                        </label>
                     </div>
                     <div class=" col-md-8 col-sm-6 p-l-0 p-r-20">
                         <input type="text" class="form-control" placeholder="Amount">
@@ -45,10 +47,11 @@
                 <div class="form-group row m-t-20 payment-button">
                     <label class="col-md-3 col-sm-6 col-form-label text-right p-t-15">Total</label>
                     <span class="col-form-label col-md-5 col-sm-6 f-16">{{2450|currency: 'INR' :true}}
-            <button type="button" placement="bottom" ngbTooltip="Click to pay online" class="btn p-l-5 m-l-15">
-              Pay online
-            </button>
-          </span>
+                        <button type="button" placement="bottom" ngbTooltip="Click to pay online"
+                            class="btn p-l-5 m-l-15">
+                            Pay online
+                        </button>
+                    </span>
                 </div>
             </div>
         </div>
@@ -62,33 +65,39 @@
         <div class="col-md-5 col-sm-6">
             <div class="text-right">
                 <label>Search:
-          <input #customerPaymentSearch type="text" class="header-search form-control input-sm full-data-search"
-            placeholder="Search for here" (keyup)='search($event)' placement="bottom" ngbTooltip="Type here to search">
-          <button type="button" class="btn search-close" (click)="customerPaymentSearch.value='';search();"><i class="fa fa-close"></i></button>
-        </label>
+                    <input #customerPaymentSearch type="text"
+                        class="header-search form-control input-sm full-data-search" placeholder="Search for here"
+                        (keyup)='search($event)' placement="bottom" ngbTooltip="Type here to search">
+                    <button type="button" class="btn search-close" (click)="customerPaymentSearch.value='';search();"><i
+                            class="fa fa-close"></i></button>
+                </label>
             </div>
         </div>
         <div class="col-md-2 col-sm-1 p-l-0 p-r-30 text-right">
-            <button type="button" placement="bottom" ngbTooltip="Click to add payment" class="btn btn-primary waves-effect" (click)='addpayment()'><i class="fa fa-plus-circle m-r-5"></i> New
-      </button>
+            <button type="button" placement="bottom" ngbTooltip="Click to add payment"
+                class="btn btn-primary waves-effect" (click)='addpayment()'><i class="fa fa-plus-circle m-r-5"></i> New
+            </button>
         </div>
     </div>
 </div>
 <div class="table-header fixed-table-header">
     <app-card [classHeader]="true">
-        <ngx-datatable #customerpaymttable class="table data-table expandable" [rows]='payHistoryList' [columnMode]="'flex'" [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false">
+        <ngx-datatable #customerpaymttable class="table data-table expandable" [rows]='payHistoryList'
+            [columnMode]="'flex'" [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false">
             <!-- Row Detail Template -->
             <ngx-datatable-column prop="paymentref" name="Reference#" [resizeable]="false">
                 <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                     <span>{{row.paymentref}}</span>
                 </ng-template>
             </ngx-datatable-column>
-            <ngx-datatable-column prop="paymentdate" name="Payment Date" [resizeable]="false" [cellClass]="'text-center'" headerClass="text-center">
+            <ngx-datatable-column prop="paymentdate" name="Payment Date" [resizeable]="false"
+                [cellClass]="'text-center'" headerClass="text-center">
                 <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                     <span>{{row.paymentdate|date:datedisplayformat}}</span>
                 </ng-template>
             </ngx-datatable-column>
-            <ngx-datatable-column prop="totalamount" name="Amount" [resizeable]="false" headerClass="text-right" [cellClass]="'text-right table-padding'">
+            <ngx-datatable-column prop="totalamount" name="Amount" [resizeable]="false" headerClass="text-right"
+                [cellClass]="'text-right table-padding'">
                 <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                     <span>{{row.totalamount| currency: 'INR' : true}}</span>
                 </ng-template>
@@ -98,14 +107,18 @@
                     <span>{{row.paymentmode}}</span>
                 </ng-template>
             </ngx-datatable-column>
-            <ngx-datatable-column prop="paymentstatus" name="Status" [sortable]="false" [resizeable]="false" [flexGrow]="0.5" [cellClass]="'text-center status'" headerClass="text-right">
+            <ngx-datatable-column prop="paymentstatus" name="Status" [sortable]="false" [resizeable]="false"
+                [flexGrow]="0.5" [cellClass]="'text-center status'" headerClass="text-right">
                 <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
                     <span>{{row.paymentstatus}}</span>
                 </ng-template>
             </ngx-datatable-column>
-            <ngx-datatable-column name="Action" [sortable]="false" [resizeable]="false" [flexGrow]="0.5" [cellClass]="'text-center action'" headerClass="text-right">
+            <ngx-datatable-column name="Action" [sortable]="false" [resizeable]="false" [flexGrow]="0.5"
+                [cellClass]="'text-center action'" headerClass="text-right">
                 <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-                    <a placement="bottom" ngbTooltip="Click to view payment" class="m-r-15 crm-action-edit text-primary text-center" (click)="viewpayment(row);"><i class="fa fa-eye"></i></a>
+                    <a placement="bottom" ngbTooltip="Click to view payment"
+                        class="m-r-15 crm-action-edit text-primary text-center" (click)="viewpayment(row);"><i
+                            class="fa fa-eye"></i></a>
                 </ng-template>
             </ngx-datatable-column>
         </ngx-datatable>
@@ -118,33 +131,38 @@
         <form [formGroup]="addPaymentForm">
             <div class="form-header">
                 <div class="col-md-12">
-                    <div class="form-group">
+                    <div class="form-group required">
                         <label>Paid date</label>
                         <div class="input-group mb-0">
-                            <input class="form-control" placeholder="dd-mm-yyyy" name="dp" formControlName="paymentdt" ngbDatepicker #dp1="ngbDatepicker" [readonly]="viewPayment">
+                            <input class="form-control" placeholder="dd-mm-yyyy" name="dp" formControlName="paymentdt"
+                                ngbDatepicker #dp1="ngbDatepicker" [readonly]="viewPayment">
                             <div class="input-group-append bg-default" (click)="dp1.toggle()">
                                 <span class="fa fa-calendar input-group-text"></span>
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group required">
                         <label>Payment amount</label>
-                        <input type="text" class="form-control" placeholder="Payment amount" formControlName="totalamount" [readonly]="viewPayment">
+                        <input type="text" class="form-control" placeholder="Payment amount"
+                            formControlName="totalamount" [readonly]="viewPayment">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group required">
                         <label>Payment Reference</label>
-                        <input type="text" class="form-control" placeholder="Payment Reference" formControlName="paymentref" [readonly]="viewPayment">
+                        <input type="text" class="form-control" placeholder="Payment Reference"
+                            formControlName="paymentref" [readonly]="viewPayment">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group required">
                         <label>Mode of payment</label>
                         <div class="input-box">
-                            <ng-select [ngClass]="'ng-select'" [options]="paymentMethods" formControlName="paymentmode" placeholder="Select payment methods">
+                            <ng-select [ngClass]="'ng-select'" [options]="paymentMethods" formControlName="paymentmode"
+                                placeholder="Select payment methods">
                             </ng-select>
                         </div>
                     </div>
                     <div class="form-group">
                         <label>Remarks</label>
-                        <textarea rows="3" cols="3" class="form-control" placeholder="Payment Notes" formControlName="remarks" [readonly]="viewPayment"></textarea>
+                        <textarea rows="3" cols="3" class="form-control" placeholder="Payment Notes"
+                            formControlName="remarks" [readonly]="viewPayment"></textarea>
                     </div>
                     <div class="form-group row" *ngIf="viewPayment">
                         <label class="col-md-3 col-sm-6 col-form-label">Reference</label>
@@ -156,15 +174,19 @@
                     </div>
                 </div>
 
-                <button *ngIf="newPayment" type="button" placement="top" ngbTooltip="Click to save payment details" (click)="savePayment()" class="btn pull-right btn-primary waves-effect m-b-10">Save</button>
+                <button *ngIf="newPayment" type="button" placement="top" (click)="savePayment()"
+                    ngbTooltip="Click to save payment details" class="btn pull-right btn-primary waves-effect 
+                m-b-10 m-r-15">Save</button>
             </div>
         </form>
-        <button (click)="closeModal($event)" aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>
+        <button (click)="closeModal($event)" aria-label="Close" class="md-close-btn"><i
+                class="fa fa-close"></i></button>
     </app-modal-animation>
 </div>
 <!-- View Payment Details PopUp Ends -->
 <div class="modal-size">
     <app-modal-animation [modalID]="'donationCauseModal'" [modalClass]="'md-effect-7'">
-        <textarea rows="3" cols="3" class="form-control" placeholder="Payment Notes" readonly>The description about the cause of Donation will be mentioned here.</textarea>
+        <textarea rows="3" cols="3" class="form-control" placeholder="Payment Notes"
+            readonly>The description about the cause of Donation will be mentioned here.</textarea>
     </app-modal-animation>
 </div>
