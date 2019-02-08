@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div class="col-md-1 col-sm-1 p-r-0">
-                <button type="button" placement="bottom" ngbTooltip="Click to add customer" class="btn btn-primary waves-effect"
+                <button *ngIf="add" type="button" placement="bottom" ngbTooltip="Click to add customer" class="btn btn-primary waves-effect"
                     (click)='addCustomer()'><i class="fa fa-plus-circle m-r-5"></i> New
                 </button>
             </div>
@@ -61,13 +61,13 @@
                             switchColor="#fff" size="small" [checked]="row.status=='Active'" (change)="updateCustomerStatus(row,rowIndex,false)"></ui-switch>
                     </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.5" [resizeable]="false"
+                <ngx-datatable-column *ngIf="edit || delete" name="Action" [sortable]="false" [flexGrow]="0.5" [resizeable]="false"
                     [cellClass]="'text-center action'">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                        <a placement="bottom" ngbTooltip="Click to edit customer" class="m-r-15 crm-action-edit text-primary"
+                        <a *ngIf="edit" placement="bottom" ngbTooltip="Click to edit customer" class="m-r-15 crm-action-edit text-primary"
                             (click)="editCustomer(row.membershipid)">
                             <i class="fa fa-pencil"></i></a>
-                        <a placement="bottom" ngbTooltip="Click to delete customer" class="m-r-15 crm-action-delete text-danger"
+                        <a *ngIf="delete" placement="bottom" ngbTooltip="Click to delete customer" class="m-r-15 crm-action-delete text-danger"
                             (click)="updateCustomerStatus(row,rowIndex,true)">
                             <i class="fa fa-trash"></i></a>
                     </ng-template>

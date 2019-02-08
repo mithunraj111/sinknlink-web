@@ -27,13 +27,15 @@
             <div class="col-md-4 col-sm-4">
                 <div class="form-group required row">
                     <label class="col-sm-3 p-l-0 p-r-0 col-form-label"><b>Data Access</b></label>
-                    <div class="col-sm-9 p-l-0 p-r-0"><select class="form-control" name="dataaccess"
+                    <div class="col-sm-9 p-l-0 p-r-0">
+                        <select class="form-control" name="dataaccess"
                             [(ngModel)]="dataaccess">
                             <option value="">Select Data Access</option>
                             <option value="All">All</option>
                             <option value="Own">Own</option>
                             <option value="Team">Team</option>
-                        </select></div>
+                        </select>
+                    </div>
                 </div>
             </div>
             <div *ngIf="roleid" class="col-md-2 col-sm-2 text-center">

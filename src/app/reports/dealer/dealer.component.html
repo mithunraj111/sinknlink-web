@@ -38,7 +38,7 @@
                 <div class="form-group">
                   <label>City</label>
                   <div class="input-group">
-                    <ng-select [ngClass]="'ng-select'" placeholder="Select city" formControlName="city"
+                    <ng-select [allowClear]="true" [ngClass]="'ng-select'" placeholder="Select city" formControlName="city"
                       [options]="cityList" (selected)="citySelect($event)"></ng-select>
                   </div>
                 </div>
@@ -47,7 +47,7 @@
                 <div class="form-group">
                   <label>Area</label>
                   <div class="input-group">
-                    <ng-select [ngClass]="'ng-select'" placeholder="Select Area" formControlName="area"
+                    <ng-select [allowClear]="true" [ngClass]="'ng-select'" placeholder="Select Area" formControlName="area"
                       [options]="areaList"></ng-select>
                   </div>
                 </div>

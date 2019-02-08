@@ -48,7 +48,7 @@
                                                             type</label>
                                                         <div class="col-md-9 col-sm-6">
                                                             <div class="input-box">
-                                                                <ng-select [ngClass]="'ng-select'" [options]="businesstypes" formControlName="biztype" placeholder="Select business type">
+                                                                <ng-select [allowClear]="true" [ngClass]="'ng-select'" [options]="businesstypes" formControlName="biztype" placeholder="Select business type">
                                                                 </ng-select>
                                                             </div>
                                                         </div>
@@ -82,7 +82,7 @@
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Category</label>
                                                         <div class="col-md-9 col-sm-6">
                                                             <div class="input-box">
-                                                                <ng-select [ngClass]="'ng-select'" [options]="categoryList" formControlName="categoryid" placeholder="Select Category">
+                                                                <ng-select [allowClear]="true" [ngClass]="'ng-select'" [options]="categoryList" formControlName="categoryid" placeholder="Select Category">
                                                                 </ng-select>
                                                             </div>
                                                         </div>
@@ -114,7 +114,7 @@
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Location</label>
                                                         <div class="col-md-9 col-sm-6">
                                                             <div class="input-box">
-                                                                <ng-select [ngClass]="'ng-select'" [options]="locationList" formControlName="locationid" placeholder="Select Location">
+                                                                <ng-select [allowClear]="true" [ngClass]="'ng-select'" [options]="locationList" formControlName="locationid" placeholder="Select Location">
                                                                 </ng-select>
                                                             </div>
                                                         </div>
@@ -124,7 +124,7 @@
                                                             days</label>
                                                         <div class="col-md-9 col-sm-6">
                                                             <div class="input-box">
-                                                                <ng-select [ngClass]="'ng-select'" [options]="workDays" [multiple]="true" formControlName="workdays" placeholder="Select Work Days">
+                                                                <ng-select [allowClear]="true" [ngClass]="'ng-select'" [options]="workDays" [multiple]="true" formControlName="workdays" placeholder="Select Work Days">
                                                                 </ng-select>
                                                             </div>
                                                         </div>
@@ -142,7 +142,7 @@
                                                             methods</label>
                                                         <div class="col-md-9 col-sm-6">
                                                             <div class="input-box">
-                                                                <ng-select [ngClass]="'ng-select'" [options]="paymentMethods" [multiple]="true" formControlName="acceptedpayments" placeholder="Select payment methods">
+                                                                <ng-select [allowClear]="true" [ngClass]="'ng-select'" [options]="paymentMethods" [multiple]="true" formControlName="acceptedpayments" placeholder="Select payment methods">
                                                                 </ng-select>
                                                             </div>
                                                         </div>
@@ -151,7 +151,7 @@
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Delivery
                                                             method</label>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <ng-select [ngClass]="'ng-select'" [options]="deliveryMethods" [multiple]="true" formControlName="deliveryoptions" placeholder="Select delivery method">
+                                                            <ng-select [allowClear]="true" [ngClass]="'ng-select'" [options]="deliveryMethods" [multiple]="true" formControlName="deliveryoptions" placeholder="Select delivery method">
                                                             </ng-select>
                                                         </div>
                                                     </div>
@@ -205,7 +205,7 @@
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Payment
                                                             Status</label>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <ng-select [ngClass]="'ng-select'" [options]="paymentStatus" formControlName="paymentstatus" placeholder="Select Payment
+                                                            <ng-select [allowClear]="true" [ngClass]="'ng-select'" [options]="paymentStatus" formControlName="paymentstatus" placeholder="Select Payment
                                                                 Status">
                                                             </ng-select>
                                                         </div>
@@ -214,7 +214,7 @@
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Member
                                                             type</label>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <ng-select [ngClass]="'ng-select'" [options]="memberTypes" formControlName="membershiptype" placeholder="Select member
+                                                            <ng-select [allowClear]="true" [ngClass]="'ng-select'" [options]="memberTypes" formControlName="membershiptype" placeholder="Select member
                                                                 type">
                                                             </ng-select>
                                                         </div>
@@ -223,7 +223,7 @@
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Payment
                                                             tenure</label>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <ng-select [ngClass]="'ng-select'" [options]="paymentTenures" formControlName="paymenttenure" placeholder="Select Payment
+                                                            <ng-select [allowClear]="true" [ngClass]="'ng-select'" [options]="paymentTenures" formControlName="paymenttenure" placeholder="Select Payment
                                                             tenure">
                                                             </ng-select>
                                                         </div>

@@ -30,7 +30,7 @@
                         <div class="form-group row required">
                             <label class="col-md-3 col-sm-6 col-form-label text-right">State</label>
                             <div class="col-md-9 col-sm-6">
-                                <ng-select [ngClass]="'ng-select'" placeholder="Select State"
+                                <ng-select [allowClear]="true" [ngClass]="'ng-select'" placeholder="Select State"
                                     formControlName="statecode" [options]="statelists"></ng-select>
                             </div>
                         </div>
@@ -68,13 +68,13 @@
                 <div class="form-group row required">
                     <label class="col-md-3 col-sm-6 col-form-label text-right">{{business.bizname}}</label>
                     <div class="col-md-9 col-sm-6">
-                        <ng-select [ngClass]="'ng-select'" [(ngModel)]="allocated[business.membershipid]" placeholder="Select Fancy Number" [options]="ownedNos"></ng-select>
+                        <ng-select [allowClear]="true" [ngClass]="'ng-select'" [(ngModel)]="allocated[business.membershipid]" placeholder="Select Fancy Number" [options]="ownedNos"></ng-select>
                     </div>
                 </div>
                 <div *ngFor="let branch of business.branches" class="form-group row required">
                     <label class="col-md-3 col-sm-6 col-form-label text-right">{{branch.bizname}}</label>
                     <div class="col-md-9 col-sm-6">
-                        <ng-select [ngClass]="'ng-select'" [(ngModel)]="allocated[branch.membershipid]" placeholder="Select Fancy Number" [options]="ownedNos">
+                        <ng-select [allowClear]="true" [ngClass]="'ng-select'" [(ngModel)]="allocated[branch.membershipid]" placeholder="Select Fancy Number" [options]="ownedNos">
                         </ng-select>
                     </div>
                 </div>

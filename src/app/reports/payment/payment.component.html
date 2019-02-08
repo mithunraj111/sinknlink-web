@@ -36,7 +36,7 @@
                 <div class="form-group">
                   <label>Payment Type</label>
                   <div class="input-group">
-                    <ng-select [ngClass]="'ng-select'" placeholder="Select Payment Type"></ng-select>
+                    <ng-select [allowClear]="true" [ngClass]="'ng-select'" placeholder="Select Payment Type"></ng-select>
                   </div>
                 </div>
               </div>
@@ -62,9 +62,9 @@
               <div class="col-sm-12 header-title">
                 <label class="dt-cust-search f-right">
                   <div class="form-group">
-                    <input #areaSearch type='text' class="form-control input-sm report-search" placeholder='Search for here'
+                    <input #paymentReportSearch type='text' class="form-control input-sm report-search" placeholder='Search for here'
                       (keyup)='search($event)' />
-                    <button type="button" class="btn search-close" (click)="paymentSearch.value='';search();"><i class="fa fa-close"></i></button>
+                    <button type="button" class="btn search-close" (click)="paymentReportSearch.value='';search();"><i class="fa fa-close"></i></button>
 
                     <button type="button" placement="bottom" ngbTooltip="Click to download reports" class="btn btn-primary waves-effect download-btn"><i
                         class="fa fa-download m-r-5"></i>

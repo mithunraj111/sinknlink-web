@@ -30,7 +30,7 @@
                             <div class="form-group row required">
                                 <label class="col-md-3 col-sm-6 col-form-label text-right">Location</label>
                                 <div class="col-md-9 col-sm-6">
-                                    <ng-select formControlName="locationid" class="ng-select location-title"
+                                    <ng-select [allowClear]="true" formControlName="locationid" class="ng-select location-title"
                                         placeholder="Select location" [options]="statelists">
                                     </ng-select>
                                 </div>

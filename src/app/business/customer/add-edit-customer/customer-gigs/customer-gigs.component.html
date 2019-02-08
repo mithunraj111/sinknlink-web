@@ -16,7 +16,7 @@
                         <label class="col-md-3 col-sm-6 col-form-label text-right">Post Type</label>
                         <div class="col-md-9 col-sm-6">
                             <div class="input-box">
-                                <ng-select [ngClass]="'ng-select'" formControlName="posttype" [options]="posttypes" placeholder="Select Post type"></ng-select>
+                                <ng-select [allowClear]="true" [ngClass]="'ng-select'" formControlName="posttype" [options]="posttypes" placeholder="Select Post type"></ng-select>
                             </div>
                         </div>
                     </div>

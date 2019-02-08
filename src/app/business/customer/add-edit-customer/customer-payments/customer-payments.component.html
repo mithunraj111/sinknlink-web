@@ -154,7 +154,7 @@
                     <div class="form-group required">
                         <label>Mode of payment</label>
                         <div class="input-box">
-                            <ng-select [ngClass]="'ng-select'" [options]="paymentMethods" formControlName="paymentmode"
+                            <ng-select [allowClear]="true" [ngClass]="'ng-select'" [options]="paymentMethods" formControlName="paymentmode"
                                 placeholder="Select payment methods">
                             </ng-select>
                         </div>

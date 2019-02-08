@@ -8,7 +8,7 @@
             <div class="col-md-6 col-sm-5">
                 <div class="row">
                     <div class="col-md-6">
-                        <ng-select [ngClass]="'ng-select'" [(ngModel)]="selectedKeyType" [options]="keylist"
+                        <ng-select [allowClear]="true" [ngClass]="'ng-select'" [(ngModel)]="selectedKeyType" [options]="keylist"
                             (selected)="getLookupList($event)" placeholder="Select KeyType"></ng-select>
                     </div>
                     <div class="col-md-6 col-sm-6 p-r-0 p-l-0">

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { DatatableComponent } from '@swimlane/ngx-datatable';
 
 @Component({
   selector: 'app-customerdetail',
@@ -7,7 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CustomerdetailComponent implements OnInit {
   public configOpenTopBar: any = 'open';
-  constructor() { }
+  @ViewChild(DatatableComponent) table: DatatableComponent;
+  tempFilter = [];
+
+  constructor() { 
+    this.tempFilter = this.businessList;
+  }
   businessList = [
     {
       bizname: 'Sales', mobileno: '6410352356', regdate: '06-Feb-2019', membershiptype: 'paid', biztype: 'purchase',
@@ -59,7 +65,8 @@ export class CustomerdetailComponent implements OnInit {
     }, {
       bizname: 'Sales', mobileno: '6410352356', regdate: '06-Feb-2019', membershiptype: 'paid', biztype: 'purchase',
       category: 'test', paymenttenure: 'cash', gigscount: '10', couponcount: '25'
-    },
+    }
+
   ];
   ngOnInit() {
   }
@@ -68,5 +75,20 @@ export class CustomerdetailComponent implements OnInit {
   }
   getRowHeight(row) {
     return row.height;
+  }
+  search(event?) {
+    let val = '';
+    if (event != null && event != undefined) {
+      val = event.target.value.toLowerCase();
+    }
+    const temp = this.tempFilter.filter(item => {
+      for (const key in item) {
+        if (('' + item[key]).toLocaleLowerCase().includes(val)) {
+          return ('' + item[key]).toLocaleLowerCase().includes(val);
+        }
+      }
+    });
+    this.businessList = temp;
+    this.table.offset = 0;
   }
 }

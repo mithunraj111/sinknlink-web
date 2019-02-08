@@ -27,6 +27,7 @@ export class ConsumerComponent implements OnInit {
   cityList = [{value: "", label: "All"}] ;
   cityName : string;
   consumerList = [];
+  tempFilter = [];
   constructor( 
     private fb: FormBuilder,
     private lookupService: LookupService,
@@ -37,6 +38,7 @@ export class ConsumerComponent implements OnInit {
   ngOnInit() {
     this.initForm();
     this.getCity();
+    this.getArea();
   }
   initForm(){
     this.consumerReportForm = this.fb.group({
@@ -104,6 +106,21 @@ export class ConsumerComponent implements OnInit {
         this.areaList = this.areaList.concat(response.data);
       }
     });
+  }
+  search(event?) {
+    let val = '';
+    if (event != null && event != undefined) {
+      val = event.target.value.toLowerCase();
+    }
+    const temp = this.tempFilter.filter(item => {
+      for (const key in item) {
+        if (('' + item[key]).toLocaleLowerCase().includes(val)) {
+          return ('' + item[key]).toLocaleLowerCase().includes(val);
+        }
+      }
+    });
+    this.consumerList = temp;
+    this.table.offset = 0;
   }
 
 }

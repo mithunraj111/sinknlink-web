@@ -44,7 +44,7 @@
                     <div class="form-group">
                       <label>City</label>
                       <div class="input-group">
-                        <ng-select [ngClass]="'ng-select'" placeholder="Select City" formControlName="city"
+                        <ng-select [allowClear]="true" [ngClass]="'ng-select'" placeholder="Select City" formControlName="city"
                           [options]="cityList" (selected) = "selectCity($event)"></ng-select>
                       </div>
                     </div>
@@ -53,7 +53,7 @@
                     <div class="form-group">
                       <label>Area</label>
                       <div class="input-group">
-                        <ng-select [ngClass]="'ng-select'" [multiple]="true" placeholder="Select Area" formControlName="area"
+                        <ng-select [allowClear]="true" [ngClass]="'ng-select'" placeholder="Select Area" formControlName="area"
                           [options]="areaList"></ng-select>
                       </div>
                     </div>
@@ -94,12 +94,11 @@
               </div>
             </div>
             <ngx-datatable #consumertable class="table data-table expandable" [rows]='consumerList' [columnMode]="'flex'"
-              [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false" [footerHeight]="50" [limit]="8">
+              [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false" [footerHeight]="50" [limit]="5">
 
               <ngx-datatable-column prop="date" name="Date" [resizeable]="false" headerClass="text-left"
-              [cellClass]="'text-left'">
+                [cellClass]="'text-left'">
                 <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                  <!-- <span>{{row.paymentdt|date:datedisplayformat}}</span> -->
                   <span>{{row.date}}</span>
                 </ng-template>
               </ngx-datatable-column>
@@ -112,12 +111,11 @@
             
               <ngx-datatable-column prop="location" name="City" [resizeable]="false">
                   <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                    <!-- <span>{{row.location?.city}}</span> -->
                     <span>{{row.location?.city}}</span>
                   </ng-template>
                 </ngx-datatable-column>
 
-              <ngx-datatable-column prop="totalconsumers" name="No.Of Consumers" [resizeable]="false" headerClass="text-right"
+              <ngx-datatable-column prop="totalconsumers" name="No. of Consumers" [resizeable]="false" headerClass="text-right"
               [cellClass]="'text-right'">
                 <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                   <span>{{row.count}}</span>
