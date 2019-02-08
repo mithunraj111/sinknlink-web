@@ -127,7 +127,7 @@ export class AddEditCustomerComponent implements OnInit {
       biztype: [null, Validators.compose([Validators.required])],
       contactperson: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
       contactmobile: [null, Validators.compose([Validators.required])],
-      contactemail: ['', Validators.compose([ Validators.pattern('([a-z0-9&_\.-]*[@][a-z0-9]+((\.[a-z]{2,3})?\.[a-z]{2,3}))'), Validators.maxLength(100)])],
+      contactemail: ['', Validators.compose([Validators.pattern('([a-z0-9&_\.-]*[@][a-z0-9]+((\.[a-z]{2,3})?\.[a-z]{2,3}))'), Validators.maxLength(100)])],
       phoneno: [[]],
       categoryid: [null, Validators.compose([Validators.required])],
       tags: [[], Validators.required],
@@ -158,7 +158,7 @@ export class AddEditCustomerComponent implements OnInit {
     });
     this.buttonText = AppConstant.BUTTON_TXT.SAVE;
   }
-  openmap(){
+  openmap() {
     this.openModal('mapmodal');
   }
   addSocialId() {
@@ -204,6 +204,9 @@ export class AddEditCustomerComponent implements OnInit {
         lat: data.lat,
         lng: data.lng
       };
+      if (this.userstoragedata.usertype === 'D') {
+        formdata.dealerid = this.userstoragedata.userid;
+      }
       if (!_.isUndefined(this.customerObj) && !_.isEmpty(this.customerObj) && !_.isUndefined(this.customerObj.membershipid)) {
         formdata.status = data.status ? AppConstant.STATUS_ACTIVE : AppConstant.STATUS_INACTIVE;
         this.customerService.update(formdata, this.customerObj.membershipid).subscribe(res => {

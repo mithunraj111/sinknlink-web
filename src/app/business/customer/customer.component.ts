@@ -30,7 +30,11 @@ export class CustomerComponent implements OnInit {
     this.getCustomerList();
   }
   getCustomerList() {
-    this.customerService.list({}).subscribe(res => {
+    const condition = {} as any;
+    if (this.userstoragedata.usertype === 'D') {
+      condition.dealerid = this.userstoragedata.userid;
+    }
+    this.customerService.list(condition).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
         this.customerList = response.data;

@@ -43,9 +43,28 @@ export class PaymentComponent implements OnInit {
       paymentref: 'cash', paymentdt: '06-Feb-2019 04.45', totalamount: '₹2,450.00', paymenttype: 'credit card', paymentmode: 'card'
     }
   ];
-  constructor() { }
+  tempFilter = [];
+  constructor() {
+    this.tempFilter = this.paymentList;
+  }
 
   ngOnInit() {
   }
+  search(event?) {
+    let val = '';
+    if (event != null && event != undefined) {
+      val = event.target.value.toLowerCase();
+    }
+    const temp = this.tempFilter.filter(item => {
+      for (const key in item) {
+        if (('' + item[key]).toLocaleLowerCase().includes(val)) {
+          return ('' + item[key]).toLocaleLowerCase().includes(val);
+        }
+      }
+    });
+    this.paymentList = temp;
+    this.table.offset = 0;
+  }
 
+  getPayment() { }
 }
