@@ -14,7 +14,6 @@ export class LookupComponent extends BaseService implements OnInit {
   displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   @ViewChild(DatatableComponent) table: DatatableComponent;
   @Output() lookupObj = {} as any;
-  userstoragedata = {} as any;
   lookupList = [];
   tempFilter = [];
   selectedKeyType: any = AppConstant.LOOKUP[0].value;

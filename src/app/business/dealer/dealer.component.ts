@@ -12,13 +12,10 @@ import { BaseService, BusinessService } from '../../services';
   templateUrl: './dealer.component.html'
 })
 export class DealerComponent extends BaseService implements OnInit {
-
   dealerList = [];
   tempFilter = [];
-  buttontext: string;
   @ViewChild(DatatableComponent) table: DatatableComponent;
   datedisplayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
-  userstoragedata = {} as any;
   constructor(private router: Router,
     private dealerService: BusinessService.DealerService,
     private bootstrapAlertService: BootstrapAlertService) {

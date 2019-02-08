@@ -18,7 +18,6 @@ export class LocationComponent extends BaseService implements OnInit {
   tempFilter = [];
   locationList = [];
   displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
-  userstoragedata = {} as any;
   constructor(private locationService: MasterService.LocationService,
     private bootstrapAlertService: BootstrapAlertService) {
     super();

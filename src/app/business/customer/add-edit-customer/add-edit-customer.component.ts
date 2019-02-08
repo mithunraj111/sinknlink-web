@@ -205,7 +205,7 @@ export class AddEditCustomerComponent implements OnInit {
         lng: data.lng
       };
       if (this.userstoragedata.usertype === 'D') {
-        formdata.dealerid = this.userstoragedata.userid;
+        formdata.dealerid = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.DEALER).dealerid;
       }
       if (!_.isUndefined(this.customerObj) && !_.isEmpty(this.customerObj) && !_.isUndefined(this.customerObj.membershipid)) {
         formdata.status = data.status ? AppConstant.STATUS_ACTIVE : AppConstant.STATUS_INACTIVE;

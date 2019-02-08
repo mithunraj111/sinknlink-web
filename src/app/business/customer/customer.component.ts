@@ -14,7 +14,6 @@ import { BaseService, BusinessService } from '../../services';
 })
 export class CustomerComponent extends BaseService implements OnInit {
   tempFilter = [];
-  userstoragedata = {} as any;
   customerList = [];
   @ViewChild(DatatableComponent) table: DatatableComponent;
   displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
@@ -23,15 +22,15 @@ export class CustomerComponent extends BaseService implements OnInit {
     private bootstrapAlertService: BootstrapAlertService) {
     super();
     this.getScreenDetails('b_customers');
+    this.getCustomerList();
   }
 
   ngOnInit() {
-    this.getCustomerList();
   }
   getCustomerList() {
     const condition = {} as any;
     if (this.userstoragedata.usertype === 'D') {
-      condition.dealerid = this.userstoragedata.userid;
+      condition.dealerid = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.DEALER).dealerid;
     }
     this.customerService.list(condition).subscribe(res => {
       const response = JSON.parse(res._body);
