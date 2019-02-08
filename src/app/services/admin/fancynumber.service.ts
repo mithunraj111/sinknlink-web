@@ -12,8 +12,12 @@ export class FancyNumberService {
     addNumbers(data): Observable<any> {
         return this.httpHandler.POST(this.endpoint + AppConstant.API_CONFIG.API_URL.ADMIN.FANCYNO.CREATE, data);
     }
-    getList(data: any): Observable<any> {
-        return this.httpHandler.POST(this.endpoint + AppConstant.API_CONFIG.API_URL.ADMIN.FANCYNO.LIST, data);
+    getList(data: any, allocated?): Observable<any> {
+        let url = this.endpoint + AppConstant.API_CONFIG.API_URL.ADMIN.FANCYNO.LIST;
+
+        if(allocated) url += `?allocatednos=true`
+
+        return this.httpHandler.POST(url, data);
     }
     editNumber(data: any, pk: string): Observable<any> {
         return this.httpHandler.POST(this.endpoint + AppConstant.API_CONFIG.API_URL.ADMIN.FANCYNO.EDIT + `/${pk}`, data);

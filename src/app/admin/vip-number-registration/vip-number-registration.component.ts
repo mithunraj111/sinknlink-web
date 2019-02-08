@@ -27,6 +27,8 @@ export class VipNumberRegistrationComponent implements OnInit {
   blockRemarks: string;
   currentTab: string = "Available";
 
+  checks: any = {};
+
   parentBiz: any = [];
 
   constructor(private localStorageService: LocalStorageService, private fancynumberService: FancyNumberService, private router: Router, private bootstrapAlertService: BootstrapAlertService) {
@@ -52,14 +54,32 @@ export class VipNumberRegistrationComponent implements OnInit {
     });
   }
   tabChanged(prop) {
+
     this.condition = {
       fancynostatus: prop.nextId
     }
+
+    if (prop.nextId == "ALLOCATED") {
+      this.getAvailableList(true);
+    } else {
+      this.getAvailableList();
+    }
+
     this.currentTab = prop.nextId
-    this.getAvailableList();
   }
-  getAvailableList() {
-    this.fancynumberService.getList(this.condition).subscribe(res => {
+
+  getAvailableList(allocated?) {
+
+    let service;
+
+    if (allocated) {
+      service = this.fancynumberService.getList(this.condition, true);
+    } else {
+      service = this.fancynumberService.getList(this.condition);
+    }
+
+
+    service.subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
         this.data = response.data;
@@ -69,25 +89,28 @@ export class VipNumberRegistrationComponent implements OnInit {
       }
     });
   }
+
   openMyModal(event) {
     document.querySelector('#' + event).classList.add('md-show');
   }
+
   closeMyModal(event?) {
     document.getElementsByClassName("md-show")[0].classList.remove('md-show');
   }
+
   blockVipNumber() {
     this.selectedBiz = "";
     this.formTitle = 'Block';
     if (this.selectedFancyNos.length > 0) this.openMyModal('vipnoregmodal');
     else this.bootstrapAlertService.showError("Select atleast one VIP Number");
   }
+
   allocateVipNumber() {
     this.selectedBiz = "";
     this.formTitle = 'Allocate';
     if (this.selectedFancyNos.length > 0) this.openMyModal('vipnoregmodal');
     else this.bootstrapAlertService.showError("Select atleast one VIP Number");
   }
-
 
   blockorallocateNumber() {
     let mode = this.formTitle;
@@ -123,6 +146,7 @@ export class VipNumberRegistrationComponent implements OnInit {
         });
         data.data = arr;
       }
+
       this.fancynumberService.blockNumbers(data).subscribe(res => {
         const response = JSON.parse(res._body);
         if (response.status) {
@@ -153,6 +177,14 @@ export class VipNumberRegistrationComponent implements OnInit {
         })
       }
     }
+
+    Array.isArray(this.selectedFancyNos) == true ? this.selectedFancyNos.splice(0, this.selectedFancyNos.length) : "";
+
+    this.selectedBiz = "";
+    this.blockRemarks = "";
+    this.checks = {};
+
+    console.log(this.selectedFancyNos);
 
     // this.getAvailableList();
 
@@ -198,6 +230,7 @@ export class VipNumberRegistrationComponent implements OnInit {
   addVipRegistration() {
     this.router.navigate(['admin/vipnumberregistration/create']);
   }
+
   changeStatus(pk, status, deleted?) {
     let data = {
       fancyid: pk,
@@ -215,11 +248,17 @@ export class VipNumberRegistrationComponent implements OnInit {
       }
     })
   }
+
   onNumberSelect(id, no) {
     let found = this.selectedFancyNos.find((o) => { return id == o });
     if (found == undefined) this.selectedFancyNos.push({ id: id, no: no });
     else this.selectedFancyNos.splice(this.selectedFancyNos.indexOf({ id: id, no: no }), 1);
   }
+
+  goToEdit(id){
+    this.router.navigate(['admin/vipnumberregistration/edit/' + id]);
+  }
+
   search(event?) {
     let val = '';
     if (event != null && event != undefined) {
