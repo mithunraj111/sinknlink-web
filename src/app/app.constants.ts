@@ -128,7 +128,8 @@ export const AppConstant = Object.freeze({
       COMMON: {
         REPORT: {
           AREA_COUNT: 'report/area',
-          CATEGORY_COUNT: 'report/category'
+          CATEGORY_COUNT: 'report/category',
+          CONSUMER_COUNT: 'report/consumer'
         },
         DOCUMENT: {
           CREATE: 'document/create',

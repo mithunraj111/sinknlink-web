@@ -1161,6 +1161,13 @@ button{
             box-shadow: none;
         }
     }
+    .dt-picker{
+        .form-control{
+            &:focus{
+                border-color: #03ADED !important;
+            }
+        }
+    }
     select.form-control{
         background: transparent;
         border-bottom: 1px solid #b1b8bb;
@@ -1342,3 +1349,11 @@ button{
         padding: 0px 15px 0px 15px;
      }
  }
+
+.tag-chips {
+    delete-icon {
+        svg{
+            height: 30px !important;
+        }
+    }
+}

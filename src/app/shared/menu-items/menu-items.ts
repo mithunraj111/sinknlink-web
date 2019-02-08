@@ -120,7 +120,7 @@ const MENUITEMS = [
       },
       {
         state: 'consumer',
-        name: 'Consumer Detail Report',
+        name: 'Consumer Report',
         code: 'r_consumer'
       },
       {
