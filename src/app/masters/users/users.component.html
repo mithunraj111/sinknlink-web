@@ -35,7 +35,8 @@
                         <span>{{row.fullname}}</span>
                     </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column prop="mobileno" name="Mobile No" [resizeable]="false">
+                <ngx-datatable-column prop="mobileno" name="Mobile No" [resizeable]="false" [cellClass]="'text-right table-padding'"
+                headerClass="text-right" >
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                         <span>{{row.mobileno}}</span>
                     </ng-template>

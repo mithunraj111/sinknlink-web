@@ -18,4 +18,7 @@ export class ReportService {
     getConsumerCount(data): Observable<any> {
         return this.httpHandler.POST(this.endpoint + AppConstant.API_CONFIG.API_URL.COMMON.REPORT.CONSUMER_COUNT, data)
     }
+    areawiseDealerCount(data): Observable<any> {
+        return this.httpHandler.POST(this.endpoint + AppConstant.API_CONFIG.API_URL.COMMON.REPORT.DEALER_COUNT, data)
+    }
 }

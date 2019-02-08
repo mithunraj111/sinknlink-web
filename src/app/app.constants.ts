@@ -130,7 +130,8 @@ export const AppConstant = Object.freeze({
         REPORT: {
           AREA_COUNT: 'report/area',
           CATEGORY_COUNT: 'report/category',
-          CONSUMER_COUNT: 'report/consumer'
+          CONSUMER_COUNT: 'report/consumer',
+          DEALER_COUNT:'  report/dealer'
         },
         DOCUMENT: {
           CREATE: 'document/create',
