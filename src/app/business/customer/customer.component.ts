@@ -3,27 +3,26 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { Router } from '@angular/router';
 import { AppConstant } from '../../app.constants';
-import { CustomerService } from 'src/app/services/business/customer.service';
-import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
 import { AppMessages } from '../../app-messages';
+import { BaseService, BusinessService } from '../../services';
 
 
 @Component({
   selector: 'app-customer',
   templateUrl: './customer.component.html'
 })
-export class CustomerComponent implements OnInit {
+export class CustomerComponent extends BaseService implements OnInit {
   tempFilter = [];
   userstoragedata = {} as any;
   customerList = [];
   @ViewChild(DatatableComponent) table: DatatableComponent;
   displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   constructor(private router: Router,
-    private customerService: CustomerService,
-    private localStorageService: LocalStorageService,
+    private customerService: BusinessService.CustomerService,
     private bootstrapAlertService: BootstrapAlertService) {
-    this.userstoragedata = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER);
+    super();
+    this.getScreenDetails('b_customers');
   }
 
   ngOnInit() {

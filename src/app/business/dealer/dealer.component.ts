@@ -3,16 +3,15 @@ import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { Router } from '@angular/router';
 import { AppConstant } from '../../app.constants';
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
-import { LocalStorageService } from '../../services/local-storage.service';
-import { DealerService } from '../../services/business/dealer.service';
 import { AppMessages } from '../../app-messages';
+import { BaseService, BusinessService } from '../../services';
 
 
 @Component({
   selector: 'app-dealer',
   templateUrl: './dealer.component.html'
 })
-export class DealerComponent implements OnInit {
+export class DealerComponent extends BaseService implements OnInit {
 
   dealerList = [];
   tempFilter = [];
@@ -21,11 +20,10 @@ export class DealerComponent implements OnInit {
   datedisplayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   userstoragedata = {} as any;
   constructor(private router: Router,
-    private dealerService: DealerService,
-    private bootstrapAlertService: BootstrapAlertService,
-    private localStorageService: LocalStorageService) {
-    this.userstoragedata = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER);
-
+    private dealerService: BusinessService.DealerService,
+    private bootstrapAlertService: BootstrapAlertService) {
+    super();
+    this.getScreenDetails('b_dealers');
   }
 
   ngOnInit() {
@@ -49,7 +47,7 @@ export class DealerComponent implements OnInit {
   }
   search(event?) {
     let val = '';
-    if( event != null && event != undefined ){
+    if (event != null && event != undefined) {
       val = event.target.value.toLowerCase();
     }
     const temp = this.tempFilter.filter(item => {
