@@ -75,6 +75,8 @@ export class AddEditVipRegistrationNumberComponent implements OnInit {
       } else {
         this.bootstrapAlertService.showError(response.message);
       }
+    }, err => {
+      console.log(err);
     });
   }
 
@@ -134,13 +136,29 @@ export class AddEditVipRegistrationNumberComponent implements OnInit {
       } else {
         this.bootstrapAlertService.showError(this.commonService.getFormErrorMessage(this.vipForm, this.vipErrObj));
       }
-    }else{
-      this.allocateFancyNos();
+    } else {
+      // this.allocateFancyNos();
     }
   }
 
-  allocateFancyNos(){
-    console.log(this.allocated);
+  allocateFancyNos(param?, mid?) {
+
+    let data = {
+      membershipid: mid,
+      membershipcode: param.label,
+      updatedby: this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER).fullname,
+      parentmembershipid: parseInt(this.bizId),
+      fancyid: param.value
+    }
+
+    this.fancynumberService.updateallocation(data).subscribe(res => {
+      const response = JSON.parse(res._body);
+      if (response.status) {
+        this.bootstrapAlertService.showSucccess(response.message);
+      } else {
+        this.bootstrapAlertService.showError(response.message);
+      }
+    })
   }
 
 }

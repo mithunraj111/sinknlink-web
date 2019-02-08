@@ -45,10 +45,10 @@ export const AppConstant = Object.freeze({
   STATUS_AVAILABLE: 'Available',
   STATUS_UNAVAILABLE: 'Notavailable',
   STATUS_DELETED: 'Deleted',
-  STATUS_INVALID: 'INVALID',
-  STATUS_BLOCKED: 'BLOCKED',
+  STATUS_INVALID: 'Invalid',
+  STATUS_BLOCKED: 'Blocked',
   STATUS_SUCCESS: 'Success',
-  STATUS_ALLOCATED: 'ALLOCATED',
+  STATUS_ALLOCATED: 'Allocated',
   // Datatypes array
   DATATYPES: [
     { label: 'String', value: 'String' },

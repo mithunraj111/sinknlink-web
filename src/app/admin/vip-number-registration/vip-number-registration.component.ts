@@ -6,6 +6,7 @@ import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
 import { AppConstant } from 'src/app/app.constants';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import * as Lodash from 'lodash';
+import { CustomerService } from 'src/app/services/business';
 
 @Component({
   selector: 'app-vip-number-registration',
@@ -31,7 +32,7 @@ export class VipNumberRegistrationComponent implements OnInit {
 
   parentBiz: any = [];
 
-  constructor(private localStorageService: LocalStorageService, private fancynumberService: FancyNumberService, private router: Router, private bootstrapAlertService: BootstrapAlertService) {
+  constructor(private customerService: CustomerService, private localStorageService: LocalStorageService, private fancynumberService: FancyNumberService, private router: Router, private bootstrapAlertService: BootstrapAlertService) {
     this.data = [
     ];
     this.tempFilter = this.data;
@@ -60,7 +61,7 @@ export class VipNumberRegistrationComponent implements OnInit {
     }
 
     if (prop.nextId == "ALLOCATED") {
-      this.getAvailableList(true);
+      this.getAllocatedBusiness();
     } else {
       this.getAvailableList();
     }
@@ -68,15 +69,23 @@ export class VipNumberRegistrationComponent implements OnInit {
     this.currentTab = prop.nextId
   }
 
-  getAvailableList(allocated?) {
+  getAllocatedBusiness(){
+    this.customerService.list({
+      status:AppConstant.STATUS_ACTIVE
+    },"parentwithfancynos").subscribe(res => {
+      const response = JSON.parse(res._body);
+      if (response.status) {
+        this.data = response.data;
+        this.tempFilter = this.data;
+      } else {
+        this.bootstrapAlertService.showError(response.message);
+      }
+    });
+  }
 
-    let service;
+  getAvailableList() {
 
-    if (allocated) {
-      service = this.fancynumberService.getList(this.condition, true);
-    } else {
-      service = this.fancynumberService.getList(this.condition);
-    }
+    let service = this.fancynumberService.getList(this.condition);
 
 
     service.subscribe(res => {
@@ -255,7 +264,7 @@ export class VipNumberRegistrationComponent implements OnInit {
     else this.selectedFancyNos.splice(this.selectedFancyNos.indexOf({ id: id, no: no }), 1);
   }
 
-  goToEdit(id){
+  goToEdit(id) {
     this.router.navigate(['admin/vipnumberregistration/edit/' + id]);
   }
 

@@ -105,15 +105,14 @@
                       [selectionType]="'checkbox'">
                       <ngx-datatable-column prop="fancycode" name="Fancy Code" [resizeable]="false">
                         <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                          <span>{{row.fancyno}}</span>
+                            <span *ngIf="row.membershipid > 1"> <a (click)="goToEdit(row?.membershipid)">{{row?.fancyno}}</a></span>                          
+                          <span *ngIf="row.membershipid < 1">{{row.fancyno}}</span>
                         </ng-template>
                       </ngx-datatable-column>
                       <ngx-datatable-column prop="membershipid" name="Blocked For" [resizeable]="false">
                         <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                           <span>{{row.membershipid}} <a (click)="unblockNumber(row.fancyid)"
-                              style="text-decoration:underline">unblock</a>, <a *ngIf="row.membershipid > 1"
-                              (click)="allocateNumber(row.fancyno,row.fancyid,row.membershipid)"
-                              style="text-decoration:underline">allocate</a> </span>
+                              style="text-decoration:underline">unblock</a></span>
                         </ng-template>
                       </ngx-datatable-column>
                       <ngx-datatable-column prop="price" name="Price" [resizeable]="false" headerClass="text-right"
@@ -158,30 +157,30 @@
                       [selectionType]="'checkbox'">
                       <ngx-datatable-column prop="membershipcode" name="Fancy Code" [resizeable]="false">
                         <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                          <span> <a (click)="goToEdit(row?.membershipid)">{{row?.business?.membershipcode}}</a></span>
+                          <span> <a (click)="goToEdit(row?.membershipid)">{{row?.membershipcode}}</a></span>
                         </ng-template>
                       </ngx-datatable-column>
                       <ngx-datatable-column prop="bizname" name="Allocated To Business" [resizeable]="false">
                         <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                          <span>{{row?.business?.bizname}}</span>
+                          <span>{{row?.bizname}}</span>
                         </ng-template>
                       </ngx-datatable-column>
                       <ngx-datatable-column prop="contactperson" name="Contact Name" [resizeable]="false" headerClass="text-right"
                         [cellClass]="'text-right'">
                         <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                          <span>{{row?.business?.contactperson}}</span>
+                          <span>{{row?.contactperson}}</span>
                         </ng-template>
                       </ngx-datatable-column>
                       <ngx-datatable-column prop="contactmobile" name="Contact Mobile" [resizeable]="false" headerClass="text-right"
                         [cellClass]="'text-right'">
                         <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                          <span>{{row?.business?.contactmobile}}</span>
+                          <span>{{row?.contactmobile}}</span>
                         </ng-template>
                       </ngx-datatable-column>
                       <ngx-datatable-column prop="contactemail" name="Contact Email" [resizeable]="false" headerClass="text-right"
                         [cellClass]="'text-right'">
                         <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                          <span>{{row?.business?.contactemail}}</span>
+                          <span>{{row?.contactemail}}</span>
                         </ng-template>
                       </ngx-datatable-column>
                     </ngx-datatable>
