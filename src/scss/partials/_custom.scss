@@ -703,6 +703,7 @@ ngx-datatable.data-table {
   .datatable-row-wrapper:nth-child(odd) {
     background-color: rgba(0, 0, 0, 0.05);
   }
+  
   datatable-body-cell {
     padding: 0.75rem;
     + datatable-body-cell {
@@ -759,7 +760,7 @@ ngx-datatable.data-table {
     }
   }
   &.scroll .datatable-body, &.fullscreen .datatable-body {
-    height: 500px !important;
+    height: 500px;
   }
   datatable-scroller {
     width: auto !important;

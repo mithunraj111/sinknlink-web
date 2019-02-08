@@ -1161,13 +1161,6 @@ button{
             box-shadow: none;
         }
     }
-    .dt-picker{
-        .form-control{
-            &:focus{
-                border-color: #03ADED !important;
-            }
-        }
-    }
     select.form-control{
         background: transparent;
         border-bottom: 1px solid #b1b8bb;
@@ -1282,9 +1275,20 @@ button{
                 color: #67757c;
                 font-family: 'Poppins', sans-serif;
                 font-weight: 400;
-                width: 100%;
                 white-space: nowrap;
+                width: 135px;
+                max-width:100%;
         }
+    }
+    .datatable-body{
+        width:100% !important;
+        height: auto;
+        .datatable-row-wrapper:nth-child(){
+            width:100%;
+        }
+    }
+    .datatable-header-cell-label {
+        padding: .75rem 35px .75rem .75rem !important;
     }
 }
 .payment-report{
@@ -1325,6 +1329,21 @@ button{
         position: relative;
     }
 }
+#pcoded{
+        &[vertical-nav-type="offcanvas"] {
+        .customer-report{
+            .datatable-row-wrapper:nth-child(odd) {
+                width: 100%;
+            }
+            .datatable-row-wrapper:nth-child(even) {
+                width: 100%;
+            }
+            .datatable-body-cell{
+                width:150px;
+            }
+        }
+    }
+}
 
 // report //
 
@@ -1354,6 +1373,13 @@ button{
     delete-icon {
         svg{
             height: 30px !important;
+        }
+    }
+}
+.dt-picker{
+    .form-control{
+        &:focus{
+            border-color: #03ADED !important;
         }
     }
 }

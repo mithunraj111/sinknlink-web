@@ -76,7 +76,7 @@ ngx-datatable.data-table {
     }
   }
   &.scroll .datatable-body, &.fullscreen .datatable-body {
-    height: 500px !important;
+    height: 500px;
   }
   datatable-scroller {
     width: auto !important;

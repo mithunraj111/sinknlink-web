@@ -8,10 +8,10 @@ import { SelectModule } from 'ng-select';
 import { ReportsRoutingModule } from './reports-routing.module';
 import { AreaCategoriesComponent } from './area-categories/area-categories.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BusinessComponent } from './business/business.component';
 import { PaymentComponent } from './payment/payment.component';
 import { DealerComponent } from './dealer/dealer.component';
 import { ConsumerComponent } from './consumer/consumer.component';
+import { CustomerdetailComponent } from './customerdetail/customerdetail.component';
 
 @NgModule({
   imports: [
@@ -24,6 +24,6 @@ import { ConsumerComponent } from './consumer/consumer.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  declarations: [AreaCategoriesComponent, BusinessComponent, PaymentComponent, DealerComponent, ConsumerComponent]
+  declarations: [AreaCategoriesComponent, PaymentComponent, DealerComponent, ConsumerComponent, CustomerdetailComponent]
 })
 export class ReportsModule { }
