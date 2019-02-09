@@ -22,6 +22,7 @@ export class DealerProfileComponent implements OnInit {
   userstoragedata = {} as any;
   locationList = [];
   dealerProfileObj = {} as any;
+  date;
   constructor(private route: ActivatedRoute,
     private bootstrapAlertService: BootstrapAlertService,
     private commonService: CommonService,

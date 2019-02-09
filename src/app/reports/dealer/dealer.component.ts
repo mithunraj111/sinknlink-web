@@ -26,10 +26,11 @@ export class DealerComponent implements OnInit {
   dealerReportForm: FormGroup;
   fromdate;
   todate;
-  cityList: any = [];
-  areaList: any = [];
+  areaList = [{ value: "", label: "All" }];
+  cityList = [{ value: "", label: "All" }];
   tempFilter = [];
-  dealerReportList =[];
+  dealerReportList = [];
+  cityName: any;
   constructor(private fb: FormBuilder,
     private commonService: CommonService,
     private bootstrapAlertService: BootstrapAlertService,
@@ -45,18 +46,7 @@ export class DealerComponent implements OnInit {
   ngOnInit() {
   }
   search(event?) {
-    let val = '';
-    if (event != null && event != undefined) {
-      val = event.target.value.toLowerCase();
-    }
-    const temp = this.tempFilter.filter(item => {
-      for (const key in item) {
-        if (('' + item[key]).toLocaleLowerCase().includes(val)) {
-          return ('' + item[key]).toLocaleLowerCase().includes(val);
-        }
-      }
-    });
-    this.dealerReportList = temp;
+    this.dealerReportList = this.commonService.globalSearch(this.tempFilter, event);
     this.table.offset = 0;
   }
   initForm() {
@@ -72,17 +62,21 @@ export class DealerComponent implements OnInit {
     const data = this.dealerReportForm.value;
     const todt = this.commonService.formatDate(data.todate);
     const fromdt = this.commonService.formatDate(data.fromdate);
+    const city = data.city;
+    const area = data.area;
     if (new Date(todt) < new Date(fromdt)) {
       this.bootstrapAlertService.showError(AppMessages.VALIDATION.DEALERREPORT.fromdate.max);
       return false;
     }
     const formData = {
       fromdate: fromdt,
-      todate: todt
+      todate: todt,
+      locationid: area
+
     };
-    this.getDealer(formData);
-  }
-  getDealer(formData) {
+    // this.getDealer(formData);
+
+    // getDealer(formData) {
     this.reportService.areawiseDealerCount(formData).subscribe((res) => {
       const response = JSON.parse(res._body);
       if (response.status) {
@@ -99,14 +93,34 @@ export class DealerComponent implements OnInit {
           item.label = item.refname;
           item.value = item.refvalue;
         })
-        this.cityList = response.data;
-      } else {
-        this.cityList = [];
+        this.cityList = this.cityList.concat(response.data);
       }
     });
   }
-  
-  
+
+  citySelect(option) {
+    this.cityName = option.value;
+    console.log(this.cityName)
+    this.getArea();
+  }
+  getArea() {
+    this.areaList = [];
+    let condition = { status: AppConstant.STATUS_ACTIVE } as any;
+    if (this.cityName != "") {
+      condition.city = this.cityName;
+    }
+    this.locationService.list(condition).subscribe(res => {
+      const response = JSON.parse(res._body);
+      if (response.status) {
+        response.data.map(item => {
+          item.label = item.area + ' (' + item.pincode + ' )';
+          item.value = item.locationid;
+        });
+        this.areaList = [{ value: "", label: "All" }];
+        this.areaList = this.areaList.concat(response.data);
+      }
+    });
+  }
 
 
 }

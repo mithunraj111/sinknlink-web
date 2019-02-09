@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, ViewChild } from '@angular/core';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { AppConstant } from '../../app.constants';
-import { MasterService, BaseService } from '../../services';
+import { MasterService, BaseService, CommonService } from '../../services';
 import * as _ from 'lodash';
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
 import { AppMessages } from '../../app-messages';
@@ -19,7 +19,8 @@ export class CategoryComponent extends BaseService implements OnInit {
   displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   categoryList = [];
   constructor(private categoryService: MasterService.CategoryService,
-    private bootstrapAlertService: BootstrapAlertService) {
+    private bootstrapAlertService: BootstrapAlertService, private commonService: CommonService,
+  ) {
     super();
     this.getScreenDetails('m_categories');
   }
@@ -82,18 +83,7 @@ export class CategoryComponent extends BaseService implements OnInit {
     this.openCategoryModal('categorymodal');
   }
   search(event?) {
-    let val = '';
-    if (event != null && event != undefined) {
-      val = event.target.value.toLowerCase();
-    }
-    const temp = this.tempFilter.filter(item => {
-      for (const key in item) {
-        if (('' + item[key]).toLocaleLowerCase().includes(val)) {
-          return ('' + item[key]).toLocaleLowerCase().includes(val);
-        }
-      }
-    });
-    this.categoryList = temp;
+    this.categoryList = this.commonService.globalSearch(this.tempFilter, event);
     this.table.offset = 0;
   }
   notifyCategoryEntry(event) {

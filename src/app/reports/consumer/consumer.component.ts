@@ -23,29 +23,29 @@ export class ConsumerComponent implements OnInit {
   consumerReportForm: FormGroup;
   displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   @ViewChild(DatatableComponent) table: DatatableComponent;
-  areaList = [{value: "", label: "All"}] ;
-  cityList = [{value: "", label: "All"}] ;
-  cityName : string;
+  areaList = [{ value: "", label: "All" }];
+  cityList = [{ value: "", label: "All" }];
+  cityName: string;
   consumerList = [];
   tempFilter = [];
-  constructor( 
+  constructor(
     private fb: FormBuilder,
     private lookupService: LookupService,
     private locationService: LocationService,
     private commonService: CommonService,
     private reportService: ReportService,
-    private bootstrapAlertService: BootstrapAlertService ) { }
+    private bootstrapAlertService: BootstrapAlertService) { }
   ngOnInit() {
     this.initForm();
     this.getCity();
     this.getArea();
   }
-  initForm(){
+  initForm() {
     this.consumerReportForm = this.fb.group({
-      fromdate : [this.commonService.parseDate(new Date())],
-      todate : [this.commonService.parseDate(new Date())],
-      city : [''],
-      area : ['']
+      fromdate: [this.commonService.parseDate(new Date())],
+      todate: [this.commonService.parseDate(new Date())],
+      city: [''],
+      area: ['']
     });
   }
   getConsumerReports() {
@@ -60,7 +60,7 @@ export class ConsumerComponent implements OnInit {
     }
     const formData = {
       fromdate: fromdt,
-      todate: todt, 
+      todate: todt,
       locationid: area
     };
     this.reportService.getConsumerCount(formData).subscribe(res => {
@@ -78,7 +78,7 @@ export class ConsumerComponent implements OnInit {
           item.label = item.refname;
           item.value = item.refvalue;
         });
-        this.cityList = this.cityList.concat(response.data) ;
+        this.cityList = this.cityList.concat(response.data);
       }
     });
   }
@@ -91,35 +91,24 @@ export class ConsumerComponent implements OnInit {
   getArea() {
     this.areaList = [];
     let condition = { status: AppConstant.STATUS_ACTIVE } as any;
-    if ( this.cityName != "") {
+    if (this.cityName != "") {
       condition.city = this.cityName;
     }
     console.log(condition);
-    this.locationService.list(condition).subscribe(res =>{
+    this.locationService.list(condition).subscribe(res => {
       const response = JSON.parse(res._body);
-      if( response.status ){
-        response.data.map( item => {
+      if (response.status) {
+        response.data.map(item => {
           item.label = item.area + ' (' + item.pincode + ' )';
           item.value = item.locationid;
         });
-        this.areaList = [{value: "", label: "All"}];
+        this.areaList = [{ value: "", label: "All" }];
         this.areaList = this.areaList.concat(response.data);
       }
     });
   }
   search(event?) {
-    let val = '';
-    if (event != null && event != undefined) {
-      val = event.target.value.toLowerCase();
-    }
-    const temp = this.tempFilter.filter(item => {
-      for (const key in item) {
-        if (('' + item[key]).toLocaleLowerCase().includes(val)) {
-          return ('' + item[key]).toLocaleLowerCase().includes(val);
-        }
-      }
-    });
-    this.consumerList = temp;
+    this.consumerList = this.commonService.globalSearch(this.tempFilter, event);
     this.table.offset = 0;
   }
 

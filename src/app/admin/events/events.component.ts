@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { AppConstant } from '../../app.constants';
-import { BaseService, AdminService } from '../../services';
+import { BaseService, AdminService, CommonService } from '../../services';
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
 import { AppMessages } from 'src/app/app-messages';
 
@@ -20,7 +20,7 @@ export class EventsComponent extends BaseService implements OnInit {
   displaydateformat = AppConstant.API_CONFIG.ANG_DATE.displaydate;
   constructor(private router: Router,
     private bootstrapAlertService: BootstrapAlertService,
-    private eventService: AdminService.EventService) {
+    private eventService: AdminService.EventService, private commonService: CommonService) {
     super();
     this.getScreenDetails('a_events');
   }
@@ -44,18 +44,7 @@ export class EventsComponent extends BaseService implements OnInit {
     this.router.navigate(['admin/event/edit/' + id]);
   }
   search(event?) {
-    let val = '';
-    if (event != null && event != undefined) {
-      val = event.target.value.toLowerCase();
-    }
-    const temp = this.tempFilter.filter(item => {
-      for (const key in item) {
-        if (('' + item[key]).toLocaleLowerCase().includes(val)) {
-          return ('' + item[key]).toLocaleLowerCase().includes(val);
-        }
-      }
-    });
-    this.eventsList = temp;
+    this.eventsList = this.commonService.globalSearch(this.tempFilter, event);
     this.table.offset = 0;
   }
   updateEvent(data, index, flag) {

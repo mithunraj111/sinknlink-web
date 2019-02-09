@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, ViewChild } from '@angular/core';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { AppConstant } from '../../app.constants';
-import { MasterService,BaseService } from '../../services';
+import { MasterService, BaseService, CommonService } from '../../services';
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
 import { AddEditLocationComponent } from './add-edit-location/add-edit-location.component';
 import { AppMessages } from '../../app-messages';
@@ -19,7 +19,8 @@ export class LocationComponent extends BaseService implements OnInit {
   locationList = [];
   displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   constructor(private locationService: MasterService.LocationService,
-    private bootstrapAlertService: BootstrapAlertService) {
+    private bootstrapAlertService: BootstrapAlertService, private commonService: CommonService,
+  ) {
     super();
   }
 
@@ -47,18 +48,7 @@ export class LocationComponent extends BaseService implements OnInit {
     this.openLocationModal('locationmodal');
   }
   search(event?) {
-    let val = '';
-    if (event != null && event != undefined) {
-      val = event.target.value.toLowerCase();
-    }
-    const temp = this.tempFilter.filter(item => {
-      for (const key in item) {
-        if (('' + item[key]).toLocaleLowerCase().includes(val)) {
-          return ('' + item[key]).toLocaleLowerCase().includes(val);
-        }
-      }
-    });
-    this.locationList = temp;
+    this.locationList = this.commonService.globalSearch(this.tempFilter, event);
     this.table.offset = 0;
   }
 

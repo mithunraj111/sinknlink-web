@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { AppConstant } from '../../app.constants';
-import { LocalStorageService, BaseService, MasterService } from '../../services';
+import { LocalStorageService, BaseService, MasterService, CommonService } from '../../services';
 import { AppMessages } from '../../app-messages';
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
 
@@ -18,7 +18,8 @@ export class RolesComponent extends BaseService implements OnInit {
   displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   constructor(private router: Router,
     private roleService: MasterService.RoleService,
-    private bootstrapAlertService: BootstrapAlertService) {
+    private bootstrapAlertService: BootstrapAlertService,
+    private commonService: CommonService) {
     super();
     this.getScreenDetails('m_roles');
   }
@@ -45,18 +46,7 @@ export class RolesComponent extends BaseService implements OnInit {
     return row.height;
   }
   search(event?) {
-    let val = '';
-    if (event != null && event != undefined) {
-      val = event.target.value.toLowerCase();
-    }
-    const temp = this.tempFilter.filter(item => {
-      for (const key in item) {
-        if (('' + item[key]).toLocaleLowerCase().includes(val)) {
-          return ('' + item[key]).toLocaleLowerCase().includes(val);
-        }
-      }
-    });
-    this.rolesList = temp;
+    this.rolesList = this.commonService.globalSearch(this.tempFilter, event);
     this.table.offset = 0;
   }
 

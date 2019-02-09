@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppConstant } from '../../app.constants';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
-import { MasterService, LocalStorageService, BaseService } from '../../services';
+import { MasterService, LocalStorageService, BaseService, CommonService } from '../../services';
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
 import { AppMessages } from 'src/app/app-messages';
 
@@ -17,7 +17,9 @@ export class UsersComponent extends BaseService implements OnInit {
   userList = [];
   @ViewChild(DatatableComponent) table: DatatableComponent;
   constructor(private router: Router, private userService: MasterService.UserService,
-    private bootstrapAlertService: BootstrapAlertService) {
+    private bootstrapAlertService: BootstrapAlertService,
+    private commonService: CommonService,
+  ) {
     super();
     this.getScreenDetails('m_users');
   }
@@ -73,18 +75,7 @@ export class UsersComponent extends BaseService implements OnInit {
   }
 
   search(event?) {
-    let val = '';
-    if (event != null && event != undefined) {
-      val = event.target.value.toLowerCase();
-    }
-    const temp = this.tempFilter.filter(item => {
-      for (const key in item) {
-        if (('' + item[key]).toLocaleLowerCase().includes(val)) {
-          return ('' + item[key]).toLocaleLowerCase().includes(val);
-        }
-      }
-    });
-    this.userList = temp;
+    this.userList = this.commonService.globalSearch(this.tempFilter, event);
     this.table.offset = 0;
   }
 }

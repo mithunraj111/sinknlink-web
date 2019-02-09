@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
+import { CommonService } from 'src/app/services';
 
 @Component({
   selector: 'app-customerdetail',
@@ -11,7 +12,7 @@ export class CustomerdetailComponent implements OnInit {
   @ViewChild(DatatableComponent) table: DatatableComponent;
   tempFilter = [];
 
-  constructor() { 
+  constructor(private commonService: CommonService) {
     this.tempFilter = this.businessList;
   }
   businessList = [
@@ -77,18 +78,7 @@ export class CustomerdetailComponent implements OnInit {
     return row.height;
   }
   search(event?) {
-    let val = '';
-    if (event != null && event != undefined) {
-      val = event.target.value.toLowerCase();
-    }
-    const temp = this.tempFilter.filter(item => {
-      for (const key in item) {
-        if (('' + item[key]).toLocaleLowerCase().includes(val)) {
-          return ('' + item[key]).toLocaleLowerCase().includes(val);
-        }
-      }
-    });
-    this.businessList = temp;
+    this.businessList = this.commonService.globalSearch(this.tempFilter, event);
     this.table.offset = 0;
   }
 }

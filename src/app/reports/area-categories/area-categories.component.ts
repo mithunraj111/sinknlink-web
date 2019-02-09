@@ -20,13 +20,13 @@ export class AreaCategoriesComponent implements OnInit {
   @ViewChild(DatatableComponent) table: DatatableComponent;
   areaCategoriesForm: FormGroup;
   areaCategoriesObj = AppMessages.VALIDATION.AREACATEGORIES;
-
+  tempFilter = [];
   areaList = [];
   categoriesList = [];
   constructor(private bootstrapAlertService: BootstrapAlertService,
     private commonService: CommonService, private fb: FormBuilder,
     private reportService: AppCommonService.ReportService) {
-
+    this.tempFilter = this.areaList;
   }
 
   ngOnInit() {
@@ -52,6 +52,7 @@ export class AreaCategoriesComponent implements OnInit {
     };
     this.getAreaList(formData);
     this.getCategoryList(formData);
+
   }
 
   getCategoryList(formData) {
@@ -70,4 +71,9 @@ export class AreaCategoriesComponent implements OnInit {
       }
     });
   }
+  search(event?) {
+    this.areaList = this.commonService.globalSearch(this.tempFilter, event);
+    this.table.offset = 0;
+  }
+ 
 }

@@ -228,7 +228,7 @@ export const AppMessages = Object.freeze({
         pattern: 'Please enter valid salary range'
       },
       contactperson: {
-        required: 'Please enter contact mobile',
+        required: 'Please enter contact person',
         maxlength: 'Contact person name should be less than 50 characters'
       },
       contactmobile: {
@@ -236,7 +236,6 @@ export const AppMessages = Object.freeze({
         pattern: 'Please enter valid mobile number'
       },
       description: {
-        required: 'Please select status',
         maxlength: 'Description should be less than 500 characters'
       },
       common: 'Please fill the gig details'
