@@ -11,19 +11,19 @@ import { AppCommonService } from 'src/app/services';
 @Component({
   selector: 'app-area-categories',
   templateUrl: './area-categories.component.html',
-  styleUrls: ['./area-categories.component.scss'],
   providers: [
     { provide: NgbDateParserFormatter, useClass: NgbDateCustomParserFormatter }
   ],
 })
 export class AreaCategoriesComponent implements OnInit {
-  @ViewChild(DatatableComponent) table: DatatableComponent;
+  @ViewChild(DatatableComponent) areaTable: DatatableComponent;
   @ViewChild(DatatableComponent) categoryTable: DatatableComponent;
-areaCategoriesForm: FormGroup;
+  areaCategoriesForm: FormGroup;
   areaCategoriesObj = AppMessages.VALIDATION.AREACATEGORIES;
-  tempFilter = [];
+  areatempFilter = [];
   areaList = [];
   categoriesList = [];
+  categorytempFilter = [];
   constructor(private bootstrapAlertService: BootstrapAlertService,
     private commonService: CommonService, private fb: FormBuilder,
     private reportService: AppCommonService.ReportService) {
@@ -34,8 +34,8 @@ areaCategoriesForm: FormGroup;
   }
   initForm() {
     this.areaCategoriesForm = this.fb.group({
-      fromdate: [''],
-      todate: ['']
+      fromdate: [this.commonService.parseDate(new Date())],
+      todate: [this.commonService.parseDate(new Date())]
     });
   }
   getAreaCategories() {
@@ -52,7 +52,7 @@ areaCategoriesForm: FormGroup;
     };
     this.getAreaList(formData);
     this.getCategoryList(formData);
-}
+  }
 
   getCategoryList(formData) {
     this.reportService.getCategoryWiseCount(formData).subscribe(res => {
@@ -60,7 +60,7 @@ areaCategoriesForm: FormGroup;
       if (response.status) {
         this.categoriesList = response.data;
       }
-      this.tempFilter=this.categoriesList
+      this.categorytempFilter = this.categoriesList;
     });
   }
   getAreaList(formData) {
@@ -69,16 +69,16 @@ areaCategoriesForm: FormGroup;
       if (response.status) {
         this.areaList = response.data;
       }
-      this.tempFilter = this.areaList;
+      this.areatempFilter = this.areaList;
 
     });
   }
   search(event?) {
-    this.areaList = this.commonService.globalSearch(this.tempFilter, event);
-    this.table.offset = 0;
+    this.areaList = this.commonService.globalSearch(this.areatempFilter, event);
+    this.areaTable.offset = 0;
   }
   searchCategory(event?) {
-    this.categoriesList = this.commonService.globalSearch(this.tempFilter, event);
+    this.categoriesList = this.commonService.globalSearch(this.categorytempFilter, event);
     this.categoryTable.offset = 0;
   }
 }
