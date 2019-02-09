@@ -15,16 +15,13 @@ import { AddEditCustomerComponent } from './customer/add-edit-customer/add-edit-
 import { CustomerPaymentsComponent } from './customer/add-edit-customer/customer-payments/customer-payments.component';
 import { CustomerBranchesComponent } from './customer/add-edit-customer/customer-branches/customer-branches.component';
 import { CustomerGigsComponent } from './customer/add-edit-customer/customer-gigs/customer-gigs.component';
-
 import { AddEditDealerComponent } from './dealer/add-edit-dealer/add-edit-dealer.component';
-import { DealerProfileComponent } from './dealer/add-edit-dealer/profile/profile.component';
 import { DealerCustomersComponent } from './dealer/add-edit-dealer/customers/customers.component';
 import { DealerPaymentsComponent } from './dealer/add-edit-dealer/payments/payments.component';
 import { CustomerGalleryComponent } from './customer/add-edit-customer/customer-gallery/customer-gallery.component';
 import { ViewConsumerComponent } from './consumer/view-consumer/view-consumer.component';
 import { CustomerSettingsComponent } from './customer/add-edit-customer/customer-settings/customer-settings.component';
 import { SelectModule } from 'ng-select';
-
 import { CustomerCouponsComponent } from './customer/add-edit-customer/customer-coupons/customer-coupons.component';
 
 
@@ -52,7 +49,6 @@ import { CustomerCouponsComponent } from './customer/add-edit-customer/customer-
     CustomerGigsComponent,
     CustomerCouponsComponent,
     AddEditDealerComponent,
-    DealerProfileComponent,
     DealerCustomersComponent,
     DealerPaymentsComponent,
     ViewConsumerComponent,
