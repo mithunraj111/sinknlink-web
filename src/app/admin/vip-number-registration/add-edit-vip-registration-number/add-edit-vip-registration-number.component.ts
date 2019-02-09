@@ -14,7 +14,7 @@ import { CustomerService } from 'src/app/services/business';
 @Component({
   selector: 'app-add-edit-vip-registration-number',
   templateUrl: './add-edit-vip-registration-number.component.html',
-  styleUrls: ['./add-edit-vip-registration-number.component.scss']
+  styleUrls: ['./add-edit-vip-registration-number.component.scss'],
 })
 export class AddEditVipRegistrationNumberComponent implements OnInit {
 

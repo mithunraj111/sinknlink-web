@@ -19,7 +19,7 @@
         <div class="col-md-12 col-sm-12 text-center employee-profile m-t-25">
             <div class="form-group">
                 <label class=" mb-3">
-          <img src="assets/images/employee.jpg" class="img-responsive w-75" alt="employee">
+          <img [src]="userfile" class="img-responsive" style="width: 150px; height: 150px;" alt="employee">
         </label>
             </div>
         </div>
@@ -42,7 +42,7 @@
                                         <div class="row p-t-10 p-b-5">
                                             <label class="col-md-3 col-sm-6 col-form-label text-right">Location</label>
                                             <div class="col-md-6 col-sm-6 m-t-5">
-                                                <span class="f-15">{{consumer?.location || '-'}}</span>
+                                                <span class="f-15">{{consumer.location?.area + consumer.location?.pincode || '-'}}</span>
                                             </div>
                                         </div>
                                         <div class="row p-t-10 p-b-5">

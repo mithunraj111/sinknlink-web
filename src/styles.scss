@@ -1386,3 +1386,12 @@ button{
         }
     }
 }
+.report-title.payment-report{
+    .ng-select {
+        div {
+            .multiple{
+                padding: 3px 10px !important;
+            }
+        }
+    }
+}

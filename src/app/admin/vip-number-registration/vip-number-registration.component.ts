@@ -7,11 +7,14 @@ import { AppConstant } from 'src/app/app.constants';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import * as Lodash from 'lodash';
 import { CustomerService } from 'src/app/services/business';
+import { fadeInOutTranslate } from '../../../assets/animations/fadeInOutTranslate';
 
 @Component({
   selector: 'app-vip-number-registration',
   templateUrl: './vip-number-registration.component.html',
-  styleUrls: ['./vip-number-registration.component.scss']
+  styleUrls: ['./vip-number-registration.component.scss'],
+  animations: [fadeInOutTranslate]
+
 })
 export class VipNumberRegistrationComponent implements OnInit {
   data: any[];

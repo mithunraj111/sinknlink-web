@@ -182,7 +182,7 @@ export class MainComponent implements OnInit {
       this.userfile = this.fileUrl + '/' + this.userstoragedata.profileimg.docurl;
     }
     else {
-      this.userfile = 'assets/images/avatar-4.jpg';
+      this.userfile = 'assets/images/avatar-blank.jpg';
     }
     // dark
     /*this.setLayoutType('dark');*/

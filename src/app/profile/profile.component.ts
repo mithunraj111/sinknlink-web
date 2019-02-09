@@ -54,8 +54,7 @@ export class ProfileComponent implements OnInit {
   }
   userProfileForm() {
     this.profileForm = this.fb.group({
-      fullname: [null, Validators.compose([Validators.required, Validators.minLength(1),
-      Validators.maxLength(50), Validators.pattern('^[a-zA-Z]*$')])],
+      fullname: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50), Validators.pattern('^[a-zA-Z ]*$')])],
       emailid: ['', Validators.compose([Validators.pattern('([a-z0-9&_\.-]*[@][a-z0-9]+((\.[a-z]{2,3})?\.[a-z]{2,3}))'), Validators.maxLength(100)])],
       address: [null, Validators.compose([Validators.minLength(1), Validators.maxLength(100)])],
       locationid: [null, Validators.compose([])],
@@ -105,6 +104,8 @@ export class ProfileComponent implements OnInit {
         this.userObj = response.data;
         if (this.userObj.profileimg != null) {
           this.userfile = this.fileUrl + '/' + this.userObj.profileimg.docurl;
+        } else {
+          this.userfile = 'assets/images/avatar-blank.jpg';
         }
         let consumer = {
           emailid: '',
@@ -115,7 +116,7 @@ export class ProfileComponent implements OnInit {
         consumer = this.userObj.consumer == null ? consumer : this.userObj.consumer;
         this.profileForm = this.fb.group({
           fullname: [this.userObj.fullname, Validators.compose([Validators.required, Validators.minLength(1),
-          Validators.maxLength(50), Validators.pattern('^[a-zA-Z]*$')])],
+          Validators.maxLength(50), Validators.pattern('^[a-zA-Z ]*$')])],
           emailid: [consumer.emailid,
           Validators.compose([Validators.pattern('([a-z0-9&_\.-]*[@][a-z0-9]+((\.[a-z]{2,3})?\.[a-z]{2,3}))'), Validators.maxLength(100)])],
           address: [consumer.address, Validators.compose([Validators.minLength(1), Validators.maxLength(100)])],
@@ -147,9 +148,9 @@ export class ProfileComponent implements OnInit {
       let data = {} as any;
       data.updatedby = this.userstoragedata.fullname;
       data.updateddt = new Date();
-      data.fullname = this.socialForm.value.fullname;
-      data.emailid = this.socialForm.value.emailid;
-      data.address = this.socialForm.value.address;
+      data.fullname = this.profileForm.value.fullname;
+      data.emailid = this.profileForm.value.emailid;
+      data.address = this.profileForm.value.address;
       data.locationid = Number(this.socialForm.value.locationid);
       data.socialid = this.socialForm.value;
       const formData = new FormData();

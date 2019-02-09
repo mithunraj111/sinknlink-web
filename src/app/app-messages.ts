@@ -285,12 +285,12 @@ export const AppMessages = Object.freeze({
       contactemail: {
         required: 'Please enter email address',
         pattern: 'Please enter valid email address',
-        maxlength: 'email address should be within 100 characters'
+        maxlength: 'Email address should be within 100 characters'
 
       },
       phoneno: { required: 'Please enter phone number' },
       categoryid: { required: 'Please select category' },
-      tags: { required: 'Please enter sub categories' },
+      tags: { required: 'Please enter tags' },
       postaladdress: {
         required: 'Please enter address',
         minlength: 'postal address should be atleast 1 characters',
