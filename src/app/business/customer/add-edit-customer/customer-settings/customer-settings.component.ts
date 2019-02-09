@@ -71,7 +71,7 @@ export class CustomerSettingsComponent implements OnInit, OnChanges {
 
   updateSettings(customerObj) {
     if (_.isEmpty(customerObj) || _.isNull(customerObj) || _.isUndefined(customerObj)) {
-      this.bootstrapAlertService.showError('Please add the customer details and try again');
+      this.bootstrapAlertService.showError(AppMessages.VALIDATION.BUSINESS.common);
       return false;
     } else {
       for (let i = 0; i < this.settingsList.length; i++) {

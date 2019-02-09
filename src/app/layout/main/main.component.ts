@@ -411,6 +411,7 @@ export class MainComponent implements OnInit {
     this.lstorageService.removeItem(AppConstant.LOCALSTORAGE.USER);
     this.lstorageService.removeItem(AppConstant.LOCALSTORAGE.ISAUTHENTICATED);
     this.lstorageService.removeItem(AppConstant.LOCALSTORAGE.SCREENS);
+    this.lstorageService.removeItem(AppConstant.LOCALSTORAGE.DEALER);
     this.route.navigate(['auth/login']);
   }
 

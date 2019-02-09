@@ -12,4 +12,7 @@ export class DocumentService {
     update(data, id): Observable<any> {
         return this.httpHandler.POST(this.endpoint + AppConstant.API_CONFIG.API_URL.COMMON.DOCUMENT.UPDATE + id, data);
     }
+    list(data): Observable<any> {
+        return this.httpHandler.POST(this.endpoint + AppConstant.API_CONFIG.API_URL.COMMON.DOCUMENT.LIST, data);
+    }
 }

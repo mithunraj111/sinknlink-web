@@ -268,6 +268,7 @@ export const AppMessages = Object.freeze({
       }
     },
     BUSINESS: {
+      common: 'Please enter business details',
       bizname: {
         required: 'Please enter business name',
         minlength: 'Business name should be atleast 1 characters',

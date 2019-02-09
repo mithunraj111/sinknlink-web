@@ -106,35 +106,40 @@ export class CustomerGigsComponent implements OnInit, OnChanges {
 
   saveOrUpdateGig() {
     let errMessage: any;
-    if (this.gigForm.status === AppConstant.STATUS_INVALID) {
-      errMessage = this.commonService.getFormErrorMessage(this.gigForm, this.gigErrObj);
-      this.bootstrapAlertService.showError(errMessage);
+    if (_.isEmpty(this.customerObj)) {
+      this.bootstrapAlertService.showError(AppMessages.VALIDATION.BUSINESS.common);
       return false;
     } else {
-      const data = this.gigForm.value;
-      const formdata = { ...data } as any;
-      formdata.membershipid = this.customerObj.membershipid;
-      formdata.updatedby = this.userstoragedata.fullname;
-      formdata.updateddt = new Date();
-      if (!_.isUndefined(this.gigObj) && !_.isUndefined(this.gigObj.gigid) && !_.isEmpty(this.gigObj)) {
-        formdata.status = data.status;
-        const index = _.indexOf(this.gigsList, this.gigObj);
-        this.updateGig(formdata, index, false);
+      if (this.gigForm.status === AppConstant.STATUS_INVALID) {
+        errMessage = this.commonService.getFormErrorMessage(this.gigForm, this.gigErrObj);
+        this.bootstrapAlertService.showError(errMessage);
+        return false;
       } else {
-        formdata.status = AppConstant.STATUS_ACTIVE;
-        formdata.createdby = this.userstoragedata.fullname;
-        formdata.createddt = new Date();
-        this.gigsService.create(formdata).subscribe((res) => {
-          const response = JSON.parse(res._body);
-          if (response.status) {
-            this.bootstrapAlertService.showSucccess(response.message);
-            this.initGigForm();
-          } else {
-            this.bootstrapAlertService.showError(response.message);
-          }
-        }, err => {
-          this.bootstrapAlertService.showError(err.message);
-        });
+        const data = this.gigForm.value;
+        const formdata = { ...data } as any;
+        formdata.membershipid = this.customerObj.membershipid;
+        formdata.updatedby = this.userstoragedata.fullname;
+        formdata.updateddt = new Date();
+        if (!_.isUndefined(this.gigObj) && !_.isUndefined(this.gigObj.gigid) && !_.isEmpty(this.gigObj)) {
+          formdata.status = data.status;
+          const index = _.indexOf(this.gigsList, this.gigObj);
+          this.updateGig(formdata, index, false);
+        } else {
+          formdata.status = AppConstant.STATUS_ACTIVE;
+          formdata.createdby = this.userstoragedata.fullname;
+          formdata.createddt = new Date();
+          this.gigsService.create(formdata).subscribe((res) => {
+            const response = JSON.parse(res._body);
+            if (response.status) {
+              this.bootstrapAlertService.showSucccess(response.message);
+              this.initGigForm();
+            } else {
+              this.bootstrapAlertService.showError(response.message);
+            }
+          }, err => {
+            this.bootstrapAlertService.showError(err.message);
+          });
+        }
       }
     }
   }

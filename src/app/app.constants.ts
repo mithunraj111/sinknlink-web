@@ -137,7 +137,8 @@ export const AppConstant = Object.freeze({
         },
         DOCUMENT: {
           CREATE: 'document/create',
-          UPDATE: 'document/edit/'
+          UPDATE: 'document/edit/',
+          LIST: 'document'
         },
         PAYMENTS: {
           CREATE: 'payment/create',
