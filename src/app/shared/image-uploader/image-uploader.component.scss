@@ -34,5 +34,20 @@
 
   .imagePicked img {
     height: 175px !important;
+    width: 200px !important;
     padding: 20px !important;
+  }
+
+  .extimage{
+    position: relative;
+    height: 175px !important;
+    width: 200px !important;
+    margin: 0;
+  }
+  .extimage .extimage_dicon{
+    position: absolute;
+    right: 22px;
+    padding: 9px;
+    background: white;
+    top: 22px;
   }

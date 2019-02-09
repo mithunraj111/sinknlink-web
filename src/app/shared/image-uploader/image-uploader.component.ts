@@ -46,17 +46,20 @@ export class ImageUploaderComponent implements OnInit, OnChanges {
 
         for (let index = 0; index < files.length; index++) {
             const file = files[index];
+            console.log(file);
             if (
-                file.type == "image/jpg" ||
-                file.type == "image/jpeg" ||
-                file.type == "image/png" ||
-                file.type == "image/bmp" ||
-                file.type == "image/gif"
+                (file.type == "image/jpg" ||
+                    file.type == "image/jpeg" ||
+                    file.type == "image/png" ||
+                    file.type == "image/bmp" ||
+                    file.type == "image/gif") && file.size < AppConstant.MAX_FILE_SIZE
             ) {
 
                 let location = document.getElementsByClassName("imagePicked");
                 let imageFile = document.createElement("img");
-                let imageContainer = document.createElement("span");
+                let imageDeleteIcon = document.createElement("i");
+                imageDeleteIcon.setAttribute("class", "extimage_dicon fa fa-close");
+                let imageContainer = document.createElement("div");
 
                 let id = Math.ceil(Math.random() * 1234124);
 
@@ -65,12 +68,19 @@ export class ImageUploaderComponent implements OnInit, OnChanges {
                 var reader = new FileReader();
                 reader.onload = function (e) {
                     imageContainer.setAttribute("id", id.toString());
+                    imageContainer.setAttribute("class", "extimage");
+
                     imageFile.setAttribute("src", reader.result.toString());
                     imageFile.setAttribute("id", (id + 1).toString());
-                    imageFile.addEventListener("click", (el: any) => {
+                    imageFile.setAttribute("class", "extImage_img");
 
-                        let element = document.getElementById(el.target.id);
-                        element.parentNode.removeChild(element);
+                    imageDeleteIcon.setAttribute("id", ("img" + id).toString());
+                    imageDeleteIcon.addEventListener("click", (el: any) => {
+
+                        let parentNode = document.getElementById(el.target.parentNode.id);
+
+                        while (parentNode.firstChild) parentNode.removeChild(parentNode.firstChild);
+
                         for (let index = 0; index < a.images.length; index++) {
                             const element = a.images[index];
                             if (element.id == el.target.id) {
@@ -79,6 +89,7 @@ export class ImageUploaderComponent implements OnInit, OnChanges {
                         }
                         a.imageAdded.emit(a.images);
                     });
+                    imageContainer.appendChild(imageDeleteIcon);
                     imageContainer.appendChild(imageFile);
                     reader.abort();
                 };
@@ -109,7 +120,7 @@ export class ImageUploaderComponent implements OnInit, OnChanges {
         // this.imageAdded.emit(this.images);
     }
 
-    removeDoc(doc) {
+    removeDoc(doc, id) {
         this.documentService.update({
             docid: doc.docid,
             status: AppConstant.STATUS_DELETED,
@@ -118,6 +129,8 @@ export class ImageUploaderComponent implements OnInit, OnChanges {
         }, doc.docid).subscribe(res => {
             let response = JSON.parse(res._body);
             if (response.status) {
+                let parentNode = document.getElementById("img" + id);
+                while (parentNode.firstChild) parentNode.removeChild(parentNode.firstChild);
                 this.bootstrapAlertService.showSucccess(response.message);
             } else {
                 this.bootstrapAlertService.showError(response.message);

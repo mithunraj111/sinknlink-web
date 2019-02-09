@@ -11,6 +11,7 @@ export const AppConstant = Object.freeze({
     SCREENS: 'scrcodes-',
     DEALER: 'dealer-'
   },
+  MAX_FILE_SIZE: 5000000,
   PERMISSION: ['Create', 'View', 'Edit', 'Delete'],
   BUTTON_TXT: {
     SAVE: 'Save',
