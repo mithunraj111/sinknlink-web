@@ -18,7 +18,8 @@ import { AppCommonService } from 'src/app/services';
 })
 export class AreaCategoriesComponent implements OnInit {
   @ViewChild(DatatableComponent) table: DatatableComponent;
-  areaCategoriesForm: FormGroup;
+  @ViewChild(DatatableComponent) categoryTable: DatatableComponent;
+areaCategoriesForm: FormGroup;
   areaCategoriesObj = AppMessages.VALIDATION.AREACATEGORIES;
   tempFilter = [];
   areaList = [];
@@ -26,7 +27,6 @@ export class AreaCategoriesComponent implements OnInit {
   constructor(private bootstrapAlertService: BootstrapAlertService,
     private commonService: CommonService, private fb: FormBuilder,
     private reportService: AppCommonService.ReportService) {
-    this.tempFilter = this.areaList;
   }
 
   ngOnInit() {
@@ -52,8 +52,7 @@ export class AreaCategoriesComponent implements OnInit {
     };
     this.getAreaList(formData);
     this.getCategoryList(formData);
-
-  }
+}
 
   getCategoryList(formData) {
     this.reportService.getCategoryWiseCount(formData).subscribe(res => {
@@ -61,6 +60,7 @@ export class AreaCategoriesComponent implements OnInit {
       if (response.status) {
         this.categoriesList = response.data;
       }
+      this.tempFilter=this.categoriesList
     });
   }
   getAreaList(formData) {
@@ -69,11 +69,16 @@ export class AreaCategoriesComponent implements OnInit {
       if (response.status) {
         this.areaList = response.data;
       }
+      this.tempFilter = this.areaList;
+
     });
   }
   search(event?) {
     this.areaList = this.commonService.globalSearch(this.tempFilter, event);
     this.table.offset = 0;
   }
- 
+  searchCategory(event?) {
+    this.categoriesList = this.commonService.globalSearch(this.tempFilter, event);
+    this.categoryTable.offset = 0;
+  }
 }

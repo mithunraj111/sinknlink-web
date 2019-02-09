@@ -74,9 +74,7 @@ export class DealerComponent implements OnInit {
       locationid: area
 
     };
-    // this.getDealer(formData);
-
-    // getDealer(formData) {
+    console.log(formData)
     this.reportService.areawiseDealerCount(formData).subscribe((res) => {
       const response = JSON.parse(res._body);
       if (response.status) {
