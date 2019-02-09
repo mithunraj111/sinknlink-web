@@ -25,6 +25,7 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
   addPaymentErrObj = AppMessages.VALIDATION.PAYMENTS;
   paymentMethods = [];
   donationList = [];
+  selectedDonation = {} as any;
   constructor(private paymentService: AppCommonService.PaymentsService,
     private lookupService: AdminService.LookupService,
     private commonService: CommonService,
@@ -107,7 +108,8 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
     this.viewPayment = false;
     this.noEdit = false;
   }
-  viewDonationCause() {
+  viewDonationCause(data) {
+    this.selectedDonation = data;
     this.openModal('donationCauseModal');
   }
   getRowHeight(row) {
