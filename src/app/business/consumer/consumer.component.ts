@@ -1,8 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { AppConstant } from '../../app.constants';
-import { ConsumerService } from '../../services/business/consumer.service';
-import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { CommonService, BaseService, BusinessService } from '../../services';
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
 import { Router } from '@angular/router';
 
@@ -11,34 +10,24 @@ import { Router } from '@angular/router';
   templateUrl: './consumer.component.html',
   styleUrls: ['./consumer.component.scss']
 })
-export class ConsumerComponent implements OnInit {
+export class ConsumerComponent extends BaseService implements OnInit {
   consumersList: any[] = [];
   tempFilter = [];
   @ViewChild(DatatableComponent) table: DatatableComponent;
   displaydtimeformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   constructor(private router: Router,
-    private consumerService: ConsumerService,
-    private bootstrapAlertService: BootstrapAlertService,
-    private localStorageService: LocalStorageService) {
-
+    private commonService: CommonService,
+    private consumerService: BusinessService.ConsumerService,
+    private bootstrapAlertService: BootstrapAlertService) {
+    super();
+    this.getScreenDetails('b_consumers');
   }
 
   ngOnInit() {
     this.getConsumers();
   }
   search(event?) {
-    let val = '';
-    if (event != null && event != undefined) {
-      val = event.target.value.toLowerCase();
-    }
-    const temp = this.tempFilter.filter(item => {
-      for (const key in item) {
-        if (('' + item[key]).toLocaleLowerCase().includes(val)) {
-          return ('' + item[key]).toLocaleLowerCase().includes(val);
-        }
-      }
-    });
-    this.consumersList = temp;
+    this.consumersList = this.commonService.globalSearch(this.tempFilter, event);
     this.table.offset = 0;
   }
   getConsumers() {

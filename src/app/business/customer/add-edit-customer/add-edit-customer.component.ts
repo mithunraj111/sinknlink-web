@@ -238,10 +238,6 @@ export class AddEditCustomerComponent implements OnInit {
     }
   }
   saveOrUpdate() {
-    if (_.isEmpty(this.customerObj)) {
-      this.bootstrapAlertService.showError(AppMessages.VALIDATION.BUSINESS.common);
-      return false;
-    }
     switch (this.customertabs.activeId) {
       case '1':
         this.saveOrUpdateBusiness();

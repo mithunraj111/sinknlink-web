@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { AppConstant } from '../../app.constants';
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
 import { AppMessages } from '../../app-messages';
-import { BaseService, BusinessService } from '../../services';
+import { BaseService, BusinessService, CommonService } from '../../services';
 
 
 @Component({
@@ -17,6 +17,7 @@ export class DealerComponent extends BaseService implements OnInit {
   @ViewChild(DatatableComponent) table: DatatableComponent;
   datedisplayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   constructor(private router: Router,
+    private commonService: CommonService,
     private dealerService: BusinessService.DealerService,
     private bootstrapAlertService: BootstrapAlertService) {
     super();
@@ -43,18 +44,7 @@ export class DealerComponent extends BaseService implements OnInit {
     this.router.navigate(['business/dealer/edit/' + id]);
   }
   search(event?) {
-    let val = '';
-    if (event != null && event != undefined) {
-      val = event.target.value.toLowerCase();
-    }
-    const temp = this.tempFilter.filter(item => {
-      for (const key in item) {
-        if (('' + item[key]).toLocaleLowerCase().includes(val)) {
-          return ('' + item[key]).toLocaleLowerCase().includes(val);
-        }
-      }
-    });
-    this.dealerList = temp;
+    this.dealerList = this.commonService.globalSearch(this.tempFilter, event);
     this.table.offset = 0;
   }
 

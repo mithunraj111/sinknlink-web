@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { AppConstant } from '../../app.constants';
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
 import { AppMessages } from '../../app-messages';
-import { BaseService, BusinessService } from '../../services';
+import { BaseService, BusinessService, CommonService } from '../../services';
 
 
 @Component({
@@ -18,6 +18,7 @@ export class CustomerComponent extends BaseService implements OnInit {
   @ViewChild(DatatableComponent) table: DatatableComponent;
   displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   constructor(private router: Router,
+    private commonService: CommonService,
     private customerService: BusinessService.CustomerService,
     private bootstrapAlertService: BootstrapAlertService) {
     super();
@@ -52,18 +53,7 @@ export class CustomerComponent extends BaseService implements OnInit {
     return row.height;
   }
   search(event?) {
-    let val = '';
-    if (event != null && event != undefined) {
-      val = event.target.value.toLowerCase();
-    }
-    const temp = this.tempFilter.filter(item => {
-      for (const key in item) {
-        if (('' + item[key]).toLocaleLowerCase().includes(val)) {
-          return ('' + item[key]).toLocaleLowerCase().includes(val);
-        }
-      }
-    });
-    this.customerList = temp;
+    this.customerList = this.commonService.globalSearch(this.tempFilter, event);
     this.table.offset = 0;
   }
   updateCustomerStatus(data, index, flag) {

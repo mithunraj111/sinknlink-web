@@ -71,4 +71,18 @@ export class CommonService {
     formatDate(dateObj: NgbDateFormat) {
         return new Date(dateObj.year, (dateObj.month - 1), dateObj.day);
     }
+
+    globalSearch(tempFilter, event) {
+        let val = '';
+        if (!_.isNull(event) && !_.isUndefined(event)) {
+            val = event.target.value.toLowerCase();
+        }
+        return tempFilter.filter(item => {
+            for (const key in item) {
+                if (('' + item[key]).toLocaleLowerCase().includes(val)) {
+                    return ('' + item[key]).toLocaleLowerCase().includes(val);
+                }
+            }
+        });
+    }
 }
