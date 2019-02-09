@@ -9,8 +9,16 @@ export class LookupService {
     constructor(private httpHandler: HttpHandlerService) {
         this.endpoint = AppConstant.API_END_POINT;
     }
-    list(data): Observable<any> {
-        return this.httpHandler.POST(this.endpoint + AppConstant.API_CONFIG.API_URL.ADMIN.LOOKUP.LIST, data);
+    list(data, multiple?): Observable<any> {
+        let url;
+
+        if (multiple) {
+            url = this.endpoint + AppConstant.API_CONFIG.API_URL.ADMIN.LOOKUP.LIST + "?multiple=true";
+        } else {
+            url = this.endpoint + AppConstant.API_CONFIG.API_URL.ADMIN.LOOKUP.LIST;
+        }
+
+        return this.httpHandler.POST(url, data);
     }
     create(data): Observable<any> {
         return this.httpHandler.POST(this.endpoint + AppConstant.API_CONFIG.API_URL.ADMIN.LOOKUP.CREATE, data);
