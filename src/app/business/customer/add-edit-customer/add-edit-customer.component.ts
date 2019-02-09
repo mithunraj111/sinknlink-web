@@ -127,7 +127,7 @@ export class AddEditCustomerComponent implements OnInit {
       biztype: [null, Validators.compose([Validators.required])],
       contactperson: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
       contactmobile: [null, Validators.compose([Validators.required])],
-      contactemail: ['', Validators.compose([Validators.pattern('([a-z0-9&_\.-]*[@][a-z0-9]+((\.[a-z]{2,3})?\.[a-z]{2,3}))'), Validators.maxLength(100)])],
+      contactemail: ['', Validators.compose([Validators.pattern(AppConstant.REGEX.WEBSITE), Validators.maxLength(100)])],
       phoneno: [[]],
       categoryid: [null, Validators.compose([Validators.required])],
       tags: [[], Validators.required],
@@ -142,7 +142,7 @@ export class AddEditCustomerComponent implements OnInit {
       deliveryoptions: [null, Validators.required],
       socialids: [[]],
       taxno: [null, Validators.compose([Validators.required, Validators.maxLength(30)])],
-      website: ['', Validators.compose([Validators.required, Validators.maxLength(200), Validators.pattern('((?:https?\:\/\/|www\.)(?:[-a-z0-9]+\.)*[-a-z0-9]+.*)')])],
+      website: ['', Validators.compose([Validators.maxLength(200), Validators.pattern(AppConstant.REGEX.WEBSITE)])],
       regdate: [new Date(), Validators.required],
       paymentstatus: [null, Validators.compose([Validators.required])],
       membershiptype: [null, Validators.compose([Validators.required])],
@@ -178,7 +178,6 @@ export class AddEditCustomerComponent implements OnInit {
   }
   saveOrUpdateBusiness() {
     let errMessage: any;
-    console.log(this.customerForm);
     if (!this.customerForm.valid) {
       errMessage = this.commonService.getFormErrorMessage(this.customerForm, this.customerErrObj);
       this.bootstrapAlertService.showError(errMessage);
@@ -253,11 +252,17 @@ export class AddEditCustomerComponent implements OnInit {
       case '5':
         if (this.gigComponent.gigForm.touched) {
           this.gigComponent.saveOrUpdateGig();
+        } else {
+          this.bootstrapAlertService.showError(AppMessages.VALIDATION.GIG.common);
+          return false;
         }
         break;
       case '6':
         if (this.couponComponent.couponForm.touched) {
           this.couponComponent.saveOrUpdateCoupon();
+        } else {
+          this.bootstrapAlertService.showError(AppMessages.VALIDATION.COUPON.common);
+          return false;
         }
         break;
     }
@@ -290,10 +295,15 @@ export class AddEditCustomerComponent implements OnInit {
     });
     this.customerObj.tncagreed = this.customerObj.tncagreed === 'Y' ? true : false;
     this.customerObj.status = (this.customerObj.status === AppConstant.STATUS_ACTIVE ? true : false);
-    this.customerForm.patchValue(this.customerObj);
     if (this.customerObj.socialids != null) {
       this.socailIdForm.patchValue(this.customerObj.socialids);
+      let socialids = '';
+      _.map(this.customerObj.socialids, function (value, key) {
+        socialids = socialids + value + ',';
+      });
+      this.customerObj.socialids = socialids;
     }
+    this.customerForm.patchValue(this.customerObj);
     this.buttonText = AppConstant.BUTTON_TXT.UPDATE;
   }
 }

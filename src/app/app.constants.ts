@@ -232,5 +232,13 @@ export const AppConstant = Object.freeze({
         }
       }
     }
+  },
+  PAYMENT_TYPES: [
+    'Online',
+    'Offline'
+  ],
+  REGEX: {
+    WEBSITE: '((?:https?\:\/\/|www\.)(?:[-a-z0-9]+\.)*[-a-z0-9]+.*)',
+    EMAIL: '',
   }
 });

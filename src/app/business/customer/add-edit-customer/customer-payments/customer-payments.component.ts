@@ -24,16 +24,19 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
   addPaymentForm: FormGroup;
   addPaymentErrObj = AppMessages.VALIDATION.PAYMENTS;
   paymentMethods = [];
+  donationList = [];
   constructor(private paymentService: AppCommonService.PaymentsService,
     private lookupService: AdminService.LookupService,
     private commonService: CommonService,
     private fb: FormBuilder,
+    private donationService: AdminService.DonationService,
     private bootstrapAlertService: BootstrapAlertService) {
   }
 
   ngOnInit() {
     this.initPaymentForm();
     this.getLookUps();
+    this.getDonations();
   }
   initPaymentForm() {
     this.addPaymentForm = this.fb.group({
@@ -41,7 +44,7 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
       totalamount: [null, Validators.required],
       paymentref: ['', Validators.required],
       paymentmode: ['', Validators.required],
-      
+
       remarks: ['']
     });
   }
@@ -58,6 +61,15 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
         }
       });
     }
+  }
+
+  getDonations() {
+    this.donationService.list({ status: AppConstant.STATUS_ACTIVE }).subscribe(res => {
+      const response = JSON.parse(res._body);
+      if (response.status) {
+        this.donationList = response.data;
+      }
+    });
   }
   search(event?) {
     let val = '';
@@ -131,6 +143,7 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
       membershipid: this.customerObj.membershipid,
       paymentmode: formData.paymentmode,
       paymentref: formData.paymentref,
+      paymenttype: AppConstant.PAYMENT_TYPES[1],
       paymentstatus: AppConstant.STATUS_SUCCESS
     };
     this.paymentService.create(data).subscribe(res => {

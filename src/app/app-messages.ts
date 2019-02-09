@@ -238,7 +238,8 @@ export const AppMessages = Object.freeze({
       description: {
         required: 'Please select status',
         maxlength: 'Description should be less than 500 characters'
-      }
+      },
+      common: 'Please fill the gig details'
     },
     COUPON: {
       couponcode: {
@@ -265,7 +266,8 @@ export const AppMessages = Object.freeze({
       },
       status: {
         required: 'Please select status'
-      }
+      },
+      common: 'Please fill the coupon details'
     },
     BUSINESS: {
       common: 'Please enter business details',

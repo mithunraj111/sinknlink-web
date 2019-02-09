@@ -38,7 +38,9 @@ export class LoginComponent implements OnInit {
         if (response.status) {
           this.localStorageService.addItem(AppConstant.LOCALSTORAGE.USER, response.data);
           this.localStorageService.addItem(AppConstant.LOCALSTORAGE.ISAUTHENTICATED, response.status);
-          this.localStorageService.addItem(AppConstant.LOCALSTORAGE.SCREENS, response.data.role.uiactions);
+          if (response.data.role != null) {
+            this.localStorageService.addItem(AppConstant.LOCALSTORAGE.SCREENS, response.data.role.uiactions);
+          }
           if (response.data.usertype === 'D') {
             this.dealerService.list({ userid: response.data.userid }).subscribe(resp => {
               const result = JSON.parse(resp._body);
