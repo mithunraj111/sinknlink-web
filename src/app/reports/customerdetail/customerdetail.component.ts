@@ -7,6 +7,7 @@ import {
 } from 'lodash'
 import { LocationService, CategoryService } from 'src/app/services/masters';
 import { CommonService } from 'src/app/services';
+import { ReportService } from 'src/app/services/common';
 
 @Component({
   selector: 'app-customerdetail',
@@ -24,8 +25,16 @@ export class CustomerdetailComponent implements OnInit {
   bizMemType = [];
   categoryLists = [];
 
-  constructor(private commonService: CommonService, private lookupService: LookupService, private categoryService: CategoryService, private locationService: LocationService, private bootstrapAlertService: BootstrapAlertService) {
+  constructor(private commonService: CommonService, private reportService: ReportService, private lookupService: LookupService, private categoryService: CategoryService, private locationService: LocationService, private bootstrapAlertService: BootstrapAlertService) {
     this.tempFilter = this.businessList;
+    this.reportFilter = {
+      fromdt: this.commonService.parseDate(new Date()),
+      todt: this.commonService.parseDate(new Date()),
+      biztype: '',
+      locationid: '',
+      categoryid: '',
+      membershiptype: ''
+    };
   }
   businessList = [
 
@@ -41,9 +50,19 @@ export class CustomerdetailComponent implements OnInit {
   getReports() {
     let filters = this.reportFilter;
     filters['fromdt'] = this.commonService.formatDate(filters['fromdt']);
-    filters['todt'] = this.commonService.formatDate(filters['todt']);
+    filters['todate'] = this.commonService.formatDate(filters['todate']);
 
-    console.log(filters); 
+    console.log(this.genFilters(filters));
+
+    this.reportService.customerDetailReport(this.genFilters(filters)).subscribe((res) => {
+      const response = JSON.parse(res._body);
+      if (response.status) {
+        this.businessList = response.data;
+      }
+    }, err => {
+
+    })
+
   }
   getRowHeight(row) {
     return row.height;
@@ -52,13 +71,18 @@ export class CustomerdetailComponent implements OnInit {
     this.locationService.list({}).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
-        this.locationLists = LMap(response.data, (o) => {
+        let lLists = [];
+        lLists = LMap(response.data, (o) => {
           return {
             label: o.area,
             value: o.locationid
           }
         });
-        console.log(response.data);
+        lLists.push({
+          label: 'All',
+          value: 'All'
+        });
+        this.locationLists = lLists;
       } else {
         this.bootstrapAlertService.showError(response.message);
       }
@@ -68,13 +92,19 @@ export class CustomerdetailComponent implements OnInit {
     this.categoryService.list({}, "").subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
-        this.categoryLists = LMap(response.data, (o) => {
+        let cLists = []
+
+        cLists = LMap(response.data, (o) => {
           return {
             label: o.categoryname,
             value: o.categoryid
           }
         });
-        console.log(response.data);
+        cLists.push({
+          label: 'All',
+          value: 'All'
+        });
+        this.categoryLists = cLists;
       } else {
         this.bootstrapAlertService.showError(response.message);
       }
@@ -86,18 +116,30 @@ export class CustomerdetailComponent implements OnInit {
     }, true).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
-        this.bizTypeLists = LMap(response.data.biz_businesstype, (o) => {
+        let bTypeLists = [];
+        let bMemType = [];
+        bTypeLists = LMap(response.data.biz_businesstype, (o) => {
           return {
             label: o.refname,
             value: o.refvalue
           }
         });
-        this.bizMemType = LMap(response.data.biz_membertype, (o) => {
+        bTypeLists.push({
+          label: 'All',
+          value: 'All'
+        })
+        this.bizTypeLists = bTypeLists;
+        bMemType = LMap(response.data.biz_membertype, (o) => {
           return {
             label: o.refname,
             value: o.refvalue
           }
         });
+        bMemType.push({
+          label: 'All',
+          value: 'All'
+        })
+        this.bizMemType = bMemType;
         console.log(response.data);
       } else {
         this.bootstrapAlertService.showError(response.message);
@@ -107,5 +149,16 @@ export class CustomerdetailComponent implements OnInit {
   search(event?) {
     this.businessList = this.commonService.globalSearch(this.tempFilter, event);
     this.table.offset = 0;
+  }
+  genFilters(data) {
+    let filters = {};
+    for (const key in data) {
+      if (data[key] == 'All' || data[key] == '') {
+
+      } else {
+        filters[key] = data[key];
+      }
+    }
+    return filters;
   }
 }

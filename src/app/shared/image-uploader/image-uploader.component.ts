@@ -46,7 +46,6 @@ export class ImageUploaderComponent implements OnInit, OnChanges {
 
         for (let index = 0; index < files.length; index++) {
             const file = files[index];
-            console.log(file);
             if (
                 (file.type == "image/jpg" ||
                     file.type == "image/jpeg" ||
@@ -63,7 +62,7 @@ export class ImageUploaderComponent implements OnInit, OnChanges {
 
                 let id = Math.ceil(Math.random() * 1234124);
 
-                this.images.push({ image: file, id: (id + 1).toString() });
+                this.images.push({ image: file, id: ("img" + (id + 1)).toString() });
 
                 var reader = new FileReader();
                 reader.onload = function (e) {
@@ -81,9 +80,11 @@ export class ImageUploaderComponent implements OnInit, OnChanges {
 
                         while (parentNode.firstChild) parentNode.removeChild(parentNode.firstChild);
 
+                        let imgid = "img" + (parseInt(el.target.id.split("img")[1]) + 1);
+
                         for (let index = 0; index < a.images.length; index++) {
                             const element = a.images[index];
-                            if (element.id == el.target.id) {
+                            if (element.id == imgid) {
                                 a.images.splice(index, 1);
                             }
                         }

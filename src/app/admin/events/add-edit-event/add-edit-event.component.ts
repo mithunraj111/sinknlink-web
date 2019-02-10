@@ -115,6 +115,7 @@ export class AddEditEventComponent implements OnInit {
     });
   }
   imageAdded(files) {
+    console.log(files);
     this.images = files;
   };
   addEvent() {
