@@ -51,7 +51,6 @@ export class ViewConsumerComponent implements OnInit {
   }
 
   getConsumer(id) {
-    // console.log(this.consumer);
     this.consumerService.byId(id).subscribe(res => {
       let response = JSON.parse(res._body);
       this.consumer = response.data;
@@ -60,11 +59,9 @@ export class ViewConsumerComponent implements OnInit {
       } else {
         this.userfile = 'assets/images/avatar-blank.jpg';
       }
-      console.log(this.consumer);
   }, err => {
       console.log(err);
     })
-    // console.log(this.consumer);
   }
 
   getConsumerCoupon(id) {

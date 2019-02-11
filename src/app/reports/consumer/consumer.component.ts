@@ -10,6 +10,7 @@ import { AppMessages } from '../../app-messages';
 import { LookupService } from '../../services/admin';
 import { LocationService } from 'src/app/services/masters';
 import { ReportService } from 'src/app/services/common';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-consumer',
@@ -23,7 +24,8 @@ export class ConsumerComponent implements OnInit {
   consumerReportForm: FormGroup;
   displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   @ViewChild(DatatableComponent) table: DatatableComponent;
-  areaList = [{ value: "", label: "All" }];
+  areaList = [];
+  // areaList = [{ value: "", label: "All" }];
   cityList = [{ value: "", label: "All" }];
   cityName: string;
   consumerList = [];
@@ -44,8 +46,8 @@ export class ConsumerComponent implements OnInit {
     this.consumerReportForm = this.fb.group({
       fromdate: [this.commonService.parseDate(new Date())],
       todate: [this.commonService.parseDate(new Date())],
-      city: [''],
-      area: ['']
+      city: ['', Validators.required],
+      area: ['',Validators.required]
     });
   }
   getConsumerReports() {
@@ -53,20 +55,27 @@ export class ConsumerComponent implements OnInit {
     const todt = this.commonService.formatDate(data.todate);
     const fromdt = this.commonService.formatDate(data.fromdate);
     const city = data.city;
-    const area = data.area;
+    let area = data.area;
     if (new Date(todt) < new Date(fromdt)) {
       this.bootstrapAlertService.showError(AppMessages.VALIDATION.AREACATEGORIES.fromdate.max);
       return false;
     }
-    const formData = {
+    let formData = {
       fromdate: fromdt,
-      todate: todt,
-      locationid: area
-    };
+      todate: todt
+    } as any;
+    if (area != "") {
+      formData.locationid = area;
+    }
+    if (city != "") {
+      formData.city = [city];
+    }
+
     this.reportService.getConsumerCount(formData).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
         this.consumerList = response.data;
+        console.log(this.consumerList);
       }
     });
   }
@@ -85,16 +94,13 @@ export class ConsumerComponent implements OnInit {
   selectCity(option) {
     this.cityName = option.value;
     this.getArea();
-    console.log(option.value);
-    console.log(this.cityName);
   }
   getArea() {
-    this.areaList = [];
+    // this.areaList = [];
     let condition = { status: AppConstant.STATUS_ACTIVE } as any;
     if (this.cityName != "") {
       condition.city = this.cityName;
     }
-    console.log(condition);
     this.locationService.list(condition).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
