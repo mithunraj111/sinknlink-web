@@ -1,6 +1,6 @@
 import { Component, OnInit, OnChanges, SimpleChanges, Input, ViewChild } from '@angular/core';
 import { AppConstant } from '../../../../app.constants';
-import { BusinessService, BaseService } from '../../../../services';
+import { BusinessService, BaseService, CommonService } from '../../../../services';
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
 import { AppMessages } from 'src/app/app-messages';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
@@ -16,7 +16,8 @@ export class CustomerBranchesComponent extends BaseService implements OnInit, On
   datedisplayformat = AppConstant.API_CONFIG.ANG_DATE.displaydate;
   @ViewChild(DatatableComponent) branchtable: DatatableComponent;
   constructor(private customerService: BusinessService.CustomerService,
-    private bootstrapAlertService: BootstrapAlertService) {
+    private bootstrapAlertService: BootstrapAlertService,
+    private commonService: CommonService) {
     super();
   }
 
@@ -60,18 +61,7 @@ export class CustomerBranchesComponent extends BaseService implements OnInit, On
     });
   }
   search(event?) {
-    let val = '';
-    if (event != null && event != undefined) {
-      val = event.target.value.toLowerCase();
-    }
-    const temp = this.tempFilter.filter(item => {
-      for (const key in item) {
-        if (('' + item[key]).toLocaleLowerCase().includes(val)) {
-          return ('' + item[key]).toLocaleLowerCase().includes(val);
-        }
-      }
-    });
-    this.branchesList = temp;
+    this.branchesList = this.commonService.globalSearch(this.tempFilter, event);
     this.branchtable.offset = 0;
   }
 }

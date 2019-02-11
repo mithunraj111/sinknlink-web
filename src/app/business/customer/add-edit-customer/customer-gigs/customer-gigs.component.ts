@@ -58,18 +58,7 @@ export class CustomerGigsComponent implements OnInit, OnChanges {
     }
   }
   search(event?) {
-    let val = '';
-    if (event != null && event != undefined) {
-      val = event.target.value.toLowerCase();
-    }
-    const temp = this.tempFilter.filter(item => {
-      for (const key in item) {
-        if (('' + item[key]).toLocaleLowerCase().includes(val)) {
-          return ('' + item[key]).toLocaleLowerCase().includes(val);
-        }
-      }
-    });
-    this.gigsList = temp;
+    this.gigsList = this.commonService.globalSearch(this.tempFilter, event);
     this.table.offset = 0;
   }
   updategigStatus(data, index, flag) {

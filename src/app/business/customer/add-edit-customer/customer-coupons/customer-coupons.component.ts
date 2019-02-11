@@ -55,18 +55,7 @@ export class CustomerCouponsComponent implements OnInit, OnChanges {
     }
   }
   search(event?) {
-    let val = '';
-    if (event != null && event != undefined) {
-      val = event.target.value.toLowerCase();
-    }
-    const temp = this.tempFilter.filter(item => {
-      for (const key in item) {
-        if (('' + item[key]).toLocaleLowerCase().includes(val)) {
-          return ('' + item[key]).toLocaleLowerCase().includes(val);
-        }
-      }
-    });
-    this.couponList = temp;
+    this.couponList = this.commonService.globalSearch(this.tempFilter, event);
     this.table.offset = 0;
   }
   changeCouponStatus(data, index, flag) {
