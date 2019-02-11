@@ -21,12 +21,13 @@ import { AppCommonService } from 'src/app/services';
   ],
 })
 export class DealerComponent implements OnInit {
-  displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
+  displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydate;
   @ViewChild(DatatableComponent) table: DatatableComponent;
   dealerReportForm: FormGroup;
   fromdate;
   todate;
-  areaList = [{ value: "", label: "All" }];
+  // areaList = [{ value: "", label: "All" }];
+  areaList = [];
   cityList = [{ value: "", label: "All" }];
   tempFilter = [];
   dealerReportList = [];
@@ -63,24 +64,29 @@ export class DealerComponent implements OnInit {
     const todt = this.commonService.formatDate(data.todate);
     const fromdt = this.commonService.formatDate(data.fromdate);
     const city = data.city;
-    const area = data.area;
+    let area = data.area;
     if (new Date(todt) < new Date(fromdt)) {
       this.bootstrapAlertService.showError(AppMessages.VALIDATION.DEALERREPORT.fromdate.max);
       return false;
     }
-    const formData = {
+    let formData = {
       fromdate: fromdt,
-      todate: todt,
-      locationid: area
+      todate: todt
+    } as any;
+    if (area != "") {
+      formData.locationid = area;
+    }
+    if (city != "") {
+      formData.city = [city];
+    }
 
-    };
     console.log(formData)
     this.reportService.areawiseDealerCount(formData).subscribe((res) => {
       const response = JSON.parse(res._body);
       if (response.status) {
         this.dealerReportList = response.data;
       }
-      console.log(this.dealerReportList)
+
     });
   }
   getCities() {
@@ -98,7 +104,6 @@ export class DealerComponent implements OnInit {
 
   citySelect(option) {
     this.cityName = option.value;
-    console.log(this.cityName)
     this.getArea();
   }
   getArea() {
@@ -119,6 +124,5 @@ export class DealerComponent implements OnInit {
       }
     });
   }
-
 
 }

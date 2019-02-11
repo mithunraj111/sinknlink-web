@@ -53,7 +53,7 @@
                     <div class="form-group">
                       <label>Area</label>
                       <div class="input-group">
-                        <ng-select [allowClear]="true" [ngClass]="'ng-select'" placeholder="Select Area"
+                        <ng-select [multiple]="true" [ngClass]="'ng-select'" placeholder="Select Area"
                           formControlName="area" [options]="areaList"></ng-select>
                       </div>
                     </div>
@@ -103,28 +103,28 @@
                 [cellClass]="'text-left'">
                 <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                   <!-- <span>{{row.paymentdt|date:datedisplayformat}}</span> -->
-                  <span>{{row.date}}</span>
+                  <span>{{row.date|date:displayformat}}</span>
                 </ng-template>
               </ngx-datatable-column>
 
               <ngx-datatable-column prop="area" name="Area" [resizeable]="false">
                 <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                  <span>{{row.area}}</span>
+                  <span>{{row.location.area}}</span>
                 </ng-template>
               </ngx-datatable-column>
 
               <ngx-datatable-column prop="location" name="City" [resizeable]="false">
                 <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                   <!-- <span>{{row.location?.city}}</span> -->
-                  <span>{{row.location}}</span>
+                  <span>{{row.location.city}}</span>
                 </ng-template>
               </ngx-datatable-column>
 
 
-              <ngx-datatable-column prop="totaldealers" name="No.Of Dealers" [resizeable]="false"
+              <ngx-datatable-column prop="count" name="No.Of Dealers" [resizeable]="false"
                 headerClass="text-right" [cellClass]="'text-right'">
                 <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                  <span>{{row.totaldealers}}</span>
+                  <span>{{row.count}}</span>
                 </ng-template>
               </ngx-datatable-column>
 
