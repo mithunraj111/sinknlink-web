@@ -109,6 +109,11 @@ export const AppMessages = Object.freeze({
         max: 'Fromdate should be smaller than todate'
       }
     },
+    PAYMENTREPORT: {
+      fromdate: {
+        max: 'Fromdate should be smaller than todate'
+      }
+    },
     PROFILE: {
       newpassword: {
         required: 'Please enter new password',
