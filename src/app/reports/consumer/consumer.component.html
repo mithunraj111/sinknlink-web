@@ -54,7 +54,7 @@
                       <label>Area</label>
                       <div class="input-group">
                         <ng-select [multiple]="true" [ngClass]="'ng-select'" placeholder="All" formControlName="area"
-                          [options]="areaList"></ng-select>
+                          [options]="areaList" (selected) = "selectArea($event)"></ng-select>
                       </div>
                     </div>
                   </div>
@@ -99,7 +99,7 @@
               <ngx-datatable-column prop="date" name="Date" [resizeable]="false" headerClass="text-left"
                 [cellClass]="'text-left'">
                 <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                  <span>{{row.date}}</span>
+                  <span>{{row.date|date:displaydateformat}}</span>
                 </ng-template>￼
                 Search for here
                 ￼￼
@@ -111,13 +111,13 @@
                 0 total
               </ngx-datatable-column>
 
-              <ngx-datatable-column prop="area" name="Area" [resizeable]="false">
+              <ngx-datatable-column prop="location.area" name="Area" [resizeable]="false">
                   <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                     <span>{{row.location?.area}}</span>
                   </ng-template>
                 </ngx-datatable-column>
             
-              <ngx-datatable-column prop="location" name="City" [resizeable]="false">
+              <ngx-datatable-column prop="location.city" name="City" [resizeable]="false">
                   <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                     <span>{{row.location?.city}}</span>
                   </ng-template>

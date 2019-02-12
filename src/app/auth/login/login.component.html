@@ -1,57 +1,58 @@
-<section class="login p-fixed d-flex text-center common-img-bg">
+<section class="login p-fixed d-flex text-center bg-primary common-img-bg">
     <!-- Container-fluid starts -->
-    <div class="container">
+    <div class="container-fluid mt-0">
         <div class="row">
             <div class="col-md-12 col-lg-12">
                 <!-- Authentication card start -->
-                <div class="col-md-12 col-lg-6 pull-left logo-text">
+                <!-- <div class="col-md-12 col-lg-6 pull-left logo-text"> -->
+                <div class="logo-text login-card auth-body">
                     <div class="text-center">
                         <!-- <img src="assets/images/fo-log.png" alt="Business Directory"> -->
-                        <h1>BUSINESS DIRECTORY</h1>
+                        <h1 class="f-32">BUSINESS DIRECTORY</h1>
                     </div>
                 </div>
-                <div class="col-md-12 col-lg-6 pull-right">
+                <!-- <div class="col-md-12 col-lg-6 pull-right"> -->
+                <div class="">
                     <div class="login-card card-block">
                         <form class="md-float-material" [formGroup]="loginForm" (ngSubmit)="login()">
                             <div class="auth-box">
                                 <div class="row m-b-10">
                                     <div class="col-md-12">
-                                        <h3 class="text-left txt-primary">Sign In</h3>
+                                        <h3 class="text-left txt-primary mt-0">Sign In</h3>
                                     </div>
                                 </div>
-
                                 <div *ngIf="errMessage" class="alert alert-danger">
                                     <strong>{{errMessage}}</strong>
                                 </div>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" name="mobileno" formControlName="mobileno" placeholder="Mobile Number">
+                                    <input type="text" class="form-control" name="mobileno" formControlName="mobileno"
+                                        placeholder="Mobile Number">
                                     <span class="md-line"></span>
                                 </div>
                                 <div class="input-group">
-                                    <input type="password" class="form-control" name="password" formControlName="password" placeholder="Password">
+                                    <input type="password" class="form-control" name="password" formControlName="password"
+                                        placeholder="Password">
                                     <span class="md-line"></span>
                                 </div>
                                 <div class="row m-t-25 text-left">
                                     <div class="col-12">
                                         <div class="forgot-phone text-right f-right">
-                                            <a [routerLink]="['/auth/forgot']" class="text-right f-w-600 text-inverse"> Forgot Password?</a>
+                                            <a [routerLink]="['/auth/forgot']" class="text-right f-w-600 text-inverse">
+                                                Forgot Password?</a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row m-t-30">
                                     <div class="col-md-12">
                                         <button type="submit" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20">Sign
-                      in</button>
+                                            in</button>
                                     </div>
                                 </div>
-                                <hr />
                             </div>
                         </form>
                         <!-- end of form -->
                     </div>
                 </div>
-
-
                 <!-- Authentication card end -->
             </div>
             <!-- end of col-sm-12 -->

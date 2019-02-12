@@ -23,9 +23,9 @@ import * as _ from 'lodash';
 export class ConsumerComponent implements OnInit {
   consumerReportForm: FormGroup;
   displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
+  displaydateformat = AppConstant.API_CONFIG.ANG_DATE.displaydate;
   @ViewChild(DatatableComponent) table: DatatableComponent;
   areaList = [];
-  // areaList = [{ value: "", label: "All" }];
   cityList = [{ value: "", label: "All" }];
   cityName: string;
   consumerList = [];
@@ -46,8 +46,8 @@ export class ConsumerComponent implements OnInit {
     this.consumerReportForm = this.fb.group({
       fromdate: [this.commonService.parseDate(new Date())],
       todate: [this.commonService.parseDate(new Date())],
-      city: ['', Validators.required],
-      area: ['',Validators.required]
+      city: [''],
+      area: ['']
     });
   }
   getConsumerReports() {
@@ -64,10 +64,10 @@ export class ConsumerComponent implements OnInit {
       fromdate: fromdt,
       todate: todt
     } as any;
-    if (area != "") {
+    if ( area != "" && area != undefined && area != null ) {
       formData.locationid = area;
     }
-    if (city != "") {
+    if ( city != "" && city != undefined && city != null ) {
       formData.city = [city];
     }
 
@@ -78,6 +78,7 @@ export class ConsumerComponent implements OnInit {
         console.log(this.consumerList);
       }
     });
+    this.getArea();
   }
   getCity() {
     this.lookupService.list({ refkey: 'biz_businesscity', status: AppConstant.STATUS_ACTIVE }).subscribe(res => {
@@ -88,6 +89,7 @@ export class ConsumerComponent implements OnInit {
           item.value = item.refvalue;
         });
         this.cityList = this.cityList.concat(response.data);
+        console.log(this.cityList);
       }
     });
   }
@@ -96,7 +98,6 @@ export class ConsumerComponent implements OnInit {
     this.getArea();
   }
   getArea() {
-    // this.areaList = [];
     let condition = { status: AppConstant.STATUS_ACTIVE } as any;
     if (this.cityName != "") {
       condition.city = this.cityName;
@@ -108,8 +109,7 @@ export class ConsumerComponent implements OnInit {
           item.label = item.area + ' (' + item.pincode + ' )';
           item.value = item.locationid;
         });
-        this.areaList = [{ value: "", label: "All" }];
-        this.areaList = this.areaList.concat(response.data);
+        this.areaList = response.data;
       }
     });
   }

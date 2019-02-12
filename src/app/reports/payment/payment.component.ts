@@ -22,10 +22,15 @@ import { AppMessages } from '../../app-messages';
 })
 export class PaymentComponent implements OnInit {
   displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
+  displaydateformat = AppConstant.API_CONFIG.ANG_DATE.displaydate;
   @ViewChild(DatatableComponent) table: DatatableComponent;
 
   paymentList = [];
-  paymentTypes = [];
+  paymentTypes = [
+    { label:'Online', value: 'Online' },
+    { label:'Offline', value: 'Offline' }
+  ];
+  paymentModes = [];
   reportfiller = {};
   tempFilter = [];
   paymentForm: FormGroup;
@@ -41,66 +46,64 @@ export class PaymentComponent implements OnInit {
 
   ngOnInit() {
     this.initForm();
-    this.getLookUps();
+    this.getPaymentModes();
   }
-  search(event?) {
-    this.paymentList = this.commonService.globalSearch(this.tempFilter, event);
-    this.table.offset = 0;
-  }
+
   initForm() {
     this.paymentForm = this.fb.group({
       fromdate: [this.commonService.parseDate(new Date())],
       todate: [this.commonService.parseDate(new Date())],
-      paymenttype: ''
+      paymenttype: [''],
+      paymentmode: ['']
+    });
+    console.log(this.paymentForm);
+  }
+
+  getPaymentModes(){
+    this.lookupService.list({ refkey: AppConstant.LOOKUP[3].value, status: AppConstant.STATUS_ACTIVE }).subscribe(res => {
+      const response = JSON.parse(res._body);
+      if (response.status) {
+        response.data.map(item => {
+          item.label = item.refname;
+          item.value = item.refvalue;
+        });
+        this.paymentModes = response.data;
+        console.log(this.paymentModes);
+        }
     });
   }
 
-  getPayment() {
+  getPaymentList(){
+    console.log(this.paymentForm.value);
     const data = this.paymentForm.value;
     const todt = this.commonService.formatDate(data.todate);
     const fromdt = this.commonService.formatDate(data.fromdate);
     const paymenttype = data.paymenttype;
+    const paymentmode = data.paymentmode;
     if (new Date(todt) < new Date(fromdt)) {
       this.bootstrapAlertService.showError(AppMessages.VALIDATION.PAYMENTREPORT.fromdate.max);
       return false;
     }
     let formData = {
-      fromdate: fromdt,
-      todate: todt
-    } as any;
-    if (paymenttype != "") {
-      formData.paymenttype = paymenttype;
+      fromdate : fromdt,
+      todate : todt,
+    }as any;
+    if ( paymentmode != "" && paymentmode != undefined && paymentmode != null ){
+      formData.paymentmode = paymentmode;
     }
-
-    this.reportService.paymentReport({formData}).subscribe((res) => {
+    if ( paymenttype != "" && paymenttype != undefined && paymenttype != null ){
+      formData.paymenttype = [paymenttype];
+    }
+    this.reportService.paymentReport(formData).subscribe(res =>{
       const response = JSON.parse(res._body);
-      if (response.status) {
+      if(response.status){
         this.paymentList = response.data;
-        console.log(this.paymentList);
       }
     });
   }
 
-  getLookUps() {
-    this.lookupService.list({ refkey: AppConstant.LOOKUP[3].value }, true).subscribe(res => {
-      const response = JSON.parse(res._body);
-      if (response.status) {
-        let bTypeLists = [];
-        bTypeLists = LMap(response.data.biz_paymentmethods, (o) => {
-          return {
-            label: o.refname,
-            value: o.refvalue
-          };
-        });
-        bTypeLists.push({
-          label: 'All',
-          value: 'All'
-        });
-        this.paymentTypes = bTypeLists;
-      } else {
-        this.bootstrapAlertService.showError(response.message);
-      }
-    });
+  search(event?) {
+    this.paymentList = this.commonService.globalSearch(this.tempFilter, event);
+    this.table.offset = 0;
   }
-
 }

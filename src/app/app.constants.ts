@@ -241,6 +241,6 @@ export const AppConstant = Object.freeze({
   ],
   REGEX: {
     WEBSITE: '((?:https?\:\/\/|www\.)(?:[-a-z0-9]+\.)*[-a-z0-9]+.*)',
-    EMAIL: '',
+    EMAIL: '([a-z0-9&_\.-]*[@][a-z0-9]+((\.[a-z]{2,3})?\.[a-z]{2,3}))',
   }
 });

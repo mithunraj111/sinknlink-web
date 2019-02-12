@@ -10,43 +10,61 @@
         <div class="card">
           <form [formGroup]="paymentForm">
             <div class="row">
-              <div class="col-md-4 col-sm-4 p-r-5">
-                <div class="form-group">
-                  <label>From Date</label>
-                  <div class="input-group">
-                    <input class="form-control" ngbDatepicker #fromdate="ngbDatepicker" formControlName="fromdate">
-                    <div class="input-group-append" (click)="fromdate.toggle()">
-                      <span class="fa fa-calendar input-group-text"></span>
+              <div class="col-md-6 col-sm-6 dt-picker">
+                <div class="row">
+                  <div class="col-md-6 col-sm-6 p-r-5">
+                    <div class="form-group">
+                      <label>From Date</label>
+                      <div class="input-group">
+                        <input class="form-control" ngbDatepicker #fromdate="ngbDatepicker" formControlName="fromdate">
+                        <div class="input-group-append" (click)="fromdate.toggle()">
+                          <span class="fa fa-calendar input-group-text"></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-sm-6 p-r-5">
+                    <div class="form-group">
+                      <label>To Date</label>
+                      <div class="input-group">
+                        <input class="form-control" ngbDatepicker #todate="ngbDatepicker" formControlName="todate">
+                        <div class="input-group-append" (click)="todate.toggle()">
+                          <span class="fa fa-calendar input-group-text"></span>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="col-md-4 col-sm-4 p-l-0 p-r-5">
-                <div class="form-group">
-                  <label>To Date</label>
-                  <div class="input-group">
-                    <input class="form-control" ngbDatepicker #todate="ngbDatepicker" formControlName="todate">
-                    <div class="input-group-append" (click)="todate.toggle()">
-                      <span class="fa fa-calendar input-group-text"></span>
+              <div class="col-md-6 col-sm-6">
+                <div class="row">
+                  <div class="col-md-5 col-sm-5 p-l-0 p-r-5">
+                    <div class="form-group">
+                      <label>Payment Type</label>
+                      <div class="input-group">
+                        <ng-select [allowClear]="true" [ngClass]="'ng-select'" [options]="paymentTypes"
+                          placeholder="All" formControlName="paymenttype">
+                        </ng-select>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
-              <div class="col-md-3 col-sm-3 p-l-0 p-r-5">
-                <div class="form-group">
-                  <label>Payment Type</label>
-                  <div class="input-group">
-                    <ng-select [allowClear]="true" [ngClass]="'ng-select'" [options]="paymentTypes"
-                      placeholder="Select Payment Type" formControlName="paymenttype">
-                    </ng-select>
+                  <div class="col-md-5 col-sm-5 p-l-0 p-r-5">
+                    <div class="form-group">
+                      <label>Payment Mode</label>
+                      <div class="input-group">
+                        <ng-select [multiple]="true" [ngClass]="'ng-select'" [options]="paymentModes"
+                          placeholder="All" formControlName="paymentmode">
+                        </ng-select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-2 col-sm-2 m-t-35">
+                    <button type="button" placement="bottom" ngbTooltip="Click to search"
+                      class="btn btn-primary generate-button waves-effect" (click)="getPaymentList()"> <i
+                      class="fa fa-search"></i>
+                    </button>
                   </div>
                 </div>
-              </div>
-              <div class="col-md-1 col-sm-1 m-t-35">
-                <button type="button" placement="bottom" ngbTooltip="Click to search"
-                  class="btn btn-primary generate-button waves-effect" (click)="getPayment()"> <i
-                    class="fa fa-search"></i>
-                </button>
               </div>
             </div>
           </form>
@@ -88,11 +106,12 @@
                 </ng-template>
               </ngx-datatable-column>
 
-              <ngx-datatable-column prop="paymentdt" name="Payment Date" [resizeable]="false">
+              <ngx-datatable-column prop="paymentdate" name="Payment Date" [resizeable]="false">
                 <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                  <span>{{row.paymentdt|date:datedisplayformat}}</span>
+                  <span>{{row.paymentdate|date:displaydateformat}}</span>
                 </ng-template>
               </ngx-datatable-column>
+
               <ngx-datatable-column prop="totalamount" name="Amount" [resizeable]="false" headerClass="text-right"
                 [cellClass]="'text-right table-padding'">
                 <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>

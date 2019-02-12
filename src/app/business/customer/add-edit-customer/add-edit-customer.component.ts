@@ -132,7 +132,7 @@ export class AddEditCustomerComponent implements OnInit {
       biztype: [null, Validators.compose([Validators.required])],
       contactperson: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
       contactmobile: [null, Validators.compose([Validators.required])],
-      contactemail: ['', Validators.compose([Validators.pattern(AppConstant.REGEX.WEBSITE), Validators.maxLength(100)])],
+      contactemail: ['', Validators.compose([Validators.pattern(AppConstant.REGEX.EMAIL), Validators.maxLength(100)])],
       phoneno: [[]],
       categoryid: [null, Validators.compose([Validators.required])],
       tags: [[], Validators.required],
