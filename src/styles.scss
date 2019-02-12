@@ -800,7 +800,7 @@ button{
     .datatable-body{
         display: block;
         overflow: auto;
-        height: 62vh !important;
+        // height: 62vh !important;
     }
      .card-block {
         padding: 0px 15px 0px 15px;
@@ -859,11 +859,17 @@ button{
 }
 .floating-alert{
     z-index: 10000 !important;
+    display: inline-block;
+    left: 18%;
+    width: 380px;
+    margin: 0 auto;
+    margin-top: -10px;
+    max-width: 100%;
+
     .alert{
-       margin-right: 33rem;
-       margin-top:50px;
        font-size:14px;
-       padding:12px 32px;
+       padding:12px 15px;
+       margin-bottom: 5px;
    }
    .alert-success{
     background-color:#2ed8b6;
@@ -1160,7 +1166,7 @@ button{
     }
     .form-control{
         &:focus{
-            border-color: transparent;
+            border-color:#03ADED;
             box-shadow: none;
         }
     }
