@@ -99,7 +99,7 @@ export class CustomerGigsComponent implements OnInit, OnChanges {
       this.bootstrapAlertService.showError(AppMessages.VALIDATION.BUSINESS.common);
       return false;
     } else {
-      if (this.gigForm.status === AppConstant.STATUS_INVALID) {
+      if (!this.gigForm.valid) {
         errMessage = this.commonService.getFormErrorMessage(this.gigForm, this.gigErrObj);
         this.bootstrapAlertService.showError(errMessage);
         return false;

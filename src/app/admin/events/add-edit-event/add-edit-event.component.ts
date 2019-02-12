@@ -67,7 +67,7 @@ export class AddEditEventComponent implements OnInit {
         response.data.map(item => {
           item.value = item.locationid.toString();
           item.label = item.area + '(' + item.pincode + ')';
-        })
+        });
         this.statelists = response.data;
       } else {
         this.bootstrapAlertService.showError(response.message);

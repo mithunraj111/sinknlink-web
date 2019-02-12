@@ -90,7 +90,7 @@ export class CustomerCouponsComponent implements OnInit, OnChanges {
       this.bootstrapAlertService.showError(AppMessages.VALIDATION.BUSINESS.common);
       return false;
     } else {
-      if (this.couponForm.status === AppConstant.STATUS_INVALID) {
+      if (!this.couponForm.valid) {
         errMessage = this.commonService.getFormErrorMessage(this.couponForm, this.couponErrObj);
         this.bootstrapAlertService.showError(errMessage);
         return false;

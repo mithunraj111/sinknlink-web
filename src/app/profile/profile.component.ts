@@ -70,7 +70,7 @@ export class ProfileComponent implements OnInit {
     });
   }
   changePassword() {
-    if (this.passwordForm.status === AppConstant.STATUS_INVALID) {
+    if (!this.passwordForm.valid) {
       this.errMessage = this.commonService.getFormErrorMessage(this.passwordForm, this.profileErrObj);
       this.bootstrapAlertService.showError(this.errMessage);
       return false;
@@ -140,7 +140,7 @@ export class ProfileComponent implements OnInit {
     });
   }
   changeProfile() {
-    if (this.profileForm.status === AppConstant.STATUS_INVALID) {
+    if (!this.profileForm.valid) {
       this.errMessage = this.commonService.getFormErrorMessage(this.profileForm, this.profileErrObj);
       this.bootstrapAlertService.showError(this.errMessage);
       return false;

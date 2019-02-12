@@ -57,7 +57,7 @@ export class AddEditDonationComponent implements OnInit {
   }
 
   saveOrUpdateDonation() {
-    if (this.donationForm.status === AppConstant.STATUS_INVALID) {
+    if (!this.donationForm.valid) {
       this.errMessage = this.commonService.getFormErrorMessage(this.donationForm, this.donationErrObj);
       this.bootstrapAlertService.showError(this.errMessage);
       return false;

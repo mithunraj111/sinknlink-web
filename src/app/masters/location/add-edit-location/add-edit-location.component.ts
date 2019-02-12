@@ -107,7 +107,7 @@ export class AddEditLocationComponent implements OnInit, OnChanges {
     }, 5000);
   }
   saveOrUpdateLocation() {
-    if (this.locationForm.status === AppConstant.STATUS_INVALID) {
+    if (!this.locationForm.valid) {
       this.errMessage = this.commonService.getFormErrorMessage(this.locationForm, this.locationErrObj);
       this.bootstrapAlertService.showError(this.errMessage);
       return false;

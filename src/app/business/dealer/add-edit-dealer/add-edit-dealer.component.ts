@@ -91,7 +91,7 @@ export class AddEditDealerComponent implements OnInit {
   }
   saveOrUpdateDealer() {
     let errMessage: any;
-    if (this.dealerProfileForm.status === AppConstant.STATUS_INVALID) {
+    if (!this.dealerProfileForm.valid) {
       errMessage = this.commonService.getFormErrorMessage(this.dealerProfileForm, this.dealerProfileErrObj);
       this.bootstrapAlertService.showError(errMessage);
       return false;

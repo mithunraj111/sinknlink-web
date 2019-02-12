@@ -65,7 +65,7 @@ export class AddEditUserComponent implements OnInit {
     this.userObj = {};
   }
   saveOrUpdateUser() {
-    if (this.userForm.status === AppConstant.STATUS_INVALID) {
+    if (!this.userForm.valid) {
       this.errMessage = this.commonService.getFormErrorMessage(this.userForm, this.userErrObj);
       this.bootstrapAlertService.showError(this.errMessage);
       return false;

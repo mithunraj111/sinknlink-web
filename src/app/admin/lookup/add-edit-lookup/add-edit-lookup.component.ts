@@ -93,7 +93,7 @@ export class AddEditLookupComponent implements OnInit, OnChanges {
     }, 5000);
   }
   saveOrUpdateLookup() {
-    if (this.lookupForm.status === AppConstant.STATUS_INVALID) {
+    if (!this.lookupForm.valid) {
       this.errMessage = this.commonService.getFormErrorMessage(this.lookupForm, this.lookupErrObj);
       this.bootstrapAlertService.showError(this.errMessage);
       return false;

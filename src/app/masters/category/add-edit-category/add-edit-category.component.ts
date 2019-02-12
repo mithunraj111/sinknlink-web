@@ -88,7 +88,7 @@ export class AddEditCategoryComponent implements OnInit, OnChanges {
     }
   }
   saveOrUpdateCategory() {
-    if (this.categoryForm.status === AppConstant.STATUS_INVALID) {
+    if (!this.categoryForm.valid) {
       this.errMessage = this.commonService.getFormErrorMessage(this.categoryForm, this.categoryErrObj);
       this.bootstrapAlertService.showError(this.errMessage);
       return false;
