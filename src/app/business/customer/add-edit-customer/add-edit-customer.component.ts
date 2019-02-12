@@ -37,6 +37,7 @@ export class AddEditCustomerComponent implements OnInit {
   businesstypes = [];
   deliveryMethods = [];
   locationList = [];
+  mallsList = [];
   paymentTenures = AppConstant.PAYMENT_TENURES;
   paymentStatus = AppConstant.PAYMENT_STATUS;
   customerid;
@@ -58,6 +59,9 @@ export class AddEditCustomerComponent implements OnInit {
       if (params.id !== undefined) {
         this.customerid = params.id;
         this.getCustomerDetail();
+      }
+      if (params.flag !== undefined) {
+        
       }
     });
   }
@@ -105,6 +109,7 @@ export class AddEditCustomerComponent implements OnInit {
           this.businesstypes = _.get(groupedData, 'biz_businesstype');
           this.paymentMethods = _.get(groupedData, 'biz_paymentmethods');
           this.deliveryMethods = _.get(groupedData, 'biz_deliverymethods');
+          this.mallsList = _.get(groupedData, 'biz_malls');
         }
       }
     });
@@ -143,12 +148,15 @@ export class AddEditCustomerComponent implements OnInit {
       socialids: [[]],
       taxno: [null, Validators.compose([Validators.required, Validators.maxLength(30)])],
       website: ['', Validators.compose([Validators.maxLength(200), Validators.pattern(AppConstant.REGEX.WEBSITE)])],
-      regdate: [new Date(), Validators.required],
+      regdate: [this.commonService.getCurrentDate('Y'), Validators.required],
       paymentstatus: [null, Validators.compose([Validators.required])],
       membershiptype: [null, Validators.compose([Validators.required])],
       paymenttenure: [null, Validators.compose([Validators.required])],
       status: [true, Validators.required],
-      tncagreed: [false, Validators.required]
+      tncagreed: [false, Validators.required],
+      landmark: ['', Validators.compose([Validators.maxLength(200)])],
+      inmallyn: [false],
+      mallname: ['']
     });
     this.socailIdForm = this.fb.group({
       fb: [null],
@@ -194,6 +202,10 @@ export class AddEditCustomerComponent implements OnInit {
       formdata.contactmobile = _.map(data.contactmobile, _.property('value'));
       formdata.tags = _.map(data.tags, _.property('value'));
       formdata.tncagreed = data.tncagreed ? 'Y' : 'N';
+      formdata.inmallyn = data.inmallyn ? 'Y' : 'N';
+      if (formdata.inmallyn === 'Y') {
+        formdata.mallname = formdata.mallname;
+      }
       formdata.socialids = this.socailIdForm.value;
       formdata.workhours = {
         starttime: data.starttime,
@@ -206,6 +218,8 @@ export class AddEditCustomerComponent implements OnInit {
       if (this.userstoragedata.usertype === 'D') {
         formdata.dealerid = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.DEALER).dealerid;
       }
+      formdata.locationobj = JSON.stringify(_.find(this.locationList, { locationid: formdata.locationid }));
+      formdata.businessobj = JSON.stringify(formdata);
       if (!_.isUndefined(this.customerObj) && !_.isEmpty(this.customerObj) && !_.isUndefined(this.customerObj.membershipid)) {
         formdata.status = data.status ? AppConstant.STATUS_ACTIVE : AppConstant.STATUS_INACTIVE;
         this.customerService.update(formdata, this.customerObj.membershipid).subscribe(res => {
@@ -290,6 +304,7 @@ export class AddEditCustomerComponent implements OnInit {
       };
     });
     this.customerObj.tncagreed = this.customerObj.tncagreed === 'Y' ? true : false;
+    this.customerObj.inmallyn = this.customerObj.inmallyn === 'Y' ? true : false;
     this.customerObj.status = (this.customerObj.status === AppConstant.STATUS_ACTIVE ? true : false);
     if (this.customerObj.socialids != null) {
       this.socailIdForm.patchValue(this.customerObj.socialids);

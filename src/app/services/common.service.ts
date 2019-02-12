@@ -71,7 +71,13 @@ export class CommonService {
     formatDate(dateObj: NgbDateFormat) {
         return new Date(dateObj.year, (dateObj.month - 1), dateObj.day);
     }
-
+    getCurrentDate(datepicker?) {
+        if (datepicker) {
+            return this.parseDate(new Date());
+        } else {
+            return new Date();
+        }
+    }
     globalSearch(tempFilter, event) {
         let val = '';
         if (!_.isNull(event) && !_.isUndefined(event)) {

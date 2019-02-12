@@ -36,13 +36,13 @@ export class CustomerSettingsComponent implements OnInit, OnChanges {
     this.getSettingDetails(changes.customerObj.currentValue);
   }
   getSettingDetails(customerObj) {
-    if (customerObj.userid) {
-      this.settingService.list({ userid: customerObj.userid }).subscribe(res => {
+    if (customerObj.membershipid) {
+      this.settingService.list({ membershipid: customerObj.membershipid }).subscribe(res => {
         const response = JSON.parse(res._body);
         if (response.status) {
           if (response.data != null) {
             this.settingsList = response.data;
-            let editForm = {} as any;
+            const editForm = {} as any;
             const self = this;
             _.map(this.settingsList, function (item, idx) {
               if (item.settingkey === 'Chat') {
@@ -60,7 +60,6 @@ export class CustomerSettingsComponent implements OnInit, OnChanges {
               }
               if ((idx + 1) === self.settingsList.length) {
                 self.settingForm.patchValue(editForm);
-                console.log(self.settingForm.value);
               }
             });
           }

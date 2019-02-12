@@ -73,9 +73,13 @@ const routes: Routes = [
         path: 'consumers/view/:id',
         component: ViewConsumerComponent
       },
+      {
+        path: 'branch',
+        component: AddEditCustomerComponent
+      },
     ],
   },
-]
+];
 
 @NgModule({
   imports: [

@@ -4,6 +4,7 @@ import { BusinessService, BaseService, CommonService } from '../../../../service
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
 import { AppMessages } from 'src/app/app-messages';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-customer-branches',
@@ -17,7 +18,8 @@ export class CustomerBranchesComponent extends BaseService implements OnInit, On
   @ViewChild(DatatableComponent) branchtable: DatatableComponent;
   constructor(private customerService: BusinessService.CustomerService,
     private bootstrapAlertService: BootstrapAlertService,
-    private commonService: CommonService) {
+    private commonService: CommonService,
+    private router: Router) {
     super();
   }
 
@@ -63,5 +65,8 @@ export class CustomerBranchesComponent extends BaseService implements OnInit, On
   search(event?) {
     this.branchesList = this.commonService.globalSearch(this.tempFilter, event);
     this.branchtable.offset = 0;
+  }
+  redirectToBranch(id) {
+    this.router.navigate(['/business/branch', { flag: 'bd00085branch', id: id, }]);
   }
 }

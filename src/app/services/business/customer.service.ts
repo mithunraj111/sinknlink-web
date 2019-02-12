@@ -9,10 +9,10 @@ export class CustomerService {
     constructor(private httpHandler: HttpHandlerService) {
         this.endpoint = AppConstant.API_END_POINT;
     }
-    list(data,type?): Observable<any> {
-        let url = this.endpoint + AppConstant.API_CONFIG.API_URL.BUSINESS.CUSTOMER.LIST
-        if(type){
-            url += `?type=${type}`
+    list(data, type?): Observable<any> {
+        let url = this.endpoint + AppConstant.API_CONFIG.API_URL.BUSINESS.CUSTOMER.LIST;
+        if (type) {
+            url += `?type=${type}`;
         }
         return this.httpHandler.POST(url, data);
     }

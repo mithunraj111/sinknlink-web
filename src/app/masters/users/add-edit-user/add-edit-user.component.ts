@@ -119,7 +119,7 @@ export class AddEditUserComponent implements OnInit {
         this.userForm = this.fb.group({
           fullname: [this.userObj.fullname, Validators.compose([Validators.required, Validators.minLength(1),
           Validators.maxLength(50), Validators.pattern('^[a-zA-Z ]*$')])],
-          mobileno: [ this.userObj.mobileno, Validators.compose([Validators.required,
+          mobileno: [this.userObj.mobileno, Validators.compose([Validators.required,
           Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$'), Validators.maxLength(13)])],
           rolename: [this.userObj.roleid.toString(), Validators.compose([Validators.required])],
           status: [this.userObj.status === AppConstant.STATUS_ACTIVE ? true : false, Validators.compose([Validators.required])],
@@ -132,12 +132,16 @@ export class AddEditUserComponent implements OnInit {
     this.roleService.list({ status: AppConstant.STATUS_ACTIVE }).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
-        response.data.map( item => {
-          item.value = item.roleid.toString();
-          item.label = item.rolename; 
-        })
-        this.roleList = response.data;
-      } else{
+        this.roleList = [];
+        const self = this;
+        _.each(response.data, item => {
+          if (item.rolename != 'Customer' && item.rolename != 'Dealer') {
+            item.value = item.roleid.toString();
+            item.label = item.rolename;
+            self.roleList.push(item);
+          }
+        });
+      } else {
         this.roleList = [];
       }
     });
