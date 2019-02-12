@@ -41,7 +41,6 @@ export class DealerComponent implements OnInit {
   ) {
     this.initForm();
     this.getCities();
-    this.tempFilter = this.dealerReportList;
   }
 
   ngOnInit() {
@@ -86,6 +85,7 @@ export class DealerComponent implements OnInit {
       if (response.status) {
         this.dealerReportList = response.data;
       }
+      this.tempFilter = this.dealerReportList;
 
     });
   }
