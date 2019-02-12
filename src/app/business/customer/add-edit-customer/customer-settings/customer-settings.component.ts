@@ -30,6 +30,7 @@ export class CustomerSettingsComponent implements OnInit, OnChanges {
       starttime: [null],
       endtime: [null],
       openyn: [true],
+      coupongenyn: [true]
     });
   }
   ngOnChanges(changes: SimpleChanges) {
@@ -57,6 +58,9 @@ export class CustomerSettingsComponent implements OnInit, OnChanges {
               }
               if (item.settingkey === 'Open Now') {
                 editForm.openyn = item.settingvalue === 'Y' ? true : false;
+              }
+              if (item.settingkey === 'Auto generate coupon') {
+                editForm.coupongenyn = item.settingvalue === 'Y' ? true : false;
               }
               if ((idx + 1) === self.settingsList.length) {
                 self.settingForm.patchValue(editForm);
@@ -88,6 +92,9 @@ export class CustomerSettingsComponent implements OnInit, OnChanges {
         }
         if (this.settingsList[i].settingkey === 'Open Now') {
           this.settingsList[i].settingvalue = this.settingForm.value.openyn ? 'Y' : 'N';
+        }
+        if (this.settingsList[i].settingkey === 'Auto generate coupon') {
+          this.settingsList[i].settingvalue = this.settingForm.value.coupongenyn ? 'Y' : 'N';
         }
         if (i + 1 === this.settingsList.length) {
           this.settingService.bulkupdate(this.settingsList).subscribe((res) => {
