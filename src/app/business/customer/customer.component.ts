@@ -27,13 +27,16 @@ export class CustomerComponent extends BaseService implements OnInit {
   }
 
   ngOnInit() {
+
   }
   getCustomerList() {
-    const condition = {} as any;
+    const condition = {
+      parentmembershipid: null
+    } as any;
     if (this.userstoragedata.usertype === 'D') {
       condition.dealerid = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.DEALER).dealerid;
     }
-    this.customerService.list(condition, 'getParentBiz').subscribe(res => {
+    this.customerService.list(condition).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
         this.customerList = response.data;

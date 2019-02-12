@@ -11,7 +11,7 @@ export const AppMessages = Object.freeze({
     },
     FORGOTPASSWORD: {
       mobileno: {
-        required: 'Mobile number is required',
+        required: 'Please enter mobile number',
         minlength: 'Mobile number is not valid',
         maxlength: 'Mobile number is not valid'
       }

@@ -81,7 +81,7 @@ export class AddEditUserComponent implements OnInit {
       data.updateddt = new Date();
       if (!_.isUndefined(this.userObj) && !_.isUndefined(this.userObj.userid) && !_.isEmpty(this.userObj)) {
         data.status = dataValue.status ? AppConstant.STATUS_ACTIVE : AppConstant.STATUS_INACTIVE;
-        formdata.append('formData', JSON.stringify(data));
+        formdata.append('data', JSON.stringify(data));
         this.userService.update(formdata, this.userObj.userid).subscribe(res => {
           const response = JSON.parse(res._body);
           if (response.status) {

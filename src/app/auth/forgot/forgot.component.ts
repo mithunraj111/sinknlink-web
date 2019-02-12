@@ -19,13 +19,15 @@ export class ForgotComponent implements OnInit {
   validatingUser;
 
   constructor(private commonService: CommonService,
-    private fb: FormBuilder, private router: Router, private forgotPasswordService: ForgotPasswordService) {
-    this.forgotPasswordForm = this.fb.group({
-      mobileno: [null, Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(10)])]
-    });
+    private fb: FormBuilder, private router: Router,
+    private forgotPasswordService: ForgotPasswordService) {
   }
 
   ngOnInit() {
+    this.forgotPasswordForm = this.fb.group({
+      mobileno: [null, Validators.compose([
+        Validators.required, Validators.minLength(10), Validators.maxLength(10)])]
+    });
   }
 
   sendSMS() {
@@ -36,14 +38,14 @@ export class ForgotComponent implements OnInit {
       this.forgotPasswordService.sendPassword(this.forgotPasswordForm.value).subscribe(res => {
         const response = JSON.parse(res._body);
         if (response.status) {
-          this.errMessage = "";
+          this.errMessage = '';
           this.sucMessage = response.message;
           this.validatingUser = false;
           window.setTimeout(() => {
             this.router.navigate(['/auth/login']);
           }, 2000);
         } else {
-          this.sucMessage = "";
+          this.sucMessage = '';
           this.errMessage = response.message;
           this.validatingUser = false;
         }

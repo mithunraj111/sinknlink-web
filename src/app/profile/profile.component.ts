@@ -84,7 +84,7 @@ export class ProfileComponent implements OnInit {
     formdata.updateddt = new Date();
     formdata.password = this.passwordForm.value.confirmpassword;
     const formData = new FormData();
-    formData.append('formData', JSON.stringify(formdata));
+    formData.append('data', JSON.stringify(formdata));
     this.userService.update(formData, this.userstoragedata.userid).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
@@ -160,7 +160,7 @@ export class ProfileComponent implements OnInit {
       if (this.userimgfile) {
         formData.append('profileimg', this.userimgfile);
       }
-      formData.append('formData', JSON.stringify(data));
+      formData.append('data', JSON.stringify(data));
       this.userService.update(formData, this.userstoragedata.userid).subscribe(res => {
         const response = JSON.parse(res._body);
         if (response.status) {

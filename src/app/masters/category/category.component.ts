@@ -35,7 +35,7 @@ export class CategoryComponent extends BaseService implements OnInit {
         (data.status === AppConstant.STATUS_ACTIVE ? AppConstant.STATUS_INACTIVE : AppConstant.STATUS_ACTIVE)
     };
     const formData = new FormData();
-    formData.append('formData', JSON.stringify(updateObj));
+    formData.append('data', JSON.stringify(updateObj));
     this.categoryService.update(formData, data.categoryid).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {

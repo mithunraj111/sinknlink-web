@@ -56,7 +56,7 @@ export class UsersComponent extends BaseService implements OnInit {
       updatedby: this.userstoragedata.fullname
     };
     const formData = new FormData();
-    formData.append('formData', JSON.stringify(updateObj));
+    formData.append('data', JSON.stringify(updateObj));
     this.userService.update(formData, data.userid).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
