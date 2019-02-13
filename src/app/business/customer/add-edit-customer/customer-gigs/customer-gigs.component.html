@@ -76,7 +76,8 @@
 <div class="header-block">
     <div class="table-header fixed-table-header">
         <app-card [classHeader]="true">
-            <ngx-datatable #gigstable class="table data-table expandable" [rows]='gigsList' [columnMode]="'flex'" [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false">
+            <ngx-datatable #gigstable class="table data-table expandable" [rows]='gigsList' [columnMode]="'flex'" 
+                [headerHeight]="50" [footerHeight]="50" [limit]="5" [rowHeight]="'auto'" [reorderable]="false">
                 <!-- Row Detail Template -->
                 <ngx-datatable-column prop="postname" name="Post Name" [resizeable]="false">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>

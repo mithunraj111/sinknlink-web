@@ -98,7 +98,8 @@
                                 <div class="header-block m-t-60">
                                     <div class="table-header fixed-table-header">
                                         <app-card [classHeader]="true">
-                                            <ngx-datatable #eventtable class="table data-table expandable" [rows]='consumerCouponsList' [columnMode]="'flex'" [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false">
+                                            <ngx-datatable #eventtable class="table data-table expandable" [rows]='consumerCouponsList' [columnMode]="'flex'" 
+                                                [headerHeight]="50" [footerHeight]="50" [limit]="10" [rowHeight]="'auto'" [reorderable]="false">
                                                 <ngx-datatable-column prop="bizname" name="Business Name" [resizeable]="false">
                                                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                                                         <span>{{row.coupon.business.bizname}}</span>
@@ -184,7 +185,8 @@
                                         </div>
                                         <div class="header-block">
                                             <div class="table-header fixed-table-header">
-                                                <ngx-datatable #eventtable class="table data-table expandable" [rows]='consumerFavs.business' [columnMode]="'flex'" [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false">
+                                                <ngx-datatable #eventtable class="table data-table expandable" [rows]='consumerFavs.business' [columnMode]="'flex'" 
+                                                    [headerHeight]="50" [footerHeight]="50" [limit]="5" [rowHeight]="'auto'" [reorderable]="false">
                                                     <ngx-datatable-column prop="bizname" name="Business Name" [resizeable]="false">
                                                         <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                                                             <span>{{row.business.bizname}}</span>
