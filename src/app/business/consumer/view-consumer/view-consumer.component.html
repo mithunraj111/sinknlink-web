@@ -9,8 +9,9 @@
                     </p>
                 </div>
                 <div class="col-md-6 col-sm-6 save-button text-right p-r-30">
-                    <button type="button" placement="bottom" ngbTooltip="Go back" routerLink="/business/consumers" class="btn btn-inverse btn-primary waves-effect"><i
-              class="fa fa-arrow-circle-left"></i></button>
+                    <button type="button" placement="bottom" ngbTooltip="Go back" routerLink="/business/consumers"
+                        class="btn btn-inverse btn-primary waves-effect"><i
+                            class="fa fa-arrow-circle-left"></i></button>
                 </div>
             </div>
         </div>
@@ -18,9 +19,9 @@
     <div class="employee-page pos-fixed consumer-menu">
         <div class="col-md-12 col-sm-12 text-center employee-profile m-t-25">
             <div class="form-group">
-                <label class=" mb-3">
-          <img [src]="userfile" class="img-responsive" style="width: 150px; height: 150px;" alt="employee">
-        </label>
+                <div class="avatar-image">
+                    <img [src]="userfile" class="img-responsive" style="width: 150px; height: 150px;" alt="employee">
+                </div>
             </div>
         </div>
     </div>
@@ -42,7 +43,8 @@
                                         <div class="row p-t-10 p-b-5">
                                             <label class="col-md-3 col-sm-6 col-form-label text-right">Location</label>
                                             <div class="col-md-6 col-sm-6 m-t-5">
-                                                <span class="f-15">{{consumer.location?.area + consumer.location?.pincode || '-'}}</span>
+                                                <span
+                                                    class="f-15">{{consumer.location?.area + consumer.location?.pincode || '-'}}</span>
                                             </div>
                                         </div>
                                         <div class="row p-t-10 p-b-5">
@@ -64,27 +66,34 @@
                                             </div>
                                         </div>
                                         <div class="row p-t-10 p-b-5">
-                                            <label class="col-md-3 col-sm-6 col-form-label text-right">Social Ids</label>
+                                            <label class="col-md-3 col-sm-6 col-form-label text-right">Social
+                                                Ids</label>
                                             <div class="col-md-6 col-sm-6 m-t-5">
-                                                <span class="f-15">Facebook id<br />Twitter id<br />Google id<br />Instagram id</span>
+                                                <span class="f-15">Facebook id<br />Twitter id<br />Google
+                                                    id<br />Instagram id</span>
                                             </div>
                                         </div>
                                         <div class="row p-t-10 p-b-5">
-                                            <label class="col-md-3 col-sm-6 col-form-label text-right">Linked Membership Id</label>
+                                            <label class="col-md-3 col-sm-6 col-form-label text-right">Linked Membership
+                                                Id</label>
                                             <div class="col-md-6 col-sm-6 m-t-5">
                                                 <span class="f-15">{{consumer?.membershipid || '-'}}</span>
                                             </div>
                                         </div>
                                         <div class="row p-t-10 p-b-5">
-                                            <label class="col-md-3 col-sm-6 col-form-label text-right">Signup date</label>
+                                            <label class="col-md-3 col-sm-6 col-form-label text-right">Signup
+                                                date</label>
                                             <div class="col-md-6 col-sm-6 m-t-5">
-                                                <span class="f-15">{{consumer?.createddt|date:date_displayformat}}</span>
+                                                <span
+                                                    class="f-15">{{consumer?.createddt|date:date_displayformat}}</span>
                                             </div>
                                         </div>
                                         <div class="row p-t-10 p-b-5">
-                                            <label class="col-md-3 col-sm-6 col-form-label text-right">Last login date</label>
+                                            <label class="col-md-3 col-sm-6 col-form-label text-right">Last login
+                                                date</label>
                                             <div class="col-md-6 col-sm-6 m-t-5">
-                                                <span class="f-15">{{consumer?.user?.lastlogin|date:date_displayformat}}</span>
+                                                <span
+                                                    class="f-15">{{consumer?.user?.lastlogin|date:date_displayformat}}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -98,31 +107,46 @@
                                 <div class="header-block m-t-60">
                                     <div class="table-header fixed-table-header">
                                         <app-card [classHeader]="true">
-                                            <ngx-datatable #eventtable class="table data-table expandable" [rows]='consumerCouponsList' [columnMode]="'flex'" 
-                                                [headerHeight]="50" [footerHeight]="50" [limit]="10" [rowHeight]="'auto'" [reorderable]="false" [messages]="emptymessages">
-                                                <ngx-datatable-column prop="bizname" name="Business Name" [resizeable]="false">
-                                                    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                                            <ngx-datatable #eventtable class="table data-table expandable"
+                                                [rows]='consumerCouponsList' [columnMode]="'flex'" [headerHeight]="50"
+                                                [footerHeight]="50" [limit]="10" [rowHeight]="'auto'"
+                                                [reorderable]="false" [messages]="emptymessages">
+                                                <ngx-datatable-column prop="bizname" name="Business Name"
+                                                    [resizeable]="false">
+                                                    <ng-template let-rowIndex="rowIndex" let-row="row"
+                                                        ngx-datatable-cell-template>
                                                         <span>{{row.coupon.business.bizname}}</span>
                                                     </ng-template>
                                                 </ngx-datatable-column>
-                                                <ngx-datatable-column prop="couponcode" name="Date" name="Coupon Code" [resizeable]="false" headerClass="text-center" [cellClass]="'text-center'">
-                                                    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                                                <ngx-datatable-column prop="couponcode" name="Date" name="Coupon Code"
+                                                    [resizeable]="false" headerClass="text-center"
+                                                    [cellClass]="'text-center'">
+                                                    <ng-template let-rowIndex="rowIndex" let-row="row"
+                                                        ngx-datatable-cell-template>
                                                         <span>{{row.coupon.couponcode}}</span>
                                                     </ng-template>
                                                 </ngx-datatable-column>
-                                                <ngx-datatable-column prop="shortdesc" name="Description" [resizeable]="false">
-                                                    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                                                <ngx-datatable-column prop="shortdesc" name="Description"
+                                                    [resizeable]="false">
+                                                    <ng-template let-rowIndex="rowIndex" let-row="row"
+                                                        ngx-datatable-cell-template>
                                                         <span>{{row.coupon.shortdesc}}</span>
                                                     </ng-template>
                                                 </ngx-datatable-column>
-                                                <ngx-datatable-column prop="claimedon" name="Claimed On" [resizeable]="false">
-                                                    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                                                        <span class="updatedate"> {{row.updateddt|date:datedisplayformat}}</span>
+                                                <ngx-datatable-column prop="claimedon" name="Claimed On"
+                                                    [resizeable]="false">
+                                                    <ng-template let-rowIndex="rowIndex" let-row="row"
+                                                        ngx-datatable-cell-template>
+                                                        <span class="updatedate">
+                                                            {{row.updateddt|date:datedisplayformat}}</span>
                                                     </ng-template>
                                                 </ngx-datatable-column>
-                                                <ngx-datatable-column prop="expirydt" name="Expiry Date" [resizeable]="false">
-                                                    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                                                        <span class="updatedate"> {{row.coupon.expirydt|date:datedisplayformat}}</span>
+                                                <ngx-datatable-column prop="expirydt" name="Expiry Date"
+                                                    [resizeable]="false">
+                                                    <ng-template let-rowIndex="rowIndex" let-row="row"
+                                                        ngx-datatable-cell-template>
+                                                        <span class="updatedate">
+                                                            {{row.coupon.expirydt|date:datedisplayformat}}</span>
                                                     </ng-template>
                                                 </ngx-datatable-column>
                                             </ngx-datatable>
@@ -152,7 +176,8 @@
                                                 <div class="col-sm-12 col-md-4">
                                                     <div class="row">
                                                         <div *ngFor="let biz of reviewedBiz" class="col-sm-12">
-                                                            <div class="card p-10 m-b-10" (click)="showReviewFor(biz.membershipid)">
+                                                            <div class="card p-10 m-b-10"
+                                                                (click)="showReviewFor(biz.membershipid)">
                                                                 <h5 class="m-0">{{biz.bizname}}</h5>
                                                             </div>
                                                         </div>
@@ -160,10 +185,14 @@
                                                 </div>
                                                 <div class="col-sm-12 col-md-8">
                                                     <div class="card p-10 m-b-10">
-                                                        <h6><b>{{bizReview?.consumer?.fullname}},  </b> <span>( {{bizReview?.updateddt |date:displaydtimeformat}} )</span> </h6>
+                                                        <h6><b>{{bizReview?.consumer?.fullname}}, </b> <span>(
+                                                                {{bizReview?.updateddt |date:displaydtimeformat}}
+                                                                )</span> </h6>
                                                         <h5 class="m-t-5 m-l-0">{{bizReview?.comments}}</h5>
                                                         <div *ngIf="bizReview.reply !== null" class="card m-2 p-3">
-                                                            <h6><b>Replied On : </b> <span>( {{bizReview?.reply?.updateddt |date:displaydtimeformat}} )</span> </h6>
+                                                            <h6><b>Replied On : </b> <span>(
+                                                                    {{bizReview?.reply?.updateddt |date:displaydtimeformat}}
+                                                                    )</span> </h6>
                                                             <h5 class="m-t-5 m-l-0">{{bizReview?.reply?.comments}}</h5>
                                                         </div>
                                                     </div>
@@ -185,25 +214,36 @@
                                         </div>
                                         <div class="header-block">
                                             <div class="table-header fixed-table-header">
-                                                <ngx-datatable #eventtable class="table data-table expandable" [rows]='consumerFavs.business' [columnMode]="'flex'" 
-                                                    [headerHeight]="50" [footerHeight]="50" [limit]="5" [rowHeight]="'auto'" [reorderable]="false" [messages]="nodata">
-                                                    <ngx-datatable-column prop="bizname" name="Business Name" [resizeable]="false">
-                                                        <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                                                <ngx-datatable #eventtable class="table data-table expandable"
+                                                    [rows]='consumerFavs.business' [columnMode]="'flex'"
+                                                    [headerHeight]="50" [footerHeight]="50" [limit]="5"
+                                                    [rowHeight]="'auto'" [reorderable]="false" [messages]="nodata">
+                                                    <ngx-datatable-column prop="bizname" name="Business Name"
+                                                        [resizeable]="false">
+                                                        <ng-template let-rowIndex="rowIndex" let-row="row"
+                                                            ngx-datatable-cell-template>
                                                             <span>{{row.business.bizname}}</span>
                                                         </ng-template>
                                                     </ngx-datatable-column>
-                                                    <ngx-datatable-column prop="biztype" name="Date" name="Business Type" [resizeable]="false" headerClass="text-center" [cellClass]="'text-center'">
-                                                        <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                                                    <ngx-datatable-column prop="biztype" name="Date"
+                                                        name="Business Type" [resizeable]="false"
+                                                        headerClass="text-center" [cellClass]="'text-center'">
+                                                        <ng-template let-rowIndex="rowIndex" let-row="row"
+                                                            ngx-datatable-cell-template>
                                                             <span>{{row.business.biztype}}</span>
                                                         </ng-template>
                                                     </ngx-datatable-column>
-                                                    <ngx-datatable-column prop="postaladdress" name="Postal Address" [resizeable]="false">
-                                                        <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                                                    <ngx-datatable-column prop="postaladdress" name="Postal Address"
+                                                        [resizeable]="false">
+                                                        <ng-template let-rowIndex="rowIndex" let-row="row"
+                                                            ngx-datatable-cell-template>
                                                             <span>{{row.business.postaladdress}}</span>
                                                         </ng-template>
                                                     </ngx-datatable-column>
-                                                    <ngx-datatable-column prop="inmallyn" name="In Mall" [resizeable]="false">
-                                                        <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                                                    <ngx-datatable-column prop="inmallyn" name="In Mall"
+                                                        [resizeable]="false">
+                                                        <ng-template let-rowIndex="rowIndex" let-row="row"
+                                                            ngx-datatable-cell-template>
                                                             <span>{{row.business.inmallyn}}</span>
                                                         </ng-template>
                                                     </ngx-datatable-column>
@@ -219,7 +259,8 @@
                                         </div>
                                         <div>
                                             <div *ngIf="consumerFavs.category.length > 0" class="row">
-                                                <div *ngFor="let cat of consumerFavs.category" class="col-md-12 col-sm-6 col-md-3 card">
+                                                <div *ngFor="let cat of consumerFavs.category"
+                                                    class="col-md-12 col-sm-6 col-md-3 card">
                                                     {{cat.category.categoryname}}
                                                 </div>
                                             </div>
@@ -237,7 +278,8 @@
                                         </div>
                                         <div>
                                             <div *ngIf="consumerFavs.location.length > 0" class="row">
-                                                <div *ngFor="let loc of consumerFavs.location" class="col-md-12 col-sm-6 col-md-3 card">
+                                                <div *ngFor="let loc of consumerFavs.location"
+                                                    class="col-md-12 col-sm-6 col-md-3 card">
                                                     {{loc.location.area}}
                                                 </div>
                                             </div>

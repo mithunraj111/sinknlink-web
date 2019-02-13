@@ -1,24 +1,25 @@
 <div class="fixedheader">
     <div class="header-title pos-fixed">
         <div class="row">
-            <div class="col-md-5 col-sm-5">
+            <div class="col-md-8 col-sm-7">
                 <h2>Users</h2>
                 <p>Create or Update the user logins</p>
             </div>
-            <div class="col-md-6 col-sm-6">
+            <div class="col-md-3 col-sm-4">
                 <div class="text-right">
-                    <label>Search:
-                        <input #userSearch type="text" class="header-search form-control input-sm full-data-search"
-                            placeholder="Search for here" (keyup)='search($event)' placement="bottom"
-                            ngbTooltip="Type here to search">
-                        <button type="button" class="btn search-close" (click)="userSearch.value='';search();"><i
-                                class="fa fa-close"></i></button>
-                    </label>
+                    <label class="col-md-3 col-sm-3 p-l-0"><b>Search:</b></label>
+                    <input #userSearch type="text"
+                        class="header-search form-control col-md-8 col-sm-8 p-l-0 p-r-0 input-sm full-data-search"
+                        placeholder="Search for here" (keyup)='search($event)' placement="bottom"
+                        ngbTooltip="Type here to search">
+                    <button type="button" class="btn search-close col-md-1 col-sm-1 p-l-0 p-r-0"
+                        (click)="userSearch.value='';search();"><i class="fa fa-close"></i></button>
                 </div>
             </div>
             <div class="col-md-1 col-sm-1 p-r-0">
                 <button *ngIf="add" type="button" placement="bottom" ngbTooltip="Click to add user"
-                    class="add-btn btn btn-primary waves-effect" (click)='addUser()'><i class="fa fa-plus-circle m-r-5"></i> New
+                    class="add-btn btn btn-primary waves-effect" (click)='addUser()'><i
+                        class="fa fa-plus-circle m-r-5"></i> New
                 </button>
             </div>
         </div>
@@ -29,7 +30,7 @@
         <app-card [classHeader]="true">
             <ngx-datatable #usertable class="table data-table expandable" [rows]='userList' [columnMode]="'flex'"
                 [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false" [footerHeight]="50" [limit]="10"
-                [messages]= "emptymessages">
+                [messages]="emptymessages">
                 <!-- Row Detail Template -->
                 <ngx-datatable-column prop="fullname" name="User Name" [resizeable]="false">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>

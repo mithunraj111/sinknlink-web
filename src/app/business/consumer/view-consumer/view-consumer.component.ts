@@ -58,7 +58,7 @@ export class ViewConsumerComponent implements OnInit {
       if (this.consumer.profileimg != null) {
         this.userfile = this.fileUrl + '/' + this.consumer.profileimg.docurl;
       } else {
-        this.userfile = 'assets/images/avatar-blank.jpg';
+        this.userfile = 'assets/images/avatar-blank.png';
       }
     }, err => {
       console.log(err);
