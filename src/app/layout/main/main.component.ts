@@ -120,6 +120,8 @@ export class MainComponent implements OnInit {
   public subItemBorder: boolean;
   public itemBorder: boolean;
 
+  private availScreens:any = [];
+
   public config: any;
   userstoragedata = {} as any;
   fileUrl = AppConstant.IMG_BASE_URL;
@@ -175,7 +177,6 @@ export class MainComponent implements OnInit {
 
     this.setMenuAttributes(this.windowWidth);
     this.setHeaderAttributes(this.windowWidth);
-    this.menuItems.getAll();
 
     this.userstoragedata = this.lstorageService.getItem(AppConstant.LOCALSTORAGE.USER);
     if (this.userstoragedata.profileimg != null) {
@@ -202,6 +203,8 @@ export class MainComponent implements OnInit {
 
   ngOnInit() {
     this.setBackgroundPattern('pattern1');
+
+    this.availScreens = this.menuItems.formMenu(this.lstorageService.getItem(AppConstant.LOCALSTORAGE.SCREENS));
 
     /*document.querySelector('body').classList.remove('dark');*/
   }

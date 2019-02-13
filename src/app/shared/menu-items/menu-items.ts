@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { BaseService } from 'src/app/services';
 import * as _ from 'lodash';
 const MENUITEMS = [
   {
@@ -133,48 +132,42 @@ const MENUITEMS = [
 ];
 
 @Injectable()
-export class MenuItems extends BaseService {
+export class MenuItems {
   menuItems = [] as any;
   constructor() {
-    super();
-    this.formMenu();
   }
-  formMenu() {
+  formMenu(availScreens) {
     this.menuItems = [];
-    const groupedMenus = _.groupBy(this.appscreens, 'prntscreencode');
-    this.menuItems = [];
+    const groupedMenus = _.groupBy(availScreens, 'prntscreencode');
     const self = this;
-    const len = MENUITEMS.length;
-    if (this.appscreens != undefined && this.appscreens.length != 0) {
-      _.map(MENUITEMS, function (item: any, idx: number) {
-        if (_.has(groupedMenus, item.code)) {
-          const data = _.get(groupedMenus, item.code);
-          if (!_.isUndefined(data) && _.isUndefined(item.children)) {
+    const len = MENUITEMS.length; 
+      for(let i =0;i<MENUITEMS.length;i++){
+        var item = MENUITEMS[i];
+          if (_.has(groupedMenus, item.code)) {
+          let data:any = _.get(groupedMenus, item.code);
+          if (!_.isUndefined(data) && _.isUndefined(item.children) && !_.isUndefined(data.assignedpermissions) && data.assignedpermissions.length > 0) {
             self.menuItems.push(item);
           } else if (!_.isUndefined(data) && !_.isUndefined(item.children)) {
             let app_child = item.children;
-            item.children = [];
+            let locChildren = [];
             _.map(data, function (actual) {
               let hasdata = {} as any;
               hasdata = _.find(app_child, { code: actual.screencode });
               if (actual.assignedpermissions != undefined) {
                 if (hasdata != undefined && actual.assignedpermissions.length > 0) {
-                  item.children.push(hasdata);
+                  locChildren.push(hasdata);
                 }
               }
             });
-            if (item.children.length > 0) {
+            if (locChildren.length > 0) {
+              item.children = locChildren;
               self.menuItems.push(item);
             }
           }
         }
-        if (len === idx + 1) {
-          // console.log(self.menuItems);
+        if (len === (i + 1)) {
+          return self.menuItems
         }
-      });
-    }
-  }
-  getAll() {
-    return this.menuItems;
+      }
   }
 }

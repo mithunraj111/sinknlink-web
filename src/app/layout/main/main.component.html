@@ -69,7 +69,7 @@
                                 <div class="pcoded-navigation-label" [attr.menu-title-theme]="menuTitleTheme"></div>
                                 <ul class="pcoded-item pcoded-left-item" [attr.item-border]="itemBorder"
                                     [attr.item-border-style]="itemBorderStyle" [attr.subitem-border]="subItemBorder"
-                                    *ngFor="let asideItem of menuItems.getAll()" appAccordionLink
+                                    *ngFor="let asideItem of availScreens" appAccordionLink
                                     group="{{asideItem.state}}">
                                     <li [routerLinkActive]="['active']" *ngIf="asideItem.type === 'external'"
                                         appAccordionLink group="{{asideItem.state}}">
