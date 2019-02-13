@@ -242,5 +242,38 @@ export const AppConstant = Object.freeze({
   REGEX: {
     WEBSITE: '((?:https?\:\/\/|www\.)(?:[-a-z0-9]+\.)*[-a-z0-9]+.*)',
     EMAIL: '([a-z0-9&_\.-]*[@][a-z0-9]+((\.[a-z]{2,3})?\.[a-z]{2,3}))',
+  },
+
+  //Do not change this variables//
+
+  EMPTY_MESSAGES: {
+    USER: { emptyMessage: 'No user data to display' },
+    ROLES: { emptyMessage: 'No role data to display' },
+    ADDROLES: { emptyMessage: 'No screen permissions to display' },
+    CATEGORIES: { emptyMessage: 'No category data to display' },
+    LOCATION: { emptyMessage: 'No location data to display' },
+    CUSTOMERS: { emptyMessage: 'No customer data to display' },
+    PAYMENT: { emptyMessage: 'No history data to display' },
+    BRANCHES: { emptyMessage: 'No branch data to display' },
+    GIGS: { emptyMessage: 'No gigs data to display' },
+    COUPONS: { emptyMessage: 'No coupon data to display' },
+    CONSUMERS: { emptyMessage: 'No consumer data to display' },
+    CONSUMERCOUPONS: { emptyMessage: 'No coupon data to display' },
+    FAVOURITES: { emptyMessage: 'No favourite data to display' },
+    DEALER: { emptyMessage: 'No dealer data to display' },
+    DEALER_CUSTOMER: { emptyMessage: 'No customer data to display' },
+    EVENTS: { emptyMessage: 'No event data to display' },
+    DONATIONS: { emptyMessage: 'No donation data to display' },
+    LOOKUP: { emptyMessage: 'No lookup data to display' },
+    VIPNUMBER: { emptyMessage: 'No vip number registration data to display' },
+    AREA: { emptyMessage: 'No area report data to display' },
+    CATEGORY: { emptyMessage: 'No category report data to display' },
+    CUSTOMERREPORT: { emptyMessage: 'No customer data report to display' },
+    CONSUMER: { emptyMessage: 'No consumer report data to display' },
+    DEALERREPORT: { emptyMessage: 'No dealer report data to display' },
+    PAYMENTREPORT: { emptyMessage: 'No payment report data to display' }
+
+
   }
+
 });

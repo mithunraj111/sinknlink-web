@@ -24,11 +24,11 @@ export class PaymentComponent implements OnInit {
   displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   displaydateformat = AppConstant.API_CONFIG.ANG_DATE.displaydate;
   @ViewChild(DatatableComponent) table: DatatableComponent;
-
+  emptymessages = AppConstant.EMPTY_MESSAGES.PAYMENTREPORT;
   paymentList = [];
   paymentTypes = [
-    { label:'Online', value: 'Online' },
-    { label:'Offline', value: 'Offline' }
+    { label: 'Online', value: 'Online' },
+    { label: 'Offline', value: 'Offline' }
   ];
   paymentModes = [];
   reportfiller = {};
@@ -59,7 +59,7 @@ export class PaymentComponent implements OnInit {
     console.log(this.paymentForm);
   }
 
-  getPaymentModes(){
+  getPaymentModes() {
     this.lookupService.list({ refkey: AppConstant.LOOKUP[3].value, status: AppConstant.STATUS_ACTIVE }).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
@@ -69,11 +69,11 @@ export class PaymentComponent implements OnInit {
         });
         this.paymentModes = response.data;
         console.log(this.paymentModes);
-        }
+      }
     });
   }
 
-  getPaymentList(){
+  getPaymentList() {
     console.log(this.paymentForm.value);
     const data = this.paymentForm.value;
     const todt = this.commonService.formatDate(data.todate);
@@ -85,18 +85,18 @@ export class PaymentComponent implements OnInit {
       return false;
     }
     let formData = {
-      fromdate : fromdt,
-      todate : todt,
-    }as any;
-    if ( paymentmode != "" && paymentmode != undefined && paymentmode != null ){
+      fromdate: fromdt,
+      todate: todt,
+    } as any;
+    if (paymentmode != "" && paymentmode != undefined && paymentmode != null) {
       formData.paymentmode = paymentmode;
     }
-    if ( paymenttype != "" && paymenttype != undefined && paymenttype != null ){
+    if (paymenttype != "" && paymenttype != undefined && paymenttype != null) {
       formData.paymenttype = [paymenttype];
     }
-    this.reportService.paymentReport(formData).subscribe(res =>{
+    this.reportService.paymentReport(formData).subscribe(res => {
       const response = JSON.parse(res._body);
-      if(response.status){
+      if (response.status) {
         this.paymentList = response.data;
       }
     });

@@ -17,7 +17,7 @@
     <div class="table-header fixed-table-header">
         <app-card [classHeader]="true">
             <ngx-datatable #customerdltable class="table data-table expandable" [rows]='dealerCustomers' [columnMode]="'flex'" 
-                [headerHeight]="50" [footerHeight]="50" [limit]="10" [rowHeight]="'auto'" [reorderable]="false">
+                [headerHeight]="50" [footerHeight]="50" [limit]="10" [rowHeight]="'auto'" [reorderable]="false" [messages]="emptymessages">
                 <!-- Row Detail Template -->
                 <ngx-datatable-column prop="bizname" name="Business Name" [resizeable]="false">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>

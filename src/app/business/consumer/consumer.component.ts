@@ -14,6 +14,8 @@ export class ConsumerComponent extends BaseService implements OnInit {
   consumersList: any[] = [];
   tempFilter = [];
   @ViewChild(DatatableComponent) table: DatatableComponent;
+  emptymessages = AppConstant.EMPTY_MESSAGES.CONSUMERS;
+
   displaydtimeformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   constructor(private router: Router,
     private commonService: CommonService,

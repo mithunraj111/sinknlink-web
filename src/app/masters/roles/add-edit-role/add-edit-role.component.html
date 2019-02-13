@@ -28,8 +28,7 @@
                 <div class="form-group required row">
                     <label class="col-sm-3 p-l-0 p-r-0 col-form-label"><b>Data Access</b></label>
                     <div class="col-sm-9 p-l-0 p-r-0">
-                        <select class="form-control" name="dataaccess"
-                            [(ngModel)]="dataaccess">
+                        <select class="form-control" name="dataaccess" [(ngModel)]="dataaccess">
                             <option value="">Select Data Access</option>
                             <option value="All">All</option>
                             <option value="Own">Own</option>
@@ -54,7 +53,8 @@
     <div class="table-header fixed-table">
         <app-card [classHeader]="true">
             <ngx-datatable #addroletable class="table data-table expandable" [rows]='screensList' [columnMode]="'flex'"
-                [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false" [footerHeight]="50" [limit]="10">
+                [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false" [footerHeight]="50" [limit]="10"
+                [messages]="emptymessages">
                 <ngx-datatable-column prop="screenname" name="Screen Name" [resizeable]="false">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                         <span>{{row.screenname}}</span>

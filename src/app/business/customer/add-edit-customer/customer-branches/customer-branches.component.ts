@@ -15,6 +15,8 @@ export class CustomerBranchesComponent extends BaseService implements OnInit, On
   tempFilter = [];
   @Input() customerObj = {} as any;
   datedisplayformat = AppConstant.API_CONFIG.ANG_DATE.displaydate;
+  emptymessages = AppConstant.EMPTY_MESSAGES.BRANCHES;
+
   @ViewChild(DatatableComponent) branchtable: DatatableComponent;
   constructor(private customerService: BusinessService.CustomerService,
     private bootstrapAlertService: BootstrapAlertService,

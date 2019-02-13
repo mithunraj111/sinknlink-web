@@ -28,15 +28,16 @@
     <div class="table-header fixed-table">
         <app-card [classHeader]="true">
             <ngx-datatable #usertable class="table data-table expandable" [rows]='userList' [columnMode]="'flex'"
-                [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false" [footerHeight]="50" [limit]="10">
+                [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false" [footerHeight]="50" [limit]="10"
+                [messages]= "emptymessages">
                 <!-- Row Detail Template -->
                 <ngx-datatable-column prop="fullname" name="User Name" [resizeable]="false">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                         <span>{{row.fullname}}</span>
                     </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column prop="mobileno" name="Mobile No" [resizeable]="false" [cellClass]="'text-right table-padding'"
-                headerClass="text-right" >
+                <ngx-datatable-column prop="mobileno" name="Mobile No" [resizeable]="false"
+                    [cellClass]="'text-right table-padding'" headerClass="text-right">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                         <span>{{row.mobileno}}</span>
                     </ng-template>

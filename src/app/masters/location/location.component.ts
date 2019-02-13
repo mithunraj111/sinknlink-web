@@ -17,6 +17,8 @@ export class LocationComponent extends BaseService implements OnInit {
   @ViewChild(DatatableComponent) table: DatatableComponent;
   tempFilter = [];
   locationList = [];
+  emptymessages = AppConstant.EMPTY_MESSAGES.LOCATION;
+
   displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   constructor(private locationService: MasterService.LocationService,
     private bootstrapAlertService: BootstrapAlertService, private commonService: CommonService,

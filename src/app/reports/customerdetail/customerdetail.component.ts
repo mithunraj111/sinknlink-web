@@ -28,6 +28,7 @@ export class CustomerdetailComponent implements OnInit {
   public configOpenTopBar: any = 'open';
   @ViewChild(DatatableComponent) table: DatatableComponent;
   displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydate;
+  emptymessages= AppConstant.EMPTY_MESSAGES.CUSTOMERREPORT;
 
   tempFilter = [];
 

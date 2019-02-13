@@ -28,6 +28,8 @@ export class AddEditRoleComponent implements OnInit {
   roleErrObj = AppMessages.VALIDATION.ROLES;
   disableButton = false;
   permissionModal = false;
+  emptymessages = AppConstant.EMPTY_MESSAGES.ADDROLES;
+
   constructor(
     private route: ActivatedRoute,
     private bootstrapAlertService: BootstrapAlertService,
@@ -37,6 +39,8 @@ export class AddEditRoleComponent implements OnInit {
     private router: Router
   ) {
     this.userstoragedata = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER);
+    this.emptymessages = AppConstant.EMPTY_MESSAGES.ADDROLES;
+
     this.route.params.subscribe(params => {
       if (params.id !== undefined) {
         this.roleid = params.id;

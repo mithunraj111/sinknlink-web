@@ -17,6 +17,8 @@ export class CustomerComponent extends BaseService implements OnInit {
   customerList = [];
   @ViewChild(DatatableComponent) table: DatatableComponent;
   displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
+  emptymessages= AppConstant.EMPTY_MESSAGES.CUSTOMERS;
+
   constructor(private router: Router,
     private commonService: CommonService,
     private customerService: BusinessService.CustomerService,

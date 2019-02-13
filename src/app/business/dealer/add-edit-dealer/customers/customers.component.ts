@@ -12,6 +12,8 @@ export class DealerCustomersComponent implements OnChanges, OnInit {
   @ViewChild(DatatableComponent) customertable: DatatableComponent;
   @Input() dealerid = {} as any;
   datedisplayformat = AppConstant.API_CONFIG.ANG_DATE.displaydate;
+  emptymessages= AppConstant.EMPTY_MESSAGES.DEALER_CUSTOMER;
+
   constructor(private customerService: CustomerService) {
 
 

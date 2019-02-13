@@ -97,7 +97,7 @@
             </div>
             <ngx-datatable #dealertable class="table data-table expandable" [rows]='dealerReportList'
               [columnMode]="'flex'" [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false" [footerHeight]="50"
-              [limit]="5">
+              [limit]="5" [messages]="emptymesages">
               <!-- Row Detail Template -->
               <ngx-datatable-column prop="date" name="Date" [resizeable]="false" headerClass="text-left"
                 [cellClass]="'text-left'">

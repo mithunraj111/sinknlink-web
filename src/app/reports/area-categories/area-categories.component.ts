@@ -24,6 +24,8 @@ export class AreaCategoriesComponent implements OnInit {
   areaList = [];
   categoriesList = [];
   categorytempFilter = [];
+  emptymesages = AppConstant.EMPTY_MESSAGES.AREA;
+  nodata = AppConstant.EMPTY_MESSAGES.CATEGORY;
   constructor(private bootstrapAlertService: BootstrapAlertService,
     private commonService: CommonService, private fb: FormBuilder,
     private reportService: AppCommonService.ReportService) {

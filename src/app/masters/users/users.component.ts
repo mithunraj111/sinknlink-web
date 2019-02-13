@@ -15,6 +15,8 @@ export class UsersComponent extends BaseService implements OnInit {
   tempFilter = [];
   userList = [];
   @ViewChild(DatatableComponent) table: DatatableComponent;
+  emptymessages = AppConstant.EMPTY_MESSAGES.USER;
+
   constructor(private router: Router, private userService: MasterService.UserService,
     private bootstrapAlertService: BootstrapAlertService,
     private commonService: CommonService,

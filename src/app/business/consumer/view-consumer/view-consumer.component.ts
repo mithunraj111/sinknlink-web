@@ -16,13 +16,14 @@ export class ViewConsumerComponent implements OnInit {
   date: any;
   userfile: any;
   fileUrl = AppConstant.IMG_BASE_URL;
-
+  emptymessages = AppConstant.EMPTY_MESSAGES.CONSUMERCOUPONS;
+  nodata = AppConstant.EMPTY_MESSAGES.FAVOURITES;
   // For Consumer Details.
   consumer: any = {};
 
   // For Consumer Coupons
   consumerCouponsList: any[] = [];
-  
+
   // For Consumer Coupon Favs
   consumerFavs: any = {
     business: [],
@@ -33,8 +34,8 @@ export class ViewConsumerComponent implements OnInit {
   // For Reviews
   reviewedBiz: any = [];
   reviews: any = {};
-  selectedReview:number;
-  bizReview:any = [];
+  selectedReview: number;
+  bizReview: any = [];
 
   constructor(private route: ActivatedRoute, private consumerService: ConsumerService) {
     this.date = new Date();
@@ -59,7 +60,7 @@ export class ViewConsumerComponent implements OnInit {
       } else {
         this.userfile = 'assets/images/avatar-blank.jpg';
       }
-  }, err => {
+    }, err => {
       console.log(err);
     })
   }
@@ -103,8 +104,8 @@ export class ViewConsumerComponent implements OnInit {
     })
   }
 
-  showReviewFor(id){
-    this.bizReview = this.reviews[id].sort(function(a, b){return a.reviewid - b.reviewid})[0];
+  showReviewFor(id) {
+    this.bizReview = this.reviews[id].sort(function (a, b) { return a.reviewid - b.reviewid })[0];
     console.log(this.bizReview);
   }
 

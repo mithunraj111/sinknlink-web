@@ -21,6 +21,7 @@ export class CustomerGigsComponent implements OnInit, OnChanges {
   gigErrObj = AppMessages.VALIDATION.GIG;
   gigObj = {} as any;
   posttypes = AppConstant.POST_TYPES;
+  emptymessages = AppConstant.EMPTY_MESSAGES.GIGS;
   constructor(private bootstrapAlertService: BootstrapAlertService,
     private commonService: CommonService,
     private gigsService: BusinessService.GigsService,
@@ -121,7 +122,6 @@ export class CustomerGigsComponent implements OnInit, OnChanges {
             const response = JSON.parse(res._body);
             if (response.status) {
               this.bootstrapAlertService.showSucccess(response.message);
-              this.gigsList = [response.data, ...this.gigsList];
               this.initGigForm();
             } else {
               this.bootstrapAlertService.showError(response.message);

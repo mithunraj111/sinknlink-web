@@ -15,6 +15,7 @@ export class RolesComponent extends BaseService implements OnInit {
   rolesList = [];
   tempFilter = [];
   @ViewChild(DatatableComponent) table: DatatableComponent;
+  emptymessages = AppConstant.EMPTY_MESSAGES.ROLES;
   displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   constructor(private router: Router,
     private roleService: MasterService.RoleService,
@@ -22,6 +23,7 @@ export class RolesComponent extends BaseService implements OnInit {
     private commonService: CommonService) {
     super();
     this.getScreenDetails('m_roles');
+    this.emptymessages = AppConstant.EMPTY_MESSAGES.ROLES;
   }
 
   ngOnInit() {

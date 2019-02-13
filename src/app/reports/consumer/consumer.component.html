@@ -94,7 +94,7 @@
               </div>
             </div>
             <ngx-datatable #consumertable class="table data-table expandable" [rows]='consumerList' [columnMode]="'flex'"
-              [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false" [footerHeight]="50" [limit]="5">
+              [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false" [footerHeight]="50" [limit]="5" [messages]="emptymessages">
 
               <ngx-datatable-column prop="date" name="Date" [resizeable]="false" headerClass="text-left"
                 [cellClass]="'text-left'">

@@ -119,8 +119,8 @@
               </div>
             </div>
             <ngx-datatable #businesstable class="table customer-report data-table expandable" [rows]='businessList'
-              [columnMode]="'flex'" [headerHeight]="40" [footerHeight]="50" [rowHeight]="40" [scrollbarV]="true"
-              [scrollbarH]="true" [limit]="5">
+              [columnMode]="'flex'" [headerHeight]="40" [footerHeight]="50" [rowHeight]="40" [scrollbarH]="true"
+              [limit]="5" [messages]="emptymessages">
 
               <ngx-datatable-column prop="bizname" name="Biz Name" [resizeable]="false">
                 <ng-template let-rowIndex="rowIndex" let-expanded="expanded" let-row="row" ngx-datatable-cell-template>

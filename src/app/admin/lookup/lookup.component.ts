@@ -13,6 +13,8 @@ import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
 export class LookupComponent extends BaseService implements OnInit {
   displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   @ViewChild(DatatableComponent) table: DatatableComponent;
+  emptymessages = AppConstant.EMPTY_MESSAGES.LOOKUP;
+
   @Output() lookupObj = {} as any;
   lookupList = [];
   tempFilter = [];
@@ -20,8 +22,8 @@ export class LookupComponent extends BaseService implements OnInit {
   keylist = AppConstant.LOOKUP;
   constructor(private lookupService: AdminService.LookupService,
     private bootstrapAlertService: BootstrapAlertService) {
-      super();
-      this.getScreenDetails('a_lookup');
+    super();
+    this.getScreenDetails('a_lookup');
   }
 
   ngOnInit() {

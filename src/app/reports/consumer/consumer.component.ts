@@ -30,6 +30,8 @@ export class ConsumerComponent implements OnInit {
   cityName: string;
   consumerList = [];
   tempFilter = [];
+  emptymessages= AppConstant.EMPTY_MESSAGES.CONSUMER;
+
   constructor(
     private fb: FormBuilder,
     private lookupService: LookupService,

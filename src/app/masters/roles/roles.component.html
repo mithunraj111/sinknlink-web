@@ -26,7 +26,7 @@
 <div class="header-block m-t-60">
     <div class="table-header fixed-table">
         <app-card [classHeader]="true">
-            <ngx-datatable #roletable class="table data-table expandable" [rows]='rolesList' [columnMode]="'flex'" [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false" [footerHeight]="50" [limit]="10">
+            <ngx-datatable #roletable class="table data-table expandable" [rows]='rolesList' [columnMode]="'flex'" [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false" [footerHeight]="50" [limit]="10" [messages]="emptymessages">
                 <ngx-datatable-column prop="rolename" name="Role Name" [resizeable]="false">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                         <span>{{row.rolename}}</span>

@@ -14,6 +14,8 @@ import { AppMessages } from 'src/app/app-messages';
 export class EventsComponent extends BaseService implements OnInit {
 
   @ViewChild(DatatableComponent) table: DatatableComponent;
+  emptymessages = AppConstant.EMPTY_MESSAGES.EVENTS;
+
   tempFilter = [];
   eventsList = [];
   displaydtimeformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;

@@ -20,6 +20,7 @@ export class CustomerCouponsComponent implements OnInit, OnChanges {
   @Output() couponObj = {} as any;
   couponForm: FormGroup;
   couponErrObj = AppMessages.VALIDATION.COUPON;
+  emptymessages = AppConstant.EMPTY_MESSAGES.COUPONS;
   constructor(private bootstrapAlertService: BootstrapAlertService,
     private commonService: CommonService,
     private couponService: BusinessService.CouponService,
@@ -114,8 +115,6 @@ export class CustomerCouponsComponent implements OnInit, OnChanges {
             const response = JSON.parse(res._body);
             if (response.status) {
               this.bootstrapAlertService.showSucccess(response.message);
-              this.couponList = [response.data, ...this.couponList];
-              this.initCouponForm();
             } else {
               this.bootstrapAlertService.showError(response.message);
             }

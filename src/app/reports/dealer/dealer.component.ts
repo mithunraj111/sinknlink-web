@@ -22,6 +22,8 @@ import { AppCommonService } from 'src/app/services';
 })
 export class DealerComponent implements OnInit {
   displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydate;
+  emptymesages = AppConstant.EMPTY_MESSAGES.DEALERREPORT;
+
   @ViewChild(DatatableComponent) table: DatatableComponent;
   dealerReportForm: FormGroup;
   fromdate;

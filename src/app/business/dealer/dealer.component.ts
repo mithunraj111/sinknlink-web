@@ -15,6 +15,8 @@ export class DealerComponent extends BaseService implements OnInit {
   dealerList = [];
   tempFilter = [];
   @ViewChild(DatatableComponent) table: DatatableComponent;
+  emptymessages = AppConstant.EMPTY_MESSAGES.DEALER;
+
   datedisplayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   constructor(private router: Router,
     private commonService: CommonService,

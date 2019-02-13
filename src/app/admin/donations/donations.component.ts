@@ -18,6 +18,8 @@ export class DonationsComponent extends BaseService implements OnInit {
   displaydtimeformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   displaydateformat = AppConstant.API_CONFIG.ANG_DATE.displaydate;
   donationList = [];
+  emptymessages= AppConstant.EMPTY_MESSAGES.DONATIONS;
+
   constructor(private router: Router,
     private donationService: AdminService.DonationService,
     private bootstrapAlertService: BootstrapAlertService, private commonService: CommonService) {
