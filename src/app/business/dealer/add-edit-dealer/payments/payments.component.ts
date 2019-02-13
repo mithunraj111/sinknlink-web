@@ -13,6 +13,8 @@ export class DealerPaymentsComponent implements OnChanges, OnInit {
   tempFilter = [];
   @Input() dealerid = {} as any;
   @ViewChild(DatatableComponent) table: DatatableComponent;
+  emptymessages = AppConstant.EMPTY_MESSAGES.DEALER_PAYMENT;
+
   datedisplayformat = AppConstant.API_CONFIG.ANG_DATE.displaydate;
   constructor(private paymentService: PaymentsService) {
   }
@@ -47,7 +49,7 @@ export class DealerPaymentsComponent implements OnChanges, OnInit {
   }
   search(event?) {
     let val = '';
-    if( event != null && event != undefined ){
+    if (event != null && event != undefined) {
       val = event.target.value.toLowerCase();
     }
     const temp = this.tempFilter.filter(item => {

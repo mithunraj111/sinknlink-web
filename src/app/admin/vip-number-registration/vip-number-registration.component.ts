@@ -34,6 +34,9 @@ export class VipNumberRegistrationComponent implements OnInit {
   checks: any = {};
 
   parentBiz: any = [];
+  emptymessages = AppConstant.EMPTY_MESSAGES.VIPNUMBER;
+  messages = AppConstant.EMPTY_MESSAGES.VIPNUMBER;
+  nodata = AppConstant.EMPTY_MESSAGES.VIPNUMBER;
 
   constructor(private customerService: CustomerService, private localStorageService: LocalStorageService, private fancynumberService: FancyNumberService, private router: Router, private bootstrapAlertService: BootstrapAlertService) {
     this.data = [
@@ -72,10 +75,10 @@ export class VipNumberRegistrationComponent implements OnInit {
     this.currentTab = prop.nextId
   }
 
-  getAllocatedBusiness(){
+  getAllocatedBusiness() {
     this.customerService.list({
-      status:AppConstant.STATUS_ACTIVE
-    },"parentwithfancynos").subscribe(res => {
+      status: AppConstant.STATUS_ACTIVE
+    }, "parentwithfancynos").subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
         this.data = response.data;
