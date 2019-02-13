@@ -950,7 +950,7 @@ button{
         .nav-link.active{
             background: #cccccc;
             border-radius: 50px 0px 0px 50px;
-            color: #fff;
+            color: #2f3d4a;
             &:hover{
                 border-right: 4px solid #03ADED!important;
             }
@@ -1400,4 +1400,7 @@ button{
             }
         }
     }
+}
+.hide-branch{
+    display: none;
 }

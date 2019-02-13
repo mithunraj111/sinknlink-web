@@ -191,6 +191,8 @@ export class AddEditCustomerComponent implements OnInit {
       this.bootstrapAlertService.showError(errMessage);
       return false;
     } else {
+      console.log(this.customerForm);
+      console.log(this.customerForm.value);
       const data = this.customerForm.value;
       const formdata = { ...data } as any;
       formdata.workhours = data.starttime + '-' + data.endtime;

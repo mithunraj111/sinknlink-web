@@ -184,6 +184,20 @@
                                                             <input type="text" class="form-control" placeholder="Website" formControlName="website">
                                                         </div>
                                                     </div>
+                                                    <div class="form-group border-checkbox-section offset-md-3 col-md-5 col-sm-4 m-t-10">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="inmall" formControlName="inmallyn" [checked]>
+                                                            <label class="border-checkbox-label" for="inmall">Business In Mall</label>
+                                                        </div>
+                                                    </div>
+                                                    <div *ngIf= "customerForm.value.inmallyn == true" class="form-group row">
+                                                        <label class="col-md-3 col-sm-6 col-form-label text-right">Mall Name</label>
+                                                        <div class="col-md-9 col-sm-6">
+                                                            <ng-select [allowClear]="true" [ngClass]="'ng-select'" [options]="mallsList" formControlName="mallname" 
+                                                                placeholder="Select Mall Name">
+                                                            </ng-select>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -230,30 +244,16 @@
                                                             </ng-select>
                                                         </div>
                                                     </div>
-                                                    <div class="form-group border-checkbox-section col-md-7 col-sm-7 m-l-10">
-                                                        <div class="border-checkbox-group border-checkbox-group-primary pull-right">
-                                                            <input class="border-checkbox" type="checkbox" id="inmall" formControlName="inmallyn">
-                                                            <label class="border-checkbox-label" for="inmall">Business In Mall</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row required">
-                                                        <label class="col-md-3 col-sm-6 col-form-label text-right">Mall Name</label>
-                                                        <div class="col-md-9 col-sm-6">
-                                                            <ng-select [allowClear]="true" [ngClass]="'ng-select'" [options]="mallsList" formControlName="mallname" placeholder="Select Mall Name">
-                                                            </ng-select>
-                                                        </div>
-                                                    </div>
                                                     <div class="form-group row required">
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Status</label>
                                                         <div class="col-md-9 col-sm-6">
                                                             <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="#03ADED" switchColor="#fff" size="small" formControlName="status"></ui-switch>
                                                         </div>
                                                     </div>
-                                                    <div class="form-group border-checkbox-section col-md-7 col-sm-7 m-l-10">
+                                                    <div class="form-group border-checkbox-section col-md-6 col-sm-7 m-l-35">
                                                         <div class="border-checkbox-group border-checkbox-group-primary pull-right">
                                                             <input class="border-checkbox" type="checkbox" id="detailst&c" formControlName="tncagreed">
-                                                            <label class="border-checkbox-label" for="detailst&c">I
-                                                                agree to the Terms and Conditions</label>
+                                                            <label class="border-checkbox-label" for="detailst&c">I agree to the Terms and Conditions</label>
                                                         </div>
                                                     </div>
                                                 </div>
