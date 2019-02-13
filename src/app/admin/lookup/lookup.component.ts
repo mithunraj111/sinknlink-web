@@ -18,6 +18,7 @@ export class LookupComponent extends BaseService implements OnInit {
   @Output() lookupObj = {} as any;
   lookupList = [];
   tempFilter = [];
+  loading = true;
   selectedKeyType: any = AppConstant.LOOKUP[0].value;
   keylist = AppConstant.LOOKUP;
   constructor(private lookupService: AdminService.LookupService,
@@ -31,6 +32,7 @@ export class LookupComponent extends BaseService implements OnInit {
   }
 
   getLookupList(selected?) {
+    this.loading = true;
     this.lookupList = [];
     let condition = {} as any;
     if (selected !== undefined && selected.value !== undefined) {
@@ -43,10 +45,12 @@ export class LookupComponent extends BaseService implements OnInit {
       };
     }
     this.lookupService.list(condition).subscribe(res => {
+      this.loading = false;
       const response = JSON.parse(res._body);
       if (res.status) {
         this.lookupList = response.data;
         this.tempFilter = this.lookupList;
+        this.loading = false;
       }
     }, err => {
       console.log(err);

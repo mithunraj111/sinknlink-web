@@ -19,6 +19,7 @@ export class AddEditLookupComponent implements OnInit, OnChanges {
   lookupForm: FormGroup;
   formTitle = AppConstant.FORM_TITLE.LOOKUP.ADD;
   buttonTxt = AppConstant.BUTTON_TXT.SAVE;
+  savingLookup: boolean = false;
   @Output() notifyLookupEntry: EventEmitter<any> = new EventEmitter();
   @Input() lookupObj = {} as any;
   @Input() selectedKeyType: string ;
@@ -68,6 +69,7 @@ export class AddEditLookupComponent implements OnInit, OnChanges {
     }
   }
   initForm() {
+    this.savingLookup = true;
     this.lookupForm = this.fb.group({
       refname: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(100)])],
       refvalue: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(100)])],
@@ -83,6 +85,7 @@ export class AddEditLookupComponent implements OnInit, OnChanges {
     });
     this.formTitle = 'ADD ' + selectedValue.label;
     this.buttonTxt = AppConstant.BUTTON_TXT.SAVE;
+    this.savingLookup = false;
   }
   close(event) {
     this.notifyLookupEntry.emit({ close: true });
@@ -94,6 +97,7 @@ export class AddEditLookupComponent implements OnInit, OnChanges {
   }
   saveOrUpdateLookup() {
     if (!this.lookupForm.valid) {
+      this.savingLookup = false;
       this.errMessage = this.commonService.getFormErrorMessage(this.lookupForm, this.lookupErrObj);
       this.bootstrapAlertService.showError(this.errMessage);
       return false;
@@ -125,12 +129,14 @@ export class AddEditLookupComponent implements OnInit, OnChanges {
         formdata.createdby = this.userstoragedata.fullname;
         formdata.createddt = new Date();
         this.lookupService.create(formdata).subscribe((res) => {
+          this.savingLookup = true;
           const response = JSON.parse(res._body);
           if (response.status) {
             this.bootstrapAlertService.showSucccess(response.message);
             this.callParent({ update: false, data: response.data });
           } else {
             this.bootstrapAlertService.showError(response.message);
+            this.savingLookup = false;
           }
         }, err => {
           this.bootstrapAlertService.showError(err.message);

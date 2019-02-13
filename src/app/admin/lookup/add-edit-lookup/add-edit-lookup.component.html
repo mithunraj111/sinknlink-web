@@ -20,7 +20,8 @@
           <div class="form-group required">
             <label>Datatype</label>
             <div class="input-box">
-              <ng-select [allowClear]="true" [ngClass]="'ng-select'" placeholder="Select Datatype" [options]="datatypeList" formControlName="datatype"></ng-select>
+              <ng-select [allowClear]="true" [ngClass]="'ng-select'" placeholder="Select Datatype"
+                [options]="datatypeList" formControlName="datatype"></ng-select>
             </div>
           </div>
 
@@ -59,7 +60,8 @@
               </div>
             </div>
           </div>
-          <button type="button" (click)="saveOrUpdateLookup()" placement="top" ngbTooltip="Click to save lookup" class="btn f-15 pull-right btn-primary waves-effect m-b-10">{{buttonTxt}}</button>
+          <button type="button" (click)="saveOrUpdateLookup()" placement="top" ngbTooltip="Click to save lookup"
+            class="btn f-15 pull-right btn-primary waves-effect m-b-10">{{savingLookup == true ? 'Saving..':buttonTxt}}</button>
         </div>
       </div>
     </form>

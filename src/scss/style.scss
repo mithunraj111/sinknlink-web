@@ -75,6 +75,7 @@
 //   font-style: normal;
 // };
 
+
 :root {
     --scroll-bar-size: 10px;
     --scroll-bar-thumb-background-color: rgba(0, 0, 0, 0.2);
@@ -104,3 +105,4 @@
     background-color: var(--scroll-bar-thumb-background-color-active);
     cursor: pointer;
   }
+

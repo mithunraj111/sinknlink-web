@@ -45,6 +45,9 @@ h1, h2, h3, h4, h5, h6 {
 .m-t-5{
     margin-top:5px !important;
 }
+.m-l-0{
+    margin-left: 0 !important;
+}
 // .m-t-60{
 //     margin-top:60px;
 // }
@@ -131,6 +134,11 @@ textarea {
         text-transform: capitalize;
         margin-left: 16px;
     }
+    @media only screen and(max-width: 1300px) {
+        .add-btn.btn{
+            padding: 5px 6px !important;
+        }
+     }
     .btn{
         font-size: 14px;
         padding: 5px 8px;
@@ -160,6 +168,8 @@ textarea {
         box-shadow: none;
         border-radius: 0;
         margin-left: 0px;
+        padding-left: 5px;
+        // width: 100% !important;
         border:0;
         &:focus{
             outline: none;
@@ -218,6 +228,7 @@ textarea {
             border:0;
         }
     }
+   
 
 }
 
@@ -950,7 +961,7 @@ button{
         .nav-link.active{
             background: #cccccc;
             border-radius: 50px 0px 0px 50px;
-            color: #2f3d4a;
+            color: #fff;
             &:hover{
                 border-right: 4px solid #03ADED!important;
             }
@@ -1367,6 +1378,7 @@ button{
                  .user-profile img{
                     width: 33px;
                     height: 33px;
+                    display:inline-block;
                  }
             }
         }
@@ -1403,4 +1415,23 @@ button{
 }
 .hide-branch{
     display: none;
+}
+// consumer view //
+.avatar-image{
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+    line-height: 90px;
+    max-width: 100%;
+    .img-responsive{
+        vertical-align: bottom;
+    }
+}
+.keytype{
+    .ng-select{
+        width:100%;
+        border: 0;
+        border-bottom: 1px solid #b1b8bb;
+        box-shadow: none;
+    }
 }
