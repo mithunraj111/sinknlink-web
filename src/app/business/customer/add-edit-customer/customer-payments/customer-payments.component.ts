@@ -26,13 +26,18 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
   paymentMethods = [];
   donationList = [];
   selectedDonation = {} as any;
-  date = new Date();
+  totalamount = 0;
+  nextdue = new Date();
+  lastpaid = new Date();
+  subscriptionAmt = 100;
+  selfPayment = true;
   constructor(private paymentService: AppCommonService.PaymentsService,
     private lookupService: AdminService.LookupService,
     private commonService: CommonService,
     private fb: FormBuilder,
     private donationService: AdminService.DonationService,
     private bootstrapAlertService: BootstrapAlertService) {
+    this.totalamount = this.subscriptionAmt;
   }
 
   ngOnInit() {
@@ -138,6 +143,32 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
       paymenttype: AppConstant.PAYMENT_TYPES[1],
       paymentstatus: AppConstant.STATUS_SUCCESS
     };
+    this.save(data);
+  }
+  donationChecked() {
+    let donationAmt = 0;
+    _.map(this.donationList, function (item) {
+      if (item.selected && item.selectedAmt) {
+        donationAmt = donationAmt + Number(item.selectedAmt);
+      }
+    });
+    this.totalamount = this.subscriptionAmt + donationAmt;
+  }
+
+  saveOnlinePayment() {
+    const data = {
+      paymentdate: new Date(),
+      totalamount: this.totalamount,
+      membershipid: this.customerObj.membershipid,
+      paymentmode: 'NEFT',
+      paymentref: '',
+      paymenttype: AppConstant.PAYMENT_TYPES[0],
+      paymentstatus: AppConstant.STATUS_SUCCESS
+    };
+    this.save(data);
+  }
+
+  save(data) {
     this.paymentService.create(data).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {

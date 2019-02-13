@@ -114,6 +114,8 @@ export class CustomerCouponsComponent implements OnInit, OnChanges {
             const response = JSON.parse(res._body);
             if (response.status) {
               this.bootstrapAlertService.showSucccess(response.message);
+              this.couponList = [response.data, ...this.couponList];
+              this.initCouponForm();
             } else {
               this.bootstrapAlertService.showError(response.message);
             }

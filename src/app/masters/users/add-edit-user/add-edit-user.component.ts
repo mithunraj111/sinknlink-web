@@ -114,7 +114,7 @@ export class AddEditUserComponent implements OnInit {
   getUserDetails() {
     this.userService.byId(this.userid).subscribe(res => {
       const response = JSON.parse(res._body);
-      if (response.status) {
+      if (response.status && !_.isNull(response.data)) {
         this.userObj = response.data;
         this.userForm = this.fb.group({
           fullname: [this.userObj.fullname, Validators.compose([Validators.required, Validators.minLength(1),

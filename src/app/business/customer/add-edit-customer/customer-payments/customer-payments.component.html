@@ -7,46 +7,46 @@
                 </div>
                 <div class="form-group row mb-0">
                     <label class="col-md-3 col-sm-6 col-form-label text-right">Next due</label>
-                    <span class="col-form-label col-md-9 col-sm-6">{{date|date:datedisplayformat}}</span>
+                    <span class="col-form-label col-md-9 col-sm-6">{{nextdue|date:datedisplayformat}}</span>
                 </div>
                 <div class="form-group row mb-0">
                     <label class="col-md-3 col-sm-6 col-form-label text-right">Last paid</label>
-                    <span class="col-form-label col-md-9 col-sm-6 f-16">{{date|date:datedisplayformat}}</span>
+                    <span class="col-form-label col-md-9 col-sm-6 f-16">{{lastpaid|date:datedisplayformat}}</span>
                 </div>
                 <div class="form group row border-checkbox-section">
                     <label class="col-md-3 col-sm-6 col-form-label text-right">Subscription Amount</label>
                     <div class="border-checkbox-group border-checkbox-group-primary col-md-7 col-sm-6 ml-1 p-t-5">
-                        <input class="border-checkbox" type="checkbox" id="checkbox1">
-                        <label class="border-checkbox-label f-w-300" for="checkbox1">500 + Tax</label>
+                        <input class="border-checkbox" type="checkbox" id="checkbox1" [(ngModel)]="selfPayment">
+                        <label class="border-checkbox-label f-w-300" for="checkbox1">{{subscriptionAmt}} + Tax</label>
                     </div>
                 </div>
-                <div class="form group row border-checkbox-section">
+                <!-- <div class="form group row border-checkbox-section">
                     <label class="col-md-3 col-sm-6 col-form-label text-right">Associated Branch</label>
                     <div class="border-checkbox-group border-checkbox-group-primary col-md-7 col-sm-6 ml-1 p-t-5">
                         <input class="border-checkbox" type="checkbox" id="checkbox2">
                         <label class="border-checkbox-label f-w-300" for="checkbox2">1,500 + Tax</label>
                     </div>
-                </div>
+                </div> -->
                 <div class="header-title m-t-20 mb-3">
                     <h3 class="f-18 text-primary m-l-15">Donate for a cause</h3>
                 </div>
-                <div *ngFor="let donation of donationList" class="form-group row border-checkbox-section">
+                <div *ngFor="let donation of donationList; index as i" class="form-group row border-checkbox-section">
                     <div class="border-checkbox-group border-checkbox-group-primary col-md-3 text-right col-sm-6 m-l-5 p-t-5">
-                        <input class="border-checkbox" type="checkbox" id="{{$index}}">
-                        <label class="border-checkbox-label" for="{{$index}}">{{donation.charityname}}
-                            <a placement="bottom" ngbTooltip="Click to view donation cause"
+                        <input class="border-checkbox" type="checkbox" id={{i}} [(ngModel)]="donation.selected" (change)="donationChecked()">
+                        <label class="border-checkbox-label" for="{{i}}">{{donation.charityname}}
+                            <a placement="bottom" ngbTooltip="Click to view donation cause" 
                                 (click)="viewDonationCause(donation);"><i class="fa fa-question-circle"
                                     aria-hidden="true"></i></a>
                         </label>
                     </div>
                     <div class=" col-md-8 col-sm-6 p-l-0 p-r-20">
-                        <input type="text" class="form-control" placeholder="Amount">
+                        <input type="text" class="form-control" [(ngModel)]="donation.selectedAmt" (ngModelChange)="donationChecked()" placeholder="Amount">
                     </div>
                 </div>
                 <div class="form-group row m-t-20 payment-button">
                     <label class="col-md-3 col-sm-6 col-form-label text-right p-t-15">Total</label>
-                    <span class="col-form-label col-md-5 col-sm-6 f-16">{{2450|currency: 'INR' :true}}
-                        <button type="button" placement="bottom" ngbTooltip="Click to pay online"
+                    <span class="col-form-label col-md-5 col-sm-6 f-16">{{totalamount|currency: 'INR' :true}}
+                        <button type="button" placement="bottom" (click)="saveOnlinePayment()" ngbTooltip="Click to pay online"
                             class="btn p-l-5 m-l-15">
                             Pay online
                         </button>
@@ -80,8 +80,7 @@
 </div>
 <div class="table-header fixed-table-header">
     <app-card [classHeader]="true">
-        <ngx-datatable #customerpaymttable class="table data-table expandable" [rows]='payHistoryList' [columnMode]="'flex'" [headerHeight]="50" 
-            [footerHeight]="50" [limit]="5" [rowHeight]="'auto'" [reorderable]="false">
+        <ngx-datatable #customerpaymttable class="table data-table expandable" [rows]='payHistoryList' [columnMode]="'flex'" [headerHeight]="50" [footerHeight]="50" [limit]="5" [rowHeight]="'auto'" [reorderable]="false">
             <!-- Row Detail Template -->
             <ngx-datatable-column prop="paymentref" name="Reference#" [resizeable]="false">
                 <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
@@ -173,6 +172,6 @@
 <!-- View Payment Details PopUp Ends -->
 <div class="modal-size">
     <app-modal-animation [modalID]="'donationCauseModal'" [modalClass]="'md-effect-7'">
-        <textarea rows="3" cols="3" class="form-control" placeholder="Payment Notes" readonly>{{selectedDonation?.causeremarks}}</textarea>
+        <textarea rows="3" cols="3" class="form-control" placeholder="Description" readonly>{{selectedDonation?.causeremarks}}</textarea>
     </app-modal-animation>
 </div>

@@ -8,8 +8,7 @@ import { AppMessages } from 'src/app/app-messages';
 
 @Component({
   selector: 'app-users',
-  templateUrl: './users.component.html',
-  styleUrls: ['./users.component.scss']
+  templateUrl: './users.component.html'
 })
 export class UsersComponent extends BaseService implements OnInit {
   displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
@@ -36,7 +35,7 @@ export class UsersComponent extends BaseService implements OnInit {
   }
 
   getUsers() {
-    this.userService.list({}).subscribe((res) => {
+    this.userService.list({ usertype: 'U' }).subscribe((res) => {
       const response = JSON.parse(res._body);
       if (response.status) {
         this.userList = response.data;
