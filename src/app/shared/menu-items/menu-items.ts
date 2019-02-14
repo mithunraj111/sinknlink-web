@@ -140,34 +140,36 @@ export class MenuItems {
     this.menuItems = [];
     const groupedMenus = _.groupBy(availScreens, 'prntscreencode');
     const self = this;
-    const len = MENUITEMS.length; 
-      for(let i =0;i<MENUITEMS.length;i++){
-        var item = MENUITEMS[i];
-          if (_.has(groupedMenus, item.code)) {
-          let data:any = _.get(groupedMenus, item.code);
-          if (!_.isUndefined(data) && _.isUndefined(item.children) && !_.isUndefined(data.assignedpermissions) && data.assignedpermissions.length > 0) {
-            self.menuItems.push(item);
-          } else if (!_.isUndefined(data) && !_.isUndefined(item.children)) {
-            let app_child = item.children;
-            let locChildren = [];
-            _.map(data, function (actual) {
-              let hasdata = {} as any;
-              hasdata = _.find(app_child, { code: actual.screencode });
-              if (actual.assignedpermissions != undefined) {
-                if (hasdata != undefined && actual.assignedpermissions.length > 0) {
-                  locChildren.push(hasdata);
-                }
+    const len = MENUITEMS.length;
+    for (let i = 0; i < MENUITEMS.length; i++) {
+      const item = MENUITEMS[i];
+      if (_.has(groupedMenus, item.code)) {
+        const data: any = _.get(groupedMenus, item.code);
+        if (!_.isUndefined(data) && _.isUndefined(item.children)
+          && !_.isUndefined(data.assignedpermissions)
+          && data.assignedpermissions.length > 0) {
+          self.menuItems.push(item);
+        } else if (!_.isUndefined(data) && !_.isUndefined(item.children)) {
+          const app_child = item.children;
+          const locChildren = [] as any;
+          _.map(data, function (actual) {
+            let hasdata = {} as any;
+            hasdata = _.find(app_child, { code: actual.screencode });
+            if (!_.isUndefined(actual.assignedpermissions)) {
+              if (!_.isUndefined(hasdata) && actual.assignedpermissions.length > 0) {
+                locChildren.push(hasdata);
               }
-            });
-            if (locChildren.length > 0) {
-              item.children = locChildren;
-              self.menuItems.push(item);
             }
+          });
+          if (locChildren.length > 0) {
+            item.children = locChildren;
+            self.menuItems.push(item);
           }
         }
-        if (len === (i + 1)) {
-          return self.menuItems
-        }
       }
+      if (len === (i + 1)) {
+        return self.menuItems;
+      }
+    }
   }
 }
