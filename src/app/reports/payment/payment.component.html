@@ -23,7 +23,7 @@
                     </div>
                   </div>
                   <div class="col-md-6 col-sm-6 p-r-5">
-                    <div class="form-group">
+                    <div class="form-group m-l-0">
                       <label>To Date</label>
                       <div class="input-group">
                         <input class="form-control" ngbDatepicker #todate="ngbDatepicker" formControlName="todate">
@@ -52,7 +52,7 @@
                       <label>Payment Mode</label>
                       <div class="input-group">
                         <ng-select [multiple]="true" [ngClass]="'ng-select'" [options]="paymentModes" placeholder="All"
-                          formControlName="paymentmode">
+                          formControlName="paymentmode" >
                         </ng-select>
                       </div>
                     </div>

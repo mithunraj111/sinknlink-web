@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
       this.messageList.push(r);
       setTimeout(() => {
         this.messageList = [];
-      }, 5000);
+      }, 2000);
     });
   }
 }

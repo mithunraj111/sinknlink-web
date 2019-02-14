@@ -56,7 +56,6 @@ export class PaymentComponent implements OnInit {
       paymenttype: [''],
       paymentmode: ['']
     });
-    console.log(this.paymentForm);
   }
 
   getPaymentModes() {
@@ -68,13 +67,11 @@ export class PaymentComponent implements OnInit {
           item.value = item.refvalue;
         });
         this.paymentModes = response.data;
-        console.log(this.paymentModes);
       }
     });
   }
 
   getPaymentList() {
-    console.log(this.paymentForm.value);
     const data = this.paymentForm.value;
     const todt = this.commonService.formatDate(data.todate);
     const fromdt = this.commonService.formatDate(data.fromdate);
