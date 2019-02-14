@@ -47,7 +47,7 @@
                     <div class="form-group row required" *ngIf="gigObj?.gigid">
                         <label class="col-md-3 col-sm-6 col-form-label text-right">Status</label>
                         <div class="col-md-9 col-sm-6">
-                            <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="#03ADED" switchColor="#fff" size="small" checked></ui-switch>
+                            <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="$primary-color" switchColor="#fff" size="small" checked></ui-switch>
                         </div>
                     </div>
                 </div>
@@ -98,7 +98,7 @@
                 </ngx-datatable-column>
                 <ngx-datatable-column name="Status" [sortable]="false" [flexGrow]="0.5" [cellClass]="'text-center status'" headerClass="text-right">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                        <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="#03ADED" switchColor="#fff" size="small" [checked]="row.status == 'Active'" (change)="updategigStatus(row,rowIndex,false)"></ui-switch>
+                        <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="$primary-color" switchColor="#fff" size="small" [checked]="row.status == 'Active'" (change)="updategigStatus(row,rowIndex,false)"></ui-switch>
                     </ng-template>
                 </ngx-datatable-column>
                 <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.5" [cellClass]="'text-center action'" headerClass="text-right">

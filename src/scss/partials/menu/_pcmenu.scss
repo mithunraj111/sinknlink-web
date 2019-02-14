@@ -1,20 +1,20 @@
 $menu-title: #000,#624e89,#3c4fb1,#919aa3,#999,#fff;
 
-$header-theme:#3b4650,#473B7B,#000000,#ff5858,#03ADED,#2d0102;
+$header-theme:#3b4650,#473B7B,#000000,#ff5858,$primary-color,#2d0102;
 $header-right-theme:#647688,#30D2BE,#0fb3c2,#f09819,#6E7FF3,#091991;
 
 //#038f9e, #4DD0E1
 
-$header-theme-light:#11c788,#FF5252,#ff784f,#38a9f9,#03ADED,#39ADB5;
+$header-theme-light:#11c788,#FF5252,#ff784f,#38a9f9,$primary-color,#39ADB5;
 $header-right-theme-light:#54e2b7,#f48fb1,#ff5370,#43e9b3,#73b4ff,#7C4DFF;
 
-$box-bg-color: #3b4650,#f78ea4,#6E7FF3,#39ADB5,#03ADED,#f09819;
+$box-bg-color: #3b4650,#f78ea4,#6E7FF3,#39ADB5,$primary-color,#f09819;
 
 $left-navbar-theme: #3b4650;
 $left-navbar-light-theme: #fff;
 
-$active-item:#3b4650,#473B7B,#000000,#ff5858,#03ADED,#2d0102,#11c788,#FF5252,#ff784f,#38a9f9,#038f9e,#39ADB5;
-$icon-color: #03ADED,#f78ea4,#2ed8b6,#f1c40f,#ab7967,#39ADB5,#7C4DFF,#FF5370;
+$active-item:#3b4650,#473B7B,#000000,#ff5858,$primary-color,#2d0102,#11c788,#FF5252,#ff784f,#38a9f9,#038f9e,#39ADB5;
+$icon-color: $primary-color,#f78ea4,#2ed8b6,#f1c40f,#ab7967,#39ADB5,#7C4DFF,#FF5370;
 .pcoded {
     &[nav-type="st1"] {
         .pcoded-item.pcoded-left-item {

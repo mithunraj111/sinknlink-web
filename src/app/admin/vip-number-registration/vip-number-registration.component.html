@@ -67,7 +67,7 @@
                         [cellClass]="'text-center'" [resizeable]="false">
                         <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                           <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status"
-                            color="#03ADED" (change)="changeStatus(row.fancyid,row.status)" switchColor="#fff"
+                            color="$primary-color" (change)="changeStatus(row.fancyid,row.status)" switchColor="#fff"
                             size="small" [disabled]="row.fancynostatus == 'Blocked' || row.fancynostatus == 'NA'"
                             [checked]="row.status == 'Active'"></ui-switch>
                         </ng-template>
@@ -124,7 +124,7 @@
                         [cellClass]="'text-center'" [resizeable]="false">
                         <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                           <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status"
-                            color="#03ADED" (change)="changeStatus(row.fancyid,row.status)" switchColor="#fff"
+                            color="$primary-color" (change)="changeStatus(row.fancyid,row.status)" switchColor="#fff"
                             size="small" [disabled]="row.fancynostatus == 'Blocked' || row.fancynostatus == 'NA'"
                             [checked]="row.status == 'Active'"></ui-switch>
                         </ng-template>

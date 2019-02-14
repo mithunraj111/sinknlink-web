@@ -47,7 +47,7 @@
                     [cellClass]="'text-center'" [resizeable]="false">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                         <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status"
-                            color="#03ADED" switchColor="#fff" size="small"
+                            color="$primary-color" switchColor="#fff" size="small"
                             (change)="updateCategoryStatus(row,rowIndex,false)" [checked]="row.status == 'Active'">
                         </ui-switch>
                     </ng-template>

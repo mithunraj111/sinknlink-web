@@ -927,7 +927,7 @@ ngx-datatable.data-table {
 }
 
 
-$icon-color-ang: #03ADED,#f78ea4,#2ed8b6,#f1c40f,#ab7967,#39ADB5,#7C4DFF,#FF5370;
+$icon-color-ang: $primary-color,#f78ea4,#2ed8b6,#f1c40f,#ab7967,#39ADB5,#7C4DFF,#FF5370;
 .pcoded {
   &[nav-type="st1"] {
     .d-color {

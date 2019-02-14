@@ -1,3 +1,7 @@
+// modal common styles //
+   $primary-color:#03ADED;
+// modal common styles //
+
 .md-close-btn {
   border: 0;
   position: absolute;
@@ -13,7 +17,7 @@
     vertical-align: middle;
     border: 0;
     background: #fff;
-    color: #03ADED;
+    color: $primary-color;
     width: 30px;
     height: 30px;
     line-height: 30px;
@@ -98,7 +102,7 @@
     font-size: 20px;
     font-weight: 600;
     opacity: 1;
-    background: #03ADED;
+    background: $primary-color;
     border-radius: 3px 3px 0 0;
     text-transform: uppercase;
     font-family: 'Open Sans', sans-serif;
