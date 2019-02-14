@@ -1,94 +1,90 @@
 <div class="fixedheader">
-    <div class="header-title pos-fixed">
-        <div class="row">
-            <div class="col-md-5 col-sm-5">
-                <h2>Donations</h2>
-                <p>Create or Update Donation details</p>
-            </div>
-            <div class="col-md-6 col-sm-6">
-                <div class="text-right">
-                    <label>Search:
-                        <input #donationSearch type="text" class="header-search form-control input-sm full-data-search"
-                            placeholder="Search for here" (keyup)='search($event)' placement="bottom"
-                            ngbTooltip="Type here to search">
-                        <button type="button" class="btn search-close" (click)="donationSearch.value='';search();"><i
-                                class="fa fa-close"></i></button>
-                    </label>
-                </div>
-            </div>
-            <div class="col-md-1 col-sm-1 p-r-0">
-                <button *ngIf="add" type="button" placement="bottom" ngbTooltip="Click to add donation"
-                    class="add-btn btn btn-primary waves-effect" (click)='addDonation()'><i class="fa fa-plus-circle m-r-5"></i>
-                    New
-                </button>
-            </div>
+  <div class="header-title pos-fixed">
+    <div class="row">
+      <div class="col-md-8 col-sm-7">
+        <h2>Donations</h2>
+        <p>Create or Update Donation details</p>
+      </div>
+      <div class="col-md-3 col-sm-4">
+        <div class="text-right">
+          <label class="col-md-3 p-l-0"><b>Search:</b></label>
+          <input #donationSearch type="text" class="header-search form-control col-md-8 col-sm-8 p-l-0 p-r-0 input-sm full-data-search"
+            placeholder="Search here" (keyup)='search($event)' placement="bottom" ngbTooltip="Type here to search">
+          <button type="button" class="btn search-close col-md-1 col-sm-1 p-l-0 p-r-0" (click)="donationSearch.value='';search();"><i
+              class="fa fa-close"></i></button>
         </div>
+      </div>
+      <div class="col-md-1 col-sm-1 p-r-0">
+        <button *ngIf="add" type="button" placement="bottom" ngbTooltip="Click to add donation" class="add-btn btn btn-primary waves-effect"
+          (click)='addDonation()'><i class="fa fa-plus-circle m-r-5"></i>
+          New
+        </button>
+      </div>
     </div>
+  </div>
 </div>
 <div class="header-block m-t-60">
-    <div class="table-header fixed-table">
-        <app-card [classHeader]="true">
-            <ngx-datatable #donationtable class="table data-table expandable" [rows]='donationList'
-                [columnMode]="'flex'" [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false" [footerHeight]="50"
-                [limit]="10" [messages]="emptymessages">
-                <ngx-datatable-column prop="charityname" name="Charity Name" [resizeable]="false">
-                    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                        <span>{{row.charityname}}</span>
-                    </ng-template>
-                </ngx-datatable-column>
-                <ngx-datatable-column prop="startdate" name="Start Date" [resizeable]="false" headerClass="text-center"
-                    [cellClass]="'text-center'">
-                    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                        <span>{{row.startdate|date:displaydateformat}}</span>
-                    </ng-template>
-                </ngx-datatable-column>
-                <ngx-datatable-column prop="enddate" name="End Date" [resizeable]="false" headerClass="text-center"
-                    [cellClass]="'text-center'">
-                    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                        <span>{{row.enddate|date:displaydateformat}}</span>
-                    </ng-template>
-                </ngx-datatable-column>
-                <ngx-datatable-column prop="updatedby" name="Updated By" [resizeable]="false">
-                    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                        <span class="updatename">{{row.updatedby}}</span>
-                        <span class="updatedate"> {{row.updateddt|date:displaydtimeformat}}</span>
-                    </ng-template>
-                </ngx-datatable-column>
-                <ngx-datatable-column name="Status" [sortable]="false" [flexGrow]="0.5" headerClass="text-center"
-                    [cellClass]="'text-center'" [resizeable]="false">
-                    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                        <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status"
-                            color="$primary-color" (change)="updateDonationStatus(row, rowIndex, false)"
-                            [checked]="row.status == 'Active'" switchColor="#fff" size="small"></ui-switch>
-                    </ng-template>
-                </ngx-datatable-column>
-                <ngx-datatable-column *ngIf="edit || delete" name="Action" [sortable]="false" [flexGrow]="0.5"
-                    headerClass="text-center" [cellClass]="'text-center'" [resizeable]="false">
-                    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                        <a *ngIf="edit" placement="bottom" ngbTooltip="Click to edit donation details"
-                            class="m-r-15 crm-action-edit text-primary" (click)='editDonation(row)'>
-                            <i class="fa fa-pencil"></i></a>
-                        <a *ngIf="delete" placement="bottom" (click)="updateDonationStatus(row,rowIndex, true)"
-                            ngbTooltip="Click to delete donation details" class="crm-action-delete text-danger">
-                            <i class="fa fa-trash"></i></a>
-                    </ng-template>
-                </ngx-datatable-column>
-            </ngx-datatable>
-        </app-card>
-    </div>
+  <div class="table-header fixed-table">
+    <app-card [classHeader]="true">
+      <ngx-datatable #donationtable class="table data-table expandable" [rows]='donationList' [columnMode]="'flex'"
+        [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false" [footerHeight]="50" [limit]="10" [messages]="emptymessages">
+        <ngx-datatable-column prop="charityname" name="Charity Name" [resizeable]="false">
+          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+            <span>{{row.charityname}}</span>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column prop="startdate" name="Start Date" [resizeable]="false" headerClass="text-center"
+          [cellClass]="'text-center'">
+          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+            <span>{{row.startdate|date:displaydateformat}}</span>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column prop="enddate" name="End Date" [resizeable]="false" headerClass="text-center" [cellClass]="'text-center'">
+          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+            <span>{{row.enddate|date:displaydateformat}}</span>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column prop="updatedby" name="Updated By" [resizeable]="false">
+          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+            <span class="updatename">{{row.updatedby}}</span>
+            <span class="updatedate"> {{row.updateddt|date:displaydtimeformat}}</span>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Status" [sortable]="false" [flexGrow]="0.5" headerClass="text-center" [cellClass]="'text-center'"
+          [resizeable]="false">
+          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+            <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="$primary-color"
+              (change)="updateDonationStatus(row, rowIndex, false)" [checked]="row.status == 'Active'" switchColor="#fff"
+              size="small"></ui-switch>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column *ngIf="edit || delete" name="Action" [sortable]="false" [flexGrow]="0.5" headerClass="text-center"
+          [cellClass]="'text-center'" [resizeable]="false">
+          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+            <a *ngIf="edit" placement="bottom" ngbTooltip="Click to edit donation details" class="m-r-15 crm-action-edit text-primary"
+              (click)='editDonation(row)'>
+              <i class="fa fa-pencil"></i></a>
+            <a *ngIf="delete" placement="bottom" (click)="updateDonationStatus(row,rowIndex, true)" ngbTooltip="Click to delete donation details"
+              class="crm-action-delete text-danger">
+              <i class="fa fa-trash"></i></a>
+          </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
+    </app-card>
+  </div>
 </div>
 <ng-template #content let-modal>
-    <div class="modal-header">
-        <h4 class="modal-title">Delete</h4>
-        <button type="button" class="close" aria-label="Close" (click)="dismiss('Cross click')">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <div class="modal-body">
-        <p><i class="fa fa-exclamation-circle"></i> Are you sure you want to delete?</p>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>
-        <button type="button" class="btn btn-danger" (click)="modal.close('Ok click')">Ok</button>
-    </div>
+  <div class="modal-header">
+    <h4 class="modal-title">Delete</h4>
+    <button type="button" class="close" aria-label="Close" (click)="dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p><i class="fa fa-exclamation-circle"></i> Are you sure you want to delete?</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>
+    <button type="button" class="btn btn-danger" (click)="modal.close('Ok click')">Ok</button>
+  </div>
 </ng-template>

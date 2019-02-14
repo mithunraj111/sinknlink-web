@@ -8,7 +8,8 @@ import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import * as _ from 'lodash';
 @Component({
   selector: 'app-customer-coupons',
-  templateUrl: './customer-coupons.component.html'
+  templateUrl: './customer-coupons.component.html',
+  styleUrls: ['customer-coupons.component.scss']
 })
 export class CustomerCouponsComponent implements OnInit, OnChanges {
   couponList = [];

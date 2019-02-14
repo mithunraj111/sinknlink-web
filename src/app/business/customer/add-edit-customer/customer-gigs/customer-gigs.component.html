@@ -63,11 +63,10 @@
         </div>
         <div class="col-md-6 col-sm-6 p-r-40">
             <div class="text-right">
-                <label> Search :
-          <input #gigsSearch type='text' class="header-search form-control input-sm full-data-search" placeholder='Search for here'
+                    <label class="col-md-3 p-l-0"><b>Search:</b></label>
+                    <input #gigsSearch type='text' class="header-search form-control col-md-8 col-sm-8 p-l-0 p-r-0 input-sm full-data-search" placeholder='Search for here'
             (keyup)='search($event)' placement="bottom" ngbTooltip="Type here to search" />
-          <button type="button" class="btn search-close" (click)="gigsSearch.value='';search();"><i class="fa fa-close"></i></button>
-        </label>
+          <button type="button" class="btn search search-close col-md-1 col-sm-1 p-l-0 p-r-0" (click)="gigsSearch.value='';search();"><i class="fa fa-close"></i></button>
             </div>
         </div>
     </div>

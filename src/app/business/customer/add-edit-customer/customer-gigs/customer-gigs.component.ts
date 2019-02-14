@@ -8,7 +8,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as _ from 'lodash';
 @Component({
   selector: 'app-customer-gigs',
-  templateUrl: './customer-gigs.component.html'
+  templateUrl: './customer-gigs.component.html',
+  styleUrls: ['customer-gigs.component.scss']
 })
 export class CustomerGigsComponent implements OnInit, OnChanges {
   gigsList = [];
