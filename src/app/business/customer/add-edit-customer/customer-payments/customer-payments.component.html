@@ -45,12 +45,11 @@
                 </div>
                 <div class="form-group row m-t-20 payment-button">
                     <label class="col-md-3 col-sm-6 col-form-label text-right p-t-15">Total</label>
-                    <span class="col-form-label col-md-5 col-sm-6 f-16">{{totalamount|currency: 'INR' :true}}
-                        <button type="button" placement="bottom" (click)="saveOnlinePayment()"
-                            ngbTooltip="Click to pay online" class="btn p-l-5 m-l-15">
-                            Pay online
-                        </button>
-                    </span>
+                    <span class="col-form-label col-md-5 col-sm-6 f-16">{{totalamount|currency: 'INR' :true}}</span>
+                </div>
+                <div class="col-md-10 col-sm-6 m-l-30 payment-button ">
+                <div class="col-md-10 col-sm-6 m-l-30 payment-button ">
+                    <button type="button" placement="bottom" ngbTooltip="Click to pay online" class="btn pull-right">Pay online</button>
                 </div>
             </div>
         </div>
