@@ -19,11 +19,10 @@ export class AddEditLookupComponent implements OnInit, OnChanges {
   lookupForm: FormGroup;
   formTitle = AppConstant.FORM_TITLE.LOOKUP.ADD;
   buttonTxt = AppConstant.BUTTON_TXT.SAVE;
-  savingLookup: boolean = false;
+  savingLookup = false;
   @Output() notifyLookupEntry: EventEmitter<any> = new EventEmitter();
   @Input() lookupObj = {} as any;
-  @Input() selectedKeyType: string ;
-  errMessage;
+  @Input() selectedKeyType: string;
   lookupErrObj = AppMessages.VALIDATION.LOOKUP;
   datatypeList = AppConstant.DATATYPES;
   keylist = AppConstant.LOOKUP;
@@ -96,10 +95,11 @@ export class AddEditLookupComponent implements OnInit, OnChanges {
     }, 5000);
   }
   saveOrUpdateLookup() {
+    let errMessage: any;
     if (!this.lookupForm.valid) {
       this.savingLookup = false;
-      this.errMessage = this.commonService.getFormErrorMessage(this.lookupForm, this.lookupErrObj);
-      this.bootstrapAlertService.showError(this.errMessage);
+      errMessage = this.commonService.getFormErrorMessage(this.lookupForm, this.lookupErrObj);
+      this.bootstrapAlertService.showError(errMessage);
       return false;
     } else {
       const data = this.lookupForm.value;

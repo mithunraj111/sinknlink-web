@@ -15,4 +15,7 @@ export class DocumentService {
     list(data): Observable<any> {
         return this.httpHandler.POST(this.endpoint + AppConstant.API_CONFIG.API_URL.COMMON.DOCUMENT.LIST, data);
     }
+    create(data): Observable<any> {
+        return this.httpHandler.POST(this.endpoint + AppConstant.API_CONFIG.API_URL.COMMON.DOCUMENT.CREATE, data);
+    }
 }

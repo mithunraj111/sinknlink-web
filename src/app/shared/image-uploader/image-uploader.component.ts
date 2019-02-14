@@ -6,7 +6,7 @@ import { LocalStorageService } from 'src/app/services';
 // import { EventEmitter } from 'selenium-webdriver';
 
 @Component({
-    selector: 'app-image-uploadaer',
+    selector: 'app-image-uploader',
     templateUrl: './image-uploader.component.html',
     styleUrls: ['./image-uploader.component.scss'],
     encapsulation: ViewEncapsulation.None
@@ -15,13 +15,15 @@ export class ImageUploaderComponent implements OnInit, OnChanges {
 
     @Output() imageAdded: EventEmitter<any> = new EventEmitter();
 
-    @Input() disablePicker: boolean = false;
-    @Input() extimage: any = [1, 2, 3];
-    @Input() editMode: boolean = false;
+    @Input() disablePicker = false;
+    @Input() extimage = [] as any;
+    @Input() editMode = false;
 
     images: any = [];
 
-    constructor(private localStorageService: LocalStorageService, private documentService: DocumentService, private bootstrapAlertService: BootstrapAlertService) { }
+    constructor(private localStorageService: LocalStorageService,
+        private documentService: DocumentService,
+        private bootstrapAlertService: BootstrapAlertService) { }
 
     ngOnInit() {
 

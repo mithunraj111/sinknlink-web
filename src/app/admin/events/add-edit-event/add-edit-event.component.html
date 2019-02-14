@@ -7,8 +7,7 @@
                     <p *ngIf="eventid" class="m-b-0">ID: {{eventid}}</p>
                 </div>
                 <div class="col-md-3 col-sm-6 save-button text-right p-r-30">
-                    <button type="button" placement="bottom" [disabled]="savingEvent" ngbTooltip="Click to {{buttontext}} events" (click)="addEvent()"
-                        class="btn btn-primary waves-effect m-r-10 text-capitalize">{{savingEvent == true ? 'Saving..':buttontext}}</button>
+                    <button type="button" placement="bottom" [disabled]="savingEvent" ngbTooltip="Click to {{buttontext}} events" (click)="addEvent()" class="btn btn-primary waves-effect m-r-10 text-capitalize">{{savingEvent == true ? 'Saving..':buttontext}}</button>
                     <button type="button" placement="bottom" ngbTooltip="Go back" routerLink="/admin/events" class="btn btn-inverse btn-primary waves-effect"><i
                             class="fa fa-arrow-circle-left"></i></button>
                 </div>
@@ -30,8 +29,7 @@
                             <div class="form-group row required">
                                 <label class="col-md-3 col-sm-6 col-form-label text-right">Location</label>
                                 <div class="col-md-9 col-sm-6">
-                                    <ng-select [allowClear]="true" formControlName="locationid" class="ng-select location-title"
-                                        placeholder="Select location" [options]="statelists">
+                                    <ng-select [allowClear]="true" formControlName="locationid" class="ng-select location-title" placeholder="Select location" [options]="statelists">
                                     </ng-select>
                                 </div>
                             </div>
@@ -39,8 +37,7 @@
                                 <label class="col-md-3 col-sm-6 col-form-label text-right">Start Date</label>
                                 <div class="col-md-9 col-sm-6">
                                     <div class="input-group">
-                                        <input formControlName="eventdate" class="form-control" placeholder="dd-mm-yyyy"
-                                            ngbDatepicker #dp="ngbDatepicker">
+                                        <input formControlName="eventdate" class="form-control" placeholder="dd-mm-yyyy" ngbDatepicker #dp="ngbDatepicker">
                                         <div class="input-group-append bg-default" (click)="dp.toggle()">
                                             <span class="fa fa-calendar input-group-text"></span>
                                         </div>
@@ -51,8 +48,7 @@
                                 <label class="col-md-3 col-sm-6 col-form-label text-right">Expiry Date</label>
                                 <div class="col-md-9 col-sm-6">
                                     <div class="input-group">
-                                        <input class="form-control" placeholder="dd-mm-yyyy"formControlName="eventexpirydt"
-                                            ngbDatepicker #d="ngbDatepicker">
+                                        <input class="form-control" placeholder="dd-mm-yyyy" formControlName="eventexpirydt" ngbDatepicker #d="ngbDatepicker">
                                         <div class="input-group-append bg-default" (click)="d.toggle()">
                                             <span class="fa fa-calendar input-group-text"></span>
                                         </div>
@@ -90,6 +86,6 @@
     </div>
     <div class="card">
         <!-- (imageAdded)="imageAdded" -->
-        <app-image-uploadaer [editMode]="edit" (imageAdded)="imageAdded($event)" [disablePicker]="savingEvent" [(extimage)]="existing_image"></app-image-uploadaer>
+        <app-image-uploader [editMode]="edit" (imageAdded)="imageAdded($event)" [disablePicker]="savingEvent" [(extimage)]="existing_image"></app-image-uploader>
     </div>
 </div>

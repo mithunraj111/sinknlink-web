@@ -12,6 +12,7 @@ import { CustomerSettingsComponent } from './customer-settings/customer-settings
 import * as _ from 'lodash';
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
 import { AppMessages } from 'src/app/app-messages';
+import { CustomerGalleryComponent } from './customer-gallery/customer-gallery.component';
 @Component({
   selector: 'app-add-edit-customer',
   templateUrl: './add-edit-customer.component.html',
@@ -30,6 +31,7 @@ export class AddEditCustomerComponent implements OnInit {
   @ViewChild(CustomerCouponsComponent) couponComponent: CustomerCouponsComponent;
   @ViewChild(CustomerGigsComponent) gigComponent: CustomerGigsComponent;
   @ViewChild(CustomerSettingsComponent) settingsComponent: CustomerSettingsComponent;
+  @ViewChild(CustomerGalleryComponent) galleryComponent: CustomerGalleryComponent;
   @ViewChild('customertabs') customertabs: NgbTabset;
   paymentMethods = [];
   categoryList = [];
@@ -44,6 +46,8 @@ export class AddEditCustomerComponent implements OnInit {
   userstoragedata = {} as any;
   customerErrObj = AppMessages.VALIDATION.BUSINESS;
   customerObj = {} as any;
+  branchFlag = false;
+  parentid;
   constructor(private fb: FormBuilder,
     private categoryService: MasterService.CategoryService,
     private lookupService: AdminService.LookupService,
@@ -61,7 +65,8 @@ export class AddEditCustomerComponent implements OnInit {
         this.getCustomerDetail();
       }
       if (params.flag !== undefined) {
-        
+        this.branchFlag = true;
+        this.parentid = params.parentid;
       }
     });
   }
@@ -195,6 +200,9 @@ export class AddEditCustomerComponent implements OnInit {
       console.log(this.customerForm.value);
       const data = this.customerForm.value;
       const formdata = { ...data } as any;
+      if (this.branchFlag) {
+        formdata.parentmembershipid = Number(this.parentid);
+      }
       formdata.workhours = data.starttime + '-' + data.endtime;
       formdata.locationid = Number(data.locationid);
       formdata.categoryid = Number(data.categoryid);
@@ -202,6 +210,7 @@ export class AddEditCustomerComponent implements OnInit {
       formdata.updatedby = this.userstoragedata.fullname;
       formdata.updateddt = new Date();
       formdata.contactmobile = _.map(data.contactmobile, _.property('value'));
+      formdata.phoneno = _.map(data.phoneno, _.property('value'));
       formdata.tags = _.map(data.tags, _.property('value'));
       formdata.tncagreed = data.tncagreed ? 'Y' : 'N';
       formdata.inmallyn = data.inmallyn ? 'Y' : 'N';
@@ -277,6 +286,10 @@ export class AddEditCustomerComponent implements OnInit {
           return false;
         }
         break;
+      case '7':
+        if (this.galleryComponent.displayImgList.length > 0) {
+          this.galleryComponent.saveOrUpdateGalleries();
+        }
     }
   }
   onCustomerTabChange(event) {
@@ -294,6 +307,12 @@ export class AddEditCustomerComponent implements OnInit {
       this.customerObj.lng = this.customerObj.geoaddress.lng;
     }
     this.customerObj.contactmobile = _.map(this.customerObj.contactmobile, function (item) {
+      return {
+        value: item,
+        display: item
+      };
+    });
+    this.customerObj.phoneno = _.map(this.customerObj.phoneno, function (item) {
       return {
         value: item,
         display: item

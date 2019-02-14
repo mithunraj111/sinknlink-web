@@ -14,11 +14,11 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { AccordionAnchorDirective } from './accordion/accordionanchor.directive';
 import { AccordionLinkDirective } from './accordion/accordionlink.directive';
 import { AccordionDirective } from './accordion/accordion.directive';
-import { CategoryService } from '../services/masters/category.service';
 import { LoginService } from '../services/auth/login.service';
 import { ForgotPasswordService } from '../services/auth/forgotpassword.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BusinessService, MasterService, AdminService, AppCommonService } from '../services';
+import { ImageUploaderComponent } from './image-uploader/image-uploader.component';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -48,7 +48,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ModalAnimationComponent,
     SpinnerComponent,
     ClickOutsideModule,
-    NgxDatatableModule
+    NgxDatatableModule,
+    ImageUploaderComponent
   ],
   declarations: [
     ToggleFullScreenDirective,
@@ -59,7 +60,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     TitleComponent,
     CardComponent,
     ModalAnimationComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    ImageUploaderComponent
   ],
   providers: [
     {

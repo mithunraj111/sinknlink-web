@@ -12,7 +12,6 @@ import { TagInputModule } from 'ngx-chips';
 import { AddEditDonationComponent } from './donations/add-edit-donation/add-edit-donation.component';
 import { AddEditEventComponent } from './events/add-edit-event/add-edit-event.component';
 import { FileUploadModule } from 'ng2-file-upload';
-import { ImageUploaderComponent } from '../shared/image-uploader/image-uploader.component';
 import { VipNumberRegistrationComponent } from './vip-number-registration/vip-number-registration.component';
 import { AddEditVipRegistrationNumberComponent } from './vip-number-registration/add-edit-vip-registration-number/add-edit-vip-registration-number.component';
 import { LookupComponent } from './lookup/lookup.component';
@@ -37,7 +36,6 @@ import { AddEditLookupComponent } from './lookup/add-edit-lookup/add-edit-lookup
     DonationsComponent,
     AddEditDonationComponent,
     AddEditEventComponent,
-    ImageUploaderComponent,
     VipNumberRegistrationComponent,
     AddEditVipRegistrationNumberComponent,
     LookupComponent,

@@ -69,6 +69,10 @@ export class CustomerBranchesComponent extends BaseService implements OnInit, On
     this.branchtable.offset = 0;
   }
   redirectToBranch(id) {
-    this.router.navigate(['/business/branch', { flag: 'bd00085branch', id: id, }]);
+    this.router.navigate(['/business/branch', { flag: 'bd00085branch', id: id, parentid: this.customerObj.membershipid }]);
   }
+  newBranch() {
+    this.router.navigate(['/business/branch', { flag: 'bd00085branch', parentid: this.customerObj.membershipid }]);
+  }
+
 }

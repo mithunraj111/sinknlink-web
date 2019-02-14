@@ -74,8 +74,12 @@ export class LookupComponent extends BaseService implements OnInit {
     this.openLookupModal('lookupmodal');
   }
   notifyLookupEntry(event) {
-    this.getLookupList(this.selectedKeyType);
-    this.closeLookupModal('lookupmodal');
+    if (!event.close) {
+      this.getLookupList(this.selectedKeyType);
+      this.closeLookupModal('lookupmodal');
+    } else {
+      this.closeLookupModal('lookupmodal');
+    }
   }
   updateLookupStatus(data, index, flag) {
     const updateObj = {
