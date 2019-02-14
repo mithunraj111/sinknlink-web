@@ -122,6 +122,7 @@ export class CustomerGigsComponent implements OnInit, OnChanges {
             const response = JSON.parse(res._body);
             if (response.status) {
               this.bootstrapAlertService.showSucccess(response.message);
+              this.gigsList = [response.data, ...this.gigsList];
               this.initGigForm();
             } else {
               this.bootstrapAlertService.showError(response.message);
