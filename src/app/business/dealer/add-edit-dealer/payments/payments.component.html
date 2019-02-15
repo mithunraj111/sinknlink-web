@@ -3,13 +3,15 @@
         <div class="col-md-6 col-sm-6">
             <h3 class="f-18 text-primary m-l-15 p-t-10">Payments</h3>
         </div>
-        <div class="col-md-6 col-sm-6 p-r-40">
+        <div class="col-md-6 col-sm-6">
             <div class="text-right">
-                <label>Search:
-                    <input #dealerPaymentSearch type='text' class="header-search form-control input-sm full-data-search" placeholder='Search here'
-                        (keyup)='search($event)' placement="bottom" ngbTooltip="Type here to search" />
-                    <button type="button" class="btn search-close" (click)="dealerPaymentSearch.value='';search();"><i class="fa fa-close"></i></button>
-                </label>
+                <label class="col-md-3 p-l-0"><b>Search:</b></label>
+                <input #dealerPaymentSearch type='text' class="header-search form-control col-md-8 col-sm-8 p-l-0 p-r-0 input-sm full-data-search"
+                    placeholder='Search here' (keyup)='search($event)' placement="bottom"
+                    ngbTooltip="Type here to search" />
+                <button type="button" class="btn search-close col-md-1 col-sm-1 p-l-0 p-r-0" (click)="dealerPaymentSearch.value='';search();"><i
+                        class="fa fa-close"></i></button>
+
             </div>
         </div>
     </div>
@@ -17,16 +19,17 @@
 <div class="header-block">
     <div class="table-header fixed-table-header">
         <app-card [classHeader]="true">
-            <ngx-datatable #dealerpaymttable class="table data-table expandable" [rows]='dealerPayments' [columnMode]="'flex'"
-                [headerHeight]="50" [footerHeight]="50" [limit]="10" [rowHeight]="'auto'" [reorderable]="false" [messages]="emptymessages">
+            <ngx-datatable #dealerpaymttable class="table data-table expandable" [rows]='dealerPayments'
+                [columnMode]="'flex'" [headerHeight]="50" [footerHeight]="50" [limit]="10" [rowHeight]="'auto'"
+                [reorderable]="false" [messages]="emptymessages">
                 <!-- Row Detail Template -->
                 <ngx-datatable-column prop="paymentdate" name="Payment Date" [resizeable]="false">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                         <span>{{row.paymentdate|date:datedisplayformat}}</span>
                     </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column prop="totalamount" name="Amount" headerClass="text-right" [cellClass]="'text-right table-padding'"
-                    [resizeable]="false">
+                <ngx-datatable-column prop="totalamount" name="Amount" headerClass="text-right"
+                    [cellClass]="'text-right table-padding'" [resizeable]="false">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                         <span>{{row.totalamount|currency : 'INR' : true}}</span>
                     </ng-template>
@@ -47,7 +50,8 @@
                         <span>{{row.paymentstatus}}</span>
                     </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.5" [cellClass]="'text-center action'">
+                <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.5"
+                    [cellClass]="'text-center action'">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                         <a (click)="viewPayment(row)" class="crm-action-edit text-primary">
                             <i class="fa fa-eye"></i></a>
@@ -109,6 +113,7 @@
                 </div>
             </div>
         </div>
-        <button (click)="close('paymentDetailModal')" aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>
+        <button (click)="close('paymentDetailModal')" aria-label="Close" class="md-close-btn"><i
+                class="fa fa-close"></i></button>
     </app-modal-animation>
 </div>

@@ -1,5 +1,5 @@
-<div class="header-title m-t-60 mb-3">
-    <h3 class="f-18 text-primary m-l-15">Gigs</h3>
+<div class="header-title">
+    <h3 class="f-18 text-primary m-l-15 m-t-10">Gigs</h3>
 </div>
 <form [formGroup]="gigForm">
     <div class="employee-form">
@@ -16,7 +16,8 @@
                         <label class="col-md-3 col-sm-6 col-form-label text-right">Post Type</label>
                         <div class="col-md-9 col-sm-6">
                             <div class="input-box">
-                                <ng-select [allowClear]="true" [ngClass]="'ng-select'" formControlName="posttype" [options]="posttypes" placeholder="Select Post type"></ng-select>
+                                <ng-select [allowClear]="true" [ngClass]="'ng-select'" formControlName="posttype"
+                                    [options]="posttypes" placeholder="Select Post type"></ng-select>
                             </div>
                         </div>
                     </div>
@@ -29,13 +30,15 @@
                     <div class="form-group row required">
                         <label class="col-md-3 col-sm-6 col-form-label text-right">Contact Person</label>
                         <div class="col-md-9 col-sm-6">
-                            <input type="text" class="form-control" placeholder="Contact Person" formControlName="contactperson">
+                            <input type="text" class="form-control" placeholder="Contact Person"
+                                formControlName="contactperson">
                         </div>
                     </div>
                     <div class="form-group row required">
                         <label class="col-md-3 col-sm-6 col-form-label text-right">Contact Mobile</label>
                         <div class="col-md-9 col-sm-6">
-                            <input type="text" class="form-control" placeholder="Contact Mobile" formControlName="contactmobile">
+                            <input type="text" class="form-control" placeholder="Contact Mobile"
+                                formControlName="contactmobile">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -47,7 +50,8 @@
                     <div class="form-group row required" *ngIf="gigObj?.gigid">
                         <label class="col-md-3 col-sm-6 col-form-label text-right">Status</label>
                         <div class="col-md-9 col-sm-6">
-                            <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="$primary-color" switchColor="#fff" size="small" checked></ui-switch>
+                            <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status"
+                                color="$primary-color" switchColor="#fff" size="small" checked></ui-switch>
                         </div>
                     </div>
                 </div>
@@ -56,17 +60,20 @@
     </div>
 </form>
 
-<div class="header-title addeditpage m-t-40 mb-3">
+<div class="header-title addeditpage m-t-10 mb-3">
     <div class="row">
         <div class="col-md-6 col-sm-6">
             <h3 class="f-18 text-primary m-l-15 p-t-10">History</h3>
         </div>
-        <div class="col-md-6 col-sm-6 p-r-40">
+        <div class="col-md-6 col-sm-6">
             <div class="text-right">
-                    <label class="col-md-3 p-l-0"><b>Search:</b></label>
-                    <input #gigsSearch type='text' class="header-search form-control col-md-8 col-sm-8 p-l-0 p-r-0 input-sm full-data-search" placeholder='Search here'
-            (keyup)='search($event)' placement="bottom" ngbTooltip="Type here to search" />
-          <button type="button" class="btn search search-close col-md-1 col-sm-1 p-l-0 p-r-0" (click)="gigsSearch.value='';search();"><i class="fa fa-close"></i></button>
+                <label class="col-md-3 p-l-0"><b>Search:</b></label>
+                <input #gigsSearch type='text'
+                    class="header-search form-control col-md-8 col-sm-8 p-l-0 p-r-0 input-sm full-data-search"
+                    placeholder='Search here' (keyup)='search($event)' placement="bottom"
+                    ngbTooltip="Type here to search" />
+                <button type="button" class="btn search search-close col-md-1 col-sm-1 p-l-0 p-r-0"
+                    (click)="gigsSearch.value='';search();"><i class="fa fa-close"></i></button>
             </div>
         </div>
     </div>
@@ -75,8 +82,9 @@
 <div class="header-block">
     <div class="table-header fixed-table-header">
         <app-card [classHeader]="true">
-            <ngx-datatable #gigstable class="table data-table expandable" [rows]='gigsList' [columnMode]="'flex'" 
-                [headerHeight]="50" [footerHeight]="50" [limit]="5" [rowHeight]="'auto'" [reorderable]="false" [messages]="emptymessages">
+            <ngx-datatable #gigstable class="table data-table expandable" [rows]='gigsList' [columnMode]="'flex'"
+                [headerHeight]="50" [footerHeight]="50" [limit]="5" [rowHeight]="'auto'" [reorderable]="false"
+                [messages]="emptymessages">
                 <!-- Row Detail Template -->
                 <ngx-datatable-column prop="postname" name="Post Name" [resizeable]="false">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
@@ -95,16 +103,22 @@
                         <span class="updatedate">{{row.updateddt|date:datedisplayformat}}</span>
                     </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column name="Status" [sortable]="false" [flexGrow]="0.5" [cellClass]="'text-center status'" headerClass="text-right">
+                <ngx-datatable-column name="Status" [sortable]="false" [flexGrow]="0.5"
+                    [cellClass]="'text-center status'" headerClass="text-right">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                        <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="$primary-color" switchColor="#fff" size="small" [checked]="row.status == 'Active'" (change)="updategigStatus(row,rowIndex,false)"></ui-switch>
+                        <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status"
+                            color="$primary-color" switchColor="#fff" size="small" [checked]="row.status == 'Active'"
+                            (change)="updategigStatus(row,rowIndex,false)"></ui-switch>
                     </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.5" [cellClass]="'text-center action'" headerClass="text-right">
+                <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.5"
+                    [cellClass]="'text-center action'" headerClass="text-right">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                        <a placement="bottom" ngbTooltip="Click to edit gigs" class="m-r-15 crm-action-edit text-primary" (click)="editGig(row)">
+                        <a placement="bottom" ngbTooltip="Click to edit gigs"
+                            class="m-r-15 crm-action-edit text-primary" (click)="editGig(row)">
                             <i class="fa fa-pencil"></i></a>
-                        <a placement="bottom" ngbTooltip="Click to delete gigs" class="crm-action-delete text-danger" (click)="updategigStatus(row,rowIndex,true)">
+                        <a placement="bottom" ngbTooltip="Click to delete gigs" class="crm-action-delete text-danger"
+                            (click)="updategigStatus(row,rowIndex,true)">
                             <i class="fa fa-trash"></i></a>
                     </ng-template>
                 </ngx-datatable-column>
