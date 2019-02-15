@@ -8,8 +8,12 @@
                         <p *ngIf="donationObj?.donationid" class="m-b-0">ID:{{donationObj?.donationid}}</p>
                     </div>
                     <div class="col-md-6 col-sm-6 save-button text-right p-r-30">
-                        <button [disabled]="validatingDonation" type="button" placement="bottom" ngbTooltip="Click to {{buttontext}} donation" (click)="saveOrUpdateDonation()" class="btn btn-primary waves-effect m-r-10 text-capitalize">{{buttontext}}</button>
-                        <button type="button" placement="bottom" ngbTooltip="Go back" routerLink="/admin/donations" class="btn btn-inverse btn-primary waves-effect"><i class="fa fa-arrow-circle-left"></i></button>
+                        <button [disabled]="validatingDonation" type="button" placement="bottom"
+                            ngbTooltip="Click to {{buttontext}} donation" (click)="saveOrUpdateDonation()"
+                            class="btn btn-primary waves-effect m-r-10 text-capitalize">{{buttontext}}</button>
+                        <button type="button" placement="bottom" ngbTooltip="Go back" routerLink="/admin/donations"
+                            class="btn btn-inverse btn-primary waves-effect"><i
+                                class="fa fa-arrow-circle-left"></i></button>
                     </div>
                 </div>
             </div>
@@ -19,20 +23,24 @@
                 <div class="row">
                     <div class="col-md-9 col-sm-9 p-l-0 p-r-10">
                         <div class="employee-form">
-                            <div class="card tenants-page tenants-pages m-b-10 m-t-60">
+                            <div class="card tenants-page tenants-pages m-b-10 m-t-15">
                                 <div class="row p-t-10 p-b-5">
                                     <div class="col-md-12 col-sm-12">
                                         <div class="form-group row required">
-                                            <label class="col-md-3 col-sm-6 col-form-label text-right">Charity Name</label>
+                                            <label class="col-md-3 col-sm-6 col-form-label text-right">Charity
+                                                Name</label>
                                             <div class="col-md-9 col-sm-6">
-                                                <input type="text" class="form-control" name="charityname" formControlName="charityname" placeholder="Charity Name">
+                                                <input type="text" class="form-control" name="charityname"
+                                                    formControlName="charityname" placeholder="Charity Name">
                                             </div>
                                         </div>
                                         <div class="form-group row required">
-                                            <label class="col-md-3 col-sm-6 col-form-label text-right">Start Date</label>
+                                            <label class="col-md-3 col-sm-6 col-form-label text-right">Start
+                                                Date</label>
                                             <div class="col-md-9 col-sm-6">
                                                 <div class="input-group">
-                                                    <input class="form-control" placeholder="dd-mm-yyyy" name="dp" ngbDatepicker #dp="ngbDatepicker" formControlName="startdate">
+                                                    <input class="form-control" placeholder="dd-mm-yyyy" name="dp"
+                                                        ngbDatepicker #dp="ngbDatepicker" formControlName="startdate">
                                                     <div class="input-group-append bg-default" (click)="dp.toggle()">
                                                         <span class="fa fa-calendar input-group-text"></span>
                                                     </div>
@@ -43,7 +51,8 @@
                                             <label class="col-md-3 col-sm-6 col-form-label text-right">End Date</label>
                                             <div class="col-md-9 col-sm-6">
                                                 <div class="input-group">
-                                                    <input class="form-control" placeholder="dd-mm-yyyy" name="dp" ngbDatepicker #d="ngbDatepicker" formControlName="enddate">
+                                                    <input class="form-control" placeholder="dd-mm-yyyy" name="dp"
+                                                        ngbDatepicker #d="ngbDatepicker" formControlName="enddate">
                                                     <div class="input-group-append bg-default" (click)="d.toggle()">
                                                         <span class="fa fa-calendar input-group-text"></span>
                                                     </div>
@@ -51,10 +60,14 @@
                                             </div>
                                         </div>
                                         <div class="form-group row ">
-                                            <label class="col-md-3 col-sm-6 col-form-label text-right">Preferred Amount</label>
+                                            <label class="col-md-3 col-sm-6 col-form-label text-right">Preferred
+                                                Amount</label>
                                             <div class="col-md-9 col-sm-6">
                                                 <div class="input-box">
-                                                    <tag-input [ngClass]="'tag-select'" theme='bootstrap' [placeholder]="'+'" [maxItems]="5" [addOnBlur]="true" [clearOnBlur]="true" [secondaryPlaceholder]="'Preferred Amount'" name="amount" formControlName="amount">
+                                                    <tag-input [ngClass]="'tag-select'" theme='bootstrap'
+                                                        [placeholder]="'+'" [maxItems]="5" [addOnBlur]="true"
+                                                        [clearOnBlur]="true" [secondaryPlaceholder]="'Preferred Amount'"
+                                                        name="amount" formControlName="amount">
                                                     </tag-input>
                                                 </div>
                                             </div>
@@ -62,15 +75,20 @@
                                         <div class="form-group row">
                                             <label class="col-md-3 col-sm-6 col-form-label text-right">Cause</label>
                                             <div class="col-md-9 col-sm-6">
-                                                <textarea rows="3" cols="3" class="form-control" placeholder="Cause for donating fund" name="causeremarks" formControlName="causeremarks"></textarea>
+                                                <textarea rows="3" cols="3" class="form-control"
+                                                    placeholder="Cause for donating fund" name="causeremarks"
+                                                    formControlName="causeremarks"></textarea>
 
                                             </div>
                                         </div>
                                         <div *ngIf="donationObj?.donationid">
                                             <div class="form-group row required">
-                                                <label class="col-md-3 col-sm-6 col-form-label text-right">Status</label>
+                                                <label
+                                                    class="col-md-3 col-sm-6 col-form-label text-right">Status</label>
                                                 <div class="col-md-9 col-sm-6">
-                                                    <ui-switch class="js-small" formControlName="status" color="$primary-color" switchColor="#fff" size="small" checked></ui-switch>
+                                                    <ui-switch class="js-small" formControlName="status"
+                                                        color="$primary-color" switchColor="#fff" size="small" checked>
+                                                    </ui-switch>
                                                 </div>
                                             </div>
                                         </div>

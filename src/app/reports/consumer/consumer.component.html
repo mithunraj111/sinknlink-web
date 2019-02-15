@@ -49,7 +49,7 @@
                     </div>
                   </div>
                   <div class="col-md-5 col-sm-3 p-l-0 p-r-5">
-                    <div class="form-group">
+                    <div class="form-group consumer-tag">
                       <label>Area</label>
                       <div class="input-group">
                         <ng-select [multiple]="true" [ngClass]="'ng-select'" placeholder="All" formControlName="area"
@@ -58,8 +58,9 @@
                     </div>
                   </div>
                   <div class="col-md-2 col-sm-1 m-t-35">
-                    <button type="button" placement="bottom" ngbTooltip="Click to search" class="btn btn-primary generate-button waves-effect"
-                      (click)="getConsumerReports()"> <i class="fa fa-search"></i>
+                    <button type="button" placement="bottom" ngbTooltip="Click to search"
+                      class="btn btn-primary generate-button waves-effect" (click)="getConsumerReports()"> <i
+                        class="fa fa-search"></i>
                     </button>
                   </div>
                 </div>
@@ -81,22 +82,24 @@
               <div class="col-sm-12 header-title">
                 <label class="dt-cust-search f-right">
                   <div class="form-group">
-                    <input #consumerReportSearch type='text' class="form-control input-sm report-search" placeholder='Search here'
-                      (keyup)='search($event)' />
+                    <input #consumerReportSearch type='text' class="form-control input-sm report-search"
+                      placeholder='Search here' (keyup)='search($event)' />
                     <button type="button" class="btn search-close" (click)="consumerReportSearch.value='';search();"><i
                         class="fa fa-close"></i></button>
 
-                    <button type="button" placement="bottom" ngbTooltip="Click to download reports" class="btn btn-primary waves-effect download-btn"><i
-                        class="fa fa-download m-r-5"></i>
+                    <button type="button" placement="bottom" ngbTooltip="Click to download reports"
+                      class="btn btn-primary waves-effect download-btn"><i class="fa fa-download m-r-5"></i>
                     </button>
                   </div>
                 </label>
               </div>
             </div>
-            <ngx-datatable #consumertable class="table data-table expandable" [rows]='consumerList' [columnMode]="'flex'"
-              [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false" [footerHeight]="50" [limit]="5" [messages]="emptymessages">
+            <ngx-datatable #consumertable class="table data-table expandable" [rows]='consumerList'
+              [columnMode]="'flex'" [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false" [footerHeight]="50"
+              [limit]="5" [messages]="emptymessages">
 
-              <ngx-datatable-column prop="date" name="Date" [resizeable]="false" headerClass="text-left" [cellClass]="'text-left'">
+              <ngx-datatable-column prop="date" name="Date" [resizeable]="false" headerClass="text-left"
+                [cellClass]="'text-left'">
                 <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                   <span>{{row.date|date:displaydateformat}}</span>
                 </ng-template>￼
@@ -122,8 +125,8 @@
                 </ng-template>
               </ngx-datatable-column>
 
-              <ngx-datatable-column prop="totalconsumers" name="No. of Consumers" [resizeable]="false" headerClass="text-right"
-                [cellClass]="'text-right'">
+              <ngx-datatable-column prop="totalconsumers" name="No. of Consumers" [resizeable]="false"
+                headerClass="text-right" [cellClass]="'text-right'">
                 <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                   <span>{{row.count}}</span>
                 </ng-template>

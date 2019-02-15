@@ -621,7 +621,11 @@ ng-select.ng-select > div {
   margin-right: 6px;
   width: 16px;
 }
-
+.consumer-tag{
+  .option{
+    width: 100%;
+  }
+}
 ng-select.ng-select > div > div {
   &.multiple {
     border: 1px solid #aaa;
@@ -640,7 +644,6 @@ ng-select.ng-select > div > div {
       padding: 5px 10px !important;
       color: #fff !important;
       margin: 0 2px 2px !important;
-      width: 100%;
     }
   }
   &.single > div {

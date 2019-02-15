@@ -191,17 +191,17 @@
 <div class="modal-size">
   <app-modal-animation [modalID]="'vipnoregmodal'" [modalClass]="'md-effect-7'">
     <h3 class="f-26">{{formTitle}}</h3>
-    <div class="form-header">
+    <div class="form-header business-select">
       <div class="form-group row required">
-        <label class="col-md-3 col-sm-6 col-form-label text-right">Select Business</label>
-        <div class="col-md-9 col-sm-6">
+        <label>Select Business</label>
+        <div class="col-md-12">
           <ng-select [(ngModel)]="selectedBiz" class="ng-select location-title" placeholder="Select Business" [options]="parentBiz">
           </ng-select>
         </div>
       </div>
       <div class="form-group row" *ngIf="formTitle == 'Block'">
-        <label class="col-md-3 col-sm-6 col-form-label text-right">Remarks</label>
-        <div class="col-md-9 col-sm-6">
+        <label>Remarks</label>
+        <div class="col-md-12">
           <textarea [(ngModel)]="blockRemarks" name="remarks" id="block_remarks"></textarea>
         </div>
       </div>
