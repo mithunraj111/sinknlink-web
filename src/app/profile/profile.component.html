@@ -1,5 +1,5 @@
 <div class="fixedheader">
-  <div class="header-title m-b-15  pos-fixed">
+  <div class="header-title m-b-15 pos-fixed">
     <div class="row">
       <div class="col-md-4 col-sm-4">
         <h2>User Profile</h2>
@@ -18,12 +18,12 @@
     <div class="col-md-8 col-sm-8 p-l-0 p-r-10">
       <div class="user-form">
         <form [formGroup]="profileForm">
-          <div class="card tenants-page tenants-pages m-b-10 m-t-50">
+          <div class="card tenants-page tenants-pages m-b-10 m-t-10">
             <div class="row p-t-10 p-b-5">
               <div class="col-md-12 col-sm-12">
                 <div class="form-group row required">
                   <label class="col-md-3 col-sm-6 col-form-label text-right">Full Name</label>
-                  <div class="col-md-6 col-sm-6 p-r-0">
+                  <div class="col-md-7 col-sm-6 p-r-0">
                     <input type="text" class="form-control" name="fullname" formControlName="fullname" placeholder="Full Name">
 
                   </div>
@@ -31,52 +31,52 @@
 
                 <div class="form-group row">
                   <label class="col-md-3 col-sm-6 col-form-label text-right">Mobile No</label>
-                  <div class="col-md-6 col-sm-6 p-r-0">
+                  <div class="col-md-7 col-sm-6 p-r-0 p-t-10">
                     <span>{{userObj?.mobileno}}</span>
                   </div>
                 </div>
 
                 <div class="form-group row role-dropdown">
                   <label class="col-md-3 col-sm-6 col-form-label text-right">Role</label>
-                  <div class="col-md-6 col-sm-6 p-r-0">
+                  <div class="col-md-7 col-sm-6 p-r-0 p-t-10">
                     <span>{{userObj.role?.rolename}}</span>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-md-3 col-sm-6 col-form-label text-right">Last Login</label>
-                  <div class="col-md-6 col-sm-6 m-t-5">
+                  <div class="col-md-7 col-sm-6 m-t-5">
                     <span>{{userObj.lastlogin|date:displayformat}}</span>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-md-3 col-sm-6 col-form-label text-right">Email ID</label>
-                  <div class="col-md-6 col-sm-6 p-r-0">
+                  <div class="col-md-7 col-sm-6 p-r-0">
                     <input type="text" class="form-control" name="emaiid" formControlName="emailid" placeholder="Email ID">
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-md-3 col-sm-6 col-form-label text-right">Address</label>
-                  <div class="col-md-6 col-sm-6 p-r-0">
+                  <div class="col-md-7 col-sm-6 p-r-0">
                     <textarea rows="3" cols="3" class="form-control" name="address" formControlName="address"></textarea>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-md-3 col-sm-6 col-form-label text-right">Location</label>
-                  <div class="col-md-6 col-sm-6 p-r-0">
+                  <div class="col-md-7 col-sm-6 p-r-0">
                     <ng-select [allowClear]="true" [ngClass]="'ng-select'" formControlName="locationid" [options]="locationList"
                       placeholder="Select location" [allowClear]="true"></ng-select>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-md-3 col-sm-6 col-form-label text-right">Social ID's</label>
-                  <div class="col-md-6 col-sm-6 p-r-0">
-                    <div class="input-group">
-                      <input type="text" class="form-control w-75" formControlName="socialid" placeholder="Social ID's"
+                  <div class="col-md-7 col-sm-6 p-r-0">
+                    <div class="input-group pull-left">
+                      <input type="text" class="form-control" formControlName="socialid" placeholder="Social ID's"
                         readonly>
-                      <div class="input-group-append bg-default" (click)='addSocialId();'>
+                    </div>
+                    <div class="input-group-append plus-icon pull-left" (click)='addSocialId();'>
                         <span class="fa fa-plus input-group-text"></span>
                       </div>
-                    </div>
                   </div>
                 </div>
               </div>

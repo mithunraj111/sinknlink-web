@@ -5,7 +5,7 @@
         <h2>VIP Number Registration</h2>
         <p>VIP number status can be checked and blocked.</p>
       </div>
-      <div class="col-md-3 col-sm-4">
+      <div class="col-md-5 col-sm-5">
         <div class="text-right">
           <label class="col-md-3 p-l-0"><b>Search:</b></label>
           <input #vipnoregSearch type="text" (keyup)='search($event)' class="header-search form-control col-md-8 col-sm-8 p-l-0 p-r-0 input-sm full-data-search"
@@ -192,16 +192,16 @@
   <app-modal-animation [modalID]="'vipnoregmodal'" [modalClass]="'md-effect-7'">
     <h3 class="f-26">{{formTitle}}</h3>
     <div class="form-header business-select">
-      <div class="form-group row required">
+      <div class="form-group required">
         <label>Select Business</label>
-        <div class="col-md-12">
+        <div class="col-md-12 p-l-0 p-r-0">
           <ng-select [(ngModel)]="selectedBiz" class="ng-select location-title" placeholder="Select Business" [options]="parentBiz">
           </ng-select>
         </div>
       </div>
-      <div class="form-group row" *ngIf="formTitle == 'Block'">
+      <div class="form-group" *ngIf="formTitle == 'Block'">
         <label>Remarks</label>
-        <div class="col-md-12">
+        <div class="col-md-12 p-l-0 p-r-0">
           <textarea [(ngModel)]="blockRemarks" name="remarks" id="block_remarks"></textarea>
         </div>
       </div>
