@@ -1113,6 +1113,7 @@ button{
     }
     .report-search{
         margin-top:-3px;
+        width: auto !important;
         &:focus{
             border:1px solid transparent !important;
         }
