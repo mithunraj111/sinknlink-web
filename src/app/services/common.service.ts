@@ -65,11 +65,10 @@ export class CommonService {
 
     parseDate(dateString) {
         const date = new Date(dateString);
-        console.log(date);
         return this.ngbDateParserFormatter.parse(date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate());
     }
     formatDate(dateObj: NgbDateFormat) {
-        return new Date(dateObj.year, (dateObj.month - 1), dateObj.day);
+        return this.ngbDateParserFormatter.format(dateObj);
     }
     getCurrentDate(datepicker?) {
         if (datepicker) {

@@ -48,6 +48,7 @@ export class AddEditCustomerComponent implements OnInit {
   customerObj = {} as any;
   branchFlag = false;
   parentid;
+  isAddForm = true;
   constructor(private fb: FormBuilder,
     private categoryService: MasterService.CategoryService,
     private lookupService: AdminService.LookupService,
@@ -63,6 +64,7 @@ export class AddEditCustomerComponent implements OnInit {
       if (params.id !== undefined) {
         this.customerid = params.id;
         this.getCustomerDetail();
+        this.isAddForm = false;
       }
       if (params.flag !== undefined) {
         this.branchFlag = true;
@@ -196,8 +198,6 @@ export class AddEditCustomerComponent implements OnInit {
       this.bootstrapAlertService.showError(errMessage);
       return false;
     } else {
-      console.log(this.customerForm);
-      console.log(this.customerForm.value);
       const data = this.customerForm.value;
       const formdata = { ...data } as any;
       if (this.branchFlag) {
@@ -252,6 +252,7 @@ export class AddEditCustomerComponent implements OnInit {
           const response = JSON.parse(res._body);
           if (response.status) {
             this.customerObj = response.data;
+            this.isAddForm = false;
             this.bootstrapAlertService.showSucccess(response.message);
           } else {
             this.bootstrapAlertService.showError(response.message);

@@ -190,11 +190,10 @@
                                                             <label class="border-checkbox-label" for="inmall">Business In Mall</label>
                                                         </div>
                                                     </div>
-                                                    <div *ngIf= "customerForm.value.inmallyn == true" class="form-group row">
+                                                    <div *ngIf="customerForm.value.inmallyn == true" class="form-group row">
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Mall Name</label>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <ng-select [allowClear]="true" [ngClass]="'ng-select'" [options]="mallsList" formControlName="mallname" 
-                                                                placeholder="Select Mall Name">
+                                                            <ng-select [allowClear]="true" [ngClass]="'ng-select'" [options]="mallsList" formControlName="mallname" placeholder="Select Mall Name">
                                                             </ng-select>
                                                         </div>
                                                     </div>
@@ -250,12 +249,12 @@
                                                             <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="$primary-color" switchColor="#fff" size="small" formControlName="status"></ui-switch>
                                                         </div>
                                                     </div>
-                                                    <div class="form-group border-checkbox-section col-md-6 col-sm-7 m-l-35">
+                                                    <!-- <div class="form-group border-checkbox-section col-md-6 col-sm-7 m-l-35">
                                                         <div class="border-checkbox-group border-checkbox-group-primary pull-right">
                                                             <input class="border-checkbox" type="checkbox" id="detailst&c" formControlName="tncagreed">
                                                             <label class="border-checkbox-label" for="detailst&c">I agree to the Terms and Conditions</label>
                                                         </div>
-                                                    </div>
+                                                    </div> -->
                                                 </div>
                                             </div>
                                         </div>
@@ -264,42 +263,42 @@
                             </div>
                         </ng-template>
                     </ngb-tab>
-                    <ngb-tab title="Payments" id='2'>
+                    <ngb-tab title="Payments" id='2' [disabled]="isAddForm">
                         <ng-template ngbTabContent>
                             <div [@fadeInOutTranslate]>
                                 <app-customer-payments [customerObj]="customerObj"></app-customer-payments>
                             </div>
                         </ng-template>
                     </ngb-tab>
-                    <ngb-tab title="Branches" id='3' [ngStyle]="{'display': branchFlag ? 'none' : 'block'}">
+                    <ngb-tab title="Branches" id='3' [disabled]="isAddForm">
                         <ng-template ngbTabContent>
                             <div [@fadeInOutTranslate]>
                                 <app-customer-branches [customerObj]="customerObj"></app-customer-branches>
                             </div>
                         </ng-template>
                     </ngb-tab>
-                    <ngb-tab title="Settings" id='4'>
+                    <ngb-tab title="Settings" id='4' [disabled]="isAddForm">
                         <ng-template ngbTabContent>
                             <div [@fadeInOutTranslate]>
                                 <app-customer-settings [customerObj]="customerObj"></app-customer-settings>
                             </div>
                         </ng-template>
                     </ngb-tab>
-                    <ngb-tab title="Gigs" id='5'>
+                    <ngb-tab title="Gigs" id='5' [disabled]="isAddForm">
                         <ng-template ngbTabContent>
                             <div [@fadeInOutTranslate]>
                                 <app-customer-gigs [customerObj]="customerObj"></app-customer-gigs>
                             </div>
                         </ng-template>
                     </ngb-tab>
-                    <ngb-tab title="Coupons" id='6'>
+                    <ngb-tab title="Coupons" id='6' [disabled]="isAddForm">
                         <ng-template ngbTabContent>
                             <div [@fadeInOutTranslate]>
                                 <app-customer-coupons [customerObj]="customerObj"></app-customer-coupons>
                             </div>
                         </ng-template>
                     </ngb-tab>
-                    <ngb-tab title="Gallery" id='7'>
+                    <ngb-tab title="Gallery" id='7' [disabled]="isAddForm">
                         <ng-template ngbTabContent>
                             <div [@fadeInOutTranslate]>
                                 <app-customer-gallery [customerObj]="customerObj"></app-customer-gallery>
