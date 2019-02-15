@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DashboardService } from "../services/common";
 declare const AmCharts: any;
 
 
@@ -8,14 +9,16 @@ declare const AmCharts: any;
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  constructor() { }
+  counts = [];
+  count: any;
+  constructor(private dashboardService: DashboardService) { }
 
   ngOnInit() {
+    this.getDashboardCounts();
     setTimeout(() => {
       AmCharts.makeChart('analythics-graph', {
         'type': 'serial',
         'theme': 'light',
-
         'dataDateFormat': 'YYYY-MM-DD',
         'precision': 2,
         'valueAxes': [{
@@ -82,40 +85,40 @@ export class DashboardComponent implements OnInit {
           'date': '2019-01-01',
           'name': 0,
           'count': 0,
-
         }, {
           'date': '2019-01-02',
           'name': 0,
           'count': 0,
-
         }, {
           'date': '2019-01-03',
           'name': 0,
           'count': 0,
-
         }, {
           'date': '2019-01-04',
           'name': 30,
           'count': 0,
-
         }, {
           'date': '2019-01-05',
           'name': 0,
           'count': 20,
-
         }, {
           'date': '2019-01-06',
           'name': 25,
           'count': 0,
-
         }, {
           'date': '2019-01-07',
           'name': 0,
           'count': 0,
-
         }]
       });
     });
-
+  }
+  getDashboardCounts(){
+    this.dashboardService.getCounts({}).subscribe(res => {
+      const response = JSON.parse(res._body);
+      if (response.status) {
+        this.counts = response.data;
+      }
+    });
   }
 }

@@ -4,36 +4,36 @@
     <div class="col-md-6 col-xl-3">
       <div class="card bg-c-blue order-card">
         <div class="card-block">
-          <h6 class="m-b-20">Total no.of business</h6>
-          <h2 class="text-right"><i class="ti-shopping-cart f-left"></i><span>486</span></h2>
-          <p class="m-b-0">This Month<span class="f-right">351</span></p>
+          <h6 class="m-b-20">Total no. of business</h6>
+          <h2 class="text-right"><i class="ti-shopping-cart f-left p-r-10"></i><span>{{counts[0]?.count}}</span></h2>
+          <a class="text-white text-underline" [routerLink]="['/business/customers']">View Business</a>
         </div>
       </div>
     </div>
     <div class="col-md-6 col-xl-3">
       <div class="card bg-c-green order-card">
         <div class="card-block">
-          <h6 class="m-b-20">Total no.of dealers</h6>
-          <h2 class="text-right"><i class="ti-tag f-left"></i><span>1641</span></h2>
-          <p class="m-b-0">This Month<span class="f-right">213</span></p>
+          <h6 class="m-b-20">Total no. of dealers</h6>
+          <h2 class="text-right"><i class="ti-tag f-left p-r-10"></i><span>{{counts[2]?.count}}</span></h2>
+          <a class="text-white text-underline" [routerLink]="['/business/dealer']">View Dealers</a>
         </div>
       </div>
     </div>
     <div class="col-md-6 col-xl-3">
       <div class="card bg-c-yellow order-card">
         <div class="card-block">
-          <h6 class="m-b-20">Total no.of consumers</h6>
-          <h2 class="text-right"><i class="ti-reload f-left"></i><span>641</span></h2>
-          <p class="m-b-0">This Month<span class="f-right">441</span></p>
+          <h6 class="m-b-20">Total no. of consumers</h6>
+          <h2 class="text-right"><i class="ti-reload f-left p-r-10"></i><span>{{counts[1]?.count}}</span></h2>
+          <a class="text-white text-underline" [routerLink]="['/business/consumers']">View Consumers</a>
         </div>
       </div>
     </div>
     <div class="col-md-6 col-xl-3">
       <div class="card bg-c-pink order-card">
         <div class="card-block">
-          <h6 class="m-b-20">Total no.of payments</h6>
-          <h2 class="text-right"><i class="ti-wallet f-left"></i><span>562</span></h2>
-          <p class="m-b-0">This Month<span class="f-right">542</span></p>
+          <h6 class="m-b-20">Total no. of users</h6>
+          <h2 class="text-right"><i class="ti-wallet f-left p-r-10"></i><span>{{counts[3]?.count}}</span></h2>
+          <a class="text-white text-underline" [routerLink]="['/masters/users']">View Users</a>
         </div>
       </div>
     </div>

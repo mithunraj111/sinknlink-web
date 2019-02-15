@@ -130,6 +130,9 @@ export const AppConstant = Object.freeze({
         }
       },
       COMMON: {
+        DASHBOARD: {
+          ALL_COUNT: 'dashboard/dcount'
+        },
         REPORT: {
           AREA_COUNT: 'report/area',
           CATEGORY_COUNT: 'report/category',
