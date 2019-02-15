@@ -41,8 +41,8 @@
                     <div class="form-group">
                       <label>Payment Type</label>
                       <div class="input-group">
-                        <ng-select [allowClear]="true" [ngClass]="'ng-select'" [options]="paymentTypes"
-                          placeholder="All" formControlName="paymenttype">
+                        <ng-select [allowClear]="true" [ngClass]="'ng-select'" [options]="paymentTypes" placeholder="All"
+                          formControlName="paymenttype">
                         </ng-select>
                       </div>
                     </div>
@@ -52,15 +52,14 @@
                       <label>Payment Mode</label>
                       <div class="input-group">
                         <ng-select [multiple]="true" [ngClass]="'ng-select'" [options]="paymentModes" placeholder="All"
-                          formControlName="paymentmode" >
+                          formControlName="paymentmode">
                         </ng-select>
                       </div>
                     </div>
                   </div>
                   <div class="col-md-2 col-sm-2 m-t-35">
-                    <button type="button" placement="bottom" ngbTooltip="Click to search"
-                      class="btn btn-primary generate-button waves-effect" (click)="getPaymentList()"> <i
-                        class="fa fa-search"></i>
+                    <button type="button" placement="bottom" ngbTooltip="Click to search" class="btn btn-primary generate-button waves-effect"
+                      (click)="getPaymentList()"> <i class="fa fa-search"></i>
                     </button>
                   </div>
                 </div>
@@ -84,21 +83,21 @@
               <div class="col-sm-12 header-title">
                 <label class="dt-cust-search f-right">
                   <div class="form-group">
-                    <input #paymentReportSearch type='text' class="form-control input-sm report-search"
-                      placeholder='Search for here' (keyup)='search($event)' />
+                    <label class="col-md-3 p-l-0"><b>Search:</b></label>
+                    <input #paymentReportSearch type='text' class="form-control input-sm report-search" placeholder='Search here'
+                      (keyup)='search($event)' />
                     <button type="button" class="btn search-close" (click)="paymentReportSearch.value='';search();"><i
                         class="fa fa-close"></i></button>
 
-                    <button type="button" placement="bottom" ngbTooltip="Click to download reports"
-                      class="btn btn-primary waves-effect download-btn"><i class="fa fa-download m-r-5"></i>
+                    <button type="button" placement="bottom" ngbTooltip="Click to download reports" class="btn btn-primary waves-effect download-btn"><i
+                        class="fa fa-download m-r-5"></i>
                     </button>
                   </div>
                 </label>
               </div>
             </div>
             <ngx-datatable #paymenttable class="table data-table expandable" [rows]='paymentList' [columnMode]="'flex'"
-              [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false" [footerHeight]="50" [limit]="5"
-              [messages]="emptymessages">
+              [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false" [footerHeight]="50" [limit]="5" [messages]="emptymessages">
               <!-- Row Detail Template -->
               <ngx-datatable-column prop="paymentref" name="Reference#" [resizeable]="false">
                 <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>

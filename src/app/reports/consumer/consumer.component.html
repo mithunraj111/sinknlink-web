@@ -16,8 +16,7 @@
                     <div class="form-group">
                       <label>From Date</label>
                       <div class="input-group">
-                        <input class="form-control"  ngbDatepicker #fromdate="ngbDatepicker"
-                          formControlName="fromdate">
+                        <input class="form-control" ngbDatepicker #fromdate="ngbDatepicker" formControlName="fromdate">
                         <div class="input-group-append" (click)="fromdate.toggle()">
                           <span class="fa fa-calendar input-group-text"></span>
                         </div>
@@ -45,7 +44,7 @@
                       <label>City</label>
                       <div class="input-group">
                         <ng-select [allowClear]="true" [ngClass]="'ng-select'" placeholder="All" formControlName="city"
-                          [options]="cityList" (selected) = "selectCity($event)"></ng-select>
+                          [options]="cityList" (selected)="selectCity($event)"></ng-select>
                       </div>
                     </div>
                   </div>
@@ -54,7 +53,7 @@
                       <label>Area</label>
                       <div class="input-group">
                         <ng-select [multiple]="true" [ngClass]="'ng-select'" placeholder="All" formControlName="area"
-                          [options]="areaList" (selected) = "selectArea($event)"></ng-select>
+                          [options]="areaList" (selected)="selectArea($event)"></ng-select>
                       </div>
                     </div>
                   </div>
@@ -82,9 +81,11 @@
               <div class="col-sm-12 header-title">
                 <label class="dt-cust-search f-right">
                   <div class="form-group">
-                    <input #consumerReportSearch type='text' class="form-control input-sm report-search" placeholder='Search for here'
+                    <label class="col-md-3 p-l-0"><b>Search:</b></label>
+                    <input #consumerReportSearch type='text' class="form-control input-sm report-search" placeholder='Search here'
                       (keyup)='search($event)' />
-                    <button type="button" class="btn search-close" (click)="consumerReportSearch.value='';search();"><i class="fa fa-close"></i></button>
+                    <button type="button" class="btn search-close" (click)="consumerReportSearch.value='';search();"><i
+                        class="fa fa-close"></i></button>
 
                     <button type="button" placement="bottom" ngbTooltip="Click to download reports" class="btn btn-primary waves-effect download-btn"><i
                         class="fa fa-download m-r-5"></i>
@@ -96,12 +97,11 @@
             <ngx-datatable #consumertable class="table data-table expandable" [rows]='consumerList' [columnMode]="'flex'"
               [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false" [footerHeight]="50" [limit]="5" [messages]="emptymessages">
 
-              <ngx-datatable-column prop="date" name="Date" [resizeable]="false" headerClass="text-left"
-                [cellClass]="'text-left'">
+              <ngx-datatable-column prop="date" name="Date" [resizeable]="false" headerClass="text-left" [cellClass]="'text-left'">
                 <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                   <span>{{row.date|date:displaydateformat}}</span>
                 </ng-template>￼
-                Search for here
+                Search here
                 ￼￼
                 Date
                 Area
@@ -112,19 +112,19 @@
               </ngx-datatable-column>
 
               <ngx-datatable-column prop="location.area" name="Area" [resizeable]="false">
-                  <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                    <span>{{row.location?.area}}</span>
-                  </ng-template>
-                </ngx-datatable-column>
-            
+                <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                  <span>{{row.location?.area}}</span>
+                </ng-template>
+              </ngx-datatable-column>
+
               <ngx-datatable-column prop="location.city" name="City" [resizeable]="false">
-                  <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                    <span>{{row.location?.city}}</span>
-                  </ng-template>
-                </ngx-datatable-column>
+                <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                  <span>{{row.location?.city}}</span>
+                </ng-template>
+              </ngx-datatable-column>
 
               <ngx-datatable-column prop="totalconsumers" name="No. of Consumers" [resizeable]="false" headerClass="text-right"
-              [cellClass]="'text-right'">
+                [cellClass]="'text-right'">
                 <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                   <span>{{row.count}}</span>
                 </ng-template>

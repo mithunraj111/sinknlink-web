@@ -53,15 +53,14 @@
                     <div class="form-group">
                       <label>Area</label>
                       <div class="input-group">
-                        <ng-select [multiple]="true" [ngClass]="'ng-select'" placeholder="Select Area"
-                          formControlName="area" [options]="areaList"></ng-select>
+                        <ng-select [multiple]="true" [ngClass]="'ng-select'" placeholder="Select Area" formControlName="area"
+                          [options]="areaList"></ng-select>
                       </div>
                     </div>
                   </div>
                   <div class="col-md-2 col-sm-2 m-t-35  p-r-5">
-                    <button type="button" placement="bottom" ngbTooltip="Click to search"
-                      class="btn btn-primary generate-button waves-effect" (click)="getDealerReport()"> <i
-                        class="fa fa-search"></i>
+                    <button type="button" placement="bottom" ngbTooltip="Click to search" class="btn btn-primary generate-button waves-effect"
+                      (click)="getDealerReport()"> <i class="fa fa-search"></i>
                     </button>
                   </div>
                 </div>
@@ -83,24 +82,23 @@
               <div class="col-sm-12 header-title">
                 <label class="dt-cust-search f-right">
                   <div class="form-group">
-                    <input #dealerReportSearch type='text' class="form-control input-sm report-search"
-                      placeholder='Search for here' (keyup)='search($event)' />
+                    <label class="col-md-3 p-l-0"><b>Search:</b></label>
+                    <input #dealerReportSearch type='text' class="form-control input-sm report-search" placeholder='Search here'
+                      (keyup)='search($event)' />
                     <button type="button" class="btn search-close" (click)="dealerReportSearch.value='';search();"><i
                         class="fa fa-close"></i></button>
 
-                    <button type="button" placement="bottom" ngbTooltip="Click to download reports"
-                      class="btn btn-primary waves-effect download-btn"><i class="fa fa-download m-r-5"></i>
+                    <button type="button" placement="bottom" ngbTooltip="Click to download reports" class="btn btn-primary waves-effect download-btn"><i
+                        class="fa fa-download m-r-5"></i>
                     </button>
                   </div>
                 </label>
               </div>
             </div>
-            <ngx-datatable #dealertable class="table data-table expandable" [rows]='dealerReportList'
-              [columnMode]="'flex'" [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false" [footerHeight]="50"
-              [limit]="5" [messages]="emptymesages">
+            <ngx-datatable #dealertable class="table data-table expandable" [rows]='dealerReportList' [columnMode]="'flex'"
+              [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false" [footerHeight]="50" [limit]="5" [messages]="emptymesages">
               <!-- Row Detail Template -->
-              <ngx-datatable-column prop="date" name="Date" [resizeable]="false" headerClass="text-left"
-                [cellClass]="'text-left'">
+              <ngx-datatable-column prop="date" name="Date" [resizeable]="false" headerClass="text-left" [cellClass]="'text-left'">
                 <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                   <!-- <span>{{row.paymentdt|date:datedisplayformat}}</span> -->
                   <span>{{row.date|date:displayformat}}</span>
@@ -121,8 +119,8 @@
               </ngx-datatable-column>
 
 
-              <ngx-datatable-column prop="count" name="No.Of Dealers" [resizeable]="false"
-                headerClass="text-right" [cellClass]="'text-right'">
+              <ngx-datatable-column prop="count" name="No.Of Dealers" [resizeable]="false" headerClass="text-right"
+                [cellClass]="'text-right'">
                 <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                   <span>{{row.count}}</span>
                 </ng-template>
