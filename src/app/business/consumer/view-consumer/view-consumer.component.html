@@ -27,7 +27,7 @@
     </div>
     <div class="row">
         <div class="col-md-10 col-xl-10 col-sm-10">
-            <div class="md-tabs md-right-tabs business-tab dealer-tab-menu">
+            <div class="md-tabs md-right-tabs business-tab dealer-tab-menu m-t-15">
                 <ngb-tabset>
                     <ngb-tab title="Details">
                         <ng-template ngbTabContent>
@@ -207,85 +207,78 @@
                     <ngb-tab title="Favourites">
                         <ng-template ngbTabContent>
                             <div [@fadeInOutTranslate]>
-                                <div class="row">
-                                    <div class="col-md-12 col-sm-12 card m-t-60">
-                                        <div class="header-title m-t-25 mb-3">
-                                            <h3 class="f-18 text-primary m-l-15">Preferred Business</h3>
-                                        </div>
-                                        <div class="header-block">
-                                            <div class="table-header fixed-table-header">
-                                                <ngx-datatable #eventtable class="table data-table expandable"
-                                                    [rows]='consumerFavs.business' [columnMode]="'flex'"
-                                                    [headerHeight]="50" [footerHeight]="50" [limit]="5"
-                                                    [rowHeight]="'auto'" [reorderable]="false" [messages]="nodata">
-                                                    <ngx-datatable-column prop="bizname" name="Business Name"
-                                                        [resizeable]="false">
-                                                        <ng-template let-rowIndex="rowIndex" let-row="row"
-                                                            ngx-datatable-cell-template>
-                                                            <span>{{row.business.bizname}}</span>
-                                                        </ng-template>
-                                                    </ngx-datatable-column>
-                                                    <ngx-datatable-column prop="biztype" name="Date"
-                                                        name="Business Type" [resizeable]="false"
-                                                        headerClass="text-center" [cellClass]="'text-center'">
-                                                        <ng-template let-rowIndex="rowIndex" let-row="row"
-                                                            ngx-datatable-cell-template>
-                                                            <span>{{row.business.biztype}}</span>
-                                                        </ng-template>
-                                                    </ngx-datatable-column>
-                                                    <ngx-datatable-column prop="postaladdress" name="Postal Address"
-                                                        [resizeable]="false">
-                                                        <ng-template let-rowIndex="rowIndex" let-row="row"
-                                                            ngx-datatable-cell-template>
-                                                            <span>{{row.business.postaladdress}}</span>
-                                                        </ng-template>
-                                                    </ngx-datatable-column>
-                                                    <ngx-datatable-column prop="inmallyn" name="In Mall"
-                                                        [resizeable]="false">
-                                                        <ng-template let-rowIndex="rowIndex" let-row="row"
-                                                            ngx-datatable-cell-template>
-                                                            <span>{{row.business.inmallyn}}</span>
-                                                        </ng-template>
-                                                    </ngx-datatable-column>
-                                                </ngx-datatable>
-                                            </div>
+                                <div class="col-md-12 col-sm-12 card">
+                                    <div class="header-title m-t-10">
+                                        <h3 class="f-18 text-primary m-l-15">Preferred Business</h3>
+                                    </div>
+                                    <div class="header-block">
+                                        <div class="table-header fixed-table-header">
+                                            <ngx-datatable #eventtable class="table data-table expandable"
+                                                [rows]='consumerFavs.business' [columnMode]="'flex'" [headerHeight]="50"
+                                                [footerHeight]="50" [limit]="5" [rowHeight]="'auto'"
+                                                [reorderable]="false" [messages]="nodata">
+                                                <ngx-datatable-column prop="bizname" name="Business Name"
+                                                    [resizeable]="false">
+                                                    <ng-template let-rowIndex="rowIndex" let-row="row"
+                                                        ngx-datatable-cell-template>
+                                                        <span>{{row.business.bizname}}</span>
+                                                    </ng-template>
+                                                </ngx-datatable-column>
+                                                <ngx-datatable-column prop="biztype" name="Date" name="Business Type"
+                                                    [resizeable]="false" headerClass="text-center"
+                                                    [cellClass]="'text-center'">
+                                                    <ng-template let-rowIndex="rowIndex" let-row="row"
+                                                        ngx-datatable-cell-template>
+                                                        <span>{{row.business.biztype}}</span>
+                                                    </ng-template>
+                                                </ngx-datatable-column>
+                                                <ngx-datatable-column prop="postaladdress" name="Postal Address"
+                                                    [resizeable]="false">
+                                                    <ng-template let-rowIndex="rowIndex" let-row="row"
+                                                        ngx-datatable-cell-template>
+                                                        <span>{{row.business.postaladdress}}</span>
+                                                    </ng-template>
+                                                </ngx-datatable-column>
+                                                <ngx-datatable-column prop="inmallyn" name="In Mall"
+                                                    [resizeable]="false">
+                                                    <ng-template let-rowIndex="rowIndex" let-row="row"
+                                                        ngx-datatable-cell-template>
+                                                        <span>{{row.business.inmallyn}}</span>
+                                                    </ng-template>
+                                                </ngx-datatable-column>
+                                            </ngx-datatable>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-12 col-sm-12 card">
-                                        <div class="header-title m-t-25">
-                                            <h3 class="f-18 text-primary m-l-15">Preferred Category</h3>
+                                <div class="col-md-12 col-sm-12 card">
+                                    <div class="header-title m-t-10">
+                                        <h3 class="f-18 text-primary m-l-15">Preferred Category</h3>
+                                    </div>
+                                    <div class="fav-title">
+                                        <div *ngIf="consumerFavs.category.length > 0" class="row">
+                                            <div *ngFor="let cat of consumerFavs.category"
+                                                class="col-md-12 col-sm-6 col-md-3 card">
+                                                {{cat.category.categoryname}}
+                                            </div>
                                         </div>
-                                        <div>
-                                            <div *ngIf="consumerFavs.category.length > 0" class="row">
-                                                <div *ngFor="let cat of consumerFavs.category"
-                                                    class="col-md-12 col-sm-6 col-md-3 card">
-                                                    {{cat.category.categoryname}}
-                                                </div>
-                                            </div>
-                                            <div *ngIf="consumerFavs.category.length == 0" class="m-l-15">
-                                                <h3 class="f-16">Nothing Found</h3>
-                                            </div>
+                                        <div *ngIf="consumerFavs.category.length == 0" class="m-l-15">
+                                            <h3 class="f-14">Nothing Found</h3>
                                         </div>
                                     </div>
-
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-12 col-sm-12 card ">
-                                        <div class="header-title m-t-25">
-                                            <h3 class="f-18 text-primary m-l-15">Preferred Location</h3>
+                                <div class="col-md-12 col-sm-12 card ">
+                                    <div class="header-title m-t-10">
+                                        <h3 class="f-18 text-primary m-l-15">Preferred Location</h3>
+                                    </div>
+                                    <div class="fav-title">
+                                        <div *ngIf="consumerFavs.location.length > 0" class="row">
+                                            <div *ngFor="let loc of consumerFavs.location"
+                                                class="col-md-12 col-sm-6 col-md-3 card">
+                                                {{loc.location.area}}
+                                            </div>
                                         </div>
-                                        <div>
-                                            <div *ngIf="consumerFavs.location.length > 0" class="row">
-                                                <div *ngFor="let loc of consumerFavs.location"
-                                                    class="col-md-12 col-sm-6 col-md-3 card">
-                                                    {{loc.location.area}}
-                                                </div>
-                                            </div>
-                                            <div *ngIf="consumerFavs.category.length == 0" class="m-l-15">
-                                                <h3 class="f-16">Nothing Found</h3>
-                                            </div>
+                                        <div *ngIf="consumerFavs.category.length == 0" class="m-l-15">
+                                            <h3 class="f-14">Nothing Found</h3>
                                         </div>
                                     </div>
                                 </div>

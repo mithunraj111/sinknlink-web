@@ -147,6 +147,7 @@ textarea {
         text-transform: capitalize;
         margin-left: 16px;
     }
+
     @media only screen and(max-width: 1300px) {
         .add-btn.btn{
             padding: 5px 6px !important;
@@ -824,8 +825,6 @@ button{
     }
     .datatable-body{
         display: block;
-        overflow: auto;
-        // height: 62vh !important;
     }
      .card-block {
         padding: 0px 15px 0px 15px;
@@ -1456,4 +1455,10 @@ button{
 .checkbox-column{
     display: inline-flex;
     width: 100px;
+}
+.fav-title{
+    h3{
+        color: #2f3d4a;
+        font-family: "Nunito", sans-serif;
+    }
 }
