@@ -120,7 +120,7 @@ export class MainComponent implements OnInit {
   public subItemBorder: boolean;
   public itemBorder: boolean;
 
-  private availScreens:any = [];
+  public availScreens: any = [];
 
   public config: any;
   userstoragedata = {} as any;
