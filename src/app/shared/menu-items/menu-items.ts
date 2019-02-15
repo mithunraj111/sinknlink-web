@@ -145,9 +145,7 @@ export class MenuItems {
       const item = MENUITEMS[i];
       if (_.has(groupedMenus, item.code)) {
         const data: any = _.get(groupedMenus, item.code);
-        if (!_.isUndefined(data) && _.isUndefined(item.children)
-          && !_.isUndefined(data[0].assignedpermissions)
-          && data[0].assignedpermissions.length > 0) {
+        if (!_.isUndefined(data) && _.isUndefined(item.children)) {
           self.menuItems.push(item);
         } else if (!_.isUndefined(data) && !_.isUndefined(item.children)) {
           const app_child = item.children;

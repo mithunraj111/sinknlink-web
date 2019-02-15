@@ -74,6 +74,7 @@ export class AddEditUserComponent implements OnInit {
       let dataValue = this.userForm.value;
       let data = {} as any;
       data.fullname = dataValue.fullname;
+      data.usertype = 'U';
       data.mobileno = dataValue.mobileno;
       data.roleid = Number(dataValue.rolename);
       data.password = dataValue.password;
