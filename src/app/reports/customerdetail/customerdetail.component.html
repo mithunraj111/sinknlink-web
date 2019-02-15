@@ -118,7 +118,7 @@
               </div>
             </div>
             <ngx-datatable #businesstable class="table customer-report data-table expandable" [rows]='businessList'
-              [columnMode]="'flex'" [headerHeight]="40" [footerHeight]="50" [rowHeight]="40" [scrollbarH]="true"
+              [columnMode]="'flex'" [headerHeight]="40" [footerHeight]="50" [rowHeight]="40" [scrollbarH]="true" [scrollbarV]="true"
               [limit]="5" [messages]="emptymessages">
 
               <ngx-datatable-column prop="bizname" name="Biz Name" [resizeable]="false">
@@ -165,14 +165,14 @@
               <ngx-datatable-column prop="gigscount" name="Gigs Count" [resizeable]="false" headerClass="text-right"
                 [cellClass]="'text-right'">
                 <ng-template let-rowIndex="rowIndex" let-expanded="expanded" let-row="row" ngx-datatable-cell-template>
-                  <span>{{row.gigscount}}</span>
+                  <span>{{row.count}}</span>
                 </ng-template>
               </ngx-datatable-column>
 
               <ngx-datatable-column prop="couponcount" name="Coupon Count" [resizeable]="false" headerClass="text-right"
                 [cellClass]="'text-right'">
                 <ng-template let-rowIndex="rowIndex" let-expanded="expanded" let-row="row" ngx-datatable-cell-template>
-                  <span>{{row.couponcount}}</span>
+                  <span>{{row.count}}</span>
                 </ng-template>
               </ngx-datatable-column>
 

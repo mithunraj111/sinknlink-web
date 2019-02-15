@@ -28,15 +28,15 @@ export class CustomerdetailComponent implements OnInit {
   public configOpenTopBar: any = 'open';
   @ViewChild(DatatableComponent) table: DatatableComponent;
   displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydate;
-  emptymessages= AppConstant.EMPTY_MESSAGES.CUSTOMERREPORT;
+  emptymessages = AppConstant.EMPTY_MESSAGES.CUSTOMERREPORT;
 
   tempFilter = [];
 
   locationLists = [{ value: "", label: "All" }];
-  bizTypeLists = [];
-  // bizMemType = [{ value: "", label: "All" }];
+  bizTypeLists = [{ value: "", label: "All" }];
+  bizMemType = [{ value: "", label: "All" }];
   categoryLists = [{ value: "", label: "All" }];
-  bizMemType = [];
+  // bizMemType = [];
   customerdetailForm: FormGroup;
 
   constructor(private fb: FormBuilder, private commonService: CommonService, private reportService: ReportService, private lookupService: LookupService, private categoryService: CategoryService, private locationService: LocationService, private bootstrapAlertService: BootstrapAlertService) {
@@ -47,9 +47,9 @@ export class CustomerdetailComponent implements OnInit {
 
   ];
   ngOnInit() {
-    this.getLookUps();
     this.getLocation();
     this.getCategory();
+    this.getLookup();
   }
   toggleTopbar() {
     this.configOpenTopBar = this.configOpenTopBar === 'open' ? '' : 'open';
@@ -80,8 +80,7 @@ export class CustomerdetailComponent implements OnInit {
     let formData = {
       fromdt: fromdt,
       todate: todt,
-      biztype: biztype,
-      membershiptype: membershiptype
+
     } as any;
 
     if (categoryid != "") {
@@ -90,7 +89,12 @@ export class CustomerdetailComponent implements OnInit {
     if (locationid != "") {
       formData.locationid = locationid;
     }
-
+    if (biztype != "") {
+      formData.biztype = biztype;
+    }
+    if (membershiptype != "") {
+      formData.membershiptype = membershiptype;
+    }
     this.reportService.customerDetailReport(formData).subscribe((res) => {
       const response = JSON.parse(res._body);
       if (response.status) {
@@ -134,69 +138,35 @@ export class CustomerdetailComponent implements OnInit {
       }
     });
   }
-  getLookUps() {
-    this.lookupService.list({
-      "refkey": "biz_businesstype,biz_membertype"
-    }, true).subscribe(res => {
+  getLookup() {
+    this.lookupService.list({ refkey: 'biz_membertype', status: AppConstant.STATUS_ACTIVE }).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
-        let bTypeLists = [];
-        let bMemType = [];
-        bTypeLists = LMap(response.data.biz_businesstype, (o) => {
-          return {
-            label: o.refname,
-            value: o.refvalue
-          }
+        response.data.map(item => {
+          item.label = item.refname;
+          item.value = item.refvalue;
         });
-        bTypeLists.push({
-          label: 'All',
-          value: 'All'
-        })
-        this.bizTypeLists = bTypeLists;
-        bMemType = LMap(response.data.biz_membertype, (o) => {
-          return {
-            label: o.refname,
-            value: o.refvalue
-          }
-        });
-        bMemType.push({
-          label: 'All',
-          value: 'All'
-        })
-        this.bizMemType = bMemType;
-        console.log(response.data);
-      } else {
-        this.bootstrapAlertService.showError(response.message);
+        this.bizMemType = [{ value: "", label: "All" }];
+        this.bizMemType = this.bizMemType.concat(response.data);
       }
     });
+    this.lookupService.list({ refkey: 'biz_businesstype', status: AppConstant.STATUS_ACTIVE }).subscribe(res => {
+      const response = JSON.parse(res._body);
+      if (response.status) {
+        response.data.map(item => {
+          item.label = item.refname;
+          item.value = item.refvalue;
+        });
+        this.bizTypeLists = [{ value: "", label: "All" }];
+        this.bizTypeLists = this.bizTypeLists.concat(response.data);
+      }
+    });
+
   }
-  // getBusiness() {
-  //   this.lookupService.list({ refKey: 'biz_businesstype' }).subscribe((res) => {
-  //     const response = JSON.parse(res._body);
-  //     if (response.status) {
-  //       response.data.map(item => {
-  //         item.label = item.refname;
-  //         item.value = item.refvalue;
-  //       })
-  //       this.bizTypeLists = [{ value: "", label: "All" }];
-  //       this.bizTypeLists = this.bizTypeLists.concat(response.data);
-  //     }
-  //   });
-  // }
 
   search(event?) {
     this.businessList = this.commonService.globalSearch(this.tempFilter, event);
     this.table.offset = 0;
   }
-  genFilters(data) {
-    let filters = {};
-    for (const key in data) {
-      if (data[key] == 'All' || data[key] == '') {
 
-      } else {
-        filters[key] = data[key];
-      }
-    }
-    return filters;
-  }
 }
