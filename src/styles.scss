@@ -1256,12 +1256,13 @@ button{
         color: #414C59;
         text-transform: capitalize;
         margin-left: 1px;
+        margin-bottom: 10px;
     }
 }
 .business-table{
     background: $white-txt;;
     padding: 10px 15px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     .form-control{
         font-size: 13px;
         display: block;
@@ -1277,10 +1278,10 @@ button{
         color: #3e4855;
     }
     .input-group{
-        margin-bottom: 10px;
+        margin-bottom: 5px;
     }
     .form-group{
-        margin-bottom: 10px;
+        margin-bottom: 0px;
     }
 }
 .customer-report{
@@ -1289,7 +1290,7 @@ button{
         .datatable-header {
             border-bottom: 1px solid hsl(216, 6%, 84%);
             margin-left:0px;
-            width:100% !important;
+            width:100vw !important;
             background: #f7f7f7;
 
                 .datatable-header-cell{
@@ -1315,7 +1316,7 @@ button{
                 font-family: 'Poppins', sans-serif;
                 font-weight: 400;
                 white-space: nowrap;
-                width: 135px;
+                width: 100%;
                 max-width:100%;
         }
     }
@@ -1326,8 +1327,39 @@ button{
             width:100%;
         }
     }
+    .reg-date{
+        .datatable-header-cell-label {
+            padding: .75rem 15px .75rem 10px !important;
+        }
+    }
+    .memberships-type{
+        .datatable-header-cell-label {
+            padding: .75rem 35px .75rem 10px !important
+        }
+    }
+    .bizs-type{
+        .datatable-header-cell-label {
+            padding: .75rem 35px .75rem 0px !important;
+        }
+    }
+    .category-type{
+        .datatable-header-cell-label {
+            padding: .75rem 35px .75rem 0px !important;
+        }
+    }
+    .mobile-no{
+        .datatable-header-cell-label {
+            padding: .75rem 35px .75rem 18px !important;
+        } 
+    }
     .datatable-header-cell-label {
-        padding: .75rem 35px .75rem .75rem !important;
+        padding: .75rem 35px .75rem 10px !important;
+    }
+    .datatable-body{
+        .datatable-scroll {
+            display: inline-block;
+            width: 100vw !important;
+        }
     }
 }
 .payment-report{
