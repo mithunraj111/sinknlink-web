@@ -146,6 +146,7 @@ textarea {
         color: #414C59;
         text-transform: capitalize;
         margin-left: 16px;
+        margin-bottom: 10px;
     }
 
     @media only screen and(max-width: 1300px) {
@@ -416,10 +417,12 @@ textarea {
 .updatedate{
     color: #bcc3d3;
     font-size: 12px;
-    line-height: 20px;
+    line-height: 16px;
     display: inherit;
 }
-
+.table{
+    margin-bottom: 10px;
+}
 .required{
    label{
     &:after {
@@ -468,7 +471,7 @@ textarea {
     }
 }
 .js-small{
-    vertical-align: -webkit-baseline-middle;
+    vertical-align: middle;
     display: inline-flex;
 }
 .import-btn{
@@ -507,6 +510,11 @@ textarea {
         width:90%; 
         margin-bottom: 0;
     }
+    @media only screen and(max-width: 1350px) {
+        .input-group{
+            width:89%; 
+        }
+     }
     label{
         font-weight: bold;
     }
@@ -1506,3 +1514,13 @@ button{
 .pay-online{
     display: inline-block;
 }
+
+// footer //
+.datatable-footer-inner{
+    height:40px !important;
+}
+.card{
+    margin-bottom: 10px;
+}
+
+// footer //
