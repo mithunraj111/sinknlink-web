@@ -1522,5 +1522,11 @@ button{
 .card{
     margin-bottom: 10px;
 }
-
+.checkbox-selection{
+    .datatable-body-row{
+        .datatable-body-cell{
+            line-height: 28px !important;
+        }
+    }
+}
 // footer //
