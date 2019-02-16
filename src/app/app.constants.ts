@@ -66,10 +66,10 @@ export const AppConstant = Object.freeze({
     { label: 'Business City', value: 'biz_businesscity' }
   ],
   PAYMENT_TENURES: [
-    { label: 'Monthly', value: '1' },
-    { label: 'Quarterly', value: '3' },
-    { label: 'Half Yearly', value: '6' },
-    { label: 'Yearly', value: '12' }
+    { label: 'Monthly', value: 'Monthly' },
+    { label: 'Quarterly', value: 'Quarterly' },
+    { label: 'Half Yearly', value: 'Half Yearly' },
+    { label: 'Yearly', value: 'Yearly' }
   ],
   PAYMENT_STATUS: [
     { label: 'Paid', value: 'Paid' },
