@@ -7,8 +7,7 @@ import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
 import { AppMessages } from '../../app-messages';
 @Component({
   selector: 'app-category',
-  templateUrl: './category.component.html',
-  styleUrls: ['./category.component.scss']
+  templateUrl: './category.component.html'
 })
 export class CategoryComponent extends BaseService implements OnInit {
   @ViewChild(DatatableComponent) table: DatatableComponent;

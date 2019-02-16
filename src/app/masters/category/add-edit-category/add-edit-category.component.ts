@@ -11,7 +11,6 @@ import { AppMessages } from 'src/app/app-messages';
 @Component({
   selector: 'app-add-edit-category',
   templateUrl: './add-edit-category.component.html',
-  styleUrls: ['./add-edit-category.component.scss']
 })
 export class AddEditCategoryComponent implements OnInit, OnChanges {
   userstoragedata = {} as any;
@@ -65,6 +64,9 @@ export class AddEditCategoryComponent implements OnInit, OnChanges {
       status: [''],
     });
     this.categoryObj = {};
+    this.categoryimage.nativeElement.value = '';
+    this.categoryfile = null;
+    this.categoryimgfile = null;
   }
   ngOnChanges(changes: SimpleChanges): void {
     if (!_.isUndefined(changes.categoryObj) && !_.isEmpty(changes.categoryObj.currentValue)) {

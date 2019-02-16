@@ -166,10 +166,10 @@ export class AddEditCustomerComponent implements OnInit {
       mallname: ['']
     });
     this.socailIdForm = this.fb.group({
-      fb: [null],
-      gmail: [null],
-      twitter: [null],
-      instagram: [null],
+      fb: [''],
+      gmail: [''],
+      twitter: [''],
+      instagram: [''],
     });
     this.buttonText = AppConstant.BUTTON_TXT.SAVE;
   }
@@ -186,9 +186,14 @@ export class AddEditCustomerComponent implements OnInit {
     ((event.target.parentElement.parentElement).parentElement).classList.remove('md-show');
   }
   update(event) {
-    let socialids = this.socailIdForm.value.fb + ',' + this.socailIdForm.value.twitter + ',' +
-      this.socailIdForm.value.gmail + ',' + this.socailIdForm.value.instagram;
-    this.customerForm.controls['socialids'].setValue(socialids);
+    let socialids = '';
+    const self = this;
+    _.map(this.socailIdForm.value, function (value, key) {
+      if (value != null && value != '') {
+        socialids = socialids + value + ',';
+      }
+      self.customerForm.controls['socialids'].setValue(socialids);
+    });
     this.closeModal(event);
   }
   saveOrUpdateBusiness() {
@@ -332,7 +337,9 @@ export class AddEditCustomerComponent implements OnInit {
       this.socailIdForm.patchValue(this.customerObj.socialids);
       let socialids = '';
       _.map(this.customerObj.socialids, function (value, key) {
-        socialids = socialids + value + ',';
+        if (value != null && value != '') {
+          socialids = socialids + value + ',';
+        }
       });
       this.customerObj.socialids = socialids;
     }
