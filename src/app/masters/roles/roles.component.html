@@ -47,6 +47,7 @@
           [resizeable]="false">
           <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
             <ui-switch class="js-small" placement="bottom" (change)="updateRoleStatus(row,rowIndex,false)" [checked]="row.status == 'Active'"
+              [disabled] = "row.rolename ==='Admin' || row.rolename ==='Dealer' || row.rolename ==='Customer'"
               ngbTooltip="Click to change status" color="$primary-color" switchColor="#fff" size="small"></ui-switch>
           </ng-template>
         </ngx-datatable-column>

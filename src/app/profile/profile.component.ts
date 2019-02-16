@@ -11,6 +11,7 @@ import { AppMessages } from '../app-messages';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
+
 export class ProfileComponent implements OnInit {
   passwordForm: FormGroup;
   profileForm: FormGroup;
@@ -30,70 +31,23 @@ export class ProfileComponent implements OnInit {
     private userService: MasterService.UserService,
     private bootstrapAlertService: BootstrapAlertService,
     private commonService: CommonService,
-    private locationService: MasterService.LocationService,
-
-  ) {
+    private locationService: MasterService.LocationService) {
     this.userstoragedata = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER);
   }
 
   ngOnInit() {
-    this.getUser();
     this.initForm();
+    this.getUser();
     this.userProfileForm();
     this.getLocationList();
     this.socialidForm();
     this.getsocialid();
   }
+
   initForm() {
     this.passwordForm = this.fb.group({
       newpassword: [null, Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(30)])],
       confirmpassword: [null, Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(30)])],
-    });
-
-  }
-  userProfileForm() {
-    this.profileForm = this.fb.group({
-      fullname: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50), Validators.pattern('^[a-zA-Z ]*$')])],
-      emailid: ['', Validators.compose([Validators.pattern('([a-z0-9&_\.-]*[@][a-z0-9]+((\.[a-z]{2,3})?\.[a-z]{2,3}))'), Validators.maxLength(100)])],
-      address: [null, Validators.compose([Validators.minLength(1), Validators.maxLength(100)])],
-      locationid: [null, Validators.compose([])],
-      socialid: ['']
-    });
-  }
-  socialidForm() {
-    this.socialForm = this.fb.group({
-      facebookid: [''],
-      twitterid: [''],
-      googleid: [''],
-      instagramid: [''],
-    });
-  }
-  changePassword() {
-    if (!this.passwordForm.valid) {
-      this.errMessage = this.commonService.getFormErrorMessage(this.passwordForm, this.profileErrObj);
-      this.bootstrapAlertService.showError(this.errMessage);
-      return false;
-    }
-    if (this.passwordForm.value['newpassword'] != this.passwordForm.value['confirmpassword']) {
-      this.bootstrapAlertService.showError(AppMessages.VALIDATION.PROFILE.newpassword.equal);
-      return false;
-    }
-    let formdata = {} as any;
-    formdata.updatedby = this.userstoragedata.fullname;
-    formdata.updateddt = new Date();
-    formdata.password = this.passwordForm.value.confirmpassword;
-    const formData = new FormData();
-    formData.append('data', JSON.stringify(formdata));
-    this.userService.update(formData, this.userstoragedata.userid).subscribe(res => {
-      const response = JSON.parse(res._body);
-      if (response.status) {
-        this.bootstrapAlertService.showSucccess(response.message);
-      } else {
-        this.bootstrapAlertService.showError(response.message);
-      }
-    }, err => {
-      this.bootstrapAlertService.showError(err.message);
-
     });
   }
   getUser() {
@@ -101,6 +55,7 @@ export class ProfileComponent implements OnInit {
       const response = JSON.parse(res._body);
       if (response.status) {
         this.userObj = response.data;
+        console.log(this.userObj.profileimg.docurl);
         if (this.userObj.profileimg != null) {
           this.userfile =  this.userObj.profileimg.docurl;
         } else {
@@ -138,6 +93,69 @@ export class ProfileComponent implements OnInit {
       }
     });
   }
+  userProfileForm() {
+    this.profileForm = this.fb.group({
+      fullname: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50), Validators.pattern('^[a-zA-Z ]*$')])],
+      emailid: ['', Validators.compose([Validators.pattern('([a-z0-9&_\.-]*[@][a-z0-9]+((\.[a-z]{2,3})?\.[a-z]{2,3}))'), Validators.maxLength(100)])],
+      address: [null, Validators.compose([Validators.minLength(1), Validators.maxLength(100)])],
+      locationid: [null, Validators.compose([])],
+      socialid: ['']
+    });
+  }
+  getLocationList() {
+    this.locationService.list({}).subscribe((res) => {
+      const response = JSON.parse(res._body);
+      if (response.status) {
+        response.data.map(item => {
+          item.label = item.area + ' ( ' + item.pincode + ' )';
+          item.value = item.locationid.toString();
+        });
+        this.locationList = response.data;
+      }
+    });
+  }
+  socialidForm() {
+    this.socialForm = this.fb.group({
+      facebookid: [''],
+      twitterid: [''],
+      googleid: [''],
+      instagramid: [''],
+    });
+  }
+  getsocialid() {
+    let socialids = this.socialForm.value.facebookid + ',' + this.socialForm.value.twitterid + ',' +
+      this.socialForm.value.googleid + ',' + this.socialForm.value.instagramid;
+    this.profileForm.controls['socialid'].setValue(socialids);
+    this.closeSocialIdModal();
+  }
+
+  changePassword() {
+    if (!this.passwordForm.valid) {
+      this.errMessage = this.commonService.getFormErrorMessage(this.passwordForm, this.profileErrObj);
+      this.bootstrapAlertService.showError(this.errMessage);
+      return false;
+    }
+    if (this.passwordForm.value['newpassword'] != this.passwordForm.value['confirmpassword']) {
+      this.bootstrapAlertService.showError(AppMessages.VALIDATION.PROFILE.newpassword.equal);
+      return false;
+    }
+    let formdata = {} as any;
+    formdata.updatedby = this.userstoragedata.fullname;
+    formdata.updateddt = new Date();
+    formdata.password = this.passwordForm.value.confirmpassword;
+    const formData = new FormData();
+    formData.append('data', JSON.stringify(formdata));
+    this.userService.update(formData, this.userstoragedata.userid).subscribe(res => {
+      const response = JSON.parse(res._body);
+      if (response.status) {
+        this.bootstrapAlertService.showSucccess(response.message);
+      } else {
+        this.bootstrapAlertService.showError(response.message);
+      }
+    }, err => {
+      this.bootstrapAlertService.showError(err.message);
+    });
+  }
   changeProfile() {
     if (!this.profileForm.valid) {
       this.errMessage = this.commonService.getFormErrorMessage(this.profileForm, this.profileErrObj);
@@ -164,7 +182,6 @@ export class ProfileComponent implements OnInit {
         const response = JSON.parse(res._body);
         if (response.status) {
           this.bootstrapAlertService.showSucccess(response.message);
-
         } else {
           this.bootstrapAlertService.showError(response.message);
         }
@@ -173,6 +190,7 @@ export class ProfileComponent implements OnInit {
       });
     }
   }
+
   openProfileModal(event) {
     document.querySelector('#' + event).classList.add('md-show');
   }
@@ -190,8 +208,8 @@ export class ProfileComponent implements OnInit {
   }
   closeSocialIdModal() {
     this.closeProfileModal('socialidmodal');
-
   }
+
   onFile(event) {
     const reader = new FileReader();
     this.userimgfile = event.target.files[0];
@@ -200,22 +218,5 @@ export class ProfileComponent implements OnInit {
     });
     reader.readAsDataURL(event.target.files[0]);
   }
-  getLocationList() {
-    this.locationService.list({}).subscribe((res) => {
-      const response = JSON.parse(res._body);
-      if (response.status) {
-        response.data.map(item => {
-          item.label = item.area + ' ( ' + item.pincode + ' )';
-          item.value = item.locationid.toString();
-        });
-        this.locationList = response.data;
 
-      }
-    });
-  }
-  getsocialid() {
-    let socialids = this.socialForm.value.facebookid + ',' + this.socialForm.value.twitterid + ',' +
-      this.socialForm.value.googleid + ',' + this.socialForm.value.instagramid;
-    this.profileForm.controls['socialid'].setValue(socialids);
-  }
 }
