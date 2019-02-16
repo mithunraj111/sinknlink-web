@@ -26,7 +26,6 @@ export class AddEditCategoryComponent implements OnInit, OnChanges {
   errMessage;
   categoryimgfile: any;
   categoryfile: any;
-  fileUrl = AppConstant.IMG_BASE_URL;
   constructor(private bootstrapAlertService: BootstrapAlertService,
     private localStorageService: LocalStorageService,
     private fb: FormBuilder, private categoryService: CategoryService,
@@ -79,7 +78,7 @@ export class AddEditCategoryComponent implements OnInit, OnChanges {
         status: [this.categoryObj.status],
       });
       if (this.categoryObj.categoryimage) {
-        this.categoryfile = this.fileUrl + '/' + this.categoryObj.categoryimage.docurl;
+        this.categoryfile = this.categoryObj.categoryimage.docurl;
       }
     } else {
       this.initForm();

@@ -15,7 +15,6 @@ export class ViewConsumerComponent implements OnInit {
   date_displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   date: any;
   userfile: any;
-  fileUrl = AppConstant.IMG_BASE_URL;
   emptymessages = AppConstant.EMPTY_MESSAGES.CONSUMERCOUPONS;
   nodata = AppConstant.EMPTY_MESSAGES.FAVOURITES;
   // For Consumer Details.
@@ -56,7 +55,7 @@ export class ViewConsumerComponent implements OnInit {
       let response = JSON.parse(res._body);
       this.consumer = response.data;
       if (this.consumer.profileimg != null) {
-        this.userfile = this.fileUrl + '/' + this.consumer.profileimg.docurl;
+        this.userfile =  this.consumer.profileimg.docurl;
       } else {
         this.userfile = 'assets/images/avatar-blank.png';
       }

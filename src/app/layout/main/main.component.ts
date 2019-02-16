@@ -124,7 +124,6 @@ export class MainComponent implements OnInit {
 
   public config: any;
   userstoragedata = {} as any;
-  fileUrl = AppConstant.IMG_BASE_URL;
   userfile: string;
   constructor(public menuItems: MenuItems, private route: Router,
     private lstorageService: LocalStorageService) {
@@ -180,9 +179,8 @@ export class MainComponent implements OnInit {
 
     this.userstoragedata = this.lstorageService.getItem(AppConstant.LOCALSTORAGE.USER);
     if (this.userstoragedata.profileimg != null) {
-      this.userfile = this.fileUrl + '/' + this.userstoragedata.profileimg.docurl;
-    }
-    else {
+      this.userfile = this.userstoragedata.profileimg.docurl;
+    } else {
       this.userfile = 'assets/images/avatar-blank.jpg';
     }
     // dark

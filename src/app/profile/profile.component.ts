@@ -23,7 +23,6 @@ export class ProfileComponent implements OnInit {
   locationList = [];
   userimgfile: any;
   userfile: any;
-  fileUrl = AppConstant.IMG_BASE_URL;
   @ViewChild('userimage') userimage: ElementRef;
 
   constructor(private fb: FormBuilder,
@@ -103,7 +102,7 @@ export class ProfileComponent implements OnInit {
       if (response.status) {
         this.userObj = response.data;
         if (this.userObj.profileimg != null) {
-          this.userfile = this.fileUrl + '/' + this.userObj.profileimg.docurl;
+          this.userfile =  this.userObj.profileimg.docurl;
         } else {
           this.userfile = 'assets/images/avatar-blank.jpg';
         }
