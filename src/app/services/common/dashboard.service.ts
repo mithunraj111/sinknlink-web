@@ -13,4 +13,7 @@ export class DashboardService{
     getCounts(data): Observable<any> {
         return this.httpHandler.POST( this.endpoint + AppConstant.API_CONFIG.API_URL.COMMON.DASHBOARD.ALL_COUNT, data );
     }
+    employeebusinessCount(data): Observable<any> {
+        return this.httpHandler.POST( this.endpoint + AppConstant.API_CONFIG.API_URL.COMMON.DASHBOARD.BIZ_COUNT, data )
+    }
 }

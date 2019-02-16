@@ -71,8 +71,8 @@ export class DealerComponent implements OnInit {
       return false;
     }
     let formData = {
-      fromdate: fromdt,
-      todate: todt
+      fromdate: fromdt + ' 00:00',
+      todate: todt + ' 23:59'
     } as any;
     if (area != "") {
       formData.locationid = area;

@@ -10,11 +10,12 @@ declare const AmCharts: any;
 })
 export class DashboardComponent implements OnInit {
   counts = [];
-  count: any;
+  bizcounts = [];
   constructor(private dashboardService: DashboardService) { }
 
   ngOnInit() {
     this.getDashboardCounts();
+    this.getDashboardBizCounts();
     setTimeout(() => {
       AmCharts.makeChart('analythics-graph', {
         'type': 'serial',
@@ -120,5 +121,14 @@ export class DashboardComponent implements OnInit {
         this.counts = response.data;
       }
     });
+  }
+  getDashboardBizCounts(){
+    this.bizcounts = [];
+    this.dashboardService.employeebusinessCount({}).subscribe( res => {
+      const response =  JSON.parse( res._body );
+      if ( response.status ) {
+        this.bizcounts = response.data;
+      }
+    })
   }
 }

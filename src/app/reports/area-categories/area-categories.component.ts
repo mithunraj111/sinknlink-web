@@ -49,8 +49,8 @@ export class AreaCategoriesComponent implements OnInit {
       return false;
     }
     const formData = {
-      fromdate: fromdt,
-      todate: todt
+      fromdate: fromdt + ' 00:00',
+      todate: todt + ' 23:59'
     };
     this.getAreaList(formData);
     this.getCategoryList(formData);

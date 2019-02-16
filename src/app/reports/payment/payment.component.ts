@@ -82,8 +82,8 @@ export class PaymentComponent implements OnInit {
       return false;
     }
     let formData = {
-      fromdate: fromdt,
-      todate: todt,
+      fromdate: fromdt + ' 00:00',
+      todate: todt + ' 23:59',
     } as any;
     if (paymentmode != "" && paymentmode != undefined && paymentmode != null) {
       formData.paymentmode = paymentmode;
