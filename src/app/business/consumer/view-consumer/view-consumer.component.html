@@ -150,10 +150,7 @@
                       <div class="row">
                         <div class="col-sm-12 col-md-4">
                           <h3 class="f-18 text-primary m-l-15">Business Reviewed</h3>
-                        </div>
-                        <div class="col-sm-12 col-md-4">
-                          <h3 class="f-18 text-primary m-l-15">Reviews</h3>
-                        </div>
+                        </div>              
                       </div>
                     </div>
                     <div class="row">
@@ -161,7 +158,7 @@
                         <div class="row">
                           <div *ngFor="let biz of reviewedBiz" class="col-sm-12">
                             <div class="card p-10 m-b-10" (click)="showReviewFor(biz.membershipid)">
-                              <h5 class="m-0">{{biz.bizname}}</h5>
+                              <h6 class="m-0">{{biz.bizname | uppercase}}</h6>
                             </div>
                           </div>
                         </div>
@@ -169,19 +166,22 @@
                       <div class="col-sm-12 col-md-8">
                         <div class="card p-10 m-b-10">
                           <div *ngIf="bizReview?.comments" class="col-sm-12 col-md-8">
-                            <h6><b>{{bizReview?.consumer?.fullname}} </b> <span>(
+                              <div class="box-body">
+                                  <bar-rating [(rate)]="rateStar" [max]="5" [theme]="'stars'"></bar-rating>
+                                </div>
+                            <h6><b>{{bizReview?.consumer?.fullname | titlecase}} </b> <span>(
                                 {{bizReview?.updateddt | date:displaydtimeformat}}
                                 )</span> </h6>
-                            <h5 class="m-t-5 m-l-0">{{bizReview?.comments}}</h5>
+                            <h6 class="m-t-5 m-l-0">{{bizReview?.comments}}</h6>
                           </div>
                           <div *ngIf="bizReview?.comments==null" class="col-sm-12 col-md-8">
                             <h6>Please select any Buisness</h6>
                           </div>
                           <div *ngIf="bizReview?.reply" class="card m-2 p-3">
-                            <h6><b>Replied On : </b> <span>(
+                            <h6>Replied On : <span>(
                                 {{bizReview?.reply?.updateddt | date:displaydtimeformat}}
                                 )</span> </h6>
-                            <h5 class="m-t-5 m-l-0">{{bizReview?.reply?.comments}}</h5>
+                            <h6 class="m-t-5 m-l-0">{{bizReview?.reply?.comments}}</h6>
                           </div>
                         </div>
                       </div>
