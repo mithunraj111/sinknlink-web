@@ -101,17 +101,17 @@ export const AppMessages = Object.freeze({
     },
     AREACATEGORIES: {
       fromdate: {
-        max: 'Fromdate should be smaller than todate'
+        max: 'From date should be smaller than to date'
       }
     },
     DEALERREPORT: {
       fromdate: {
-        max: 'Fromdate should be smaller than todate'
+        max: 'From date should be smaller than to date'
       }
     },
     PAYMENTREPORT: {
       fromdate: {
-        max: 'Fromdate should be smaller than todate'
+        max: 'From date should be smaller than to date'
       }
     },
     PROFILE: {

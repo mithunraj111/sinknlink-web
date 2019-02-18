@@ -32,7 +32,9 @@ export class CustomerdetailComponent implements OnInit {
 
   tempFilter = [];
 
-  locationLists = [{ value: "", label: "All" }];
+  areaList = [];
+  cityList = [{ value: "", label: "All" }];
+  cityName: string;
   bizTypeLists = [{ value: "", label: "All" }];
   bizMemType = [{ value: "", label: "All" }];
   categoryLists = [{ value: "", label: "All" }];
@@ -47,7 +49,8 @@ export class CustomerdetailComponent implements OnInit {
 
   ];
   ngOnInit() {
-    this.getLocation();
+    this.getCity();
+    this.getArea();
     this.getCategory();
     this.getLookup();
   }
@@ -111,16 +114,36 @@ export class CustomerdetailComponent implements OnInit {
   getRowHeight(row) {
     return row.height;
   }
-  getLocation() {
-    this.locationService.list({}).subscribe(res => {
+  getCity() {
+    this.lookupService.list({ refkey: 'biz_businesscity', status: AppConstant.STATUS_ACTIVE }).subscribe(res => {
+      const response = JSON.parse(res._body);
+      if (response.status) {
+        response.data.map(item => {
+          item.label = item.refname;
+          item.value = item.refvalue;
+        });
+        this.cityList = this.cityList.concat(response.data);
+        console.log(this.cityList);
+      }
+    });
+  }
+  selectCity(option) {
+    this.cityName = option.value;
+    this.getArea();
+  }
+  getArea() {
+    let condition = { status: AppConstant.STATUS_ACTIVE } as any;
+    if (this.cityName != "") {
+      condition.city = this.cityName;
+    }
+    this.locationService.list(condition).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
         response.data.map(item => {
           item.label = item.area + ' (' + item.pincode + ' )';
           item.value = item.locationid;
         });
-        this.locationLists = [{ value: "", label: "All" }];
-        this.locationLists = this.locationLists.concat(response.data);
+        this.areaList = response.data;
       }
     });
   }

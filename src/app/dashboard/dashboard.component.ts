@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DashboardService } from "../services/common";
+import * as _ from 'lodash';
 declare const AmCharts: any;
 
 
@@ -11,20 +12,22 @@ declare const AmCharts: any;
 export class DashboardComponent implements OnInit {
   counts = [];
   bizcounts = [];
+  searchcounts = [];
   constructor(private dashboardService: DashboardService) { }
 
   ngOnInit() {
     this.getDashboardCounts();
     this.getDashboardBizCounts();
+    this.getSearchCounts();
     setTimeout(() => {
-      AmCharts.makeChart('analythics-graph', {
+      AmCharts.makeChart('analytics-graph', {
         'type': 'serial',
         'theme': 'light',
-        'dataDateFormat': 'YYYY-MM-DD',
+        // 'dataDateFormat': 'YYYY-MM-DD',
         'precision': 2,
         'valueAxes': [{
           'id': 'v1',
-          'title': 'Search',
+          'title': 'Search Count',
           'position': 'left',
           'autoGridCount': false,
           'labelFunction': function (value) {
@@ -46,19 +49,19 @@ export class DashboardComponent implements OnInit {
           'useLineColorForBulletBorder': true,
           'valueField': 'name',
           'balloonText': '[[title]]<br /><b style="font-size: 130%">[[value]]</b>'
-        }, {
-          'id': 'g2',
-          'valueAxis': 'v2',
-          'fillAlphas': 0.9,
-          'bulletColor': '#FF5370 ',
-          'lineThickness': 0,
-          'lineColor': '#FF5370 ',
-          'type': 'smoothedLine',
-          'title': 'Search count',
-          'useLineColorForBulletBorder': true,
-          'valueField': 'count',
-          'balloonText': '[[title]]<br /><b style="font-size: 130%">[[value]]</b>'
-        }],
+        }
+        // { 'id': 'g2',
+        //   'valueAxis': 'v2',
+        //   'fillAlphas': 0.9,
+        //   'bulletColor': '#FF5370 ',
+        //   'lineThickness': 0,
+        //   'lineColor': '#FF5370 ',
+        //   'type': 'smoothedLine',
+        //   'title': 'count',
+        //   'useLineColorForBulletBorder': true,
+        //   'valueField': 'count',
+        //   'balloonText': '[[title]]<br /><b style="font-size: 130%">[[value]]</b>'}
+      ],
         'chartCursor': {
           'pan': true,
           'valueLineEnabled': true,
@@ -66,9 +69,9 @@ export class DashboardComponent implements OnInit {
           'cursorAlpha': 0,
           'valueLineAlpha': 0.2
         },
-        'categoryField': 'date',
+        'categoryField': 'category',
         'categoryAxis': {
-          'parseDates': true,
+          // 'parseDates': true,
           'gridAlpha': 0,
           'minorGridEnabled': true
         },
@@ -83,33 +86,33 @@ export class DashboardComponent implements OnInit {
           'enabled': true
         },
         'dataProvider': [{
-          'date': '2019-01-01',
-          'name': 0,
-          'count': 0,
+          'category': 'Category 1',
+          'name': 20,
+          // 'count': 0,
         }, {
-          'date': '2019-01-02',
-          'name': 0,
-          'count': 0,
-        }, {
-          'date': '2019-01-03',
-          'name': 0,
-          'count': 0,
-        }, {
-          'date': '2019-01-04',
-          'name': 30,
-          'count': 0,
-        }, {
-          'date': '2019-01-05',
-          'name': 0,
-          'count': 20,
-        }, {
-          'date': '2019-01-06',
+          'category': 'Category 2',
           'name': 25,
-          'count': 0,
+          // 'count': 0,
         }, {
-          'date': '2019-01-07',
-          'name': 0,
-          'count': 0,
+          'category': 'Category 3',
+          'name': 15,
+          // 'count': 0,
+        }, {
+          'category': 'Category 4',
+          'name': 30,
+          // 'count': 0,
+        }, {
+          'category': 'Category 5',
+          'name': 35,
+          // 'count': 20,
+        // }, {
+        //   'date': '2019-01-06',
+        //   'name': 25,
+        //   'count': 0,
+        // }, {
+        //   'date': '2019-01-07',
+        //   'name': 0,
+        //   'count': 0,
         }]
       });
     });
@@ -128,6 +131,15 @@ export class DashboardComponent implements OnInit {
       const response =  JSON.parse( res._body );
       if ( response.status ) {
         this.bizcounts = response.data;
+      }
+    })
+  }
+  getSearchCounts(){
+    this.dashboardService.searchCount({}).subscribe( res => {
+      const response = JSON.parse( res._body );
+      if( response.status ){
+        this.searchcounts = response.data;
+        console.log(this.searchcounts);
       }
     })
   }
