@@ -6,11 +6,12 @@
         <div class="col-md-6 col-sm-6">
             <div class="text-right">
                 <label class="col-md-3 p-l-0"><b>Search:</b></label>
-                <input #dealerPaymentSearch type='text' class="header-search form-control col-md-8 col-sm-8 p-l-0 p-r-0 input-sm full-data-search"
+                <input #dealerPaymentSearch type='text'
+                    class="header-search form-control col-md-8 col-sm-8 p-l-0 p-r-0 input-sm full-data-search"
                     placeholder='Search here' (keyup)='search($event)' placement="bottom"
                     ngbTooltip="Type here to search" />
-                <button type="button" class="btn search-close col-md-1 col-sm-1 p-l-0 p-r-0" (click)="dealerPaymentSearch.value='';search();"><i
-                        class="fa fa-close"></i></button>
+                <button type="button" class="btn search-close col-md-1 col-sm-1 p-l-0 p-r-0"
+                    (click)="dealerPaymentSearch.value='';search();"><i class="fa fa-close"></i></button>
 
             </div>
         </div>
@@ -44,14 +45,13 @@
                         <span>{{row.paymentmode}}</span>
                     </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column prop="paymentstatus" name="Status" [flexGrow]="0.5" headerClass="text-center"
+                <ngx-datatable-column prop="paymentstatus" name="Status" [flexGrow]="0.9" headerClass="text-center"
                     [cellClass]="'text-center'" [resizeable]="false">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                         <span>{{row.paymentstatus}}</span>
                     </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.5"
-                    [cellClass]="'text-center action'">
+                <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.5" [cellClass]="'text-center'">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                         <a (click)="viewPayment(row)" class="crm-action-edit text-primary">
                             <i class="fa fa-eye"></i></a>

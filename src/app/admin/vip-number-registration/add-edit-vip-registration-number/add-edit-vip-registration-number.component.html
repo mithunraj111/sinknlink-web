@@ -23,7 +23,7 @@
 </div>
 <div class="col-md-12 col-sm-12">
     <div *ngIf="!editMode" class="row">
-        <div class="col-md-12 col-sm-8 p-l-0">
+        <div class="col-md-9 col-sm-9 p-l-0">
             <form class="employee-form" [formGroup]="vipForm">
                 <div class="card tenants-page tenants-pages m-b-10 m-t-20">
                     <div class="col-md-12 col-sm-12 p-t-10">
@@ -53,8 +53,8 @@
                             <label class="col-md-3 col-sm-6 col-form-label text-right">Status</label>
                             <div class="col-md-9 col-sm-6">
                                 <ui-switch formControlName="status" class="js-small" placement="bottom"
-                                    ngbTooltip="Click to change status" color="$primary-color" switchColor="#fff" size="small"
-                                    checked></ui-switch>
+                                    ngbTooltip="Click to change status" switchColor="#fff" size="small" checked>
+                                </ui-switch>
                             </div>
                         </div>
                     </div>
@@ -70,8 +70,8 @@
                         {{ business.membershipid }}; Fancy Code: {{ business?.membershipcode }}</label>
                     <div class="col-md-9 col-sm-6">
                         <ng-select [ngClass]="'ng-select'" [(ngModel)]="allocated[business.membershipid]"
-                            (selected)="allocateFancyNos($event,business.membershipid)" placeholder="Select Fancy Number"
-                            [options]="ownedNos"></ng-select>
+                            (selected)="allocateFancyNos($event,business.membershipid)"
+                            placeholder="Select Fancy Number" [options]="ownedNos"></ng-select>
                     </div>
                 </div>
                 <div *ngFor="let branch of business.branches" class="form-group row ">

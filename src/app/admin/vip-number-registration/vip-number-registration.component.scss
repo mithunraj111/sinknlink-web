@@ -3,10 +3,13 @@
         .border-checkbox-group {
             display: block;
             line-height: normal;
-            margin-left: 16px;
-                .border-checkbox-label:before {
-                    width: 20px;
-                    height: 20px;
+            margin-left: 16px;    
+                .border-checkbox-label{
+                    margin-bottom: 12px;
+                    &:before {
+                        width: 20px;
+                        height: 20px;
+                    }
                 }
             }
         .border-checkbox-label {

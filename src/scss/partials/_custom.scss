@@ -663,8 +663,9 @@ ng-select.ng-select > div > div {
     padding: 5px 10px !important;
     height: auto !important;
     z-index: 0;
-    line-height: 25px !important;
+    line-height: 24px !important;
     background: $color-blue !important;
+    margin-left: 2px !important;
     delete-icon{
       &:hover{
         transform: scale(1);

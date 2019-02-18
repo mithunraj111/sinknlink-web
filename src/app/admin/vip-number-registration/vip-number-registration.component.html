@@ -33,7 +33,7 @@
 </div>
 <div class="header-block">
   <div class="row">
-    <div class="col-md-10 col-xl-10 col-sm-10">
+    <div class="col-md-9 col-sm-9">
       <div class="md-tabs md-right-tabs business-tab dealer-tab-menu">
         <ngb-tabset (tabChange)="tabChanged($event)">
           <ngb-tab title="Available" id="Available">
@@ -143,7 +143,7 @@
           <ngb-tab title="Allocated" id="ALLOCATED">
             <ng-template ngbTabContent>
               <div [@fadeInOutTranslate]>
-                <div class="table-header fixed-table-header">
+                <div class="table-header view-table fixed-table-header">
                   <app-card [classHeader]="true">
                     <ngx-datatable [loadingIndicator]="true" #vipnoregtable class="table data-table expandable" [rows]='data'
                       [columnMode]="'flex'" [headerHeight]="50" [footerHeight]="50" [limit]="10" [rowHeight]="'auto'"
@@ -158,8 +158,8 @@
                           <span>{{row?.bizname}}</span>
                         </ng-template>
                       </ngx-datatable-column>
-                      <ngx-datatable-column prop="contactperson" name="Contact Name" [resizeable]="false" headerClass="text-right"
-                        [cellClass]="'text-right'">
+                      <ngx-datatable-column prop="contactperson" name="Contact Name" [resizeable]="false" headerClass="text-left"
+                        [cellClass]="'text-left'">
                         <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                           <span>{{row?.contactperson}}</span>
                         </ng-template>
@@ -170,8 +170,8 @@
                           <span>{{row?.contactmobile}}</span>
                         </ng-template>
                       </ngx-datatable-column>
-                      <ngx-datatable-column prop="contactemail" name="Contact Email" [resizeable]="false" headerClass="text-right"
-                        [cellClass]="'text-right'">
+                      <ngx-datatable-column prop="contactemail" name="Contact Email" [resizeable]="false" headerClass="text-left"
+                        [cellClass]="'text-left'">
                         <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                           <span>{{row?.contactemail}}</span>
                         </ng-template>

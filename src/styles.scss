@@ -841,8 +841,6 @@ button{
 }
 
 .tag-wrapper{
-    height: 15px;
-    line-height: 15px;
     padding-left: 3px;
     .ng-star-inserted{
         svg{
@@ -1054,6 +1052,7 @@ button{
         color: #757575 !important;
         .placeholder{
             color: #757575 !important;
+            font-size: 14px;
         }
         .clear{
             color: #2b2f33 !important;
@@ -1299,7 +1298,7 @@ button{
             border-bottom: 1px solid hsl(216, 6%, 84%);
             margin-left:0px;
             width:100vw !important;
-            background: #f7f7f7;
+            // background: #f7f7f7;
 
                 .datatable-header-cell{
                     border: 0px solid #d3d5d8;
@@ -1530,3 +1529,15 @@ button{
     }
 }
 // footer //
+
+// view consumer //
+.view-table{
+    .data-table {
+        .datatable-header {
+            .datatable-header-cell{
+                width:auto;
+            }
+        }
+    }
+}
+// view consumer //

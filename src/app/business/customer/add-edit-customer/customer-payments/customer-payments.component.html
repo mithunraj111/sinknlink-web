@@ -76,7 +76,7 @@
                         class="header-search form-control col-md-8 col-sm-8 p-l-0 p-r-0 input-sm full-data-search"
                         placeholder="Search here" (keyup)='search($event)' placement="bottom"
                         ngbTooltip="Type here to search">
-                    <button type="button" class="btn search search-close"
+                    <button type="button" class="btn search search-close col-md-1 col-sm-1 p-l-0 p-r-0"
                         (click)="customerPaymentSearch.value='';search();"><i class="fa fa-close"></i></button>
                 </div>
             </div>
@@ -88,7 +88,7 @@
             </div>
         </div>
     </div>
-    <div class="table-header fixed-table-header">
+    <div class="table-header view-table fixed-table-header">
         <app-card [classHeader]="true">
             <ngx-datatable #customerpaymttable class="table data-table expandable" [rows]='payHistoryList'
                 [columnMode]="'flex'" [headerHeight]="50" [footerHeight]="50" [limit]="5" [rowHeight]="'auto'"
@@ -117,12 +117,12 @@
                     </ng-template>
                 </ngx-datatable-column>
                 <ngx-datatable-column prop="paymentstatus" name="Status" [sortable]="false" [resizeable]="false"
-                    [flexGrow]="0.5" [cellClass]="'text-center status'" headerClass="text-right">
+                    [cellClass]="'text-center status'" headerClass="text-right">
                     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
                         <span>{{row.paymentstatus}}</span>
                     </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column name="Action" [sortable]="false" [resizeable]="false" [flexGrow]="0.5"
+                <ngx-datatable-column name="Action" [sortable]="false" [resizeable]="false"
                     [cellClass]="'text-center action'" headerClass="text-right">
                     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
                         <a placement="bottom" ngbTooltip="Click to view payment"

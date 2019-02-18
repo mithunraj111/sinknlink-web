@@ -9,8 +9,8 @@
           </p>
         </div>
         <div class="col-md-6 col-sm-6 save-button text-right p-r-30">
-          <button type="button" placement="bottom" ngbTooltip="Go back" routerLink="/business/consumers" class="btn btn-inverse btn-primary waves-effect"><i
-              class="fa fa-arrow-circle-left"></i></button>
+          <button type="button" placement="bottom" ngbTooltip="Go back" routerLink="/business/consumers"
+            class="btn btn-inverse btn-primary waves-effect"><i class="fa fa-arrow-circle-left"></i></button>
         </div>
       </div>
     </div>
@@ -19,76 +19,76 @@
     <div class="col-md-12 col-sm-12 text-center employee-profile m-t-25">
       <div class="form-group">
         <div class="avatar-image">
-          <img [src]="userfile" class="img-responsive" style="width: 150px; height: 150px;" alt="employee">
+          <img [src]="userfile" class="img-responsive" alt="employee">
         </div>
       </div>
     </div>
   </div>
   <div class="row">
-    <div class="col-md-10 col-xl-10 col-sm-10">
+    <div class="col-md-9 col-sm-9">
       <div class="md-tabs md-right-tabs business-tab dealer-tab-menu m-t-15">
         <ngb-tabset>
           <ngb-tab title="Details">
             <ng-template ngbTabContent>
               <div [@fadeInOutTranslate]>
                 <div class="employee-form">
-                  <div class="card tenants-page m-b-10 m-t-60">
+                  <div class="card tenants-page m-b-10">
                     <div class="row p-t-10 p-b-5">
-                      <label class="col-md-3 col-sm-6 col-form-label text-right">Name</label>
-                      <div class="col-md-6 col-sm-6 m-t-5">
+                      <label class="col-md-5 col-sm-6 col-form-label text-right">Name</label>
+                      <div class="col-md-7 col-sm-7 m-t-5">
                         <span class="f-15">{{consumer?.fullname || '-'}}</span>
                       </div>
                     </div>
                     <div class="row p-t-10 p-b-5">
-                      <label class="col-md-3 col-sm-6 col-form-label text-right">Location</label>
-                      <div class="col-md-6 col-sm-6 m-t-5">
+                      <label class="col-md-5 col-sm-6 col-form-label text-right">Location</label>
+                     <div class="col-md-7 col-sm-7 m-t-5">
                         <span class="f-15">{{consumer.location?.area + consumer.location?.pincode || '-'}}</span>
                       </div>
                     </div>
                     <div class="row p-t-10 p-b-5">
-                      <label class="col-md-3 col-sm-6 col-form-label text-right">Address</label>
-                      <div class="col-md-6 col-sm-6 m-t-5">
+                      <label class="col-md-5 col-sm-6 col-form-label text-right">Address</label>
+                     <div class="col-md-7 col-sm-7 m-t-5">
                         <span class="f-15">{{consumer?.postaladdress || '-'}} </span>
                       </div>
                     </div>
                     <div class="row p-t-10 p-b-5">
-                      <label class="col-md-3 col-sm-6 col-form-label text-right">Mobile</label>
-                      <div class="col-md-6 col-sm-6 m-t-5">
+                      <label class="col-md-5 col-sm-6 col-form-label text-right">Mobile</label>
+                     <div class="col-md-7 col-sm-7 m-t-5">
                         <span class="f-15">{{consumer?.mobileno || '-'}}</span>
                       </div>
                     </div>
                     <div class="row p-t-10 p-b-5">
-                      <label class="col-md-3 col-sm-6 col-form-label text-right">Email</label>
-                      <div class="col-md-6 col-sm-6 m-t-5">
+                      <label class="col-md-5 col-sm-6 col-form-label text-right">Email</label>
+                     <div class="col-md-7 col-sm-7 m-t-5">
                         <span class="f-15">{{consumer?.contactemail || '-'}}</span>
                       </div>
                     </div>
                     <div class="row p-t-10 p-b-5">
-                      <label class="col-md-3 col-sm-6 col-form-label text-right">Social
+                      <label class="col-md-5 col-sm-6 col-form-label text-right">Social
                         Ids</label>
-                      <div class="col-md-6 col-sm-6 m-t-5">
+                     <div class="col-md-7 col-sm-7 m-t-5">
                         <span class="f-15">Facebook id<br />Twitter id<br />Google
                           id<br />Instagram id</span>
                       </div>
                     </div>
                     <div class="row p-t-10 p-b-5">
-                      <label class="col-md-3 col-sm-6 col-form-label text-right">Linked Membership
+                      <label class="col-md-5 col-sm-6 col-form-label text-right">Linked Membership
                         Id</label>
-                      <div class="col-md-6 col-sm-6 m-t-5">
+                     <div class="col-md-7 col-sm-7 m-t-5">
                         <span class="f-15">{{consumer?.membershipid || '-'}}</span>
                       </div>
                     </div>
                     <div class="row p-t-10 p-b-5">
-                      <label class="col-md-3 col-sm-6 col-form-label text-right">Signup
+                      <label class="col-md-5 col-sm-6 col-form-label text-right">Signup
                         date</label>
-                      <div class="col-md-6 col-sm-6 m-t-5">
+                     <div class="col-md-7 col-sm-7 m-t-5">
                         <span class="f-15">{{consumer?.createddt|date:date_displayformat}}</span>
                       </div>
                     </div>
                     <div class="row p-t-10 p-b-5">
-                      <label class="col-md-3 col-sm-6 col-form-label text-right">Last login
+                      <label class="col-md-5 col-sm-6 col-form-label text-right">Last login
                         date</label>
-                      <div class="col-md-6 col-sm-6 m-t-5">
+                     <div class="col-md-7 col-sm-7 m-t-5">
                         <span class="f-15">{{consumer?.user?.lastlogin|date:date_displayformat}}</span>
                       </div>
                     </div>
@@ -101,7 +101,7 @@
             <ng-template ngbTabContent>
               <div [@fadeInOutTranslate]>
                 <div class="header-block m-t-60">
-                  <div class="table-header fixed-table-header">
+                  <div class="table-header view-table fixed-table-header">
                     <app-card [classHeader]="true">
                       <ngx-datatable #eventtable class="table data-table expandable" [rows]='consumerCouponsList'
                         [columnMode]="'flex'" [headerHeight]="50" [footerHeight]="50" [limit]="10" [rowHeight]="'auto'"
@@ -159,7 +159,7 @@
                     <div class="row">
                       <div class="col-sm-12 col-md-4">
                         <div class="row">
-                          <div *ngFor="let biz of reviewedBiz" class="col-sm-12" >
+                          <div *ngFor="let biz of reviewedBiz" class="col-sm-12">
                             <div class="card p-10 m-b-10" (click)="showReviewFor(biz.membershipid)">
                               <h5 class="m-0">{{biz.bizname}}</h5>
                             </div>
@@ -175,7 +175,7 @@
                             <h5 class="m-t-5 m-l-0">{{bizReview?.comments}}</h5>
                           </div>
                           <div *ngIf="bizReview?.comments==null" class="col-sm-12 col-md-8">
-                              <h6>Please select any Buisness</h6>
+                            <h6>Please select any Buisness</h6>
                           </div>
                           <div *ngIf="bizReview?.reply" class="card m-2 p-3">
                             <h6><b>Replied On : </b> <span>(

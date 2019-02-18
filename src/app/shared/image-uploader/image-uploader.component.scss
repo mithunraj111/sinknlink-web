@@ -1,9 +1,9 @@
 .dropbox {
     outline-offset: -10px;
-    background: lightcyan;
+    background: #EFEFEF;
     color: dimgray;
     padding: 10px 10px;
-    min-height: 350px; /* minimum height */
+    min-height: 100%; /* minimum height */
     position: relative;
     cursor: pointer;
   }
@@ -11,7 +11,7 @@
   .input-file {
     opacity: 0; /* invisible but it's there! */
     width: 100%;
-    height: 350px;
+    height: 100%;
     position: absolute;
     cursor: pointer;
   }
@@ -23,31 +23,33 @@
   .dropbox p {
     font-size: 1.2em;
     text-align: center;
-    padding: 135px 0;
-  }
-  .banner_delete_btn {
-    position: relative !important;
-    top: -57px;
-    color: red !important;
-    background: white;
+    padding: 35px 0;
   }
 
-  .imagePicked img {
-    height: 175px !important;
-    width: 200px !important;
-    padding: 20px !important;
-  }
 
   .extimage{
     position: relative;
-    height: 175px !important;
-    width: 200px !important;
+    height: auto;
+    width: auto;
     margin: 0;
+    float: left;
+    img{
+      display: inline-block;
+      max-width: 100%;
+      height: 165px;
+      padding: 10px;
+    }
   }
   .extimage .extimage_dicon{
     position: absolute;
-    right: 22px;
-    padding: 9px;
-    background: white;
-    top: 22px;
+    right: auto;
+    padding: 5px;
+    background: #03ADED;
+    top: 2px;
+    left: auto;
+    border-radius: 50px;
+    width: 23px;
+    height: 23px;
+    color: #fff;
+    text-align: center;
   }

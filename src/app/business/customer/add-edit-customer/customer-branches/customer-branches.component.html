@@ -20,7 +20,7 @@
   </div>
 </div>
 <div class="header-block m-t-15">
-  <div class="table-header fixed-table-header">
+  <div class="table-header view-table fixed-table-header">
     <app-card [classHeader]="true">
       <ngx-datatable #branchtable class="table data-table expandable" [rows]='branchesList' [columnMode]="'flex'"
         [headerHeight]="50" [footerHeight]="50" [limit]="10" [rowHeight]="'auto'" [reorderable]="false" [messages]="emptymessages">
@@ -50,13 +50,13 @@
             <span>{{row.updateddt|date:datedisplayformat}}</span>
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="Status" [sortable]="false" [resizeable]="false" [flexGrow]="0.5" [cellClass]="'text-center status'">
+        <ngx-datatable-column name="Status" [sortable]="false" [resizeable]="false" [cellClass]="'text-center status'">
           <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
             <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="$primary-color"
               switchColor="#fff" size="small" (change)="updateBranchStatus(row,rowIndex,false)" [checked]="row.status=='Active'"></ui-switch>
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="Action" [sortable]="false" [resizeable]="false" [flexGrow]="0.5" [cellClass]="'text-center action'">
+        <ngx-datatable-column name="Action" [sortable]="false" [resizeable]="false" [cellClass]="'text-center action'">
           <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
             <a placement="bottom" ngbTooltip="Click to view branch" class="m-r-15 crm-action-edit text-primary text-center"
               (click)="redirectToBranch(row.membershipid);"><i class="fa fa-eye"></i></a>
