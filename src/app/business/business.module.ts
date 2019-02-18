@@ -23,6 +23,7 @@ import { ViewConsumerComponent } from './consumer/view-consumer/view-consumer.co
 import { CustomerSettingsComponent } from './customer/add-edit-customer/customer-settings/customer-settings.component';
 import { SelectModule } from 'ng-select';
 import { CustomerCouponsComponent } from './customer/add-edit-customer/customer-coupons/customer-coupons.component';
+import {BarRatingModule} from 'ngx-bar-rating';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { CustomerCouponsComponent } from './customer/add-edit-customer/customer-
     UiSwitchModule,
     TagInputModule,
     FileUploadModule,
-    SelectModule
+    SelectModule,
+    BarRatingModule
   ],
   declarations: [
     CustomerComponent,

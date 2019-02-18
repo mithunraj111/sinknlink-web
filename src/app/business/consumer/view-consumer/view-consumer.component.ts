@@ -35,6 +35,7 @@ export class ViewConsumerComponent implements OnInit {
   reviews: any = {};
   selectedReview: number;
   bizReview: any = [];
+  public rateStar = '';
 
   constructor(private route: ActivatedRoute, private consumerService: ConsumerService) {
     this.date = new Date();
@@ -96,6 +97,7 @@ export class ViewConsumerComponent implements OnInit {
         reviews = Lodash.groupBy(response.data, 'membershipid');
         this.reviewedBiz = businesses;
         this.reviews = reviews;
+        
 
       }
     }, err => {
@@ -106,6 +108,7 @@ export class ViewConsumerComponent implements OnInit {
   showReviewFor(id) {
     this.bizReview = this.reviews[id].sort(function (a, b) { return a.reviewid - b.reviewid })[0];
     console.log(this.bizReview);
+    this.rateStar = this.bizReview.rating;
   }
 
   groupFavs(data) {
