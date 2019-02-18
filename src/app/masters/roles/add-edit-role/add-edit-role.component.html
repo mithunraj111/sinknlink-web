@@ -50,6 +50,13 @@
     </div>
 </div>
 <div class="header-block">
+     <div *ngIf="loadingIndicator" class="loader-block">
+        <svg id="loader2" viewBox="0 0 100 100">
+            <circle id="circle-loader2" cx="50" cy="50" r="45"></circle>
+        </svg>
+    </div>
+        <div *ngIf="!loadingIndicator">
+
     <div class="table-header fixed-table">
         <app-card [classHeader]="true">
             <ngx-datatable #addroletable class="table data-table expandable" [rows]='screensList' [columnMode]="'flex'"
@@ -83,6 +90,7 @@
             </ngx-datatable>
         </app-card>
     </div>
+</div>
 </div>
 <!-- Add Contact Start Model -->
 <div class="modal-size" [hidden]='!permissionModal'>

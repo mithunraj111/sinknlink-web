@@ -5,7 +5,7 @@ import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { MasterService, LocalStorageService, BaseService, CommonService } from '../../services';
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
 import { AppMessages } from 'src/app/app-messages';
-
+import {LoaderComponent} from '../../shared/loader/loader.component';
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html'
@@ -14,15 +14,16 @@ export class UsersComponent extends BaseService implements OnInit {
   displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   tempFilter = [];
   userList = [];
+  loadingIndicator: boolean = true;
   @ViewChild(DatatableComponent) table: DatatableComponent;
   emptymessages = AppConstant.EMPTY_MESSAGES.USER;
-
   constructor(private router: Router, private userService: MasterService.UserService,
     private bootstrapAlertService: BootstrapAlertService,
     private commonService: CommonService,
   ) {
     super();
     this.getScreenDetails('m_users');
+
   }
 
   ngOnInit() {
@@ -37,9 +38,11 @@ export class UsersComponent extends BaseService implements OnInit {
   }
 
   getUsers() {
+    this.loadingIndicator = true;
     this.userService.list({ usertype: 'U' }).subscribe((res) => {
       const response = JSON.parse(res._body);
       if (response.status) {
+        this.loadingIndicator = false;
         this.userList = response.data;
         this.tempFilter = this.userList;
       }
@@ -79,4 +82,15 @@ export class UsersComponent extends BaseService implements OnInit {
     this.userList = this.commonService.globalSearch(this.tempFilter, event);
     this.table.offset = 0;
   }
+  // loadTable(){
+  //   this.userService.list({}).subscribe(data=>{
+  //   if(data.length === 0 || !data){
+  //     return;
+  //   }
+  //   data.forEach(rowData=>{
+  //     this.userList.push(rowData);
+  //   });
+  //   });
+  // }
+
 }

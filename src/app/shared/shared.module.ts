@@ -19,6 +19,7 @@ import { ForgotPasswordService } from '../services/auth/forgotpassword.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BusinessService, MasterService, AdminService, AppCommonService } from '../services';
 import { ImageUploaderComponent } from './image-uploader/image-uploader.component';
+import { LoaderComponent } from './loader/loader.component';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -49,7 +50,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     SpinnerComponent,
     ClickOutsideModule,
     NgxDatatableModule,
-    ImageUploaderComponent
+    ImageUploaderComponent,
+    LoaderComponent
   ],
   declarations: [
     ToggleFullScreenDirective,
@@ -61,7 +63,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     CardComponent,
     ModalAnimationComponent,
     SpinnerComponent,
-    ImageUploaderComponent
+    ImageUploaderComponent,
+    LoaderComponent
   ],
   providers: [
     {

@@ -17,6 +17,8 @@ export class RolesComponent extends BaseService implements OnInit {
   @ViewChild(DatatableComponent) table: DatatableComponent;
   emptymessages = AppConstant.EMPTY_MESSAGES.ROLES;
   displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
+  loadingIndicator: boolean = true;
+
   constructor(private router: Router,
     private roleService: MasterService.RoleService,
     private bootstrapAlertService: BootstrapAlertService,
@@ -30,9 +32,11 @@ export class RolesComponent extends BaseService implements OnInit {
     this.getRoles();
   }
   getRoles() {
+    this.loadingIndicator = true;
     this.roleService.list({}).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
+        this.loadingIndicator = false;
         this.rolesList = response.data;
         this.tempFilter = this.rolesList;
       }

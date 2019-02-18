@@ -29,6 +29,7 @@ export class AddEditRoleComponent implements OnInit {
   disableButton = false;
   permissionModal = false;
   emptymessages = AppConstant.EMPTY_MESSAGES.ADDROLES;
+  loadingIndicator: boolean = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -55,9 +56,12 @@ export class AddEditRoleComponent implements OnInit {
   }
 
   getScreenNames() {
+    this.loadingIndicator = true;
     this.lookupService.list({ refkey: 'app_screens', status: AppConstant.STATUS_ACTIVE }).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
+        this.loadingIndicator = false;
+
         if (response.data.length != 0) {
           this.screensList = JSON.parse(response.data[0].refvalue);
           if (this.roleid) {
@@ -146,6 +150,7 @@ export class AddEditRoleComponent implements OnInit {
         this.roleService.create(formdata).subscribe((res) => {
           const response = JSON.parse(res._body);
           if (response.status) {
+
             this.bootstrapAlertService.showSucccess(response.message);
             this.router.navigate(['/masters/roles']);
           } else {
@@ -167,6 +172,7 @@ export class AddEditRoleComponent implements OnInit {
       if (response.status) {
         this.roleObj = response.data;
         this.rolename = response.data.rolename;
+
         this.dataaccess = response.data.dataaccess;
         this.status = response.data.status === AppConstant.STATUS_ACTIVE ? true : false;
       }
