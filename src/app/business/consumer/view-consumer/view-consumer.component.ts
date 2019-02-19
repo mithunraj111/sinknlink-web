@@ -15,6 +15,7 @@ export class ViewConsumerComponent implements OnInit {
   date_displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   date: any;
   userfile: any;
+  categorydoc: any;
   emptymessages = AppConstant.EMPTY_MESSAGES.CONSUMERCOUPONS;
   nodata = AppConstant.EMPTY_MESSAGES.FAVOURITES;
   // For Consumer Details.
@@ -107,7 +108,6 @@ export class ViewConsumerComponent implements OnInit {
 
   showReviewFor(id) {
     this.bizReview = this.reviews[id].sort(function (a, b) { return a.reviewid - b.reviewid })[0];
-    console.log(this.bizReview);
     this.rateStar = this.bizReview.rating;
   }
 
@@ -115,7 +115,7 @@ export class ViewConsumerComponent implements OnInit {
     let groups = {
       business: [],
       category: [],
-      location: []
+      location: [],
     }
     data.forEach(element => {
       if (parseInt(element.membershipid)) {
@@ -127,6 +127,8 @@ export class ViewConsumerComponent implements OnInit {
       if (parseInt(element.categoryid)) {
         groups.category.push(element)
       }
+
+      console.log(this.categorydoc)
     });
     return groups;
   }
