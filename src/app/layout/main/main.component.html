@@ -6,7 +6,7 @@
     (window:resize)="onResize($event)">
     <div class="pcoded-overlay-box"></div>
     <div class="pcoded-container navbar-wrapper">
-        <nav class="navbar header-navbar pcoded-header" [attr.header-theme]="headerTheme"
+        <nav class="navbar header-navbar pcoded-header main-header" [attr.header-theme]="headerTheme"
             [attr.pcoded-header-position]="pcodedHeaderPosition">
             <div class="navbar-wrapper">
                 <div class="navbar-logo">
@@ -14,10 +14,10 @@
                         [exclude]="'#main_navbar'" (clickOutside)="onClickedOutsideSidebar($event)">
                         <i class="ti-menu"></i>
                     </a>
-                    <a [routerLink]="['/dashboard']">
-                        <!-- <img class="img-fluid" src="assets/images/Logo.png" alt="Business Directory" /> -->
+                    <!-- <a [routerLink]="['/dashboard']">
+                        <img class="img-fluid" src="assets/images/Logo.png" alt="Business Directory" />
                         <h1 class="logo-title">Business Directory</h1>
-                    </a>
+                    </a> -->
                     <a href="javascript:" class="mobile-options" (click)="toggleHeaderNavRight()">
                         <i class="ti-more"></i>
                     </a>
@@ -58,19 +58,22 @@
         </nav>
         <div class="pcoded-main-container" [style.margin-top]="headerFixedMargin">
             <div class="pcoded-wrapper">
-                <nav id="main_navbar" class="pcoded-navbar" (clickOutside)="onClickedOutsideSidebar($event)"
+                <nav id="main_navbar" class="pcoded-navbar main-navbar" (clickOutside)="onClickedOutsideSidebar($event)"
                     [exclude]="'#mobile-collapse'" [attr.pcoded-header-position]="pcodedHeaderPosition"
                     [attr.navbar-theme]="navBarTheme" [attr.active-item-theme]="activeItemTheme" sub-item-theme="theme2"
                     active-item-style="style0" [attr.pcoded-navbar-position]="pcodedSidebarPosition">
                     <div class="pcoded-inner-navbar main-menu" appAccordion>
-                        <perfect-scrollbar [style.max-width]="'235px'" [style.max-height]="sidebarFixedHeight"
+                        <perfect-scrollbar [style.max-width]="'236px'" [style.max-height]="sidebarFixedHeight"
                             [config]="config">
                             <span class="d-color">
-                                <div class="pcoded-navigation-label" [attr.menu-title-theme]="menuTitleTheme"></div>
-                                <ul class="pcoded-item pcoded-left-item" [attr.item-border]="itemBorder"
+                               
+                                <!-- <div class="pcoded-navigation-label" [attr.menu-title-theme]="menuTitleTheme"></div> -->
+                                <a  class="navbar-title" [routerLink]="['/dashboard']">
+                                    <h1 class="logo-title">Business Directory</h1>
+                                </a>
+                                <ul class="pcoded-item pcoded-left-item main-nav-item" [attr.item-border]="itemBorder"
                                     [attr.item-border-style]="itemBorderStyle" [attr.subitem-border]="subItemBorder"
-                                    *ngFor="let asideItem of availScreens" appAccordionLink
-                                    group="{{asideItem.state}}">
+                                    *ngFor="let asideItem of availScreens" appAccordionLink group="{{asideItem.state}}">
                                     <li [routerLinkActive]="['active']" *ngIf="asideItem.type === 'external'"
                                         appAccordionLink group="{{asideItem.state}}">
                                         <a href="{{asideItem.external}}"
@@ -251,9 +254,9 @@
                                                             <li class="theme-option" id="bg-pattern-visiblity"
                                                                 [ngClass]="displayBoxLayout">
                                                                 <div class="theme-color">
-                                                                    <a href="javascript:" class="small"
+                                                                    <!-- <a href="javascript:" class="small"
                                                                         (click)="setBackgroundPattern('pattern1')"
-                                                                        themebg-pattern="pattern1"></a>
+                                                                        themebg-pattern="pattern1"></a> -->
                                                                     <a href="javascript:" class="small"
                                                                         (click)="setBackgroundPattern('pattern2')"
                                                                         themebg-pattern="pattern2"></a>

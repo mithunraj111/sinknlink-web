@@ -6,7 +6,7 @@ const MENUITEMS = [
     short_label: 'D',
     name: 'Dashboard',
     type: 'link',
-    icon: 'ti-home',
+    icon: 'fa fa-home',
     code: 'dashboard'
   },
   {
@@ -14,7 +14,7 @@ const MENUITEMS = [
     short_label: 'M',
     name: 'Masters',
     type: 'sub',
-    icon: 'ti-user',
+    icon: 'fa fa-user',
     code: 'masters',
     children: [
       {
@@ -44,7 +44,7 @@ const MENUITEMS = [
     short_label: 'B',
     name: 'Business',
     type: 'sub',
-    icon: 'ti-stats-up',
+    icon: 'fa fa-line-chart',
     code: 'business',
     children: [
       {
@@ -69,7 +69,7 @@ const MENUITEMS = [
     short_label: 'A',
     name: 'Admin',
     type: 'sub',
-    icon: 'ti-user',
+    icon: 'fa fa-user',
     code: 'admin',
     children: [
       {
@@ -99,7 +99,7 @@ const MENUITEMS = [
     short_label: 'R',
     name: 'Reports',
     type: 'sub',
-    icon: 'ti-files',
+    icon: 'fa fa-file-text-o',
     code: 'reports',
     children: [
       {

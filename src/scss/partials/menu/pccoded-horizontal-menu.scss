@@ -79,7 +79,7 @@ a:focus {
     .pcoded-brand {
         float: left;
 
-        a .pcoded-brand-text {}
+        // a .pcoded-brand-text {}
     }
 
     &[pcoded-device-type="desktop"],
@@ -137,7 +137,7 @@ a:focus {
                 line-height: 2.3;
             }
 
-            &:hover > a {}
+            // &:hover > a {}
         }
 
         .pcoded-hasmenu .pcoded-submenu {
@@ -360,8 +360,8 @@ a:focus {
             }
         }
 
-        &[horizontal-placement="bottom"] .pcoded-navbar,
-        &[horizontal-placement="top"] .pcoded-navbar {}
+        // &[horizontal-placement="bottom"] .pcoded-navbar,
+        // &[horizontal-placement="top"] .pcoded-navbar {}
 
         .pcoded-navbar {
             .pcoded-brand.pcoded-left-align,
@@ -574,9 +574,9 @@ li.edge > ul {
                 }
             }
 
-            .pcoded-brand.pcoded-left-align {
-                /*  display: none; */
-            }
+            // .pcoded-brand.pcoded-left-align {
+            //    display: none; 
+            // }
         }
 
         &[pcoded-device-type="desktop"] .pcoded-navbar.isCentered,
@@ -594,7 +594,6 @@ li.edge > ul {
         .pcoded-brand {
             display: inline-block;
             float: none;
-            float: unset;
             margin-top: 0;
             position: relative;
             top: -13px;

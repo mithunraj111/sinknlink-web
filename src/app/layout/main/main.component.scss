@@ -1,6 +1,106 @@
-.logo-title{
-    font-size: 16px;
-    vertical-align: middle;
-    display: inline;
-    text-transform: uppercase;
+.navbar-title {
+    display: inline-block;
+    min-height: 56px;
+    line-height: 56px;
+    margin-bottom: 20px;
+    .logo-title{
+        font-size: 18px;
+        vertical-align: middle;
+        display: inline-block;
+        text-transform: uppercase;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: bold;
+        text-align: center;
+        margin: 0 10px;
+    }
+}
+#pcoded{
+    &[vertical-nav-type="offcanvas"] {
+        .main-header {
+            right: auto;
+            width: calc(100%) !important;
+        }
+    }
+}
+body[themebg-pattern="pattern1"]{
+    background-color: transparent !important;
+}
+.main-header{
+    right: 0;
+    width: calc(100% - 238px) !important; 
+    background: linear-gradient(to right, #eff2f9, #f2f5fa) !important;
+    box-shadow: none !important;
+    border-bottom: 1px solid #d6d9de;
+    .mobile-menu {
+        font-size: 17px;
+        color: #838487;
+    }
+    .navbar-container{
+      .nav-right{
+          li {
+              a{
+                  span{
+                    color: #5c5c5c;
+                    font-weight: 600;
+                  }
+              }
+          }
+          .user-profile {
+            i{
+                color: #c8c8c8;
+            }
+          }
+      }
+    }
+}
+.main-navbar{
+    box-shadow: none !important;
+    border-right: 1px solid #d6d9de;
+    width: 236px !important;
+    .main-nav-item{
+        li{
+            a{
+                font-family: 'Roboto', sans-serif !important;
+                font-weight: 600;
+                color: #000000 !important;
+                &:hover{
+                    color:#004dff !important; 
+                }
+               
+            }
+        }
+    }
+}
+.pcoded .pcoded-navbar .pcoded-item > li > a > .pcoded-micon{
+    font-size: 18px;
+    padding: 0;
+    color: #8a8a8a;
+}
+.pcoded .pcoded-navbar[active-item-theme="theme10"] .pcoded-item > li.active > a:before{
+    border-left-color: #004dff;
+}
+.pcoded[theme-layout="vertical"] .pcoded-navbar .pcoded-item li.pcoded-hasmenu[dropdown-icon="style3"] > a:after {
+    content: '\f078';
+    font-family: 'fontawesome';
+}
+.pcoded[theme-layout="vertical"] .pcoded-navbar .pcoded-item li.pcoded-hasmenu.pcoded-trigger[dropdown-icon="style3"] > a:after{
+    content: "\f077";
+    font-family: 'fontawesome';
+}
+.header-navbar{
+    .navbar-wrapper{
+        .navbar-logo{
+            height:50px !important; 
+            width:56px !important; 
+        }
+    }
+}
+.pcoded[theme-layout="vertical"]{
+    .pcoded-content {
+        position: relative;
+        display: block;
+        padding: 50px 0px 0 0px;
+        box-sizing: border-box;
+        height: 100%;
+    }
 }

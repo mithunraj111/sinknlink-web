@@ -1,17 +1,28 @@
 
 $font-stack: 'Montserrat', sans-serif;
-$primary-color: #03ADED;  // title heading color and list table color //
-$border-color: #03ADED; // box border color //
-$button-border-color: #03ADED; // all buttons border color, close icon and sidebar title bottom color //
-$background:#03ADED;
+// $primary-color: #03ADED;  // title heading color and list table color //
+$border-color: #004dff; // box border color //
+$button-border-color: #004dff; // all buttons border color, close icon and sidebar title bottom color //
 $primary-text-color: #4b5056; // table header color //
 $white-txt: #ffffff;
 $danger-color: #FF5370; // alert error //
 $success-color:#2ed8b6; // alert success //
 $warning-color:#FFB64D; // alert warning //
 $info-color :#00bcd4;  // alert info //
+$primary-color: linear-gradient(to right, #004dff, #6b98fe);
+$background: -webkit-linear-gradient(90deg, rgb(0, 77, 255) 0%, rgb(100, 147, 254) 100%);
 
 // header section //
+.btn-inverse {
+    background: #2f3d4a !important;
+    border-color: #2f3d4a !important;
+    color: #fff;
+}
+.btn-primary{
+    background: $background;
+    border: 0 none !important;
+}
+
 p{
     font-family: 'Open Sans',sans-serif;
     font-weight: 300;  
@@ -347,9 +358,9 @@ textarea {
                 font-family: "Nunito", sans-serif;
                 font-weight: 400;
                 display: inline-block;
-                vertical-align: top;
+                vertical-align: middle;
                 width:100%;
-                line-height: 31px;
+                line-height: 26px;
 
             &:first-child{
                 padding-left: 12px;
@@ -863,6 +874,9 @@ button{
             width: 96%;
         }
     }
+}
+body[themebg-pattern="pattern1"]{
+    background-color: transparent !important;
 }
 .addeditpage{
     .fixedheader{
