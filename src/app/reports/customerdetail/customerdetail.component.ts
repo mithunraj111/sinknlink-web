@@ -63,7 +63,7 @@ export class CustomerdetailComponent implements OnInit {
       fromdt: [this.commonService.parseDate(new Date())],
       todate: [this.commonService.parseDate(new Date())],
       biztype: [''],
-      locationid: [''],
+      area: [''],
       categoryid: [''],
       membershiptype: ['']
     })
@@ -72,7 +72,7 @@ export class CustomerdetailComponent implements OnInit {
     const data = this.customerdetailForm.value;
     const todt = this.commonService.formatDate(data.todate);
     const fromdt = this.commonService.formatDate(data.fromdt);
-    let locationid = data.locationid;
+    let area = data.area;
     let categoryid = data.categoryid;
     let biztype = data.biztype;
     let membershiptype = data.membershiptype;
@@ -89,8 +89,8 @@ export class CustomerdetailComponent implements OnInit {
     if (categoryid != "") {
       formData.categoryid = categoryid;
     }
-    if (locationid != "") {
-      formData.locationid = locationid;
+    if (area != "") {
+      formData.area = area;
     }
     if (biztype != "") {
       formData.biztype = biztype;
@@ -107,10 +107,9 @@ export class CustomerdetailComponent implements OnInit {
 
       console.log(this.businessList)
     }, err => {
-
     })
-
   }
+
   getRowHeight(row) {
     return row.height;
   }
@@ -184,7 +183,6 @@ export class CustomerdetailComponent implements OnInit {
         this.bizTypeLists = this.bizTypeLists.concat(response.data);
       }
     });
-
   }
 
   search(event?) {

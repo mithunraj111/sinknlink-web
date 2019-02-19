@@ -57,9 +57,19 @@
                         </div>
                         <div class="col-md-3 col-sm-3 p-r-0 p-l-0">
                             <div class="form-group locationlist">
+                                <label>City</label>
+                                <div class="input-group">
+                                    <ng-select formcontrolName= "city" [options]="cityList" (selected)="selectCity($event)"
+                                    [allowClear]="true" [ngClass]="'ng-select'" placeholder="Select city">
+                                </ng-select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-3 p-r-0 p-l-0">
+                            <div class="form-group locationlist">
                                 <label>Area</label>
                                 <div class="input-group">
-                                    <ng-select formControlName="locationid" [options]="locationLists"
+                                    <ng-select formControlName="area" [options]="areaList"
                                         [allowClear]="true" [ngClass]="'ng-select'" placeholder="Select Area">
                                     </ng-select>
                                 </div>
@@ -75,8 +85,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4 col-sm-4 m-t-25">
-                            <div class="search-button">
+                        <div class="col-md-3 col-sm-3 m-t-25">
+                            <div class="search-button f-right">
                                 <button type="button" placement="bottom" ngbTooltip="Click to search"
                                     class="btn btn-primary generate-button waves-effect  download-btn"
                                     (click)="getReports()">
@@ -101,6 +111,7 @@
                             <div class="col-sm-12 header-title">
                                 <label class="dt-cust-search f-right">
                                     <div class="form-group">
+                                        <label class="p-r-10 f-16"><b>Search:</b></label>
                                         <input #customerReportSearch type='text'
                                             class="form-control input-sm report-search" placeholder='Search here'
                                             (keyup)='search($event)' />
