@@ -34,6 +34,7 @@ export class PaymentComponent implements OnInit {
   reportfiller = {};
   tempFilter = [];
   paymentForm: FormGroup;
+  loadingIndicator: Boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -72,6 +73,7 @@ export class PaymentComponent implements OnInit {
   }
 
   getPaymentList() {
+    this.loadingIndicator = true;
     const data = this.paymentForm.value;
     const todt = this.commonService.formatDate(data.todate);
     const fromdt = this.commonService.formatDate(data.fromdate);
@@ -94,6 +96,7 @@ export class PaymentComponent implements OnInit {
     this.reportService.paymentReport(formData).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
+        this.loadingIndicator = false;
         this.paymentList = response.data;
       }
     });

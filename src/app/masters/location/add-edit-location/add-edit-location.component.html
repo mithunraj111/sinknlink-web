@@ -43,7 +43,7 @@
                     </div>
                 </div>
                 <button type="button" placement="top" (click)="saveOrUpdateLocation()" ngbTooltip="Click to {{buttonTxt}} location" class="btn pull-right btn-primary waves-effect 
-                    m-b-10 m-r-15" [disabled]="validatingLocation">{{buttonTxt}}</button>
+                    m-b-10 m-r-15" [disabled]="validatingLocation">{{validatingLocation == true ? 'Saving' : buttonTxt}}</button>
             </div>
         </form>
         <button (click)="close('locationmodal')" aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>

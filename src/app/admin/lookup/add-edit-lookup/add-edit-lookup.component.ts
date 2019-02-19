@@ -102,6 +102,7 @@ export class AddEditLookupComponent implements OnInit, OnChanges {
       this.bootstrapAlertService.showError(errMessage);
       return false;
     } else {
+      this.savingLookup = true;
       const data = this.lookupForm.value;
       const formdata = {} as any;
       formdata.refkey = this.selectedKeyType;
@@ -129,9 +130,9 @@ export class AddEditLookupComponent implements OnInit, OnChanges {
         formdata.createdby = this.userstoragedata.fullname;
         formdata.createddt = new Date();
         this.lookupService.create(formdata).subscribe((res) => {
-          this.savingLookup = true;
           const response = JSON.parse(res._body);
           if (response.status) {
+            this.savingLookup = false;
             this.bootstrapAlertService.showSucccess(response.message);
             this.callParent({ update: false, data: response.data });
           } else {
@@ -139,6 +140,7 @@ export class AddEditLookupComponent implements OnInit, OnChanges {
             this.savingLookup = false;
           }
         }, err => {
+          this.savingLookup = false;
           this.bootstrapAlertService.showError(err.message);
         });
       }

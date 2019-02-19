@@ -18,6 +18,7 @@ export class LocationComponent extends BaseService implements OnInit {
   tempFilter = [];
   locationList = [];
   emptymessages = AppConstant.EMPTY_MESSAGES.LOCATION;
+  loadingIndicator: boolean = true;
 
   displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   constructor(private locationService: MasterService.LocationService,
@@ -56,9 +57,11 @@ export class LocationComponent extends BaseService implements OnInit {
 
   // API call to get the location list
   getLocations() {
+    this.loadingIndicator = true;
     this.locationService.list({}).subscribe((res) => {
       const response = JSON.parse(res._body);
       if (response.status) {
+        this.loadingIndicator = false;
         this.locationList = response.data;
         this.tempFilter = this.locationList;
       }

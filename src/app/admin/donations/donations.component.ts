@@ -18,7 +18,8 @@ export class DonationsComponent extends BaseService implements OnInit {
   displaydtimeformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   displaydateformat = AppConstant.API_CONFIG.ANG_DATE.displaydate;
   donationList = [];
-  emptymessages= AppConstant.EMPTY_MESSAGES.DONATIONS;
+  emptymessages = AppConstant.EMPTY_MESSAGES.DONATIONS;
+  loadingIndicator: boolean = true;
 
   constructor(private router: Router,
     private donationService: AdminService.DonationService,
@@ -31,9 +32,11 @@ export class DonationsComponent extends BaseService implements OnInit {
     this.getDonations();
   }
   getDonations() {
+    this.loadingIndicator = true;
     this.donationService.list({}).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
+        this.loadingIndicator = false;
         this.donationList = response.data;
         this.tempFilter = this.donationList;
       } else {

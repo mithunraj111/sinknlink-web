@@ -41,8 +41,8 @@
                     <div class="form-group">
                       <label>Payment Type</label>
                       <div class="input-group">
-                        <ng-select [allowClear]="true" [ngClass]="'ng-select'" [options]="paymentTypes" placeholder="All"
-                          formControlName="paymenttype">
+                        <ng-select [allowClear]="true" [ngClass]="'ng-select'" [options]="paymentTypes"
+                          placeholder="All" formControlName="paymenttype">
                         </ng-select>
                       </div>
                     </div>
@@ -59,8 +59,9 @@
                   </div>
                   <div class="col-md-2 col-sm-2 m-t-35">
                     <div class="search-button">
-                      <button type="button" placement="bottom" ngbTooltip="Click to search" class="btn btn-primary generate-button waves-effect"
-                        (click)="getPaymentList()"> <i class="fa fa-search"></i>
+                      <button type="button" placement="bottom" ngbTooltip="Click to search"
+                        class="btn btn-primary generate-button waves-effect" (click)="getPaymentList()"> <i
+                          class="fa fa-search"></i>
                       </button>
                     </div>
                   </div>
@@ -77,63 +78,67 @@
   <div class="row">
     <div class="col-lg-12 col-md-12 p-r-5">
       <div class="header-block">
-        <div class="table-header report-table payment-table">
-          <app-card [classHeader]="true">
-            <div class="row">
-              <div class="col-sm-12 header-title">
-                <label class="dt-cust-search f-right">
-                  <div class="form-group">
-                    <label class="p-r-10 f-16"><b>Search:</b></label>
-                    <input #paymentReportSearch type='text' class="form-control input-sm report-search" placeholder='Search here'
-                      (keyup)='search($event)' />
-                    <button type="button" class="btn search-close" (click)="paymentReportSearch.value='';search();"><i
-                        class="fa fa-close"></i></button>
-                    <button type="button" placement="bottom" ngbTooltip="Click to download reports" class="btn btn-primary waves-effect download-btn"><i
-                        class="fa fa-download m-r-5"></i>
-                    </button>
-                  </div>
-                </label>
+        <div *ngIf="!loadingIndicator">
+          <div class="table-header report-table payment-table">
+            <app-card [classHeader]="true">
+              <div class="row">
+                <div class="col-sm-12 header-title">
+                  <label class="dt-cust-search f-right">
+                    <div class="form-group">
+                      <label class="p-r-10 f-16"><b>Search:</b></label>
+                      <input #paymentReportSearch type='text' class="form-control input-sm report-search"
+                        placeholder='Search here' (keyup)='search($event)' />
+                      <button type="button" class="btn search-close" (click)="paymentReportSearch.value='';search();"><i
+                          class="fa fa-close"></i></button>
+                      <button type="button" placement="bottom" ngbTooltip="Click to download reports"
+                        class="btn btn-primary waves-effect download-btn"><i class="fa fa-download m-r-5"></i>
+                      </button>
+                    </div>
+                  </label>
+                </div>
               </div>
-            </div>
-            <ngx-datatable #paymenttable class="table data-table expandable" [rows]='paymentList' [columnMode]="'flex'"
-              [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false" [footerHeight]="50" [limit]="5" [messages]="emptymessages">
-              <!-- Row Detail Template -->
-              <ngx-datatable-column prop="paymentref" name="Reference#" [resizeable]="false">
-                <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                  <span>{{row.paymentref}}</span>
-                </ng-template>
-              </ngx-datatable-column>
+              <ngx-datatable #paymenttable class="table data-table expandable" [rows]='paymentList'
+                [columnMode]="'flex'" [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false" [footerHeight]="50"
+                [limit]="5" [messages]="emptymessages">
+                <!-- Row Detail Template -->
+                <ngx-datatable-column prop="paymentref" name="Reference#" [resizeable]="false">
+                  <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                    <span>{{row.paymentref}}</span>
+                  </ng-template>
+                </ngx-datatable-column>
 
-              <ngx-datatable-column prop="paymentdate" name="Payment Date" [resizeable]="false">
-                <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                  <span>{{row.paymentdate|date:displaydateformat}}</span>
-                </ng-template>
-              </ngx-datatable-column>
+                <ngx-datatable-column prop="paymentdate" name="Payment Date" [resizeable]="false">
+                  <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                    <span>{{row.paymentdate|date:displaydateformat}}</span>
+                  </ng-template>
+                </ngx-datatable-column>
 
-              <ngx-datatable-column prop="totalamount" name="Amount" [resizeable]="false" headerClass="text-right"
-                [cellClass]="'text-right table-padding'">
-                <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                  <span>{{row.totalamount| currency: 'INR' : true}}</span>
-                </ng-template>
-              </ngx-datatable-column>
+                <ngx-datatable-column prop="totalamount" name="Amount" [resizeable]="false" headerClass="text-right"
+                  [cellClass]="'text-right table-padding'">
+                  <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                    <span>{{row.totalamount| currency: 'INR' : true}}</span>
+                  </ng-template>
+                </ngx-datatable-column>
 
-              <ngx-datatable-column prop="paymenttype" name="Payment Type" [resizeable]="false">
-                <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                  <span>{{row.paymenttype}}</span>
-                </ng-template>
-              </ngx-datatable-column>
+                <ngx-datatable-column prop="paymenttype" name="Payment Type" [resizeable]="false">
+                  <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                    <span>{{row.paymenttype}}</span>
+                  </ng-template>
+                </ngx-datatable-column>
 
-              <ngx-datatable-column prop="paymentmode" name="Payment Mode" [resizeable]="false">
-                <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                  <span>{{row.paymentmode}}</span>
-                </ng-template>
-              </ngx-datatable-column>
+                <ngx-datatable-column prop="paymentmode" name="Payment Mode" [resizeable]="false">
+                  <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                    <span>{{row.paymentmode}}</span>
+                  </ng-template>
+                </ngx-datatable-column>
 
 
-            </ngx-datatable>
-          </app-card>
+              </ngx-datatable>
+            </app-card>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+<app-loader [loadingIndicator]="loadingIndicator"></app-loader>

@@ -23,6 +23,7 @@ export class VipNumberRegistrationComponent implements OnInit {
   rows = [];
   formTitle: string;
   blocklist: string;
+  loadingIndicator: boolean = true;
 
   condition: any = { fancynostatus: AppConstant.STATUS_AVAILABLE };
 
@@ -46,9 +47,11 @@ export class VipNumberRegistrationComponent implements OnInit {
 
   ngOnInit() {
     this.getAvailableList();
+    this.loadingIndicator = true;
     this.fancynumberService.getParentBix({ status: "Active" }).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
+        this.loadingIndicator = false;
         this.parentBiz = Lodash.map(response.data, (item) => {
           return {
             label: item.bizname + " - " + item.membershipid,
@@ -76,11 +79,13 @@ export class VipNumberRegistrationComponent implements OnInit {
   }
 
   getAllocatedBusiness() {
+    this.loadingIndicator = true;
     this.customerService.list({
       status: AppConstant.STATUS_ACTIVE
     }, "parentwithfancynos").subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
+        this.loadingIndicator = false;
         this.data = response.data;
         this.tempFilter = this.data;
       } else {
@@ -90,6 +95,7 @@ export class VipNumberRegistrationComponent implements OnInit {
   }
 
   getAvailableList() {
+    this.loadingIndicator = true;
 
     let service = this.fancynumberService.getList(this.condition);
 
@@ -97,6 +103,7 @@ export class VipNumberRegistrationComponent implements OnInit {
     service.subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
+        this.loadingIndicator = false;
         this.data = response.data;
         this.tempFilter = this.data;
       } else {
@@ -161,10 +168,11 @@ export class VipNumberRegistrationComponent implements OnInit {
         });
         data.data = arr;
       }
-
+      this.loadingIndicator = true;
       this.fancynumberService.blockNumbers(data).subscribe(res => {
         const response = JSON.parse(res._body);
         if (response.status) {
+          this.loadingIndicator = false;
           this.getAvailableList();
           this.closeMyModal();
           this.bootstrapAlertService.showSucccess(response.message);
@@ -206,6 +214,7 @@ export class VipNumberRegistrationComponent implements OnInit {
   }
 
   unblockNumber(id) {
+
     let data = {
       data: [{
         fancyid: id,
@@ -215,9 +224,11 @@ export class VipNumberRegistrationComponent implements OnInit {
         updatedby: this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER).fullname
       }]
     }
+    this.loadingIndicator = true;
     this.fancynumberService.blockNumbers(data).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
+        this.loadingIndicator = false;
         this.getAvailableList();
         this.bootstrapAlertService.showSucccess(response.message);
       } else {

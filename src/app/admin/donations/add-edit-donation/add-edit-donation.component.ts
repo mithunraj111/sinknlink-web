@@ -91,9 +91,11 @@ export class AddEditDonationComponent implements OnInit {
         this.donationService.update(formdata, this.donationObj.donationid).subscribe(res => {
           const response = JSON.parse(res._body);
           if (response.status) {
+            this.validatingDonation = false;
             this.bootstrapAlertService.showSucccess(response.message);
             this.router.navigate(['/admin/donations/']);
           } else {
+            this.validatingDonation = false;
             this.bootstrapAlertService.showError(response.message);
           }
         }, err => {
@@ -107,9 +109,11 @@ export class AddEditDonationComponent implements OnInit {
         this.donationService.create(formdata).subscribe((res) => {
           const response = JSON.parse(res._body);
           if (response.status) {
+            this.validatingDonation = false;
             this.bootstrapAlertService.showSucccess(response.message);
             this.router.navigate(['/admin/donations/']);
           } else {
+            this.validatingDonation = false;
             this.bootstrapAlertService.showError(response.message);
           }
         }, err => {

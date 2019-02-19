@@ -23,6 +23,7 @@
   </div>
 </div>
 <div class="header-block m-t-60">
+  <div *ngIf="!loadingIndicator">
   <div class="table-header fixed-table-header">
     <app-card [classHeader]="true">
       <ngx-datatable #dealertable class="table data-table expandable" [rows]='dealerList' [columnMode]="'flex'"
@@ -74,3 +75,5 @@
     </app-card>
   </div>
 </div>
+</div>
+<app-loader [loadingIndicator]="loadingIndicator"></app-loader>

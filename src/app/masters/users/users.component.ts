@@ -5,7 +5,7 @@ import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { MasterService, LocalStorageService, BaseService, CommonService } from '../../services';
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
 import { AppMessages } from 'src/app/app-messages';
-import {LoaderComponent} from '../../shared/loader/loader.component';
+import { LoaderComponent } from '../../shared/loader/loader.component';
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html'
@@ -82,15 +82,6 @@ export class UsersComponent extends BaseService implements OnInit {
     this.userList = this.commonService.globalSearch(this.tempFilter, event);
     this.table.offset = 0;
   }
-  // loadTable(){
-  //   this.userService.list({}).subscribe(data=>{
-  //   if(data.length === 0 || !data){
-  //     return;
-  //   }
-  //   data.forEach(rowData=>{
-  //     this.userList.push(rowData);
-  //   });
-  //   });
-  // }
+
 
 }

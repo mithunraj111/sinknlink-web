@@ -35,8 +35,8 @@
               </div>
               <div class="col-md-4 col-sm-4 m-t-35">
                 <div class="f-right p-r-10">
-                  <button type="button" placement="bottom" ngbTooltip="Click to search" class="btn btn-primary generate-button waves-effect  download-btn"
-                    (click)="getAreaCategories()">
+                  <button type="button" placement="bottom" ngbTooltip="Click to search"
+                    class="btn btn-primary generate-button waves-effect  download-btn" (click)="getAreaCategories()">
                     <i class="fa fa-search"></i>
                   </button>
                 </div>
@@ -52,84 +52,93 @@
   <div class="row">
     <div class="col-lg-6 col-md-12 p-r-5">
       <div class="header-block">
-        <div class="table-header report-table">
-          <app-card [classHeader]="true" [title]="'Area'">
-            <div class="row">
-              <div class="col-sm-12 header-title">
-                <label class="dt-cust-search f-right">
-                  <div class="form-group">
-                    <input #areaSearch type="text" class="form-control input-sm report-search" placeholder='Search here'
-                      (keyup)='search($event)' />
-                    <button type="button" class="btn search-close" (click)="areaSearch.value='';search();"><i class="fa fa-close"></i></button>
-                    <button type="button" placement="bottom" ngbTooltip="Click to download reports" class="btn btn-primary waves-effect download-btn"><i
-                        class="fa fa-download m-r-5"></i></button>
-                  </div>
-                </label>
+        <div *ngIf="!loadingIndicator==true">
+          <div class="table-header report-table">
+            <app-card [classHeader]="true" [title]="'Area'">
+              <div class="row">
+                <div class="col-sm-12 header-title">
+                  <label class="dt-cust-search f-right">
+                    <div class="form-group">
+                      <input #areaSearch type="text" class="form-control input-sm report-search"
+                        placeholder='Search here' (keyup)='search($event)' />
+                      <button type="button" class="btn search-close" (click)="areaSearch.value='';search();"><i
+                          class="fa fa-close"></i></button>
+                      <button type="button" placement="bottom" ngbTooltip="Click to download reports"
+                        class="btn btn-primary waves-effect download-btn"><i class="fa fa-download m-r-5"></i></button>
+                    </div>
+                  </label>
+                </div>
               </div>
-            </div>
-            <ngx-datatable #areatable class="table data-table expandable" [rows]='areaList' [columnMode]="'flex'"
-              [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false" [footerHeight]="50" [limit]="5" [messages]="emptymesages">
-              <!-- Row Detail Template -->
-              <ngx-datatable-column prop="area" name="Area" [resizeable]="false">
-                <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                  <span>{{row.area}}</span>
-                </ng-template>
-              </ngx-datatable-column>
-              <ngx-datatable-column prop="pincode" name="Pincode" [resizeable]="false">
-                <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                  <span>{{row.pincode}}</span>
-                </ng-template>
-              </ngx-datatable-column>
+              <ngx-datatable #areatable class="table data-table expandable" [rows]='areaList' [columnMode]="'flex'"
+                [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false" [footerHeight]="50" [limit]="5"
+                [messages]="emptymesages">
+                <!-- Row Detail Template -->
+                <ngx-datatable-column prop="area" name="Area" [resizeable]="false">
+                  <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                    <span>{{row.area}}</span>
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column prop="pincode" name="Pincode" [resizeable]="false">
+                  <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                    <span>{{row.pincode}}</span>
+                  </ng-template>
+                </ngx-datatable-column>
 
-              <ngx-datatable-column prop="count" name=" Count" [resizeable]="false" headerClass="text-right"
-                [cellClass]="'text-right table-padding'">
-                <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                  <span>{{row.count}}</span>
-                </ng-template>
-              </ngx-datatable-column>
+                <ngx-datatable-column prop="count" name=" Count" [resizeable]="false" headerClass="text-right"
+                  [cellClass]="'text-right table-padding'">
+                  <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                    <span>{{row.count}}</span>
+                  </ng-template>
+                </ngx-datatable-column>
 
-            </ngx-datatable>
-          </app-card>
+              </ngx-datatable>
+            </app-card>
+          </div>
         </div>
       </div>
     </div>
     <div class="col-lg-6 col-md-12 p-l-5">
       <div class="header-block">
-        <div class="table-header report-table">
-          <app-card [classHeader]="true" [title]="'Category'">
-            <div class="row">
-              <div class="col-sm-12 header-title">
-                <label class="dt-cust-search f-right">
-                  <div class="form-group">
-                    <input #categoryReportSearch type="text" class="form-control input-sm report-search" placeholder='Search here'
-                      (keyup)='searchCategory($event)' />
-                    <button type="button" class="btn search-close" (click)="categoryReportSearch.value='';searchCategory();"><i
-                        class="fa fa-close"></i></button>
-                    <button type="button" placement="bottom" ngbTooltip="Click to download reports" class="btn btn-primary waves-effect download-btn"><i
-                        class="fa fa-download m-r-5"></i></button>
-                  </div>
-                </label>
-              </div>
-            </div>
-            <ngx-datatable #categoriestable class="table data-table expandable" [rows]='categoriesList' [columnMode]="'flex'"
-              [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false" [footerHeight]="50" [limit]="5" [messages]="nodata">
-              <!-- Row Detail Template -->
-              <ngx-datatable-column prop="categoryname" name="Category Name" [resizeable]="false">
-                <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                  <span>{{row.categoryname}}</span>
-                </ng-template>
-              </ngx-datatable-column>
-              <ngx-datatable-column prop="count" name=" Count" [resizeable]="false" headerClass="text-right"
-                [cellClass]="'text-right table-padding'">
-                <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                  <span>{{row.count}}</span>
-                </ng-template>
-              </ngx-datatable-column>
+        <div *ngIf="!loadingIndicator==true">
 
-            </ngx-datatable>
-          </app-card>
+          <div class="table-header report-table">
+            <app-card [classHeader]="true" [title]="'Category'">
+              <div class="row">
+                <div class="col-sm-12 header-title">
+                  <label class="dt-cust-search f-right">
+                    <div class="form-group">
+                      <input #categoryReportSearch type="text" class="form-control input-sm report-search"
+                        placeholder='Search here' (keyup)='searchCategory($event)' />
+                      <button type="button" class="btn search-close"
+                        (click)="categoryReportSearch.value='';searchCategory();"><i class="fa fa-close"></i></button>
+                      <button type="button" placement="bottom" ngbTooltip="Click to download reports"
+                        class="btn btn-primary waves-effect download-btn"><i class="fa fa-download m-r-5"></i></button>
+                    </div>
+                  </label>
+                </div>
+              </div>
+              <ngx-datatable #categoriestable class="table data-table expandable" [rows]='categoriesList'
+                [columnMode]="'flex'" [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false" [footerHeight]="50"
+                [limit]="5" [messages]="nodata">
+                <!-- Row Detail Template -->
+                <ngx-datatable-column prop="categoryname" name="Category Name" [resizeable]="false">
+                  <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                    <span>{{row.categoryname}}</span>
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column prop="count" name=" Count" [resizeable]="false" headerClass="text-right"
+                  [cellClass]="'text-right table-padding'">
+                  <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                    <span>{{row.count}}</span>
+                  </ng-template>
+                </ngx-datatable-column>
+
+              </ngx-datatable>
+            </app-card>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+<app-loader [loadingIndicator]="loadingIndicator"></app-loader>

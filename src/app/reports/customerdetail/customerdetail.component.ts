@@ -29,8 +29,9 @@ export class CustomerdetailComponent implements OnInit {
   @ViewChild(DatatableComponent) table: DatatableComponent;
   displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydate;
   emptymessages = AppConstant.EMPTY_MESSAGES.CUSTOMERREPORT;
+  loadingIndicator: Boolean = false;
 
-  tempFilter = [];
+  tempFilter = [{ value: "", label: "All" }];
 
   areaList = [];
   cityList = [{ value: "", label: "All" }];
@@ -69,6 +70,7 @@ export class CustomerdetailComponent implements OnInit {
     })
   }
   getReports() {
+    this.loadingIndicator = true;
     const data = this.customerdetailForm.value;
     const todt = this.commonService.formatDate(data.todate);
     const fromdt = this.commonService.formatDate(data.fromdt);
@@ -101,6 +103,7 @@ export class CustomerdetailComponent implements OnInit {
     this.reportService.customerDetailReport(formData).subscribe((res) => {
       const response = JSON.parse(res._body);
       if (response.status) {
+        this.loadingIndicator = false;
         this.businessList = response.data;
       }
       this.tempFilter = this.businessList;
@@ -142,7 +145,8 @@ export class CustomerdetailComponent implements OnInit {
           item.label = item.area + ' (' + item.pincode + ' )';
           item.value = item.locationid;
         });
-        this.areaList = response.data;
+        this.areaList = [{ value: "", label: "All" }];
+        this.areaList = this.areaList.concat(response.data);
       }
     });
   }

@@ -15,6 +15,7 @@ import { AppMessages } from 'src/app/app-messages';
 export class AddEditCategoryComponent implements OnInit, OnChanges {
   userstoragedata = {} as any;
   categoryForm: FormGroup;
+  savecategory;
   formTitle = AppConstant.FORM_TITLE.CATEGORY.ADD;
   buttonTxt = AppConstant.BUTTON_TXT.SAVE;
   @Output() notifyCategoryEntry: EventEmitter<any> = new EventEmitter();
@@ -119,6 +120,7 @@ export class AddEditCategoryComponent implements OnInit, OnChanges {
           }
         });
       } else {
+        this.savecategory = true;
         data.status = AppConstant.STATUS_ACTIVE;
         data.createdby = this.userstoragedata.fullname;
         data.createddt = new Date();
@@ -126,9 +128,11 @@ export class AddEditCategoryComponent implements OnInit, OnChanges {
         this.categoryService.create(formdata).subscribe((res) => {
           const response = JSON.parse(res._body);
           if (response.status) {
+            this.savecategory = false;
             this.bootstrapAlertService.showSucccess(response.message);
             this.callParent({ update: true, data: response.data });
           } else {
+            this.savecategory = false;
             this.bootstrapAlertService.showError(response.message);
           }
         }, err => {

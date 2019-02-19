@@ -1,90 +1,85 @@
 <div class="fixedheader">
-        <div class="header-title pos-fixed">
-            <div class="row">
-                <div class="col-md-7 col-sm-6">
-                    <h2>Users</h2>
-                    <p>Create or Update the user logins</p>
+    <div class="header-title pos-fixed">
+        <div class="row">
+            <div class="col-md-7 col-sm-6">
+                <h2>Users</h2>
+                <p>Create or Update the user logins</p>
+            </div>
+            <div class="col-md-4 col-sm-4">
+                <div class="text-right">
+                    <label class="col-md-3 p-l-0"><b>Search:</b></label>
+                    <input #userSearch type="text"
+                        class="header-search form-control col-md-8 col-sm-8 p-l-0 p-r-0 input-sm full-data-search"
+                        placeholder="Search here" (keyup)='search($event)' placement="bottom"
+                        ngbTooltip="Type here to search">
+                    <button type="button" class="btn search-close col-md-1 col-sm-1 p-l-0 p-r-0"
+                        (click)="userSearch.value='';search();"><i class="fa fa-close"></i></button>
                 </div>
-                <div class="col-md-4 col-sm-4">
-                    <div class="text-right">
-                        <label class="col-md-3 p-l-0"><b>Search:</b></label>
-                        <input #userSearch type="text"
-                            class="header-search form-control col-md-8 col-sm-8 p-l-0 p-r-0 input-sm full-data-search"
-                            placeholder="Search here" (keyup)='search($event)' placement="bottom"
-                            ngbTooltip="Type here to search">
-                        <button type="button" class="btn search-close col-md-1 col-sm-1 p-l-0 p-r-0"
-                            (click)="userSearch.value='';search();"><i class="fa fa-close"></i></button>
-                    </div>
-                </div>
-                <div class="col-md-1 col-sm-1 p-r-0">
-                    <button *ngIf="add" type="button" placement="bottom" ngbTooltip="Click to add user"
-                        class="add-btn btn btn-primary waves-effect" (click)='addUser()'><i
-                            class="fa fa-plus-circle m-r-5"></i> New
-                    </button>
-                </div>
+            </div>
+            <div class="col-md-1 col-sm-1 p-r-0">
+                <button *ngIf="add" type="button" placement="bottom" ngbTooltip="Click to add user"
+                    class="add-btn btn btn-primary waves-effect" (click)='addUser()'><i
+                        class="fa fa-plus-circle m-r-5"></i> New
+                </button>
             </div>
         </div>
     </div>
-    <div class="header-block m-t-60">
-        <!-- <div *ngIf="loadingIndicator" class="loader-block">
-            <svg id="loader2" viewBox="0 0 100 100">
-                <circle id="circle-loader2" cx="50" cy="50" r="45"></circle>
-            </svg>
-        </div> -->
-        <div *ngIf="!loadingIndicator">
-            <div class="table-header fixed-table ">
-                <app-card [classHeader]="true">
-                    <ngx-datatable #usertable [loadingIndicator]="!loadingIndicator"
-                        class="table data-table expandable  loader-block" [rows]='userList' [columnMode]="'flex'"
-                        [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false" [footerHeight]="50" [limit]="10"
-                        [messages]="emptymessages">
-                        <!-- Row Detail Template -->
-                        <ngx-datatable-column prop="fullname" name="Full Name" [resizeable]="false">
-                            <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                                <span>{{row.fullname}}</span>
-                            </ng-template>
-                        </ngx-datatable-column>
-                        <ngx-datatable-column prop="mobileno" name="Mobile No" [resizeable]="false"
-                            [cellClass]="'text-right table-padding'" headerClass="text-right">
-                            <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                                <span>{{row.mobileno}}</span>
-                            </ng-template>
-                        </ngx-datatable-column>
-                        <ngx-datatable-column prop="role" name="Role" [resizeable]="false">
-                            <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                                <span>{{row.role?.rolename}}</span>
-                            </ng-template>
-                        </ngx-datatable-column>
-                        <ngx-datatable-column prop="updatedby" name="Updated By" [resizeable]="false">
-                            <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                                <span class="updatename">{{row.updatedby}}</span>
-                                <span class="updatedate"> {{row.updateddt|date:displayformat}}</span>
-                            </ng-template>
-                        </ngx-datatable-column>
-                        <ngx-datatable-column name="Status" [sortable]="false" [flexGrow]="0.5" [cellClass]="'text-center'"
-                            headerClass="text-center" [resizeable]="false">
-                            <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                                <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status"
-                                    color="$primary-color" switchColor="#fff" size="small"
-                                    (change)="changeStatus(row,rowIndex,false)" [checked]="row.status == 'Active'">
-                                </ui-switch>
-                            </ng-template>
-                        </ngx-datatable-column>
-                        <ngx-datatable-column *ngIf="edit||delete" name="Action" [sortable]="false" [flexGrow]="0.5"
-                            headerClass="text-center" [cellClass]="'text-center'" [resizeable]="false">
-                            <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                                <a *ngIf="edit" placement="bottom" ngbTooltip="Click to edit user"
-                                    class="m-r-15 crm-action-edit text-primary" (click)='editUser(row.userid)'>
-                                    <i class="fa fa-pencil"></i></a>
-                                <a *ngIf="delete" placement="bottom" ngbTooltip="Click to delete user"
-                                    (click)="changeStatus(row,rowIndex,true)" class="crm-action-delete text-danger">
-                                    <i class="fa fa-trash"></i></a>
-                            </ng-template>
-                        </ngx-datatable-column>
-                    </ngx-datatable>
-                </app-card>
-            </div>
-    
+</div>
+<div class="header-block m-t-60">
+   
+    <div *ngIf="!loadingIndicator">
+        <div class="table-header fixed-table ">
+            <app-card [classHeader]="true">
+                <ngx-datatable #usertable class="table data-table expandable  loader-block" [rows]='userList'
+                    [columnMode]="'flex'" [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false"
+                    [footerHeight]="50" [limit]="10" [messages]="emptymessages">
+                    <!-- Row Detail Template -->
+                    <ngx-datatable-column prop="fullname" name="Full Name" [resizeable]="false">
+                        <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                            <span>{{row.fullname}}</span>
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column prop="mobileno" name="Mobile No" [resizeable]="false"
+                        [cellClass]="'text-right table-padding'" headerClass="text-right">
+                        <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                            <span>{{row.mobileno}}</span>
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column prop="role" name="Role" [resizeable]="false">
+                        <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                            <span>{{row.role?.rolename}}</span>
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column prop="updatedby" name="Updated By" [resizeable]="false">
+                        <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                            <span class="updatename">{{row.updatedby}}</span>
+                            <span class="updatedate"> {{row.updateddt|date:displayformat}}</span>
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Status" [sortable]="false" [flexGrow]="0.5" [cellClass]="'text-center'"
+                        headerClass="text-center" [resizeable]="false">
+                        <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                            <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status"
+                                color="$primary-color" switchColor="#fff" size="small"
+                                (change)="changeStatus(row,rowIndex,false)" [checked]="row.status == 'Active'">
+                            </ui-switch>
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column *ngIf="edit||delete" name="Action" [sortable]="false" [flexGrow]="0.5"
+                        headerClass="text-center" [cellClass]="'text-center'" [resizeable]="false">
+                        <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                            <a *ngIf="edit" placement="bottom" ngbTooltip="Click to edit user"
+                                class="m-r-15 crm-action-edit text-primary" (click)='editUser(row.userid)'>
+                                <i class="fa fa-pencil"></i></a>
+                            <a *ngIf="delete" placement="bottom" ngbTooltip="Click to delete user"
+                                (click)="changeStatus(row,rowIndex,true)" class="crm-action-delete text-danger">
+                                <i class="fa fa-trash"></i></a>
+                        </ng-template>
+                    </ngx-datatable-column>
+                </ngx-datatable>
+            </app-card>
         </div>
+
     </div>
-    <app-loader *ngIf="loadingIndicator"></app-loader>
+</div>
+<app-loader [loadingIndicator]="loadingIndicator"></app-loader>

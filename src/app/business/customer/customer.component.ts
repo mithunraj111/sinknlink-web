@@ -15,9 +15,11 @@ import { BaseService, BusinessService, CommonService } from '../../services';
 export class CustomerComponent extends BaseService implements OnInit {
   tempFilter = [];
   customerList = [];
+  loadingIndicator: boolean = true;
+
   @ViewChild(DatatableComponent) table: DatatableComponent;
   displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
-  emptymessages= AppConstant.EMPTY_MESSAGES.CUSTOMERS;
+  emptymessages = AppConstant.EMPTY_MESSAGES.CUSTOMERS;
 
   constructor(private router: Router,
     private commonService: CommonService,
@@ -38,9 +40,11 @@ export class CustomerComponent extends BaseService implements OnInit {
     if (this.userstoragedata.usertype === 'D') {
       condition.dealerid = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.DEALER).dealerid;
     }
+    this.loadingIndicator = true;
     this.customerService.list(condition).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
+        this.loadingIndicator = false;
         this.customerList = response.data;
         this.tempFilter = this.customerList;
       } else {

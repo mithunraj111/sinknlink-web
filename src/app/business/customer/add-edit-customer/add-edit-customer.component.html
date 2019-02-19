@@ -9,7 +9,7 @@
                     </p>
                 </div>
                 <div class="col-md-6 col-sm-6 save-button text-right p-r-30">
-                    <button type="button" placement="bottom" ngbTooltip="Click To {{buttonText}} Customer Details" (click)="saveOrUpdate()" class="btn btn-primary waves-effect m-r-10 text-capitalize">{{buttonText}}</button>
+                    <button type="button" placement="bottom" ngbTooltip="Click To {{buttonText}} Customer Details" (click)="saveOrUpdate()" class="btn btn-primary waves-effect m-r-10 text-capitalize" [disabled]="savecustomer">{{savecustomer == true ? 'Saving' : buttonText}}</button>
                     <button type="button" placement="bottom" ngbTooltip="Go back" routerLink="/business/customers" class="btn btn-inverse btn-primary waves-effect"><i class="fa fa-arrow-circle-left"></i></button>
                 </div>
             </div>

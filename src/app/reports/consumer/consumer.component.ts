@@ -30,7 +30,8 @@ export class ConsumerComponent implements OnInit {
   cityName: string;
   consumerList = [];
   tempFilter = [];
-  emptymessages= AppConstant.EMPTY_MESSAGES.CONSUMER;
+  emptymessages = AppConstant.EMPTY_MESSAGES.CONSUMER;
+  loadingIndicator: Boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -53,6 +54,7 @@ export class ConsumerComponent implements OnInit {
     });
   }
   getConsumerReports() {
+    this.loadingIndicator = true;
     const data = this.consumerReportForm.value;
     const todt = this.commonService.formatDate(data.todate);
     const fromdt = this.commonService.formatDate(data.fromdate);
@@ -66,16 +68,17 @@ export class ConsumerComponent implements OnInit {
       fromdate: fromdt + ' 00:00',
       todate: todt + ' 23:59'
     } as any;
-    if ( area != "" && area != undefined && area != null ) {
+    if (area != "" && area != undefined && area != null) {
       formData.locationid = area;
     }
-    if ( city != "" && city != undefined && city != null ) {
+    if (city != "" && city != undefined && city != null) {
       formData.city = [city];
     }
 
     this.reportService.getConsumerCount(formData).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
+        this.loadingIndicator = false;
         this.consumerList = response.data;
         console.log(this.consumerList);
       }

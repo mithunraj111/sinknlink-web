@@ -17,6 +17,8 @@ export class CategoryComponent extends BaseService implements OnInit {
   categoryPage: any;
   displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   categoryList = [];
+  loadingIndicator: boolean = true;
+
   emptymessages = AppConstant.EMPTY_MESSAGES.CATEGORIES;
   constructor(private categoryService: MasterService.CategoryService,
     private bootstrapAlertService: BootstrapAlertService, private commonService: CommonService,
@@ -54,11 +56,13 @@ export class CategoryComponent extends BaseService implements OnInit {
   }
   // API call to get the category list
   getCategories() {
+    this.loadingIndicator = true;
     const condition = {
     };
     this.categoryService.list(condition, '').subscribe((res) => {
       const response = JSON.parse(res._body);
       if (response.status) {
+        this.loadingIndicator = false;
         this.categoryList = response.data;
         this.tempFilter = this.categoryList;
       }

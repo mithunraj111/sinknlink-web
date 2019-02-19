@@ -23,6 +23,7 @@ import { AppCommonService } from 'src/app/services';
 export class DealerComponent implements OnInit {
   displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydate;
   emptymesages = AppConstant.EMPTY_MESSAGES.DEALERREPORT;
+  loadingIndicator: Boolean = false;
 
   @ViewChild(DatatableComponent) table: DatatableComponent;
   dealerReportForm: FormGroup;
@@ -61,6 +62,7 @@ export class DealerComponent implements OnInit {
 
   }
   getDealerReport() {
+
     const data = this.dealerReportForm.value;
     const todt = this.commonService.formatDate(data.todate);
     const fromdt = this.commonService.formatDate(data.fromdate);
@@ -82,11 +84,14 @@ export class DealerComponent implements OnInit {
     }
 
     console.log(formData)
+    this.loadingIndicator = true;
     this.reportService.areawiseDealerCount(formData).subscribe((res) => {
       const response = JSON.parse(res._body);
       if (response.status) {
+        this.loadingIndicator = false;
         this.dealerReportList = response.data;
       }
+      this.loadingIndicator = false;
       this.tempFilter = this.dealerReportList;
 
     });

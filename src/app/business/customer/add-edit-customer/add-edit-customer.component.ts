@@ -27,6 +27,7 @@ export class AddEditCustomerComponent implements OnInit {
   socailIdForm: FormGroup;
   formTitle: string;
   buttonText = AppConstant.BUTTON_TXT.SAVE;
+  savecustomer;
   workDays = AppConstant.WORKDAYS;
   @ViewChild(CustomerCouponsComponent) couponComponent: CustomerCouponsComponent;
   @ViewChild(CustomerGigsComponent) gigComponent: CustomerGigsComponent;
@@ -203,6 +204,7 @@ export class AddEditCustomerComponent implements OnInit {
       this.bootstrapAlertService.showError(errMessage);
       return false;
     } else {
+      this.savecustomer = true;
       const data = this.customerForm.value;
       const formdata = { ...data } as any;
       if (this.branchFlag) {
@@ -256,13 +258,16 @@ export class AddEditCustomerComponent implements OnInit {
         this.customerService.create(formdata).subscribe((res) => {
           const response = JSON.parse(res._body);
           if (response.status) {
+            this.savecustomer = false;
             this.customerObj = response.data;
             this.isAddForm = false;
             this.bootstrapAlertService.showSucccess(response.message);
           } else {
+            this.savecustomer = false;
             this.bootstrapAlertService.showError(response.message);
           }
         }, err => {
+          this.savecustomer = false;
           this.bootstrapAlertService.showError(err.message);
         });
       }

@@ -24,7 +24,8 @@
   </div>
 </div>
 <div class="header-block m-t-60">
-  <div class="table-header fixed-table">
+    <div *ngIf="!loadingIndicator">
+<div class="table-header fixed-table">
     <app-card [classHeader]="true">
       <ngx-datatable #donationtable class="table data-table expandable" [rows]='donationList' [columnMode]="'flex'"
         [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false" [footerHeight]="50" [limit]="10" [messages]="emptymessages">
@@ -73,6 +74,8 @@
     </app-card>
   </div>
 </div>
+</div>
+<app-loader [loadingIndicator]="loadingIndicator"></app-loader>
 <ng-template #content let-modal>
   <div class="modal-header">
     <h4 class="modal-title">Delete</h4>

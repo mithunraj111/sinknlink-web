@@ -11,7 +11,7 @@
                         class="fa fa-arrow-circle-left"></i></button>
                 <button type="button" placement="bottom" ngbTooltip="Click to {{buttontext}} role"
                     (click)="saveOrUpdateRole()" [disabled]='disableButton'
-                    class="btn pull-right btn-primary waves-effect m-r-10 text-capitalize">{{buttontext}}</button>
+                    class="btn pull-right btn-primary waves-effect m-r-10 text-capitalize">{{disableButton == true ? 'Saving' : buttontext}}</button>
             </div>
         </div>
         <div class="row">
@@ -41,8 +41,8 @@
                 <div class="form-group row">
                     <label class="col-sm-6 p-r-0 col-form-label text-right"><b>Status</b><small>*</small></label>
                     <div class="col-sm-4 p-l-0 p-r-0">
-                        <ui-switch class="js-small" color="$primary-color" [(ngModel)]="status" switchColor="#fff" size="small"
-                            checked></ui-switch>
+                        <ui-switch class="js-small" color="$primary-color" [(ngModel)]="status" switchColor="#fff"
+                            size="small" checked></ui-switch>
                     </div>
                 </div>
             </div>
@@ -50,48 +50,43 @@
     </div>
 </div>
 <div class="header-block">
-     <div *ngIf="loadingIndicator" class="loader-block">
-        <svg id="loader2" viewBox="0 0 100 100">
-            <circle id="circle-loader2" cx="50" cy="50" r="45"></circle>
-        </svg>
-    </div>
-        <div *ngIf="!loadingIndicator">
+    <div *ngIf="!loadingIndicator">
+        <div class="table-header fixed-table">
+            <app-card [classHeader]="true">
+                <ngx-datatable #addroletable class="table data-table expandable" [rows]='screensList'
+                    [columnMode]="'flex'" [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false"
+                    [footerHeight]="50" [limit]="10" [messages]="emptymessages">
+                    <ngx-datatable-column prop="screenname" name="Screen Name" [resizeable]="false">
+                        <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                            <span>{{row.screenname}}</span>
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column prop="permissions" name="Available Permissions" [resizeable]="false">
+                        <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                            <span>{{row.permissions}}</span>
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column prop="assignedpermissions" name="Granted Permissions" [resizeable]="false">
+                        <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                            <span>{{row.assignedpermissions?row.assignedpermissions:'-'}}</span>
+                        </ng-template>
+                    </ngx-datatable-column>
 
-    <div class="table-header fixed-table">
-        <app-card [classHeader]="true">
-            <ngx-datatable #addroletable class="table data-table expandable" [rows]='screensList' [columnMode]="'flex'"
-                [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false" [footerHeight]="50" [limit]="10"
-                [messages]="emptymessages">
-                <ngx-datatable-column prop="screenname" name="Screen Name" [resizeable]="false">
-                    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                        <span>{{row.screenname}}</span>
-                    </ng-template>
-                </ngx-datatable-column>
-                <ngx-datatable-column prop="permissions" name="Available Permissions" [resizeable]="false">
-                    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                        <span>{{row.permissions}}</span>
-                    </ng-template>
-                </ngx-datatable-column>
-                <ngx-datatable-column prop="assignedpermissions" name="Granted Permissions" [resizeable]="false">
-                    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                        <span>{{row.assignedpermissions?row.assignedpermissions:'-'}}</span>
-                    </ng-template>
-                </ngx-datatable-column>
-
-                <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.5" headerClass="text-center"
-                    [cellClass]="'text-center'" [resizeable]="false">
-                    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                        <a placement="bottom" ngbTooltip="Click to edit permissions"
-                            class="m-r-15 crm-action-edit text-primary"
-                            (click)="openPermissionModal('permission',row,rowIndex)">
-                            <i class="fa fa-pencil"></i></a>
-                    </ng-template>
-                </ngx-datatable-column>
-            </ngx-datatable>
-        </app-card>
+                    <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.5" headerClass="text-center"
+                        [cellClass]="'text-center'" [resizeable]="false">
+                        <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                            <a placement="bottom" ngbTooltip="Click to edit permissions"
+                                class="m-r-15 crm-action-edit text-primary"
+                                (click)="openPermissionModal('permission',row,rowIndex)">
+                                <i class="fa fa-pencil"></i></a>
+                        </ng-template>
+                    </ngx-datatable-column>
+                </ngx-datatable>
+            </app-card>
+        </div>
     </div>
 </div>
-</div>
+<app-loader [loadingIndicator]="loadingIndicator"></app-loader>
 <!-- Add Contact Start Model -->
 <div class="modal-size" [hidden]='!permissionModal'>
     <app-modal-animation [modalID]="'permission'" [modalClass]="'md-effect-7'">
@@ -105,7 +100,8 @@
                 </div>
             </div>
             <button type="button" (click)="updatePermissions()" placement="top" ngbTooltip="Click to save permissions"
-                class="btn pull-right btn-primary waves-effect m-b-10">Save</button>
+                class="btn pull-right btn-primary waves-effect m-b-10"
+                [disabled]="savepermissions">{{savepermissions == true ? 'Saving' : buttontext}}</button>
         </div>
         <button (click)="closePermissionModal($event)" aria-label="Close" class="md-close-btn"><i
                 class="fa fa-close"></i></button>

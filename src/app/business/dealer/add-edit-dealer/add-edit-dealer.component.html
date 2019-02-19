@@ -9,9 +9,12 @@
                     </p>
                 </div>
                 <div class="col-md-6 col-sm-6 save-button text-right p-r-30">
-                    <button type="button" placement="bottom" ngbTooltip="Click to {{buttontext}} dealer" (click)="saveOrUpdate()" class="btn btn-primary waves-effect m-r-10 text-capitalize">{{buttontext}}</button>
-                    <button type="button" placement="bottom" ngbTooltip="Go back" routerLink="/business/dealer" class="btn btn-inverse btn-primary waves-effect"><i
-              class="fa fa-arrow-circle-left"></i></button>
+                    <button type="button" placement="bottom" ngbTooltip="Click to {{buttontext}} dealer"
+                        (click)="saveOrUpdate()" class="btn btn-primary waves-effect m-r-10 text-capitalize"
+                        [disabled]="adddealer">{{adddealer == true ? 'Saving' : buttontext}}</button>
+                    <button type="button" placement="bottom" ngbTooltip="Go back" routerLink="/business/dealer"
+                        class="btn btn-inverse btn-primary waves-effect"><i
+                            class="fa fa-arrow-circle-left"></i></button>
                 </div>
             </div>
         </div>
@@ -31,60 +34,88 @@
                                             <div class="row p-t-10 p-b-5">
                                                 <div class="col-md-12 col-sm-12">
                                                     <div class="form-group row required">
-                                                        <label class="col-md-3 col-sm-6 col-form-label text-right">Dealer Name</label>
+                                                        <label
+                                                            class="col-md-3 col-sm-6 col-form-label text-right">Dealer
+                                                            Name</label>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <input type="text" class="form-control" placeholder="Dealer Name" formControlName="dealername">
+                                                            <input type="text" class="form-control"
+                                                                placeholder="Dealer Name" formControlName="dealername">
                                                         </div>
                                                     </div>
                                                     <div class="form-group row required">
-                                                        <label class="col-md-3 col-sm-6 col-form-label text-right">Mobile No</label>
+                                                        <label
+                                                            class="col-md-3 col-sm-6 col-form-label text-right">Mobile
+                                                            No</label>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <input type="text" class="form-control" placeholder="Mobile No" formControlName="mobileno">
+                                                            <input type="text" class="form-control"
+                                                                placeholder="Mobile No" formControlName="mobileno">
                                                         </div>
                                                     </div>
                                                     <div class="form-group row required">
-                                                        <label class="col-md-3 col-sm-6 col-form-label text-right">Contact person</label>
+                                                        <label
+                                                            class="col-md-3 col-sm-6 col-form-label text-right">Contact
+                                                            person</label>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <input type="text" class="form-control" placeholder="Contact Person" formControlName="contactperson">
+                                                            <input type="text" class="form-control"
+                                                                placeholder="Contact Person"
+                                                                formControlName="contactperson">
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
-                                                        <label class="col-md-3 col-sm-6 col-form-label text-right">Phone No</label>
+                                                        <label class="col-md-3 col-sm-6 col-form-label text-right">Phone
+                                                            No</label>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <input type="text" class="form-control" placeholder="Phone No" formControlName="phoneno">
+                                                            <input type="text" class="form-control"
+                                                                placeholder="Phone No" formControlName="phoneno">
                                                         </div>
                                                     </div>
                                                     <div class="form-group row required">
-                                                        <label class="col-md-3 col-sm-6 col-form-label text-right">Location</label>
+                                                        <label
+                                                            class="col-md-3 col-sm-6 col-form-label text-right">Location</label>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <ng-select [ngClass]="'ng-select'" placeholder="Select a Location" formControlName="locationid" [options]="locationList" [allowClear]="true">
+                                                            <ng-select [ngClass]="'ng-select'"
+                                                                placeholder="Select a Location"
+                                                                formControlName="locationid" [options]="locationList"
+                                                                [allowClear]="true">
                                                             </ng-select>
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
-                                                        <label class="col-md-3 col-sm-6 col-form-label text-right">Address</label>
+                                                        <label
+                                                            class="col-md-3 col-sm-6 col-form-label text-right">Address</label>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <textarea rows="4" cols="4" class="form-control" formControlName="address" placeholder="Address"></textarea>
+                                                            <textarea rows="4" cols="4" class="form-control"
+                                                                formControlName="address"
+                                                                placeholder="Address"></textarea>
                                                         </div>
                                                     </div>
                                                     <div class="form-group row required">
-                                                        <label class="col-md-3 col-sm-6 col-form-label text-right">Commission (%)</label>
+                                                        <label
+                                                            class="col-md-3 col-sm-6 col-form-label text-right">Commission
+                                                            (%)</label>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <input type="text" class="form-control" placeholder="Commission (%)" formControlName="commissionpercent">
+                                                            <input type="text" class="form-control"
+                                                                placeholder="Commission (%)"
+                                                                formControlName="commissionpercent">
                                                         </div>
                                                     </div>
                                                     <div class="form-group row last-paid">
-                                                        <label class="col-md-3 col-sm-6 col-form-label text-right">Last Paid</label>
+                                                        <label class="col-md-3 col-sm-6 col-form-label text-right">Last
+                                                            Paid</label>
                                                         <div class="col-md-9 col-sm-6">
                                                             <div class="static-text">
-                                                                <div class="form-control-static">{{date|date:date_displayformat}}</div>
+                                                                <div class="form-control-static">
+                                                                    {{date|date:date_displayformat}}</div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div *ngIf="dealerid" class="form-group row">
-                                                        <label class="col-md-3 col-sm-6 col-form-label text-right">Status</label>
+                                                        <label
+                                                            class="col-md-3 col-sm-6 col-form-label text-right">Status</label>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <ui-switch class="js-small" color="$primary-color" switchColor="#fff" formControlName="status" size="small"></ui-switch>
+                                                            <ui-switch class="js-small" color="$primary-color"
+                                                                switchColor="#fff" formControlName="status"
+                                                                size="small"></ui-switch>
                                                         </div>
                                                     </div>
                                                 </div>

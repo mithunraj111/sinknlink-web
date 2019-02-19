@@ -26,6 +26,7 @@ export class AreaCategoriesComponent implements OnInit {
   categorytempFilter = [];
   emptymesages = AppConstant.EMPTY_MESSAGES.AREA;
   nodata = AppConstant.EMPTY_MESSAGES.CATEGORY;
+  loadingIndicator: Boolean = false;
   constructor(private bootstrapAlertService: BootstrapAlertService,
     private commonService: CommonService, private fb: FormBuilder,
     private reportService: AppCommonService.ReportService) {
@@ -57,20 +58,26 @@ export class AreaCategoriesComponent implements OnInit {
   }
 
   getCategoryList(formData) {
+    this.loadingIndicator = true;
     this.reportService.getCategoryWiseCount(formData).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
+        this.loadingIndicator = false;
         this.categoriesList = response.data;
       }
+      this.loadingIndicator = false;
       this.categorytempFilter = this.categoriesList;
     });
   }
   getAreaList(formData) {
+    this.loadingIndicator = true;
     this.reportService.getAreaWiseCount(formData).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
+        this.loadingIndicator = false;
         this.areaList = response.data;
       }
+      this.loadingIndicator = false;
       this.areatempFilter = this.areaList;
 
     });

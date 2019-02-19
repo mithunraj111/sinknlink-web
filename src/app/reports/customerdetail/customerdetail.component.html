@@ -59,9 +59,10 @@
                             <div class="form-group locationlist">
                                 <label>City</label>
                                 <div class="input-group">
-                                    <ng-select formcontrolName= "city" [options]="cityList" (selected)="selectCity($event)"
-                                    [allowClear]="true" [ngClass]="'ng-select'" placeholder="Select city">
-                                </ng-select>
+                                    <ng-select formcontrolName="city" [options]="cityList"
+                                        (selected)="selectCity($event)" [allowClear]="true" [ngClass]="'ng-select'"
+                                        placeholder="Select city">
+                                    </ng-select>
                                 </div>
                             </div>
                         </div>
@@ -69,8 +70,8 @@
                             <div class="form-group locationlist">
                                 <label>Area</label>
                                 <div class="input-group">
-                                    <ng-select formControlName="area" [options]="areaList"
-                                        [allowClear]="true" [ngClass]="'ng-select'" placeholder="Select Area">
+                                    <ng-select formControlName="area" [options]="areaList" [allowClear]="true"
+                                        [ngClass]="'ng-select'" placeholder="Select Area">
                                     </ng-select>
                                 </div>
                             </div>
@@ -105,107 +106,110 @@
     <div class="row">
         <div class="col-lg-12 col-md-12">
             <div class="header-block">
-                <div class="report-table payment-table">
-                    <app-card [classHeader]="true">
-                        <div class="row">
-                            <div class="col-sm-12 header-title">
-                                <label class="dt-cust-search f-right">
-                                    <div class="form-group">
-                                        <label class="p-r-10 f-16"><b>Search:</b></label>
-                                        <input #customerReportSearch type='text'
-                                            class="form-control input-sm report-search" placeholder='Search here'
-                                            (keyup)='search($event)' />
-                                        <button type="button" class="btn search-close"
-                                            (click)="customerReportSearch.value='';search();"><i
-                                                class="fa fa-close"></i></button>
+                <div *ngIf="!loadingIndicator">
+                    <div class="report-table payment-table">
+                        <app-card [classHeader]="true">
+                            <div class="row">
+                                <div class="col-sm-12 header-title">
+                                    <label class="dt-cust-search f-right">
+                                        <div class="form-group">
+                                            <label class="p-r-10 f-16"><b>Search:</b></label>
+                                            <input #customerReportSearch type='text'
+                                                class="form-control input-sm report-search" placeholder='Search here'
+                                                (keyup)='search($event)' />
+                                            <button type="button" class="btn search-close"
+                                                (click)="customerReportSearch.value='';search();"><i
+                                                    class="fa fa-close"></i></button>
 
-                                        <button type="button" placement="bottom" ngbTooltip="Click to download reports"
-                                            class="btn btn-primary waves-effect download-btn"><i
-                                                class="fa fa-download m-r-5"></i>
-                                        </button>
-                                    </div>
-                                </label>
+                                            <button type="button" placement="bottom"
+                                                ngbTooltip="Click to download reports"
+                                                class="btn btn-primary waves-effect download-btn"><i
+                                                    class="fa fa-download m-r-5"></i>
+                                            </button>
+                                        </div>
+                                    </label>
+                                </div>
                             </div>
-                        </div>
-                        <ngx-datatable #businesstable class="table customer-report data-table expandable"
-                            [rows]='businessList' [columnMode]="'flex'" [headerHeight]="50" [footerHeight]="40"
-                            [rowHeight]="50" [scrollbarV]="false" [scrollbarH]="true" [limit]="5"
-                            [messages]="emptymessages">
+                            <ngx-datatable #businesstable class="table customer-report data-table expandable"
+                                [rows]='businessList' [columnMode]="'flex'" [headerHeight]="50" [footerHeight]="40"
+                                [rowHeight]="50" [scrollbarV]="false" [scrollbarH]="true" [limit]="5"
+                                [messages]="emptymessages">
 
-                            <ngx-datatable-column prop="bizname" name="Biz Name" [resizeable]="false">
-                                <ng-template let-rowIndex="rowIndex" let-expanded="expanded" let-row="row"
-                                    ngx-datatable-cell-template>
-                                    <span>{{row.bizname}}</span>
-                                </ng-template>
-                            </ngx-datatable-column>
-                            <ngx-datatable-column prop="mobileno" name="Mobile Number" [resizeable]="false"
-                                headerClass="mobile-no">
-                                <ng-template let-rowIndex="rowIndex" let-expanded="expanded" let-row="row"
-                                    ngx-datatable-cell-template>
-                                    <span>{{row.contactmobile}}</span>
-                                </ng-template>
-                            </ngx-datatable-column>
+                                <ngx-datatable-column prop="bizname" name="Biz Name" [resizeable]="false">
+                                    <ng-template let-rowIndex="rowIndex" let-expanded="expanded" let-row="row"
+                                        ngx-datatable-cell-template>
+                                        <span>{{row.bizname}}</span>
+                                    </ng-template>
+                                </ngx-datatable-column>
+                                <ngx-datatable-column prop="mobileno" name="Mobile Number" [resizeable]="false"
+                                    headerClass="mobile-no">
+                                    <ng-template let-rowIndex="rowIndex" let-expanded="expanded" let-row="row"
+                                        ngx-datatable-cell-template>
+                                        <span>{{row.contactmobile}}</span>
+                                    </ng-template>
+                                </ngx-datatable-column>
 
-                            <ngx-datatable-column prop="regdate" name="Reg Date" [resizeable]="false"
-                                headerClass="reg-date text-center" [cellClass]="'text-center'">
-                                <ng-template let-rowIndex="rowIndex" let-expanded="expanded" let-row="row"
-                                    ngx-datatable-cell-template>
-                                    <span>{{row.regdate|date:displayformat}}</span>
-                                </ng-template>
-                            </ngx-datatable-column>
+                                <ngx-datatable-column prop="regdate" name="Reg Date" [resizeable]="false"
+                                    headerClass="reg-date text-center" [cellClass]="'text-center'">
+                                    <ng-template let-rowIndex="rowIndex" let-expanded="expanded" let-row="row"
+                                        ngx-datatable-cell-template>
+                                        <span>{{row.regdate|date:displayformat}}</span>
+                                    </ng-template>
+                                </ngx-datatable-column>
 
-                            <ngx-datatable-column prop="membershiptype" name="Membership Type" [resizeable]="false"
-                                headerClass="memberships-type">
-                                <ng-template let-rowIndex="rowIndex" let-expanded="expanded" let-row="row"
-                                    ngx-datatable-cell-template>
-                                    <span>{{row.membershiptype}}</span>
-                                </ng-template>
-                            </ngx-datatable-column>
+                                <ngx-datatable-column prop="membershiptype" name="Membership Type" [resizeable]="false"
+                                    headerClass="memberships-type">
+                                    <ng-template let-rowIndex="rowIndex" let-expanded="expanded" let-row="row"
+                                        ngx-datatable-cell-template>
+                                        <span>{{row.membershiptype}}</span>
+                                    </ng-template>
+                                </ngx-datatable-column>
 
-                            <ngx-datatable-column prop="biztype" name="Biz Type" [resizeable]="false"
-                                headerClass="bizs-type">
-                                <ng-template let-rowIndex="rowIndex" let-expanded="expanded" let-row="row"
-                                    ngx-datatable-cell-template>
-                                    <span>{{row.biztype}}</span>
-                                </ng-template>
-                            </ngx-datatable-column>
+                                <ngx-datatable-column prop="biztype" name="Biz Type" [resizeable]="false"
+                                    headerClass="bizs-type">
+                                    <ng-template let-rowIndex="rowIndex" let-expanded="expanded" let-row="row"
+                                        ngx-datatable-cell-template>
+                                        <span>{{row.biztype}}</span>
+                                    </ng-template>
+                                </ngx-datatable-column>
 
-                            <ngx-datatable-column prop="category" name="Category" [resizeable]="false"
-                                headerClass="category-type">
-                                <ng-template let-rowIndex="rowIndex" let-expanded="expanded" let-row="row"
-                                    ngx-datatable-cell-template>
-                                    <span>{{row?.category?.categoryname}}</span>
-                                </ng-template>
-                            </ngx-datatable-column>
-                            <ngx-datatable-column prop="paymenttenure" name="Payment Tenure" [resizeable]="false"
-                                headerClass="text-right" [cellClass]="'text-right'">
-                                <ng-template let-rowIndex="rowIndex" let-expanded="expanded" let-row="row"
-                                    ngx-datatable-cell-template>
-                                    <span>{{row.paymenttenure}}</span>
-                                </ng-template>
-                            </ngx-datatable-column>
+                                <ngx-datatable-column prop="category" name="Category" [resizeable]="false"
+                                    headerClass="category-type">
+                                    <ng-template let-rowIndex="rowIndex" let-expanded="expanded" let-row="row"
+                                        ngx-datatable-cell-template>
+                                        <span>{{row?.category?.categoryname}}</span>
+                                    </ng-template>
+                                </ngx-datatable-column>
+                                <ngx-datatable-column prop="paymenttenure" name="Payment Tenure" [resizeable]="false"
+                                    headerClass="text-right" [cellClass]="'text-right'">
+                                    <ng-template let-rowIndex="rowIndex" let-expanded="expanded" let-row="row"
+                                        ngx-datatable-cell-template>
+                                        <span>{{row.paymenttenure}}</span>
+                                    </ng-template>
+                                </ngx-datatable-column>
 
-                            <ngx-datatable-column prop="gigcount" name="Gigs" [resizeable]="false"
-                                headerClass="text-right" [cellClass]="'text-right'">
-                                <ng-template let-rowIndex="rowIndex" let-expanded="expanded" let-row="row"
-                                    ngx-datatable-cell-template>
-                                    <span>{{row.gigcount}}</span>
-                                </ng-template>
-                            </ngx-datatable-column>
+                                <ngx-datatable-column prop="gigcount" name="Gigs" [resizeable]="false"
+                                    headerClass="text-right" [cellClass]="'text-right'">
+                                    <ng-template let-rowIndex="rowIndex" let-expanded="expanded" let-row="row"
+                                        ngx-datatable-cell-template>
+                                        <span>{{row.gigcount}}</span>
+                                    </ng-template>
+                                </ngx-datatable-column>
 
-                            <ngx-datatable-column prop="couponcount" name="Coupons" [resizeable]="false"
-                                headerClass="text-right" [cellClass]="'text-right'">
-                                <ng-template let-rowIndex="rowIndex" let-expanded="expanded" let-row="row"
-                                    ngx-datatable-cell-template>
-                                    <span>{{row.couponcount}}</span>
-                                </ng-template>
-                            </ngx-datatable-column>
+                                <ngx-datatable-column prop="couponcount" name="Coupons" [resizeable]="false"
+                                    headerClass="text-right" [cellClass]="'text-right'">
+                                    <ng-template let-rowIndex="rowIndex" let-expanded="expanded" let-row="row"
+                                        ngx-datatable-cell-template>
+                                        <span>{{row.couponcount}}</span>
+                                    </ng-template>
+                                </ngx-datatable-column>
 
-                        </ngx-datatable>
-                    </app-card>
-
+                            </ngx-datatable>
+                        </app-card>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<app-loader [loadingIndicator]="loadingIndicator"></app-loader>

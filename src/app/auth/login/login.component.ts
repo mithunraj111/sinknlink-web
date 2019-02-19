@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   loginErrObj = AppMessages.VALIDATION.LOGIN;
   errMessage;
+  signingin;
   constructor(private commonService: CommonService,
     private fb: FormBuilder,
     private loginService: LoginService,
@@ -33,9 +34,11 @@ export class LoginComponent implements OnInit {
       this.errMessage = this.commonService.getFormErrorMessage(this.loginForm, this.loginErrObj);
       return false;
     } else {
+      this.signingin = true;
       this.loginService.login(this.loginForm.value).subscribe(res => {
         const response = JSON.parse(res._body);
         if (response.status) {
+          this.signingin = false;
           this.localStorageService.addItem(AppConstant.LOCALSTORAGE.USER, response.data);
           this.localStorageService.addItem(AppConstant.LOCALSTORAGE.ISAUTHENTICATED, response.status);
           if (response.data.role != null) {
@@ -51,6 +54,7 @@ export class LoginComponent implements OnInit {
           }
           this.router.navigate(['dashboard']);
         } else {
+          this.signingin = false;
           this.errMessage = response.message;
         }
       });

@@ -13,7 +13,6 @@ import { AppMessages } from 'src/app/app-messages';
   styleUrls: ['./add-edit-role.component.scss']
 })
 export class AddEditRoleComponent implements OnInit {
-
   rolename: string;
   status = true;
   dataaccess = AppConstant.DEFAULT_DATA_ACCESS;
@@ -30,7 +29,7 @@ export class AddEditRoleComponent implements OnInit {
   permissionModal = false;
   emptymessages = AppConstant.EMPTY_MESSAGES.ADDROLES;
   loadingIndicator: boolean = true;
-
+  savepermissions;
   constructor(
     private route: ActivatedRoute,
     private bootstrapAlertService: BootstrapAlertService,
@@ -109,7 +108,6 @@ export class AddEditRoleComponent implements OnInit {
     this.permissionModal = false;
   }
   saveOrUpdateRole() {
-
     if (_.isEmpty(this.rolename) || _.isUndefined(this.rolename) || _.isNull(this.rolename)) {
       this.bootstrapAlertService.showError(this.roleErrObj.rolename.required);
       return false;
@@ -150,7 +148,6 @@ export class AddEditRoleComponent implements OnInit {
         this.roleService.create(formdata).subscribe((res) => {
           const response = JSON.parse(res._body);
           if (response.status) {
-
             this.bootstrapAlertService.showSucccess(response.message);
             this.router.navigate(['/masters/roles']);
           } else {

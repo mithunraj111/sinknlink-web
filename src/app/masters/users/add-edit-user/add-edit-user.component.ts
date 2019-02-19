@@ -29,6 +29,7 @@ export class AddEditUserComponent implements OnInit {
   displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   userstoragedata = {} as any;
   userObj = {} as any;
+  adduser = false;
   constructor(private route: ActivatedRoute,
     private router: Router,
     private bootstrapAlertService: BootstrapAlertService,
@@ -50,6 +51,7 @@ export class AddEditUserComponent implements OnInit {
   ngOnInit() {
     this.initForm();
     this.getRoleList();
+
   }
 
   initForm() {
@@ -70,6 +72,7 @@ export class AddEditUserComponent implements OnInit {
       this.bootstrapAlertService.showError(this.errMessage);
       return false;
     } else {
+      this.adduser = true;
       const formdata = new FormData();
       let dataValue = this.userForm.value;
       let data = {} as any;
@@ -86,9 +89,11 @@ export class AddEditUserComponent implements OnInit {
         this.userService.update(formdata, this.userObj.userid).subscribe(res => {
           const response = JSON.parse(res._body);
           if (response.status) {
+            this.adduser = false;
             this.bootstrapAlertService.showSucccess(response.message);
             this.router.navigate(['/masters/users/']);
           } else {
+            this.adduser = false;
             this.bootstrapAlertService.showError(response.message);
           }
         }, err => {
@@ -101,12 +106,15 @@ export class AddEditUserComponent implements OnInit {
         this.userService.create(data).subscribe((res) => {
           const response = JSON.parse(res._body);
           if (response.status) {
+            this.adduser = false;
             this.bootstrapAlertService.showSucccess(response.message);
             this.router.navigate(['/masters/users/']);
           } else {
+            this.adduser = false;
             this.bootstrapAlertService.showError(response.message);
           }
         }, err => {
+          this.adduser = false;
           this.bootstrapAlertService.showError(err.message);
         });
       }

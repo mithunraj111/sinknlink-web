@@ -29,6 +29,7 @@ export class AddEditDealerComponent implements OnInit {
   dealerProfileObj = {} as any;
   userstoragedata = {} as any;
   locationList = [];
+  adddealer;
   constructor(private route: ActivatedRoute,
     private bootstrapAlertService: BootstrapAlertService,
     private dealerService: BusinessService.DealerService,
@@ -96,6 +97,7 @@ export class AddEditDealerComponent implements OnInit {
       this.bootstrapAlertService.showError(errMessage);
       return false;
     } else {
+      this.adddealer = true;
       const data = this.dealerProfileForm.value;
       const formdata = { ...data } as any;
       formdata.locationid = Number(data.locationid);
@@ -122,11 +124,14 @@ export class AddEditDealerComponent implements OnInit {
         this.dealerService.create(formdata).subscribe((res) => {
           const response = JSON.parse(res._body);
           if (response.status) {
+            this.adddealer = false;
             this.bootstrapAlertService.showSucccess(response.message);
           } else {
+            this.adddealer = false;
             this.bootstrapAlertService.showError(response.message);
           }
         }, err => {
+          this.adddealer = false;
           this.bootstrapAlertService.showError(err.message);
         });
       }

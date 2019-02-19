@@ -11,18 +11,19 @@
             <div class="row">
               <label class="col-md-3 col-sm-3 p-l-0 p-r-0 col-form-label"><b>KeyType:</b></label>
               <div class="col-md-9 col-sm-9 p-l-0">
-                <ng-select [ngClass]="'ng-select'" [(ngModel)]="selectedKeyType" [options]="keylist" (selected)="getLookupList($event)"
-                  placeholder="Select KeyType"></ng-select>
+                <ng-select [ngClass]="'ng-select'" [(ngModel)]="selectedKeyType" [options]="keylist"
+                  (selected)="getLookupList($event)" placeholder="Select KeyType"></ng-select>
               </div>
             </div>
           </div>
           <div class="col-md-6 col-sm-6 p-r-0 p-l-0">
             <div class="text-left">
               <label class="col-md-3"><b>Search:</b></label>
-              <input #lookupSearch type="text" class="header-search form-control col-md-8 col-sm-8 p-l-0 p-r-0 input-sm full-data-search"
+              <input #lookupSearch type="text"
+                class="header-search form-control col-md-8 col-sm-8 p-l-0 p-r-0 input-sm full-data-search"
                 placeholder="Search here" (keyup)='search($event)' placement="bottom" ngbTooltip="Type here to search">
-              <button type="button" class="btn search-close col-md-1 col-sm-1 p-l-0 p-r-0" (click)="lookupSearch.value='';search();"><i
-                  class="fa fa-close"></i></button>
+              <button type="button" class="btn search-close col-md-1 col-sm-1 p-l-0 p-r-0"
+                (click)="lookupSearch.value='';search();"><i class="fa fa-close"></i></button>
             </div>
           </div>
         </div>
@@ -36,60 +37,65 @@
   </div>
 </div>
 <div class="header-block m-t-60">
-  <div class="table-header fixed-table">
-    <app-card [classHeader]="true">
-      <ngx-datatable #lookuptable class="table data-table expandable" [rows]='lookupList' [columnMode]="'flex'"
-        [headerHeight]="50" [loadingIndicator]="loading" [rowHeight]="'auto'" [reorderable]="false" [footerHeight]="50"
-        [limit]="10" [messages]="emptymessages">
-        <ngx-datatable-column prop="refname" name="Name" [resizeable]="false">
-          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-            <span>{{row.refname}}</span>
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column prop="refvalue" name="Value" [resizeable]="false">
-          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-            <span>{{row.refvalue}}</span>
-          </ng-template>
-        </ngx-datatable-column>
+  <div *ngIf="!loadingIndicator">
+    <div class="table-header fixed-table">
+      <app-card [classHeader]="true">
+        <ngx-datatable #lookuptable class="table data-table expandable" [rows]='lookupList' [columnMode]="'flex'"
+          [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false" [footerHeight]="50" [limit]="10"
+          [messages]="emptymessages">
+          <ngx-datatable-column prop="refname" name="Name" [resizeable]="false">
+            <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+              <span>{{row.refname}}</span>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column prop="refvalue" name="Value" [resizeable]="false">
+            <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+              <span>{{row.refvalue}}</span>
+            </ng-template>
+          </ngx-datatable-column>
 
-        <ngx-datatable-column prop="datatype" name="Datatype" [resizeable]="false">
-          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-            <span>{{row.datatype}}</span>
-          </ng-template>
-        </ngx-datatable-column>
+          <ngx-datatable-column prop="datatype" name="Datatype" [resizeable]="false">
+            <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+              <span>{{row.datatype}}</span>
+            </ng-template>
+          </ngx-datatable-column>
 
-        <ngx-datatable-column name="Is Default?" [sortable]="false" [resizeable]="false">
-          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-            <span>{{row.isdefault==='Y'?'Yes':'No'}}</span>
-          </ng-template>
-        </ngx-datatable-column>
+          <ngx-datatable-column name="Is Default?" [sortable]="false" [resizeable]="false">
+            <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+              <span>{{row.isdefault==='Y'?'Yes':'No'}}</span>
+            </ng-template>
+          </ngx-datatable-column>
 
-        <ngx-datatable-column prop="updatedby" name="Updated By" [resizeable]="false">
-          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-            <span class="updatename">{{row.updatedby}}</span>
-            <span class="updatedate"> {{row.updateddt|date:displayformat}}</span>
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="Status" [sortable]="false" [flexGrow]="0.5" headerClass="text-center" [cellClass]="'text-center'"
-          [resizeable]="false">
-          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-            <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="$primary-color"
-              switchColor="#fff" size="small" [checked]="row.status == 'Active'" (change)="updateLookupStatus(row, rowIndex, false)"></ui-switch>
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column *ngIf="edit || delete" name="Action" [sortable]="false" [flexGrow]="0.5" headerClass="text-center"
-          [cellClass]="'text-center'" [resizeable]="false">
-          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-            <a *ngIf="edit" placement="bottom" ngbTooltip="Click to edit lookup" (click)="editLookup(row)" class="m-r-15 crm-action-edit text-primary">
-              <i class="fa fa-pencil"></i></a>
-            <a *ngIf="delete" placement="bottom" ngbTooltip="Click to delete lookup" (click)="updateLookupStatus(row, rowIndex, true)"
-              class="crm-action-delete text-danger">
-              <i class="fa fa-trash"></i></a>
-          </ng-template>
-        </ngx-datatable-column>
-      </ngx-datatable>
-    </app-card>
+          <ngx-datatable-column prop="updatedby" name="Updated By" [resizeable]="false">
+            <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+              <span class="updatename">{{row.updatedby}}</span>
+              <span class="updatedate"> {{row.updateddt|date:displayformat}}</span>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Status" [sortable]="false" [flexGrow]="0.5" headerClass="text-center"
+            [cellClass]="'text-center'" [resizeable]="false">
+            <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+              <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="$primary-color"
+                switchColor="#fff" size="small" [checked]="row.status == 'Active'"
+                (change)="updateLookupStatus(row, rowIndex, false)"></ui-switch>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column *ngIf="edit || delete" name="Action" [sortable]="false" [flexGrow]="0.5"
+            headerClass="text-center" [cellClass]="'text-center'" [resizeable]="false">
+            <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+              <a *ngIf="edit" placement="bottom" ngbTooltip="Click to edit lookup" (click)="editLookup(row)"
+                class="m-r-15 crm-action-edit text-primary">
+                <i class="fa fa-pencil"></i></a>
+              <a *ngIf="delete" placement="bottom" ngbTooltip="Click to delete lookup"
+                (click)="updateLookupStatus(row, rowIndex, true)" class="crm-action-delete text-danger">
+                <i class="fa fa-trash"></i></a>
+            </ng-template>
+          </ngx-datatable-column>
+        </ngx-datatable>
+      </app-card>
+    </div>
   </div>
 </div>
-
-<app-add-edit-lookup [lookupObj]="lookupObj" [selectedKeyType]="selectedKeyType" (notifyLookupEntry)="notifyLookupEntry($event)"></app-add-edit-lookup>
+<app-loader [loadingIndicator]="loadingIndicator"></app-loader>
+<app-add-edit-lookup [lookupObj]="lookupObj" [selectedKeyType]="selectedKeyType"
+  (notifyLookupEntry)="notifyLookupEntry($event)"></app-add-edit-lookup>
