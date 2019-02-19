@@ -41,9 +41,9 @@
       <div class="card">
         <div class="card-header p-t-20 p-b-0">
           <h5>Analytics</h5>
-          <div class="col-md-3 col-sm-3 f-right form-group">
+          <!-- <div class="col-md-3 col-sm-3 f-right form-group">
             <input class="form-control" type="month" />
-          </div>
+          </div> -->
         </div>
         <div class="card-block">
           <div id="analytics-graph" style="height:365px"></div>
@@ -88,5 +88,13 @@
         </div>
       </div>
     </div>
+  </div>
+</div>
+<div ngbDropdown class="pos-fixed" style="bottom:25px; right:25px;">
+  <button class="btn btn-primary btn-round px-3" id="dropdownConfig" ngbDropdownToggle><i class="fa fa-filter f-14 m-0"></i></button>
+  <div ngbDropdownMenu aria-labelledby="dropdownConfig">
+    <a class="dropdown-item" href="javascript:;" (click)="getData(0);">Today</a>
+    <a class="dropdown-item" href="javascript:;" (click)="getData(7);">This week</a>
+    <a class="dropdown-item" href="javascript:;" (click)="getData(30);">This month</a>
   </div>
 </div>
