@@ -22,7 +22,7 @@
     </div>
   </div>
 </div>
-<div class="header-block m-t-60">
+<div *ngIf="dealerList.length!=0" class="header-block m-t-60">
   <div *ngIf="!loadingIndicator">
   <div class="table-header fixed-table-header">
     <app-card [classHeader]="true">
@@ -76,4 +76,12 @@
   </div>
 </div>
 </div>
+
+<div *ngIf="dealerList.length==0" class="text-center no-data">
+  <div class="nodata-text nodata-image">
+      <h3>Create Consumer (s) of associated with organization</h3>
+      <img class="hand-icon" src="assets/images/no-data.png">
+  </div>
+</div>
+
 <app-loader [loadingIndicator]="loadingIndicator"></app-loader>
