@@ -1,3 +1,6 @@
+// all buttons background colors //
+$background:#004dff;
+// all buttons background colors //
 .dropbox {
     outline-offset: -10px;
     background: #EFEFEF;
@@ -44,7 +47,7 @@
     position: absolute;
     right: auto;
     padding: 5px;
-    background: #03ADED;
+    background: $background;
     top: 2px;
     left: auto;
     border-radius: 50px;

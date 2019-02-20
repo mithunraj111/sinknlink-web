@@ -1,3 +1,8 @@
+// all buttons background color and text color //
+$primary-color:#004dff;
+$white-txt: #ffffff;
+// all buttons background color and text color //
+
 .navbar-title {
     display: inline-block;
     min-height: 56px;
@@ -62,11 +67,12 @@ body[themebg-pattern="pattern1"]{
             a{
                 font-family: 'Roboto', sans-serif !important;
                 font-weight: 600;
-                color: #000000 !important;
                 &:hover{
-                    color:#004dff !important; 
-                }
-               
+                    color:$primary-color !important; 
+                    &:before{
+                        color: $primary-color !important;
+                    }
+                }   
             }
             .pcoded-submenu{
                 li{
@@ -85,8 +91,12 @@ body[themebg-pattern="pattern1"]{
     padding: 2px;
     color: #8a8a8a;
 }
+.pcoded .pcoded-navbar[active-item-theme="theme10"] .pcoded-item > li.active > a, 
+.pcoded .pcoded-navbar[active-item-theme="theme10"] .pcoded-item > li.active > a .pcoded-micon{
+    color: $primary-color !important;
+}
 .pcoded .pcoded-navbar[active-item-theme="theme10"] .pcoded-item > li.active > a:before{
-    border-left-color: #004dff;
+    border-left-color: $primary-color;
 }
 .pcoded[theme-layout="vertical"] .pcoded-navbar .pcoded-item li.pcoded-hasmenu[dropdown-icon="style3"] > a:after {
     content: '\f078';
@@ -96,6 +106,23 @@ body[themebg-pattern="pattern1"]{
     content: "\f077";
     font-family: 'fontawesome';
 }
+.pcoded .pcoded-navbar[active-item-theme="theme10"] .pcoded-item li:hover > a .pcoded-micon, 
+.pcoded .pcoded-navbar[active-item-theme="theme10"] .pcoded-item li:hover > a{
+    color: $primary-color !important;
+}
+.pcoded .pcoded-navbar[active-item-theme="theme10"] .pcoded-item li .pcoded-submenu li.active > a, 
+.pcoded .pcoded-navbar[active-item-theme="theme10"] .pcoded-item li .pcoded-submenu li:hover > a{
+  color: $primary-color !important;
+}
+.pcoded .pcoded-navbar[active-item-theme="theme10"] 
+.pcoded-item .pcoded-hasmenu[subitem-icon="style7"] 
+.pcoded-submenu > li.active > a > .pcoded-mtext:after, .pcoded 
+.pcoded-navbar[active-item-theme="theme10"] 
+.pcoded-item .pcoded-hasmenu[subitem-icon="style7"] 
+.pcoded-submenu > li:hover > a > .pcoded-mtext:after{
+    background-color: $primary-color !important;
+}
+
 .header-navbar{
     .navbar-wrapper{
         .navbar-logo{
@@ -111,5 +138,23 @@ body[themebg-pattern="pattern1"]{
         padding: 50px 0px 0 0px;
         box-sizing: border-box;
         height: 100%;
+    }
+}
+.logout-btn{
+    position: absolute;
+    bottom: 0;
+    border: 1px solid $primary-color;
+    text-align: center;
+    left: 70px;
+    border-radius: 3px;
+    .btn{
+        font-weight: bold;
+        color: $primary-color;
+        padding: 5px 20px;
+        font-family: 'Montserrat', sans-serif;
+        &:hover{
+            background: $primary-color;
+            color: $white-txt;
+        }
     }
 }

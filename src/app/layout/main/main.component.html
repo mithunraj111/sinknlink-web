@@ -35,7 +35,7 @@
                             <a href="javascript:">
                                 <img [src]="userfile" class="img-radius" alt="">
                                 <span>{{userstoragedata.fullname}}</span>
-                                <i class="ti-angle-down"></i>
+                                <i class="fa fa-chevron-down"></i>
                             </a>
 
                             <ul [@notificationBottom]="profileNotification"
@@ -45,11 +45,11 @@
                                         <i class="ti-user"></i> Profile
                                     </a>
                                 </li>
-                                <li>
+                                <!-- <li>
                                     <a (click)="logout()">
                                         <i class="fa fa-sign-out"></i> Logout
                                     </a>
-                                </li>
+                                </li> -->
                             </ul>
                         </li>
                     </ul>
@@ -66,9 +66,9 @@
                         <perfect-scrollbar [style.max-width]="'236px'" [style.max-height]="sidebarFixedHeight"
                             [config]="config">
                             <span class="d-color">
-                               
+
                                 <!-- <div class="pcoded-navigation-label" [attr.menu-title-theme]="menuTitleTheme"></div> -->
-                                <a  class="navbar-title" [routerLink]="['/dashboard']">
+                                <a class="navbar-title" [routerLink]="['/dashboard']">
                                     <h1 class="logo-title">Business Directory</h1>
                                 </a>
                                 <ul class="pcoded-item pcoded-left-item main-nav-item" [attr.item-border]="itemBorder"
@@ -173,7 +173,11 @@
                                     </li>
                                 </ul>
                             </span>
-
+                            <ul class="logout-btn">
+                                <li>
+                                    <a class="btn" (click)="logout()">Logout</a>
+                                </li>
+                            </ul>
                         </perfect-scrollbar>
                     </div>
                 </nav>

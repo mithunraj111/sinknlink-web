@@ -9,7 +9,7 @@ $danger-color: #FF5370; // alert error //
 $success-color:#2ed8b6; // alert success //
 $warning-color:#FFB64D; // alert warning //
 $info-color :#00bcd4;  // alert info //
-$primary-color: linear-gradient(to right, #004dff, #6b98fe);
+$primary-color: #004dff;
 $background: -webkit-linear-gradient(0deg, rgb(0, 77, 255) 50%, rgb(88, 139, 255) 100%);
 
 // header section //
@@ -18,10 +18,10 @@ $background: -webkit-linear-gradient(0deg, rgb(0, 77, 255) 50%, rgb(88, 139, 255
     border-color: #2f3d4a !important;
     color: #fff;
 }
-.btn-primary{
-    background: $background;
-    border: 0 none !important;
-}
+// .btn-primary{
+//     background: $background;
+//     border: 0 none !important;
+// }
 
 p{
     font-family: 'Open Sans',sans-serif;
@@ -179,10 +179,10 @@ textarea {
         }
     }
     input{
-        background-image: -webkit-gradient(linear, left top, left bottom, from(#20aee3), to(#20aee3)), -webkit-gradient(linear, left top, left bottom, from(#b1b8bb), to(#b1b8bb));
-        background-image: -webkit-linear-gradient(#20aee3, #20aee3), -webkit-linear-gradient(#b1b8bb, #b1b8bb);
-        background-image: -o-linear-gradient(#20aee3, #20aee3), -o-linear-gradient(#b1b8bb, #b1b8bb);
-        background-image: linear-gradient(#20aee3, #20aee3), linear-gradient(#b1b8bb, #b1b8bb);
+        background-image: -webkit-gradient(linear, left top, left bottom, from($primary-color), to($primary-color)), -webkit-gradient(linear, left top, left bottom, from(#b1b8bb), to(#b1b8bb));
+        background-image: -webkit-linear-gradient($primary-color, $primary-color), -webkit-linear-gradient(#b1b8bb, #b1b8bb);
+        background-image: -o-linear-gradient($primary-color, $primary-color), -o-linear-gradient(#b1b8bb, #b1b8bb);
+        background-image: linear-gradient($primary-color, $primary-color), linear-gradient(#b1b8bb, #b1b8bb);
         background-size: 0 2px, 100% 1px;
         background-repeat: no-repeat;
         background-position: center bottom, center calc(100% - 1px);
@@ -200,10 +200,10 @@ textarea {
         border:0;
         &:focus{
             outline: none;
-            background-image: -webkit-gradient(linear, left top, left bottom, from(#20aee3), to(#20aee3)), -webkit-gradient(linear, left top, left bottom, from(#b1b8bb), to(#b1b8bb));
-            background-image: -webkit-linear-gradient(#20aee3, #20aee3), -webkit-linear-gradient(#b1b8bb, #b1b8bb);
-            background-image: -o-linear-gradient(#20aee3, #20aee3), -o-linear-gradient(#b1b8bb, #b1b8bb);
-            background-image: linear-gradient(#20aee3, #20aee3), linear-gradient(#b1b8bb, #b1b8bb);
+            background-image: -webkit-gradient(linear, left top, left bottom, from($primary-color), to($primary-color)), -webkit-gradient(linear, left top, left bottom, from(#b1b8bb), to(#b1b8bb));
+            background-image: -webkit-linear-gradient($primary-color, $primary-color), -webkit-linear-gradient(#b1b8bb, #b1b8bb);
+            background-image: -o-linear-gradient($primary-color, $primary-color), -o-linear-gradient(#b1b8bb, #b1b8bb);
+            background-image: linear-gradient($primary-color, $primary-color), linear-gradient(#b1b8bb, #b1b8bb);
             background-size: 100% 2px, 100% 1px;
             -webkit-box-shadow: none;
             box-shadow: none;
@@ -431,7 +431,7 @@ textarea {
     color: #bcc3d3;
     font-size: 12px;
     line-height: 16px;
-    display: inherit;
+    font-family: 'Poppins', sans-serif;
 }
 .table{
     margin-bottom: 10px;
@@ -876,7 +876,7 @@ button{
     }
 }
 body[themebg-pattern="pattern1"]{
-    background-color: transparent !important;
+    background-color: #EFF1F6 !important;
 }
 .addeditpage{
     .fixedheader{
