@@ -125,14 +125,12 @@ export class AddEditLocationComponent implements OnInit, OnChanges {
         this.locationService.update(formdata, this.locationObj.locationid).subscribe(res => {
           const response = JSON.parse(res._body);
           if (response.status) {
-            this.validatingLocation = true;
             this.bootstrapAlertService.showSucccess(response.message);
             this.callParent({ update: false, data: response.data });
           } else {
             this.bootstrapAlertService.showError(response.message);
           }
         }, err => {
-          this.validatingLocation = false;
           this.bootstrapAlertService.showError(err.message);
         });
       } else {

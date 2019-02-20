@@ -117,12 +117,15 @@ export class AddEditLookupComponent implements OnInit, OnChanges {
         this.lookupService.update(formdata, this.lookupObj.refid).subscribe(res => {
           const response = JSON.parse(res._body);
           if (response.status) {
+            this.savingLookup = false;
             this.bootstrapAlertService.showSucccess(response.message);
             this.callParent({ update: false, data: response.data });
           } else {
+            this.savingLookup = false;
             this.bootstrapAlertService.showError(response.message);
           }
         }, err => {
+          this.savingLookup = false;
           this.bootstrapAlertService.showError(err.message);
         });
       } else {

@@ -42,6 +42,7 @@ export class AddEditDealerComponent implements OnInit {
       if (params.id !== undefined) {
         this.dealerid = params.id;
         this.getDealerDetails(this.dealerid);
+        this.buttontext = AppConstant.BUTTON_TXT.UPDATE;
       }
     });
   }
@@ -109,12 +110,15 @@ export class AddEditDealerComponent implements OnInit {
         this.dealerService.update(formdata, this.dealerProfileObj.dealerid).subscribe(res => {
           const response = JSON.parse(res._body);
           if (response.status) {
+            this.adddealer = false;
             this.bootstrapAlertService.showSucccess(response.message);
             this.dealerProfileObj = response.data;
           } else {
+            this.adddealer = false;
             this.bootstrapAlertService.showError(response.message);
           }
         }, err => {
+          this.adddealer = false;
           this.bootstrapAlertService.showError(err.message);
         });
       } else {

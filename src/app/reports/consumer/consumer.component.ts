@@ -54,7 +54,6 @@ export class ConsumerComponent implements OnInit {
     });
   }
   getConsumerReports() {
-    this.loadingIndicator = true;
     const data = this.consumerReportForm.value;
     const todt = this.commonService.formatDate(data.todate);
     const fromdt = this.commonService.formatDate(data.fromdate);
@@ -74,7 +73,7 @@ export class ConsumerComponent implements OnInit {
     if (city != "" && city != undefined && city != null) {
       formData.city = [city];
     }
-
+    this.loadingIndicator = true;
     this.reportService.getConsumerCount(formData).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
@@ -82,6 +81,9 @@ export class ConsumerComponent implements OnInit {
         this.consumerList = response.data;
         console.log(this.consumerList);
       }
+      this.loadingIndicator = false;
+      this.tempFilter = this.consumerList;
+
     });
     this.getArea();
   }

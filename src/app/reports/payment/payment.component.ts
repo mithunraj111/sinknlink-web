@@ -73,7 +73,6 @@ export class PaymentComponent implements OnInit {
   }
 
   getPaymentList() {
-    this.loadingIndicator = true;
     const data = this.paymentForm.value;
     const todt = this.commonService.formatDate(data.todate);
     const fromdt = this.commonService.formatDate(data.fromdate);
@@ -93,12 +92,16 @@ export class PaymentComponent implements OnInit {
     if (paymenttype != "" && paymenttype != undefined && paymenttype != null) {
       formData.paymenttype = [paymenttype];
     }
+    this.loadingIndicator = true;
     this.reportService.paymentReport(formData).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
         this.loadingIndicator = false;
         this.paymentList = response.data;
       }
+      this.loadingIndicator = false;
+      this.tempFilter = this.paymentList;
+
     });
   }
 

@@ -70,7 +70,6 @@ export class CustomerdetailComponent implements OnInit {
     })
   }
   getReports() {
-    this.loadingIndicator = true;
     const data = this.customerdetailForm.value;
     const todt = this.commonService.formatDate(data.todate);
     const fromdt = this.commonService.formatDate(data.fromdt);
@@ -100,12 +99,14 @@ export class CustomerdetailComponent implements OnInit {
     if (membershiptype != "") {
       formData.membershiptype = membershiptype;
     }
+    this.loadingIndicator = true;
     this.reportService.customerDetailReport(formData).subscribe((res) => {
       const response = JSON.parse(res._body);
       if (response.status) {
         this.loadingIndicator = false;
         this.businessList = response.data;
       }
+      this.loadingIndicator = false;
       this.tempFilter = this.businessList;
 
       console.log(this.businessList)
