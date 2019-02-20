@@ -4,6 +4,7 @@ import { fadeInOutTranslate } from '../../../../assets/animations/fadeInOutTrans
 import { ActivatedRoute } from '@angular/router';
 import { ConsumerService } from 'src/app/services/business/consumer.service';
 import * as Lodash from 'lodash';
+import { element } from '@angular/core/src/render3/instructions';
 
 @Component({
   selector: 'app-view-consumer',
@@ -15,7 +16,6 @@ export class ViewConsumerComponent implements OnInit {
   date_displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   date: any;
   userfile: any;
-  categorydoc: any;
   emptymessages = AppConstant.EMPTY_MESSAGES.CONSUMERCOUPONS;
   nodata = AppConstant.EMPTY_MESSAGES.FAVOURITES;
   // For Consumer Details.
@@ -30,6 +30,7 @@ export class ViewConsumerComponent implements OnInit {
     category: [],
     location: []
   };
+  userimg: any = {};
 
   // For Reviews
   reviewedBiz: any = [];
@@ -57,7 +58,7 @@ export class ViewConsumerComponent implements OnInit {
       let response = JSON.parse(res._body);
       this.consumer = response.data;
       if (this.consumer.profileimg != null) {
-        this.userfile =  this.consumer.profileimg.docurl;
+        this.userfile = this.consumer.profileimg.docurl;
       } else {
         this.userfile = 'assets/images/avatar-blank.png';
       }
@@ -74,7 +75,7 @@ export class ViewConsumerComponent implements OnInit {
       console.log(err);
     })
   }
-
+  i1
   getConsumerFavs(id) {
     this.consumerService.consumerFavs({ consumerid: parseInt(id) }).subscribe(res => {
       let response = JSON.parse(res._body);
@@ -87,7 +88,6 @@ export class ViewConsumerComponent implements OnInit {
   getConsumerReviews(id) {
     this.consumerService.consumerReviews({ consumerid: parseInt(id) }).subscribe(res => {
       let response = JSON.parse(res._body);
-
       let businesses = [];
       let reviews = {};
 
@@ -98,9 +98,8 @@ export class ViewConsumerComponent implements OnInit {
         reviews = Lodash.groupBy(response.data, 'membershipid');
         this.reviewedBiz = businesses;
         this.reviews = reviews;
-        
-
       }
+
     }, err => {
       console.log(err);
     })
@@ -115,7 +114,7 @@ export class ViewConsumerComponent implements OnInit {
     let groups = {
       business: [],
       category: [],
-      location: [],
+      location: []
     }
     data.forEach(element => {
       if (parseInt(element.membershipid)) {
@@ -127,10 +126,7 @@ export class ViewConsumerComponent implements OnInit {
       if (parseInt(element.categoryid)) {
         groups.category.push(element)
       }
-
-      console.log(this.categorydoc)
     });
     return groups;
   }
-
 }
