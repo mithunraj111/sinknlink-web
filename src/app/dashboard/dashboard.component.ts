@@ -24,21 +24,18 @@ export class DashboardComponent implements OnInit {
     this.getData(30);
   }
   getData(n) {
-    console.log("inside getdata");
     let tDate = new Date();
     let toDate = tDate.getFullYear() + '-' + (tDate.getMonth() + 1) + '-' + tDate.getDate() + ' 23:59:59';
     let fromdate = new Date();
     let FromDate = fromdate.setDate(fromdate.getDate() - n);
     let cDate = new Date(FromDate);
     let fromDate = cDate.getFullYear() + '-' + (cDate.getMonth() + 1) + '-' + cDate.getDate() + ' 00:00:00';
-    console.log(fromDate);
-    console.log(toDate);
-    this.getDashboardCounts();
-    this.getDashboardBizCounts();
+    this.getDashboardCounts(fromDate, toDate);
+    this.getDashboardBizCounts(fromDate, toDate);
     this.getSearchCounts(fromDate, toDate);
   }
-  getDashboardCounts() {
-    this.dashboardService.getCounts({}).subscribe(res => {
+  getDashboardCounts(fromDate, toDate) {
+    this.dashboardService.getCounts({ "fromDate": fromDate, "toDate": toDate }).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
         this.counts = response.data;
@@ -46,9 +43,9 @@ export class DashboardComponent implements OnInit {
       }
     });
   }
-  getDashboardBizCounts() {
+  getDashboardBizCounts(fromDate, toDate) {
     this.bizcounts = [];
-    this.dashboardService.employeebusinessCount({}).subscribe(res => {
+    this.dashboardService.employeebusinessCount({ "fromDate": fromDate, "toDate": toDate }).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
         this.bizcounts = response.data;
@@ -76,14 +73,12 @@ export class DashboardComponent implements OnInit {
       console.log(err);
     })
   }
-
   generateCatCountChart(data) {
     AmCharts.makeChart('analytics-graph', {
       'type': 'serial',
       'theme': 'light',
-      // 'dataDateFormat': 'YYYY-MM-DD',
       'precision': 2,
-      'categoryAxes': [{
+      'valueAxes': [{
         'id': 'v1',
         'title': 'Search Count',
         'position': 'left',
@@ -101,25 +96,14 @@ export class DashboardComponent implements OnInit {
         'valueAxis': 'v2',
         'lineThickness': 0,
         'fillAlphas': 0.9,
+        'bulletColor': '#4099ff ',
         'lineColor': '#4099ff ',
-        'type': 'smoothedhbLine',
-        'title': 'Category Name',
+        'type': 'smoothedLine',
+        'title': 'Search count',
         'useLineColorForBulletBorder': true,
         'valueField': 'name',
         'balloonText': '[[title]]<br /><b style="font-size: 130%">[[value]]</b>'
-      }
-        // { 'id': 'g2',
-        //   'valueAxis': 'v2',
-        //   'fillAlphas': 0.9,
-        //   'bulletColor': '#FF5370 ',
-        //   'lineThickness': 0,
-        //   'lineColor': '#FF5370 ',
-        //   'type': 'smoothedLine',
-        //   'title': 'count',
-        //   'useLineColorForBulletBorder': true,
-        //   'valueField': 'count',
-        //   'balloonText': '[[title]]<br /><b style="font-size: 130%">[[value]]</b>'}
-      ],
+      }],
       'chartCursor': {
         'pan': true,
         'valueLineEnabled': true,
@@ -129,7 +113,6 @@ export class DashboardComponent implements OnInit {
       },
       'categoryField': 'category',
       'categoryAxis': {
-        // 'parseDates': true,
         'gridAlpha': 0,
         'minorGridEnabled': true
       },
