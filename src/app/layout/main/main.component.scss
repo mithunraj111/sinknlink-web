@@ -158,3 +158,12 @@ body[themebg-pattern="pattern1"]{
         }
     }
 }
+.header-navbar{
+    .navbar-wrapper{
+        .navbar-container{
+            .header-notification.active:before{
+                display: none;
+            }
+        }
+    }
+}

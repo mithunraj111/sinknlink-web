@@ -1448,10 +1448,13 @@ body[themebg-pattern="pattern1"]{
     .navbar-wrapper {
         .navbar-container{
             .nav-right{
-                 .user-profile img{
-                    width: 33px;
-                    height: 33px;
-                    display:inline-block;
+                 .user-profile{
+                    img{
+                        width: 33px;
+                        height: 33px;
+                        display:inline-block;
+                        box-shadow: 0px 5px 25px 0 rgba(0, 0, 0, 0.25)
+                     }
                  }
             }
         }

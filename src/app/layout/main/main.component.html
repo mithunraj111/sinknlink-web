@@ -32,25 +32,25 @@
                         <li (clickOutside)="notificationOutsideClick('profile')"
                             class="user-profile header-notification" [ngClass]="profileNotificationClass"
                             (click)="toggleProfileNotification()">
-                            <a href="javascript:">
+                            <a href="javascript:" [routerLink]="['/profile']">
                                 <img [src]="userfile" class="img-radius" alt="">
                                 <span>{{userstoragedata.fullname}}</span>
-                                <i class="fa fa-chevron-down"></i>
+                                <!-- <i class="fa fa-chevron-down"></i> -->
                             </a>
 
-                            <ul [@notificationBottom]="profileNotification"
+                            <!-- <ul [@notificationBottom]="profileNotification"
                                 class="show-notification profile-notification">
                                 <li>
                                     <a [routerLink]="['/profile']">
                                         <i class="ti-user"></i> Profile
                                     </a>
                                 </li>
-                                <!-- <li>
+                                <li>
                                     <a (click)="logout()">
                                         <i class="fa fa-sign-out"></i> Logout
                                     </a>
-                                </li> -->
-                            </ul>
+                                </li>
+                            </ul> -->
                         </li>
                     </ul>
                 </div>
