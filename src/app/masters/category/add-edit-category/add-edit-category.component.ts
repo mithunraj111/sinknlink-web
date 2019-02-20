@@ -102,6 +102,7 @@ export class AddEditCategoryComponent implements OnInit, OnChanges {
       } else {
         formdata.append('categoryimg', this.categoryimgfile);
       }
+      this.savecategory = true;
       const data = {} as any;
       data.categoryname = this.categoryForm.value.categoryname;
       data.categoryimg = this.categoryForm.value.categoryimg;
@@ -113,9 +114,11 @@ export class AddEditCategoryComponent implements OnInit, OnChanges {
         this.categoryService.update(formdata, this.categoryObj.categoryid).subscribe(res => {
           const response = JSON.parse(res._body);
           if (response.status) {
+            this.savecategory = false;
             this.callParent({ update: false, data: response.data });
             this.bootstrapAlertService.showSucccess(response.message);
           } else {
+            this.savecategory = false;
             this.bootstrapAlertService.showError(response.message);
           }
         });
