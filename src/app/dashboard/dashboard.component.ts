@@ -54,10 +54,8 @@ export class DashboardComponent implements OnInit {
     })
   }
   getSearchCounts(fromDate, toDate) {
-    console.log("inside search counts");
     this.dashboardService.searchCount({ "fromDate": fromDate, "toDate": toDate }).subscribe(res => {
       const response = JSON.parse(res._body);
-      console.log(response);
       if (response.status) {
         this.searchcounts = response.data;
         this.generateCatCountChart(this.searchcounts.map((d) => {
@@ -66,10 +64,8 @@ export class DashboardComponent implements OnInit {
             name: d.count
           }
         }));
-        console.log(this.searchcounts);
       }
     }, err => {
-      console.log('Err');
       console.log(err);
     })
   }

@@ -5,6 +5,8 @@ import { AppMessages } from '../../app-messages';
 import { Router } from '@angular/router';
 import { AppConstant } from '../../app.constants';
 import { BusinessService, LocalStorageService, CommonService } from '../../services';
+import { DashboardComponent } from 'src/app/dashboard/dashboard.component';
+import { routerNgProbeToken } from '@angular/router/src/router_module';
 
 @Component({
   selector: 'app-login',
@@ -15,6 +17,9 @@ export class LoginComponent implements OnInit {
   loginErrObj = AppMessages.VALIDATION.LOGIN;
   errMessage;
   signingin;
+  authenticated = {} as any;
+
+
   constructor(private commonService: CommonService,
     private fb: FormBuilder,
     private loginService: LoginService,
@@ -28,7 +33,15 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isLoggedIn()
   }
+  isLoggedIn(){
+    this.authenticated = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.ISAUTHENTICATED);
+    if(this.authenticated==true){
+      this.router.navigate(['dashboard']);
+    }
+  }
+
   login() {
     if (!this.loginForm.valid) {
       this.errMessage = this.commonService.getFormErrorMessage(this.loginForm, this.loginErrObj);
@@ -52,6 +65,9 @@ export class LoginComponent implements OnInit {
               }
             });
           }
+          if(localStorage.length>0){
+            
+          }
           this.router.navigate(['dashboard']);
         } else {
           this.signingin = false;
@@ -60,4 +76,5 @@ export class LoginComponent implements OnInit {
       });
     }
   }
+
 }
