@@ -18,10 +18,10 @@ $background: -webkit-linear-gradient(0deg, rgb(0, 77, 255) 50%, rgb(88, 139, 255
     border-color: #2f3d4a !important;
     color: #fff;
 }
-// .btn-primary{
-//     background: $background;
-//     border: 0 none !important;
-// }
+.btn-primary{
+    border-radius: 0 ;
+    box-shadow: 0px 5px 25px 0 rgba(0, 0, 0, 0.25);
+}
 
 p{
     font-family: 'Open Sans',sans-serif;
@@ -1593,4 +1593,13 @@ body[themebg-pattern="pattern1"]{
     }
 }
 
+.bg-c-green {
+    background: linear-gradient(45deg, #00A8B0, #18C5A9);
+}
+.bg-c-pink {
+    background: linear-gradient(45deg, #ff4081, #FF5370);
+}
+.bg-c-yellow {
+    background: linear-gradient(45deg, #E67E22, #F39C12);
+}
 // no data //
