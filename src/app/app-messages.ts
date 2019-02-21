@@ -298,8 +298,8 @@ export const AppMessages = Object.freeze({
       tags: { required: 'Please enter tags' },
       postaladdress: {
         required: 'Please enter address',
-        minlength: 'postal address should be atleast 1 characters',
-        maxlength: 'postal address should be within 100 characters'
+        minlength: 'Postal address should be atleast 1 characters',
+        maxlength: 'Postal address should be within 100 characters'
       },
       lat: {
         required: 'Please enter latitude '

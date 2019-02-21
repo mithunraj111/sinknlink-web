@@ -22,11 +22,19 @@ const routes: Routes = [
       },
       {
         path: 'location',
-        component: LocationComponent
+        component: LocationComponent,
+        data: {
+          title: 'Location',
+          status: false
+        }
       },
       {
         path: 'category',
-        component: CategoryComponent
+        component: CategoryComponent,
+        data: {
+          title: 'Category',
+          status: false
+        }
       }
     ],
   }

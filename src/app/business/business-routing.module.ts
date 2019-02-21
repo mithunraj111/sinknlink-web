@@ -16,66 +16,122 @@ import { ViewConsumerComponent } from './consumer/view-consumer/view-consumer.co
 const routes: Routes = [
   {
     path: '',
-    data: {
-      title: 'Business',
-      status: false
-    },
+    // data: {
+    //   title: 'Business',
+    //   status: false
+    // },
     children: [
       {
         path: 'customers',
-        component: CustomerComponent
+        component: CustomerComponent,
+        data: {
+          title: 'Customers',
+          status: false
+        },
       },
       {
         path: 'customers/create',
-        component: AddEditCustomerComponent
+        component: AddEditCustomerComponent,
+        data: {
+          title: 'Customers',
+          status: false
+        },
       },
       {
         path: 'customers/edit/:id',
-        component: AddEditCustomerComponent
+        component: AddEditCustomerComponent,
+        data: {
+          title: 'Customers',
+          status: false
+        },
       },
       {
         path: 'customers/branches',
-        component: CustomerBranchesComponent
+        component: CustomerBranchesComponent,
+        data: {
+          title: 'Customers',
+          status: false
+        },
       },
       {
         path: 'customers/gigs',
-        component: CustomerGigsComponent
+        component: CustomerGigsComponent,
+        data: {
+          title: 'Customers',
+          status: false
+        },
       },
       {
         path: 'customers/coupons',
-        component: CustomerCouponsComponent
+        component: CustomerCouponsComponent,
+        data: {
+          title: 'Customers',
+          status: false
+        },
       },
       {
         path: 'consumers',
-        component: ConsumerComponent
+        component: ConsumerComponent,
+        data: {
+          title: 'Consumers',
+          status: false
+        },
       },
       {
         path: 'dealer',
-        component: DealerComponent
+        component: DealerComponent,
+        data: {
+          title: 'Dealer',
+          status: false
+        },
       },
       {
         path: 'dealer/create',
-        component: AddEditDealerComponent
+        component: AddEditDealerComponent,
+        data: {
+          title: 'Dealer',
+          status: false
+        },
       },
       {
         path: 'dealer/edit/:id',
-        component: AddEditDealerComponent
+        component: AddEditDealerComponent,
+        data: {
+          title: 'Dealer',
+          status: false
+        },
       },
       {
         path: 'customers/payment_details',
-        component: CustomerPaymentsComponent
+        component: CustomerPaymentsComponent,
+        data: {
+          title: 'Customers',
+          status: false
+        },
       },
       {
         path: 'customers/gallery',
-        component: CustomerGalleryComponent
+        component: CustomerGalleryComponent,
+        data: {
+          title: 'Customers',
+          status: false
+        },
       },
       {
         path: 'consumers/view/:id',
-        component: ViewConsumerComponent
+        component: ViewConsumerComponent,
+        data: {
+          title: 'Consumers',
+          status: false
+        },
       },
       {
         path: 'branch',
-        component: AddEditCustomerComponent
+        component: AddEditCustomerComponent,
+        data: {
+          title: 'Customers',
+          status: false
+        },
       },
     ],
   },

@@ -9,30 +9,50 @@ import { CustomerdetailComponent } from './customerdetail/customerdetail.compone
 const routes: Routes = [
   {
     path: '',
-    data: {
-      title: 'Reports',
-      status: false
-    },
+    // data: {
+    //   title: 'Reports',
+    //   status: false
+    // },
     children: [
       {
         path: 'areacategories',
-        component: AreaCategoriesComponent
+        component: AreaCategoriesComponent,
+        data: {
+          title: 'Area & Category',
+          status: false
+        },
       },
       {
         path: 'payments',
-        component: PaymentComponent
+        component: PaymentComponent,
+        data: {
+          title: 'Payment Reports',
+          status: false
+        },
       },
       {
         path: 'dealer',
-        component: DealerComponent
+        component: DealerComponent,
+        data: {
+          title: 'Dealer Reports',
+          status: false
+        },
       },
       {
         path: 'consumer',
-        component: ConsumerComponent
+        component: ConsumerComponent,
+        data: {
+          title: 'Consumer Reports',
+          status: false
+        },
       },
       {
         path: 'customerdetail',
-        component: CustomerdetailComponent
+        component: CustomerdetailComponent,
+        data: {
+          title: 'Business Reports',
+          status: false
+        },
       }
     ],
   }

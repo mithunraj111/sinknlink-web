@@ -12,58 +12,106 @@ import { from } from 'rxjs';
 const routes: Routes = [
   {
     path: '',
-    data: {
-      title: 'Admin',
-      status: false
-    },
+    // data: {
+    //   title: 'Admin',
+    //   status: false
+    // },
     children: [
       {
         path: 'events',
-        component: EventsComponent
+        component: EventsComponent,
+        data: {
+          title: 'Events',
+          status: false
+        },
       },
       {
         path: 'event/create',
-        component: AddEditEventComponent
+        component: AddEditEventComponent,
+        data: {
+          title: 'Events',
+          status: false
+        },
       },
       {
         path: 'event/edit/:id',
-        component: AddEditEventComponent
+        component: AddEditEventComponent,
+        data: {
+          title: 'Events',
+          status: false
+        },
       },
       {
         path: 'donations',
-        component: DonationsComponent
+        component: DonationsComponent,
+        data: {
+          title: 'Donations',
+          status: false
+        },
       },
       {
         path: 'donation/create',
         component: AddEditDonationComponent,
+        data: {
+          title: 'Donations',
+          status: false
+        },
       },
       {
         path: 'donation/edit/:id',
         component: AddEditDonationComponent,
+        data: {
+          title: 'Donations',
+          status: false
+        },
       },
       {
         path: 'vipnumberregistration',
-        component: VipNumberRegistrationComponent
+        component: VipNumberRegistrationComponent,
+        data: {
+          title: 'Vip number registration',
+          status: false
+        },
       },
       {
         path: 'vipnumberregistration/create',
         component: AddEditVipRegistrationNumberComponent,
+        data: {
+          title: 'Vip number registration',
+          status: false
+        },
       },
       {
         path: 'vipnumberregistration/edit/:id',
         component: AddEditVipRegistrationNumberComponent,
+        data: {
+          title: 'Vip number registration',
+          status: false
+        },
       },
       {
         path: 'lookup',
-        component: LookupComponent
+        component: LookupComponent,
+        data: {
+          title: 'Lookup',
+          status: false
+        },
       },
       {
         path: 'lookup/create',
         component: AddEditLookupComponent,
+        data: {
+          title: 'Lookup',
+          status: false
+        },
       },
       {
         path: 'lookup/edit/:id',
         component: AddEditLookupComponent,
+        data: {
+          title: 'Lookup',
+          status: false
+        },
       }
     ],
   }

@@ -3,7 +3,7 @@ import { animate, AUTO_STYLE, state, style, transition, trigger } from '@angular
 import { MenuItems } from '../../shared/menu-items/menu-items';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { AppConstant } from 'src/app/app.constants';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-main',
@@ -125,8 +125,24 @@ export class MainComponent implements OnInit {
   public config: any;
   userstoragedata = {} as any;
   userfile: string;
-  constructor(public menuItems: MenuItems, private route: Router,
+  title = '';
+  constructor(public menuItems: MenuItems, private router: Router, private route: ActivatedRoute,
     private lstorageService: LocalStorageService) {
+      this.router.events
+      .filter(event => event instanceof NavigationEnd)
+      .subscribe(() => {
+        let currentRoute = this.route.root;
+        do {
+          const childrenRoutes = currentRoute.children;
+          currentRoute = null;
+          childrenRoutes.forEach(routes => {
+            if (routes.outlet === 'primary') {
+              this.title = routes.snapshot.data.title;
+              currentRoute = routes;
+            }
+          });
+        } while (currentRoute);
+      });
     this.navType = 'st2';
     this.themeLayout = 'vertical';
     this.verticalPlacement = 'left';
@@ -413,7 +429,7 @@ export class MainComponent implements OnInit {
     this.lstorageService.removeItem(AppConstant.LOCALSTORAGE.ISAUTHENTICATED);
     this.lstorageService.removeItem(AppConstant.LOCALSTORAGE.SCREENS);
     this.lstorageService.removeItem(AppConstant.LOCALSTORAGE.DEALER);
-    this.route.navigate(['auth/login']);
+    this.router.navigate(['auth/login']);
   }
 
 }

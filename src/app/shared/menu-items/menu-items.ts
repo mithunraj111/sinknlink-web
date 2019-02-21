@@ -7,7 +7,10 @@ const MENUITEMS = [
     name: 'Dashboard',
     type: 'link',
     icon: 'fa fa-home',
-    code: 'dashboard'
+    code: 'dashboard',
+    data: {
+      title: 'Dashboard'
+    }
   },
   {
     state: 'masters',
@@ -21,21 +24,33 @@ const MENUITEMS = [
         state: 'users',
         name: 'Users',
         code: 'm_users',
+        data: {
+          title: 'Users'
+        }
       },
       {
         state: 'roles',
         name: 'Roles',
         code: 'm_roles',
+        data: {
+          title: 'Roles'
+        }
       },
       {
         state: 'category',
         name: 'Categories',
         code: 'm_categories',
+        data: {
+          title: 'Category'
+        }
       },
       {
         state: 'location',
         name: 'Location',
         code: 'm_location',
+        data: {
+          title: 'Location'
+        }
       }
     ]
   },
@@ -51,16 +66,25 @@ const MENUITEMS = [
         state: 'customers',
         name: 'Customers',
         code: 'b_customers',
+        data: {
+          title: 'Customers'
+        }
       },
       {
         state: 'consumers',
         name: 'Consumers',
         code: 'b_consumers',
+        data: {
+          title: 'Consumers'
+        }
       },
       {
         state: 'dealer',
         name: 'Dealers',
         code: 'b_dealers',
+        data: {
+          title: 'Dealers'
+        }
       }
     ]
   },
@@ -76,21 +100,33 @@ const MENUITEMS = [
         state: 'events',
         name: 'Events',
         code: 'a_events',
+        data: {
+          title: 'Events'
+        }
       },
       {
         state: 'donations',
         name: 'Donations',
         code: 'a_donations',
+        data: {
+          title: 'Donations'
+        }
       },
       {
         state: 'vipnumberregistration',
         name: 'VIP Number Registration',
         code: 'a_vipno',
+        data: {
+          title: 'VIP Number Registration'
+        }
       },
       {
         state: 'lookup',
         name: 'Look up',
-        code: 'a_lookup'
+        code: 'a_lookup',
+        data: {
+          title: 'Look up'
+        }
       }
     ]
   },
@@ -105,27 +141,42 @@ const MENUITEMS = [
       {
         state: 'areacategories',
         name: 'Area & Categories',
-        code: 'r_areacategories'
+        code: 'r_areacategories',
+        data: {
+          title: 'Area & Categories'
+        }
       },
       {
         state: 'dealer',
         name: 'Dealer Report',
-        code: 'r_dealer'
+        code: 'r_dealer',
+        data: {
+          title: 'Dealer Report'
+        }
       },
       {
         state: 'customerdetail',
         name: 'Customer Detail Report',
-        code: 'r_customer'
+        code: 'r_customer',
+        data: {
+          title: 'Customer Detail Report'
+        }
       },
       {
         state: 'consumer',
         name: 'Consumer Report',
-        code: 'r_consumer'
+        code: 'r_consumer',
+        data: {
+          title: 'Consumer Report'
+        }
       },
       {
         state: 'payments',
         name: 'Payment Report',
-        code: 'r_payments'
+        code: 'r_payments',
+        data: {
+          title: 'Payment Report'
+        }
       }
     ]
   }

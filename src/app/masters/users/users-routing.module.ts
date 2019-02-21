@@ -9,6 +9,7 @@ const routes: Routes = [
     component: UsersComponent,
     data: {
       title: 'Users',
+      testing:"asdasd",
       // icon: 'ti-settings',
       // caption: 'users',
       status: false

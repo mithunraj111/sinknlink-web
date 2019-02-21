@@ -6,10 +6,10 @@ const routes: Routes = [
   {
     path: '',
     component: DashboardComponent,
-    // data: {
-    //   title: 'Dashboard',
-    //   status: false
-    // }
+    data: {
+      title: 'Dashboard',
+      status: false
+    }
   }
 ];
 
