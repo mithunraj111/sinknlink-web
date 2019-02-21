@@ -185,7 +185,7 @@ $icon-color: $primary-color,#f78ea4,#2ed8b6,#f1c40f,#ab7967,#39ADB5,#7C4DFF,#FF5
 
             .mobile-menu {
                 position: absolute;
-                right: 25px;
+                right: auto;
                 top: calc(50% - 8px);
                 font-size: 16px;
             }

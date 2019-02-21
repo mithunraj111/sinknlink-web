@@ -26,9 +26,9 @@
         </div>
     </div>
     <div *ngIf="!loadingIndicator">
-        <div class="table-header fixed-table ">
+        <div class="table-header fixed-table">
             <app-card [classHeader]="true">
-                <ngx-datatable #usertable class="talbe data-table expandable  loader-block" [rows]='userList'
+                <ngx-datatable #usertable class="talbe data-table expandable  loader-block m-b-10" [rows]='userList'
                     [columnMode]="'flex'" [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false"
                     [footerHeight]="50" [limit]="10" [messages]="emptymessages">
                     <!-- Row Detail Template -->
@@ -84,9 +84,9 @@
 <div *ngIf="userList.length==0" class="text-center no-data">
     <div class="nodata-text nodata-image">
         <img class="hand-icon" src="assets/images/no-data.png">
-        <h3>Create User (s) of associated with organization</h3>
+        <h3>Create User(s) of associated with organization</h3>
         <button *ngIf="add" type="button" placement="bottom" ngbTooltip="Click to add donation"
-            class="add-btn btn btn-primary waves-effect" (click)='addDonation()'><i class="fa fa-plus-circle m-r-5"></i>
+            class="add-btn btn btn-primary waves-effect" (click)='addUser()'><i class="fa fa-plus-circle m-r-5"></i>
             Create User
         </button>
     </div>
