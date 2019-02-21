@@ -2,7 +2,6 @@
     <div class="header-title m-b-15  pos-fixed">
         <div class="row">
             <div class="col-md-6 col-sm-6">
-                <h2>User</h2>
                 <p *ngIf="userObj?.userid" class="m-b-0">User ID : {{userObj?.userid}}</p>
             </div>
             <div class="col-md-6 col-sm-6 save-button text-right p-r-30">
@@ -16,7 +15,7 @@
     <div class="row">
         <div class="col-md-8 col-sm-9 p-l-0 p-r-10">
             <div class="user-form">
-                <div class="card tenants-page tenants-pages m-b-10 m-t-10">
+                <div class="card tenants-page tenants-pages">
                     <div class="row p-t-10 p-b-5">
                         <div class="col-md-12 col-sm-12">
                             <form [formGroup]="userForm">

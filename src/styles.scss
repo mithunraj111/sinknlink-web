@@ -147,7 +147,7 @@ textarea {
         text-transform: capitalize;
         padding: 0;
         font-weight: 500;
-        margin: 0 13px;
+        margin: 0 0 0 15px;
         color: $primary-color;
         display: inline-block;
         font-family: 'Montserrat', sans-serif;
@@ -779,8 +779,9 @@ button{
 
 // fixed header //
 .fixedheader{
-         display:inline-block;
-         width:98%;
+    display: inline-block;
+    width: 97%;
+    margin: 0 15px;
     .pos-fixed{
         max-width: 100%;
         z-index: 9;
@@ -1112,7 +1113,7 @@ body[themebg-pattern="pattern1"]{
 }
 .search-close{
     position: relative;
-    right: 12%;
+    right: 8%;
     margin-top: 0 !important;
     .fa-close{
         color: $primary-color;
@@ -1601,5 +1602,8 @@ body[themebg-pattern="pattern1"]{
 }
 .bg-c-yellow {
     background: linear-gradient(45deg, #E67E22, #F39C12);
+}
+.reload-btn{
+    padding: 3px 5px !important;
 }
 // no data //
