@@ -63,7 +63,7 @@
                                                     <div class="form-group row required placeholder-text">
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Mobile number</label>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <tag-input class="tag-chips" [maxItems]="5" placeholder="Mobile number" formControlName="contactmobile"></tag-input>
+                                                            <tag-input class="tag-chips" [maxItems]="5" placeholder="Mobile number" [secondaryPlaceholder]="'Mobile number'" formControlName="contactmobile"></tag-input>
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
@@ -75,7 +75,7 @@
                                                     <div class="form-group row placeholder-text">
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Phone Number</label>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <tag-input class="tag-chips" [maxItems]="5" placeholder="Phone number" formControlName="phoneno"></tag-input>
+                                                            <tag-input class="tag-chips" [maxItems]="5" placeholder="Phone number" [secondaryPlaceholder]="'Phone number'" formControlName="phoneno"></tag-input>
                                                         </div>
                                                     </div>
                                                     <div class="form-group row required">
@@ -90,7 +90,7 @@
                                                     <div class="form-group row required placeholder-text">
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Tags</label>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <tag-input class="tag-chips" [maxItems]="5" formControlName="tags" placeholder="Tags"></tag-input>
+                                                            <tag-input class="tag-chips" [maxItems]="5" formControlName="tags"[secondaryPlaceholder]="'Tags'" placeholder="Tags"></tag-input>
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">

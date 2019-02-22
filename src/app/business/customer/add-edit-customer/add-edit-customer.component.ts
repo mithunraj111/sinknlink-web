@@ -213,6 +213,8 @@ export class AddEditCustomerComponent implements OnInit {
       formdata.workhours = data.starttime + '-' + data.endtime;
       formdata.locationid = Number(data.locationid);
       formdata.categoryid = Number(data.categoryid);
+      formdata.latitude = Number(data.latitude);
+      formdata.longitude = Number(data.longitude);
       formdata.regdate = this.commonService.formatDate(data.regdate);
       formdata.updatedby = this.userstoragedata.fullname;
       formdata.updateddt = new Date();
@@ -230,9 +232,10 @@ export class AddEditCustomerComponent implements OnInit {
         endtime: data.endtime
       };
       formdata.geoaddress = {
-        lat: data.lat,
-        lng: data.lng
+        lat: data.latitude,
+        lng: data.longitude
       };
+      
       if (this.userstoragedata.usertype === 'D') {
         formdata.dealerid = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.DEALER).dealerid;
       }

@@ -113,8 +113,7 @@ export class AddEditVipRegistrationNumberComponent implements OnInit {
         data['createddt'] = new Date();
         data['startnumber'] = parseInt(data['startnumber']);
         data['endnumber'] = parseInt(data['endnumber']) || 0;
-
-        if ((data['endnumber'] - data['startnumber']) < 0) {
+        if ( (data['endnumber'] != '') && ((data['endnumber'] - data['startnumber']) < 0) )  {
           this.creatingNumbers = false;
           this.bootstrapAlertService.showError('VIP Number range not valid');
         } else {
@@ -123,6 +122,7 @@ export class AddEditVipRegistrationNumberComponent implements OnInit {
             if (response.status) {
               this.creatingNumbers = false;
               this.bootstrapAlertService.showSucccess(response.message);
+              this.router.navigate(['/admin/vipnumberregistration/']);
             } else {
               this.creatingNumbers = false;
               this.bootstrapAlertService.showError(response.message);

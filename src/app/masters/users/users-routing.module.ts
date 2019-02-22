@@ -9,19 +9,22 @@ const routes: Routes = [
     component: UsersComponent,
     data: {
       title: 'Users',
-      testing:"asdasd",
-      // icon: 'ti-settings',
-      // caption: 'users',
       status: false
     }
   },
   {
     path: 'create',
-    component: AddEditUserComponent
+    component: AddEditUserComponent,
+    data:{
+      title: 'Users'
+    }
   },
   {
     path: 'edit/:id',
-    component: AddEditUserComponent
+    component: AddEditUserComponent,
+    data:{
+      title: 'Users'
+    }
   }
 ]
 
