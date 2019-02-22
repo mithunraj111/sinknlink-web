@@ -126,7 +126,9 @@ export class MainComponent implements OnInit {
   userstoragedata = {} as any;
   userfile: string;
   title = '';
-  constructor(public menuItems: MenuItems, private router: Router, private route: ActivatedRoute,
+  fullname: any;
+userprofile:Boolean = false;
+    constructor(public menuItems: MenuItems, private router: Router, private route: ActivatedRoute,
     private lstorageService: LocalStorageService) {
       this.router.events
       .filter(event => event instanceof NavigationEnd)
@@ -194,10 +196,14 @@ export class MainComponent implements OnInit {
     this.setHeaderAttributes(this.windowWidth);
 
     this.userstoragedata = this.lstorageService.getItem(AppConstant.LOCALSTORAGE.USER);
+    
+
     if (this.userstoragedata.profileimg != null) {
       this.userfile = this.userstoragedata.profileimg.docurl;
+      this.userprofile =true;
     } else {
-      this.userfile = 'assets/images/avatar-blank.jpg';
+      this.userprofile = false;
+      this.userfile = this.userstoragedata.fullname.substring(0,1) ;
     }
     // dark
     /*this.setLayoutType('dark');*/

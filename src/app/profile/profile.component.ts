@@ -24,6 +24,7 @@ export class ProfileComponent implements OnInit {
   locationList = [];
   userimgfile: any;
   userfile: any;
+  profileimage: Boolean = false;
   @ViewChild('userimage') userimage: ElementRef;
 
   constructor(private fb: FormBuilder,
@@ -55,11 +56,12 @@ export class ProfileComponent implements OnInit {
       const response = JSON.parse(res._body);
       if (response.status) {
         this.userObj = response.data;
-        console.log(this.userObj.profileimg.docurl);
         if (this.userObj.profileimg != null) {
-          this.userfile =  this.userObj.profileimg.docurl;
+          this.userfile = this.userObj.profileimg.docurl;
+          this.profileimage = true;
         } else {
-          this.userfile = 'assets/images/avatar-blank.jpg';
+          this.profileimage = false;
+          this.userfile = this.userstoragedata.fullname.substring(0, 1);
         }
         let consumer = {
           emailid: '',

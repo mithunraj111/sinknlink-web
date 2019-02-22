@@ -17,7 +17,7 @@ import { AppCommonService } from 'src/app/services';
 })
 export class AreaCategoriesComponent implements OnInit {
   @ViewChild(DatatableComponent) areaTable: DatatableComponent;
-  @ViewChild(DatatableComponent) categoryTable: DatatableComponent;
+  @ViewChild(DatatableComponent) categoriestable: DatatableComponent;
   areaCategoriesForm: FormGroup;
   areaCategoriesObj = AppMessages.VALIDATION.AREACATEGORIES;
   areatempFilter = [];
@@ -88,6 +88,6 @@ export class AreaCategoriesComponent implements OnInit {
   }
   searchCategory(event?) {
     this.categoriesList = this.commonService.globalSearch(this.categorytempFilter, event);
-    this.categoryTable.offset = 0;
+    this.categoriestable.offset = 0;
   }
 }

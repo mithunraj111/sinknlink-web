@@ -36,7 +36,9 @@
                             class="user-profile header-notification" [ngClass]="profileNotificationClass"
                             (click)="toggleProfileNotification()">
                             <a href="javascript:" [routerLink]="['/profile']">
-                                <img [src]="userfile" class="img-radius" alt="">
+                                <img [src]="userfile" class="img-radius" alt="" *ngIf="userprofile==true">
+                                <span class="img-radius profile-image" *ngIf="userprofile==false">{{userfile}}</span>
+                                <img class="img-radius" *ngIf="userprofile==false" />
                                 <span>{{userstoragedata.fullname}}</span>
                                 <!-- <i class="fa fa-chevron-down"></i> -->
                             </a>
