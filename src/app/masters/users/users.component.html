@@ -11,14 +11,14 @@
                     <button type="button" class="btn search-close col-md-1 col-sm-1 p-l-0 p-r-0"
                         (click)="userSearch.value='';search();"><i class="fa fa-close"></i></button>
                 </div>
-                <div class="col-md-6 col-sm-6 text-right">
+                <div class="col-md-6 col-sm-6 p-r-0 text-right">
                     <button *ngIf="add" type="button" placement="bottom" ngbTooltip="Click to add user"
                         class="add-btn btn btn-primary waves-effect m-r-10" (click)='addUser()'><i
                             class="fa fa-plus-circle m-r-5"></i> New
                     </button>
                     <button type="button" placement="bottom" ngbTooltip="Reload" (click)="getUsers()"
-                        class="btn btn-inverse btn-primary reload-btn waves-effect"><i
-                            class="ti-reload f-left p-1"></i></button>
+                        class="btn btn-inverse btn-primary waves-effect"><i
+                            class="ti-reload"></i></button>
                 </div>
 
             </div>

@@ -1,7 +1,7 @@
 <div class="fixedheader">
   <div class="header-title pos-fixed">
     <div class="row">
-      <div class="col-md-8 col-sm-7">
+      <div class="col-md-7 col-sm-7">
         <h2>Dealers</h2>
         <p>Create or Update The Dealers Details</p>
       </div>
@@ -14,73 +14,75 @@
               class="fa fa-close"></i></button>
         </div>
       </div>
-      <div class="col-md-1 col-sm-1 p-r-0">
-        <button *ngIf="add" type="button" placement="bottom" ngbTooltip="Click to add dealer" class="add-btn btn btn-primary waves-effect"
+      <div class="col-md-2 col-sm-1 p-r-0 text-right">
+        <button *ngIf="add" type="button" placement="bottom" ngbTooltip="Click to add dealer" class="add-btn btn btn-primary waves-effect m-r-10"
           (click)='addDealer()'><i class="fa fa-plus-circle m-r-5"></i> New
         </button>
+        <button type="button" placement="bottom" ngbTooltip="Reload" (click)="getDealersList()" class="btn btn-inverse btn-primary waves-effect"><i
+            class="ti-reload"></i></button>
       </div>
     </div>
   </div>
 </div>
 <div *ngIf="dealerList.length!=0" class="header-block m-t-60">
   <div *ngIf="!loadingIndicator">
-  <div class="table-header fixed-table-header">
-    <app-card [classHeader]="true">
-      <ngx-datatable #dealertable class="table data-table expandable" [rows]='dealerList' [columnMode]="'flex'"
-        [headerHeight]="50" [footerHeight]="50" [limit]="10" [rowHeight]="'auto'" [reorderable]="false" [messages]="emptymessages">
-        <!-- Row Detail Template -->
-        <ngx-datatable-column prop="dealername" name="Dealer Name" [resizeable]="false">
-          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-            <span>{{row.dealername}}</span>
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column prop="mobileno" name="Mobile No" [resizeable]="false">
-          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-            <span>{{row.mobileno}}</span>
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column prop="contactperson" name="Contact Person" [resizeable]="false">
-          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-            <span>{{row.contactperson}}</span>
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column prop="location" name="City" [resizeable]="false">
-          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-            <span>{{row.location?.city}}</span>
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column prop="updatedby" name="Updated By" [resizeable]="false">
-          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-            <span class="updatename">{{row.updatedby}}</span>
-            <span class="updatedate"> {{row.updateddt|date:datedisplayformat}}</span>
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="Status" [sortable]="false" [flexGrow]="0.5" [cellClass]="'text-center status'">
-          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-            <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="$primary-color"
-              switchColor="#fff" size="small" [checked]="row.status == 'Active'" (change)="updateDealerStatus(row,rowIndex,false)"></ui-switch>
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="Action" *ngIf="edit || delete" [sortable]="false" [flexGrow]="0.5" [cellClass]="'text-center action'">
-          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-            <a *ngIf="edit" placement="bottom" ngbTooltip="Click to edit dealer" class="m-r-15 crm-action-edit text-primary"
-              (click)="editDealer(row.dealerid)">
-              <i class="fa fa-pencil"></i></a>
-            <a *ngIf="delete" placement="bottom" ngbTooltip="Click to delete dealer" class="crm-action-delete text-danger"
-              (click)="updateDealerStatus(row,rowIndex,true)">
-              <i class="fa fa-trash"></i></a>
-          </ng-template>
-        </ngx-datatable-column>
-      </ngx-datatable>
-    </app-card>
+    <div class="table-header fixed-table-header">
+      <app-card [classHeader]="true">
+        <ngx-datatable #dealertable class="table data-table expandable" [rows]='dealerList' [columnMode]="'flex'"
+          [headerHeight]="50" [footerHeight]="50" [limit]="10" [rowHeight]="'auto'" [reorderable]="false" [messages]="emptymessages">
+          <!-- Row Detail Template -->
+          <ngx-datatable-column prop="dealername" name="Dealer Name" [resizeable]="false">
+            <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+              <span>{{row.dealername}}</span>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column prop="mobileno" name="Mobile No" [resizeable]="false">
+            <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+              <span>{{row.mobileno}}</span>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column prop="contactperson" name="Contact Person" [resizeable]="false">
+            <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+              <span>{{row.contactperson}}</span>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column prop="location" name="City" [resizeable]="false">
+            <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+              <span>{{row.location?.city}}</span>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column prop="updatedby" name="Updated By" [resizeable]="false">
+            <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+              <span class="updatename">{{row.updatedby}}</span>
+              <span class="updatedate"> {{row.updateddt|date:datedisplayformat}}</span>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Status" [sortable]="false" [flexGrow]="0.5" [cellClass]="'text-center status'">
+            <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+              <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="$primary-color"
+                switchColor="#fff" size="small" [checked]="row.status == 'Active'" (change)="updateDealerStatus(row,rowIndex,false)"></ui-switch>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Action" *ngIf="edit || delete" [sortable]="false" [flexGrow]="0.5" [cellClass]="'text-center action'">
+            <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+              <a *ngIf="edit" placement="bottom" ngbTooltip="Click to edit dealer" class="m-r-15 crm-action-edit text-primary"
+                (click)="editDealer(row.dealerid)">
+                <i class="fa fa-pencil"></i></a>
+              <a *ngIf="delete" placement="bottom" ngbTooltip="Click to delete dealer" class="crm-action-delete text-danger"
+                (click)="updateDealerStatus(row,rowIndex,true)">
+                <i class="fa fa-trash"></i></a>
+            </ng-template>
+          </ngx-datatable-column>
+        </ngx-datatable>
+      </app-card>
+    </div>
   </div>
-</div>
 </div>
 
 <div *ngIf="dealerList.length==0" class="text-center no-data">
   <div class="nodata-text nodata-image">
-      <h3>Create Consumer (s) of associated with organization</h3>
-      <img class="hand-icon" src="assets/images/no-data.png">
+    <h3>Create Consumer (s) of associated with organization</h3>
+    <img class="hand-icon" src="assets/images/no-data.png">
   </div>
 </div>
 

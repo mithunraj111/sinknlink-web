@@ -1,7 +1,7 @@
 <div class="fixedheader">
     <div class="header-title consumer-header pos-fixed">
         <div class="row">
-            <div class="col-md-8 col-sm-8">
+            <div class="col-md-6 col-sm-8">
                 <h2>Consumers</h2>
                 <p>View Consumer Details</p>
             </div>
@@ -15,6 +15,9 @@
                     <button type="button" class="btn search-close col-md-1 col-sm-1 p-l-0 "
                         (click)="consumerSearch.value='';search();"><i class="fa fa-close"></i></button>
                 </div>
+            </div>
+            <div class="col-md-2 text-right">
+                <button type="button" placement="bottom" ngbTooltip="Reload" (click)="getConsumers()" class="btn btn-inverse btn-primary waves-effect"><i class="ti-reload "></i></button>
             </div>
         </div>
     </div>

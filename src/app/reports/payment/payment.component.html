@@ -91,8 +91,10 @@
                       <button type="button" class="btn search-close" (click)="paymentReportSearch.value='';search();"><i
                           class="fa fa-close"></i></button>
                       <button type="button" placement="bottom" ngbTooltip="Click to download reports"
-                        class="btn btn-primary waves-effect download-btn"><i class="fa fa-download m-r-5"></i>
+                        class="btn btn-primary waves-effect download-btn m-r-5"><i class="fa fa-download m-r-5"></i>
                       </button>
+                      <button type="button" placement="bottom" ngbTooltip="Reload" (click)="getPaymentList()" class="btn btn-inverse btn-primary waves-effect m-t-0"><i
+                        class="ti-reload"></i></button>
                     </div>
                   </label>
                 </div>
