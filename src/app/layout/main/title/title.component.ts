@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import {Title} from '@angular/platform-browser';
-import {Router, NavigationEnd, ActivatedRoute} from '@angular/router';
-import {isUndefined} from "util";
+import { Title } from '@angular/platform-browser';
+import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-title',
@@ -24,8 +23,8 @@ export class TitleComponent {
             }
           });
         } while (currentRoute);
-        if (title !== undefined ) {
-          this.titleService.setTitle( 'Business Directory | ' + title);
+        if (title !== undefined) {
+          this.titleService.setTitle('Business Directory | ' + title);
         }
       });
   }

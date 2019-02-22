@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  host: 'http://13.233.72.134',
-  port: 3000,
+  host: 'http://180.12.181.8',
+  port: 2000,
   baseurl: '/bd/'
 };

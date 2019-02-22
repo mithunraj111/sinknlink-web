@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { MainComponent } from './layout/main/main.component';
 import { AuthComponent } from './layout/auth/auth.component';
 import { ProfileComponent } from './profile/profile.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
   {
@@ -16,7 +17,7 @@ const routes: Routes = [
       },
       {
         path: 'dashboard',
-        loadChildren: './dashboard/dashboard.module#DashboardModule'
+        component: DashboardComponent,
       },
       {
         path: 'masters',

@@ -17,7 +17,7 @@ export class CategoryComponent extends BaseService implements OnInit {
   categoryPage: any;
   displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   categoryList = [];
-  loadingIndicator: boolean = true;
+  loadingIndicator = true;
 
   emptymessages = AppConstant.EMPTY_MESSAGES.CATEGORIES;
   constructor(private categoryService: MasterService.CategoryService,

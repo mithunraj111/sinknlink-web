@@ -18,6 +18,7 @@ import { FileUploadModule } from 'ng2-file-upload';
 import { SelectModule } from 'ng-select';
 import { TagInputModule } from 'ngx-chips';
 import { DataTableModule } from 'angular2-datatable';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { DataTableModule } from 'angular2-datatable';
     MainComponent,
     AuthComponent,
     ProfileComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

@@ -127,10 +127,10 @@ export class MainComponent implements OnInit {
   userfile: string;
   title = '';
   fullname: any;
-userprofile:Boolean = false;
-    constructor(public menuItems: MenuItems, private router: Router, private route: ActivatedRoute,
+  userprofile = false;
+  constructor(public menuItems: MenuItems, private router: Router, private route: ActivatedRoute,
     private lstorageService: LocalStorageService) {
-      this.router.events
+    this.router.events
       .filter(event => event instanceof NavigationEnd)
       .subscribe(() => {
         let currentRoute = this.route.root;
@@ -196,14 +196,14 @@ userprofile:Boolean = false;
     this.setHeaderAttributes(this.windowWidth);
 
     this.userstoragedata = this.lstorageService.getItem(AppConstant.LOCALSTORAGE.USER);
-    
+
 
     if (this.userstoragedata.profileimg != null) {
       this.userfile = this.userstoragedata.profileimg.docurl;
-      this.userprofile =true;
+      this.userprofile = true;
     } else {
       this.userprofile = false;
-      this.userfile = this.userstoragedata.fullname.substring(0,1) ;
+      this.userfile = this.userstoragedata.fullname.substring(0, 1);
     }
     // dark
     /*this.setLayoutType('dark');*/
