@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DashboardService } from "../services/common";
 import * as _ from 'lodash';
 import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
-import { timestamp } from 'rxjs-compat/operator/timestamp';
+import { DatePipe } from '@angular/common';
 declare const AmCharts: any;
 
 
@@ -19,17 +19,54 @@ export class DashboardComponent implements OnInit {
     config.placement = 'top-right';
     config.autoClose = true;
   }
+  filterRange: String = "week";
 
   ngOnInit() {
-    this.getData(30);
+    this.getData(this.filterRange);
   }
   getData(n) {
-    let tDate = new Date();
-    let toDate = tDate.getFullYear() + '-' + (tDate.getMonth() + 1) + '-' + tDate.getDate() + ' 23:59:59';
-    let fromdate = new Date();
-    let FromDate = fromdate.setDate(fromdate.getDate() - n);
-    let cDate = new Date(FromDate);
-    let fromDate = cDate.getFullYear() + '-' + (cDate.getMonth() + 1) + '-' + cDate.getDate() + ' 00:00:00';
+
+    let fromDate;
+    let toDate;
+
+    this.filterRange = n;
+
+    switch (n) {
+      case "today":
+        fromDate = new DatePipe("en-US").transform(new Date(), "yyyy-MM-dd").toString() + ' 00:00:00';
+        toDate = new DatePipe("en-US").transform(new Date(), "yyyy-MM-dd").toString() + ' 00:00:00';
+        break;
+      case "week":
+        fromDate = new DatePipe("en-US").transform((function () {
+          let d = new Date();
+          var day = d.getDay(),
+            diff = d.getDate() - day + (day == 0 ? -6 : 1);
+          return new Date(d.setDate(diff));
+        }()), "yyyy-MM-dd").toString() + ' 00:00:00';
+        toDate = new DatePipe("en-US").transform((function () {
+          let date = new Date();
+          var lastday = date.getDate() - (date.getDay() - 1) + 6;
+          return new Date(date.setDate(lastday));
+        }()), "yyyy-MM-dd").toString() + ' 00:00:00';
+        break;
+      case "month":
+        fromDate = new DatePipe("en-US").transform((function () {
+          let date = new Date();
+          return new Date(date.getFullYear(), date.getMonth(), 1);
+        }()), "yyyy-MM-dd").toString() + ' 00:00:00';
+        toDate = new DatePipe("en-US").transform((function () {
+          let date = new Date();
+          return new Date(date.getFullYear(), date.getMonth() + 1, 0);
+        }()), "yyyy-MM-dd").toString() + ' 00:00:00';
+        break;
+
+      default:
+        fromDate = new DatePipe("en-US").transform(new Date(), "yyyy-MM-dd").toString() + ' 00:00:00';
+        toDate = new DatePipe("en-US").transform(new Date(), "yyyy-MM-dd").toString() + ' 00:00:00';
+        break;
+
+    }
+
     this.getDashboardCounts(fromDate, toDate);
     this.getDashboardBizCounts(fromDate, toDate);
     this.getSearchCounts(fromDate, toDate);
