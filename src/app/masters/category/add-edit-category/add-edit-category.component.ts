@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, OnChanges, SimpleChanges, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
+import { DomSanitizer } from '@angular/platform-browser';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { LocalStorageService } from '../../../services/local-storage.service';
 import { AppConstant } from '../../../app.constants';
@@ -27,6 +28,7 @@ export class AddEditCategoryComponent implements OnInit, OnChanges {
   categoryimgfile: any;
   categoryfile: any;
   constructor(private bootstrapAlertService: BootstrapAlertService,
+    private sanitizer: DomSanitizer,
     private localStorageService: LocalStorageService,
     private fb: FormBuilder, private categoryService: CategoryService,
     private commonService: CommonService) {
@@ -54,7 +56,8 @@ export class AddEditCategoryComponent implements OnInit, OnChanges {
     const reader = new FileReader();
     this.categoryimgfile = event.target.files[0];
     reader.onload = ((e) => {
-      this.categoryfile = e.target['result'];
+      this.categoryfile = this.sanitizer.bypassSecurityTrustResourceUrl(e.target['result']);
+      console.log(this.categoryimgfile)
     });
     reader.readAsDataURL(event.target.files[0]);
   }
