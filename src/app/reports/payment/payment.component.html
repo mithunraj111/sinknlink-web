@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-md-12 col-sm-12 m-t-25">
       </div>
-      <div class="col-lg-12 col-md-12 p-r-0 ">
+      <div class="col-lg-12 col-md-12 p-r-0 p-l-0">
         <div class="card">
           <form [formGroup]="paymentForm">
             <div class="row">
@@ -72,31 +72,28 @@
     </div>
   </div>
 </div>
-<div class="col-lg-12 col-md-12 col-sm-12 reports p-l-0">
+<div class="row">
+  <div class="col-md-6 col-sm-6 header-title">
+    <input #paymentReportSearch type='text' class="form-control input-sm  col-md-5 col-sm-5  full-data-search"
+      placeholder='Search here' (keyup)='search($event)' />
+    <button type="button" class="btn search-close col-md-1 col-sm-1 p-l-0 p-r-0"
+      (click)="paymentReportSearch.value='';search();"><i class="fa fa-close"></i></button>
+  </div>
+  <div class="col-md-6  col-md-6  text-right header-title ">
+    <button type="button" placement="bottom" ngbTooltip="Click to download reports"
+      class="btn btn-primary waves-effect download-btn m-r-5"><i class="fa fa-download m-r-5"></i>
+    </button>
+    <button type="button" placement="bottom" ngbTooltip="Reload" (click)="getPaymentList()"
+      class="btn btn-inverse btn-primary waves-effect m-t-5"><i class="ti-reload"></i></button>
+  </div>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 reports p-l-0 m-t-20">
   <div class="row">
-    <div class="col-lg-12 col-md-12 p-r-5 m-l-15">
+    <div class="col-lg-12 col-md-12 p-r-5">
       <div class="header-block">
         <div *ngIf="!loadingIndicator">
           <div class="table-header report-table payment-table">
             <app-card [classHeader]="true">
-              <div class="row">
-                <div class="col-sm-12 header-title">
-                  <label class="dt-cust-search f-right">
-                    <div class="form-group">
-                      <label class="p-r-10 f-16"><b>Search:</b></label>
-                      <input #paymentReportSearch type='text' class="form-control input-sm report-search"
-                        placeholder='Search here' (keyup)='search($event)' />
-                      <button type="button" class="btn search-close" (click)="paymentReportSearch.value='';search();"><i
-                          class="fa fa-close"></i></button>
-                      <button type="button" placement="bottom" ngbTooltip="Click to download reports"
-                        class="btn btn-primary waves-effect download-btn m-r-5"><i class="fa fa-download m-r-5"></i>
-                      </button>
-                      <button type="button" placement="bottom" ngbTooltip="Reload" (click)="getPaymentList()"
-                        class="btn btn-inverse btn-primary waves-effect m-t-0"><i class="ti-reload"></i></button>
-                    </div>
-                  </label>
-                </div>
-              </div>
               <ngx-datatable #paymenttable class="table data-table expandable" [rows]='paymentList'
                 [columnMode]="'flex'" [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false" [footerHeight]="50"
                 [limit]="5" [messages]="emptymessages">
