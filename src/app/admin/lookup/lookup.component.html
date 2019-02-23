@@ -1,44 +1,36 @@
-<div class="fixedheader">
-  <div class="header-title pos-fixed">
-    <div class="row">
-      <div class="col-md-4 col-sm-4">
-        <h2>Lookup</h2>
-        <p>Define your Lookup descriptions and permissions</p>
-      </div>
-      <div class="col-md-6 col-sm-6">
+<div *ngIf="!loadingIndicator">
+  <div *ngIf="lookupList.length!=0" class="header-block">
+    <div class="fixedheader m-b-15">
+      <div class="header-title">
         <div class="row">
-          <div class="col-md-6 keytype">
-            <div class="row">
-              <label class="col-md-3 col-sm-3 p-l-0 p-r-0 col-form-label"><b>KeyType:</b></label>
-              <div class="col-md-9 col-sm-9 p-l-0">
-                <ng-select [ngClass]="'ng-select'" [(ngModel)]="selectedKeyType" [options]="keylist" (selected)="getLookupList($event)"
-                  placeholder="Select KeyType"></ng-select>
-              </div>
-            </div>
+          <div class="col-md-4 col-sm-4 p-r-0">
+            <input #lookupSearch type="text" class="header-search form-control col-md-8 col-sm-8 p-l-0 p-r-0 input-sm full-data-search"
+              placeholder="Search here" (keyup)='search($event)' placement="bottom" ngbTooltip="Type here to search">
+            <button type="button" class="btn search-close col-md-1 col-sm-1 p-l-0 p-r-0" (click)="lookupSearch.value='';search();"><i
+                class="fa fa-close"></i></button>
           </div>
-          <div class="col-md-6 col-sm-6 p-r-0 p-l-0">
-            <div class="text-left">
-              <label class="col-md-3"><b>Search:</b></label>
-              <input #lookupSearch type="text" class="header-search form-control col-md-8 col-sm-8 p-l-0 p-r-0 input-sm full-data-search"
-                placeholder="Search here" (keyup)='search($event)' placement="bottom" ngbTooltip="Type here to search">
-              <button type="button" class="btn search-close col-md-1 col-sm-1 p-l-0 p-r-0" (click)="lookupSearch.value='';search();"><i
-                  class="fa fa-close"></i></button>
+          <div class="col-md-8 col-sm-8">
+            <div class="row">
+              <div class="col-md-6 col-sm-6 text-right keytype">
+                <div class="row">
+                  <label class="col-md-3 col-sm-3 p-l-0 p-r-0 col-form-label"><b>KeyType:</b></label>
+                  <div class="col-md-9 col-sm-9 p-l-0">
+                    <ng-select [ngClass]="'ng-select'" [(ngModel)]="selectedKeyType" [options]="keylist" (selected)="getLookupList($event)"
+                      placeholder="Select KeyType"></ng-select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-sm-6 p-r-10 text-right">
+                <button *ngIf="add" type="button" placement="bottom" ngbTooltip="Click to add lookup" (click)='addLookup()'
+                  class="add-btn btn btn-primary waves-effect m-r-10"><i class="fa fa-plus-circle m-r-5"></i> New</button>
+                <button type="button" placement="bottom" ngbTooltip="Reload" (click)="getLookupList()" class="btn btn-inverse btn-primary waves-effect"><i
+                    class="ti-reload"></i></button>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-md-2 col-sm-1 p-r-0 text-right">
-        <button *ngIf="add" type="button" placement="bottom" ngbTooltip="Click to add lookup" (click)='addLookup()'
-          class="add-btn btn btn-primary waves-effect m-r-10"><i class="fa fa-plus-circle m-r-5"></i>
-          New </button>
-        <button type="button" placement="bottom" ngbTooltip="Reload" (click)="getLookupList()" class="btn btn-inverse btn-primary waves-effect"><i
-            class="ti-reload"></i></button>
-      </div>
     </div>
-  </div>
-</div>
-<div class="header-block m-t-60">
-  <div *ngIf="!loadingIndicator">
     <div class="table-header fixed-table">
       <app-card [classHeader]="true">
         <ngx-datatable #lookuptable class="table data-table expandable" [rows]='lookupList' [columnMode]="'flex'"
@@ -53,19 +45,16 @@
               <span>{{row.refvalue}}</span>
             </ng-template>
           </ngx-datatable-column>
-
           <ngx-datatable-column prop="datatype" name="Datatype" [resizeable]="false">
             <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
               <span>{{row.datatype}}</span>
             </ng-template>
           </ngx-datatable-column>
-
           <ngx-datatable-column name="Is Default?" [sortable]="false" [resizeable]="false">
             <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
               <span>{{row.isdefault==='Y'?'Yes':'No'}}</span>
             </ng-template>
           </ngx-datatable-column>
-
           <ngx-datatable-column prop="updatedby" name="Updated By" [resizeable]="false">
             <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
               <span class="updatename">{{row.updatedby}}</span>
@@ -91,6 +80,16 @@
           </ngx-datatable-column>
         </ngx-datatable>
       </app-card>
+    </div>
+  </div>
+  <div *ngIf="lookupList.length == 0" class="text-center no-data">
+    <div class="nodata-text nodata-image">
+      <img class="hand-icon" src="assets/images/no-data.png">
+      <h3>Create lookup(s) associated with organization</h3>
+      <button *ngIf="add" type="button" placement="bottom" ngbTooltip="Click to add lookup" class="add-btn btn btn-primary waves-effect"
+        (click)='addLookup()'><i class="fa fa-plus-circle m-r-5"></i>Create lookup</button>
+      <button type="button" placement="bottom" ngbTooltip="Reload" (click)="getLookupList()" class="btn btn-inverse btn-primary waves-effect"><i
+          class="ti-reload"></i></button>
     </div>
   </div>
 </div>

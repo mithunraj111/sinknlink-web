@@ -1,31 +1,24 @@
-<div class="fixedheader">
-  <div class="header-title pos-fixed">
-    <div class="row">
-      <div class="col-md-7 col-sm-7">
-        <h2>Dealers</h2>
-        <p>Create or Update The Dealers Details</p>
-      </div>
-      <div class="col-md-3 col-sm-4">
-        <div class="text-right">
-          <label class="col-md-3 p-l-0"><b>Search:</b></label>
-          <input #dealerSearch type="text" class="header-search form-control col-md-8 col-sm-8 p-l-0 p-r-0 input-sm full-data-search"
-            placeholder="Search here" (keyup)='search($event)' placement="bottom" ngbTooltip="Type here to search">
-          <button type="button" class="btn search-close col-md-1 col-sm-1 p-l-0 p-r-0" (click)="dealerSearch.value='';search();"><i
-              class="fa fa-close"></i></button>
+<div *ngIf="!loadingIndicator">
+  <div *ngIf="dealerList.length!=0" class="header-block">
+    <div class="fixedheader m-b-15">
+      <div class="header-title">
+        <div class="row">
+          <div class="col-md-6 col-sm-6">
+            <input #dealerSearch type="text" class="header-search form-control col-md-5 col-sm-5 p-l-0 p-r-0 input-sm full-data-search"
+              placeholder="Search here" (keyup)='search($event)' placement="bottom" ngbTooltip="Type here to search">
+            <button type="button" class="btn search-close col-md-1 col-sm-1 p-l-0 p-r-0" (click)="dealerSearch.value='';search();"><i
+                class="fa fa-close"></i></button>
+          </div>
+          <div class="col-md-6 col-sm-6 p-r-10 text-right">
+            <button *ngIf="add" type="button" placement="bottom" ngbTooltip="Click to add dealer" class="add-btn btn btn-primary waves-effect m-r-10"
+              (click)='addDealer()'><i class="fa fa-plus-circle m-r-5"></i> New
+            </button>
+            <button type="button" placement="bottom" ngbTooltip="Reload" (click)="getDealersList()" class="btn btn-inverse btn-primary waves-effect"><i
+                class="ti-reload"></i></button>
+          </div>
         </div>
       </div>
-      <div class="col-md-2 col-sm-1 p-r-0 text-right">
-        <button *ngIf="add" type="button" placement="bottom" ngbTooltip="Click to add dealer" class="add-btn btn btn-primary waves-effect m-r-10"
-          (click)='addDealer()'><i class="fa fa-plus-circle m-r-5"></i> New
-        </button>
-        <button type="button" placement="bottom" ngbTooltip="Reload" (click)="getDealersList()" class="btn btn-inverse btn-primary waves-effect"><i
-            class="ti-reload"></i></button>
-      </div>
     </div>
-  </div>
-</div>
-<div *ngIf="dealerList.length!=0" class="header-block m-t-60">
-  <div *ngIf="!loadingIndicator">
     <div class="table-header fixed-table-header">
       <app-card [classHeader]="true">
         <ngx-datatable #dealertable class="table data-table expandable" [rows]='dealerList' [columnMode]="'flex'"
@@ -77,13 +70,11 @@
       </app-card>
     </div>
   </div>
-</div>
-
-<div *ngIf="dealerList.length==0" class="text-center no-data">
-  <div class="nodata-text nodata-image">
-    <h3>Create Consumer (s) of associated with organization</h3>
-    <img class="hand-icon" src="assets/images/no-data.png">
+  <div *ngIf="dealerList.length==0" class="text-center no-data">
+    <div class="nodata-text nodata-image">
+      <h3>Create Consumer (s) of associated with organization</h3>
+      <img class="hand-icon" src="assets/images/no-data.png">
+    </div>
   </div>
 </div>
-
 <app-loader [loadingIndicator]="loadingIndicator"></app-loader>

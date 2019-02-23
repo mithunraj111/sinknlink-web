@@ -1,31 +1,23 @@
-<div class="fixedheader">
-  <div class="header-title pos-fixed">
-    <div class="row">
-      <!-- <div class="col-md-7 col-sm-6">
-        <h2>Donations</h2>
-        <p>Create or Update Donation details</p>
-      </div> -->
-      <div class="col-md-6 col-sm-6">
-        <label class="col-md-3 p-l-0"><b>Search:</b></label>
-        <input #donationSearch type="text" class="header-search form-control col-md-8 col-sm-8 p-l-0 p-r-0 input-sm full-data-search"
-          placeholder="Search here" (keyup)='search($event)' placement="bottom" ngbTooltip="Type here to search">
-        <button type="button" class="btn search-close col-md-1 col-sm-1 p-l-0 p-r-0" (click)="donationSearch.value='';search();"><i
-            class="fa fa-close"></i></button>
-      </div>
-      <div class="col-md-6 col-sm-6 p-r-0 text-right">
-        <button *ngIf="add" type="button" placement="bottom" ngbTooltip="Click to add donation" class="add-btn btn btn-primary waves-effect m-r-10"
-          (click)='addDonation()'><i class="fa fa-plus-circle m-r-5"></i>
-          New
-        </button>
-        <button type="button" placement="bottom" ngbTooltip="Reload" (click)="getDonations()" class="btn btn-inverse btn-primary waves-effect"><i
-            class="ti-reload"></i></button>
-
+<div *ngIf="!loadingIndicator">
+  <div *ngIf="donationList.length!=0" class="header-block">
+    <div class="fixedheader m-b-15">
+      <div class="header-title">
+        <div class="row">
+          <div class="col-md-6 col-sm-6">
+            <input #donationSearch type="text" class="header-search form-control col-md-8 col-sm-8 input-sm full-data-search"
+              placeholder="Search here" (keyup)='search($event)' placement="bottom" ngbTooltip="Type here to search">
+            <button type="button" class="btn search-close col-md-1 col-sm-1 p-l-0 p-r-0" (click)="donationSearch.value='';search();"><i
+                class="fa fa-close"></i></button>
+          </div>
+          <div class="col-md-6 col-sm-6 p-r-10 text-right">
+            <button *ngIf="add" type="button" placement="bottom" ngbTooltip="Click to add donation" class="add-btn btn btn-primary waves-effect m-r-10"
+              (click)='addDonation()'><i class="fa fa-plus-circle m-r-5"></i>New</button>
+            <button type="button" placement="bottom" ngbTooltip="Reload" (click)="getDonations()" class="btn btn-inverse btn-primary waves-effect"><i
+                class="ti-reload"></i></button>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
-<div *ngIf="donationList.length!=0" class="header-block m-t-60">
-  <div *ngIf="!loadingIndicator">
     <div class="table-header fixed-table">
       <app-card [classHeader]="true">
         <ngx-datatable #donationtable class="table data-table expandable" [rows]='donationList' [columnMode]="'flex'"
@@ -76,19 +68,15 @@
       </app-card>
     </div>
   </div>
-</div>
-
-<div *ngIf="donationList.length==0" class="text-center no-data">
-  <div class="nodata-text nodata-image">
-    <img class="hand-icon" src="assets/images/no-data.png">
-    <h3>Create Consumer (s) of associated with organization</h3>
-    <button *ngIf="add" type="button" placement="bottom" ngbTooltip="Click to add donation" class="add-btn btn btn-primary waves-effect"
-      (click)='addDonation()'><i class="fa fa-plus-circle m-r-5"></i>
-      Create Donation
-    </button>
+  <div *ngIf="donationList.length==0" class="text-center no-data">
+    <div class="nodata-text nodata-image">
+      <img class="hand-icon" src="assets/images/no-data.png">
+      <h3>Create Donation(s) associated with organization</h3>
+      <button *ngIf="add" type="button" placement="bottom" ngbTooltip="Click to add donation" class="add-btn btn btn-primary waves-effect"
+        (click)='addDonation()'><i class="fa fa-plus-circle m-r-5"></i>Create Donation</button>
+    </div>
   </div>
 </div>
-
 <app-loader [loadingIndicator]="loadingIndicator"></app-loader>
 <ng-template #content let-modal>
   <div class="modal-header">

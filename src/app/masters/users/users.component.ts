@@ -14,6 +14,7 @@ export class UsersComponent extends BaseService implements OnInit {
   displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   tempFilter = [];
   userList = [];
+  noData: boolean = false;
   loadingIndicator: boolean = true;
   @ViewChild(DatatableComponent) table: DatatableComponent;
   emptymessages = AppConstant.EMPTY_MESSAGES.USER;

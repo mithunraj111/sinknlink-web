@@ -1,35 +1,28 @@
-<div class="fixedheader">
-  <div class="header-title pos-fixed">
-    <div class="row">
-      <div class="col-md-5 col-sm-5">
-        <h2>VIP Number Registration</h2>
-        <p>VIP number status can be checked and blocked.</p>
-      </div>
-      <div class="col-md-4 col-sm-5">
-        <div class="text-right">
-          <label class="col-md-3 p-l-0"><b>Search:</b></label>
-          <input #vipnoregSearch type="text" (keyup)='search($event)' class="header-search form-control col-md-8 col-sm-8 p-l-0 p-r-0 input-sm full-data-search"
+<div class="fixedheader m-l-0">
+  <div class="header-title m-b-15">
+    <div class="col-md-9 col-sm-9 p-r-0">
+      <div class="row">
+        <div class="col-md-6 col-sm-6">
+          <input #vipnoregSearch type="text" (keyup)='search($event)' class="header-search form-control col-md-8 col-sm-8 p-l-0 input-sm full-data-search"
             placeholder="Search here" placement="bottom" ngbTooltip="Type here to search">
           <button type="button" class="btn search-close col-md-1 col-sm-1 p-l-0 p-r-0" (click)="vipnoregSearch.value='';search();"><i
               class="fa fa-close"></i></button>
         </div>
-      </div>
-      <div *ngIf="currentTab == 'Available'" class="col-md-1 col-sm-1 p-r-0 p-l-0 text-right">
-        <div ngbDropdown class="dropdown-primary">
-          <button ngbDropdownToggle class="btn add-btn btn-primary waves-effect waves-light " type="button">Action</button>
-          <div ngbDropdownMenu>
-            <a class="dropdown-item waves-light waves-effect" (click)='blockVipNumber()'>Block</a>
-            <a class="dropdown-item waves-light waves-effect" (click)='allocateVipNumber()'>Allocate</a>
+        <div class="col-md-4 col-sm-2 text-right">
+          <div *ngIf="currentTab == 'Available'" ngbDropdown class="dropdown-primary">
+            <button ngbDropdownToggle class="btn add-btn btn-primary waves-effect waves-light " type="button">Action</button>
+            <div ngbDropdownMenu>
+              <a class="dropdown-item waves-light waves-effect" (click)='blockVipNumber()'>Block</a>
+              <a class="dropdown-item waves-light waves-effect" (click)='allocateVipNumber()'>Allocate</a>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="col-md-2 col-sm-1 p-r-0 text-right">
-        <button type="button" placement="bottom" ngbTooltip="Click to add" class="m-r-10 add-btn btn btn-primary waves-effect"
-          (click)='addVipRegistration()'><i class="fa fa-plus-circle m-r-5"></i> New
-        </button>
-        <button type="button" placement="bottom" ngbTooltip="Reload" (click)="getAllocatedBusiness()" class="btn btn-inverse btn-primary waves-effect"><i
-            class="ti-reload"></i></button>
-
+        <div class="col-md-2 col-sm-4 p-r-10 text-right">
+          <button type="button" placement="bottom" ngbTooltip="Click to add" class="m-r-10 add-btn btn btn-primary waves-effect"
+            (click)='addVipRegistration()'><i class="fa fa-plus-circle m-r-5"></i> New</button>
+          <button type="button" placement="bottom" ngbTooltip="Reload" (click)="getAllocatedBusiness()" class="btn btn-inverse btn-primary waves-effect"><i
+              class="ti-reload"></i></button>
+        </div>
       </div>
     </div>
   </div>
@@ -43,7 +36,6 @@
             <ng-template ngbTabContent>
               <div [@fadeInOutTranslate]>
                 <div *ngIf="!loadingIndicator">
-
                   <div class="table-header fixed-table-header">
                     <app-card [classHeader]="true">
                       <ngx-datatable #vipnoregtable class="table data-table expandable" [rows]='data' [columnMode]="'flex'"
@@ -54,11 +46,6 @@
                             <span>{{row.fancyno}}</span>
                           </ng-template>
                         </ngx-datatable-column>
-                        <!-- <ngx-datatable-column prop="state" name="State" [resizeable]="false">
-                        <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                          <span>{{row.fancynostatus}}</span>
-                        </ng-template>
-                      </ngx-datatable-column> -->
                         <ngx-datatable-column prop="price" name="Price" [resizeable]="false" headerClass="text-right"
                           [cellClass]="'text-right'">
                           <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
