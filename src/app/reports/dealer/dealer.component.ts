@@ -31,7 +31,7 @@ export class DealerComponent implements OnInit {
   todate;
   // areaList = [{ value: "", label: "All" }];
   areaList = [];
-  cityList = [{ value: "", label: "All" }];
+  cityList = [];
   tempFilter = [];
   dealerReportList = [];
   cityName: any;
@@ -126,7 +126,6 @@ export class DealerComponent implements OnInit {
           item.label = item.area + ' (' + item.pincode + ' )';
           item.value = item.locationid;
         });
-        this.areaList = [{ value: "", label: "All" }];
         this.areaList = this.areaList.concat(response.data);
       }
     });

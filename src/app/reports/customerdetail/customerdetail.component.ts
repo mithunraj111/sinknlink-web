@@ -12,9 +12,7 @@ import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { NgbDateCustomParserFormatter } from 'src/app/shared/elements/dateParser';
 import { AppMessages } from 'src/app/app-messages';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { areAllEquivalent } from '@angular/compiler/src/output/output_ast';
 import { AppConstant } from 'src/app/app.constants';
-import { isNgTemplate } from '@angular/compiler';
 
 @Component({
   selector: 'app-customerdetail',
@@ -30,43 +28,35 @@ export class CustomerdetailComponent implements OnInit {
   displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydate;
   emptymessages = AppConstant.EMPTY_MESSAGES.CUSTOMERREPORT;
   loadingIndicator: Boolean = false;
-
-  tempFilter = [{ value: "", label: "All" }];
-
+  tempFilter = [];
   areaList = [];
-  cityList = [{ value: "", label: "All" }];
+  cityList = [];
   cityName: string;
-  bizTypeLists = [{ value: "", label: "All" }];
-  bizMemType = [{ value: "", label: "All" }];
-  categoryLists = [{ value: "", label: "All" }];
-  // bizMemType = [];
+  bizTypeLists = [];
+  bizMemType = [];
+  categoryLists = [];
   customerdetailForm: FormGroup;
-
+  businessList = [];
   constructor(private fb: FormBuilder, private commonService: CommonService, private reportService: ReportService, private lookupService: LookupService, private categoryService: CategoryService, private locationService: LocationService, private bootstrapAlertService: BootstrapAlertService) {
     this.initForm();
-
   }
-  businessList = [
 
-  ];
   ngOnInit() {
     this.getCity();
     this.getArea();
     this.getCategory();
     this.getLookup();
   }
-  toggleTopbar() {
-    this.configOpenTopBar = this.configOpenTopBar === 'open' ? '' : 'open';
-  }
 
   initForm() {
     this.customerdetailForm = this.fb.group({
       fromdt: [this.commonService.parseDate(new Date())],
       todate: [this.commonService.parseDate(new Date())],
-      biztype: [''],
-      area: [''],
-      categoryid: [''],
-      membershiptype: ['']
+      biztype: [""],
+      area: [""],
+      categoryid: [""],
+      membershiptype: [""],
+      city: ['']
     })
   }
   getReports() {
@@ -77,6 +67,7 @@ export class CustomerdetailComponent implements OnInit {
     let categoryid = data.categoryid;
     let biztype = data.biztype;
     let membershiptype = data.membershiptype;
+    let city = data.city;
     if (new Date(fromdt) > new Date(todt)) {
       this.bootstrapAlertService.showError(AppMessages.VALIDATION.DEALERREPORT.fromdate.max);
       return false;
@@ -87,7 +78,7 @@ export class CustomerdetailComponent implements OnInit {
 
     } as any;
 
-    if (categoryid != "") {
+    if (categoryid != "" && categoryid != undefined && categoryid != null) {
       formData.categoryid = categoryid;
     }
     if (area != "") {
@@ -99,6 +90,9 @@ export class CustomerdetailComponent implements OnInit {
     if (membershiptype != "") {
       formData.membershiptype = membershiptype;
     }
+    if (city != "" && city != undefined && city != null) {
+      formData.city = [city];
+    }
     this.loadingIndicator = true;
     this.reportService.customerDetailReport(formData).subscribe((res) => {
       const response = JSON.parse(res._body);
@@ -109,7 +103,6 @@ export class CustomerdetailComponent implements OnInit {
       this.loadingIndicator = false;
       this.tempFilter = this.businessList;
 
-      console.log(this.businessList)
     }, err => {
     })
   }
@@ -126,7 +119,6 @@ export class CustomerdetailComponent implements OnInit {
           item.value = item.refvalue;
         });
         this.cityList = this.cityList.concat(response.data);
-        console.log(this.cityList);
       }
     });
   }
@@ -146,7 +138,6 @@ export class CustomerdetailComponent implements OnInit {
           item.label = item.area + ' (' + item.pincode + ' )';
           item.value = item.locationid;
         });
-        this.areaList = [{ value: "", label: "All" }];
         this.areaList = this.areaList.concat(response.data);
       }
     });
@@ -160,7 +151,6 @@ export class CustomerdetailComponent implements OnInit {
           item.label = item.categoryname;
           item.value = item.categoryid;
         });
-        this.categoryLists = [{ value: "", label: "All" }];
         this.categoryLists = this.categoryLists.concat(response.data);
       }
     });
@@ -173,7 +163,6 @@ export class CustomerdetailComponent implements OnInit {
           item.label = item.refname;
           item.value = item.refvalue;
         });
-        this.bizMemType = [{ value: "", label: "All" }];
         this.bizMemType = this.bizMemType.concat(response.data);
       }
     });
@@ -184,7 +173,6 @@ export class CustomerdetailComponent implements OnInit {
           item.label = item.refname;
           item.value = item.refvalue;
         });
-        this.bizTypeLists = [{ value: "", label: "All" }];
         this.bizTypeLists = this.bizTypeLists.concat(response.data);
       }
     });

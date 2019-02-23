@@ -2,11 +2,8 @@
   <div class="fixedheader">
     <div class="report-title payment-report pos-fixed">
       <div class="row">
-        <div class="col-md-12 col-sm-12">
-          <h2>Consumer</h2>
-          <p>Area Wise Consumer Count</p>
+        <div class="col-md-12 col-sm-12 m-t-25">
         </div>
-
         <div class="col-lg-12 col-md-12 p-r-0">
           <div class="card">
             <div class="row">
@@ -59,8 +56,9 @@
                   </div>
                   <div class="col-md-2 col-sm-1 m-t-35">
                     <div class="search-button">
-                      <button type="button" placement="bottom" ngbTooltip="Click to search" class="btn btn-primary generate-button waves-effect"
-                        (click)="getConsumerReports()"> <i class="fa fa-search"></i>
+                      <button type="button" placement="bottom" ngbTooltip="Click to search"
+                        class="btn btn-primary generate-button waves-effect" (click)="getConsumerReports()"> <i
+                          class="fa fa-search"></i>
                       </button>
                     </div>
                   </div>
@@ -75,7 +73,7 @@
 </form>
 <div class="col-lg-12 col-md-12 col-sm-12 reports p-l-0">
   <div class="row">
-    <div class="col-lg-12 col-md-12 p-r-5">
+    <div class="col-lg-12 col-md-12 p-r-5 m-l-15">
       <div class="header-block">
         <div *ngIf="!loadingIndicator">
           <div class="table-header report-table payment-table">
@@ -84,26 +82,27 @@
                 <div class="col-sm-12 header-title">
                   <label class="dt-cust-search f-right">
                     <div class="form-group">
-                      <input #consumerReportSearch type='text' class="form-control input-sm report-search" placeholder='Search here'
-                        (keyup)='search($event)' />
-                      <button type="button" class="btn search-close" (click)="consumerReportSearch.value='';search();"><i
-                          class="fa fa-close"></i></button>
+                      <input #consumerReportSearch type='text' class="form-control input-sm report-search"
+                        placeholder='Search here' (keyup)='search($event)' />
+                      <button type="button" class="btn search-close"
+                        (click)="consumerReportSearch.value='';search();"><i class="fa fa-close"></i></button>
 
-                      <button type="button" placement="bottom" ngbTooltip="Click to download reports" class="btn btn-primary waves-effect download-btn m-r-5"><i
-                          class="fa fa-download m-r-5"></i>
+                      <button type="button" placement="bottom" ngbTooltip="Click to download reports"
+                        class="btn btn-primary waves-effect download-btn m-r-5"><i class="fa fa-download m-r-5"></i>
                       </button>
-                      <button type="button" placement="bottom" ngbTooltip="Reload" (click)="getConsumerReports()" class="btn btn-inverse btn-primary waves-effect m-t-0"><i
-                          class="ti-reload"></i></button>
+                      <button type="button" placement="bottom" ngbTooltip="Reload" (click)="getConsumerReports()"
+                        class="btn btn-inverse btn-primary waves-effect m-t-0"><i class="ti-reload"></i></button>
 
                     </div>
                   </label>
                 </div>
               </div>
-              <ngx-datatable #consumertable class="table data-table expandable" [rows]='consumerList' [columnMode]="'flex'"
-                [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false" [footerHeight]="50" [limit]="5"
-                [messages]="emptymessages">
+              <ngx-datatable #consumertable class="table data-table expandable" [rows]='consumerList'
+                [columnMode]="'flex'" [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false" [footerHeight]="50"
+                [limit]="5" [messages]="emptymessages">
 
-                <ngx-datatable-column prop="date" name="Date" [resizeable]="false" headerClass="text-left" [cellClass]="'text-left'">
+                <ngx-datatable-column prop="date" name="Date" [resizeable]="false" headerClass="text-left"
+                  [cellClass]="'text-left'">
                   <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                     <span>{{row.date|date:displaydateformat}}</span>
                   </ng-template>￼ Search here ￼￼ Date Area City No. of Consumers No data to display 0
@@ -122,8 +121,8 @@
                   </ng-template>
                 </ngx-datatable-column>
 
-                <ngx-datatable-column prop="totalconsumers" name="No. of Consumers" [resizeable]="false" headerClass="text-right"
-                  [cellClass]="'text-right'">
+                <ngx-datatable-column prop="totalconsumers" name="No. of Consumers" [resizeable]="false"
+                  headerClass="text-right" [cellClass]="'text-right'">
                   <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                     <span>{{row.count}}</span>
                   </ng-template>

@@ -2,11 +2,8 @@
   <div class="fixedheader">
     <div class="report-title payment-report pos-fixed">
       <div class="row">
-        <div class="col-md-12 col-sm-12">
-          <h2>Dealer</h2>
-          <p>Area wise dealer count</p>
+        <div class="col-md-12 col-sm-12 m-t-25">
         </div>
-
         <div class="col-lg-12 col-md-12 p-r-0">
           <div class="card">
             <div class="row">
@@ -44,7 +41,7 @@
                     <div class="form-group">
                       <label>City</label>
                       <div class="input-group">
-                        <ng-select [allowClear]="true" [ngClass]="'ng-select'" placeholder="Select city"
+                        <ng-select [allowClear]="true" [ngClass]="'ng-select'" placeholder="All"
                           formControlName="city" [options]="cityList" (selected)="citySelect($event)"></ng-select>
                       </div>
                     </div>
@@ -53,7 +50,7 @@
                     <div class="form-group">
                       <label>Area</label>
                       <div class="input-group">
-                        <ng-select [multiple]="true" [ngClass]="'ng-select'" placeholder="Select Area"
+                        <ng-select [multiple]="true" [ngClass]="'ng-select'" placeholder="All"
                           formControlName="area" [options]="areaList"></ng-select>
                       </div>
                     </div>
@@ -77,7 +74,7 @@
 </form>
 <div class="col-lg-12 col-md-12 col-sm-12 reports p-l-0">
   <div class="row">
-    <div class="col-lg-12 col-md-12 p-r-5">
+    <div class="col-lg-12 col-md-12 p-r-5 m-l-15">
       <div class="header-block">
         <div *ngIf="!loadingIndicator==true">
           <div class="table-header report-table payment-table">
@@ -95,8 +92,8 @@
                       <button type="button" placement="bottom" ngbTooltip="Click to download reports"
                         class="btn btn-primary waves-effect download-btn m-r-5"><i class="fa fa-download m-r-5"></i>
                       </button>
-                      <button type="button" placement="bottom" ngbTooltip="Reload" (click)="getDealerReport()" class="btn btn-inverse btn-primary waves-effect m-t-0"><i
-                        class="ti-reload "></i></button>
+                      <button type="button" placement="bottom" ngbTooltip="Reload" (click)="getDealerReport()"
+                        class="btn btn-inverse btn-primary waves-effect m-t-0"><i class="ti-reload "></i></button>
                     </div>
                   </label>
                 </div>
