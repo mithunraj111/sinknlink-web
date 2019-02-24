@@ -50,7 +50,7 @@ const routes: Routes = [
         path: 'customerdetail',
         component: CustomerdetailComponent,
         data: {
-          title: 'Business Reports',
+          title: 'Customer detail reports',
           status: false
         },
       }

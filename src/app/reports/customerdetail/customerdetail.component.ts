@@ -73,8 +73,8 @@ export class CustomerdetailComponent implements OnInit {
       return false;
     }
     let formData = {
-      fromdt: fromdt,
-      todate: todt,
+      fromdt: fromdt + ' 00:00',
+      todate: todt + ' 23:59',
 
     } as any;
 

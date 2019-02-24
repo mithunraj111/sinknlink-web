@@ -24,9 +24,9 @@ export class ConsumerComponent implements OnInit {
   consumerReportForm: FormGroup;
   displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   displaydateformat = AppConstant.API_CONFIG.ANG_DATE.displaydate;
-  @ViewChild(DatatableComponent) table: DatatableComponent;
+  @ViewChild(DatatableComponent) consumertable: DatatableComponent;
   areaList = [];
-  cityList = [{ value: "", label: "All" }];
+  cityList = [];
   cityName: string;
   consumerList = [];
   tempFilter = [];
@@ -122,7 +122,7 @@ export class ConsumerComponent implements OnInit {
   }
   search(event?) {
     this.consumerList = this.commonService.globalSearch(this.tempFilter, event);
-    this.table.offset = 0;
+    this.consumertable.offset = 0;
   }
 
 }
