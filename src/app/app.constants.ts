@@ -166,7 +166,8 @@ export const AppConstant = Object.freeze({
           CREATE: 'location/create',
           LIST: 'location',
           GETBYID: 'location/',
-          UPDATE: 'location/edit/'
+          UPDATE: 'location/edit/',
+          DELETE: 'location/delete/'
         },
         USER: {
           CREATE: 'user/create',
@@ -252,32 +253,32 @@ export const AppConstant = Object.freeze({
   //Do not change this variables//
 
   EMPTY_MESSAGES: {
-    USER: { emptyMessage: 'No user data to display',totalMessage: 'total' },
-    ROLES: { emptyMessage: 'No role data to display',totalMessage: 'total' },
-    ADDROLES: { emptyMessage: 'No screen permissions to display',totalMessage: 'total' },
-    CATEGORIES: { emptyMessage: 'No category data to display' ,totalMessage: 'total'},
-    LOCATION: { emptyMessage: 'No location data to display',totalMessage: 'total' },
-    CUSTOMERS: { emptyMessage: 'No customer data to display',totalMessage: 'total' },
-    PAYMENT: { emptyMessage: 'No history data to display',totalMessage: 'total' },
-    BRANCHES: { emptyMessage: 'No branch data to display',totalMessage: 'total' },
-    GIGS: { emptyMessage: 'No gigs data to display',totalMessage: 'total' },
-    COUPONS: { emptyMessage: 'No coupon data to display' ,totalMessage: 'total'},
-    CONSUMERS: { emptyMessage: 'No consumer data to display' ,totalMessage: 'total'},
-    CONSUMERCOUPONS: { emptyMessage: 'No coupon data to display',totalMessage: 'total' },
-    FAVOURITES: { emptyMessage: 'No favourite data to display',totalMessage: 'total' },
-    DEALER: { emptyMessage: 'No dealer data to display',totalMessage: 'total' },
-    DEALER_CUSTOMER: { emptyMessage: 'No customer data to display',totalMessage: 'total' },
-    EVENTS: { emptyMessage: 'No event data to display',totalMessage: 'total' },
-    DONATIONS: { emptyMessage: 'No donation data to display',totalMessage: 'total' },
-    LOOKUP: { emptyMessage: 'No lookup data to display' ,totalMessage: 'total'},
-    VIPNUMBER: { emptyMessage: 'No vip number registration data to display',totalMessage: 'total' },
-    AREA: { emptyMessage: 'No area report data to display',totalMessage: 'total'  },
-    CATEGORY: { emptyMessage: 'No category report data to display',totalMessage: 'total'  },
-    CUSTOMERREPORT: { emptyMessage: 'No customer report data to display',totalMessage: 'total' },
-    CONSUMER: { emptyMessage: 'No consumer report data to display',totalMessage: 'total' },
-    DEALERREPORT: { emptyMessage: 'No dealer report data to display',totalMessage: 'total' },
-    PAYMENTREPORT: { emptyMessage: 'No payment report data to display' ,totalMessage: 'total'},
-    DEALER_PAYMENT:{ emptyMessage: 'No payment data to display' ,totalMessage: 'total'}
+    USER: { emptyMessage: 'No user data to display', totalMessage: 'total' },
+    ROLES: { emptyMessage: 'No role data to display', totalMessage: 'total' },
+    ADDROLES: { emptyMessage: 'No screen permissions to display', totalMessage: 'total' },
+    CATEGORIES: { emptyMessage: 'No category data to display', totalMessage: 'total' },
+    LOCATION: { emptyMessage: 'No location data to display', totalMessage: 'total' },
+    CUSTOMERS: { emptyMessage: 'No customer data to display', totalMessage: 'total' },
+    PAYMENT: { emptyMessage: 'No history data to display', totalMessage: 'total' },
+    BRANCHES: { emptyMessage: 'No branch data to display', totalMessage: 'total' },
+    GIGS: { emptyMessage: 'No gigs data to display', totalMessage: 'total' },
+    COUPONS: { emptyMessage: 'No coupon data to display', totalMessage: 'total' },
+    CONSUMERS: { emptyMessage: 'No consumer data to display', totalMessage: 'total' },
+    CONSUMERCOUPONS: { emptyMessage: 'No coupon data to display', totalMessage: 'total' },
+    FAVOURITES: { emptyMessage: 'No favourite data to display', totalMessage: 'total' },
+    DEALER: { emptyMessage: 'No dealer data to display', totalMessage: 'total' },
+    DEALER_CUSTOMER: { emptyMessage: 'No customer data to display', totalMessage: 'total' },
+    EVENTS: { emptyMessage: 'No event data to display', totalMessage: 'total' },
+    DONATIONS: { emptyMessage: 'No donation data to display', totalMessage: 'total' },
+    LOOKUP: { emptyMessage: 'No lookup data to display', totalMessage: 'total' },
+    VIPNUMBER: { emptyMessage: 'No vip number registration data to display', totalMessage: 'total' },
+    AREA: { emptyMessage: 'No area report data to display', totalMessage: 'total' },
+    CATEGORY: { emptyMessage: 'No category report data to display', totalMessage: 'total' },
+    CUSTOMERREPORT: { emptyMessage: 'No customer report data to display', totalMessage: 'total' },
+    CONSUMER: { emptyMessage: 'No consumer report data to display', totalMessage: 'total' },
+    DEALERREPORT: { emptyMessage: 'No dealer report data to display', totalMessage: 'total' },
+    PAYMENTREPORT: { emptyMessage: 'No payment report data to display', totalMessage: 'total' },
+    DEALER_PAYMENT: { emptyMessage: 'No payment data to display', totalMessage: 'total' }
 
   }
 

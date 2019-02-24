@@ -22,4 +22,9 @@ export class HttpHandlerService {
         url = url + '/' + id;
         return this.http.put(url, data);
     }
+
+    DELETE(url: string, id: number, options?: any): Observable<any> {
+        url = url + id;
+        return this.http.delete(url);
+    }
 }
