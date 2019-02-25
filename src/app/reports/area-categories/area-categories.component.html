@@ -56,8 +56,9 @@
         <div *ngIf="!loadingIndicator==true">
 
           <div class="table-header report-table">
-            <app-card [classHeader]="true" [title]="'Area'">
-              <div class="row">
+            <div class="card p-r-15 p-l-15">
+              <div class="row m-b-10">
+                <h2 class="f-24 m-l-20 m-t-20">Area</h2>
                 <div class="col-sm-12 header-title">
                   <label class="dt-cust-search f-right">
                     <div class="form-group">
@@ -94,7 +95,7 @@
                 </ngx-datatable-column>
 
               </ngx-datatable>
-            </app-card>
+            </div>
           </div>
         </div>
       </div>
@@ -104,8 +105,9 @@
         <div *ngIf="!loadingIndicator==true">
 
           <div class="table-header report-table">
-            <app-card [classHeader]="true" [title]="'Category'">
-              <div class="row">
+            <div class="card p-r-15 p-l-15">
+              <div class="row m-b-10">
+                <h2 class="f-24 m-l-20 m-t-20">Category</h2>
                 <div class="col-sm-12 header-title">
                   <label class="dt-cust-search f-right">
                     <div class="form-group">
@@ -136,7 +138,7 @@
                 </ngx-datatable-column>
 
               </ngx-datatable>
-            </app-card>
+            </div>
           </div>
         </div>
       </div>

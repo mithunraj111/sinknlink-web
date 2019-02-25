@@ -87,7 +87,7 @@
 </div>
 <div class="header-block">
     <div class="table-header fixed-table-header">
-        <app-card [classHeader]="true">
+        <div class="card p-r-15 p-l-15">
             <ngx-datatable #couponstable class="table data-table expandable" [rows]='couponList' [columnMode]="'flex'"
                 [headerHeight]="50" [footerHeight]="50" [limit]="5" [rowHeight]="'auto'" [reorderable]="false" [messages]="emptymessages">
                 <!-- Row Detail Template -->
@@ -132,7 +132,7 @@
                     </ng-template>
                 </ngx-datatable-column>
             </ngx-datatable>
-        </app-card>
+        </div>
     </div>
 </div>
 <!-- <app-add-edit-coupon [couponObj]="couponObj" (notifyCouponChange)="notifyCouponChange($event)"></app-add-edit-coupon> -->

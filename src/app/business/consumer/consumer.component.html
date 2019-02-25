@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="table-header fixed-table-header">
-            <app-card [classHeader]="true">
+            <div class="card p-r-15 p-l-15">
                 <ngx-datatable #eventtable class="table data-table expandable" [rows]='consumersList' [columnMode]="'flex'"
                     [headerHeight]="50" [footerHeight]="50" [limit]="10" [rowHeight]="'auto'" [reorderable]="false"
                     [messages]="emptymessages">
@@ -64,7 +64,7 @@
                         </ng-template>
                     </ngx-datatable-column>
                 </ngx-datatable>
-            </app-card>
+            </div>
         </div>
     </div>
     <div *ngIf="consumersList.length == 0" class="text-center no-data">

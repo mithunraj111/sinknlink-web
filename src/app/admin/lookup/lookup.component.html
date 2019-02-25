@@ -32,7 +32,7 @@
       </div>
     </div>
     <div class="table-header fixed-table">
-      <app-card [classHeader]="true">
+      <div class="card p-r-15 p-l-15">
         <ngx-datatable #lookuptable class="table data-table expandable" [rows]='lookupList' [columnMode]="'flex'"
           [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false" [footerHeight]="50" [limit]="10" [messages]="emptymessages">
           <ngx-datatable-column prop="refname" name="Name" [resizeable]="false">
@@ -79,7 +79,7 @@
             </ng-template>
           </ngx-datatable-column>
         </ngx-datatable>
-      </app-card>
+      </div>
     </div>
   </div>
   <div *ngIf="lookupList.length == 0" class="text-center no-data">

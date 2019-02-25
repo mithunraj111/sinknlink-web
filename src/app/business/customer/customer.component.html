@@ -11,7 +11,7 @@
           </div>
           <div class="col-md-6 col-sm-6 p-r-10 text-right">
             <button *ngIf="add" type="button" placement="bottom" ngbTooltip="Click to add customer" class="add-btn btn btn-primary waves-effect m-r-10"
-              (click)='addCustomer()'><i class="fa fa-plus-circle m-r-5"></i>New</button>
+              (click)='addCustomer()'><i class="fa fa-plus-circle m-r-5"></i> New</button>
             <button type="button" placement="bottom" ngbTooltip="Reload" (click)="getCustomerList()" class="btn btn-inverse btn-primary waves-effect"><i
                 class="ti-reload "></i></button>
           </div>
@@ -19,7 +19,7 @@
       </div>
     </div>
     <div class="table-header fixed-table-header">
-      <app-card [classHeader]="true">
+      <div class="card p-r-15 p-l-15">
         <ngx-datatable #customertable class="table data-table expandable" [rows]='customerList' [columnMode]="'flex'"
           [headerHeight]="50" [footerHeight]="50" [limit]="10" [rowHeight]="'auto'" [reorderable]="false" [messages]="emptymessages">
           <!-- Row Detail Template -->
@@ -67,7 +67,7 @@
             </ng-template>
           </ngx-datatable-column>
         </ngx-datatable>
-      </app-card>
+      </div>
     </div>
   </div>
   <div *ngIf="customerList.length == 0" class="text-center no-data">

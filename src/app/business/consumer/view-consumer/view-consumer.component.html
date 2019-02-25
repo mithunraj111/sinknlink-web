@@ -102,7 +102,7 @@
               <div [@fadeInOutTranslate]>
                 <div class="header-block m-t-60">
                   <div class="table-header view-table fixed-table-header">
-                    <app-card [classHeader]="true">
+                    <div class="card p-r-15 p-l-15">
                       <ngx-datatable #eventtable class="table data-table expandable" [rows]='consumerCouponsList'
                         [columnMode]="'flex'" [headerHeight]="50" [footerHeight]="50" [limit]="10" [rowHeight]="'auto'"
                         [reorderable]="false" [messages]="emptymessages">
@@ -135,7 +135,7 @@
                           </ng-template>
                         </ngx-datatable-column>
                       </ngx-datatable>
-                    </app-card>
+                    </div>
                   </div>
                 </div>
               </div>

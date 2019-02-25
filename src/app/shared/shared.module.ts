@@ -5,8 +5,6 @@ import { ToggleFullScreenDirective } from './fullscreen/toggle-fullscreen.direct
 import { HttpClientModule } from '@angular/common/http';
 import { PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface, PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { TitleComponent } from '../layout/main/title/title.component';
-import { CardComponent } from './card/card.component';
-import { CardToggleDirective } from './card/card-toggle.directive';
 import { ModalAnimationComponent } from './modal-animation/modal-animation.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { ClickOutsideModule } from 'ng-click-outside';
@@ -41,11 +39,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AccordionAnchorDirective,
     AccordionLinkDirective,
     AccordionDirective,
-    CardToggleDirective,
     HttpClientModule,
     PerfectScrollbarModule,
     TitleComponent,
-    CardComponent,
     ModalAnimationComponent,
     SpinnerComponent,
     ClickOutsideModule,
@@ -58,9 +54,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AccordionAnchorDirective,
     AccordionLinkDirective,
     AccordionDirective,
-    CardToggleDirective,
     TitleComponent,
-    CardComponent,
     ModalAnimationComponent,
     SpinnerComponent,
     ImageUploaderComponent,

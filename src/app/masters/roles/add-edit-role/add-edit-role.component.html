@@ -51,7 +51,7 @@
 <div class="header-block">
     <div *ngIf="!loadingIndicator">
         <div class="table-header fixed-table">
-            <app-card [classHeader]="true">
+            <div class="card p-r-15 p-l-15">
                 <ngx-datatable #addroletable class="table data-table expandable" [rows]='screensList'
                     [columnMode]="'flex'" [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false"
                     [footerHeight]="50" [limit]="10" [messages]="emptymessages">
@@ -81,7 +81,7 @@
                         </ng-template>
                     </ngx-datatable-column>
                 </ngx-datatable>
-            </app-card>
+            </div>
         </div>
     </div>
 </div>

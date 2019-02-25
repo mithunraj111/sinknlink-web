@@ -15,7 +15,7 @@
 </div>
 <div class="header-block">
     <div class="table-header fixed-table-header">
-        <app-card [classHeader]="true">
+        <div class="card p-r-15 p-l-15">
             <ngx-datatable #customerdltable class="table data-table expandable" [rows]='dealerCustomers' [columnMode]="'flex'" 
                 [headerHeight]="50" [footerHeight]="50" [limit]="10" [rowHeight]="'auto'" [reorderable]="false" [messages]="emptymessages">
                 <!-- Row Detail Template -->
@@ -45,6 +45,6 @@
                     </ng-template>
                 </ngx-datatable-column>
             </ngx-datatable>
-        </app-card>
+        </div>
     </div>
 </div>

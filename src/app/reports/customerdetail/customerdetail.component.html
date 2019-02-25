@@ -94,7 +94,7 @@
     </div>
   </div>
 </form>
-<div class="row">
+<div class="row p-r-20 p-l-15">
   <div class="col-md-6 col-sm-6 header-title">
     <input #customerReportSearch type='text' class="form-control input-sm  col-md-5 col-sm-5  full-data-search"
       placeholder='Search here' (keyup)='search($event)' />
@@ -115,7 +115,7 @@
       <div class="header-block">
         <div *ngIf="!loadingIndicator">
           <div class="report-table payment-table">
-            <app-card [classHeader]="true">
+            <div class="card p-r-15 p-l-15">
               <ngx-datatable #businesstable class="table  customer-report data-table expandable"
                 [rows]='businessList' [columnMode]="'flex'" [headerHeight]="50" [footerHeight]="40" [rowHeight]="50"
                 [scrollbarV]="false" [scrollbarH]="true" [limit]="5" [messages]="emptymessages">
@@ -180,7 +180,7 @@
                 </ngx-datatable-column>
 
               </ngx-datatable>
-            </app-card>
+            </div>
           </div>
         </div>
       </div>

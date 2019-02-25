@@ -20,7 +20,7 @@
       </div>
     </div>
     <div class="table-header fixed-table">
-      <app-card [classHeader]="true">
+      <div class="card p-r-10 p-l-10">
         <ngx-datatable #roletable class="table data-table expandable" [rows]='rolesList' [columnMode]="'flex'"
           [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false" [footerHeight]="50" [limit]="10" [messages]="emptymessages">
           <ngx-datatable-column prop="rolename" name="Role Name" [resizeable]="false">
@@ -66,7 +66,7 @@
             </ng-template>
           </ngx-datatable-column>
         </ngx-datatable>
-      </app-card>
+      </div>
     </div>
   </div>
 

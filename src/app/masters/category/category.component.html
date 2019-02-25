@@ -19,7 +19,7 @@
             </div>
         </div>
         <div class="table-header fixed-table">
-            <app-card [classHeader]="true">
+            <div class="card p-r-10 p-l-10">
                 <ngx-datatable #categorytable class="table data-table expandable" [rows]='categoryList' [columnMode]="'flex'"
                     [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false" [footerHeight]="50" [limit]="10"
                     [messages]="emptymessages">
@@ -56,7 +56,7 @@
                         </ng-template>
                     </ngx-datatable-column>
                 </ngx-datatable>
-            </app-card>
+            </div>
         </div>
     </div>
     <div *ngIf="categoryList.length==0" class="text-center no-data">
