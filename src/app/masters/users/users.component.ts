@@ -60,25 +60,33 @@ export class UsersComponent extends BaseService implements OnInit {
       updateddt: new Date(),
       updatedby: this.userstoragedata.fullname
     };
-    const formData = new FormData();
-    formData.append('data', JSON.stringify(updateObj));
-    this.userService.update(formData, data.userid).subscribe(res => {
-      const response = JSON.parse(res._body);
-      if (response.status) {
-        if (flag) {
-          this.bootstrapAlertService.showSucccess('#' + data.userid + ' ' + AppMessages.VALIDATION.COMMON.DELETE_SUCCESS);
+
+    if (flag) {
+      this.userService.delete(updateObj, data.userid).subscribe(res => {
+        const response = JSON.parse(res._body);
+        if (response.status) {
+          this.bootstrapAlertService.showSucccess('#' + data.userid + ' ' + response.message);
           this.userList.splice(index, 1);
-        } else {
+          this.userList = [...this.userList];
+        }
+        else {
+          this.bootstrapAlertService.showError(response.message);
+        }
+      });
+    }
+    else {
+      this.userService.update(updateObj, data.userid).subscribe(res => {
+        const response = JSON.parse(res._body);
+        if (response.status) {
           this.bootstrapAlertService.showSucccess(response.message);
           this.userList[index].status = response.data.status;
+          this.userList = [...this.userList];
+        } else {
+          this.bootstrapAlertService.showError(response.message);
         }
-        this.userList = [...this.userList];
-      } else {
-        this.bootstrapAlertService.showError(response.message);
-      }
-    });
+      });
+    }
   }
-
   search(event?) {
     this.userList = this.commonService.globalSearch(this.tempFilter, event);
     this.table.offset = 0;

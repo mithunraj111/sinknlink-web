@@ -160,7 +160,8 @@ export const AppConstant = Object.freeze({
           CREATE: 'category/create',
           LIST: 'category',
           GETBYID: 'category/',
-          UPDATE: 'category/edit/'
+          UPDATE: 'category/edit/',
+          DELETE: 'category/delete/'
         },
         LOCATION: {
           CREATE: 'location/create',
@@ -173,7 +174,8 @@ export const AppConstant = Object.freeze({
           CREATE: 'user/create',
           LIST: 'user',
           GETBYID: 'user/',
-          UPDATE: 'user/edit/'
+          UPDATE: 'user/edit/',
+          DELETE: 'user/delete/'
         },
         SETTINGS: {
           CREATE: 'settings/create',
@@ -186,7 +188,9 @@ export const AppConstant = Object.freeze({
           CREATE: 'role/create',
           LIST: 'role',
           GETBYID: 'role/',
-          UPDATE: 'role/edit/'
+          UPDATE: 'role/edit/',
+          DELETE: 'role/delete/'
+
         }
       },
       BUSINESS: {

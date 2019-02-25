@@ -21,4 +21,7 @@ export class UserService {
     byId(id): Observable<any> {
         return this.httpHandler.GET(this.endpoint + AppConstant.API_CONFIG.API_URL.MASTERS.USER.GETBYID + id);
     }
+    delete(data, id): Observable<any> {
+        return this.httpHandler.DELETE(this.endpoint + AppConstant.API_CONFIG.API_URL.MASTERS.USER.DELETE, id, data);
+    }
 }

@@ -36,23 +36,29 @@ export class CategoryComponent extends BaseService implements OnInit {
       status: flag ? AppConstant.STATUS_DELETED :
         (data.status === AppConstant.STATUS_ACTIVE ? AppConstant.STATUS_INACTIVE : AppConstant.STATUS_ACTIVE)
     };
-    const formData = new FormData();
-    formData.append('data', JSON.stringify(updateObj));
-    this.categoryService.update(formData, data.categoryid).subscribe(res => {
-      const response = JSON.parse(res._body);
-      if (response.status) {
-        if (flag) {
-          this.bootstrapAlertService.showSucccess('#' + data.categoryid + ' ' + AppMessages.VALIDATION.COMMON.DELETE_SUCCESS);
+    if (flag) {
+      this.categoryService.delete(updateObj, data.categoryid).subscribe(res => {
+        const response = JSON.parse(res._body);
+        if (response.status) {
+          this.bootstrapAlertService.showSucccess('#' + data.categoryid + ' ' + response.message);
           this.categoryList.splice(index, 1);
+          this.categoryList = [...this.categoryList];
         } else {
+          this.bootstrapAlertService.showError(response.message);
+        }
+      });
+    } else {
+      this.categoryService.update(updateObj, data.categoryid).subscribe(res => {
+        const response = JSON.parse(res._body);
+        if (response.status) {
           this.bootstrapAlertService.showSucccess(response.message);
           this.categoryList[index].status = response.data.status;
+          this.categoryList = [...this.categoryList];
+        } else {
+          this.bootstrapAlertService.showError(response.message);
         }
-        this.categoryList = [...this.categoryList];
-      } else {
-        this.bootstrapAlertService.showError(response.message);
-      }
-    });
+      });
+    }
   }
   // API call to get the category list
   getCategories() {

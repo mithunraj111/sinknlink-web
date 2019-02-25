@@ -63,20 +63,31 @@ export class RolesComponent extends BaseService implements OnInit {
       status: flag ? AppConstant.STATUS_DELETED :
         (data.status === AppConstant.STATUS_ACTIVE ? AppConstant.STATUS_INACTIVE : AppConstant.STATUS_ACTIVE)
     };
-    this.roleService.update(updateObj, data.roleid).subscribe(res => {
-      const response = JSON.parse(res._body);
-      if (response.status) {
-        if (flag) {
-          this.bootstrapAlertService.showSucccess('#' + data.roleid + ' ' + AppMessages.VALIDATION.COMMON.DELETE_SUCCESS);
+    if (flag) {
+      this.roleService.delete(updateObj, data.roleid).subscribe(res => {
+        const response = JSON.parse(res._body);
+        if (response.status) {
+          this.bootstrapAlertService.showSucccess('#' + data.roleid + ' ' + response.message);
           this.rolesList.splice(index, 1);
-        } else {
+          this.rolesList = [...this.rolesList];
+        }
+        else {
+          this.bootstrapAlertService.showError(response.message);
+        }
+      });
+    }
+    else {
+      this.roleService.update(updateObj, data.roleid).subscribe(res => {
+        const response = JSON.parse(res._body);
+        if (response.status) {
           this.bootstrapAlertService.showSucccess(response.message);
           this.rolesList[index].status = response.data.status;
+          this.rolesList = [...this.rolesList];
+        } else {
+          this.bootstrapAlertService.showError(response.message);
         }
-        this.rolesList = [...this.rolesList];
-      } else {
-        this.bootstrapAlertService.showError(response.message);
-      }
-    });
+      });
+    }
+
   }
 }
