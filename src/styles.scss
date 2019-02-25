@@ -954,11 +954,20 @@ body[themebg-pattern="pattern1"]{
     height: 38px !important;
 }
 .tag-chips {
+    delete-icon {
+        svg{
+            height: 30px !important;
+        }
+    }
     .ng2-tag-input{
         width: 90%;
         line-height: 24px;
-        border: 1px solid #dfe8f1 !important;
+        border: 1px solid #cccccc !important;
         box-shadow: inset 1px 1px 3px #f6f6f6;
+        tag{
+            background: $primary-color !important;
+            border-radius: 4px !important;
+        }
     }
 }
 .btn-inverse-active{
@@ -1466,13 +1475,6 @@ body[themebg-pattern="pattern1"]{
      }
  }
 
-.tag-chips {
-    delete-icon {
-        svg{
-            height: 30px !important;
-        }
-    }
-}
 .dt-picker{
     .form-control{
         &:focus{
@@ -1607,10 +1609,11 @@ body[themebg-pattern="pattern1"]{
 }
 .profile-image{
     margin-right:-21px;
-    
 }
-.profile-img{
+.f-60{
     font-size: 60px;
-    line-height: 100px;
+}
+.ngb-dp-weekday{
+    color: $primary-color !important;
 }
 // no data //

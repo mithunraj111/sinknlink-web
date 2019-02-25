@@ -137,18 +137,19 @@ export class AddEditCustomerComponent implements OnInit {
   initForm() {
     this.customerForm = this.fb.group({
       bizname: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
-      biztype: [null, Validators.compose([Validators.required])],
+      biztype: [null, Validators.required],
+      bizdesc: ['',Validators.compose([Validators.minLength(5), Validators.maxLength(100)])],
       contactperson: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
-      contactmobile: [null, Validators.compose([Validators.required])],
+      contactmobile: [null, Validators.required],
       contactemail: ['', Validators.compose([Validators.pattern(AppConstant.REGEX.EMAIL), Validators.maxLength(100)])],
       phoneno: [[]],
-      categoryid: [null, Validators.compose([Validators.required])],
+      categoryid: [null, Validators.required],
       tags: [[], Validators.required],
       postaladdress: ['', Validators.compose([Validators.minLength(1), Validators.maxLength(100)])],
-      latitude: [null, Validators.compose([Validators.required])],
-      longitude: [null, Validators.compose([Validators.required])],
-      locationid: [null, Validators.compose([Validators.required])],
-      workdays: [null, Validators.compose([Validators.required])],
+      latitude: [null, Validators.required],
+      longitude: [null, Validators.required],
+      locationid: [null, Validators.required],
+      workdays: [null, Validators.required],
       starttime: [null, Validators.required],
       endtime: [null, Validators.required],
       acceptedpayments: [null, Validators.required],
@@ -157,12 +158,12 @@ export class AddEditCustomerComponent implements OnInit {
       taxno: [null, Validators.compose([Validators.required, Validators.maxLength(30)])],
       website: ['', Validators.compose([Validators.maxLength(200), Validators.pattern(AppConstant.REGEX.WEBSITE)])],
       regdate: [this.commonService.getCurrentDate('Y'), Validators.required],
-      paymentstatus: [null, Validators.compose([Validators.required])],
-      membershiptype: [null, Validators.compose([Validators.required])],
-      paymenttenure: [null, Validators.compose([Validators.required])],
+      paymentstatus: [null, Validators.required],
+      membershiptype: [null, Validators.required],
+      paymenttenure: [null, Validators.required],
       status: [true, Validators.required],
       tncagreed: [false, Validators.required],
-      landmark: ['', Validators.compose([Validators.maxLength(200)])],
+      landmark: ['', Validators.maxLength(200)],
       inmallyn: [false],
       mallname: ['']
     });
@@ -198,6 +199,7 @@ export class AddEditCustomerComponent implements OnInit {
     this.closeModal(event);
   }
   saveOrUpdateBusiness() {
+    console.log('..');
     let errMessage: any;
     if (!this.customerForm.valid) {
       errMessage = this.commonService.getFormErrorMessage(this.customerForm, this.customerErrObj);

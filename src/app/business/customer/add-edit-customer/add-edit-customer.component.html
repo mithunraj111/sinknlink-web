@@ -53,6 +53,15 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-md-3 col-sm-6 col-form-label text-right">Business 
+                                                            description</label>
+                                                        <div class="col-md-9 col-sm-6">
+                                                            <div class="input-box">
+                                                                <textarea rows="3" cols="3" class="form-control" placeholder="Business description" formControlName="bizdesc"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                     <div class="form-group row required">
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Contact
                                                             person</label>
@@ -344,7 +353,7 @@
                     <input type="text" class="form-control" formControlName="instagram" placeholder="Instagram ID">
                 </div>
             </div>
-            <button (click)="update($event)" type="button" placement="bottom" ngbTooltip="Click to {{buttonText}} locations " class="btn pull-right btn-primary waves-effect m-b-10 mr-3">{{buttonText}}</button>
+            <button (click)="update($event)" type="button" placement="bottom" ngbTooltip="Click to {{buttonText}} Social IDs " class="btn pull-right btn-primary waves-effect m-b-10 mr-3">{{buttonText}}</button>
         </form>
         <button (click)="closeModal($event)" aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>
     </app-modal-animation>
