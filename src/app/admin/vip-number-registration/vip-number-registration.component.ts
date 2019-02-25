@@ -257,22 +257,37 @@ export class VipNumberRegistrationComponent implements OnInit {
     this.router.navigate(['admin/vipnumberregistration/create']);
   }
 
-  changeStatus(pk, status, deleted?) {
-    let data = {
-      fancyid: pk,
-      status: deleted == true ? AppConstant.STATUS_DELETED : status == AppConstant.STATUS_ACTIVE ? AppConstant.STATUS_INACTIVE : AppConstant.STATUS_ACTIVE,
+  changeStatus(data, index, flag) {
+    const updateObj = {
+      status: flag ? AppConstant.STATUS_DELETED :
+        (data.status === AppConstant.STATUS_ACTIVE ? AppConstant.STATUS_INACTIVE : AppConstant.STATUS_ACTIVE),
       updateddt: new Date(),
       updatedby: this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER).fullname
     }
-    this.fancynumberService.editNumber(data, pk).subscribe(res => {
-      const response = JSON.parse(res._body);
-      if (response.status) {
-        this.getAvailableList();
-        this.bootstrapAlertService.showSucccess(response.message);
-      } else {
-        this.bootstrapAlertService.showError(response.message);
-      }
-    })
+    if (flag) {
+      this.fancynumberService.delete(updateObj, data.fancyid).subscribe(res => {
+        const response = JSON.parse(res._body);
+        if (response.status) {
+          this.bootstrapAlertService.showSucccess('#' + data.fancyid + ' ' + response.message);
+          this.data.splice(index, 1);
+          this.data = [...this.data];
+        } else {
+          this.bootstrapAlertService.showError(response.message);
+        }
+      });
+    } else {
+      this.fancynumberService.editNumber(updateObj, data.fancyid).subscribe(res => {
+        const response = JSON.parse(res._body);
+        if (response.status) {
+          this.bootstrapAlertService.showSucccess(response.message);
+          this.data[index].status = response.data.status;
+          this.data = [...this.data];
+        } else {
+          this.bootstrapAlertService.showError(response.message);
+        }
+      });
+    }
+
   }
 
   onNumberSelect(id, no) {

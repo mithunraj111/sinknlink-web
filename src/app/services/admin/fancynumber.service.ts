@@ -15,7 +15,7 @@ export class FancyNumberService {
     getList(data: any, allocated?): Observable<any> {
         let url = this.endpoint + AppConstant.API_CONFIG.API_URL.ADMIN.FANCYNO.LIST;
 
-        if(allocated) url += `?allocatednos=true`
+        if (allocated) url += `?allocatednos=true`
 
         return this.httpHandler.POST(url, data);
     }
@@ -33,5 +33,8 @@ export class FancyNumberService {
     }
     updateallocation(data): Observable<any> {
         return this.httpHandler.POST(this.endpoint + AppConstant.API_CONFIG.API_URL.ADMIN.FANCYNO.UPDATEALLOCATED, data);
+    }
+    delete(data, id): Observable<any> {
+        return this.httpHandler.DELETE(this.endpoint + AppConstant.API_CONFIG.API_URL.ADMIN.FANCYNO.DELETE, id, data);
     }
 }

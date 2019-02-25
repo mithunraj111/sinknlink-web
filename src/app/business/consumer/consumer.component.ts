@@ -35,7 +35,7 @@ export class ConsumerComponent extends BaseService implements OnInit {
   }
   getConsumers() {
     this.loadingIndicator = true;
-this.consumerService.list({}).subscribe(res => {
+    this.consumerService.list({}).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
         this.loadingIndicator = false;
@@ -45,24 +45,38 @@ this.consumerService.list({}).subscribe(res => {
       }
     });
   }
-  updateConsumer(pk, status, isDeleted?) {
-    const data = {
-      consumerid: pk,
-      status: isDeleted == true ?
-        AppConstant.STATUS_DELETED : status === AppConstant.STATUS_ACTIVE ? AppConstant.STATUS_INACTIVE : AppConstant.STATUS_ACTIVE,
+  updateConsumer(data, index, flag) {
+    const updateObj = {
       updateddt: new Date(),
-      updatedby: this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER).fullname
+      updatedby: this.userstoragedata.fullname,
+      status: flag ? AppConstant.STATUS_DELETED :
+        (data.status === AppConstant.STATUS_ACTIVE ? AppConstant.STATUS_INACTIVE : AppConstant.STATUS_ACTIVE)
     };
-    this.consumerService.update(data, pk).subscribe(res => {
-      const response = JSON.parse(res._body);
-      if (response.status) {
-        this.getConsumers(); this.bootstrapAlertService.showSucccess(response.message);
-      } else {
-        this.bootstrapAlertService.showError(response.message);
-      }
-    }, err => {
-      console.log(err);
-    });
+
+    if (flag) {
+      this.consumerService.delete(updateObj, data.consumerid).subscribe(res => {
+        const response = JSON.parse(res._body);
+        if (response.status) {
+          this.bootstrapAlertService.showSucccess('#' + data.consumerid + ' ' + response.message);
+          this.consumersList.splice(index, 1);
+          this.consumersList = [...this.consumersList];
+        } else {
+          this.bootstrapAlertService.showError(response.message);
+        }
+      });
+    } else {
+      this.consumerService.update(updateObj, data.consumerid).subscribe(res => {
+        const response = JSON.parse(res._body);
+        if (response.status) {
+          this.bootstrapAlertService.showSucccess(response.message);
+          this.consumersList[index].status = response.data.status;
+          this.consumersList = [...this.consumersList];
+        } else {
+          this.bootstrapAlertService.showError(response.message);
+        }
+      });
+    }
+
   }
   viewCustomer(id) {
     this.router.navigate(['business/consumers/view/' + id]);

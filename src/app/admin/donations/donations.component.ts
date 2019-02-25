@@ -51,21 +51,29 @@ export class DonationsComponent extends BaseService implements OnInit {
       status: flag ? AppConstant.STATUS_DELETED :
         (data.status === AppConstant.STATUS_ACTIVE ? AppConstant.STATUS_INACTIVE : AppConstant.STATUS_ACTIVE)
     };
-    this.donationService.update(updateObj, data.donationid).subscribe(res => {
-      const response = JSON.parse(res._body);
-      if (response.status) {
-        if (flag) {
-          this.bootstrapAlertService.showSucccess('#' + data.donationid + ' ' + AppMessages.VALIDATION.COMMON.DELETE_SUCCESS);
+    if (flag) {
+      this.donationService.delete(updateObj, data.donationid).subscribe(res => {
+        const response = JSON.parse(res._body);
+        if (response.status) {
+          this.bootstrapAlertService.showSucccess('#' + data.donationid + ' ' + response.message);
           this.donationList.splice(index, 1);
+          this.donationList = [...this.donationList];
         } else {
+          this.bootstrapAlertService.showError(response.message);
+        }
+      });
+    } else {
+      this.donationService.update(updateObj, data.donationid).subscribe(res => {
+        const response = JSON.parse(res._body);
+        if (response.status) {
           this.bootstrapAlertService.showSucccess(response.message);
           this.donationList[index].status = response.data.status;
+          this.donationList = [...this.donationList];
+        } else {
+          this.bootstrapAlertService.showError(response.message);
         }
-        this.donationList = [...this.donationList];
-      } else {
-        this.bootstrapAlertService.showError(response.message);
-      }
-    });
+      });
+    }
   }
 
   addDonation() {

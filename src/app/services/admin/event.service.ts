@@ -24,10 +24,13 @@ export class EventService {
     getLocations(data): Observable<any> {
         return this.httpHandler.POST(this.endpoint + AppConstant.API_CONFIG.API_URL.MASTERS.LOCATION.LIST, data);
     }
-    addDocument(data):Observable<any>{
+    addDocument(data): Observable<any> {
         return this.httpHandler.POST(this.endpoint + AppConstant.API_CONFIG.API_URL.COMMON.DOCUMENT.CREATE, data);
     }
-    updateDocument(data):Observable<any>{
+    updateDocument(data): Observable<any> {
         return this.httpHandler.POST(this.endpoint + AppConstant.API_CONFIG.API_URL.COMMON.DOCUMENT.CREATE, data);
+    }
+    delete(data, id): Observable<any> {
+        return this.httpHandler.DELETE(this.endpoint + AppConstant.API_CONFIG.API_URL.ADMIN.EVENT.DELETE, id, data);
     }
 }

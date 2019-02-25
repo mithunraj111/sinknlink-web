@@ -60,20 +60,30 @@ export class DealerComponent extends BaseService implements OnInit {
       status: flag ? AppConstant.STATUS_DELETED :
         (data.status === AppConstant.STATUS_ACTIVE ? AppConstant.STATUS_INACTIVE : AppConstant.STATUS_ACTIVE)
     };
-    this.dealerService.update(updateObj, data.dealerid).subscribe(res => {
-      const response = JSON.parse(res._body);
-      if (response.status) {
-        if (flag) {
-          this.bootstrapAlertService.showSucccess('#' + data.dealerid + ' ' + AppMessages.VALIDATION.COMMON.DELETE_SUCCESS);
+
+    if (flag) {
+      this.dealerService.delete(updateObj, data.dealerid).subscribe(res => {
+        const response = JSON.parse(res._body);
+        if (response.status) {
+          this.bootstrapAlertService.showSucccess('#' + data.dealerid + ' ' + response.message);
           this.dealerList.splice(index, 1);
+          this.dealerList = [...this.dealerList];
         } else {
+          this.bootstrapAlertService.showError(response.message);
+        }
+      });
+    } 
+    else {
+      this.dealerService.update(updateObj, data.dealerid).subscribe(res => {
+        const response = JSON.parse(res._body);
+        if (response.status) {
           this.bootstrapAlertService.showSucccess(response.message);
           this.dealerList[index].status = response.data.status;
+          this.dealerList = [...this.dealerList];
+        } else {
+          this.bootstrapAlertService.showError(response.message);
         }
-        this.dealerList = [...this.dealerList];
-      } else {
-        this.bootstrapAlertService.showError(response.message);
-      }
-    });
+      });
+    }
   }
 }

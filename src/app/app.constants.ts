@@ -106,19 +106,23 @@ export const AppConstant = Object.freeze({
           CREATE: 'donation/create',
           LIST: 'donation',
           GETBYID: 'donation/',
-          UPDATE: 'donation/edit/'
+          UPDATE: 'donation/edit/',
+          DELETE: 'donation/delete/'
         },
         LOOKUP: {
           CREATE: 'lookup/create',
           LIST: 'lookup',
           GETBYID: 'lookup/',
-          UPDATE: 'lookup/edit/'
+          UPDATE: 'lookup/edit/',
+          DELETE: 'lookup/delete/'
         },
         EVENT: {
           CREATE: 'event/create',
           LIST: 'event',
           GETBYID: 'event/',
-          UPDATE: 'event/edit/'
+          UPDATE: 'event/edit/',
+          DELETE: 'event/delete/'
+
         },
         FANCYNO: {
           CREATE: 'fancyno/create',
@@ -126,7 +130,8 @@ export const AppConstant = Object.freeze({
           EDIT: 'fancyno/edit',
           BLOCK: 'fancyno/block',
           ALLOCATE: 'fancyno/allocate',
-          UPDATEALLOCATED: 'fancyno/updateallocation'
+          UPDATEALLOCATED: 'fancyno/updateallocation',
+          DELETE: 'fancyno/delete/'
         }
       },
       COMMON: {
@@ -198,13 +203,15 @@ export const AppConstant = Object.freeze({
           CREATE: 'dealer/create',
           LIST: 'dealer',
           GETBYID: 'dealer/',
-          UPDATE: 'dealer/edit/'
+          UPDATE: 'dealer/edit/',
+          DELETE: 'dealer/delete/'
         },
         CONSUMER: {
           GETBYID: 'consumer/',
           CREATE: 'consumer/create',
           LIST: 'consumer',
-          UPDATE: 'consumer/edit/'
+          UPDATE: 'consumer/edit/',
+          DELETE: 'consumer/delete/'
         },
         CONSUMERCOUPON: {
           GETBYID: 'consumercoupon/',
@@ -228,19 +235,22 @@ export const AppConstant = Object.freeze({
           GETBYID: 'business/',
           CREATE: 'business/create',
           LIST: 'business',
-          UPDATE: 'business/edit/'
+          UPDATE: 'business/edit/',
+          DELETE: 'business/delete/'
         },
         GIGS: {
           GETBYID: 'gigs/',
           CREATE: 'gigs/create',
           LIST: 'gigs',
-          UPDATE: 'gigs/edit/'
+          UPDATE: 'gigs/edit/',
+          DELETE: 'gigs/delete/'
         },
         COUPONS: {
           GETBYID: 'coupon/',
           CREATE: 'coupon/create',
           LIST: 'coupon',
-          UPDATE: 'coupon/edit/'
+          UPDATE: 'coupon/edit/',
+          DELETE: 'coupon/delete/'
         }
       }
     }

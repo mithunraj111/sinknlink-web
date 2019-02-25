@@ -30,4 +30,7 @@ export class ConsumerService {
     consumerReviews(data): Observable<any> {
         return this.httpHandler.POST(this.endpoint + AppConstant.API_CONFIG.API_URL.BUSINESS.REVIEWS.LIST, data);
     }
+    delete(data, id): Observable<any> {
+        return this.httpHandler.DELETE(this.endpoint + AppConstant.API_CONFIG.API_URL.BUSINESS.CONSUMER.DELETE, id, data);
+    }    
 }

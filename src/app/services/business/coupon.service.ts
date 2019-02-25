@@ -21,4 +21,7 @@ export class CouponService {
     byId(id): Observable<any> {
         return this.httpHandler.GET(this.endpoint + AppConstant.API_CONFIG.API_URL.BUSINESS.COUPONS.GETBYID + id);
     }
+    delete(data, id): Observable<any> {
+        return this.httpHandler.DELETE(this.endpoint + AppConstant.API_CONFIG.API_URL.BUSINESS.COUPONS.DELETE, id, data);
+    }
 }

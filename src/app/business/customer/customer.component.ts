@@ -72,20 +72,29 @@ export class CustomerComponent extends BaseService implements OnInit {
       status: flag ? AppConstant.STATUS_DELETED :
         (data.status === AppConstant.STATUS_ACTIVE ? AppConstant.STATUS_INACTIVE : AppConstant.STATUS_ACTIVE)
     };
-    this.customerService.update(updateObj, data.membershipid).subscribe(res => {
-      const response = JSON.parse(res._body);
-      if (response.status) {
-        if (flag) {
-          this.bootstrapAlertService.showSucccess('#' + data.membershipid + ' ' + AppMessages.VALIDATION.COMMON.DELETE_SUCCESS);
+
+    if (flag) {
+      this.customerService.delete(updateObj, data.membershipid).subscribe(res => {
+        const response = JSON.parse(res._body);
+        if (response.status) {
+          this.bootstrapAlertService.showSucccess('#' + data.membershipid + ' ' + response.message);
           this.customerList.splice(index, 1);
+          this.customerList = [...this.customerList];
         } else {
+          this.bootstrapAlertService.showError(response.message);
+        }
+      });
+    } else {
+      this.customerService.update(updateObj, data.membershipid).subscribe(res => {
+        const response = JSON.parse(res._body);
+        if (response.status) {
           this.bootstrapAlertService.showSucccess(response.message);
           this.customerList[index].status = response.data.status;
+          this.customerList = [...this.customerList];
+        } else {
+          this.bootstrapAlertService.showError(response.message);
         }
-        this.customerList = [...this.customerList];
-      } else {
-        this.bootstrapAlertService.showError(response.message);
-      }
-    });
+      });
+    }
   }
 }

@@ -5,30 +5,31 @@
                 <div class="row">
                     <div class="col-md-4 col-sm-4">
                         <input #consumerSearch type="text" placeholder="Search here" (keyup)='search($event)'
-                            ngbTooltip="Type here to search" class="header-search form-control col-md-8 col-sm-8 p-l-0 p-r-0  input-sm full-data-search"
+                            ngbTooltip="Type here to search"
+                            class="header-search form-control col-md-8 col-sm-8 p-l-0 p-r-0  input-sm full-data-search"
                             placement="bottom">
-                        <button type="button" class="btn search-close col-md-1 col-sm-1 p-l-0 " (click)="consumerSearch.value='';search();"><i
-                                class="fa fa-close"></i></button>
+                        <button type="button" class="btn search-close col-md-1 col-sm-1 p-l-0 "
+                            (click)="consumerSearch.value='';search();"><i class="fa fa-close"></i></button>
                     </div>
                     <div class="col-md-8 col-sm-8 p-r-10 text-right">
-                        <button type="button" placement="bottom" ngbTooltip="Reload" (click)="getConsumers()" class="btn btn-inverse btn-primary waves-effect"><i
-                                class="ti-reload "></i></button>
+                        <button type="button" placement="bottom" ngbTooltip="Reload" (click)="getConsumers()"
+                            class="btn btn-inverse btn-primary waves-effect"><i class="ti-reload "></i></button>
                     </div>
                 </div>
             </div>
         </div>
         <div class="table-header fixed-table-header">
             <div class="card p-r-15 p-l-15">
-                <ngx-datatable #eventtable class="table data-table expandable" [rows]='consumersList' [columnMode]="'flex'"
-                    [headerHeight]="50" [footerHeight]="50" [limit]="10" [rowHeight]="'auto'" [reorderable]="false"
-                    [messages]="emptymessages">
+                <ngx-datatable #eventtable class="table data-table expandable" [rows]='consumersList'
+                    [columnMode]="'flex'" [headerHeight]="50" [footerHeight]="50" [limit]="10" [rowHeight]="'auto'"
+                    [reorderable]="false" [messages]="emptymessages">
                     <ngx-datatable-column prop="fullname" name="Full Name" [resizeable]="false">
                         <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                             <span>{{row.fullname}}</span>
                         </ng-template>
                     </ngx-datatable-column>
-                    <ngx-datatable-column prop="mobileno" name="Date" name="Mobile No" [resizeable]="false" headerClass="text-center"
-                        [cellClass]="'text-center'">
+                    <ngx-datatable-column prop="mobileno" name="Date" name="Mobile No" [resizeable]="false"
+                        headerClass="text-center" [cellClass]="'text-center'">
                         <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                             <span>{{row.mobileno}}</span>
                         </ng-template>
@@ -47,19 +48,19 @@
                     <ngx-datatable-column name="Status" [sortable]="false" [flexGrow]="0.5" [resizeable]="false"
                         headerClass="text-center" [cellClass]="'text-center status'" [resizeable]="false">
                         <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                            <ui-switch (change)="updateConsumer(row.consumerid,row.status)" class="js-small" placement="bottom"
-                                ngbTooltip="Click to change status" color="$primary-color" switchColor="#fff" size="small"
-                                [checked]="row.status == 'Active'"></ui-switch>
+                            <ui-switch (change)="updateConsumer(row,rowIndex,false)" class="js-small" placement="bottom"
+                                ngbTooltip="Click to change status" color="$primary-color" switchColor="#fff"
+                                size="small" [checked]="row.status == 'Active'"></ui-switch>
                         </ng-template>
                     </ngx-datatable-column>
                     <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.5" [resizeable]="false"
                         headerClass="text-center" [cellClass]="'text-center action'" [resizeable]="false">
                         <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                            <a placement="bottom" ngbTooltip="Click to view consumer details" class="m-r-15 crm-action-edit text-primary"
-                                (click)='viewCustomer(row.consumerid)'>
+                            <a placement="bottom" ngbTooltip="Click to view consumer details"
+                                class="m-r-15 crm-action-edit text-primary" (click)='viewCustomer(row.consumerid)'>
                                 <i class="fa fa-eye"></i></a>
-                            <a placement="bottom" (click)="updateConsumer(row.consumerid,row.status,true)" ngbTooltip="Click to delete consumer"
-                                class="crm-action-delete text-danger">
+                            <a placement="bottom" (click)="updateConsumer(row,rowIndex,true)"
+                                ngbTooltip="Click to delete consumer" class="crm-action-delete text-danger">
                                 <i class="fa fa-trash"></i></a>
                         </ng-template>
                     </ngx-datatable-column>

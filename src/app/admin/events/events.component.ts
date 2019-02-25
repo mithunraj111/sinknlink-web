@@ -57,24 +57,30 @@ export class EventsComponent extends BaseService implements OnInit {
       updateddt: new Date(),
       updatedby: this.userstoragedata.fullname,
       status: flag ? AppConstant.STATUS_DELETED :
-        data.status === AppConstant.STATUS_ACTIVE ? AppConstant.STATUS_INACTIVE : AppConstant.STATUS_ACTIVE
+        (data.status === AppConstant.STATUS_ACTIVE ? AppConstant.STATUS_INACTIVE : AppConstant.STATUS_ACTIVE)
     };
-    const formData = new FormData();
-    formData.append('data', JSON.stringify(updateObj));
-    this.eventService.update(formData, data.eventid).subscribe(res => {
-      const response = JSON.parse(res._body);
-      if (response.status) {
-        if (flag) {
-          this.bootstrapAlertService.showSucccess(AppMessages.VALIDATION.COMMON.DELETE_SUCCESS);
+    if (flag) {
+      this.eventService.delete(updateObj, data.eventid).subscribe(res => {
+        const response = JSON.parse(res._body);
+        if (response.status) {
+          this.bootstrapAlertService.showSucccess('#' + data.eventid + ' ' + response.message);
           this.eventsList.splice(index, 1);
+          this.eventsList = [...this.eventsList];
         } else {
+          this.bootstrapAlertService.showError(response.message);
+        }
+      });
+    } else {
+      this.eventService.update(updateObj, data.eventid).subscribe(res => {
+        const response = JSON.parse(res._body);
+        if (response.status) {
           this.bootstrapAlertService.showSucccess(response.message);
           this.eventsList[index].status = response.data.status;
+          this.eventsList = [...this.eventsList];
+        } else {
+          this.bootstrapAlertService.showError(response.message);
         }
-        this.eventsList = [...this.eventsList];
-      } else {
-        this.bootstrapAlertService.showError(response.message);
-      }
-    });
+      });
+    }
   }
 }

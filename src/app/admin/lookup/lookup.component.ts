@@ -88,21 +88,29 @@ export class LookupComponent extends BaseService implements OnInit {
       status: flag ? AppConstant.STATUS_DELETED :
         (data.status === AppConstant.STATUS_ACTIVE ? AppConstant.STATUS_INACTIVE : AppConstant.STATUS_ACTIVE)
     };
-    this.lookupService.update(updateObj, data.refid).subscribe(res => {
-      const response = JSON.parse(res._body);
-      if (response.status) {
-        if (flag) {
-          this.bootstrapAlertService.showSucccess('#' + data.refid + ' ' + AppMessages.VALIDATION.COMMON.DELETE_SUCCESS);
+    if (flag) {
+      this.lookupService.delete(updateObj, data.refid).subscribe(res => {
+        const response = JSON.parse(res._body);
+        if (response.status) {
+          this.bootstrapAlertService.showSucccess('#' + data.refid + ' ' + response.message);
           this.lookupList.splice(index, 1);
+          this.lookupList = [...this.lookupList];
         } else {
+          this.bootstrapAlertService.showError(response.message);
+        }
+      });
+    } else {
+      this.lookupService.update(updateObj, data.refid).subscribe(res => {
+        const response = JSON.parse(res._body);
+        if (response.status) {
           this.bootstrapAlertService.showSucccess(response.message);
           this.lookupList[index].status = response.data.status;
+          this.lookupList = [...this.lookupList];
+        } else {
+          this.bootstrapAlertService.showError(response.message);
         }
-        this.lookupList = [...this.lookupList];
-      } else {
-        this.bootstrapAlertService.showError(response.message);
-      }
-    });
+      });
+    }
   }
   search(event?) {
     let val = '';

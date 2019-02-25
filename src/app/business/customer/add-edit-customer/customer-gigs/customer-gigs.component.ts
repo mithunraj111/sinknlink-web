@@ -73,22 +73,35 @@ export class CustomerGigsComponent implements OnInit, OnChanges {
     this.updateGig(updateObj, index, flag);
   }
   updateGig(data, index, flag) {
-    this.gigsService.update(data, this.gigObj.gigid).subscribe(res => {
-      const response = JSON.parse(res._body);
-      if (response.status) {
-        if (flag) {
-          this.bootstrapAlertService.showSucccess('#' + this.gigObj.gigid + ' ' + AppMessages.VALIDATION.COMMON.DELETE_SUCCESS);
+    if (flag) {
+      this.gigsService.delete(data, this.gigObj.gigid).subscribe(res => {
+        const response = JSON.parse(res._body);
+        if (response.status) {
+          this.bootstrapAlertService.showSucccess('#' + this.gigObj.gigid + ' ' + response.message);
           this.gigsList.splice(index, 1);
+          this.gigsList = [...this.gigsList];
         } else {
-          this.bootstrapAlertService.showSucccess(response.message);
-          this.gigsList[index].status = response.data.status;
-          this.initGigForm();
+          this.bootstrapAlertService.showError(response.message);
         }
-        this.gigsList = [...this.gigsList];
-      } else {
-        this.bootstrapAlertService.showError(response.message);
-      }
-    });
+      });
+    } else {
+      this.gigsService.update(data, this.gigObj.gigid).subscribe(res => {
+        const response = JSON.parse(res._body);
+        if (response.status) {
+          if (flag) {
+            this.bootstrapAlertService.showSucccess('#' + this.gigObj.gigid + ' ' + AppMessages.VALIDATION.COMMON.DELETE_SUCCESS);
+            this.gigsList.splice(index, 1);
+          } else {
+            this.bootstrapAlertService.showSucccess(response.message);
+            this.gigsList[index].status = response.data.status;
+            this.initGigForm();
+          }
+          this.gigsList = [...this.gigsList];
+        } else {
+          this.bootstrapAlertService.showError(response.message);
+        }
+      });
+    }
   }
   editGig(data) {
     this.gigObj = data;

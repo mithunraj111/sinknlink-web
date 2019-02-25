@@ -56,7 +56,7 @@ export class UsersComponent extends BaseService implements OnInit {
   changeStatus(data, index, flag) {
     const updateObj = {
       status: flag ? AppConstant.STATUS_DELETED :
-        data.status === AppConstant.STATUS_ACTIVE ? AppConstant.STATUS_INACTIVE : AppConstant.STATUS_ACTIVE,
+        (data.status === AppConstant.STATUS_ACTIVE ? AppConstant.STATUS_INACTIVE : AppConstant.STATUS_ACTIVE),
       updateddt: new Date(),
       updatedby: this.userstoragedata.fullname
     };

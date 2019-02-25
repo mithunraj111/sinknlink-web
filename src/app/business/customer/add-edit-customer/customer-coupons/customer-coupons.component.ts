@@ -70,21 +70,30 @@ export class CustomerCouponsComponent implements OnInit, OnChanges {
     this.updateCoupon(updateObj, index, flag);
   }
   updateCoupon(data, index, flag) {
-    this.couponService.update(data, this.couponObj.couponid).subscribe(res => {
-      const response = JSON.parse(res._body);
-      if (response.status) {
-        if (flag) {
-          this.bootstrapAlertService.showSucccess('#' + this.couponObj.couponid + ' ' + AppMessages.VALIDATION.COMMON.DELETE_SUCCESS);
+    if (flag) {
+      this.couponService.delete(data, data.couponid).subscribe(res => {
+        const response = JSON.parse(res._body);
+        if (response.status) {
+          this.bootstrapAlertService.showSucccess('#' + data.couponid + ' ' + response.message);
           this.couponList.splice(index, 1);
+          this.couponList = [...this.couponList];
         } else {
+          this.bootstrapAlertService.showError(response.message);
+        }
+      });
+    } else {
+      this.couponService.update(data, data.couponid).subscribe(res => {
+        const response = JSON.parse(res._body);
+        if (response.status) {
           this.bootstrapAlertService.showSucccess(response.message);
           this.couponList[index].status = response.data.status;
+          this.couponList = [...this.couponList];
+        } else {
+          this.bootstrapAlertService.showError(response.message);
         }
-        this.couponList = [...this.couponList];
-      } else {
-        this.bootstrapAlertService.showError(response.message);
-      }
-    });
+      });
+    }
+
   }
   saveOrUpdateCoupon() {
     let errMessage: any;
