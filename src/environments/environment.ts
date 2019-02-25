@@ -4,11 +4,11 @@
 
 export const environment = {
   production: false,
-  host: 'http://localhost',
-  port: 2000,
+  host: 'http://13.233.72.134',
+  port: 3000,
   baseurl: '/bd/'
-};
-
+ };
+ 
 /*
  * In development mode, to ignore zone related error stack frames such as
  * `zone.run`, `zoneDelegate.invokeTask` for easier debugging, you can

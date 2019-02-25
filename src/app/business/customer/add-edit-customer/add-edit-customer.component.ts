@@ -13,12 +13,15 @@ import * as _ from 'lodash';
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
 import { AppMessages } from 'src/app/app-messages';
 import { CustomerGalleryComponent } from './customer-gallery/customer-gallery.component';
+import { MapService } from '../../../services/map.service';
+
 @Component({
   selector: 'app-add-edit-customer',
   templateUrl: './add-edit-customer.component.html',
   styleUrls: ['./add-edit-customer.component.scss'],
   providers: [
-    { provide: NgbDateParserFormatter, useClass: NgbDateCustomParserFormatter }
+    { provide: NgbDateParserFormatter, useClass: NgbDateCustomParserFormatter },
+    MapService
   ],
   animations: [fadeInOutTranslate]
 })
@@ -49,6 +52,8 @@ export class AddEditCustomerComponent implements OnInit {
   customerObj = {} as any;
   branchFlag = false;
   parentid;
+  newlat: any;
+  newlong: any;
   isAddForm = true;
   constructor(private fb: FormBuilder,
     private categoryService: MasterService.CategoryService,
@@ -58,7 +63,9 @@ export class AddEditCustomerComponent implements OnInit {
     private customerService: BusinessService.CustomerService,
     private bootstrapAlertService: BootstrapAlertService,
     private locationService: MasterService.LocationService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private mapService: MapService
+
   ) {
     this.userstoragedata = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER);
     this.route.params.subscribe(params => {
@@ -79,7 +86,40 @@ export class AddEditCustomerComponent implements OnInit {
     this.getLookUps();
     this.getCategoryList();
     this.getLocationList();
+    this.loadScripts();
   }
+    
+  private loadScripts() {
+
+    this.mapService.load('googlemaps').then(data => {
+      console.log('script loaded')
+    }).catch(error => { console.log(error); console.log('Inside err') });
+
+  }
+
+    openmap() {
+    var data = this.customerForm.value;
+    var w: any = window;
+    var Curloc = { lat: parseFloat(data.latitude), lng: parseFloat(data.longitude) }
+    var gmap = w.google.maps;
+    var map = new gmap.Map(document.getElementById("map"), {
+      center: Curloc,
+      zoom: 12
+    });
+    var marker = new gmap.Marker({ position: Curloc, map: map, draggable: true })
+
+    gmap.event.addListener(marker, 'dragend', function () {
+      console.log(marker.getPosition())
+      // var latlng = marker.getPosition().Scopes.Closure;
+      // this.newlat = latlng.a;
+      // this.newlong = latlng.b;
+      // console.log(this.newlat, this.newlong)
+    });
+
+    this.openModal('mapmodal');
+  }
+
+    
   getCustomerDetail() {
     this.customerService.byId(this.customerid).subscribe(res => {
       const response = JSON.parse(res._body);
@@ -175,9 +215,7 @@ export class AddEditCustomerComponent implements OnInit {
     });
     this.buttonText = AppConstant.BUTTON_TXT.SAVE;
   }
-  openmap() {
-    this.openModal('mapmodal');
-  }
+
   addSocialId() {
     this.openModal('socialidmodal');
   }

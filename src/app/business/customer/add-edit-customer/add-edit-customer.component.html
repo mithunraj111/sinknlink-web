@@ -322,12 +322,15 @@
 <!-- GEO ADDRESS POP UP STARTS -->
 <div class="modal-size select-input addlocation">
     <app-modal-animation [modalID]="'mapmodal'" [modalClass]="'md-effect-7'">
-        <div class="card p-r-15 p-l-15">
-            <!-- <agm-map></agm-map> -->
+      <div class="card p-r-15 p-l-15">
+        <div class="col-md-12">
+          <div id="map">
+          </div>
         </div>
-        <button (click)="closeModal($event)" aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>
+      </div>
+      <button (click)="closeModal($event)" aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>
     </app-modal-animation>
-</div>
+  </div>
 <!-- GEO ADDRESS POP UP ENDS -->
 
 <!-- SOCIAL ID POPUP Starts -->
