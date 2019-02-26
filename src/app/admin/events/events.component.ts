@@ -71,7 +71,9 @@ export class EventsComponent extends BaseService implements OnInit {
         }
       });
     } else {
-      this.eventService.update(updateObj, data.eventid).subscribe(res => {
+      const formData = new FormData();
+      formData.append('data', JSON.stringify(updateObj));
+      this.eventService.update(formData, data.eventid).subscribe(res => {
         const response = JSON.parse(res._body);
         if (response.status) {
           this.bootstrapAlertService.showSucccess(response.message);

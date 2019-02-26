@@ -48,7 +48,9 @@ export class CategoryComponent extends BaseService implements OnInit {
         }
       });
     } else {
-      this.categoryService.update(updateObj, data.categoryid).subscribe(res => {
+      const formData = new FormData();
+      formData.append('data', JSON.stringify(updateObj));
+      this.categoryService.update(formData, data.categoryid).subscribe(res => {
         const response = JSON.parse(res._body);
         if (response.status) {
           this.bootstrapAlertService.showSucccess(response.message);

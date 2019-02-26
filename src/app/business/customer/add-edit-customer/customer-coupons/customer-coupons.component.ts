@@ -70,19 +70,22 @@ export class CustomerCouponsComponent implements OnInit, OnChanges {
     this.updateCoupon(updateObj, index, flag);
   }
   updateCoupon(data, index, flag) {
+
     if (flag) {
-      this.couponService.delete(data, data.couponid).subscribe(res => {
+      this.couponService.delete(data, this.couponObj.couponid).subscribe(res => {
+        console.log(this.couponObj.couponid)
         const response = JSON.parse(res._body);
         if (response.status) {
-          this.bootstrapAlertService.showSucccess('#' + data.couponid + ' ' + response.message);
+          this.bootstrapAlertService.showSucccess('#' + this.couponObj.couponid + ' ' + response.message);
           this.couponList.splice(index, 1);
           this.couponList = [...this.couponList];
         } else {
           this.bootstrapAlertService.showError(response.message);
         }
       });
-    } else {
-      this.couponService.update(data, data.couponid).subscribe(res => {
+    }
+    else {
+      this.couponService.update(data, this.couponObj.couponid).subscribe(res => {
         const response = JSON.parse(res._body);
         if (response.status) {
           this.bootstrapAlertService.showSucccess(response.message);
@@ -93,7 +96,6 @@ export class CustomerCouponsComponent implements OnInit, OnChanges {
         }
       });
     }
-
   }
   saveOrUpdateCoupon() {
     let errMessage: any;

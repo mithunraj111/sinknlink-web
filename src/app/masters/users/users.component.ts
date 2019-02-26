@@ -75,7 +75,9 @@ export class UsersComponent extends BaseService implements OnInit {
       });
     }
     else {
-      this.userService.update(updateObj, data.userid).subscribe(res => {
+      const formData = new FormData();
+      formData.append('data', JSON.stringify(updateObj));
+      this.userService.update(formData, data.userid).subscribe(res => {
         const response = JSON.parse(res._body);
         if (response.status) {
           this.bootstrapAlertService.showSucccess(response.message);
