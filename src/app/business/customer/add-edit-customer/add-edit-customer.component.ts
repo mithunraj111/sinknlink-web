@@ -52,8 +52,8 @@ export class AddEditCustomerComponent implements OnInit {
   customerObj = {} as any;
   branchFlag = false;
   parentid;
-  newlat: any;
-  newlong: any;
+  customerlat: any;
+  customerlng: any;
   isAddForm = true;
   constructor(private fb: FormBuilder,
     private categoryService: MasterService.CategoryService,
@@ -86,40 +86,9 @@ export class AddEditCustomerComponent implements OnInit {
     this.getLookUps();
     this.getCategoryList();
     this.getLocationList();
-    this.loadScripts();
-  }
-    
-  private loadScripts() {
-
-    this.mapService.load('googlemaps').then(data => {
-      console.log('script loaded') 
-    }).catch(error => { console.log(error); console.log('Inside err') });
-
+    this.loadMap();
   }
 
-    openmap() {
-    var data = this.customerForm.value;
-    var w: any = window;
-    var Curloc = { lat: parseFloat(data.latitude), lng: parseFloat(data.longitude) }
-    var gmap = w.google.maps;
-    var map = new gmap.Map(document.getElementById("map"), {
-      center: Curloc,
-      zoom: 12
-    });
-    var marker = new gmap.Marker({ position: Curloc, map: map, draggable: true })
-
-    gmap.event.addListener(marker, 'dragend', function () {
-      console.log(marker.getPosition())
-      // var latlng = marker.getPosition().Scopes.Closure;
-      // this.newlat = latlng.a;
-      // this.newlong = latlng.b;
-      // console.log(this.newlat, this.newlong)
-    });
-
-    this.openModal('mapmodal');
-  }
-
-    
   getCustomerDetail() {
     this.customerService.byId(this.customerid).subscribe(res => {
       const response = JSON.parse(res._body);
@@ -159,28 +128,28 @@ export class AddEditCustomerComponent implements OnInit {
           this.deliveryMethods = _.get(groupedData, 'biz_deliverymethods');
           this.mallsList = _.get(groupedData, 'biz_malls');
         }
-        if( this.customerid == null ){
-          let selectedMemberType = [] ;
-          _.each(this.memberTypes,function(item){
-            if(item.isdefault=='Y'){
+        if (this.customerid == null) {
+          let selectedMemberType = [];
+          _.each(this.memberTypes, function (item) {
+            if (item.isdefault == 'Y') {
               selectedMemberType.push(item.refvalue);
             }
           });
-          let selectedBusinessType = [] ;
-          _.each(this.businesstypes,function(item){
-            if(item.isdefault=='Y'){
+          let selectedBusinessType = [];
+          _.each(this.businesstypes, function (item) {
+            if (item.isdefault == 'Y') {
               selectedBusinessType.push(item.refvalue);
             }
           });
-          let selectedPaymentMethods = [] ;
-          _.each(this.paymentMethods,function(item){
-            if(item.isdefault=='Y'){
+          let selectedPaymentMethods = [];
+          _.each(this.paymentMethods, function (item) {
+            if (item.isdefault == 'Y') {
               selectedPaymentMethods.push(item.refvalue);
             }
           });
-          let selectedDeliveryOpts = [] ;
-          _.each(this.deliveryMethods,function(item){
-            if(item.isdefault=='Y'){
+          let selectedDeliveryOpts = [];
+          _.each(this.deliveryMethods, function (item) {
+            if (item.isdefault == 'Y') {
               selectedDeliveryOpts.push(item.refvalue);
             }
           });
@@ -208,7 +177,7 @@ export class AddEditCustomerComponent implements OnInit {
     this.customerForm = this.fb.group({
       bizname: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
       biztype: [null, Validators.required],
-      bizdesc: ['',Validators.compose([Validators.minLength(5), Validators.maxLength(100)])],
+      bizdesc: ['', Validators.compose([Validators.minLength(5), Validators.maxLength(100)])],
       contactperson: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
       contactmobile: [null, Validators.required],
       contactemail: ['', Validators.compose([Validators.pattern(AppConstant.REGEX.EMAIL), Validators.maxLength(100)])],
@@ -253,9 +222,9 @@ export class AddEditCustomerComponent implements OnInit {
     document.querySelector('#' + event).classList.add('md-show');
   }
   closeModal(event) {
-    ((event.target.parentElement.parentElement).parentElement).classList.remove('md-show');
+    document.querySelector('#' + event).classList.remove('md-show');
   }
-  update(event) {
+  update() {
     let socialids = '';
     const self = this;
     _.map(this.socailIdForm.value, function (value, key) {
@@ -264,7 +233,7 @@ export class AddEditCustomerComponent implements OnInit {
       }
       self.customerForm.controls['socialids'].setValue(socialids);
     });
-    this.closeModal(event);
+    this.closeModal('socialidmodal');
   }
   saveOrUpdateBusiness() {
     let errMessage: any;
@@ -304,7 +273,7 @@ export class AddEditCustomerComponent implements OnInit {
         lat: data.latitude,
         lng: data.longitude
       };
-      
+
       if (this.userstoragedata.usertype === 'D') {
         formdata.dealerid = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.DEALER).dealerid;
       }
@@ -423,4 +392,54 @@ export class AddEditCustomerComponent implements OnInit {
     this.customerForm.patchValue(this.customerObj);
     this.buttonText = AppConstant.BUTTON_TXT.UPDATE;
   }
+
+  //map starts 
+
+
+  private loadMap() {
+
+    this.mapService.load('googlemaps').catch(error => { console.log(error); console.log('Inside err') });
+
+  }
+
+  openmap() {
+
+    var data = this.customerForm.value;
+    var w: any = window;
+    var userLocation = this;
+    
+    if (data.latitude && data.longitude !== null) {
+      var Curloc = { lat: parseFloat(data.latitude), lng: parseFloat(data.longitude) }
+    }
+    else {
+      var Curloc = { lat: 11.0805951, lng: 76.9425555 }
+    }
+
+    var gmap = w.google.maps;
+    var map = new gmap.Map(document.getElementById("map"), {
+      center: Curloc,
+      zoom: 12
+    });
+
+    var input = document.getElementById('pac-input'); 
+
+    var marker = new gmap.Marker({ position: Curloc, map: map, draggable: true })
+    gmap.event.addListener(marker, 'dragend', function () {
+      userLocation.customerlat = marker.getPosition().lat();
+      userLocation.customerlng = marker.getPosition().lng();
+    });
+    this.openModal('mapmodal');
+  }
+
+  setlocation() {
+    this.customerForm.patchValue({
+      latitude: this.customerlat,
+      longitude: this.customerlng
+    });
+    this.closeModal('mapmodal');
+  }
+
 }
+
+
+// map ends
