@@ -1617,3 +1617,8 @@ body[themebg-pattern="pattern1"]{
     color: $primary-color !important;
 }
 // no data //
+select-dropdown{
+    div{
+        z-index: 11 !important;
+    }
+}

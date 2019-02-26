@@ -92,7 +92,7 @@ export class AddEditCustomerComponent implements OnInit {
   private loadScripts() {
 
     this.mapService.load('googlemaps').then(data => {
-      console.log('script loaded')
+      console.log('script loaded') 
     }).catch(error => { console.log(error); console.log('Inside err') });
 
   }
@@ -158,6 +158,36 @@ export class AddEditCustomerComponent implements OnInit {
           this.paymentMethods = _.get(groupedData, 'biz_paymentmethods');
           this.deliveryMethods = _.get(groupedData, 'biz_deliverymethods');
           this.mallsList = _.get(groupedData, 'biz_malls');
+        }
+        if( this.customerid == null ){
+          let selectedMemberType = [] ;
+          _.each(this.memberTypes,function(item){
+            if(item.isdefault=='Y'){
+              selectedMemberType.push(item.refvalue);
+            }
+          });
+          let selectedBusinessType = [] ;
+          _.each(this.businesstypes,function(item){
+            if(item.isdefault=='Y'){
+              selectedBusinessType.push(item.refvalue);
+            }
+          });
+          let selectedPaymentMethods = [] ;
+          _.each(this.paymentMethods,function(item){
+            if(item.isdefault=='Y'){
+              selectedPaymentMethods.push(item.refvalue);
+            }
+          });
+          let selectedDeliveryOpts = [] ;
+          _.each(this.deliveryMethods,function(item){
+            if(item.isdefault=='Y'){
+              selectedDeliveryOpts.push(item.refvalue);
+            }
+          });
+          this.customerForm.controls['membershiptype'].setValue(selectedMemberType);
+          this.customerForm.controls['biztype'].setValue(selectedBusinessType);
+          this.customerForm.controls['acceptedpayments'].setValue(selectedPaymentMethods);
+          this.customerForm.controls['deliveryoptions'].setValue(selectedDeliveryOpts);
         }
       }
     });
@@ -237,7 +267,6 @@ export class AddEditCustomerComponent implements OnInit {
     this.closeModal(event);
   }
   saveOrUpdateBusiness() {
-    console.log('..');
     let errMessage: any;
     if (!this.customerForm.valid) {
       errMessage = this.commonService.getFormErrorMessage(this.customerForm, this.customerErrObj);
