@@ -16,10 +16,6 @@ import { ViewConsumerComponent } from './consumer/view-consumer/view-consumer.co
 const routes: Routes = [
   {
     path: '',
-    // data: {
-    //   title: 'Business',
-    //   status: false
-    // },
     children: [
       {
         path: 'customers',
@@ -33,7 +29,7 @@ const routes: Routes = [
         path: 'customers/create',
         component: AddEditCustomerComponent,
         data: {
-          title: 'Customers',
+          title: 'Customer',
           status: false
         },
       },
@@ -41,7 +37,7 @@ const routes: Routes = [
         path: 'customers/edit/:id',
         component: AddEditCustomerComponent,
         data: {
-          title: 'Customers',
+          title: 'Customer',
           status: false
         },
       },
@@ -49,7 +45,7 @@ const routes: Routes = [
         path: 'customers/branches',
         component: CustomerBranchesComponent,
         data: {
-          title: 'Customers',
+          title: 'Customer',
           status: false
         },
       },
@@ -57,7 +53,7 @@ const routes: Routes = [
         path: 'customers/gigs',
         component: CustomerGigsComponent,
         data: {
-          title: 'Customers',
+          title: 'Customer',
           status: false
         },
       },
@@ -65,7 +61,7 @@ const routes: Routes = [
         path: 'customers/coupons',
         component: CustomerCouponsComponent,
         data: {
-          title: 'Customers',
+          title: 'Customer',
           status: false
         },
       },
@@ -81,7 +77,7 @@ const routes: Routes = [
         path: 'dealer',
         component: DealerComponent,
         data: {
-          title: 'Dealer',
+          title: 'Dealers',
           status: false
         },
       },
@@ -121,7 +117,7 @@ const routes: Routes = [
         path: 'consumers/view/:id',
         component: ViewConsumerComponent,
         data: {
-          title: 'Consumers',
+          title: 'Consumer',
           status: false
         },
       },

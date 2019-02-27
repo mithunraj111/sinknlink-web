@@ -38,7 +38,7 @@
               <span>{{row.membershipcode}}</span>
             </ng-template>
           </ngx-datatable-column>
-          <ngx-datatable-column prop="city" name="City" [resizeable]="false">
+          <ngx-datatable-column prop="location.city" name="City" [resizeable]="false">
             <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
               <span>{{row.location?.city}}</span>
             </ng-template>

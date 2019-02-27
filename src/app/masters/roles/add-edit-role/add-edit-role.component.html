@@ -25,8 +25,8 @@
             </div>
             <div class="col-md-4 col-sm-4">
                 <div class="form-group required row">
-                    <label class="col-sm-3 p-l-0 p-r-0 col-form-label"><b>Data Access</b></label>
-                    <div class="col-sm-9 p-l-0 p-r-0">
+                    <label class="col-sm-4 p-l-0 p-r-0 col-form-label"><b>Data Access</b></label>
+                    <div class="col-sm-8 p-l-0 p-r-0">
                         <select class="form-control" name="dataaccess" [(ngModel)]="dataaccess">
                             <option value="">Select Data Access</option>
                             <option value="All">All</option>
@@ -39,7 +39,7 @@
             <div *ngIf="roleid" class="col-md-2 col-sm-2 text-center">
                 <div class="form-group row">
                     <label class="col-sm-6 p-r-0 col-form-label text-right"><b>Status</b><small>*</small></label>
-                    <div class="col-sm-4 p-l-0 p-r-0">
+                    <div class="col-sm-4 p-l-0 p-r-0 p-t-10">
                         <ui-switch class="js-small" color="$primary-color" [(ngModel)]="status" switchColor="#fff"
                             size="small" checked></ui-switch>
                     </div>
@@ -74,10 +74,19 @@
                     <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.5" headerClass="text-center"
                         [cellClass]="'text-center'" [resizeable]="false">
                         <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                            <a placement="bottom" ngbTooltip="Click to edit permissions"
-                                class="m-r-15 crm-action-edit text-primary"
-                                (click)="openPermissionModal('permission',row,rowIndex)">
-                                <i class="fa fa-pencil"></i></a>
+                            <div class="row checkbox-column text-center">
+                                <div class="border-checkbox-section">
+                                    <div class="border-checkbox-group border-checkbox-group-primary m-r-15">
+                                        <input class="border-checkbox" type="checkbox" id={{rowIndex}}
+                                            (change)="onSelectPermissions(rowIndex)">
+                                        <label class="border-checkbox-label" for="{{rowIndex}}"></label>
+                                    </div>
+                                </div>
+                                <a placement="bottom" ngbTooltip="Click to edit permissions"
+                                    class="m-r-15 crm-action-edit text-primary"
+                                    (click)="openPermissionModal('permission',row,rowIndex)">
+                                    <i class="fa fa-pencil"></i></a>
+                            </div>
                         </ng-template>
                     </ngx-datatable-column>
                 </ngx-datatable>

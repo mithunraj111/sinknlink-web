@@ -4,12 +4,12 @@
       <div class="row">
         <div class="col-md-6 col-sm-6">
           <input #vipnoregSearch type="text" (keyup)='search($event)'
-            class="header-search form-control col-md-8 col-sm-8 p-l-0 input-sm full-data-search"
-            placeholder="Search here" placement="bottom" ngbTooltip="Type here to search">
+            class="header-search form-control col-md-8 col-sm-8 p-l-0 input-sm full-data-search" placeholder="Search here"
+            placement="bottom" ngbTooltip="Type here to search">
           <button type="button" class="btn search-close col-md-1 col-sm-1 p-l-0 p-r-0"
             (click)="vipnoregSearch.value='';search();"><i class="fa fa-close"></i></button>
         </div>
-        <div class="col-md-4 col-sm-2 text-right">
+        <div class="col-md-3 col-sm-2 text-right">
           <div *ngIf="currentTab == 'Available'" ngbDropdown class="dropdown-primary">
             <button ngbDropdownToggle class="btn add-btn btn-primary waves-effect waves-light "
               type="button">Action</button>
@@ -19,7 +19,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md-2 col-sm-4 p-r-10 text-right">
+        <div class="col-md-3 col-sm-4 p-r-10 text-right">
           <button type="button" placement="bottom" ngbTooltip="Click to add"
             class="m-r-10 add-btn btn btn-primary waves-effect" (click)='addVipRegistration()'><i
               class="fa fa-plus-circle m-r-5"></i> New</button>

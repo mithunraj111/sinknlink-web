@@ -12,10 +12,6 @@ import { from } from 'rxjs';
 const routes: Routes = [
   {
     path: '',
-    // data: {
-    //   title: 'Admin',
-    //   status: false
-    // },
     children: [
       {
         path: 'events',
@@ -29,7 +25,7 @@ const routes: Routes = [
         path: 'event/create',
         component: AddEditEventComponent,
         data: {
-          title: 'Events',
+          title: 'Event',
           status: false
         },
       },
@@ -37,7 +33,7 @@ const routes: Routes = [
         path: 'event/edit/:id',
         component: AddEditEventComponent,
         data: {
-          title: 'Events',
+          title: 'Event',
           status: false
         },
       },
@@ -53,7 +49,7 @@ const routes: Routes = [
         path: 'donation/create',
         component: AddEditDonationComponent,
         data: {
-          title: 'Donations',
+          title: 'Donation',
           status: false
         },
       },
@@ -61,7 +57,7 @@ const routes: Routes = [
         path: 'donation/edit/:id',
         component: AddEditDonationComponent,
         data: {
-          title: 'Donations',
+          title: 'Donation',
           status: false
         },
       },

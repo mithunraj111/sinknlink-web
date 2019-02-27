@@ -32,7 +32,7 @@ const routes: Routes = [
         path: 'location',
         component: LocationComponent,
         data: {
-          title: 'Location',
+          title: 'Locations',
           status: false
         }
       },
@@ -40,7 +40,7 @@ const routes: Routes = [
         path: 'category',
         component: CategoryComponent,
         data: {
-          title: 'Category',
+          title: 'Business Categories',
           status: false
         }
       }

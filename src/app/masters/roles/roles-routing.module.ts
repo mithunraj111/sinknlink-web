@@ -18,7 +18,7 @@ const routes: Routes = [
     path: 'create',
     component: AddEditRoleComponent,
     data: {
-      title: 'Add Role',
+      title: 'Role',
       icon: 'ti-settings',
       caption: 'add role',
       status: false
@@ -28,7 +28,7 @@ const routes: Routes = [
     path: 'edit/:id',
     component: AddEditRoleComponent,
     data: {
-      title: 'Edit Role',
+      title: 'Role',
       icon: 'ti-settings',
       caption: 'edit role',
       status: false

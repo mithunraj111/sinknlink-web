@@ -16,14 +16,14 @@ const routes: Routes = [
     path: 'create',
     component: AddEditUserComponent,
     data:{
-      title: 'Users'
+      title: 'User'
     }
   },
   {
     path: 'edit/:id',
     component: AddEditUserComponent,
     data:{
-      title: 'Users'
+      title: 'User'
     }
   }
 ]
