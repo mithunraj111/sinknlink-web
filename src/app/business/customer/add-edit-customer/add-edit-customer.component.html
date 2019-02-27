@@ -345,9 +345,10 @@
   <app-modal-animation [modalID]="'mapmodal'" [modalClass]="'md-effect-7'">
     <div class="card p-r-15 p-l-15">
       <div class="col-md-12">
-        <div id="map">
-        </div>
+        <div id="map"></div>
       </div>
+      <div class="col-md-12" id="controls">
+     </div>
     </div>
     <button (click)="closeModal('mapmodal')" aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>
     <button (click)="setlocation($event)" placement="bottom" ngbTooltip="Click here to set location " class="btn btn-primary text-center">Set</button>
@@ -359,7 +360,7 @@
 <div class="modal-size select-input addlocation">
   <app-modal-animation [modalID]="'socialidmodal'" [modalClass]="'md-effect-7'">
     <h3 class="f-26">Social ID</h3>
-    <form class="form-header" [formGroup]="socailIdForm">
+    <form class="form-header" [formGroup]="socialidForm">
       <div class="col-md-12">
         <div class="form-group">
           <label>Facebook</label>

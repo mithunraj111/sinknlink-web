@@ -27,7 +27,7 @@ import { MapService } from '../../../services/map.service';
 })
 export class AddEditCustomerComponent implements OnInit {
   customerForm: FormGroup;
-  socailIdForm: FormGroup;
+  socialidForm: FormGroup;
   formTitle: string;
   buttonText = AppConstant.BUTTON_TXT.SAVE;
   savecustomer;
@@ -206,7 +206,7 @@ export class AddEditCustomerComponent implements OnInit {
       inmallyn: [false],
       mallname: ['']
     });
-    this.socailIdForm = this.fb.group({
+    this.socialidForm = this.fb.group({
       fb: [''],
       gmail: [''],
       twitter: [''],
@@ -227,7 +227,7 @@ export class AddEditCustomerComponent implements OnInit {
   update() {
     let socialids = '';
     const self = this;
-    _.map(this.socailIdForm.value, function (value, key) {
+    _.map(this.socialidForm.value, function (value, key) {
       if (value != null && value != '') {
         socialids = socialids + value + ',';
       }
@@ -264,7 +264,7 @@ export class AddEditCustomerComponent implements OnInit {
       if (formdata.inmallyn === 'Y') {
         formdata.mallname = formdata.mallname;
       }
-      formdata.socialids = this.socailIdForm.value;
+      formdata.socialids = this.socialidForm.value;
       formdata.workhours = {
         starttime: data.starttime,
         endtime: data.endtime
@@ -380,7 +380,7 @@ export class AddEditCustomerComponent implements OnInit {
     this.customerObj.inmallyn = this.customerObj.inmallyn === 'Y' ? true : false;
     this.customerObj.status = (this.customerObj.status === AppConstant.STATUS_ACTIVE ? true : false);
     if (this.customerObj.socialids != null) {
-      this.socailIdForm.patchValue(this.customerObj.socialids);
+      this.socialidForm.patchValue(this.customerObj.socialids);
       let socialids = '';
       _.map(this.customerObj.socialids, function (value, key) {
         if (value != null && value != '') {
@@ -407,7 +407,7 @@ export class AddEditCustomerComponent implements OnInit {
     var data = this.customerForm.value;
     var w: any = window;
     var userLocation = this;
-    
+
     if (data.latitude && data.longitude !== null) {
       var Curloc = { lat: parseFloat(data.latitude), lng: parseFloat(data.longitude) }
     }
@@ -418,15 +418,64 @@ export class AddEditCustomerComponent implements OnInit {
     var gmap = w.google.maps;
     var map = new gmap.Map(document.getElementById("map"), {
       center: Curloc,
-      zoom: 12
+      zoom: 12,
+      mapTypeControl: false,
+      fullscreenControl: false
     });
 
-    var input = document.getElementById('pac-input'); 
+    let location = document.getElementById("controls");
+    let pac_input = document.createElement("input");
+    pac_input.setAttribute("id", "pac-input");
+    pac_input.setAttribute("class", "controls");
+    pac_input.setAttribute("type", "text");
+    pac_input.setAttribute("placeholder", "Search here");
 
-    var marker = new gmap.Marker({ position: Curloc, map: map, draggable: true })
-    gmap.event.addListener(marker, 'dragend', function () {
-      userLocation.customerlat = marker.getPosition().lat();
-      userLocation.customerlng = marker.getPosition().lng();
+    location.appendChild(pac_input);
+
+    var searchBox = new gmap.places.SearchBox(document.getElementById('pac-input'));
+
+    map.controls[gmap.ControlPosition.TOP_CENTER].push(document.getElementById('pac-input'));
+
+    map.addListener('bounds_changed', function () {
+      searchBox.setBounds(map.getBounds());
+    });
+
+    gmap.event.addListener(searchBox, 'places_changed', function () {
+
+      searchBox.set('map', null);
+
+
+      var places = searchBox.getPlaces();
+
+      var bounds = gmap.LatLngBounds();
+
+      places.forEach(function (place) {
+        if (!place.geometry) {
+          console.log("Returned place contains no geometry");
+          return;
+        }
+        var placevalue = place.geometry.location;
+        // console.log(place.geometry.location)
+
+        var marker = new gmap.Marker({ position: { lat: placevalue.lat(), lng: placevalue.lng() }, map: map, draggable: true })
+        gmap.event.addListener(marker, 'dragend', function () {
+          userLocation.customerlat = marker.getPosition().lat();
+          userLocation.customerlng = marker.getPosition().lng();
+        });
+
+        gmap.event.addListener(marker, 'map_changed', function () {
+          if (!this.getMap()) {
+            this.unbindAll();
+          }
+        });
+        // if (place.geometry.viewport) {
+        //   bounds.union(place.geometry.viewport);
+        // } else {
+        //   bounds.extend(place.geometry.location);
+        // }
+      });
+      // console.log(bounds)
+      // map.fitBounds(bounds);
     });
     this.openModal('mapmodal');
   }

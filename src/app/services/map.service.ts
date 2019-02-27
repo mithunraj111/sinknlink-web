@@ -6,7 +6,7 @@ interface Scripts {
 }
 
 export const Scriptsrc: Scripts[] = [
-  { name: 'googlemaps', src: 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCSnVLpMDtCcctoW83R8JnO-WK-eRXvZww' }
+  { name: 'googlemaps', src: 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCSnVLpMDtCcctoW83R8JnO-WK-eRXvZww&libraries=places' }
 ]
 declare var document: any;
 
