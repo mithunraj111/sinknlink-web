@@ -27,7 +27,7 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
   donationList = [];
   selectedDonation = {} as any;
   totalamount = 0;
-  nextdue = new Date();
+  // nextdue = new Date();
   lastpaid = new Date();
   subscriptionAmt = 100;
   selfPayment = true;

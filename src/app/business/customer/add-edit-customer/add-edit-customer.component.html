@@ -3,9 +3,8 @@
     <div class="header-title m-b-15 pos-fixed">
       <div class="row">
         <div class="col-md-6 col-sm-6">
-          <h2>Customer</h2>
           <p class="m-b-0" *ngIf="customerObj?.membershipid">
-            <i class="fa fa-pencil"></i> Membership ID: {{customerObj?.membershipid}}
+            <!-- <i class="fa fa-pencil"></i> Membership ID: {{customerObj?.membershipid}} -->
           </p>
         </div>
         <div class="col-md-6 col-sm-6 save-button text-right p-r-30">
@@ -58,12 +57,11 @@
                             </div>
                           </div>
                           <div class="form-group row">
-                            <label class="col-md-3 col-sm-6 col-form-label text-right">Business
-                              description</label>
+                            <label class="col-md-3 col-sm-6 col-form-label text-right">Description</label>
                             <div class="col-md-9 col-sm-6">
                               <div class="input-box">
-                                <textarea rows="3" cols="3" class="form-control" placeholder="Business description"
-                                  formControlName="bizdesc"></textarea>
+                                <textarea rows="3" cols="3" class="form-control" placeholder="Description"
+                                  formControlName="bizdescription"></textarea>
                               </div>
                             </div>
                           </div>

@@ -9,16 +9,12 @@ import { CustomerdetailComponent } from './customerdetail/customerdetail.compone
 const routes: Routes = [
   {
     path: '',
-    // data: {
-    //   title: 'Reports',
-    //   status: false
-    // },
     children: [
       {
         path: 'areacategories',
         component: AreaCategoriesComponent,
         data: {
-          title: 'Area & Category',
+          title: 'Area & Category Reports',
           status: false
         },
       },
@@ -50,7 +46,7 @@ const routes: Routes = [
         path: 'customerdetail',
         component: CustomerdetailComponent,
         data: {
-          title: 'Customer detail reports',
+          title: 'Business Reports',
           status: false
         },
       }

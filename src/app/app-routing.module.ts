@@ -18,6 +18,9 @@ const routes: Routes = [
       {
         path: 'dashboard',
         component: DashboardComponent,
+        data: {
+          title: 'Dashboard' 
+        }
       },
       {
         path: 'masters',
@@ -33,7 +36,10 @@ const routes: Routes = [
       },
       {
         path: 'profile',
-        component: ProfileComponent
+        component: ProfileComponent,
+        data: {
+          title: 'User Profile'
+        }
       },
       {
         path: 'reports',

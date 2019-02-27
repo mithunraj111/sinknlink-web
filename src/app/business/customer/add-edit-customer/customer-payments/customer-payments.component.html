@@ -1,14 +1,14 @@
-<div class="employee-form m-t-15">
+<div class="employee-form">
+    <div class="header-title">
+        <h3 class="f-18 text-primary m-l-25">Payments</h3>
+    </div>
     <div class="card tenants-page tenants-pages m-b-10">
         <div class="row">
             <div class="col-md-12 col-sm-12">
-                <div class="header-title">
-                    <h3 class="f-18 text-primary m-l-15">Payments</h3>
-                </div>
-                <div class="form-group row mb-0">
+                <!-- <div class="form-group row mb-0">
                     <label class="col-md-3 col-sm-6 col-form-label text-right">Next due</label>
                     <span class="col-form-label col-md-9 col-sm-6">{{nextdue|date:datedisplayformat}}</span>
-                </div>
+                </div> -->
                 <div class="form-group row mb-0">
                     <label class="col-md-3 col-sm-6 col-form-label text-right">Last paid</label>
                     <span class="col-form-label col-md-9 col-sm-6 f-16">{{lastpaid|date:datedisplayformat}}</span>
@@ -17,7 +17,7 @@
                     <label class="col-md-3 col-sm-6 col-form-label text-right">Subscription Amount</label>
                     <div class="border-checkbox-group border-checkbox-group-primary col-md-7 col-sm-6 ml-1 p-t-5">
                         <input class="border-checkbox" type="checkbox" id="checkbox1" [(ngModel)]="selfPayment">
-                        <label class="border-checkbox-label f-w-300" for="checkbox1">{{subscriptionAmt}}</label>
+                        <label class="border-checkbox-label f-w-300" for="checkbox1">{{subscriptionAmt | currency: 'INR' :true}}</label>
                     </div>
                 </div>
                 <!-- <div class="form group row border-checkbox-section">
@@ -28,14 +28,14 @@
                     </div>
                 </div> -->
                 <div class="header-title m-t-20 mb-3">
-                    <h3 class="f-18 text-primary m-l-15">Donate for a cause</h3>
+                    <h3 class="f-18 text-primary m-l-10">Donate for a cause</h3>
                 </div>
                 <div *ngFor="let donation of donationList; index as i" class="form-group row border-checkbox-section">
                     <div
                         class="border-checkbox-group border-checkbox-group-primary col-md-3 text-right col-sm-6 m-l-5 p-t-5">
                         <input class="border-checkbox" type="checkbox" id={{i}} [(ngModel)]="donation.selected"
                             (change)="donationChecked()">
-                        <label class="border-checkbox-label" for="{{i}}">{{donation.charityname}}
+                        <label class="border-checkbox-label" for={{i}}>{{donation.charityname}}
                             <a placement="bottom" ngbTooltip="Click to view donation cause"
                                 (click)="viewDonationCause(donation);"><i class="fa fa-question-circle"
                                     aria-hidden="true"></i></a>
@@ -54,9 +54,9 @@
                 <div class="col-md-12 col-sm-12 pay-online">
                     <div class="row">
                         <div class="col-md-3 col-sm-3"></div>
-                        <div class="col-md-9 col-sm-9 p-l-0">
+                        <div class="col-md-9 col-sm-9 p-l-0 p-r-0 header-title">
                             <button type="button" placement="bottom" ngbTooltip="Click to pay online"
-                                class="btn btn-primary pull-left">Pay
+                                class="btn btn-primary pull-right">Pay
                                 online</button>
                         </div>
                     </div>
@@ -64,22 +64,20 @@
             </div>
         </div>
     </div>
-    <div class="header-title addeditpage m-t-10 mb-3">
-        <div class="row">
-            <div class="col-md-5 col-sm-6 p-t-10">
-                <h3 class="f-18 text-primary m-l-15">History</h3>
-            </div>
-            <div class="col-md-5 col-sm-6">
-                <div class="text-right">
+    <div class="header-title addeditpage mb-3">
+        <div class="col-md-6 col-sm-6">
+            <h3 class="f-18 text-primary m-l-15 p-t-10">History</h3>
+        </div>
+        <div class="row p-l-15">
+            <div class="col-md-10 col-sm-6">
                     <input #customerPaymentSearch type="text"
-                        class="header-search form-control col-md-8 col-sm-8 p-l-0 p-r-0 input-sm full-data-search"
+                        class="header-search form-control col-md-5 col-sm-5 p-l-0 p-r-0 input-sm full-data-search"
                         placeholder="Search here" (keyup)='search($event)' placement="bottom"
                         ngbTooltip="Type here to search">
                     <button type="button" class="btn search search-close col-md-1 col-sm-1 p-l-0 p-r-0"
                         (click)="customerPaymentSearch.value='';search();"><i class="fa fa-close"></i></button>
-                </div>
             </div>
-            <div class="col-md-2 col-sm-1 p-l-0 p-r-30 text-right">
+            <div class="col-md-2 col-sm-6 p-l-0 p-r-30 text-right">
                 <button type="button" placement="bottom" ngbTooltip="Click to add payment"
                     class="add-btn btn btn-primary waves-effect" (click)='addpayment()'><i
                         class="fa fa-plus-circle m-r-5"></i> New
@@ -145,7 +143,7 @@
                                 <input class="form-control" placeholder="dd-mm-yyyy" name="dp"
                                     formControlName="paymentdt" ngbDatepicker #dp1="ngbDatepicker"
                                     [readonly]="viewPayment">
-                                <div class="input-group-append bg-default" (click)="dp1.toggle()">
+                                <div class="input-group-append bg-default" (click)="dp1.toggle()" >
                                     <span class="fa fa-calendar input-group-text"></span>
                                 </div>
                             </div>
@@ -195,7 +193,7 @@
     <!-- View Payment Details PopUp Ends -->
     <div class="modal-size">
         <app-modal-animation [modalID]="'donationCauseModal'" [modalClass]="'md-effect-7'">
-            <textarea rows="3" cols="3" class="form-control" placeholder="Description"
-                readonly>{{selectedDonation?.causeremarks}}</textarea>
+            <h3>Remarks</h3>
+            <p class="px-3 p-t-10">{{selectedDonation?.causeremarks|| "Cause for donation"}}</p>
         </app-modal-animation>
     </div>

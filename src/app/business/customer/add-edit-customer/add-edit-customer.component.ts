@@ -177,7 +177,7 @@ export class AddEditCustomerComponent implements OnInit {
     this.customerForm = this.fb.group({
       bizname: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
       biztype: [null, Validators.required],
-      bizdesc: ['', Validators.compose([Validators.minLength(5), Validators.maxLength(100)])],
+      bizdescription: ['', Validators.compose([Validators.minLength(5), Validators.maxLength(100)])],
       contactperson: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
       contactmobile: [null, Validators.required],
       contactemail: ['', Validators.compose([Validators.pattern(AppConstant.REGEX.EMAIL), Validators.maxLength(100)])],
