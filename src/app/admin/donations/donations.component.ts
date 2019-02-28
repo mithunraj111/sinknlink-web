@@ -9,8 +9,7 @@ import { AppMessages } from '../../app-messages';
 @Component({
   selector: 'app-donations',
   templateUrl: './donations.component.html',
-  encapsulation: ViewEncapsulation.None,
-  styleUrls: ['./donations.component.scss']
+  encapsulation: ViewEncapsulation.None
 })
 export class DonationsComponent extends BaseService implements OnInit {
   @ViewChild(DatatableComponent) table: DatatableComponent;

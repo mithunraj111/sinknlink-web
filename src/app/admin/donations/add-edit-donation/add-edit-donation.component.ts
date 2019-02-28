@@ -13,7 +13,6 @@ import * as _ from 'lodash';
 @Component({
   selector: 'app-add-edit-donation',
   templateUrl: './add-edit-donation.component.html',
-  styleUrls: ['./add-edit-donation.component.scss'],
   providers: [
     { provide: NgbDateParserFormatter, useClass: NgbDateCustomParserFormatter }
   ]

@@ -15,7 +15,6 @@ import { Alert } from 'selenium-webdriver';
 @Component({
   selector: 'app-add-edit-event',
   templateUrl: './add-edit-event.component.html',
-  styleUrls: ['./add-edit-event.component.scss'],
   providers: [
     { provide: NgbDateParserFormatter, useClass: NgbDateCustomParserFormatter }
   ]

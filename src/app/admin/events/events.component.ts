@@ -8,8 +8,7 @@ import { AppMessages } from 'src/app/app-messages';
 
 @Component({
   selector: 'app-events',
-  templateUrl: './events.component.html',
-  styleUrls: ['./events.component.scss']
+  templateUrl: './events.component.html'
 })
 export class EventsComponent extends BaseService implements OnInit {
 
