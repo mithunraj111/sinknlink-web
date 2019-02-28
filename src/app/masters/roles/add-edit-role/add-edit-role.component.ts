@@ -61,9 +61,9 @@ export class AddEditRoleComponent implements OnInit {
     this.loadingIndicator = true;
     this.lookupService.list({ refkey: 'app_screens', status: AppConstant.STATUS_ACTIVE }).subscribe(res => {
       const response = JSON.parse(res._body);
+
       if (response.status) {
         this.loadingIndicator = false;
-
         if (response.data.length != 0) {
           this.screensList = JSON.parse(response.data[0].refvalue);
           if (this.roleid) {
@@ -73,6 +73,9 @@ export class AddEditRoleComponent implements OnInit {
               if (!_.isUndefined(data)) {
                 const index = _.indexOf(self.screensList, data);
                 self.screensList[index].assignedpermissions = item.assignedpermissions;
+                if (_.isEqual(self.screensList[index].assignedpermissions,self.screensList[index].permissions)) {
+                  self.screensList[index].checked = true;
+                }
               }
               if (idx + 1 === self.roleObj.uiactions.length) {
                 self.screensList = [...self.screensList];
@@ -183,7 +186,7 @@ export class AddEditRoleComponent implements OnInit {
     if (this.screensList[rowIndex].checked) {
       this.screensList[rowIndex].assignedpermissions = this.screensList[rowIndex].permissions;
     } else {
-      this.screensList[rowIndex].assignedpermissions = [];
+      this.screensList[rowIndex].assignedpermissions = "-";
     }
     this.screensList = [...this.screensList];
   }
