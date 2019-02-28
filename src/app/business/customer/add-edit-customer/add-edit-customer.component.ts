@@ -14,6 +14,7 @@ import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
 import { AppMessages } from 'src/app/app-messages';
 import { CustomerGalleryComponent } from './customer-gallery/customer-gallery.component';
 import { MapService } from '../../../services/map.service';
+import { Position } from 'ngx-perfect-scrollbar';
 
 @Component({
   selector: 'app-add-edit-customer',
@@ -92,10 +93,12 @@ export class AddEditCustomerComponent implements OnInit {
   getCustomerDetail() {
     this.customerService.byId(this.customerid).subscribe(res => {
       const response = JSON.parse(res._body);
+      console.log(response)
       if (response.status) {
         if (response.data != null) {
           this.customerObj = response.data;
           this.generateEditForm();
+          
         }
       }
     });
@@ -354,16 +357,19 @@ export class AddEditCustomerComponent implements OnInit {
     this.customerObj.regdate = this.commonService.parseDate(this.customerObj.regdate);
     this.customerObj.starttime = this.customerObj.workhours.starttime;
     this.customerObj.endtime = this.customerObj.workhours.endtime;
+
     if (this.customerObj.geoaddress) {
-      this.customerObj.lat = this.customerObj.geoaddress.lat;
-      this.customerObj.lng = this.customerObj.geoaddress.lng;
+      this.customerObj.latitude = this.customerObj.geoaddress.lat;
+      this.customerObj.longitude = this.customerObj.geoaddress.lng;
     }
+
     this.customerObj.contactmobile = _.map(this.customerObj.contactmobile, function (item) {
       return {
         value: item,
         display: item
       };
     });
+
     this.customerObj.phoneno = _.map(this.customerObj.phoneno, function (item) {
       return {
         value: item,
@@ -403,83 +409,88 @@ export class AddEditCustomerComponent implements OnInit {
   }
 
   openmap() {
-
-    var data = this.customerForm.value;
-    var w: any = window;
-    var userLocation = this;
-
-    if (data.latitude && data.longitude !== null) {
-      var Curloc = { lat: parseFloat(data.latitude), lng: parseFloat(data.longitude) }
-    }
-    else {
-      var Curloc = { lat: 11.0805951, lng: 76.9425555 }
-    }
-
-    var gmap = w.google.maps;
-    var map = new gmap.Map(document.getElementById("map"), {
-      center: Curloc,
-      zoom: 12,
-      mapTypeControl: false,
-      fullscreenControl: false
-    });
-
+    let data = this.customerForm.value;
+    let a = this;
+    let w: any = window;
+    let gmap = w.google.maps;
+    let markers = [];
+    let Curloc;
+    let map;
+    // Creating Search field.
     let location = document.getElementById("controls");
     let pac_input = document.createElement("input");
     pac_input.setAttribute("id", "pac-input");
     pac_input.setAttribute("class", "controls");
     pac_input.setAttribute("type", "text");
     pac_input.setAttribute("placeholder", "Search here");
-
+    pac_input.setAttribute("autocomplete", "on");   
     location.appendChild(pac_input);
-
-    var searchBox = new gmap.places.SearchBox(document.getElementById('pac-input'));
-
-    map.controls[gmap.ControlPosition.TOP_CENTER].push(document.getElementById('pac-input'));
-
+    if (data.latitude && data.longitude !== null) {
+      Curloc = { lat: parseFloat(data.latitude), lng: parseFloat(data.longitude) }
+    }
+    else {
+      Curloc = { lat: 0.0, lng: 0.0 }
+    }
+    map = new gmap.Map(document.getElementById("map"), {
+      center: Curloc,
+      zoom: 16,
+      mapTypeControl: false,
+      fullscreenControl: false,
+      mapTypeId: 'roadmap'
+    });
+    var marker = new gmap.Marker({ position: Curloc, map: map, draggable: true })
+    gmap.event.addListener(marker, 'dragend', function () {
+      a.customerlat = marker.getPosition().lat();
+      a.customerlng = marker.getPosition().lng();
+    });
+    markers.push(marker);
+    this.openModal('mapmodal');
+    a.createAutoCompleteSearchBox(gmap, a, markers, map);
+  }
+  createAutoCompleteSearchBox(gmap, a, markers, map) {
+    let s_input = document.getElementById('pac-input');
+    var searchBox = new gmap.places.SearchBox(s_input);
+    map.controls[gmap.ControlPosition.TOP_LEFT].push(s_input);
     map.addListener('bounds_changed', function () {
       searchBox.setBounds(map.getBounds());
     });
-
-    gmap.event.addListener(searchBox, 'places_changed', function () {
-
-      searchBox.set('map', null);
-
-
+    searchBox.addListener('places_changed', function () {
       var places = searchBox.getPlaces();
-
-      var bounds = gmap.LatLngBounds();
-
+      if (places.length == 0) {
+        return;
+      }
+      markers.forEach(function (marker) {
+        marker.setMap(null);
+      });
+      markers = [];
+      var bounds = new gmap.LatLngBounds();
       places.forEach(function (place) {
         if (!place.geometry) {
           console.log("Returned place contains no geometry");
           return;
         }
-        var placevalue = place.geometry.location;
-        // console.log(place.geometry.location)
+        var marker = new gmap.Marker({
+          map: map,
+          title: place.name,
+          position: place.geometry.location,
+          draggable: true
+        });
 
-        var marker = new gmap.Marker({ position: { lat: placevalue.lat(), lng: placevalue.lng() }, map: map, draggable: true })
         gmap.event.addListener(marker, 'dragend', function () {
-          userLocation.customerlat = marker.getPosition().lat();
-          userLocation.customerlng = marker.getPosition().lng();
+          a.customerlat = marker.getPosition().lat();
+          a.customerlng = marker.getPosition().lng();
         });
-
-        gmap.event.addListener(marker, 'map_changed', function () {
-          if (!this.getMap()) {
-            this.unbindAll();
-          }
-        });
-        // if (place.geometry.viewport) {
-        //   bounds.union(place.geometry.viewport);
-        // } else {
-        //   bounds.extend(place.geometry.location);
-        // }
+        markers.push(marker);
+          
+        if (place.geometry.viewport) {
+          bounds.union(place.geometry.viewport);
+        } else {
+          bounds.extend(place.geometry.location);
+        }
       });
-      // console.log(bounds)
-      // map.fitBounds(bounds);
+      map.fitBounds(bounds);
     });
-    this.openModal('mapmodal');
-  }
-
+  };
   setlocation() {
     this.customerForm.patchValue({
       latitude: this.customerlat,
@@ -487,7 +498,6 @@ export class AddEditCustomerComponent implements OnInit {
     });
     this.closeModal('mapmodal');
   }
-
 }
 
 
