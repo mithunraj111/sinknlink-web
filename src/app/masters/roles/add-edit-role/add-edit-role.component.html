@@ -77,9 +77,9 @@
                             <div class="row checkbox-column text-center">
                                 <div class="border-checkbox-section">
                                     <div class="border-checkbox-group border-checkbox-group-primary m-r-15">
-                                        <input class="border-checkbox" type="checkbox" id={{rowIndex}}
-                                            (change)="onSelectPermissions(rowIndex)">
-                                        <label class="border-checkbox-label" for="{{rowIndex}}"></label>
+                                        <input  class="border-checkbox" type="checkbox" id={{rowIndex}}
+                                            (change)="onSelectPermissions(rowIndex)" [(ngModel)]="row.checked">
+                                        <label  class="border-checkbox-label" for="{{rowIndex}}" ></label>
                                     </div>
                                 </div>
                                 <a placement="bottom" ngbTooltip="Click to edit permissions"

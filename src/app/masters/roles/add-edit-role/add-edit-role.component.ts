@@ -7,7 +7,6 @@ import { LookupService } from '../../../services/admin/lookup.service';
 import { LocalStorageService } from '../../../services/local-storage.service';
 import * as _ from 'lodash';
 import { AppMessages } from 'src/app/app-messages';
-import { CheckboxControlValueAccessor } from '@angular/forms';
 @Component({
   selector: 'app-add-edit-role',
   templateUrl: './add-edit-role.component.html',
@@ -32,6 +31,8 @@ export class AddEditRoleComponent implements OnInit {
   emptymessages = AppConstant.EMPTY_MESSAGES.ADDROLES;
   loadingIndicator: boolean = true;
   savepermissions;
+  ischecked: boolean = false;
+
   constructor(
     private route: ActivatedRoute,
     private bootstrapAlertService: BootstrapAlertService,
@@ -179,7 +180,11 @@ export class AddEditRoleComponent implements OnInit {
     });
   }
   onSelectPermissions(rowIndex) {
-    this.screensList[rowIndex].assignedpermissions=this.screensList[rowIndex].permissions;
+    if (this.screensList[rowIndex].checked) {
+      this.screensList[rowIndex].assignedpermissions = this.screensList[rowIndex].permissions;
+    } else {
+      this.screensList[rowIndex].assignedpermissions = [];
+    }
     this.screensList = [...this.screensList];
   }
 }
