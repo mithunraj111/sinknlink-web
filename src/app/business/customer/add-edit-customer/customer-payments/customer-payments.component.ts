@@ -18,7 +18,6 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
   datedisplayformat = AppConstant.API_CONFIG.ANG_DATE.displaydate;
   newPayment = true;
   viewPayment = true;
-  noEdit = true;
   @Input() customerObj = {} as any;
   selectedPaymentObj = {} as any;
   addPaymentForm: FormGroup;
@@ -27,8 +26,8 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
   donationList = [];
   selectedDonation = {} as any;
   totalamount = 0;
-  // nextdue = new Date();
-  lastpaid = new Date();
+  nextdue: any;
+  lastpaid: any;
   subscriptionAmt = 100;
   selfPayment = true;
 
@@ -40,7 +39,6 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
     private donationService: AdminService.DonationService,
     private bootstrapAlertService: BootstrapAlertService) {
     this.totalamount = this.subscriptionAmt;
-
   }
 
   ngOnInit() {
@@ -54,7 +52,6 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
       totalamount: [null, Validators.required],
       paymentref: ['', Validators.required],
       paymentmode: ['', Validators.required],
-
       remarks: ['']
     });
   }
@@ -62,12 +59,33 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
     this.getPaymentHistory(changes.customerObj.currentValue);
   }
   getPaymentHistory(customerObj) {
+    let selectedDate = [] as any ;
     if (!_.isEmpty(customerObj)) {
       this.paymentService.list({ membershipid: customerObj.membershipid }).subscribe(res => {
         const response = JSON.parse(res._body);
         if (response.status) {
           this.payHistoryList = response.data;
           this.tempFilter = this.payHistoryList;
+        }
+        let orderedDate = _.orderBy(this.payHistoryList, 'paymentdate','desc');
+        selectedDate = _.find(orderedDate, function (obj: any) {
+          if (obj.paymentstatus === 'Success') {return obj;}
+        });
+        this.lastpaid = selectedDate.paymentdate;
+        this.nextdue = (this.lastpaid) + ' 00:00:00';
+        console.log(this.nextdue);
+        if(this.customerObj.paymenttenure == 'Yearly') {
+          console.log('Yearly');
+        } else {
+          if (this.customerObj.paymenttenure == 'Half Yearly') {
+            console.log('Half yearly');
+          } else { 
+            if(this.customerObj.paymenttenure == 'Quarterly') {
+              console.log('Quarterly');
+            } else {
+              console.log('Monthly');
+            }
+          }
         }
       });
     }
@@ -95,16 +113,15 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
     this.openModal('customerpaymentmodal');
     this.newPayment = false;
     this.viewPayment = true;
-    this.noEdit = true;
     this.selectedPaymentObj = row;
     this.selectedPaymentObj.paymentdt = this.commonService.parseDate(this.selectedPaymentObj.paymentdate);
     this.addPaymentForm.patchValue(this.selectedPaymentObj);
   }
   addpayment() {
+    this.initPaymentForm();
     this.openModal('customerpaymentmodal');
     this.newPayment = true;
     this.viewPayment = false;
-    this.noEdit = false;
   }
   viewDonationCause(data) {
     this.selectedDonation = data;
