@@ -4,17 +4,19 @@
       <div class="header-title pos-fixed">
         <div class="row">
           <div class="col-md-6 col-sm-6">
-            <input #roleSearch type="text" class="header-search form-control col-md-5 col-sm-5 input-sm full-data-search"
-              placeholder="Search here" (keyup)='search($event)' placement="bottom" ngbTooltip="Type here to search">
-            <button type="button" class="btn search-close col-md-1 col-sm-1 p-l-0 p-r-0" (click)="roleSearch.value='';search();"><i
-                class="fa fa-close"></i></button>
+            <input #roleSearch type="text"
+              class="header-search form-control col-md-5 col-sm-5 input-sm full-data-search" placeholder="Search here"
+              (keyup)='search($event)' placement="bottom" ngbTooltip="Type here to search">
+            <button type="button" class="btn search-close col-md-1 col-sm-1 p-l-0 p-r-0"
+              (click)="roleSearch.value='';search();"><i class="fa fa-close"></i></button>
           </div>
           <div class="col-md-6 col-sm-6 p-r-10 text-right">
-            <button *ngIf="add" type="button" placement="bottom" ngbTooltip="Click to add role" class="add-btn btn btn-primary waves-effect"
-              (click)='addRole()'><i class="fa fa-plus-circle m-r-5"></i> New
+            <button *ngIf="add" type="button" placement="bottom" ngbTooltip="Click to add role"
+              class="add-btn btn btn-primary waves-effect" (click)='addRole()'><i class="fa fa-plus-circle m-r-5"></i>
+              New
             </button>
-            <button type="button" placement="bottom" ngbTooltip="Reload" (click)="getRoles()" class="btn btn-inverse btn-primary waves-effect m-l-10"><i
-                class="ti-reload "></i></button>
+            <button type="button" placement="bottom" ngbTooltip="Reload" (click)="getRoles()"
+              class="btn btn-inverse btn-primary waves-effect m-l-10"><i class="ti-reload "></i></button>
           </div>
         </div>
       </div>
@@ -22,7 +24,8 @@
     <div class="table-header fixed-table">
       <div class="card p-r-10 p-l-10">
         <ngx-datatable #roletable class="table data-table expandable" [rows]='rolesList' [columnMode]="'flex'"
-          [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false" [footerHeight]="50" [limit]="10" [messages]="emptymessages">
+          [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false" [footerHeight]="50" [limit]="10"
+          [messages]="emptymessages">
           <ngx-datatable-column prop="rolename" name="Role Name" [resizeable]="false">
             <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
               <span>{{row.rolename}}</span>
@@ -39,30 +42,34 @@
               <span class="updatedate"> {{row.updateddt|date:displayformat}}</span>
             </ng-template>
           </ngx-datatable-column>
-          <ngx-datatable-column name="Status" [sortable]="false" [flexGrow]="0.5" headerClass="text-center" [cellClass]="'text-center'"
-            [resizeable]="false">
+          <ngx-datatable-column name="Status" [sortable]="false" [flexGrow]="0.5" headerClass="text-center"
+            [cellClass]="'text-center'" [resizeable]="false">
             <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-              <ui-switch class="js-small" placement="bottom" (change)="updateRoleStatus(row,rowIndex,false)" [checked]="row.status == 'Active'"
+              <ui-switch class="js-small" placement="bottom" (change)="updateRoleStatus(row,rowIndex,false)"
+                [checked]="row.status == 'Active'"
                 [disabled]="row.rolename ==='Admin' || row.rolename ==='Dealer' || row.rolename ==='Customer'"
                 [ngbTooltip]="(row.rolename ==='Admin' || row.rolename ==='Dealer' || row.rolename ==='Customer') ? '' : 'Click to change status'"
                 color="$primary-color" switchColor="#fff" size="small"></ui-switch>
             </ng-template>
           </ngx-datatable-column>
-          <ngx-datatable-column *ngIf="edit || delete" name="Action" [sortable]="false" [flexGrow]="0.5" headerClass="text-center"
-            [cellClass]="'text-center'" [resizeable]="false">
+          <ngx-datatable-column *ngIf="edit || delete" name="Action" [sortable]="false" [flexGrow]="0.5"
+            headerClass="text-center" [cellClass]="'text-center'" [resizeable]="false">
             <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
               <a [ngClass]="{
                             'disabled': ( row.rolename ==='Admin' || row.rolename ==='Dealer' || row.rolename ==='Customer')
-                          }"
-                *ngIf="edit" placement="bottom" ngbTooltip="Click to edit role" class="m-r-15 crm-action-edit text-primary"
-                (click)='editRole(row.roleid)'>
+                          }" *ngIf="edit" placement="bottom" ngbTooltip="Click to edit role"
+                class="m-r-15 crm-action-edit text-primary" (click)='editRole(row.roleid)'>
                 <i class="fa fa-pencil"></i></a>
               <a [ngClass]="{
                             'disabled': ( row.rolename ==='Admin' || row.rolename ==='Dealer' || row.rolename ==='Customer')
-                          }"
-                *ngIf="delete" placement="bottom" ngbTooltip="Click to delete role" class="crm-action-delete text-danger"
-                (click)="updateRoleStatus(row,rowIndex,true)">
+                          }" *ngIf="delete" placement="bottom" ngbTooltip="Click to delete role"
+                class="m-r-15 crm-action-delete text-danger" (click)="updateRoleStatus(row,rowIndex,true)">
                 <i class="fa fa-trash"></i></a>
+              <a [ngClass]="{
+                'disabled': ( row.rolename ==='Admin' || row.rolename ==='Dealer' || row.rolename ==='Customer')
+              }" placement="bottom" ngbTooltip="Click to copy" class="m-r-15 crm-action-edit text-primary"
+                (click)='copyRole(row.roleid)'>
+                <i class="fa fa-copy"></i></a>
             </ng-template>
           </ngx-datatable-column>
         </ngx-datatable>
@@ -74,10 +81,10 @@
     <div class="nodata-text nodata-image">
       <img class="hand-icon" src="assets/images/no-data.png">
       <h3>Create Role(s) associated with organization</h3>
-      <button *ngIf="add" type="button" placement="bottom" ngbTooltip="Click to add donation" class="add-btn btn btn-primary waves-effect"
-        (click)='addRole()'><i class="fa fa-plus-circle m-r-5"></i>Create Role</button>
+      <button *ngIf="add" type="button" placement="bottom" ngbTooltip="Click to add donation"
+        class="add-btn btn btn-primary waves-effect" (click)='addRole()'><i class="fa fa-plus-circle m-r-5"></i>Create
+        Role</button>
     </div>
   </div>
 </div>
-
 <app-loader *ngIf="loadingIndicator"></app-loader>

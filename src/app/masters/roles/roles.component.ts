@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { AppConstant } from '../../app.constants';
 import { LocalStorageService, BaseService, MasterService, CommonService } from '../../services';
@@ -18,18 +18,21 @@ export class RolesComponent extends BaseService implements OnInit {
   emptymessages = AppConstant.EMPTY_MESSAGES.ROLES;
   displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   loadingIndicator: boolean = true;
-
-  constructor(private router: Router,
+  roleid:number;
+  constructor(private router: Router,private route: ActivatedRoute,
     private roleService: MasterService.RoleService,
     private bootstrapAlertService: BootstrapAlertService,
     private commonService: CommonService) {
     super();
     this.getScreenDetails('m_roles');
     this.emptymessages = AppConstant.EMPTY_MESSAGES.ROLES;
+  
+    
   }
 
   ngOnInit() {
     this.getRoles();
+    
   }
   getRoles() {
     this.loadingIndicator = true;
@@ -47,6 +50,10 @@ export class RolesComponent extends BaseService implements OnInit {
   }
   editRole(id) {
     this.router.navigate(['masters/roles/edit/' + id]);
+  }
+  copyRole(id) {
+    console.log(id);
+    this.router.navigate(['masters/roles/copy'],{queryParams:{mode:'copy', id:id} } );
   }
   getRowHeight(row) {
     return row.height;

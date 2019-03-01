@@ -32,7 +32,7 @@ export class AddEditRoleComponent implements OnInit {
   loadingIndicator: boolean = true;
   savepermissions;
   ischecked: boolean = false;
-
+  mode;
   constructor(
     private route: ActivatedRoute,
     private bootstrapAlertService: BootstrapAlertService,
@@ -51,10 +51,15 @@ export class AddEditRoleComponent implements OnInit {
         this.getRoleDetail(this.roleid);
       }
     });
+    this.route.queryParams.subscribe(params => {
+      this.mode = params.mode;
+      this.getRoleDetail(params.id);
+});
   }
 
   ngOnInit() {
     this.getScreenNames();
+
   }
 
   getScreenNames() {
@@ -66,14 +71,14 @@ export class AddEditRoleComponent implements OnInit {
         this.loadingIndicator = false;
         if (response.data.length != 0) {
           this.screensList = JSON.parse(response.data[0].refvalue);
-          if (this.roleid) {
+          if (this.roleid || this.mode =='copy') {
             const self = this;
             _.map(this.roleObj.uiactions, function (item, idx) {
               const data = _.find(self.screensList, { screencode: item.screencode });
               if (!_.isUndefined(data)) {
                 const index = _.indexOf(self.screensList, data);
                 self.screensList[index].assignedpermissions = item.assignedpermissions;
-                if (_.isEqual(self.screensList[index].assignedpermissions,self.screensList[index].permissions)) {
+                if (_.isEqual(self.screensList[index].assignedpermissions, self.screensList[index].permissions)) {
                   self.screensList[index].checked = true;
                 }
               }
@@ -82,6 +87,7 @@ export class AddEditRoleComponent implements OnInit {
               }
             });
           }
+
         }
 
       }
@@ -119,6 +125,7 @@ export class AddEditRoleComponent implements OnInit {
       this.bootstrapAlertService.showError(this.roleErrObj.rolename.required);
       return false;
     }
+    
     if (this.rolename.length > 50) {
       this.bootstrapAlertService.showError(this.roleErrObj.rolename.maxlength);
       return false;
@@ -176,10 +183,14 @@ export class AddEditRoleComponent implements OnInit {
       if (response.status) {
         this.roleObj = response.data;
         this.rolename = response.data.rolename;
-
         this.dataaccess = response.data.dataaccess;
         this.status = response.data.status === AppConstant.STATUS_ACTIVE ? true : false;
-      }
+        if (this.mode == 'copy') {
+          this.roleObj.roleid = null;
+          this.rolename = '';
+          
+        }
+        }
     });
   }
   onSelectPermissions(rowIndex) {
