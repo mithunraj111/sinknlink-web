@@ -37,7 +37,7 @@
         display: block;
         border-radius: 50%;
         transform: translate(-50%, -50%);
-        background-color: #1abc9c;
+        background-color: $primary-color;
     }
     .circle.delay-1 {
         animation-delay: 0.125s;

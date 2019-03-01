@@ -186,7 +186,7 @@ export class MainComponent implements OnInit {
     this.isVerticalLayoutChecked = false;
     this.isSidebarChecked = true;
     this.isHeaderChecked = true;
-    this.headerFixedMargin = '0px';
+    this.headerFixedMargin = '55px';
     this.sidebarFixedHeight = 'calc(100vh - 56px)';
     this.itemBorderStyle = 'none';
     this.subItemBorder = true;

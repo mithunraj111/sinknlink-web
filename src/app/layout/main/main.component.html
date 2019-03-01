@@ -6,24 +6,25 @@
     (window:resize)="onResize($event)">
     <div class="pcoded-overlay-box"></div>
     <div class="pcoded-container navbar-wrapper">
-        <nav class="navbar header-navbar pcoded-header main-header" [attr.header-theme]="headerTheme"
+        <nav class="navbar header-navbar navbar-title pcoded-header main-header" [attr.header-theme]="headerTheme"
             [attr.pcoded-header-position]="pcodedHeaderPosition">
             <div class="navbar-wrapper">
                 <div class="navbar-logo">
+                    
                     <a class="mobile-menu" id="mobile-collapse" href="javascript:" (click)="toggleOpened()"
                         [exclude]="'#main_navbar'" (clickOutside)="onClickedOutsideSidebar($event)">
                         <i class="ti-menu"></i>
                     </a>
-                    <div class="main-title m-l-20 m-t-5">
-                        <h2 class="pl-2">{{title}}</h2>
-                    </div>
-                    <!-- <a [routerLink]="['/dashboard']">
-                        <img class="img-fluid" src="assets/images/Logo.png" alt="Business Directory" />
+                    <a [routerLink]="['/dashboard']" style="margin-top:7px;">
+                        <!-- <img class="img-fluid" src="assets/images/Logo.png" alt="Business Directory" /> -->
                         <h1 class="logo-title">Business Directory</h1>
-                    </a> -->
+                    </a>
                     <a href="javascript:" class="mobile-options" (click)="toggleHeaderNavRight()">
                         <i class="ti-more"></i>
                     </a>
+                </div>
+                <div class="main-title m-l-20 m-t-5">
+                    <h2 class="pl-2">{{title}}</h2>
                 </div>
                 <div class="navbar-container container-fluid">
                     <ul class="nav-left">
@@ -42,6 +43,7 @@
                                 <span>{{userstoragedata.fullname}}</span>
                                 <!-- <i class="fa fa-chevron-down"></i> -->
                             </a>
+                            <a class="btn logout-btn" placement="bottom" ngbTooltip="Logout" (click)="logout()"><i class="icofont-logout"></i></a>
 
                             <!-- <ul [@notificationBottom]="profileNotification"
                                 class="show-notification profile-notification">
@@ -73,9 +75,9 @@
                             <span class="d-color">
 
                                 <!-- <div class="pcoded-navigation-label" [attr.menu-title-theme]="menuTitleTheme"></div> -->
-                                <a class="navbar-title" [routerLink]="['/dashboard']">
+                                <!-- <a class="navbar-title" [routerLink]="['/dashboard']">
                                     <h1 class="logo-title">Business Directory</h1>
-                                </a>
+                                </a> -->
                                 <ul class="pcoded-item pcoded-left-item main-nav-item" [attr.item-border]="itemBorder"
                                     [attr.item-border-style]="itemBorderStyle" [attr.subitem-border]="subItemBorder"
                                     *ngFor="let asideItem of availScreens" appAccordionLink group="{{asideItem.state}}">
@@ -178,11 +180,11 @@
                                     </li>
                                 </ul>
                             </span>
-                            <ul class="logout-btn">
+                            <!-- <ul class="logout-btn">
                                 <li>
                                     <a class="btn" (click)="logout()">Logout</a>
                                 </li>
-                            </ul>
+                            </ul> -->
                         </perfect-scrollbar>
                     </div>
                 </nav>
