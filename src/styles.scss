@@ -356,13 +356,11 @@ textarea {
             border-bottom:1px solid #d3d5d8;
             .datatable-body-cell{
                 border: 0px solid #d3d5d8;
-                // font-size: 13px;
-                font-size: 14px;
+                font-size: 13px;
                 color: #67757c;
                 padding: 3px 10px;
-                // font-family: 'Poppins', sans-serif;
-                font-family: "Nunito", sans-serif;
-                font-weight: 400;
+                font-family: 'Montserrat', sans-serif;
+                font-weight: 500;
                 display: inline-block;
                 vertical-align: middle;
                 width:100%;
@@ -434,10 +432,8 @@ textarea {
     line-height:16px;
 }
 .updatedate{
-    color: #848484;
     font-size: 12px;
     line-height: 16px;
-    font-family: 'Poppins', sans-serif;
 }
 .table{
     margin-bottom: 10px;
@@ -1562,7 +1558,7 @@ body[themebg-pattern="pattern1"]{
     .data-table {
         .datatable-header {
             .datatable-header-cell{
-                width:auto;
+                width:100%;
             }
         }
     }
