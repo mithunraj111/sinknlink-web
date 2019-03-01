@@ -1,13 +1,14 @@
-<div class="addeditpage">
+<div class="addeditpage vieweditpage">
   <div class="fixedheader">
     <div class="header-title m-b-15 pos-fixed">
       <div class="row">
-        <div class="col-md-6 col-sm-6">
-          <p class="m-b-0" *ngIf="consumer?.membershipid">
+        <div class="col-md-9 col-sm-9 p-l-0 p-r-0 border-bottom">
+          <h2 class="m-l-0 m-b-5">Details</h2>
+          <p class="m-b-5 m-l-0" *ngIf="consumer?.membershipid">
             <i class="fa fa-pencil"></i> Membership ID: {{consumer?.membershipid}}
           </p>
         </div>
-        <div class="col-md-6 col-sm-6 save-button text-right p-r-30">
+        <div class="col-md-3 col-sm-3 save-button text-right">
           <button type="button" placement="bottom" ngbTooltip="Go back" routerLink="/business/consumers" class="btn btn-inverse btn-primary waves-effect"><i
               class="fa fa-arrow-circle-left"></i></button>
         </div>
@@ -30,63 +31,64 @@
           <ngb-tab title="Details">
             <ng-template ngbTabContent>
               <div [@fadeInOutTranslate]>
-                <div class="employee-form">
-                  <div class="card tenants-page m-b-10">
-                    <div class="row p-t-10 p-b-5">
-                      <label class="col-md-5 col-sm-6 col-form-label text-right">Name</label>
+                <div class="employee-form view-list-form">
+                  <div class="m-b-10 m-l-25">
+                    <div class="row">
+                      <label class="col-md-3 col-sm-5 col-form-label text-left">Name : </label>
                       <div class="col-md-7 col-sm-7 m-t-5">
                         <span class="f-15">{{consumer?.fullname || '-'}}</span>
                       </div>
+                      
                     </div>
-                    <div class="row p-t-10 p-b-5">
-                      <label class="col-md-5 col-sm-6 col-form-label text-right">Location</label>
+                    <div class="row">
+                      <label class="col-md-3 col-sm-5 col-form-label text-left">Location : </label>
                       <div class="col-md-7 col-sm-7 m-t-5">
                         <span class="f-15">{{consumer.location?.area + consumer.location?.pincode || '-'}}</span>
                       </div>
                     </div>
-                    <div class="row p-t-10 p-b-5">
-                      <label class="col-md-5 col-sm-6 col-form-label text-right">Address</label>
+                    <div class="row">
+                      <label class="col-md-3 col-sm-5 col-form-label text-left">Address : </label>
                       <div class="col-md-7 col-sm-7 m-t-5">
                         <span class="f-15">{{consumer?.postaladdress || '-'}} </span>
                       </div>
                     </div>
-                    <div class="row p-t-10 p-b-5">
-                      <label class="col-md-5 col-sm-6 col-form-label text-right">Mobile</label>
+                    <div class="row">
+                      <label class="col-md-3 col-sm-5 col-form-label text-left">Mobile : </label>
                       <div class="col-md-7 col-sm-7 m-t-5">
                         <span class="f-15">{{consumer?.mobileno || '-'}}</span>
                       </div>
                     </div>
-                    <div class="row p-t-10 p-b-5">
-                      <label class="col-md-5 col-sm-6 col-form-label text-right">Email</label>
+                    <div class="row">
+                      <label class="col-md-3 col-sm-5 col-form-label text-left">Email : </label>
                       <div class="col-md-7 col-sm-7 m-t-5">
                         <span class="f-15">{{consumer?.contactemail || '-'}}</span>
                       </div>
                     </div>
-                    <div class="row p-t-10 p-b-5">
-                      <label class="col-md-5 col-sm-6 col-form-label text-right">Social
-                        Ids</label>
+                    <div class="row">
+                      <label class="col-md-3 col-sm-5 col-form-label text-left">Social
+                        Ids : </label>
                       <div class="col-md-7 col-sm-7 m-t-5">
                         <span class="f-15">Facebook id<br />Twitter id<br />Google
                           id<br />Instagram id</span>
                       </div>
                     </div>
-                    <div class="row p-t-10 p-b-5">
-                      <label class="col-md-5 col-sm-6 col-form-label text-right">Linked Membership
-                        Id</label>
+                    <div class="row">
+                      <label class="col-md-3 col-sm-5 col-form-label text-left">Linked Membership
+                        Id : </label>
                       <div class="col-md-7 col-sm-7 m-t-5">
                         <span class="f-15">{{consumer?.membershipid || '-'}}</span>
                       </div>
                     </div>
-                    <div class="row p-t-10 p-b-5">
-                      <label class="col-md-5 col-sm-6 col-form-label text-right">Signup
-                        date</label>
+                    <div class="row">
+                      <label class="col-md-3 col-sm-5 col-form-label text-left">Signup
+                        date : </label>
                       <div class="col-md-7 col-sm-7 m-t-5">
                         <span class="f-15">{{consumer?.createddt|date:date_displayformat}}</span>
                       </div>
                     </div>
-                    <div class="row p-t-10 p-b-5">
-                      <label class="col-md-5 col-sm-6 col-form-label text-right">Last login
-                        date</label>
+                    <div class="row">
+                      <label class="col-md-3 col-sm-5 col-form-label text-left">Last login
+                        date : </label>
                       <div class="col-md-7 col-sm-7 m-t-5">
                         <span class="f-15">{{consumer?.user?.lastlogin|date:date_displayformat}}</span>
                       </div>
