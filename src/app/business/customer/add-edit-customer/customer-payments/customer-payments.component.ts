@@ -23,6 +23,9 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
   addPaymentForm: FormGroup;
   addPaymentErrObj = AppMessages.VALIDATION.PAYMENTS;
   paymentMethods = [];
+  paymentTenure = [];
+  paymentarray: any ;
+  userstoragedata = {} as any;
   donationList = [];
   selectedDonation = {} as any;
   totalamount = 0;
@@ -37,14 +40,15 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
     private commonService: CommonService,
     private fb: FormBuilder,
     private donationService: AdminService.DonationService,
-    private bootstrapAlertService: BootstrapAlertService) {
+    private bootstrapAlertService: BootstrapAlertService,
+    private localStorageService: LocalStorageService) {
     this.totalamount = this.subscriptionAmt;
+    this.getDonations();
+    this.userstoragedata = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER);
   }
 
   ngOnInit() {
     this.initPaymentForm();
-    this.getLookUps();
-    this.getDonations();
   }
   initPaymentForm() {
     this.addPaymentForm = this.fb.group({
@@ -57,36 +61,22 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
   }
   ngOnChanges(changes: SimpleChanges) {
     this.getPaymentHistory(changes.customerObj.currentValue);
+    this.getLookUps();
   }
   getPaymentHistory(customerObj) {
-    let selectedDate = [] as any ;
+    let selectedDate = [] as any;
     if (!_.isEmpty(customerObj)) {
       this.paymentService.list({ membershipid: customerObj.membershipid }).subscribe(res => {
         const response = JSON.parse(res._body);
         if (response.status) {
-          this.payHistoryList = response.data;
           this.tempFilter = this.payHistoryList;
+          this.payHistoryList = response.data;
         }
-        let orderedDate = _.orderBy(this.payHistoryList, 'paymentdate','desc');
+        let orderedDate = _.orderBy(this.payHistoryList, 'paymentdate', 'desc');
         selectedDate = _.find(orderedDate, function (obj: any) {
-          if (obj.paymentstatus === 'Success') {return obj;}
+          if (obj.paymentstatus === 'Success') { return obj; }
         });
         this.lastpaid = selectedDate.paymentdate;
-        this.nextdue = (this.lastpaid) + ' 00:00:00';
-        console.log(this.nextdue);
-        if(this.customerObj.paymenttenure == 'Yearly') {
-          console.log('Yearly');
-        } else {
-          if (this.customerObj.paymenttenure == 'Half Yearly') {
-            console.log('Half yearly');
-          } else { 
-            if(this.customerObj.paymenttenure == 'Quarterly') {
-              console.log('Quarterly');
-            } else {
-              console.log('Monthly');
-            }
-          }
-        }
       });
     }
   }
@@ -141,8 +131,12 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
           });
           let groupedData = _.groupBy(response.data, 'refkey');
           this.paymentMethods = _.get(groupedData, 'biz_paymentmethods');
+          this.paymentTenure = _.get(groupedData, 'biz_paymenttenure');
         }
       }
+      this.paymentarray = this.paymentTenure.find((item)=>item.refid == this.customerObj.paymenttenure)
+      var date = new Date(this.lastpaid);
+      this.nextdue = date.setDate(date.getDate() + Number(this.paymentarray.refvalue));
     });
   }
 

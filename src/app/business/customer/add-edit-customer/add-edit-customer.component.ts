@@ -15,6 +15,7 @@ import { AppMessages } from 'src/app/app-messages';
 import { CustomerGalleryComponent } from './customer-gallery/customer-gallery.component';
 import { MapService } from '../../../services/map.service';
 import { Position } from 'ngx-perfect-scrollbar';
+import { IOption } from 'ng-select';
 
 @Component({
   selector: 'app-add-edit-customer',
@@ -45,7 +46,7 @@ export class AddEditCustomerComponent implements OnInit {
   deliveryMethods = [];
   locationList = [];
   mallsList = [];
-  paymentTenures = AppConstant.PAYMENT_TENURES;
+  paymentTenuresList = [];
   paymentStatus = AppConstant.PAYMENT_STATUS;
   customerid;
   userstoragedata = {} as any;
@@ -56,6 +57,7 @@ export class AddEditCustomerComponent implements OnInit {
   customerlat: any;
   customerlng: any;
   isAddForm = true;
+  msg: string;
   constructor(private fb: FormBuilder,
     private categoryService: MasterService.CategoryService,
     private lookupService: AdminService.LookupService,
@@ -98,7 +100,6 @@ export class AddEditCustomerComponent implements OnInit {
         if (response.data != null) {
           this.customerObj = response.data;
           this.generateEditForm();
-          
         }
       }
     });
@@ -122,7 +123,7 @@ export class AddEditCustomerComponent implements OnInit {
         if (response.data.length > 0) {
           response.data.map(item => {
             item.value = item.refvalue;
-            item.label = item.refvalue;
+            item.label = item.refname;
           });
           let groupedData = _.groupBy(response.data, 'refkey');
           this.memberTypes = _.get(groupedData, 'biz_membertype');
@@ -130,6 +131,7 @@ export class AddEditCustomerComponent implements OnInit {
           this.paymentMethods = _.get(groupedData, 'biz_paymentmethods');
           this.deliveryMethods = _.get(groupedData, 'biz_deliverymethods');
           this.mallsList = _.get(groupedData, 'biz_malls');
+          this.paymentTenuresList = _.get(groupedData, 'biz_paymenttenure');
         }
         if (this.customerid == null) {
           let selectedMemberType = [];
@@ -156,10 +158,17 @@ export class AddEditCustomerComponent implements OnInit {
               selectedDeliveryOpts.push(item.refvalue);
             }
           });
+          let selectedPaymentTenure = [];
+          _.each(this.paymentTenuresList, function(item) {
+            if(item.isdefault == 'Y') {
+              selectedPaymentTenure.push(item.refvalue);
+            }
+          });
           this.customerForm.controls['membershiptype'].setValue(selectedMemberType);
           this.customerForm.controls['biztype'].setValue(selectedBusinessType);
           this.customerForm.controls['acceptedpayments'].setValue(selectedPaymentMethods);
           this.customerForm.controls['deliveryoptions'].setValue(selectedDeliveryOpts);
+          this.customerForm.controls['paymenttenure'].setValue(selectedPaymentTenure);
         }
       }
     });
@@ -180,7 +189,7 @@ export class AddEditCustomerComponent implements OnInit {
     this.customerForm = this.fb.group({
       bizname: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
       biztype: [null, Validators.required],
-      bizdescription: ['', Validators.compose([Validators.minLength(5), Validators.maxLength(100)])],
+      bizdescription: ['', Validators.compose([Validators.minLength(5), Validators.maxLength(500)])],
       contactperson: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
       contactmobile: [null, Validators.required],
       contactemail: ['', Validators.compose([Validators.pattern(AppConstant.REGEX.EMAIL), Validators.maxLength(100)])],
@@ -238,6 +247,10 @@ export class AddEditCustomerComponent implements OnInit {
     });
     this.closeModal('socialidmodal');
   }
+  onSelected(option: IOption) {
+    this.msg = `${option.label}`;
+    console.log(this.msg);
+  }
   saveOrUpdateBusiness() {
     let errMessage: any;
     if (!this.customerForm.valid) {
@@ -248,9 +261,15 @@ export class AddEditCustomerComponent implements OnInit {
       this.savecustomer = true;
       const data = this.customerForm.value;
       const formdata = { ...data } as any;
+      let paymentarray = this.paymentTenuresList.find(item =>
+        item.refvalue == formdata.paymenttenure
+      );
+      console.log(paymentarray);
       if (this.branchFlag) {
         formdata.parentmembershipid = Number(this.parentid);
       }
+      console.log(paymentarray.refid);
+      formdata.paymenttenure = paymentarray.refid.toString();
       formdata.workhours = data.starttime + '-' + data.endtime;
       formdata.locationid = Number(data.locationid);
       formdata.categoryid = Number(data.categoryid);
@@ -357,7 +376,9 @@ export class AddEditCustomerComponent implements OnInit {
     this.customerObj.regdate = this.commonService.parseDate(this.customerObj.regdate);
     this.customerObj.starttime = this.customerObj.workhours.starttime;
     this.customerObj.endtime = this.customerObj.workhours.endtime;
-
+    // if (this.customerObj.paymenttenure) {
+    //   this.customerObj.paymenttenure = this.customerObj.paymenttenure;
+    // }
     if (this.customerObj.geoaddress) {
       this.customerObj.latitude = this.customerObj.geoaddress.lat;
       this.customerObj.longitude = this.customerObj.geoaddress.lng;
@@ -423,7 +444,7 @@ export class AddEditCustomerComponent implements OnInit {
     pac_input.setAttribute("class", "controls");
     pac_input.setAttribute("type", "text");
     pac_input.setAttribute("placeholder", "Search here");
-    pac_input.setAttribute("autocomplete", "on");   
+    pac_input.setAttribute("autocomplete", "on");
     location.appendChild(pac_input);
     if (data.latitude && data.longitude !== null) {
       Curloc = { lat: parseFloat(data.latitude), lng: parseFloat(data.longitude) }
@@ -481,7 +502,7 @@ export class AddEditCustomerComponent implements OnInit {
           a.customerlng = marker.getPosition().lng();
         });
         markers.push(marker);
-          
+
         if (place.geometry.viewport) {
           bounds.union(place.geometry.viewport);
         } else {

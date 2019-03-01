@@ -286,9 +286,9 @@ export const AppMessages = Object.freeze({
         minlength: 'Contact person should be atleast 1 characters',
         maxlength: 'Contact person should be within 50 characters'
       },
-      bizdesc: {
+      bizdescription: {
         minlength: 'Description should be atleast 5 characters',
-        maxlength: 'Description should be within 100 characters'
+        maxlength: 'Description should be within 500 characters'
       },
       contactmobile: { required: 'Please enter mobile number' },
       contactemail: {
