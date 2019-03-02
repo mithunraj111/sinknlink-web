@@ -6,6 +6,7 @@ import * as _ from 'lodash';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
 import { AppMessages } from 'src/app/app-messages';
+import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-customer-payments',
   templateUrl: './customer-payments.component.html',
@@ -82,7 +83,14 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
   }
 
   getDonations() {
-    this.donationService.list({ status: AppConstant.STATUS_ACTIVE }).subscribe(res => {
+    let today =  new DatePipe("en-US").transform(new Date(), "yyyy-MM-dd").toString();
+    console.log(today);
+    let condition = {
+      status: AppConstant.STATUS_ACTIVE,
+      startdate: today,
+      enddate: today
+    }
+    this.donationService.list(condition).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
         this.donationList = response.data;

@@ -95,7 +95,6 @@ export class AddEditCustomerComponent implements OnInit {
   getCustomerDetail() {
     this.customerService.byId(this.customerid).subscribe(res => {
       const response = JSON.parse(res._body);
-      console.log(response)
       if (response.status) {
         if (response.data != null) {
           this.customerObj = response.data;
@@ -169,6 +168,12 @@ export class AddEditCustomerComponent implements OnInit {
           this.customerForm.controls['acceptedpayments'].setValue(selectedPaymentMethods);
           this.customerForm.controls['deliveryoptions'].setValue(selectedDeliveryOpts);
           this.customerForm.controls['paymenttenure'].setValue(selectedPaymentTenure);
+        }
+        if(this.customerObj != null){
+          let paymentObj = this.paymentTenuresList.find(item =>
+            item.refid == this.customerObj.paymenttenure
+          );
+          this.customerForm.controls.paymenttenure.setValue(paymentObj.refvalue);
         }
       }
     });
@@ -247,10 +252,6 @@ export class AddEditCustomerComponent implements OnInit {
     });
     this.closeModal('socialidmodal');
   }
-  onSelected(option: IOption) {
-    this.msg = `${option.label}`;
-    console.log(this.msg);
-  }
   saveOrUpdateBusiness() {
     let errMessage: any;
     if (!this.customerForm.valid) {
@@ -264,11 +265,9 @@ export class AddEditCustomerComponent implements OnInit {
       let paymentarray = this.paymentTenuresList.find(item =>
         item.refvalue == formdata.paymenttenure
       );
-      console.log(paymentarray);
       if (this.branchFlag) {
         formdata.parentmembershipid = Number(this.parentid);
       }
-      console.log(paymentarray.refid);
       formdata.paymenttenure = paymentarray.refid.toString();
       formdata.workhours = data.starttime + '-' + data.endtime;
       formdata.locationid = Number(data.locationid);
@@ -376,14 +375,10 @@ export class AddEditCustomerComponent implements OnInit {
     this.customerObj.regdate = this.commonService.parseDate(this.customerObj.regdate);
     this.customerObj.starttime = this.customerObj.workhours.starttime;
     this.customerObj.endtime = this.customerObj.workhours.endtime;
-    // if (this.customerObj.paymenttenure) {
-    //   this.customerObj.paymenttenure = this.customerObj.paymenttenure;
-    // }
     if (this.customerObj.geoaddress) {
       this.customerObj.latitude = this.customerObj.geoaddress.lat;
       this.customerObj.longitude = this.customerObj.geoaddress.lng;
     }
-
     this.customerObj.contactmobile = _.map(this.customerObj.contactmobile, function (item) {
       return {
         value: item,
