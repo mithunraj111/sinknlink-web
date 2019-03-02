@@ -133,33 +133,33 @@ export class AddEditCustomerComponent implements OnInit {
           this.paymentTenuresList = _.get(groupedData, 'biz_paymenttenure');
         }
         if (this.customerid == null) {
-          let selectedMemberType = [];
+          const selectedMemberType = [];
           _.each(this.memberTypes, function (item) {
-            if (item.isdefault == 'Y') {
+            if (item.isdefault === 'Y') {
               selectedMemberType.push(item.refvalue);
             }
           });
-          let selectedBusinessType = [];
+          const selectedBusinessType = [];
           _.each(this.businesstypes, function (item) {
-            if (item.isdefault == 'Y') {
+            if (item.isdefault === 'Y') {
               selectedBusinessType.push(item.refvalue);
             }
           });
-          let selectedPaymentMethods = [];
+          const selectedPaymentMethods = [];
           _.each(this.paymentMethods, function (item) {
-            if (item.isdefault == 'Y') {
+            if (item.isdefault === 'Y') {
               selectedPaymentMethods.push(item.refvalue);
             }
           });
-          let selectedDeliveryOpts = [];
+          const selectedDeliveryOpts = [];
           _.each(this.deliveryMethods, function (item) {
-            if (item.isdefault == 'Y') {
+            if (item.isdefault === 'Y') {
               selectedDeliveryOpts.push(item.refvalue);
             }
           });
-          let selectedPaymentTenure = [];
-          _.each(this.paymentTenuresList, function(item) {
-            if(item.isdefault == 'Y') {
+          const selectedPaymentTenure = [];
+          _.each(this.paymentTenuresList, function (item) {
+            if (item.isdefault === 'Y') {
               selectedPaymentTenure.push(item.refvalue);
             }
           });
@@ -169,11 +169,17 @@ export class AddEditCustomerComponent implements OnInit {
           this.customerForm.controls['deliveryoptions'].setValue(selectedDeliveryOpts);
           this.customerForm.controls['paymenttenure'].setValue(selectedPaymentTenure);
         }
-        if(this.customerObj != null){
-          let paymentObj = this.paymentTenuresList.find(item =>
-            item.refid == this.customerObj.paymenttenure
-          );
-          this.customerForm.controls.paymenttenure.setValue(paymentObj.refvalue);
+        if (this.customerObj != null) {
+          let paymentObj = {} as any;
+          const self = this;
+          paymentObj = _.find(this.paymentTenuresList, function (item) {
+            if (item.refid === Number(self.customerObj.paymenttenure)) {
+              return item;
+            }
+          });
+          if (!_.isUndefined(paymentObj)) {
+            this.customerForm.controls.paymenttenure.setValue(paymentObj.refvalue);
+          }
         }
       }
     });
@@ -263,7 +269,7 @@ export class AddEditCustomerComponent implements OnInit {
       const data = this.customerForm.value;
       const formdata = { ...data } as any;
       let paymentarray = this.paymentTenuresList.find(item =>
-        item.refvalue == formdata.paymenttenure
+        item.refvalue === formdata.paymenttenure
       );
       if (this.branchFlag) {
         formdata.parentmembershipid = Number(this.parentid);
@@ -272,8 +278,8 @@ export class AddEditCustomerComponent implements OnInit {
       formdata.workhours = data.starttime + '-' + data.endtime;
       formdata.locationid = Number(data.locationid);
       formdata.categoryid = Number(data.categoryid);
-      formdata.latitude = Number(data.latitude);
-      formdata.longitude = Number(data.longitude);
+      formdata.latitude = parseFloat(data.latitude);
+      formdata.longitude = parseFloat(data.longitude);
       formdata.regdate = this.commonService.formatDate(data.regdate);
       formdata.updatedby = this.userstoragedata.fullname;
       formdata.updateddt = new Date();
@@ -304,6 +310,7 @@ export class AddEditCustomerComponent implements OnInit {
         formdata.status = data.status ? AppConstant.STATUS_ACTIVE : AppConstant.STATUS_INACTIVE;
         this.customerService.update(formdata, this.customerObj.membershipid).subscribe(res => {
           const response = JSON.parse(res._body);
+          this.savecustomer = false;
           if (response.status) {
             this.bootstrapAlertService.showSucccess(response.message);
             this.customerObj = response.data;
@@ -375,10 +382,6 @@ export class AddEditCustomerComponent implements OnInit {
     this.customerObj.regdate = this.commonService.parseDate(this.customerObj.regdate);
     this.customerObj.starttime = this.customerObj.workhours.starttime;
     this.customerObj.endtime = this.customerObj.workhours.endtime;
-    if (this.customerObj.geoaddress) {
-      this.customerObj.latitude = this.customerObj.geoaddress.lat;
-      this.customerObj.longitude = this.customerObj.geoaddress.lng;
-    }
     this.customerObj.contactmobile = _.map(this.customerObj.contactmobile, function (item) {
       return {
         value: item,
