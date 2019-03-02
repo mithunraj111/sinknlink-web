@@ -65,7 +65,7 @@ const routes: Routes = [
         path: 'vipnumberregistration',
         component: VipNumberRegistrationComponent,
         data: {
-          title: 'Vip number registration',
+          title: 'VIP number registration',
           status: false
         },
       },
@@ -73,7 +73,7 @@ const routes: Routes = [
         path: 'vipnumberregistration/create',
         component: AddEditVipRegistrationNumberComponent,
         data: {
-          title: 'Vip number registration',
+          title: 'VIP number registration',
           status: false
         },
       },
@@ -81,7 +81,7 @@ const routes: Routes = [
         path: 'vipnumberregistration/edit/:id',
         component: AddEditVipRegistrationNumberComponent,
         data: {
-          title: 'Vip number registration',
+          title: 'VIP number registration',
           status: false
         },
       },

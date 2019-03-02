@@ -14,7 +14,7 @@ const routes: Routes = [
         path: 'areacategories',
         component: AreaCategoriesComponent,
         data: {
-          title: 'Area & Category Reports',
+          title: 'Area & Category Report',
           status: false
         },
       },
@@ -22,7 +22,7 @@ const routes: Routes = [
         path: 'payments',
         component: PaymentComponent,
         data: {
-          title: 'Payment Reports',
+          title: 'Payment Report',
           status: false
         },
       },
@@ -30,7 +30,7 @@ const routes: Routes = [
         path: 'dealer',
         component: DealerComponent,
         data: {
-          title: 'Dealer Reports',
+          title: 'Dealer Report',
           status: false
         },
       },
@@ -38,7 +38,7 @@ const routes: Routes = [
         path: 'consumer',
         component: ConsumerComponent,
         data: {
-          title: 'Consumer Reports',
+          title: 'Consumer Report',
           status: false
         },
       },
@@ -46,7 +46,7 @@ const routes: Routes = [
         path: 'customerdetail',
         component: CustomerdetailComponent,
         data: {
-          title: 'Business Reports',
+          title: 'Customer Detail Report',
           status: false
         },
       }

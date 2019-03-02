@@ -13,7 +13,7 @@ import { element } from '@angular/core/src/render3/instructions';
   animations: [fadeInOutTranslate]
 })
 export class ViewConsumerComponent implements OnInit {
-  date_displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
+  datedisplayformat = AppConstant.API_CONFIG.ANG_DATE.displaydate;
   date: any;
   userfile: any;
   emptymessages = AppConstant.EMPTY_MESSAGES.CONSUMERCOUPONS;
@@ -93,7 +93,7 @@ export class ViewConsumerComponent implements OnInit {
 
       if (response.data.length > 0) {
         response.data.forEach(element => {
-          if (Lodash.find(businesses, function (o) { return o.membershipid == element.membershipid }) == undefined) businesses.push({ membershipid: element.membershipid, bizname: element.business.bizname });
+          if (Lodash.find(businesses, function (o) { return o.membershipid == element.membershipid }) == undefined) businesses.push({ membershipid: element.membershipid, bizname: element.business == null ? "" : element.business.bizname });
         });
         reviews = Lodash.groupBy(response.data, 'membershipid');
         this.reviewedBiz = businesses;
