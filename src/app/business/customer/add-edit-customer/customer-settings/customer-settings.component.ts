@@ -46,20 +46,20 @@ export class CustomerSettingsComponent implements OnInit, OnChanges {
             const editForm = {} as any;
             const self = this;
             _.map(this.settingsList, function (item, idx) {
-              if (item.settingkey === 'Chat') {
+              if (item.settingkey === 'chatyn') {
                 editForm.chatyn = item.settingvalue === 'Y' ? true : false;
               }
-              if (item.settingkey === 'Business search') {
+              if (item.settingkey === 'bizsearchyn') {
                 editForm.bizsearch = item.settingvalue === 'Y' ? true : false;
               }
-              if (item.settingkey === 'Work Hours') {
+              if (item.settingkey === 'workhrs') {
                 editForm.starttime = JSON.parse(item.settingvalue).starttime;
                 editForm.endtime = JSON.parse(item.settingvalue).endtime;
               }
-              if (item.settingkey === 'Open Now') {
+              if (item.settingkey === 'openyn') {
                 editForm.openyn = item.settingvalue === 'Y' ? true : false;
               }
-              if (item.settingkey === 'Auto generate coupon') {
+              if (item.settingkey === 'autogencouponyn') {
                 editForm.coupongenyn = item.settingvalue === 'Y' ? true : false;
               }
               if ((idx + 1) === self.settingsList.length) {
@@ -78,22 +78,22 @@ export class CustomerSettingsComponent implements OnInit, OnChanges {
       return false;
     } else {
       for (let i = 0; i < this.settingsList.length; i++) {
-        if (this.settingsList[i].settingkey === 'Chat') {
+        if (this.settingsList[i].settingkey === 'chatyn') {
           this.settingsList[i].settingvalue = this.settingForm.value.chatyn ? 'Y' : 'N';
         }
-        if (this.settingsList[i].settingkey === 'Business search') {
+        if (this.settingsList[i].settingkey === 'bizsearchyn') {
           this.settingsList[i].settingvalue = this.settingForm.value.bizsearch ? 'Y' : 'N';
         }
-        if (this.settingsList[i].settingkey === 'Work Hours') {
+        if (this.settingsList[i].settingkey === 'workhrs') {
           this.settingsList[i].settingvalue = JSON.stringify({
             starttime: this.settingForm.value.starttime,
             endtime: this.settingForm.value.endtime
           });
         }
-        if (this.settingsList[i].settingkey === 'Open Now') {
+        if (this.settingsList[i].settingkey === 'openyn') {
           this.settingsList[i].settingvalue = this.settingForm.value.openyn ? 'Y' : 'N';
         }
-        if (this.settingsList[i].settingkey === 'Auto generate coupon') {
+        if (this.settingsList[i].settingkey === 'autogencouponyn') {
           this.settingsList[i].settingvalue = this.settingForm.value.coupongenyn ? 'Y' : 'N';
         }
         if (i + 1 === this.settingsList.length) {
