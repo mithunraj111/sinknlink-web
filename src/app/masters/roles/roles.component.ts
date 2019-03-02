@@ -18,21 +18,21 @@ export class RolesComponent extends BaseService implements OnInit {
   emptymessages = AppConstant.EMPTY_MESSAGES.ROLES;
   displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   loadingIndicator: boolean = true;
-  roleid:number;
-  constructor(private router: Router,private route: ActivatedRoute,
+  roleid: number;
+  constructor(private router: Router, private route: ActivatedRoute,
     private roleService: MasterService.RoleService,
     private bootstrapAlertService: BootstrapAlertService,
     private commonService: CommonService) {
     super();
     this.getScreenDetails('m_roles');
     this.emptymessages = AppConstant.EMPTY_MESSAGES.ROLES;
-  
-    
+
+
   }
 
   ngOnInit() {
     this.getRoles();
-    
+
   }
   getRoles() {
     this.loadingIndicator = true;
@@ -52,8 +52,7 @@ export class RolesComponent extends BaseService implements OnInit {
     this.router.navigate(['masters/roles/edit/' + id]);
   }
   copyRole(id) {
-    console.log(id);
-    this.router.navigate(['masters/roles/copy'],{queryParams:{mode:'copy', id:id} } );
+    this.router.navigate(['masters/roles/create'], { queryParams: { mode: 'copy', id: id } });
   }
   getRowHeight(row) {
     return row.height;

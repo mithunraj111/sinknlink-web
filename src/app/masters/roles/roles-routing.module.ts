@@ -33,16 +33,6 @@ const routes: Routes = [
       caption: 'edit role',
       status: false
     }
-  },
-  {
-    path: 'copy',
-    component: AddEditRoleComponent,
-    data: {
-      title: 'Role',
-      icon: 'ti-settings',
-      caption: 'add role',
-      status: false
-    }
   }
 ];
 

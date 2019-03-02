@@ -52,14 +52,15 @@ export class AddEditRoleComponent implements OnInit {
       }
     });
     this.route.queryParams.subscribe(params => {
+      if(params.mode!=undefined){
       this.mode = params.mode;
       this.getRoleDetail(params.id);
-});
+      }
+    });
   }
 
   ngOnInit() {
     this.getScreenNames();
-
   }
 
   getScreenNames() {
@@ -71,7 +72,7 @@ export class AddEditRoleComponent implements OnInit {
         this.loadingIndicator = false;
         if (response.data.length != 0) {
           this.screensList = JSON.parse(response.data[0].refvalue);
-          if (this.roleid || this.mode =='copy') {
+          if (this.roleid || this.mode == 'copy') {
             const self = this;
             _.map(this.roleObj.uiactions, function (item, idx) {
               const data = _.find(self.screensList, { screencode: item.screencode });
@@ -99,7 +100,6 @@ export class AddEditRoleComponent implements OnInit {
     const self = this;
     this.index = rowindex;
     _.each(data.permissions, function (item, index) {
-      console.log(data.permissions)
       self.permissionList.push({ value: item, label: item });
       if (index + 1 === data.permissions.length) {
         self.permissionList = [...self.permissionList];
@@ -111,8 +111,12 @@ export class AddEditRoleComponent implements OnInit {
   }
   updatePermissions() {
     this.screensList[this.index].assignedpermissions = this.permissions;
+    if (_.isEqual(this.screensList[this.index].assignedpermissions, this.screensList[this.index].permissions)) {
+      this.screensList[this.index].checked = true;
+    }
     this.screensList = [...this.screensList];
     this.closePermissionModal('permission');
+
   }
   getRowHeight(row) {
     return row.height;
@@ -125,7 +129,7 @@ export class AddEditRoleComponent implements OnInit {
       this.bootstrapAlertService.showError(this.roleErrObj.rolename.required);
       return false;
     }
-    
+
     if (this.rolename.length > 50) {
       this.bootstrapAlertService.showError(this.roleErrObj.rolename.maxlength);
       return false;
@@ -140,7 +144,7 @@ export class AddEditRoleComponent implements OnInit {
       formdata.uiactions = this.screensList;
       formdata.updatedby = this.userstoragedata.fullname;
       formdata.updateddt = new Date();
-      if (!_.isUndefined(this.roleObj) && !_.isUndefined(this.roleObj.roleid) && !_.isEmpty(this.roleObj)) {
+      if (!_.isUndefined(this.roleObj) && !_.isUndefined(this.roleObj.roleid) && !_.isEmpty(this.roleObj) && !_.isNull(this.roleObj.roleid)) {
         formdata.status = this.status ? AppConstant.STATUS_ACTIVE : AppConstant.STATUS_INACTIVE;
         this.roleService.update(formdata, this.roleObj.roleid).subscribe(res => {
           const response = JSON.parse(res._body);
@@ -187,12 +191,12 @@ export class AddEditRoleComponent implements OnInit {
         this.status = response.data.status === AppConstant.STATUS_ACTIVE ? true : false;
         if (this.mode == 'copy') {
           this.roleObj.roleid = null;
-          this.rolename = '';
-          
+          this.rolename = "";
         }
-        }
+      }
     });
   }
+
   onSelectPermissions(rowIndex) {
     if (this.screensList[rowIndex].checked) {
       this.screensList[rowIndex].assignedpermissions = this.screensList[rowIndex].permissions;
