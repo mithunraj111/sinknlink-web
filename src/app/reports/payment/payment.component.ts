@@ -11,6 +11,8 @@ import { AppConstant } from '../../app.constants';
 import { PaymentsService } from '../../services/common/payments.service';
 import { ReportService } from '../../services/common';
 import { AppMessages } from '../../app-messages';
+import { Buffer } from 'buffer';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-payment',
@@ -32,6 +34,7 @@ export class PaymentComponent implements OnInit {
   ];
   paymentModes = [];
   reportfiller = {};
+  generatingFile = false;
   tempFilter = [];
   paymentForm: FormGroup;
   loadingIndicator: Boolean = false;
@@ -108,5 +111,46 @@ export class PaymentComponent implements OnInit {
   search(event?) {
     this.paymentList = this.commonService.globalSearch(this.tempFilter, event);
     this.table.offset = 0;
+  }
+
+  downloadReport() {
+    this.generatingFile = true;
+    const data = this.paymentForm.value;
+    const todt = this.commonService.formatDate(data.todate);
+    const fromdt = this.commonService.formatDate(data.fromdate);
+    const paymenttype = data.paymenttype;
+    const paymentmode = data.paymentmode;
+    if (new Date(todt) < new Date(fromdt)) {
+      this.bootstrapAlertService.showError(AppMessages.VALIDATION.PAYMENTREPORT.fromdate.max);
+      return false;
+    }
+    let formData = {
+      fromdate: fromdt + ' 00:00',
+      todate: todt + ' 23:59',
+    } as any;
+    if (paymentmode != "" && paymentmode != undefined && paymentmode != null) {
+      formData.paymentmode = paymentmode;
+    }
+    if (paymenttype != "" && paymenttype != undefined && paymenttype != null) {
+      formData.paymenttype = [paymenttype];
+    }
+    this.reportService.paymentReportdownload(formData).subscribe((res) => {
+      var buffer = Buffer.from(JSON.parse(res._body).file.data);
+      this.generatingFile = false;
+
+      saveData(buffer, `PaymentReport-${new DatePipe("en-US").transform(new Date(), "dd-MM-yyyy").toString()}.xlsx`);
+
+      function saveData(blob, name) {
+        var a = document.createElement("a");
+        document.body.appendChild(a);
+        a.setAttribute("style", "none");
+        blob = new Blob([blob], { type: "octet/stream" });
+        var url = window.URL.createObjectURL(blob);
+        a.href = url;
+        a.download = name;
+        a.click();
+        window.URL.revokeObjectURL(url);
+      }
+    })
   }
 }

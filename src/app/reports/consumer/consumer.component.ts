@@ -11,6 +11,8 @@ import { LookupService } from '../../services/admin';
 import { LocationService } from 'src/app/services/masters';
 import { ReportService } from 'src/app/services/common';
 import * as _ from 'lodash';
+import { Buffer } from 'buffer';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-consumer',
@@ -29,6 +31,7 @@ export class ConsumerComponent implements OnInit {
   cityList = [];
   cityName: string;
   consumerList = [];
+  generatingFile = false;
   tempFilter = [];
   emptymessages = AppConstant.EMPTY_MESSAGES.CONSUMER;
   loadingIndicator: Boolean = false;
@@ -79,7 +82,6 @@ export class ConsumerComponent implements OnInit {
       if (response.status) {
         this.loadingIndicator = false;
         this.consumerList = response.data;
-        console.log(this.consumerList);
       }
       this.loadingIndicator = false;
       this.tempFilter = this.consumerList;
@@ -96,7 +98,6 @@ export class ConsumerComponent implements OnInit {
           item.value = item.refvalue;
         });
         this.cityList = this.cityList.concat(response.data);
-        console.log(this.cityList);
       }
     });
   }
@@ -125,4 +126,45 @@ export class ConsumerComponent implements OnInit {
     this.consumertable.offset = 0;
   }
 
+  downloadReport() {
+    this.generatingFile = true;
+    const data = this.consumerReportForm.value;
+    const todt = this.commonService.formatDate(data.todate);
+    const fromdt = this.commonService.formatDate(data.fromdate);
+    const city = data.city;
+    let area = data.area;
+    if (new Date(todt) < new Date(fromdt)) {
+      this.bootstrapAlertService.showError(AppMessages.VALIDATION.AREACATEGORIES.fromdate.max);
+      return false;
+    }
+    let formData = {
+      fromdate: fromdt + ' 00:00',
+      todate: todt + ' 23:59'
+    } as any;
+    if (area != "" && area != undefined && area != null) {
+      formData.locationid = area;
+    }
+    if (city != "" && city != undefined && city != null) {
+      formData.city = [city];
+    }
+
+    this.reportService.consumerReportDownload(formData).subscribe((res) => {
+      var buffer = Buffer.from(JSON.parse(res._body).file.data);
+      this.generatingFile = false;
+
+      saveData(buffer, `ConsumerReport-${new DatePipe("en-US").transform(new Date(), "dd-MM-yyyy").toString()}.xlsx`);
+
+      function saveData(blob, name) {
+        var a = document.createElement("a");
+        document.body.appendChild(a);
+        a.setAttribute("style", "none");
+        blob = new Blob([blob], { type: "octet/stream" });
+        var url = window.URL.createObjectURL(blob);
+        a.href = url;
+        a.download = name;
+        a.click();
+        window.URL.revokeObjectURL(url);
+      }
+    })
+  }
 }

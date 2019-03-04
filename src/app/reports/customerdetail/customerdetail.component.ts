@@ -13,6 +13,8 @@ import { NgbDateCustomParserFormatter } from 'src/app/shared/elements/dateParser
 import { AppMessages } from 'src/app/app-messages';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AppConstant } from 'src/app/app.constants';
+import { DatePipe } from '@angular/common';
+import { Buffer } from 'buffer';
 
 @Component({
   selector: 'app-customerdetail',
@@ -34,6 +36,7 @@ export class CustomerdetailComponent implements OnInit {
   cityName: string;
   bizTypeLists = [];
   bizMemType = [];
+  generatingFile = false;
   categoryLists = [];
   customerdetailForm: FormGroup;
   businessList = [];
@@ -181,6 +184,62 @@ export class CustomerdetailComponent implements OnInit {
   search(event?) {
     this.businessList = this.commonService.globalSearch(this.tempFilter, event);
     this.table.offset = 0;
+  }
+
+  downloadReport() {
+    this.generatingFile = true;
+    const data = this.customerdetailForm.value;
+    const todt = this.commonService.formatDate(data.todate);
+    const fromdt = this.commonService.formatDate(data.fromdt);
+    let area = data.area;
+    let categoryid = data.categoryid;
+    let biztype = data.biztype;
+    let membershiptype = data.membershiptype;
+    let city = data.city;
+    if (new Date(fromdt) > new Date(todt)) {
+      this.bootstrapAlertService.showError(AppMessages.VALIDATION.DEALERREPORT.fromdate.max);
+      return false;
+    }
+    let formData = {
+      fromdt: fromdt + ' 00:00',
+      todate: todt + ' 23:59',
+
+    } as any;
+
+    if (categoryid != "" && categoryid != undefined && categoryid != null) {
+      formData.categoryid = categoryid;
+    }
+    if (area != "") {
+      formData.area = area;
+    }
+    if (biztype != "") {
+      formData.biztype = biztype;
+    }
+    if (membershiptype != "") {
+      formData.membershiptype = membershiptype;
+    }
+    if (city != "" && city != undefined && city != null) {
+      formData.city = [city];
+    }
+
+    this.reportService.customerDetailReportDownload(formData).subscribe((res) => {
+      var buffer = Buffer.from(JSON.parse(res._body).file.data);
+      this.generatingFile = false;
+
+      saveData(buffer, `CustomerReport-${new DatePipe("en-US").transform(new Date(), "dd-MM-yyyy").toString()}.xlsx`);
+
+      function saveData(blob, name) {
+        var a = document.createElement("a");
+        document.body.appendChild(a);
+        a.setAttribute("style", "none");
+        blob = new Blob([blob], { type: "octet/stream" });
+        var url = window.URL.createObjectURL(blob);
+        a.href = url;
+        a.download = name;
+        a.click();
+        window.URL.revokeObjectURL(url);
+      }
+    })
   }
 
 }

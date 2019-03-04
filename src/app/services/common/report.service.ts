@@ -33,5 +33,17 @@ export class ReportService {
     dealerReportDownload(data): Observable<any> {
         return this.httpHandler.POST(this.endpoint + AppConstant.API_CONFIG.API_URL.COMMON.REPORT.DEALER_COUNT +"?download=true", data);
     }
+    paymentReportdownload(data): Observable<any> {
+        return this.httpHandler.POST(this.endpoint + AppConstant.API_CONFIG.API_URL.COMMON.REPORT.PAYMENT_STATUS +"?download=true", data);
+    }
+    areaReportDownload(data): Observable<any> {
+        return this.httpHandler.POST(this.endpoint + AppConstant.API_CONFIG.API_URL.COMMON.REPORT.AREA_COUNT +"?download=true", data);
+    }
+    categoryReportDownload(data): Observable<any> {
+        return this.httpHandler.POST(this.endpoint + AppConstant.API_CONFIG.API_URL.COMMON.REPORT.CATEGORY_COUNT +"?download=true", data);
+    }
+    consumerReportDownload(data): Observable<any> {
+        return this.httpHandler.POST(this.endpoint + AppConstant.API_CONFIG.API_URL.COMMON.REPORT.CONSUMER_COUNT +"?download=true", data);
+    }
 
 }

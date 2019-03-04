@@ -8,6 +8,9 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AppConstant } from '../../app.constants';
 import { AppMessages } from '../../app-messages';
 import { AppCommonService } from 'src/app/services';
+import { DatePipe } from '@angular/common';
+import { Buffer } from 'buffer';
+
 @Component({
   selector: 'app-area-categories',
   templateUrl: './area-categories.component.html',
@@ -24,6 +27,7 @@ export class AreaCategoriesComponent implements OnInit {
   areaList = [];
   categoriesList = [];
   categorytempFilter = [];
+  generatingFile = false;
   emptymesages = AppConstant.EMPTY_MESSAGES.AREA;
   nodata = AppConstant.EMPTY_MESSAGES.CATEGORY;
   loadingIndicator: Boolean = false;
@@ -55,6 +59,7 @@ export class AreaCategoriesComponent implements OnInit {
     };
     this.getAreaList(formData);
     this.getCategoryList(formData);
+
   }
 
   getCategoryList(formData) {
@@ -89,5 +94,71 @@ export class AreaCategoriesComponent implements OnInit {
   searchCategory(event?) {
     this.categoriesList = this.commonService.globalSearch(this.categorytempFilter, event);
     this.categoriestable.offset = 0;
+  }
+  downloadareareport() {
+    this.generatingFile = true;
+    const data = this.areaCategoriesForm.value;
+    const todt = this.commonService.formatDate(data.todate);
+    const fromdt = this.commonService.formatDate(data.fromdate);
+    if (new Date(todt) < new Date(fromdt)) {
+      this.bootstrapAlertService.showError(AppMessages.VALIDATION.AREACATEGORIES.fromdate.max);
+      return false;
+    }
+    const formData = {
+      fromdate: fromdt + ' 00:00',
+      todate: todt + ' 23:59'
+    };
+    this.reportService.areaReportDownload(formData).subscribe((res) => {
+      var buffer = Buffer.from(JSON.parse(res._body).file.data);
+      this.generatingFile = false;
+
+      saveData(buffer, `AreaReport-${new DatePipe("en-US").transform(new Date(), "dd-MM-yyyy").toString()}.xlsx`);
+
+      function saveData(blob, name) {
+        var a = document.createElement("a");
+        document.body.appendChild(a);
+        a.setAttribute("style", "none");
+        blob = new Blob([blob], { type: "octet/stream" });
+        var url = window.URL.createObjectURL(blob);
+        a.href = url;
+        a.download = name;
+        a.click();
+        window.URL.revokeObjectURL(url);
+      }
+    })
+  }
+  downloadcatreport() {
+
+    this.generatingFile = true;
+    const data = this.areaCategoriesForm.value;
+    const todt = this.commonService.formatDate(data.todate);
+    const fromdt = this.commonService.formatDate(data.fromdate);
+    if (new Date(todt) < new Date(fromdt)) {
+      this.bootstrapAlertService.showError(AppMessages.VALIDATION.AREACATEGORIES.fromdate.max);
+      return false;
+    }
+    const formData = {
+      fromdate: fromdt + ' 00:00',
+      todate: todt + ' 23:59'
+    };
+
+    this.reportService.categoryReportDownload(formData).subscribe((res) => {
+      var buffer = Buffer.from(JSON.parse(res._body).file.data);
+      this.generatingFile = false;
+
+      saveData(buffer, `CategoryReport-${new DatePipe("en-US").transform(new Date(), "dd-MM-yyyy").toString()}.xlsx`);
+
+      function saveData(blob, name) {
+        var a = document.createElement("a");
+        document.body.appendChild(a);
+        a.setAttribute("style", "none");
+        blob = new Blob([blob], { type: "octet/stream" });
+        var url = window.URL.createObjectURL(blob);
+        a.href = url;
+        a.download = name;
+        a.click();
+        window.URL.revokeObjectURL(url);
+      }
+    })
   }
 }

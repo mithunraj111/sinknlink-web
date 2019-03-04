@@ -33,12 +33,11 @@
               </div>
               <div class="col-md-4 col-sm-4 m-t-35">
                 <div class="p-r-10">
-                  <button type="button" placement="bottom" ngbTooltip="Click to search"
-                    class="btn btn-primary generate-button waves-effect  download-btn" (click)="getAreaCategories()">
+                  <button type="button" placement="bottom" ngbTooltip="Click to search" class="btn btn-primary generate-button waves-effect  download-btn"
+                    (click)="getAreaCategories()">
                     <i class="fa fa-search"></i>
                   </button>
-                  <button type="button" placement="bottom" ngbTooltip="Reload" (click)="getAreaCategories()"
-                    class="btn btn-inverse btn-primary generate-button waves-effect m-l-5 "><i
+                  <button type="button" placement="bottom" ngbTooltip="Reload" (click)="getAreaCategories()" class="btn btn-inverse btn-primary generate-button waves-effect m-l-5 "><i
                       class="ti-reload"></i></button>
                 </div>
               </div>
@@ -60,15 +59,15 @@
                 <div class="col-sm-12 header-title">
                   <label class="dt-cust-search">
                     <div class="row p-l-15">
-                    <input #areaSearch type="text" class="form-control input-sm report-search"
-                      placeholder='Search here' (keyup)='search($event)' />
-                    <button type="button" class="btn search-close" (click)="areaSearch.value='';search();"><i
-                        class="fa fa-close"></i></button>
+                      <input #areaSearch type="text" class="form-control input-sm report-search" placeholder='Search here'
+                        (keyup)='search($event)' />
+                      <button type="button" class="btn search-close" (click)="areaSearch.value='';search();"><i class="fa fa-close"></i></button>
                     </div>
                   </label>
                   <label class="dt-cust-search f-right">
-                      <button type="button" placement="bottom" ngbTooltip="Click to download reports"
-                        class="btn btn-primary waves-effect download-btn"><i class="fa fa-download m-r-5"></i></button>
+                    <button type="button" placement="bottom" ngbTooltip="Click to download reports" class="btn btn-primary waves-effect download-btn"
+                      (click)="downloadareareport()" [disabled]="areaList.length == 0 || generatingFile == true">
+                      <i class="fa fa-download m-r-5"></i></button>
                   </label>
                 </div>
               </div>
@@ -107,15 +106,16 @@
                 <div class="col-sm-12 header-title">
                   <label class="dt-cust-search">
                     <div class="row p-l-15">
-                      <input #categoryReportSearch type="text" class="form-control input-sm report-search"
-                        placeholder='Search here' (keyup)='searchCategory($event)' />
-                      <button type="button" class="btn search-close"
-                        (click)="categoryReportSearch.value='';searchCategory();"><i class="fa fa-close"></i></button>
+                      <input #categoryReportSearch type="text" class="form-control input-sm report-search" placeholder='Search here'
+                        (keyup)='searchCategory($event)' />
+                      <button type="button" class="btn search-close" (click)="categoryReportSearch.value='';searchCategory();"><i
+                          class="fa fa-close"></i></button>
                     </div>
                   </label>
                   <label class="f-right">
-                      <button type="button" placement="bottom" ngbTooltip="Click to download reports"
-                        class="btn btn-primary waves-effect download-btn"><i class="fa fa-download m-r-5"></i></button>
+                    <button type="button" placement="bottom" ngbTooltip="Click to download reports" class="btn btn-primary waves-effect download-btn"
+                      (click)="downloadcatreport()" [disabled]="categoriesList.length == 0 || generatingFile == true"><i
+                        class="fa fa-download m-r-5"></i></button>
                   </label>
                 </div>
               </div>
