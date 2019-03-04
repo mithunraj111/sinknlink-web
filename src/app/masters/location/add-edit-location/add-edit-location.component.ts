@@ -100,9 +100,9 @@ export class AddEditLocationComponent implements OnInit, OnChanges {
     this.notifyLocationEntry.emit({ close: true });
   }
   callParent(data) {
-    setTimeout(() => {
+    // setTimeout(() => {
       this.notifyLocationEntry.emit(data);
-    }, 5000);
+    // }, 5000);
   }
   saveOrUpdateLocation() {
     if (!this.locationForm.valid) {

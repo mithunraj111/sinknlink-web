@@ -90,9 +90,9 @@ export class AddEditLookupComponent implements OnInit, OnChanges {
     this.notifyLookupEntry.emit({ close: true });
   }
   callParent(data) {
-    setTimeout(() => {
-      this.notifyLookupEntry.emit(data);
-    }, 5000);
+    // setTimeout(() => {
+    this.notifyLookupEntry.emit(data);
+    // }, 5000);
   }
   saveOrUpdateLookup() {
     let errMessage: any;
