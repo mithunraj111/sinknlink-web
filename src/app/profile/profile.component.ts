@@ -129,7 +129,6 @@ export class ProfileComponent implements OnInit {
     let socialids = this.socialForm.value.facebookid + ',' + this.socialForm.value.twitterid + ',' +
       this.socialForm.value.googleid + ',' + this.socialForm.value.instagramid;
     this.profileForm.controls['socialid'].setValue(socialids);
-    this.closeSocialIdModal();
   }
 
   changePassword() {

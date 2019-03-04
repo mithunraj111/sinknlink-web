@@ -1,5 +1,5 @@
 <div *ngIf="!loadingIndicator">
-    <div class="header-block" *ngIf="rolesList.length!=0">
+    <div class="header-block" *ngIf="tempFilter.length!=0">
         <div class="fixedheader m-b-15">
             <div class="header-title pos-fixed">
                 <div class="row">
@@ -60,7 +60,7 @@
         </div>
     </div>
 
-    <div *ngIf="rolesList.length==0" class="text-center no-data">
+    <div *ngIf="tempFilter.length==0" class="text-center no-data">
         <div class="nodata-text nodata-image">
             <img class="hand-icon" src="assets/images/no-data.png">
             <h3>Create Role(s) associated with organization</h3>

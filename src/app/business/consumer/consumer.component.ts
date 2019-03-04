@@ -15,7 +15,7 @@ export class ConsumerComponent extends BaseService implements OnInit {
   tempFilter = [];
   @ViewChild(DatatableComponent) table: DatatableComponent;
   emptymessages = AppConstant.EMPTY_MESSAGES.CONSUMERS;
-  loadingIndicator: boolean = true;
+  loadingIndicator = true;
 
   displaydtimeformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   constructor(private router: Router,
@@ -39,7 +39,6 @@ export class ConsumerComponent extends BaseService implements OnInit {
       const response = JSON.parse(res._body);
       if (response.status) {
         this.loadingIndicator = false;
-
         this.consumersList = response.data;
         this.tempFilter = this.consumersList;
       }

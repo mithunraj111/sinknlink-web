@@ -1,5 +1,5 @@
 <div *ngIf="!loadingIndicator">
-    <div *ngIf="dealerList.length!=0" class="header-block">
+    <div *ngIf="tempFilter.length!=0" class="header-block">
         <div class="fixedheader m-b-15">
             <div class="header-title">
                 <div class="row">
@@ -64,7 +64,7 @@
             </div>
         </div>
     </div>
-    <div *ngIf="dealerList.length == 0" class="text-center no-data">
+    <div *ngIf="tempFilter.length == 0" class="text-center no-data">
         <div class="nodata-text nodata-image">
             <img class="hand-icon" src="assets/images/no-data.png">
             <h3>Create Dealer(s)</h3>

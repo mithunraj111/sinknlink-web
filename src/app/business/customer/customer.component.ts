@@ -15,8 +15,7 @@ import { BaseService, BusinessService, CommonService } from '../../services';
 export class CustomerComponent extends BaseService implements OnInit {
   tempFilter = [];
   customerList = [];
-  loadingIndicator: boolean = true;
-
+  loadingIndicator = true;
   @ViewChild(DatatableComponent) table: DatatableComponent;
   displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   emptymessages = AppConstant.EMPTY_MESSAGES.CUSTOMERS;
