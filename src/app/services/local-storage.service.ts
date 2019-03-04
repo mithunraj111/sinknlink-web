@@ -28,7 +28,9 @@ export class LocalStorageService {
       return item;
     }
   }
-
+  setItem(Key:string,Value:string){
+    localStorage.setItem(this.prefix+Key, JSON.stringify(Value));
+  }
   removeItem(key: string) {
     localStorage.removeItem(this.prefix + key);
   }
