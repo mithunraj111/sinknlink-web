@@ -133,7 +133,7 @@ export class DealerComponent implements OnInit {
       }
     });
   }
-  downloadreport(){
+  downloadreport() {
     this.generatingFile = true;
     const data = this.dealerReportForm.value;
     const todt = this.commonService.formatDate(data.todate);
@@ -154,7 +154,7 @@ export class DealerComponent implements OnInit {
     if (city != "") {
       formData.city = [city];
     }
-    
+
     this.reportService.dealerReportDownload(formData).subscribe((res) => {
       var buffer = Buffer.from(JSON.parse(res._body).file.data);
       this.generatingFile = false;

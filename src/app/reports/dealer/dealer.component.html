@@ -96,14 +96,14 @@
                                         <span>{{row.name}}</span>
                                     </ng-template>
                                 </ngx-datatable-column>
-                                <ngx-datatable-column prop="location.area" name="Area" [resizeable]="false">
+                                <ngx-datatable-column prop="area" name="Area" [resizeable]="false">
                                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                                        <span>{{row.location.area}}</span>
+                                        <span>{{row.area}}</span>
                                     </ng-template>
                                 </ngx-datatable-column>
-                                <ngx-datatable-column prop="location.city" name="City" [resizeable]="false">
+                                <ngx-datatable-column prop="city" name="City" [resizeable]="false">
                                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                                        <span>{{row.location.city}}</span>
+                                        <span>{{row.city}}</span>
                                     </ng-template>
                                 </ngx-datatable-column>
                                 <ngx-datatable-column prop="count" name="No. of Customers" [resizeable]="false" headerClass="text-right" [cellClass]="'text-right'">
