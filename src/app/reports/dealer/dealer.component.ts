@@ -11,6 +11,9 @@ import { LocationService } from 'src/app/services/masters';
 import { LookupService } from 'src/app/services/admin';
 import { DealerService } from 'src/app/services/business';
 import { AppCommonService } from 'src/app/services';
+import { Buffer } from 'buffer';
+import { DatePipe } from '@angular/common';
+
 
 @Component({
   selector: 'app-dealer',
@@ -35,6 +38,7 @@ export class DealerComponent implements OnInit {
   tempFilter = [];
   dealerReportList = [];
   cityName: any;
+  generatingFile = false;
   constructor(private fb: FormBuilder,
     private commonService: CommonService,
     private bootstrapAlertService: BootstrapAlertService,
@@ -83,7 +87,6 @@ export class DealerComponent implements OnInit {
       formData.city = [city];
     }
 
-    console.log(formData)
     this.loadingIndicator = true;
     this.reportService.areawiseDealerCount(formData).subscribe((res) => {
       const response = JSON.parse(res._body);
@@ -129,6 +132,48 @@ export class DealerComponent implements OnInit {
         this.areaList = this.areaList.concat(response.data);
       }
     });
+  }
+  downloadreport(){
+    this.generatingFile = true;
+    const data = this.dealerReportForm.value;
+    const todt = this.commonService.formatDate(data.todate);
+    const fromdt = this.commonService.formatDate(data.fromdate);
+    const city = data.city;
+    let area = data.area;
+    if (new Date(todt) < new Date(fromdt)) {
+      this.bootstrapAlertService.showError(AppMessages.VALIDATION.DEALERREPORT.fromdate.max);
+      return false;
+    }
+    let formData = {
+      fromdate: fromdt + ' 00:00',
+      todate: todt + ' 23:59'
+    } as any;
+    if (area != "") {
+      formData.locationid = area;
+    }
+    if (city != "") {
+      formData.city = [city];
+    }
+    
+    this.reportService.dealerReportDownload(formData).subscribe((res) => {
+      console.log(res);
+      var buffer = Buffer.from(JSON.parse(res._body).file.data);
+      this.generatingFile = false;
+
+      saveData(buffer, `DealerReport-${new DatePipe("en-US").transform(new Date(), "dd-MM-yyyy").toString()}.xlsx`);
+
+      function saveData(blob, name) {
+        var a = document.createElement("a");
+        document.body.appendChild(a);
+        a.setAttribute("style", "none");
+        blob = new Blob([blob], { type: "octet/stream" });
+        var url = window.URL.createObjectURL(blob);
+        a.href = url;
+        a.download = name;
+        a.click();
+        window.URL.revokeObjectURL(url);
+      }
+    })
   }
 
 }

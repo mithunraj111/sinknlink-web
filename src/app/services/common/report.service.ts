@@ -27,4 +27,11 @@ export class ReportService {
     paymentReport(data): Observable<any> {
         return this.httpHandler.POST(this.endpoint + AppConstant.API_CONFIG.API_URL.COMMON.REPORT.PAYMENT_STATUS, data);
     }
+    customerDetailReportDownload(data): Observable<any> {
+        return this.httpHandler.POST(this.endpoint + AppConstant.API_CONFIG.API_URL.COMMON.REPORT.CUSTOMER_DETAIL +"?download=true", data);
+    }
+    dealerReportDownload(data): Observable<any> {
+        return this.httpHandler.POST(this.endpoint + AppConstant.API_CONFIG.API_URL.COMMON.REPORT.DEALER_COUNT +"?download=true", data);
+    }
+
 }
