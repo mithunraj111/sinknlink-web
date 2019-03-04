@@ -63,18 +63,14 @@ export class VipNumberRegistrationComponent implements OnInit {
       }
     });
   }
-  tabChanged(prop) {
 
+  tabChanged(prop) {
     this.condition = {
       fancynostatus: prop.nextId
     }
-
     if (prop.nextId == "ALLOCATED") {
       this.getAllocatedBusiness();
-    } else {
-      this.getAvailableList();
-    }
-
+    } else { this.getAvailableList(); }
     this.currentTab = prop.nextId
   }
 
@@ -96,10 +92,7 @@ export class VipNumberRegistrationComponent implements OnInit {
 
   getAvailableList() {
     this.loadingIndicator = true;
-
     let service = this.fancynumberService.getList(this.condition);
-
-
     service.subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
@@ -138,11 +131,7 @@ export class VipNumberRegistrationComponent implements OnInit {
     let mode = this.formTitle;
     let selectedBiz = this.selectedBiz;
     let selectedFancyNos = Array.isArray(this.selectedFancyNos) == true ? this.selectedFancyNos : [this.selectedFancyNos];
-
-    let data = {
-      data: []
-    };
-
+    let data = { data: [] };
     if (mode == 'Block') {
       if (typeof selectedBiz == "string") {
         let arr = Lodash.map(selectedFancyNos, (item) => {
@@ -200,17 +189,10 @@ export class VipNumberRegistrationComponent implements OnInit {
         })
       }
     }
-
     Array.isArray(this.selectedFancyNos) == true ? this.selectedFancyNos.splice(0, this.selectedFancyNos.length) : "";
-
     this.selectedBiz = "";
     this.blockRemarks = "";
     this.checks = {};
-
-    console.log(this.selectedFancyNos);
-
-    // this.getAvailableList();
-
   }
 
   unblockNumber(id) {

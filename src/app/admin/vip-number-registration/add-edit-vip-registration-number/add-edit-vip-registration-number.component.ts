@@ -107,7 +107,6 @@ export class AddEditVipRegistrationNumberComponent implements OnInit {
         this.creatingNumbers = true;
 
         let data = this.vipForm.value;
-
         data['status'] = data['status'] ? AppConstant.STATUS_ACTIVE : AppConstant.STATUS_INACTIVE;
         data['createdby'] = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER).fullname;
         data['createddt'] = new Date();
@@ -119,6 +118,7 @@ export class AddEditVipRegistrationNumberComponent implements OnInit {
         } else {
           this.fancynumberService.addNumbers(data).subscribe(res => {
             const response = JSON.parse(res._body);
+            console.log(response);
             if (response.status) {
               this.creatingNumbers = false;
               this.bootstrapAlertService.showSucccess(response.message);

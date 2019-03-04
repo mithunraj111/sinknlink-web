@@ -23,7 +23,7 @@
           <button type="button" placement="bottom" ngbTooltip="Click to add"
             class="m-r-10 add-btn btn btn-primary waves-effect" (click)='addVipRegistration()'><i
               class="fa fa-plus-circle m-r-5"></i> New</button>
-          <button type="button" placement="bottom" ngbTooltip="Reload" (click)="getAllocatedBusiness()"
+          <button type="button" placement="bottom" ngbTooltip="Reload" (click)="getAvailableList()"
             class="btn btn-inverse btn-primary waves-effect"><i class="ti-reload"></i></button>
         </div>
       </div>
@@ -106,34 +106,18 @@
                         </ngx-datatable-column>
                         <ngx-datatable-column prop="membershipid" name="Blocked For" [resizeable]="false">
                           <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                            <span>{{row.membershipid}} <a (click)="unblockNumber(row.fancyid)"
-                                style="text-decoration:underline">unblock</a></span>
+                            <span>{{row.business?.bizname}}-{{row.membershipid}}</span>
+                          </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column prop="Action" name="Action" [resizeable]="false" [sortable]="false">
+                          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                            <span><a (click)="unblockNumber(row.fancyid)" style="text-decoration:underline">Unblock</a></span>
                           </ng-template>
                         </ngx-datatable-column>
                         <ngx-datatable-column prop="price" name="Price" [resizeable]="false" headerClass="text-right"
-                          [cellClass]="'text-right'">
+                          [cellClass]="'text-right pr-3'">
                           <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                             <span>{{row.price|currency : 'INR' : true}}</span>
-                          </ng-template>
-                        </ngx-datatable-column>
-                        <ngx-datatable-column name="Status" [sortable]="false" [flexGrow]="0.5"
-                          headerClass="text-center" [cellClass]="'text-center'" [resizeable]="false">
-                          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                            <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status"
-                              color="$primary-color" (change)="changeStatus(row, rowIndex, false)" switchColor="#fff"
-                              size="small" [disabled]="row.fancynostatus == 'Blocked' || row.fancynostatus == 'NA'"
-                              [checked]="row.status == 'Active'"></ui-switch>
-                          </ng-template>
-                        </ngx-datatable-column>
-                        <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.5"
-                          headerClass="text-center" [cellClass]="'text-center'" [resizeable]="false">
-                          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                            <div class="row checkbox-column">
-                              <a (click)="changeStatus(row, rowIndex, true)" placement="bottom"
-                                ngbTooltip="Click to delete registration details"
-                                class="crm-action-delete m-l-30 text-danger">
-                                <i class="fa fa-trash"></i></a>
-                            </div>
                           </ng-template>
                         </ngx-datatable-column>
                       </ngx-datatable>
