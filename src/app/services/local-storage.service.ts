@@ -28,8 +28,10 @@ export class LocalStorageService {
       return item;
     }
   }
-  setItem(Key:string,Value:string){
-    localStorage.setItem(this.prefix+Key, JSON.stringify(Value));
+  setItem(key: string, data: any) {
+    const item = JSON.parse(localStorage.getItem(this.prefix + key));
+    item.fullname = data.fullname;
+    localStorage.setItem(this.prefix + key, JSON.stringify(item));
   }
   removeItem(key: string) {
     localStorage.removeItem(this.prefix + key);

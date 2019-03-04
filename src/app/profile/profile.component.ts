@@ -5,6 +5,7 @@ import { LocalStorageService, MasterService, CommonService } from '../services';
 import * as _ from 'lodash';
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
 import { AppMessages } from '../app-messages';
+import { MainComponent } from '../layout/main/main.component';
 
 @Component({
   selector: 'app-profile',
@@ -27,7 +28,7 @@ export class ProfileComponent implements OnInit {
   profileimage: Boolean = false;
   @ViewChild('userimage') userimage: ElementRef;
 
-  constructor(private fb: FormBuilder,
+  constructor(private mainComponent: MainComponent, private fb: FormBuilder,
     private localStorageService: LocalStorageService,
     private userService: MasterService.UserService,
     private bootstrapAlertService: BootstrapAlertService,
@@ -185,6 +186,7 @@ export class ProfileComponent implements OnInit {
         if (response.status) {
           this.bootstrapAlertService.showSucccess(response.message);
           this.localStorageService.setItem(AppConstant.LOCALSTORAGE.USER, response.data);
+          this.mainComponent.userstoragedata.fullname = response.data.fullname;
         } else {
           this.bootstrapAlertService.showError(response.message);
         }
