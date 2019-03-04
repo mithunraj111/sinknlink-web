@@ -1666,3 +1666,11 @@ select-dropdown{
     }
 }
 
+.profile-page{
+    .md-close-btn{
+        right:36px;
+    }
+    .custom-file-control:lang(en):empty::after {
+        content: "Browse";
+    }
+}

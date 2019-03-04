@@ -77,7 +77,7 @@
     <div *ngIf="tempFilter.length == 0" class="text-center no-data">
         <div class="nodata-text nodata-image">
             <img class="hand-icon" src="assets/images/no-data.png">
-            <h3>Create lookup(s) associated with organization</h3>
+            <h3>No Lookup(s) Found</h3>
             <button *ngIf="add" type="button" placement="bottom" ngbTooltip="Click to add lookup" class="add-btn btn btn-primary waves-effect" (click)='addLookup()'><i class="fa fa-plus-circle m-r-5"></i>Create lookup</button>
             <button type="button" placement="bottom" ngbTooltip="Reload" (click)="getLookupList()" class="btn btn-inverse btn-primary waves-effect"><i
           class="ti-reload"></i></button>
