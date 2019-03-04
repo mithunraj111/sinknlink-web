@@ -195,16 +195,7 @@ export class MainComponent implements OnInit {
     this.setMenuAttributes(this.windowWidth);
     this.setHeaderAttributes(this.windowWidth);
 
-    this.userstoragedata = this.lstorageService.getItem(AppConstant.LOCALSTORAGE.USER);
-
-
-    if (this.userstoragedata.profileimg != null) {
-      this.userfile = this.userstoragedata.profileimg.docurl;
-      this.userprofile = true;
-    } else {
-      this.userprofile = false;
-      this.userfile = this.userstoragedata.fullname.substring(0, 1);
-    }
+    this.checkProfile();
     // dark
     /*this.setLayoutType('dark');*/
 
@@ -217,10 +208,17 @@ export class MainComponent implements OnInit {
 
     // side-bar image
     /*this.setLayoutType('img');*/
-
-
   }
-
+  checkProfile() {
+    this.userstoragedata = this.lstorageService.getItem(AppConstant.LOCALSTORAGE.USER);
+    if (this.userstoragedata.profileimg != null) {
+      this.userfile = this.userstoragedata.profileimg.docurl;
+      this.userprofile = true;
+    } else {
+      this.userprofile = false;
+      this.userfile = this.userstoragedata.fullname.substring(0, 1);
+    }
+  }
   ngOnInit() {
     this.setBackgroundPattern('pattern1');
 

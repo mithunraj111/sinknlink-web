@@ -29,9 +29,7 @@ export class LocalStorageService {
     }
   }
   setItem(key: string, data: any) {
-    const item = JSON.parse(localStorage.getItem(this.prefix + key));
-    item.fullname = data.fullname;
-    localStorage.setItem(this.prefix + key, JSON.stringify(item));
+    localStorage.setItem(this.prefix + key, JSON.stringify(data));
   }
   removeItem(key: string) {
     localStorage.removeItem(this.prefix + key);

@@ -185,8 +185,18 @@ export class ProfileComponent implements OnInit {
         const response = JSON.parse(res._body);
         if (response.status) {
           this.bootstrapAlertService.showSucccess(response.message);
-          this.localStorageService.setItem(AppConstant.LOCALSTORAGE.USER, response.data);
+          // this.localStorageService.setItem(AppConstant.LOCALSTORAGE.USER, response.data);
           this.mainComponent.userstoragedata.fullname = response.data.fullname;
+          //  if (this.userimgfile) {
+          this.userService.byId(this.userstoragedata.userid).subscribe(result => {
+            const userResponse = JSON.parse(result._body);
+            if (userResponse.status) {
+              this.localStorageService.setItem(AppConstant.LOCALSTORAGE.USER, userResponse.data);
+              this.mainComponent.userstoragedata.fullname = userResponse.data.fullname;
+              this.mainComponent.checkProfile();
+            }
+          });
+          // }
         } else {
           this.bootstrapAlertService.showError(response.message);
         }

@@ -65,9 +65,6 @@ export class LoginComponent implements OnInit {
               }
             });
           }
-          if(localStorage.length>0){
-            
-          }
           this.router.navigate(['dashboard']);
         } else {
           this.signingin = false;
