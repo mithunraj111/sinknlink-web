@@ -33,14 +33,14 @@ export class CustomerComponent extends BaseService implements OnInit {
 
   }
   getCustomerList() {
-    const condition = {
-      parentmembershipid: null
-    } as any;
+    const condition = {} as any;
     if (this.userstoragedata.usertype === 'D') {
       condition.dealerid = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.DEALER).dealerid;
     }
     if (this.userstoragedata.usertype === 'C') {
       condition.userid = this.userstoragedata.userid;
+    } else {
+      condition.parentmembershipid = null;
     }
     this.loadingIndicator = true;
     this.customerService.list(condition).subscribe(res => {

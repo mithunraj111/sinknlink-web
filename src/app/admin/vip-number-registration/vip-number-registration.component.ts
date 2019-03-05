@@ -273,9 +273,13 @@ export class VipNumberRegistrationComponent implements OnInit {
   }
 
   onNumberSelect(id, no) {
-    let found = this.selectedFancyNos.find((o) => { return id == o });
-    if (found == undefined) this.selectedFancyNos.push({ id: id, no: no });
-    else this.selectedFancyNos.splice(this.selectedFancyNos.indexOf({ id: id, no: no }), 1);
+    let found = this.selectedFancyNos.find((o) => { 
+      return id == o.id });
+    if (found == undefined) {
+      this.selectedFancyNos.push({ id: id, no: no });
+    } else {
+      this.selectedFancyNos.splice(this.selectedFancyNos.indexOf({ id: id, no: no }), 1);
+    }
   }
 
   goToEdit(id) {
