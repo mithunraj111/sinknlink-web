@@ -12,6 +12,7 @@ import * as _ from 'lodash';
 export class AddEditGigComponent implements OnInit, OnChanges {
     userstoragedata = {} as any;
     @Input() customerObj = {} as any;
+    saving = false;
     gigForm: FormGroup;
     gigErrObj = AppMessages.VALIDATION.GIG;
     @Input() gigObj = {} as any;

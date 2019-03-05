@@ -52,19 +52,21 @@ export class ProfileComponent implements OnInit {
       confirmpassword: [null, Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(30)])],
     });
   }
+  checkProfileImg() {
+    if (this.userObj.profileimg != null) {
+      this.userfile = this.userObj.profileimg.docurl;
+      this.profileimage = true;
+    } else {
+      this.profileimage = false;
+      this.userfile = this.userObj.fullname.substring(0, 1);
+    }
+  }
   getUser() {
     this.userService.byId(this.userstoragedata.userid).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
         this.userObj = response.data;
-        if (this.userObj.profileimg != null) {
-          this.userfile = this.userObj.profileimg.docurl;
-          this.profileimage = true;
-        } else {
-          this.profileimage = false;
-          this.userfile = this.userstoragedata.fullname.substring(0, 1);
-        }
-
+        this.checkProfileImg();
         let consumer = {
           emailid: '',
           locationid: '',
@@ -165,15 +167,14 @@ export class ProfileComponent implements OnInit {
       this.bootstrapAlertService.showError(this.errMessage);
       return false;
     } else {
-      let data = {} as any;
+      const data = {} as any;
       data.updatedby = this.userstoragedata.fullname;
       data.updateddt = new Date();
       data.fullname = this.profileForm.value.fullname;
       data.emailid = this.profileForm.value.emailid;
       data.address = this.profileForm.value.address;
-      data.locationid = Number(this.socialForm.value.locationid);
+      data.locationid = Number(this.profileForm.value.locationid);
       data.socialid = this.socialForm.value;
-     
       const formData = new FormData();
       if (this.userObj.profileimg != null && this.userObj.profileimg.docid) {
         data.docid = this.userObj.profileimg.docid;
@@ -193,9 +194,11 @@ export class ProfileComponent implements OnInit {
           this.userService.byId(this.userstoragedata.userid).subscribe(result => {
             const userResponse = JSON.parse(result._body);
             if (userResponse.status) {
+              this.userObj = userResponse.data;
               this.localStorageService.setItem(AppConstant.LOCALSTORAGE.USER, userResponse.data);
               this.mainComponent.userstoragedata.fullname = userResponse.data.fullname;
               this.mainComponent.checkProfile();
+              this.checkProfileImg();
             }
           });
           // }

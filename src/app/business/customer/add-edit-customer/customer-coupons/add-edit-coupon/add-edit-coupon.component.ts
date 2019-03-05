@@ -18,6 +18,7 @@ export class AddEditCouponComponent implements OnInit, OnChanges {
     @Input() couponObj = {} as any;
     couponForm: FormGroup;
     couponErrObj = AppMessages.VALIDATION.COUPON;
+    saving = false;
     @Output() notifyCouponChange: EventEmitter<any> = new EventEmitter();
     buttonTxt = AppConstant.BUTTON_TXT.SAVE;
     formTitle = AppConstant.FORM_TITLE.COUPON.ADD;
