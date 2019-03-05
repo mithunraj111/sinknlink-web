@@ -351,12 +351,12 @@ export class AddEditCustomerComponent implements OnInit {
         this.settingsComponent.updateSettings(this.customerObj);
         break;
       case '5':
-        if (this.gigComponent.gigForm.touched) {
-          this.gigComponent.saveOrUpdateGig();
-        } else {
-          this.bootstrapAlertService.showError(AppMessages.VALIDATION.GIG.common);
-          return false;
-        }
+        // if (this.gigComponent.gigForm.touched) {
+        //   this.gigComponent.saveOrUpdateGig();
+        // } else {
+        //   this.bootstrapAlertService.showError(AppMessages.VALIDATION.GIG.common);
+        //   return false;
+        // }
         break;
       case '6':
         if (this.couponComponent.couponForm.touched) {

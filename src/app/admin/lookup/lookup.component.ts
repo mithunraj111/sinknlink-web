@@ -20,7 +20,7 @@ export class LookupComponent extends BaseService implements OnInit {
   tempFilter = [];
   selectedKeyType: any = AppConstant.LOOKUP[0].value;
   keylist = AppConstant.LOOKUP;
-  loadingIndicator: boolean = true;
+  loadingIndicator = true;
 
   constructor(private lookupService: AdminService.LookupService,
     private bootstrapAlertService: BootstrapAlertService) {

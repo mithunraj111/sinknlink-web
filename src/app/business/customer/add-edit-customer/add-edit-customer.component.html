@@ -1,384 +1,353 @@
 <div class="addeditpage">
-  <div class="fixedheader">
-    <div class="header-title m-b-15 pos-fixed">
-      <div class="row">
-        <div class="col-md-6 col-sm-6">
-          <p class="m-b-0" *ngIf="customerObj?.membershipid">
-            <!-- <i class="fa fa-pencil"></i> Membership ID: {{customerObj?.membershipid}} -->
-          </p>
-        </div>
-        <div class="col-md-6 col-sm-6 save-button text-right p-r-30">
-          <button type="button" placement="bottom" ngbTooltip="Click To {{buttonText}} Customer Details" (click)="saveOrUpdate()"
-            class="btn btn-primary waves-effect m-r-10 text-capitalize" [disabled]="savecustomer">{{savecustomer ==
+    <div class="fixedheader">
+        <div class="header-title m-b-15 pos-fixed">
+            <div class="row">
+                <div class="col-md-6 col-sm-6">
+                    <p class="m-b-0" *ngIf="customerObj?.membershipid">
+                        <!-- <i class="fa fa-pencil"></i> Membership ID: {{customerObj?.membershipid}} -->
+                    </p>
+                </div>
+                <div class="col-md-6 col-sm-6 save-button text-right p-r-30">
+                    <button type="button" placement="bottom" ngbTooltip="Click To {{buttonText}} Customer Details" (click)="saveOrUpdate()" class="btn btn-primary waves-effect m-r-10 text-capitalize" [disabled]="savecustomer">{{savecustomer ==
             true ? 'Saving' : buttonText}}</button>
-          <button type="button" placement="bottom" ngbTooltip="Go back" routerLink="/business/customers" class="btn btn-inverse btn-primary waves-effect"><i
+                    <button type="button" placement="bottom" ngbTooltip="Go back" routerLink="/business/customers" class="btn btn-inverse btn-primary waves-effect"><i
               class="fa fa-arrow-circle-left"></i></button>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-  <div class="employee-page pos-fixed customer-menu">
-    <div class="col-md-12 col-sm-12 text-center employee-profile m-t-25">
-      <!-- <div class="form-group">
+    <div class="employee-page pos-fixed customer-menu">
+        <div class="col-md-12 col-sm-12 text-center employee-profile m-t-25">
+            <!-- <div class="form-group">
                 <label class="mb-3">
                     <img src="assets/images/employee.jpg" class="img-responsive w-75" alt="employee">
                 </label>
             </div> -->
+        </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-md-9 col-sm-9">
-      <div class="md-tabs md-right-tabs business-tab">
-        <ngb-tabset #customertabs (tabChange)="onCustomerTabChange($event)">
-          <ngb-tab title="Details" id='1'>
-            <ng-template ngbTabContent>
-              <div [@fadeInOutTranslate]>
-                <form [formGroup]="customerForm">
-                  <div class="employee-form">
-                    <div class="card tenants-page tenants-pages m-b-10 m-t-15">
-                      <div class="row p-t-10 p-b-5">
-                        <div class="col-md-12 col-sm-12">
-                          <div class="form-group row required">
-                            <label class="col-md-3 col-sm-6 col-form-label text-right">Business
-                              name</label>
-                            <div class="col-md-9 col-sm-6">
-                              <input type="text" class="form-control" placeholder="Business name" formControlName="bizname">
-                            </div>
-                          </div>
-                          <div class="form-group row required">
-                            <label class="col-md-3 col-sm-6 col-form-label text-right">Business
-                              type</label>
-                            <div class="col-md-9 col-sm-6">
-                              <div class="input-box">
-                                <ng-select [allowClear]="true" [ngClass]="'ng-select'" [options]="businesstypes"
-                                  formControlName="biztype" placeholder="Select business type">
-                                </ng-select>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="form-group row">
-                            <label class="col-md-3 col-sm-6 col-form-label text-right">Description</label>
-                            <div class="col-md-9 col-sm-6">
-                              <div class="input-box">
-                                <textarea rows="3" cols="3" class="form-control" placeholder="Description"
-                                  formControlName="bizdescription"></textarea>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="form-group row required">
-                            <label class="col-md-3 col-sm-6 col-form-label text-right">Contact
-                              person</label>
-                            <div class="col-md-9 col-sm-6">
-                              <input type="text" class="form-control" placeholder="Contact person" formControlName="contactperson">
-                            </div>
-                          </div>
-                          <div class="form-group row required placeholder-text">
-                            <label class="col-md-3 col-sm-6 col-form-label text-right">Mobile number</label>
-                            <div class="col-md-9 col-sm-6">
-                              <tag-input class="tag-chips" [maxItems]="5" placeholder="Mobile number"
-                                [secondaryPlaceholder]="'Mobile number'" formControlName="contactmobile"></tag-input>
-                            </div>
-                          </div>
-                          <div class="form-group row">
-                            <label class="col-md-3 col-sm-6 col-form-label text-right">Email address</label>
-                            <div class="col-md-9 col-sm-6">
-                              <input type="text" class="form-control" placeholder="Email address" formControlName="contactemail">
-                            </div>
-                          </div>
-                          <div class="form-group row placeholder-text">
-                            <label class="col-md-3 col-sm-6 col-form-label text-right">Phone Number</label>
-                            <div class="col-md-9 col-sm-6">
-                              <tag-input class="tag-chips" [maxItems]="5" placeholder="Phone number"
-                                [secondaryPlaceholder]="'Phone number'" formControlName="phoneno"></tag-input>
-                            </div>
-                          </div>
-                          <div class="form-group row required">
-                            <label class="col-md-3 col-sm-6 col-form-label text-right">Category</label>
-                            <div class="col-md-9 col-sm-6">
-                              <div class="input-box">
-                                <ng-select [allowClear]="true" [ngClass]="'ng-select'" [options]="categoryList"
-                                  formControlName="categoryid" placeholder="Select Category">
-                                </ng-select>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="form-group row required placeholder-text">
-                            <label class="col-md-3 col-sm-6 col-form-label text-right">Tags</label>
-                            <div class="col-md-9 col-sm-6">
-                              <tag-input class="tag-chips" [maxItems]="5" formControlName="tags" [secondaryPlaceholder]="'Tags'"
-                                placeholder="Tags"></tag-input>
-                            </div>
-                          </div>
-                          <div class="form-group row">
-                            <label class="col-md-3 col-sm-6 col-form-label text-right">Address</label>
-                            <div class="col-md-9 col-sm-6">
-                              <textarea rows="3" cols="3" class="form-control" placeholder="Address" formControlName="postaladdress"></textarea>
-                            </div>
-                          </div>
-                          <div class="form-group row">
-                            <label class="col-md-3 col-sm-6 col-form-label text-right">Landmark</label>
-                            <div class="col-md-9 col-sm-6">
-                              <input type="text" class="form-control" placeholder="Landmark" formControlName="landmark">
-                            </div>
-                          </div>
-                          <div class="form-group row required">
-                            <div class="col-md-3 col-sm-6 col-form-label text-right">
-                              <label>Geo Address
+    <div class="row">
+        <div class="col-md-9 col-sm-9">
+            <div class="md-tabs md-right-tabs business-tab">
+                <ngb-tabset #customertabs (tabChange)="onCustomerTabChange($event)">
+                    <ngb-tab title="Details" id='1'>
+                        <ng-template ngbTabContent>
+                            <div [@fadeInOutTranslate]>
+                                <form [formGroup]="customerForm">
+                                    <div class="employee-form">
+                                        <div class="card tenants-page tenants-pages m-b-10 m-t-15">
+                                            <div class="row p-t-10 p-b-5">
+                                                <div class="col-md-12 col-sm-12">
+                                                    <div class="form-group row required">
+                                                        <label class="col-md-3 col-sm-6 col-form-label text-right">Business name</label>
+                                                        <div class="col-md-9 col-sm-6">
+                                                            <input type="text" class="form-control" placeholder="Business name" formControlName="bizname">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row required">
+                                                        <label class="col-md-3 col-sm-6 col-form-label text-right">Business type</label>
+                                                        <div class="col-md-9 col-sm-6">
+                                                            <div class="input-box">
+                                                                <ng-select [allowClear]="true" [ngClass]="'ng-select'" [options]="businesstypes" formControlName="biztype" placeholder="Select business type">
+                                                                </ng-select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row required">
+                                                        <label class="col-md-3 col-sm-6 col-form-label text-right">Membership type</label>
+                                                        <div class="col-md-9 col-sm-6">
+                                                            <ng-select [allowClear]="true" [ngClass]="'ng-select'" [options]="memberTypes" formControlName="membershiptype" placeholder="Select member type">
+                                                            </ng-select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-md-3 col-sm-6 col-form-label text-right">Description</label>
+                                                        <div class="col-md-9 col-sm-6">
+                                                            <div class="input-box">
+                                                                <textarea rows="3" cols="3" class="form-control" placeholder="Description" formControlName="bizdescription"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row required">
+                                                        <label class="col-md-3 col-sm-6 col-form-label text-right">Contact person</label>
+                                                        <div class="col-md-9 col-sm-6">
+                                                            <input type="text" class="form-control" placeholder="Contact person" formControlName="contactperson">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row required placeholder-text">
+                                                        <label class="col-md-3 col-sm-6 col-form-label text-right">Mobile number</label>
+                                                        <div class="col-md-9 col-sm-6">
+                                                            <tag-input class="tag-chips" [maxItems]="5" placeholder="Mobile number" [secondaryPlaceholder]="'Mobile number'" formControlName="contactmobile"></tag-input>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-md-3 col-sm-6 col-form-label text-right">Email address</label>
+                                                        <div class="col-md-9 col-sm-6">
+                                                            <input type="text" class="form-control" placeholder="Email address" formControlName="contactemail">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row placeholder-text">
+                                                        <label class="col-md-3 col-sm-6 col-form-label text-right">Phone Number</label>
+                                                        <div class="col-md-9 col-sm-6">
+                                                            <tag-input class="tag-chips" [maxItems]="5" placeholder="Phone number" [secondaryPlaceholder]="'Phone number'" formControlName="phoneno"></tag-input>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row required">
+                                                        <label class="col-md-3 col-sm-6 col-form-label text-right">Category</label>
+                                                        <div class="col-md-9 col-sm-6">
+                                                            <div class="input-box">
+                                                                <ng-select [allowClear]="true" [ngClass]="'ng-select'" [options]="categoryList" formControlName="categoryid" placeholder="Select Category">
+                                                                </ng-select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row required placeholder-text">
+                                                        <label class="col-md-3 col-sm-6 col-form-label text-right">Tags</label>
+                                                        <div class="col-md-9 col-sm-6">
+                                                            <tag-input class="tag-chips" [maxItems]="5" formControlName="tags" [secondaryPlaceholder]="'Tags'" placeholder="Tags"></tag-input>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-md-3 col-sm-6 col-form-label text-right">Address</label>
+                                                        <div class="col-md-9 col-sm-6">
+                                                            <textarea rows="3" cols="3" class="form-control" placeholder="Address" formControlName="postaladdress"></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-md-3 col-sm-6 col-form-label text-right">Landmark</label>
+                                                        <div class="col-md-9 col-sm-6">
+                                                            <input type="text" class="form-control" placeholder="Landmark" formControlName="landmark">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row required">
+                                                        <div class="col-md-3 col-sm-6 col-form-label text-right">
+                                                            <label>Geo Address
                                 <i class="fa fa-globe" (click)="openmap();" aria-hidden="true"></i>
                               </label>
-                            </div>
-                            <div class="col-md-9 col-sm-6">
-                              <input type="text" class="form-control m-b-10" placeholder="Latitude" formControlName="latitude">
-                              <input type="text" class="form-control" placeholder="Longitude" formControlName="longitude">
-                            </div>
-                          </div>
-                          <div class="form-group row required">
-                            <label class="col-md-3 col-sm-6 col-form-label text-right">Location</label>
-                            <div class="col-md-9 col-sm-6">
-                              <div class="input-box">
-                                <ng-select [allowClear]="true" [ngClass]="'ng-select'" [options]="locationList"
-                                  formControlName="locationid" placeholder="Select Location">
-                                </ng-select>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="form-group row required">
-                            <label class="col-md-3 col-sm-6 col-form-label text-right">Work
-                              days</label>
-                            <div class="col-md-9 col-sm-6">
-                              <div class="input-box">
-                                <ng-select [allowClear]="true" [ngClass]="'ng-select'" [options]="workDays" [multiple]="true"
-                                  formControlName="workdays" placeholder="Select Work Days">
-                                </ng-select>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="form-group row required">
-                            <label class="col-md-3 col-sm-6 col-form-label text-right">Work
-                              hours</label>
-                            <div class="col-md-9 col-sm-6">
-                              <input class="form-control m-b-10" type="time" formControlName="starttime">
-                              <input class="form-control" type="time" formControlName="endtime">
-                            </div>
-                          </div>
-                          <div class="form-group row required donation-header">
-                            <label class="col-md-3 col-sm-6 col-form-label text-right">Payment methods</label>
-                            <div class="col-md-9 col-sm-6">
-                              <div class="input-box">
-                                <ng-select [allowClear]="true" [ngClass]="'ng-select'" [options]="paymentMethods"
-                                  [multiple]="true" formControlName="acceptedpayments" placeholder="Select payment methods">
-                                </ng-select>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="form-group row required">
-                            <label class="col-md-3 col-sm-6 col-form-label text-right">Delivery
-                              method</label>
-                            <div class="col-md-9 col-sm-6">
-                              <ng-select [allowClear]="true" [ngClass]="'ng-select'" [options]="deliveryMethods"
-                                [multiple]="true" formControlName="deliveryoptions" placeholder="Select delivery method">
-                              </ng-select>
-                            </div>
-                          </div>
-                          <div class="form-group row">
-                            <label class="col-md-3 col-sm-6 col-form-label text-right">Social ID's</label>
-                            <div class="col-md-9 col-sm-6">
-                              <div class="input-group">
-                                <input type="text" class="form-control w-75" placeholder="Social ID's" readonly
-                                  formControlName="socialids">
-                                <div class="input-group-append bg-default" (click)='addSocialId();'>
-                                  <span class="fa fa-plus input-group-text"></span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="form-group row required">
-                            <label class="col-md-3 col-sm-6 col-form-label text-right">Tax
-                              number</label>
-                            <div class="col-md-9 col-sm-6">
-                              <input type="text" class="form-control" placeholder="Tax number" formControlName="taxno">
-                            </div>
-                          </div>
-                          <div class="form-group row">
-                            <label class="col-md-3 col-sm-6 col-form-label text-right">Website</label>
-                            <div class="col-md-9 col-sm-6">
-                              <input type="text" class="form-control" placeholder="Website" formControlName="website">
-                            </div>
-                          </div>
-                          <div class="form-group border-checkbox-section offset-md-3 col-md-5 col-sm-4 m-t-10">
-                            <div class="border-checkbox-group border-checkbox-group-primary">
-                              <input class="border-checkbox" type="checkbox" id="inmall" formControlName="inmallyn"
-                                [checked]>
-                              <label class="border-checkbox-label" for="inmall">Business In Mall</label>
-                            </div>
-                          </div>
-                          <div *ngIf="customerForm.value.inmallyn == true" class="form-group row">
-                            <label class="col-md-3 col-sm-6 col-form-label text-right">Mall Name</label>
-                            <div class="col-md-9 col-sm-6">
-                              <ng-select [allowClear]="true" [ngClass]="'ng-select'" [options]="mallsList"
-                                formControlName="mallname" placeholder="Select Mall Name">
-                              </ng-select>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="header-title m-t-10">
-                      <h3 class="f-18 text-primary m-l-15">Other Details</h3>
-                    </div>
-                    <div class="card tenants-page tenants-pages m-b-10 m-t-10">
-                      <div class="row p-t-10 p-b-5">
-                        <div class="col-md-12 col-sm-12">
-                          <div class="form-group row required">
-                            <label class="col-md-3 col-sm-6 col-form-label text-right">Registration
-                              Date</label>
-                            <div class="col-md-9 col-sm-6">
-                              <div class="input-group">
-                                <input class="form-control" placeholder="dd-mm-yyyy" name="regdt" ngbDatepicker #regdt="ngbDatepicker"
-                                  formControlName="regdate">
-                                <div class="input-group-append bg-default" (click)="regdt.toggle()">
-                                  <span class="fa fa-calendar input-group-text"></span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="form-group row required">
-                            <label class="col-md-3 col-sm-6 col-form-label text-right">Payment
-                              Status</label>
-                            <div class="col-md-9 col-sm-6">
-                              <ng-select [allowClear]="true" [ngClass]="'ng-select'" [options]="paymentStatus"
-                                formControlName="paymentstatus" placeholder="Select Payment
-                                                                Status">
-                              </ng-select>
-                            </div>
-                          </div>
-                          <div class="form-group row required">
-                            <label class="col-md-3 col-sm-6 col-form-label text-right">Member type</label>
-                            <div class="col-md-9 col-sm-6">
-                              <ng-select [allowClear]="true" [ngClass]="'ng-select'" [options]="memberTypes"
-                                formControlName="membershiptype" placeholder="Select member
-                                                                type">
-                              </ng-select>
-                            </div>
-                          </div>
-                          <div class="form-group row required">
-                            <label class="col-md-3 col-sm-6 col-form-label text-right">Payment Tenure</label>
-                            <div class="col-md-9 col-sm-6">
-                              <ng-select [allowClear]="true" [ngClass]="'ng-select'" [options]="paymentTenuresList"
-                                formControlName="paymenttenure" placeholder="Select Payment
-                                                            tenure">
-                              </ng-select>
-                            </div>
-                          </div>
-                          <div class="form-group row required">
-                            <label class="col-md-3 col-sm-6 col-form-label text-right">Status</label>
-                            <div class="col-md-9 col-sm-6">
-                              <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="$primary-color"
-                                switchColor="#fff" size="small" formControlName="status"></ui-switch>
-                            </div>
-                          </div>
-                          <!-- <div class="form-group border-checkbox-section col-md-6 col-sm-7 m-l-35">
-                                                        <div class="border-checkbox-group border-checkbox-group-primary pull-right">
-                                                            <input class="border-checkbox" type="checkbox" id="detailst&c" formControlName="tncagreed">
-                                                            <label class="border-checkbox-label" for="detailst&c">I agree to the Terms and Conditions</label>
                                                         </div>
-                                                    </div> -->
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </ng-template>
-          </ngb-tab>
-          <ngb-tab title="Payments" id='2' [disabled]="isAddForm">
-            <ng-template ngbTabContent>
-              <div [@fadeInOutTranslate]>
-                <app-customer-payments [customerObj]="customerObj"></app-customer-payments>
-              </div>
-            </ng-template>
-          </ngb-tab>
-          <ngb-tab title="Branches" id='3' [disabled]="isAddForm">
-            <ng-template ngbTabContent>
-              <div [@fadeInOutTranslate]>
-                <app-customer-branches [customerObj]="customerObj"></app-customer-branches>
-              </div>
-            </ng-template>
-          </ngb-tab>
-          <ngb-tab title="Settings" id='4' [disabled]="isAddForm">
-            <ng-template ngbTabContent>
-              <div [@fadeInOutTranslate]>
-                <app-customer-settings [customerObj]="customerObj"></app-customer-settings>
-              </div>
-            </ng-template>
-          </ngb-tab>
-          <ngb-tab title="Gigs" id='5' [disabled]="isAddForm">
-            <ng-template ngbTabContent>
-              <div [@fadeInOutTranslate]>
-                <app-customer-gigs [customerObj]="customerObj"></app-customer-gigs>
-              </div>
-            </ng-template>
-          </ngb-tab>
-          <ngb-tab title="Coupons" id='6' [disabled]="isAddForm">
-            <ng-template ngbTabContent>
-              <div [@fadeInOutTranslate]>
-                <app-customer-coupons [customerObj]="customerObj"></app-customer-coupons>
-              </div>
-            </ng-template>
-          </ngb-tab>
-          <ngb-tab title="Gallery" id='7' [disabled]="isAddForm">
-            <ng-template ngbTabContent>
-              <div [@fadeInOutTranslate]>
-                <app-customer-gallery [customerObj]="customerObj"></app-customer-gallery>
-              </div>
-            </ng-template>
-          </ngb-tab>
-        </ngb-tabset>
-      </div>
+                                                        <div class="col-md-9 col-sm-6">
+                                                            <input type="text" class="form-control m-b-10" placeholder="Latitude" formControlName="latitude">
+                                                            <input type="text" class="form-control" placeholder="Longitude" formControlName="longitude">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row required">
+                                                        <label class="col-md-3 col-sm-6 col-form-label text-right">Location</label>
+                                                        <div class="col-md-9 col-sm-6">
+                                                            <div class="input-box">
+                                                                <ng-select [allowClear]="true" [ngClass]="'ng-select'" [options]="locationList" formControlName="locationid" placeholder="Select Location">
+                                                                </ng-select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row required">
+                                                        <label class="col-md-3 col-sm-6 col-form-label text-right">Work
+                              days</label>
+                                                        <div class="col-md-9 col-sm-6">
+                                                            <div class="input-box">
+                                                                <ng-select [allowClear]="true" [ngClass]="'ng-select'" [options]="workDays" [multiple]="true" formControlName="workdays" placeholder="Select Work Days">
+                                                                </ng-select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row required">
+                                                        <label class="col-md-3 col-sm-6 col-form-label text-right">Work
+                              hours</label>
+                                                        <div class="col-md-9 col-sm-6">
+                                                            <input class="form-control m-b-10" type="time" formControlName="starttime">
+                                                            <input class="form-control" type="time" formControlName="endtime">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row required donation-header">
+                                                        <label class="col-md-3 col-sm-6 col-form-label text-right">Payment methods</label>
+                                                        <div class="col-md-9 col-sm-6">
+                                                            <div class="input-box">
+                                                                <ng-select [allowClear]="true" [ngClass]="'ng-select'" [options]="paymentMethods" [multiple]="true" formControlName="acceptedpayments" placeholder="Select payment methods">
+                                                                </ng-select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row required">
+                                                        <label class="col-md-3 col-sm-6 col-form-label text-right">Delivery
+                              method</label>
+                                                        <div class="col-md-9 col-sm-6">
+                                                            <ng-select [allowClear]="true" [ngClass]="'ng-select'" [options]="deliveryMethods" [multiple]="true" formControlName="deliveryoptions" placeholder="Select delivery method">
+                                                            </ng-select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-md-3 col-sm-6 col-form-label text-right">Social ID's</label>
+                                                        <div class="col-md-9 col-sm-6">
+                                                            <div class="input-group">
+                                                                <input type="text" class="form-control w-75" placeholder="Social ID's" readonly formControlName="socialids">
+                                                                <div class="input-group-append bg-default" (click)='addSocialId();'>
+                                                                    <span class="fa fa-plus input-group-text"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row required">
+                                                        <label class="col-md-3 col-sm-6 col-form-label text-right">Tax
+                              number</label>
+                                                        <div class="col-md-9 col-sm-6">
+                                                            <input type="text" class="form-control" placeholder="Tax number" formControlName="taxno">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-md-3 col-sm-6 col-form-label text-right">Website</label>
+                                                        <div class="col-md-9 col-sm-6">
+                                                            <input type="text" class="form-control" placeholder="Website" formControlName="website">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group border-checkbox-section offset-md-3 col-md-5 col-sm-4 m-t-10">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="inmall" formControlName="inmallyn" [checked]>
+                                                            <label class="border-checkbox-label" for="inmall">Business In Mall</label>
+                                                        </div>
+                                                    </div>
+                                                    <div *ngIf="customerForm.value.inmallyn == true" class="form-group row">
+                                                        <label class="col-md-3 col-sm-6 col-form-label text-right">Mall Name</label>
+                                                        <div class="col-md-9 col-sm-6">
+                                                            <ng-select [allowClear]="true" [ngClass]="'ng-select'" [options]="mallsList" formControlName="mallname" placeholder="Select Mall Name">
+                                                            </ng-select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="header-title m-t-10">
+                                            <h3 class="f-18 text-primary m-l-15">Other Details</h3>
+                                        </div>
+                                        <div class="card tenants-page tenants-pages m-b-10 m-t-10">
+                                            <div class="row p-t-10 p-b-5">
+                                                <div class="col-md-12 col-sm-12">
+                                                    <div class="form-group row required">
+                                                        <label class="col-md-3 col-sm-6 col-form-label text-right">Registration
+                              Date</label>
+                                                        <div class="col-md-9 col-sm-6">
+                                                            <div class="input-group">
+                                                                <input class="form-control" placeholder="dd-mm-yyyy" name="regdt" ngbDatepicker #regdt="ngbDatepicker" formControlName="regdate">
+                                                                <div class="input-group-append bg-default" (click)="regdt.toggle()">
+                                                                    <span class="fa fa-calendar input-group-text"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row required">
+                                                        <label class="col-md-3 col-sm-6 col-form-label text-right">Payment
+                              Status</label>
+                                                        <div class="col-md-9 col-sm-6">
+                                                            <ng-select [allowClear]="true" [ngClass]="'ng-select'" [options]="paymentStatus" formControlName="paymentstatus" placeholder="Select Payment
+                                                                Status">
+                                                            </ng-select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row required">
+                                                        <label class="col-md-3 col-sm-6 col-form-label text-right">Payment Tenure</label>
+                                                        <div class="col-md-9 col-sm-6">
+                                                            <ng-select [allowClear]="true" [ngClass]="'ng-select'" [options]="paymentTenuresList" formControlName="paymenttenure" placeholder="Select Payment tenure">
+                                                            </ng-select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row required">
+                                                        <label class="col-md-3 col-sm-6 col-form-label text-right">Status</label>
+                                                        <div class="col-md-9 col-sm-6">
+                                                            <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="$primary-color" switchColor="#fff" size="small" formControlName="status"></ui-switch>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </ng-template>
+                    </ngb-tab>
+                    <ngb-tab title="Payments" id='2' [disabled]="isAddForm">
+                        <ng-template ngbTabContent>
+                            <div [@fadeInOutTranslate]>
+                                <app-customer-payments [customerObj]="customerObj"></app-customer-payments>
+                            </div>
+                        </ng-template>
+                    </ngb-tab>
+                    <ngb-tab title="Branches" id='3' [disabled]="isAddForm">
+                        <ng-template ngbTabContent>
+                            <div [@fadeInOutTranslate]>
+                                <app-customer-branches [customerObj]="customerObj"></app-customer-branches>
+                            </div>
+                        </ng-template>
+                    </ngb-tab>
+                    <ngb-tab title="Settings" id='4' [disabled]="isAddForm">
+                        <ng-template ngbTabContent>
+                            <div [@fadeInOutTranslate]>
+                                <app-customer-settings [customerObj]="customerObj"></app-customer-settings>
+                            </div>
+                        </ng-template>
+                    </ngb-tab>
+                    <ngb-tab title="Gigs" id='5' [disabled]="isAddForm">
+                        <ng-template ngbTabContent>
+                            <div [@fadeInOutTranslate]>
+                                <app-customer-gigs [customerObj]="customerObj"></app-customer-gigs>
+                            </div>
+                        </ng-template>
+                    </ngb-tab>
+                    <ngb-tab title="Coupons" id='6' [disabled]="isAddForm">
+                        <ng-template ngbTabContent>
+                            <div [@fadeInOutTranslate]>
+                                <app-customer-coupons [customerObj]="customerObj"></app-customer-coupons>
+                            </div>
+                        </ng-template>
+                    </ngb-tab>
+                    <ngb-tab title="Gallery" id='7' [disabled]="isAddForm">
+                        <ng-template ngbTabContent>
+                            <div [@fadeInOutTranslate]>
+                                <app-customer-gallery [customerObj]="customerObj"></app-customer-gallery>
+                            </div>
+                        </ng-template>
+                    </ngb-tab>
+                </ngb-tabset>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 <!-- GEO ADDRESS POP UP STARTS -->
 <div class="modal-size select-input addlocation">
-  <app-modal-animation [modalID]="'mapmodal'" [modalClass]="'md-effect-7'">
-    <div class="card p-r-15 p-l-15">
-      <div class="col-md-12" id="controls">
-        <div id="map"></div>
-      </div>
-    </div>
-    <button (click)="closeModal('mapmodal')" aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>
-    <button (click)="setlocation()" placement="bottom" ngbTooltip="Click here to set location " class="btn btn-primary text-center">Set</button>
-  </app-modal-animation>
+    <app-modal-animation [modalID]="'mapmodal'" [modalClass]="'md-effect-7'">
+        <div class="card p-r-15 p-l-15">
+            <div class="col-md-12" id="controls">
+                <div id="map"></div>
+            </div>
+        </div>
+        <button (click)="closeModal('mapmodal')" aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>
+        <button (click)="setlocation()" placement="bottom" ngbTooltip="Click here to set location " class="btn btn-primary text-center">Set</button>
+    </app-modal-animation>
 </div>
 <!-- GEO ADDRESS POP UP ENDS -->
 
 <!-- SOCIAL ID POPUP Starts -->
 <div class="modal-size select-input addlocation">
-  <app-modal-animation [modalID]="'socialidmodal'" [modalClass]="'md-effect-7'">
-    <h3 class="f-26">Social ID</h3>
-    <form class="form-header" [formGroup]="socialidForm">
-      <div class="col-md-12">
-        <div class="form-group">
-          <label>Facebook</label>
-          <input type="text" class="form-control" formControlName="fb" placeholder="Facebook ID">
-        </div>
-        <div class="form-group">
-          <label>Twitter</label>
-          <input type="text" class="form-control" formControlName="twitter" placeholder="Twitter ID">
-        </div>
-        <div class="form-group">
-          <label>Google</label>
-          <input type="text" class="form-control" formControlName="gmail" placeholder="Google ID">
-        </div>
-        <div class="form-group">
-          <label>Instagram</label>
-          <input type="text" class="form-control" formControlName="instagram" placeholder="Instagram ID">
-        </div>
-      </div>
-      <button (click)="update()" type="button" placement="bottom" ngbTooltip="Click to {{buttonText}} Social IDs "
-        class="btn pull-right btn-primary waves-effect m-b-10 mr-3">{{buttonText}}</button>
-    </form>
-    <button (click)="closeModal('socialidmodal')" aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>
-  </app-modal-animation>
+    <app-modal-animation [modalID]="'socialidmodal'" [modalClass]="'md-effect-7'">
+        <h3 class="f-26">Social ID</h3>
+        <form class="form-header" [formGroup]="socialidForm">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Facebook</label>
+                    <input type="text" class="form-control" formControlName="fb" placeholder="Facebook ID">
+                </div>
+                <div class="form-group">
+                    <label>Twitter</label>
+                    <input type="text" class="form-control" formControlName="twitter" placeholder="Twitter ID">
+                </div>
+                <div class="form-group">
+                    <label>Google</label>
+                    <input type="text" class="form-control" formControlName="gmail" placeholder="Google ID">
+                </div>
+                <div class="form-group">
+                    <label>Instagram</label>
+                    <input type="text" class="form-control" formControlName="instagram" placeholder="Instagram ID">
+                </div>
+            </div>
+            <button (click)="update()" type="button" placement="bottom" ngbTooltip="Click to {{buttonText}} Social IDs " class="btn pull-right btn-primary waves-effect m-b-10 mr-3">{{buttonText}}</button>
+        </form>
+        <button (click)="closeModal('socialidmodal')" aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>
+    </app-modal-animation>
 </div>
 <!-- SOCIAL ID POPUP Ends -->

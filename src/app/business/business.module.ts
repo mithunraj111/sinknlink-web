@@ -23,7 +23,8 @@ import { ViewConsumerComponent } from './consumer/view-consumer/view-consumer.co
 import { CustomerSettingsComponent } from './customer/add-edit-customer/customer-settings/customer-settings.component';
 import { SelectModule } from 'ng-select';
 import { CustomerCouponsComponent } from './customer/add-edit-customer/customer-coupons/customer-coupons.component';
-import {BarRatingModule} from 'ngx-bar-rating';
+import { BarRatingModule } from 'ngx-bar-rating';
+import { AddEditGigComponent } from './customer/add-edit-customer/customer-gigs/add-edit-gigs/add-edit-gigs.component';
 
 
 @NgModule({
@@ -55,7 +56,8 @@ import {BarRatingModule} from 'ngx-bar-rating';
     DealerPaymentsComponent,
     ViewConsumerComponent,
     CustomerGalleryComponent,
-    CustomerSettingsComponent
+    CustomerSettingsComponent,
+    AddEditGigComponent
   ]
 })
 export class BusinessModule { }
