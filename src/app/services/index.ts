@@ -5,6 +5,7 @@ import * as BusinessService from './business';
 import * as AdminService from './admin';
 import * as AppCommonService from './common';
 import { BaseService } from './base.service';
+import { MapService } from './map.service';
 export {
     LocalStorageService,
     BusinessService,
@@ -12,5 +13,6 @@ export {
     CommonService,
     AdminService,
     BaseService,
-    AppCommonService
+    AppCommonService,
+    MapService
 };

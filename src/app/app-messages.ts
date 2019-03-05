@@ -305,10 +305,10 @@ export const AppMessages = Object.freeze({
         minlength: 'Postal address should be atleast 1 characters',
         maxlength: 'Postal address should be within 100 characters'
       },
-      lat: {
+      latitude: {
         required: 'Please enter latitude '
       },
-      lng: {
+      longitude: {
         required: 'Please enter longitude'
       },
       locationid: { required: 'Please select location' },

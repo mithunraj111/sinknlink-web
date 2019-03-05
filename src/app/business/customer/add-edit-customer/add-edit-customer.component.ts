@@ -5,7 +5,7 @@ import { NgbDateCustomParserFormatter } from '../../../shared/elements/dateParse
 import { NgbDateParserFormatter, NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 import { fadeInOutTranslate } from '../../../../assets/animations/fadeInOutTranslate';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MasterService, CommonService, LocalStorageService, AdminService, BusinessService } from '../../../services';
+import { MasterService, CommonService, LocalStorageService, AdminService, BusinessService, MapService } from '../../../services';
 import { CustomerCouponsComponent } from './customer-coupons/customer-coupons.component';
 import { CustomerGigsComponent } from './customer-gigs/customer-gigs.component';
 import { CustomerSettingsComponent } from './customer-settings/customer-settings.component';
@@ -13,9 +13,6 @@ import * as _ from 'lodash';
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
 import { AppMessages } from 'src/app/app-messages';
 import { CustomerGalleryComponent } from './customer-gallery/customer-gallery.component';
-import { MapService } from '../../../services/map.service';
-import { Position } from 'ngx-perfect-scrollbar';
-import { IOption } from 'ng-select';
 
 @Component({
   selector: 'app-add-edit-customer',
@@ -221,9 +218,9 @@ export class AddEditCustomerComponent implements OnInit {
       taxno: [null, Validators.compose([Validators.required, Validators.maxLength(30)])],
       website: ['', Validators.compose([Validators.maxLength(200), Validators.pattern(AppConstant.REGEX.WEBSITE)])],
       regdate: [this.commonService.getCurrentDate('Y'), Validators.required],
-      paymentstatus: [null, Validators.required],
+      paymentstatus: ['', Validators.required],
       membershiptype: [null, Validators.required],
-      paymenttenure: [null, Validators.required],
+      paymenttenure: ['', Validators.required],
       status: [true, Validators.required],
       tncagreed: [false, Validators.required],
       landmark: ['', Validators.maxLength(200)],
@@ -260,6 +257,7 @@ export class AddEditCustomerComponent implements OnInit {
     this.closeModal('socialidmodal');
   }
   saveOrUpdateBusiness() {
+    console.log(this.customerForm);
     let errMessage: any;
     if (!this.customerForm.valid) {
       errMessage = this.commonService.getFormErrorMessage(this.customerForm, this.customerErrObj);
@@ -269,13 +267,15 @@ export class AddEditCustomerComponent implements OnInit {
       this.savecustomer = true;
       const data = this.customerForm.value;
       const formdata = { ...data } as any;
-      const paymentarray = this.paymentTenuresList.find(item =>
-        item.refvalue === formdata.paymenttenure
-      );
       if (this.branchFlag) {
         formdata.parentmembershipid = Number(this.parentid);
       }
-      formdata.paymenttenure = paymentarray.refid.toString();
+      if (formdata.membershiptype != AppConstant.MEM_TYPE) {
+        const paymentarray = this.paymentTenuresList.find(item =>
+          item.refvalue === formdata.paymenttenure
+        );
+        formdata.paymenttenure = paymentarray.refid.toString();
+      }
       formdata.workhours = data.starttime + '-' + data.endtime;
       formdata.locationid = Number(data.locationid);
       formdata.categoryid = Number(data.categoryid);
@@ -512,6 +512,22 @@ export class AddEditCustomerComponent implements OnInit {
       longitude: this.customerlng
     });
     this.closeModal('mapmodal');
+  }
+
+  onMembershipChange(event) {
+    if (event.refvalue === AppConstant.MEM_TYPE) {
+      this.customerForm.get('paymenttenure').clearValidators();
+      this.customerForm.get('paymentstatus').clearValidators();
+      this.customerForm.get('paymentstatus').updateValueAndValidity();
+      this.customerForm.get('paymenttenure').updateValueAndValidity();
+    } else {
+      this.customerForm.get('paymenttenure').setValue('');
+      this.customerForm.get('paymentstatus').setValue('');
+      this.customerForm.get('paymenttenure').setValidators(Validators.required);
+      this.customerForm.get('paymentstatus').setValidators(Validators.required);
+      this.customerForm.get('paymentstatus').updateValueAndValidity();
+      this.customerForm.get('paymenttenure').updateValueAndValidity();
+    }
   }
 }
 

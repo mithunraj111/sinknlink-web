@@ -50,6 +50,7 @@ export const AppConstant = Object.freeze({
   STATUS_BLOCKED: 'Blocked',
   STATUS_SUCCESS: 'Success',
   STATUS_ALLOCATED: 'Allocated',
+  MEM_TYPE: 'Free',
   // Datatypes array
   DATATYPES: [
     { label: 'String', value: 'String' },
@@ -72,13 +73,13 @@ export const AppConstant = Object.freeze({
   ],
   // Workdays Data
   WORKDAYS: [
-    { value: 'Monday', label: 'Monday' },
-    { value: 'Tuesday', label: 'Tuesday' },
-    { value: 'Wednesday', label: 'Wednesday' },
-    { value: 'Thursday', label: 'Thursday' },
-    { value: 'Friday', label: 'Friday' },
-    { value: 'Saturday', label: 'Saturday' },
-    { value: 'Sunday', label: 'Sunday' },
+    { value: 'Monday', label: 'Monday', display: 'Monday' },
+    { value: 'Tuesday', label: 'Tuesday', display: 'Tuesday' },
+    { value: 'Wednesday', label: 'Wednesday', display: 'Wednesday' },
+    { value: 'Thursday', label: 'Thursday', display: 'Thursday' },
+    { value: 'Friday', label: 'Friday', display: 'Friday' },
+    { value: 'Saturday', label: 'Saturday', display: 'Saturday' },
+    { value: 'Sunday', label: 'Sunday', display: 'Sunday' },
   ],
   // POST_TYPES
   POST_TYPES: [
