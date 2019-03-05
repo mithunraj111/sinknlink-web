@@ -34,6 +34,7 @@ export class AddEditCustomerComponent implements OnInit {
   buttonText = AppConstant.BUTTON_TXT.SAVE;
   savecustomer;
   workDays = AppConstant.WORKDAYS;
+  showbutton = true;
   @ViewChild(CustomerCouponsComponent) couponComponent: CustomerCouponsComponent;
   @ViewChild(CustomerGigsComponent) gigComponent: CustomerGigsComponent;
   @ViewChild(CustomerSettingsComponent) settingsComponent: CustomerSettingsComponent;
@@ -124,7 +125,7 @@ export class AddEditCustomerComponent implements OnInit {
             item.value = item.refvalue;
             item.label = item.refname;
           });
-          let groupedData = _.groupBy(response.data, 'refkey');
+          const groupedData = _.groupBy(response.data, 'refkey');
           this.memberTypes = _.get(groupedData, 'biz_membertype');
           this.businesstypes = _.get(groupedData, 'biz_businesstype');
           this.paymentMethods = _.get(groupedData, 'biz_paymentmethods');
@@ -268,7 +269,7 @@ export class AddEditCustomerComponent implements OnInit {
       this.savecustomer = true;
       const data = this.customerForm.value;
       const formdata = { ...data } as any;
-      let paymentarray = this.paymentTenuresList.find(item =>
+      const paymentarray = this.paymentTenuresList.find(item =>
         item.refvalue === formdata.paymenttenure
       );
       if (this.branchFlag) {
@@ -350,6 +351,12 @@ export class AddEditCustomerComponent implements OnInit {
       case '4':
         this.settingsComponent.updateSettings(this.customerObj);
         break;
+      case '5':
+        this.gigComponent.addgig();
+        break;
+      case '6':
+        this.couponComponent.addCoupon();
+        break;
       case '7':
         if (this.galleryComponent.displayImgList.length > 0) {
           this.galleryComponent.saveOrUpdateGalleries();
@@ -358,6 +365,11 @@ export class AddEditCustomerComponent implements OnInit {
   }
   onCustomerTabChange(event) {
     this.customerObj = this.customerObj;
+    if (event.nextId === '6' || event.nextId === '5' || event.nextId === '3') {
+      this.showbutton = false;
+    } else {
+      this.showbutton = true;
+    }
   }
 
   generateEditForm() {
