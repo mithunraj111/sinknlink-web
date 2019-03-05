@@ -1,4 +1,4 @@
-<div class="modal-size">
+<div class="modal-size gigs-modal">
     <app-modal-animation [modalID]="'gigmodal'" [modalClass]="'md-effect-7'">
         <h3 class="f-26">{{formTitle}}</h3>
         <form [formGroup]="gigForm">
@@ -51,7 +51,7 @@
                     </div>
                 </div>
                 <button type="button" placement="top" (click)="saveOrUpdateGig()" ngbTooltip="Click to save details"
-                    class="btn pull-right btn-primary waves-effect 
+                    class="btn pull-right btn-primary waves-effect saveupdate 
                 m-b-10 m-r-15">{{saving == true ? 'Saving..':buttonTxt}}</button>
             </div>
         </form>

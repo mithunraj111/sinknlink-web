@@ -4,14 +4,6 @@
             <div class="col-md-12">
                 <p *ngIf="roleid" class="m-b-0">ID: {{roleid}}</p>
             </div>
-            <div class="col-md-6  col-sm-6 save-button text-right m-t-10 p-r-30">
-                <button type="button" placement="bottom" ngbTooltip=" Go back" routerLink="/masters/roles"
-                    class="btn pull-right btn-inverse btn-primary waves-effect"><i
-                        class="fa fa-arrow-circle-left"></i></button>
-                <button type="button" placement="bottom" ngbTooltip="Click to {{buttontext}} role"
-                    (click)="saveOrUpdateRole()" [disabled]='disableButton'
-                    class="btn pull-right btn-primary waves-effect m-r-10 text-capitalize">{{disableButton == true ? 'Saving' : buttontext}}</button>
-            </div>
         </div>
         <div class="row">
             <div class="col-md-4 col-sm-4 p-l-30">
@@ -26,7 +18,7 @@
             <div class="col-md-4 col-sm-4">
                 <div class="form-group required row">
                     <label class="col-sm-4 p-l-0 p-r-0 col-form-label"><b>Data Access</b></label>
-                    <div class="col-sm-8 p-l-0 p-r-0">
+                    <div class="col-sm-8 p-l-0 p-r-0 role-select">
                         <select class="form-control" name="dataaccess" [(ngModel)]="dataaccess">
                             <option value="">Select Data Access</option>
                             <option value="All">All</option>
@@ -39,11 +31,19 @@
             <div *ngIf="roleid" class="col-md-2 col-sm-2 text-center">
                 <div class="form-group row">
                     <label class="col-sm-6 p-r-0 col-form-label text-right"><b>Status</b><small>*</small></label>
-                    <div class="col-sm-4 p-l-0 p-r-0 p-t-10">
+                    <div class="col-sm-4 p-l-0 p-r-0 p-t-5">
                         <ui-switch class="js-small" color="$primary-color" [(ngModel)]="status" switchColor="#fff"
                             size="small" checked></ui-switch>
                     </div>
                 </div>
+            </div>
+            <div class="col-md-2 col-sm-2 save-button text-right p-r-30">
+                <button type="button" placement="bottom" ngbTooltip=" Go back" routerLink="/masters/roles"
+                    class="btn pull-right btn-inverse btn-primary waves-effect"><i
+                        class="fa fa-arrow-circle-left"></i></button>
+                <button type="button" placement="bottom" ngbTooltip="Click to {{buttontext}} role"
+                    (click)="saveOrUpdateRole()" [disabled]='disableButton'
+                    class="btn pull-right btn-primary waves-effect m-r-10 text-capitalize">{{disableButton == true ? 'Saving' : buttontext}}</button>
             </div>
         </div>
     </div>
@@ -103,7 +103,7 @@
             <div class="form-group required row">
                 <label class="col-sm-12">Permissions</label>
                 <div class="col-sm-12">
-                    <ng-select [ngClass]="'ng-select'" [(ngModel)]="permissions" [options]="permissionList"
+                    <ng-select [ngClass]="'ng-select w-100'" [(ngModel)]="permissions" [options]="permissionList"
                         [multiple]="true" placeholder="Permissions"></ng-select>
                 </div>
             </div>

@@ -11,7 +11,7 @@ $white-txt: #ffffff;
         vertical-align: middle;
         display: inline-block;
         text-transform: uppercase;
-        font-family: 'Montserrat', sans-serif;
+        font-family: 'proxima_nova_regular';
         font-weight: bold;
         text-align: center;
         margin: 0 10px;
@@ -64,7 +64,7 @@ body[themebg-pattern="pattern1"]{
     .main-nav-item{
         li{
             a{
-                font-family: 'Roboto', sans-serif !important;
+                font-family: 'proxima_nova_regular' !important;
                 font-weight: 600;
                 &:hover{
                     color:$primary-color !important; 
@@ -78,7 +78,7 @@ body[themebg-pattern="pattern1"]{
                     a{
                         font-weight: 500;
                         font-size: 14px;
-                        font-family: 'Nunito', sans-serif !important;
+                        font-family: 'proxima_nova_regular', sans-serif !important;
                     }
                 }
             }
@@ -157,17 +157,19 @@ body[themebg-pattern="pattern1"]{
         font-size: 20px;
         text-transform: capitalize;
         padding: 0;
-        font-weight: 500;
+        font-weight: 600;
         margin: 10px 0 0 15px;
         color: $primary-color;
         display: inline-block;
-        font-family: 'Montserrat', sans-serif;
+        font-family: 'proxima_nova_regular', sans-serif;
+        letter-spacing: 0.5px;
     }
 }
 .logout-btn{
-    padding: 0px 4px 0 5px !important;
+    padding: 0px 3px 0 5px !important;
     background: #2f3d4a;
-    margin-top: -2px;
+    display: inline-block;
+    vertical-align: baseline;
     text-align: center;
     .icofont-logout{
         margin-left: 0 !important;
@@ -176,9 +178,26 @@ body[themebg-pattern="pattern1"]{
             content: "\f054";
             font-family: 'IcoFont' !important;
             color: #ccc;
-            font-size: 18px;
+            font-size: 16px;
             font-style: normal;
             color: #fff;
         }
     }
+}
+.fullname {
+    display: inline-block;
+    width: auto;
+    margin-left: 10px;
+    font-weight: 500 !important;
+    font-family: 'Nunito';
+    color: #2f3d4a !important;
+}
+.profile-image {
+    width: 45px;
+    display: inline-block;
+    text-align: center;
+    background: #ccc;
+    border-radius: 100%;
+    line-height: 45px;
+    max-width: 100%;
 }

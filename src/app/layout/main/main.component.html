@@ -38,9 +38,8 @@
                             (click)="toggleProfileNotification()">
                             <a href="javascript:" [routerLink]="['/profile']">
                                 <img [src]="userfile" class="img-radius" alt="" *ngIf="userprofile==true">
-                                <span class="img-radius profile-image" *ngIf="userprofile==false">{{userfile}}</span>
-                                <img class="img-radius" *ngIf="userprofile==false" />
-                                <span>{{userstoragedata.fullname}}</span>
+                                <span class="profile-image" *ngIf="userprofile==false">{{userfile}}</span>
+                                <span class="fullname">{{userstoragedata.fullname}}</span>
                                 <!-- <i class="fa fa-chevron-down"></i> -->
                             </a>
                             <a class="btn logout-btn" placement="bottom" ngbTooltip="Logout" (click)="logout()"><i class="icofont-logout"></i></a>

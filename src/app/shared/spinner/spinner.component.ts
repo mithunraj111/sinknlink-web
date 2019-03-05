@@ -15,7 +15,7 @@ import {DOCUMENT} from '@angular/common';
 export class SpinnerComponent implements OnDestroy {
     public isSpinnerVisible = true;
     public Spinkit = Spinkit;
-    @Input() public backgroundColor = 'rgba(255, 255, 255, 0.8)';
+    @Input() public backgroundColor = 'rgba(0, 77, 255, 0.8)';
     @Input() public spinner = Spinkit.skLine;
     constructor(private router: Router, @Inject(DOCUMENT) private document: Document) {
         this.router.events.subscribe(event => {

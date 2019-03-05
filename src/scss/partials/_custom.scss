@@ -613,7 +613,7 @@ ng-select.ng-select > div {
 }
 
 .ng-select select-dropdown .highlighted {
-  background-color: $color-blue;
+  background-color: $color-blue !important;
 }
 
 .famfamfam-flags {
@@ -800,7 +800,7 @@ ngx-datatable.data-table {
     a {
       padding: 5px 10px;
       border-radius: 100px;
-      margin: 0px 2px;
+      margin: 0px 1px;
       text-align: center;
       vertical-align: middle;
       color: rgba(0, 0, 0, 0.54);
