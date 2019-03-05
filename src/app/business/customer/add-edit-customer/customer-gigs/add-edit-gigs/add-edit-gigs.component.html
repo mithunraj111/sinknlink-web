@@ -3,64 +3,56 @@
         <h3 class="f-26">{{formTitle}}</h3>
         <form [formGroup]="gigForm">
             <div class="form-header pt-2">
-                <div class="col-md-12 col-sm-12">
-                    <div class="form-group row required">
-                        <label class="col-md-3 col-sm-6 col-form-label text-right">Post Name</label>
-                        <div class="col-md-9 col-sm-6">
-                            <input type="text" class="form-control" placeholder="Post Name" formControlName="postname">
+                <div class="col-md-12">
+                    <div class="form-group required">
+                        <label>Post Name</label>
+                        <input type="text" class="form-control" placeholder="Post Name" formControlName="postname">
+                    </div>
+                    <div class="form-group  required">
+                        <label>Post Type</label>
+                        <div class="input-box">
+                            <ng-select [allowClear]="true" [ngClass]="'ng-select w-100'" formControlName="posttype"
+                                [options]="posttypes" placeholder="Select Post type"></ng-select>
                         </div>
                     </div>
-                    <div class="form-group row required">
-                        <label class="col-md-3 col-sm-6 col-form-label text-right">Post Type</label>
-                        <div class="col-md-9 col-sm-6">
-                            <div class="input-box">
-                                <ng-select [allowClear]="true" [ngClass]="'ng-select'" formControlName="posttype" [options]="posttypes" placeholder="Select Post type"></ng-select>
-                            </div>
-                        </div>
+                    <div class="form-group">
+                        <label>Salary</label>
+                        <input type="text" class="form-control" placeholder="Salary" formControlName="salary"></div>
+                    <div class="form-group required">
+                        <label>Contact Person</label>
+                        <input type="text" class="form-control" placeholder="Contact Person"
+                            formControlName="contactperson">
                     </div>
-                    <div class="form-group row">
-                        <label class="col-md-3 col-sm-6 col-form-label text-right">Salary</label>
-                        <div class="col-md-9 col-sm-6">
-                            <input type="text" class="form-control" placeholder="Salary" formControlName="salary">
-                        </div>
+                    <div class="form-group  required">
+                        <label>Contact Mobile</label>
+                        <input type="text" class="form-control" placeholder="Contact Mobile"
+                            formControlName="contactmobile">
                     </div>
-                    <div class="form-group row required">
-                        <label class="col-md-3 col-sm-6 col-form-label text-right">Contact Person</label>
-                        <div class="col-md-9 col-sm-6">
-                            <input type="text" class="form-control" placeholder="Contact Person" formControlName="contactperson">
-                        </div>
-                    </div>
-                    <div class="form-group row required">
-                        <label class="col-md-3 col-sm-6 col-form-label text-right">Contact Mobile</label>
-                        <div class="col-md-9 col-sm-6">
-                            <input type="text" class="form-control" placeholder="Contact Mobile" formControlName="contactmobile">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-3 col-sm-6 col-form-label text-right">Details</label>
-                        <div class="col-md-9 col-sm-6">
-                            <textarea class="form-control" rows="5" cols="50" formControlName="description"></textarea>
-                        </div>
+                    <div class="form-group">
+                        <label>Details</label>
+                        <textarea class="form-control" rows="3" cols="50" formControlName="description"></textarea>
                     </div>
                     <div class="form-group" *ngIf="gigObj?.gigid">
                         <label>Status <small>*</small></label>
                         <div class="form-radio">
                             <div class="radio radio-inline">
                                 <label>
-                                      <input type="radio" value="Active" formControlName="status">
-                                      <i class="helper"></i>Active
-                                    </label>
+                                    <input type="radio" value="Active" formControlName="status">
+                                    <i class="helper"></i>Active
+                                </label>
                             </div>
                             <div class="radio radio-inline">
                                 <label>
-                                      <input type="radio" value="Inactive" formControlName="status">
-                                      <i class="helper"></i>Inactive
-                                    </label>
+                                    <input type="radio" value="Inactive" formControlName="status">
+                                    <i class="helper"></i>Inactive
+                                </label>
                             </div>
                         </div>
                     </div>
-                    <button type="button" (click)="saveOrUpdateGig()" placement="top" ngbTooltip="Click to save details" class="btn f-15 pull-right btn-primary waves-effect m-b-10">{{saving == true ? 'Saving..':buttonTxt}}</button>
                 </div>
+                <button type="button" placement="top" (click)="saveOrUpdateGig()" ngbTooltip="Click to save details"
+                    class="btn pull-right btn-primary waves-effect 
+                m-b-10 m-r-15">{{saving == true ? 'Saving..':buttonTxt}}</button>
             </div>
         </form>
         <button (click)="close()" aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>

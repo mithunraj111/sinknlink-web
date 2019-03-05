@@ -173,14 +173,9 @@ export class ProfileComponent implements OnInit {
       data.address = this.profileForm.value.address;
       data.locationid = Number(this.socialForm.value.locationid);
       data.socialid = this.socialForm.value;
-      if (this.userObj.profileimg == null) {
-        this.profileimage = true;
-        data.docid = this.userObj.profileimg.docid;
-        this.userfile = this.userObj.profileimg.docurl;
-      }
+     
       const formData = new FormData();
       if (this.userObj.profileimg != null && this.userObj.profileimg.docid) {
-        console.log(data.docid);
         data.docid = this.userObj.profileimg.docid;
       }
       if (this.userimgfile) {
@@ -236,7 +231,6 @@ export class ProfileComponent implements OnInit {
     const reader = new FileReader();
     this.profileimage = true;
     this.userimgfile = event.target.files[0];
-    console.log(event.target.files[0]);
     reader.onload = ((e) => {
       this.userfile = e.target['result'];
     });

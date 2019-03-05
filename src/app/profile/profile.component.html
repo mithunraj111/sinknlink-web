@@ -94,9 +94,7 @@
                     <div class="form-group">
                         <label class="custom-file mb-3 profile-page">
                             <img [src]="userfile" class="img-responsive w-50" alt="" *ngIf="profileimage==true">
-                            <button *ngIf="profileimage==true" aria-label="Close" (click)="close(event)" class="md-close-btn"><i
-                                    class="fa fa-close"></i></button>
-                            <span class="img-radius f-60" *ngIf="profileimage==false">{{userfile}}</span>
+                           <span class="img-radius f-60" *ngIf="profileimage==false">{{userfile}}</span>
                             <input #userimage type="file" name="userimg" (change)="onFile($event)"
                                 class="custom-file-input">
                             <span class="custom-file-control"></span>
