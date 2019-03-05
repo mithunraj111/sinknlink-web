@@ -19,8 +19,6 @@ export class CustomerCouponsComponent implements OnInit, OnChanges {
   userstoragedata = {} as any;
   @Input() customerObj = {} as any;
   @Output() couponObj = {} as any;
-  couponForm: FormGroup;
-  couponErrObj = AppMessages.VALIDATION.COUPON;
   emptymessages = AppConstant.EMPTY_MESSAGES.COUPONS;
   constructor(private bootstrapAlertService: BootstrapAlertService,
     private commonService: CommonService,
@@ -29,18 +27,7 @@ export class CustomerCouponsComponent implements OnInit, OnChanges {
     private localStorageService: LocalStorageService) {
   }
   ngOnInit() {
-    this.initCouponForm();
     this.userstoragedata = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER);
-  }
-  initCouponForm() {
-    this.couponForm = this.fb.group({
-      couponcode: [null, Validators.compose([Validators.required, Validators.maxLength(50)])],
-      shortdesc: [null, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])],
-      noofcoupons: [null, Validators.compose([Validators.required, Validators.maxLength(11), Validators.pattern('^[0-9]*$')])],
-      expirydt: [null, Validators.required],
-      description: ['', Validators.compose([Validators.minLength(3), Validators.maxLength(500)])],
-      status: [true, Validators.required]
-    });
   }
   ngOnChanges(changes: SimpleChanges) {
     this.getCouponList(changes.customerObj.currentValue);
@@ -70,10 +57,8 @@ export class CustomerCouponsComponent implements OnInit, OnChanges {
     this.updateCoupon(updateObj, index, flag);
   }
   updateCoupon(data, index, flag) {
-
     if (flag) {
       this.couponService.delete(data, this.couponObj.couponid).subscribe(res => {
-        console.log(this.couponObj.couponid)
         const response = JSON.parse(res._body);
         if (response.status) {
           this.bootstrapAlertService.showSucccess('#' + this.couponObj.couponid + ' ' + response.message);
@@ -83,8 +68,7 @@ export class CustomerCouponsComponent implements OnInit, OnChanges {
           this.bootstrapAlertService.showError(response.message);
         }
       });
-    }
-    else {
+    } else {
       this.couponService.update(data, this.couponObj.couponid).subscribe(res => {
         const response = JSON.parse(res._body);
         if (response.status) {
@@ -97,51 +81,27 @@ export class CustomerCouponsComponent implements OnInit, OnChanges {
       });
     }
   }
-  saveOrUpdateCoupon() {
-    let errMessage: any;
-    if (_.isEmpty(this.customerObj)) {
-      this.bootstrapAlertService.showError(AppMessages.VALIDATION.BUSINESS.common);
-      return false;
+
+  notifyCouponChange(event) {
+    if (!event.close) {
+      this.getCouponList(this.customerObj);
+      this.close();
     } else {
-      if (!this.couponForm.valid) {
-        errMessage = this.commonService.getFormErrorMessage(this.couponForm, this.couponErrObj);
-        this.bootstrapAlertService.showError(errMessage);
-        return false;
-      } else {
-        const data = this.couponForm.value;
-        const formdata = { ...data } as any;
-        formdata.membershipid = this.customerObj.membershipid;
-        formdata.noofcoupons = Number(data.noofcoupons);
-        formdata.expirydt = this.commonService.formatDate(data.expirydt);
-        formdata.updatedby = this.userstoragedata.fullname;
-        formdata.updateddt = new Date();
-        if (!_.isUndefined(this.couponObj) && !_.isUndefined(this.couponObj.couponid) && !_.isEmpty(this.couponObj)) {
-          formdata.status = data.status;
-          const index = _.indexOf(this.couponList, this.couponObj);
-          this.updateCoupon(formdata, index, false);
-        } else {
-          formdata.status = AppConstant.STATUS_ACTIVE;
-          formdata.createdby = this.userstoragedata.fullname;
-          formdata.createddt = new Date();
-          this.couponService.create(formdata).subscribe((res) => {
-            const response = JSON.parse(res._body);
-            if (response.status) {
-              this.bootstrapAlertService.showSucccess(response.message);
-              this.couponList = [response.data, ...this.couponList];
-              this.initCouponForm();
-            } else {
-              this.bootstrapAlertService.showError(response.message);
-            }
-          }, err => {
-            this.bootstrapAlertService.showError(err.message);
-          });
-        }
-      }
+      this.close();
     }
+  }
+  addCoupon() {
+    this.couponObj = {};
+    this.open();
   }
   editCoupon(data) {
     this.couponObj = data;
-    this.couponObj.expirydt = this.commonService.parseDate(new Date(this.couponObj.expirydt));
-    this.couponForm.patchValue(this.couponObj);
+    this.open();
+  }
+  close() {
+    document.querySelector('#couponmodal').classList.remove('md-show');
+  }
+  open() {
+    document.querySelector('#couponmodal').classList.add('md-show');
   }
 }

@@ -25,6 +25,7 @@ import { SelectModule } from 'ng-select';
 import { CustomerCouponsComponent } from './customer/add-edit-customer/customer-coupons/customer-coupons.component';
 import { BarRatingModule } from 'ngx-bar-rating';
 import { AddEditGigComponent } from './customer/add-edit-customer/customer-gigs/add-edit-gigs/add-edit-gigs.component';
+import { AddEditCouponComponent } from './customer/add-edit-customer/customer-coupons/add-edit-coupon/add-edit-coupon.component';
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import { AddEditGigComponent } from './customer/add-edit-customer/customer-gigs/
     ViewConsumerComponent,
     CustomerGalleryComponent,
     CustomerSettingsComponent,
-    AddEditGigComponent
+    AddEditGigComponent,
+    AddEditCouponComponent
   ]
 })
 export class BusinessModule { }

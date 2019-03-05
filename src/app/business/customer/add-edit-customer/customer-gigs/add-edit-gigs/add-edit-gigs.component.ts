@@ -86,6 +86,7 @@ export class AddEditGigComponent implements OnInit, OnChanges {
                         if (response.status) {
                             this.bootstrapAlertService.showSucccess(response.message);
                             this.initGigForm();
+                            this.callParent(response.data);
                         } else {
                             this.bootstrapAlertService.showError(response.message);
                         }
@@ -99,6 +100,7 @@ export class AddEditGigComponent implements OnInit, OnChanges {
                         if (response.status) {
                             this.bootstrapAlertService.showSucccess(response.message);
                             this.initGigForm();
+                            this.callParent(response.data);
                         } else {
                             this.bootstrapAlertService.showError(response.message);
                         }

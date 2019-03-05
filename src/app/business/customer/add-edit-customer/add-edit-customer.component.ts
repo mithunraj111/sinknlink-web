@@ -350,22 +350,6 @@ export class AddEditCustomerComponent implements OnInit {
       case '4':
         this.settingsComponent.updateSettings(this.customerObj);
         break;
-      case '5':
-        // if (this.gigComponent.gigForm.touched) {
-        //   this.gigComponent.saveOrUpdateGig();
-        // } else {
-        //   this.bootstrapAlertService.showError(AppMessages.VALIDATION.GIG.common);
-        //   return false;
-        // }
-        break;
-      case '6':
-        if (this.couponComponent.couponForm.touched) {
-          this.couponComponent.saveOrUpdateCoupon();
-        } else {
-          this.bootstrapAlertService.showError(AppMessages.VALIDATION.COUPON.common);
-          return false;
-        }
-        break;
       case '7':
         if (this.galleryComponent.displayImgList.length > 0) {
           this.galleryComponent.saveOrUpdateGalleries();
