@@ -268,7 +268,7 @@ export class AddEditCustomerComponent implements OnInit {
       this.savecustomer = true;
       const data = this.customerForm.value;
       const formdata = { ...data } as any;
-      if (this.branchFlag) {
+      if (this.branchFlag && this.parentid) {
         formdata.parentmembershipid = Number(this.parentid);
       }
       if (formdata.membershiptype != AppConstant.MEM_TYPE) {
@@ -382,6 +382,9 @@ export class AddEditCustomerComponent implements OnInit {
     this.customerObj.regdate = this.commonService.parseDate(this.customerObj.regdate);
     this.customerObj.starttime = this.customerObj.workhours.starttime;
     this.customerObj.endtime = this.customerObj.workhours.endtime;
+    if (this.customerObj.parentmembershipid != null) {
+      this.branchFlag = true;
+    }
     this.customerObj.contactmobile = _.map(this.customerObj.contactmobile, function (item) {
       return {
         value: item,

@@ -261,14 +261,14 @@
                             </div>
                         </ng-template>
                     </ngb-tab>
-                    <ngb-tab title="Payments" id='2' [disabled]="isAddForm">
+                    <ngb-tab title="Payments" id='2' [disabled]="isAddForm" *ngIf="customerForm.value.membershiptype!='Free'">
                         <ng-template ngbTabContent>
                             <div [@fadeInOutTranslate]>
                                 <app-customer-payments [customerObj]="customerObj"></app-customer-payments>
                             </div>
                         </ng-template>
                     </ngb-tab>
-                    <ngb-tab title="Branches" id='3' [disabled]="isAddForm">
+                    <ngb-tab title="Branches" id='3' [disabled]="isAddForm" *ngIf="!branchFlag">
                         <ng-template ngbTabContent>
                             <div [@fadeInOutTranslate]>
                                 <app-customer-branches [customerObj]="customerObj"></app-customer-branches>
