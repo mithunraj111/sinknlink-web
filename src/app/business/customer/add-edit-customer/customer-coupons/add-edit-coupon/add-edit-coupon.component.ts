@@ -80,7 +80,7 @@ export class AddEditCouponComponent implements OnInit, OnChanges {
                 formdata.updateddt = new Date();
                 if (!_.isUndefined(this.couponObj) && !_.isUndefined(this.couponObj.couponid) && !_.isEmpty(this.couponObj)) {
                     formdata.status = data.status;
-                    this.couponService.update(data, this.couponObj.couponid).subscribe(res => {
+                    this.couponService.update(formdata, this.couponObj.couponid).subscribe(res => {
                         const response = JSON.parse(res._body);
                         if (response.status) {
                             this.bootstrapAlertService.showSucccess(response.message);

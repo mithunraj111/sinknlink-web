@@ -13,6 +13,7 @@ import * as _ from 'lodash';
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
 import { AppMessages } from 'src/app/app-messages';
 import { CustomerGalleryComponent } from './customer-gallery/customer-gallery.component';
+import { CustomerBranchesComponent } from './customer-branches/customer-branches.component';
 
 @Component({
   selector: 'app-add-edit-customer',
@@ -36,6 +37,7 @@ export class AddEditCustomerComponent implements OnInit {
   @ViewChild(CustomerGigsComponent) gigComponent: CustomerGigsComponent;
   @ViewChild(CustomerSettingsComponent) settingsComponent: CustomerSettingsComponent;
   @ViewChild(CustomerGalleryComponent) galleryComponent: CustomerGalleryComponent;
+  @ViewChild(CustomerBranchesComponent) branchComponent: CustomerBranchesComponent;
   @ViewChild('customertabs') customertabs: NgbTabset;
   paymentMethods = [];
   categoryList = [];
@@ -257,7 +259,6 @@ export class AddEditCustomerComponent implements OnInit {
     this.closeModal('socialidmodal');
   }
   saveOrUpdateBusiness() {
-    console.log(this.customerForm);
     let errMessage: any;
     if (!this.customerForm.valid) {
       errMessage = this.commonService.getFormErrorMessage(this.customerForm, this.customerErrObj);
@@ -347,6 +348,9 @@ export class AddEditCustomerComponent implements OnInit {
     switch (this.customertabs.activeId) {
       case '1':
         this.saveOrUpdateBusiness();
+        break;
+      case '3':
+        this.branchComponent.newBranch();
         break;
       case '4':
         this.settingsComponent.updateSettings(this.customerObj);
