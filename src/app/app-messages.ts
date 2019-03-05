@@ -261,7 +261,8 @@ export const AppMessages = Object.freeze({
         pattern: 'Coupon count should contain numbers only'
       },
       expirydt: {
-        required: 'Please select expiry date'
+        required: 'Please select expiry date',
+        invalid : 'Invalid expiry date'
       },
       description: {
         required: 'Please enter description',

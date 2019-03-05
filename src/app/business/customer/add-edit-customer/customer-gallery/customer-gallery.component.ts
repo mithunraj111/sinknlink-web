@@ -3,6 +3,7 @@ import { AppCommonService, CommonService, BaseService } from '../../../../servic
 import * as _ from 'lodash';
 import { AppMessages } from 'src/app/app-messages';
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
+import { AppConstant } from 'src/app/app.constants';
 @Component({
   selector: 'app-customer-gallery',
   templateUrl: './customer-gallery.component.html'
@@ -23,7 +24,11 @@ export class CustomerGalleryComponent extends BaseService implements OnInit, OnC
   }
   getGalleries(customerObj) {
     if (!_.isEmpty(customerObj)) {
-      this.documentService.list({ refid: customerObj.membershipid, reftype: 'Business' }).subscribe(res => {
+      this.documentService.list({
+        refid: customerObj.membershipid,
+        reftype: 'Customer',
+        status: AppConstant.STATUS_ACTIVE
+      }).subscribe(res => {
         const response = JSON.parse(res._body);
         if (response.status) {
           this.imagesList = response.data;
@@ -48,7 +53,7 @@ export class CustomerGalleryComponent extends BaseService implements OnInit, OnC
       }
       const reference = {
         refid: this.customerObj.membershipid,
-        reftype: 'Business',
+        reftype: 'Customer',
         createddt: new Date(),
         createdby: this.userstoragedata.createdby
       };
