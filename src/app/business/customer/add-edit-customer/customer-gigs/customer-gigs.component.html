@@ -40,14 +40,14 @@
                 </ngx-datatable-column>
                 <ngx-datatable-column name="Status" [sortable]="false" [flexGrow]="0.5" [cellClass]="'text-center status'" headerClass="text-right">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                        <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="$primary-color" switchColor="#fff" size="small" [checked]="row.status == 'Active'" (change)="updategigStatus(row,rowIndex,false)"></ui-switch>
+                        <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="$primary-color" switchColor="#fff" size="small" [checked]="row.status == 'Active'" (change)="updateGig(row,rowIndex,false)"></ui-switch>
                     </ng-template>
                 </ngx-datatable-column>
                 <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.5" [cellClass]="'text-center action'" headerClass="text-right">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                         <a placement="bottom" ngbTooltip="Click to edit gigs" class="m-r-15 crm-action-edit text-primary" (click)="editgig(row)">
                             <i class="fa fa-pencil"></i></a>
-                        <a placement="bottom" ngbTooltip="Click to delete gigs" class="crm-action-delete text-danger" (click)="updategigStatus(row,rowIndex,true)">
+                        <a placement="bottom" ngbTooltip="Click to delete gigs" class="crm-action-delete text-danger" (click)="updateGig(row,rowIndex,true)">
                             <i class="fa fa-trash"></i></a>
                     </ng-template>
                 </ngx-datatable-column>

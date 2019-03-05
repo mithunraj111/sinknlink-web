@@ -35,22 +35,12 @@
                         <span>{{row.location?.city}}</span>
                     </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column prop="payment" name="Payment" [resizeable]="false">
-                    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                        <span>{{row.payment}}</span>
-                    </ng-template>
-                </ngx-datatable-column>
-                <ngx-datatable-column prop="duedate" name="Due Date" [resizeable]="false" [cellClass]="'text-center'">
-                    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                        <span>{{row.updateddt|date:datedisplayformat}}</span>
-                    </ng-template>
-                </ngx-datatable-column>
-                <ngx-datatable-column name="Status" [sortable]="false" [resizeable]="false" [cellClass]="'text-center status'">
+                <ngx-datatable-column name="Status" [sortable]="false" [resizeable]="false" headerClass="text-center" [cellClass]="'text-center status'">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                         <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="$primary-color" switchColor="#fff" size="small" (change)="updateBranchStatus(row,rowIndex,false)" [checked]="row.status=='Active'"></ui-switch>
                     </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column name="Action" [sortable]="false" [resizeable]="false" [cellClass]="'text-center action'">
+                <ngx-datatable-column name="Action" [sortable]="false" [resizeable]="false" headerClass="text-center" [cellClass]="'text-center action'">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                         <a placement="bottom" ngbTooltip="Click to view branch" class="m-r-15 crm-action-edit text-primary text-center" (click)="redirectToBranch(row.membershipid);"><i class="fa fa-eye"></i></a>
                     </ng-template>

@@ -3,8 +3,6 @@ import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { AppConstant } from '../../../../app.constants';
 import { BusinessService, LocalStorageService, CommonService } from '../../../../services';
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
-import { AppMessages } from '../../../../app-messages';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as _ from 'lodash';
 @Component({
   selector: 'app-customer-gigs',
@@ -23,7 +21,6 @@ export class CustomerGigsComponent implements OnInit, OnChanges {
   constructor(private bootstrapAlertService: BootstrapAlertService,
     private commonService: CommonService,
     private gigsService: BusinessService.GigsService,
-    private fb: FormBuilder,
     private localStorageService: LocalStorageService) {
   }
   ngOnInit() {
@@ -47,21 +44,18 @@ export class CustomerGigsComponent implements OnInit, OnChanges {
     this.gigsList = this.commonService.globalSearch(this.tempFilter, event);
     this.table.offset = 0;
   }
-  updategigStatus(data, index, flag) {
+  updateGig(data, index, flag) {
     const updateObj = {
       updateddt: new Date(),
       updatedby: this.userstoragedata.fullname,
       status: flag ? AppConstant.STATUS_DELETED :
         (data.status === AppConstant.STATUS_ACTIVE ? AppConstant.STATUS_INACTIVE : AppConstant.STATUS_ACTIVE)
     };
-    this.updateGig(updateObj, index, flag);
-  }
-  updateGig(data, index, flag) {
     if (flag) {
-      this.gigsService.delete(data, this.gigObj.gigid).subscribe(res => {
+      this.gigsService.delete(updateObj, data.gigid).subscribe(res => {
         const response = JSON.parse(res._body);
         if (response.status) {
-          this.bootstrapAlertService.showSucccess('#' + this.gigObj.gigid + ' ' + response.message);
+          this.bootstrapAlertService.showSucccess('#' + data.gigid + ' ' + response.message);
           this.gigsList.splice(index, 1);
           this.gigsList = [...this.gigsList];
         } else {
@@ -69,16 +63,11 @@ export class CustomerGigsComponent implements OnInit, OnChanges {
         }
       });
     } else {
-      this.gigsService.update(data, this.gigObj.gigid).subscribe(res => {
+      this.gigsService.update(updateObj, data.gigid).subscribe(res => {
         const response = JSON.parse(res._body);
         if (response.status) {
-          if (flag) {
-            this.bootstrapAlertService.showSucccess('#' + this.gigObj.gigid + ' ' + AppMessages.VALIDATION.COMMON.DELETE_SUCCESS);
-            this.gigsList.splice(index, 1);
-          } else {
-            this.bootstrapAlertService.showSucccess(response.message);
-            this.gigsList[index].status = response.data.status;
-          }
+          this.bootstrapAlertService.showSucccess(response.message);
+          this.gigsList[index].status = response.data.status;
           this.gigsList = [...this.gigsList];
         } else {
           this.bootstrapAlertService.showError(response.message);

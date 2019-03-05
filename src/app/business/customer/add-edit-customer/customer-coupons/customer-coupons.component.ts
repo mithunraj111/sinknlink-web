@@ -47,21 +47,18 @@ export class CustomerCouponsComponent implements OnInit, OnChanges {
     this.couponList = this.commonService.globalSearch(this.tempFilter, event);
     this.table.offset = 0;
   }
-  changeCouponStatus(data, index, flag) {
+  updateCoupon(data, index, flag) {
     const updateObj = {
       updateddt: new Date(),
       updatedby: this.userstoragedata.fullname,
       status: flag ? AppConstant.STATUS_DELETED :
         (data.status === AppConstant.STATUS_ACTIVE ? AppConstant.STATUS_INACTIVE : AppConstant.STATUS_ACTIVE)
     };
-    this.updateCoupon(updateObj, index, flag);
-  }
-  updateCoupon(data, index, flag) {
     if (flag) {
-      this.couponService.delete(data, this.couponObj.couponid).subscribe(res => {
+      this.couponService.delete(updateObj, data.couponid).subscribe(res => {
         const response = JSON.parse(res._body);
         if (response.status) {
-          this.bootstrapAlertService.showSucccess('#' + this.couponObj.couponid + ' ' + response.message);
+          this.bootstrapAlertService.showSucccess('#' + data.couponid + ' ' + response.message);
           this.couponList.splice(index, 1);
           this.couponList = [...this.couponList];
         } else {
@@ -69,7 +66,7 @@ export class CustomerCouponsComponent implements OnInit, OnChanges {
         }
       });
     } else {
-      this.couponService.update(data, this.couponObj.couponid).subscribe(res => {
+      this.couponService.update(updateObj, data.couponid).subscribe(res => {
         const response = JSON.parse(res._body);
         if (response.status) {
           this.bootstrapAlertService.showSucccess(response.message);
