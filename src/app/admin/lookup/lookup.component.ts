@@ -43,6 +43,10 @@ export class LookupComponent extends BaseService implements OnInit {
       condition = {
         refkey: selected
       };
+    } else {
+      condition = {
+        refkey: this.selectedKeyType
+      };
     }
     this.loadingIndicator = true;
     this.lookupService.list(condition).subscribe(res => {

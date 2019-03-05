@@ -1,276 +1,269 @@
 <div class="addeditpage vieweditpage">
-  <div class="fixedheader">
-    <div class="header-title m-b-15 pos-fixed">
-      <div class="row">
-        <div class="col-md-9 col-sm-9 p-l-0 p-r-0 border-bottom">
-          <h2 class="m-l-0 m-b-5">Details</h2>
-          <p class="m-b-5 m-l-0" *ngIf="consumer?.membershipid">
-            <i class="fa fa-pencil"></i> Membership ID: {{consumer?.membershipid}}
-          </p>
-        </div>
-        <div class="col-md-3 col-sm-3 save-button text-right">
-          <button type="button" placement="bottom" ngbTooltip="Go back" routerLink="/business/consumers" class="btn btn-inverse btn-primary waves-effect"><i
+    <div class="fixedheader">
+        <div class="header-title m-b-15 pos-fixed">
+            <div class="row">
+                <div class="col-md-9 col-sm-9 p-l-0 p-r-0 border-bottom">
+                    <h2 class="m-l-0 m-b-5">Details</h2>
+                    <p class="m-b-5 m-l-0" *ngIf="consumer?.membershipid"> Membership ID: {{consumer?.membershipid}}
+                    </p>
+                </div>
+                <div class="col-md-3 col-sm-3 save-button text-right">
+                    <button type="button" placement="bottom" ngbTooltip="Go back" routerLink="/business/consumers" class="btn btn-inverse btn-primary waves-effect"><i
               class="fa fa-arrow-circle-left"></i></button>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-  <div class="employee-page pos-fixed consumer-menu">
-    <div class="col-md-12 col-sm-12 text-center employee-profile m-t-25">
-      <div class="form-group">
-        <div class="avatar-image">
-          <img [src]="userfile" class="img-responsive" alt="employee">
+    <div class="employee-page pos-fixed consumer-menu">
+        <div class="col-md-12 col-sm-12 text-center employee-profile m-t-25">
+            <div class="form-group">
+                <div class="avatar-image">
+                    <img [src]="userfile" class="img-responsive" alt="employee">
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-md-9 col-sm-9">
-      <div class="md-tabs md-right-tabs business-tab dealer-tab-menu m-t-15">
-        <ngb-tabset>
-          <ngb-tab title="Details">
-            <ng-template ngbTabContent>
-              <div [@fadeInOutTranslate]>
-                <div class="employee-form view-list-form">
-                  <div class="m-b-10 m-l-25">
-                    <div class="row">
-                      <label class="col-md-3 col-sm-5 col-form-label text-left">Name : </label>
-                      <div class="col-md-7 col-sm-7 m-t-5">
-                        <span class="f-15">{{consumer?.fullname || '-'}}</span>
-                      </div>
-                      
-                    </div>
-                    <div class="row">
-                      <label class="col-md-3 col-sm-5 col-form-label text-left">Location : </label>
-                      <div class="col-md-7 col-sm-7 m-t-5">
-                        <span class="f-15">{{consumer.location?.area + consumer.location?.pincode || '-'}}</span>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <label class="col-md-3 col-sm-5 col-form-label text-left">Address : </label>
-                      <div class="col-md-7 col-sm-7 m-t-5">
-                        <span class="f-15">{{consumer?.postaladdress || '-'}} </span>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <label class="col-md-3 col-sm-5 col-form-label text-left">Mobile : </label>
-                      <div class="col-md-7 col-sm-7 m-t-5">
-                        <span class="f-15">{{consumer?.mobileno || '-'}}</span>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <label class="col-md-3 col-sm-5 col-form-label text-left">Email : </label>
-                      <div class="col-md-7 col-sm-7 m-t-5">
-                        <span class="f-15">{{consumer?.contactemail || '-'}}</span>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <label class="col-md-3 col-sm-5 col-form-label text-left">Social
+    <div class="row">
+        <div class="col-md-9 col-sm-9">
+            <div class="md-tabs md-right-tabs business-tab dealer-tab-menu m-t-15">
+                <ngb-tabset>
+                    <ngb-tab title="Details">
+                        <ng-template ngbTabContent>
+                            <div [@fadeInOutTranslate]>
+                                <div class="employee-form view-list-form">
+                                    <div class="m-b-10 m-l-25">
+                                        <div class="row">
+                                            <label class="col-md-3 col-sm-5 col-form-label text-left">Name : </label>
+                                            <div class="col-md-7 col-sm-7 m-t-5">
+                                                <span class="f-15">{{consumer?.fullname || '-'}}</span>
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-md-3 col-sm-5 col-form-label text-left">Location : </label>
+                                            <div class="col-md-7 col-sm-7 m-t-5">
+                                                <span class="f-15">{{consumer.location?.area + consumer.location?.pincode || '-'}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-md-3 col-sm-5 col-form-label text-left">Address : </label>
+                                            <div class="col-md-7 col-sm-7 m-t-5">
+                                                <span class="f-15">{{consumer?.postaladdress || '-'}} </span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-md-3 col-sm-5 col-form-label text-left">Mobile : </label>
+                                            <div class="col-md-7 col-sm-7 m-t-5">
+                                                <span class="f-15">{{consumer?.mobileno || '-'}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-md-3 col-sm-5 col-form-label text-left">Email : </label>
+                                            <div class="col-md-7 col-sm-7 m-t-5">
+                                                <span class="f-15">{{consumer?.contactemail || '-'}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-md-3 col-sm-5 col-form-label text-left">Social
                         Ids : </label>
-                      <div class="col-md-7 col-sm-7 m-t-5">
-                        <span class="f-15">Facebook id<br />Twitter id<br />Google
+                                            <div class="col-md-7 col-sm-7 m-t-5">
+                                                <span class="f-15">Facebook id<br />Twitter id<br />Google
                           id<br />Instagram id</span>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <label class="col-md-3 col-sm-5 col-form-label text-left">Linked Membership
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-md-3 col-sm-5 col-form-label text-left">Linked Membership
                         Id : </label>
-                      <div class="col-md-7 col-sm-7 m-t-5">
-                        <span class="f-15">{{consumer?.membershipid || '-'}}</span>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <label class="col-md-3 col-sm-5 col-form-label text-left">Signup
+                                            <div class="col-md-7 col-sm-7 m-t-5">
+                                                <span class="f-15">{{consumer?.membershipid || '-'}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-md-3 col-sm-5 col-form-label text-left">Signup
                         date : </label>
-                      <div class="col-md-7 col-sm-7 m-t-5">
-                        <span class="f-15">{{consumer?.createddt|date:date_displayformat}}</span>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <label class="col-md-3 col-sm-5 col-form-label text-left">Last login
+                                            <div class="col-md-7 col-sm-7 m-t-5">
+                                                <span class="f-15">{{consumer?.createddt|date:date_displayformat}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-md-3 col-sm-5 col-form-label text-left">Last login
                         date : </label>
-                      <div class="col-md-7 col-sm-7 m-t-5">
-                        <span class="f-15">{{consumer?.user?.lastlogin|date:date_displayformat}}</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </ng-template>
-          </ngb-tab>
-          <ngb-tab title="Coupons">
-            <ng-template ngbTabContent>
-              <div [@fadeInOutTranslate]>
-                <div class="header-block m-t-60">
-                  <div class="table-header view-table fixed-table-header">
-                    <div class="card p-r-15 p-l-15">
-                      <ngx-datatable #eventtable class="table data-table expandable" [rows]='consumerCouponsList'
-                        [columnMode]="'flex'" [headerHeight]="50" [footerHeight]="50" [limit]="10" [rowHeight]="'auto'"
-                        [reorderable]="false" [messages]="emptymessages">
-                        <ngx-datatable-column prop="bizname" name="Business Name" [resizeable]="false">
-                          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                            <span>{{row.coupon.business.bizname}}</span>
-                          </ng-template>
-                        </ngx-datatable-column>
-                        <ngx-datatable-column prop="couponcode" name="Date" name="Coupon Code" [resizeable]="false"
-                          headerClass="text-center" [cellClass]="'text-center'">
-                          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                            <span>{{row.coupon.couponcode}}</span>
-                          </ng-template>
-                        </ngx-datatable-column>
-                        <ngx-datatable-column prop="shortdesc" name="Description" [resizeable]="false">
-                          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                            <span>{{row.coupon.shortdesc}}</span>
-                          </ng-template>
-                        </ngx-datatable-column>
-                        <ngx-datatable-column prop="claimedon" name="Claimed On" [resizeable]="false">
-                          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                            <span class="updatedate">
+                                            <div class="col-md-7 col-sm-7 m-t-5">
+                                                <span class="f-15">{{consumer?.user?.lastlogin|date:date_displayformat}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </ngb-tab>
+                    <ngb-tab title="Coupons">
+                        <ng-template ngbTabContent>
+                            <div [@fadeInOutTranslate]>
+                                <div class="header-block m-t-60">
+                                    <div class="table-header view-table fixed-table-header">
+                                        <div class="card p-r-15 p-l-15">
+                                            <ngx-datatable #eventtable class="table data-table expandable" [rows]='consumerCouponsList' [columnMode]="'flex'" [headerHeight]="50" [footerHeight]="50" [limit]="10" [rowHeight]="'auto'" [reorderable]="false" [messages]="emptymessages">
+                                                <ngx-datatable-column prop="bizname" name="Business Name" [resizeable]="false">
+                                                    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                                                        <span>{{row.coupon.business.bizname}}</span>
+                                                    </ng-template>
+                                                </ngx-datatable-column>
+                                                <ngx-datatable-column prop="couponcode" name="Date" name="Coupon Code" [resizeable]="false" headerClass="text-center" [cellClass]="'text-center'">
+                                                    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                                                        <span>{{row.coupon.couponcode}}</span>
+                                                    </ng-template>
+                                                </ngx-datatable-column>
+                                                <ngx-datatable-column prop="shortdesc" name="Description" [resizeable]="false">
+                                                    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                                                        <span>{{row.coupon.shortdesc}}</span>
+                                                    </ng-template>
+                                                </ngx-datatable-column>
+                                                <ngx-datatable-column prop="claimedon" name="Claimed On" [resizeable]="false">
+                                                    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                                                        <span class="updatedate">
                               {{row.updateddt|date:datedisplayformat}}</span>
-                          </ng-template>
-                        </ngx-datatable-column>
-                        <ngx-datatable-column prop="expirydt" name="Expiry Date" [resizeable]="false">
-                          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                            <span class="updatedate">
+                                                    </ng-template>
+                                                </ngx-datatable-column>
+                                                <ngx-datatable-column prop="expirydt" name="Expiry Date" [resizeable]="false">
+                                                    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                                                        <span class="updatedate">
                               {{row.coupon.expirydt|date:datedisplayformat}}</span>
-                          </ng-template>
-                        </ngx-datatable-column>
-                      </ngx-datatable>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </ng-template>
-          </ngb-tab>
-          <ngb-tab title="Reviews">
-            <ng-template ngbTabContent>
-              <div [@fadeInOutTranslate]>
-                <div class="col-md-12 col-sm-12 card">
-                  <div class="header-title m-t-25 mb-3">
-                    <div class="header-title mb-3">
-                      <div class="row">
-                        <div class="col-sm-12 col-md-4">
-                          <h3 class="f-18 text-primary m-l-15">Business Reviewed</h3>
-                        </div>
-                      </div>
-                    </div>
-                    <div *ngIf="reviewedBiz.length>0">
-                      <div class="col-sm-12 col-md-4 wdt">
-                        <div class="row">
-                          <div *ngFor="let biz of reviewedBiz" class="col-sm-12 waves-effect" ngbTooltip="Click here to display the reviews">
-                            <div class=" p-10 m-b-10 card" (click)="showReviewFor(biz.membershipid)">
-                              <h6 class="col-sm-12 col-md-8">{{biz.bizname | titlecase}}</h6>
+                                                    </ng-template>
+                                                </ngx-datatable-column>
+                                            </ngx-datatable>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-sm-12 col-md-8 wdt">
-                        <div class=" p-10 m-b-10">
-                          <div *ngIf="bizReview?.comments" class="col-sm-12 col-md-8">
-                            <h6><b>{{bizReview?.consumer?.fullname | titlecase}} </b></h6>
-                            <div><span>{{bizReview?.updateddt | date:displaydtimeformat}}</span> </div>
-                            <div class="box-body">
-                              <bar-rating [(rate)]="rateStar" [max]="5" [readOnly]="true"></bar-rating>
+                        </ng-template>
+                    </ngb-tab>
+                    <ngb-tab title="Reviews">
+                        <ng-template ngbTabContent>
+                            <div [@fadeInOutTranslate]>
+                                <div class="col-md-12 col-sm-12 card">
+                                    <div class="header-title m-t-25 mb-3">
+                                        <div class="header-title mb-3">
+                                            <div class="row">
+                                                <div class="col-sm-12 col-md-4">
+                                                    <h3 class="f-18 text-primary m-l-15">Business Reviewed</h3>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div *ngIf="reviewedBiz.length>0">
+                                            <div class="col-sm-12 col-md-4 wdt">
+                                                <div class="row">
+                                                    <div *ngFor="let biz of reviewedBiz" class="col-sm-12 waves-effect" ngbTooltip="Click here to display the reviews">
+                                                        <div class=" p-10 m-b-10 card" (click)="showReviewFor(biz.membershipid)">
+                                                            <h6 class="col-sm-12 col-md-8">{{biz.bizname | titlecase}}</h6>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 col-md-8 wdt">
+                                                <div class=" p-10 m-b-10">
+                                                    <div *ngIf="bizReview?.comments" class="col-sm-12 col-md-8">
+                                                        <h6><b>{{bizReview?.consumer?.fullname | titlecase}} </b></h6>
+                                                        <div><span>{{bizReview?.updateddt | date:displaydtimeformat}}</span> </div>
+                                                        <div class="box-body">
+                                                            <bar-rating [(rate)]="rateStar" [max]="5" [readOnly]="true"></bar-rating>
+                                                        </div>
+                                                        <h6 class="m-t-5 m-l-0 p-t-10">{{bizReview?.comments}}</h6>
+                                                    </div>
+                                                    <div *ngIf="bizReview?.reply" class=" m-2 p-3 p-l-10">
+                                                        <h6><b>Replied On : </b>
+                                                            <span>({{bizReview?.reply?.updateddt | date:displaydtimeformat}})</span> </h6>
+                                                        <h6 class="m-t-5 m-l-0">{{bizReview?.reply?.comments}}</h6>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div *ngIf="reviewedBiz.length==0" class="text-center">
+                                            <h6>No Review data to display </h6>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <h6 class="m-t-5 m-l-0 p-t-10">{{bizReview?.comments}}</h6>
-                          </div>
-                          <div *ngIf="bizReview?.reply" class=" m-2 p-3 p-l-10">
-                            <h6><b>Replied On : </b>
-                              <span>({{bizReview?.reply?.updateddt | date:displaydtimeformat}})</span> </h6>
-                            <h6 class="m-t-5 m-l-0">{{bizReview?.reply?.comments}}</h6>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div *ngIf="reviewedBiz.length==0" class="text-center">
-                      <h6>No Review data to display </h6>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </ng-template>
-          </ngb-tab>
-          <ngb-tab title="Favourites">
-            <ng-template ngbTabContent>
-              <div [@fadeInOutTranslate]>
-                <div class="col-md-12 col-sm-12 card">
-                  <div class="header-title m-t-10">
-                    <h3 class="f-18 text-primary m-l-15">Preferred Business</h3>
-                  </div>
-                  <div class="header-block">
-                    <div class="table-header fixed-table-header">
-                      <ngx-datatable #eventtable class="table data-table expandable" [rows]='consumerFavs.business'
-                        [columnMode]="'flex'" [headerHeight]="50" [footerHeight]="50" [limit]="5" [rowHeight]="'auto'"
-                        [reorderable]="false" [messages]="nodata">
-                        <ngx-datatable-column prop="bizname" name="Business Name" [resizeable]="false">
-                          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                            <span>{{row.business.bizname}}</span>
-                          </ng-template>
-                        </ngx-datatable-column>
-                        <ngx-datatable-column prop="biztype" name="Date" name="Business Type" [resizeable]="false">
-                          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                            <span>{{row.business.biztype}}</span>
-                          </ng-template>
-                        </ngx-datatable-column>
-                        <ngx-datatable-column prop="postaladdress" name="Postal Address" [resizeable]="false">
-                          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                            <span>{{row.business.postaladdress}}</span>
-                          </ng-template>
-                        </ngx-datatable-column>
-                        <ngx-datatable-column prop="inmallyn" name="In Mall" [resizeable]="false">
-                          <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                            <span>{{row.business.inmallyn}}</span>
-                          </ng-template>
-                        </ngx-datatable-column>
-                      </ngx-datatable>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-6 p-r-0">
-                    <div class="card  z-depth-bottom-1 ">
-                      <div class="header-title m-t-10">
-                        <h3 class="f-18 text-primary m-l-15">Preferred Category</h3>
-                      </div>
-                      <div class="fav-title">
-                        <div *ngIf="consumerFavs.category.length > 0">
-                          <div class="row">
-                            <div *ngFor="let cat of consumerFavs.category" class="col-sm-12 col-md-4 text-center p-4">
-                              <div> <img class="img-fluid img-100 p-b-10" src={{cat.category.categoryimage.docurl}}></div>
-                              <div>{{cat.category.categoryname}}</div>
+                        </ng-template>
+                    </ngb-tab>
+                    <ngb-tab title="Favourites">
+                        <ng-template ngbTabContent>
+                            <div [@fadeInOutTranslate]>
+                                <div class="col-md-12 col-sm-12 card">
+                                    <div class="header-title m-t-10">
+                                        <h3 class="f-18 text-primary m-l-15">Preferred Business</h3>
+                                    </div>
+                                    <div class="header-block">
+                                        <div class="table-header fixed-table-header">
+                                            <ngx-datatable #eventtable class="table data-table expandable" [rows]='consumerFavs.business' [columnMode]="'flex'" [headerHeight]="50" [footerHeight]="50" [limit]="5" [rowHeight]="'auto'" [reorderable]="false" [messages]="nodata">
+                                                <ngx-datatable-column prop="bizname" name="Business Name" [resizeable]="false">
+                                                    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                                                        <span>{{row.business.bizname}}</span>
+                                                    </ng-template>
+                                                </ngx-datatable-column>
+                                                <ngx-datatable-column prop="biztype" name="Date" name="Business Type" [resizeable]="false">
+                                                    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                                                        <span>{{row.business.biztype}}</span>
+                                                    </ng-template>
+                                                </ngx-datatable-column>
+                                                <ngx-datatable-column prop="postaladdress" name="Postal Address" [resizeable]="false">
+                                                    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                                                        <span>{{row.business.postaladdress}}</span>
+                                                    </ng-template>
+                                                </ngx-datatable-column>
+                                                <ngx-datatable-column prop="inmallyn" name="In Mall" [resizeable]="false">
+                                                    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                                                        <span>{{row.business.inmallyn}}</span>
+                                                    </ng-template>
+                                                </ngx-datatable-column>
+                                            </ngx-datatable>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 p-r-0">
+                                        <div class="card  z-depth-bottom-1 ">
+                                            <div class="header-title m-t-10">
+                                                <h3 class="f-18 text-primary m-l-15">Preferred Category</h3>
+                                            </div>
+                                            <div class="fav-title">
+                                                <div *ngIf="consumerFavs.category.length > 0">
+                                                    <div class="row">
+                                                        <div *ngFor="let cat of consumerFavs.category" class="col-sm-12 col-md-4 text-center p-4">
+                                                            <div> <img class="img-fluid img-100 p-b-10" src={{cat.category.categoryimage.docurl}}></div>
+                                                            <div>{{cat.category.categoryname}}</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div *ngIf="consumerFavs.category.length == 0" class="m-l-15">
+                                                    <h3 class="f-14">Nothing Found</h3>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 ">
+                                        <div class="card  z-depth-bottom-1">
+                                            <div class="header-title m-t-10">
+                                                <h3 class="f-18 text-primary m-l-15">Preferred Location</h3>
+                                            </div>
+                                            <div class="fav-title">
+                                                <div *ngIf="consumerFavs.location.length > 0">
+                                                    <div *ngFor="let loc of consumerFavs.location" class="col-md-12 col-sm-6 col-md-3 p-b-10 p-t-10">
+                                                        <i class="fa fa-map-marker fa-lg p-r-3" aria-hidden="true"></i> {{loc.location.area}}
+                                                    </div>
+                                                </div>
+                                                <div *ngIf="consumerFavs.category.length == 0" class="m-l-15">
+                                                    <h3 class="f-14">Nothing Found</h3>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                          </div>
-                        </div>
-                        <div *ngIf="consumerFavs.category.length == 0" class="m-l-15">
-                          <h3 class="f-14">Nothing Found</h3>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-6 ">
-                    <div class="card  z-depth-bottom-1">
-                      <div class="header-title m-t-10">
-                        <h3 class="f-18 text-primary m-l-15">Preferred Location</h3>
-                      </div>
-                      <div class="fav-title">
-                        <div *ngIf="consumerFavs.location.length > 0">
-                          <div *ngFor="let loc of consumerFavs.location" class="col-md-12 col-sm-6 col-md-3 p-b-10 p-t-10">
-                              <i class="fa fa-map-marker fa-lg p-r-3" aria-hidden="true"></i>
-                              {{loc.location.area}}
-                          </div>
-                        </div>
-                        <div *ngIf="consumerFavs.category.length == 0" class="m-l-15">
-                          <h3 class="f-14">Nothing Found</h3>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </ng-template>
-          </ngb-tab>
-        </ngb-tabset>
-      </div>
+                        </ng-template>
+                    </ngb-tab>
+                </ngb-tabset>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
