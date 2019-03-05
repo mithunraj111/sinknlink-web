@@ -13,8 +13,7 @@ import { DealerService } from 'src/app/services/business';
 import { AppCommonService } from 'src/app/services';
 import { Buffer } from 'buffer';
 import { DatePipe } from '@angular/common';
-
-
+import downloadService from '../../services/download.service';
 @Component({
   selector: 'app-dealer',
   templateUrl: './dealer.component.html',
@@ -65,7 +64,7 @@ export class DealerComponent implements OnInit {
     });
 
   }
-  getDealerReport() {
+  getDealerReport(download?) {
 
     const data = this.dealerReportForm.value;
     const todt = this.commonService.formatDate(data.todate);
@@ -85,94 +84,63 @@ export class DealerComponent implements OnInit {
     }
     if (city != "") {
       formData.city = [city];
+    } let service;
+    if (download) {
+      service = this.reportService.areawiseDealerCount(formData, true);
+    } else {
+      service = this.reportService.areawiseDealerCount(formData);
     }
-
-    this.loadingIndicator = true;
-    this.reportService.areawiseDealerCount(formData).subscribe((res) => {
-      const response = JSON.parse(res._body);
-      if (response.status) {
-        this.loadingIndicator = false;
-        this.dealerReportList = response.data;
+    service.subscribe((res) => {
+      if (download) {
+        this.loadingIndicator = true;
+        var buffer = Buffer.from(JSON.parse(res._body).file.data);
+        this.generatingFile = false;
+        downloadService(buffer, `DealerReport-${new DatePipe("en-US").transform(new Date(), "dd-MM-yyyy").toString()}.xlsx`);
+        this.loadingIndicator = true;
+      } else {
+        this.loadingIndicator = true;
+          const response = JSON.parse(res._body);
+          if (response.status) {
+            this.loadingIndicator = false;
+            this.dealerReportList = response.data;
+          }
+          this.loadingIndicator = false;
+          this.tempFilter = this.dealerReportList;
       }
-      this.loadingIndicator = false;
-      this.tempFilter = this.dealerReportList;
-
-    });
-  }
-  getCities() {
-    this.lookupService.list({ refKey: 'biz_businesscity', status: AppConstant.STATUS_ACTIVE }).subscribe((res) => {
-      const response = JSON.parse(res._body);
-      if (response.status) {
-        response.data.map(item => {
-          item.label = item.refname;
-          item.value = item.refvalue;
-        })
-        this.cityList = this.cityList.concat(response.data);
-      }
-    });
-  }
-
-  citySelect(option) {
-    this.cityName = option.value;
-    this.getArea();
-  }
-  getArea() {
-    this.areaList = [];
-    let condition = { status: AppConstant.STATUS_ACTIVE } as any;
-    if (this.cityName != "") {
-      condition.city = this.cityName;
-    }
-    this.locationService.list(condition).subscribe(res => {
-      const response = JSON.parse(res._body);
-      if (response.status) {
-        response.data.map(item => {
-          item.label = item.area + ' (' + item.pincode + ' )';
-          item.value = item.locationid;
         });
-        this.areaList = this.areaList.concat(response.data);
       }
-    });
-  }
-  downloadreport() {
-    this.generatingFile = true;
-    const data = this.dealerReportForm.value;
-    const todt = this.commonService.formatDate(data.todate);
-    const fromdt = this.commonService.formatDate(data.fromdate);
-    const city = data.city;
-    let area = data.area;
-    if (new Date(todt) < new Date(fromdt)) {
-      this.bootstrapAlertService.showError(AppMessages.VALIDATION.DEALERREPORT.fromdate.max);
-      return false;
-    }
-    let formData = {
-      fromdate: fromdt + ' 00:00',
-      todate: todt + ' 23:59'
-    } as any;
-    if (area != "") {
-      formData.locationid = area;
-    }
-    if (city != "") {
-      formData.city = [city];
-    }
-
-    this.reportService.dealerReportDownload(formData).subscribe((res) => {
-      var buffer = Buffer.from(JSON.parse(res._body).file.data);
-      this.generatingFile = false;
-
-      saveData(buffer, `DealerReport-${new DatePipe("en-US").transform(new Date(), "dd-MM-yyyy").toString()}.xlsx`);
-
-      function saveData(blob, name) {
-        var a = document.createElement("a");
-        document.body.appendChild(a);
-        a.setAttribute("style", "none");
-        blob = new Blob([blob], { type: "octet/stream" });
-        var url = window.URL.createObjectURL(blob);
-        a.href = url;
-        a.download = name;
-        a.click();
-        window.URL.revokeObjectURL(url);
+      getCities() {
+        this.lookupService.list({ refKey: 'biz_businesscity', status: AppConstant.STATUS_ACTIVE }).subscribe((res) => {
+          const response = JSON.parse(res._body);
+          if (response.status) {
+            response.data.map(item => {
+              item.label = item.refname;
+              item.value = item.refvalue;
+            })
+            this.cityList = this.cityList.concat(response.data);
+          }
+        });
       }
-    })
-  }
 
-}
+      citySelect(option) {
+        this.cityName = option.value;
+        this.getArea();
+      }
+      getArea() {
+        this.areaList = [];
+        let condition = { status: AppConstant.STATUS_ACTIVE } as any;
+        if (this.cityName != "") {
+          condition.city = this.cityName;
+        }
+        this.locationService.list(condition).subscribe(res => {
+          const response = JSON.parse(res._body);
+          if (response.status) {
+            response.data.map(item => {
+              item.label = item.area + ' (' + item.pincode + ' )';
+              item.value = item.locationid;
+            });
+            this.areaList = this.areaList.concat(response.data);
+          }
+        });
+      }
+    }

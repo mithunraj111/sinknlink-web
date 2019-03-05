@@ -79,7 +79,7 @@
         class="fa fa-close"></i></button>
   </div>
   <div class="col-md-6  col-md-6  text-right header-title ">
-    <button type="button" placement="bottom" ngbTooltip="Click to download reports" (click)="downloadReport()"
+    <button type="button" placement="bottom" ngbTooltip="Click to download reports" (click)="getPaymentList(true)"
     [disabled]="paymentList.length == 0 || generatingFile == true" class="btn btn-primary waves-effect download-btn m-r-5"><i
         class="fa fa-download m-r-5"></i>
     </button>

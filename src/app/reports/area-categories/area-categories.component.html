@@ -66,7 +66,7 @@
                   </label>
                   <label class="dt-cust-search f-right">
                     <button type="button" placement="bottom" ngbTooltip="Click to download reports" class="btn btn-primary waves-effect download-btn"
-                      (click)="downloadareareport()" [disabled]="areaList.length == 0 || generatingFile == true">
+                      (click)="getAreaList(true)" [disabled]="areaList.length == 0 || generatingFile == true">
                       <i class="fa fa-download m-r-5"></i></button>
                   </label>
                 </div>
@@ -114,7 +114,7 @@
                   </label>
                   <label class="f-right">
                     <button type="button" placement="bottom" ngbTooltip="Click to download reports" class="btn btn-primary waves-effect download-btn"
-                      (click)="downloadcatreport()" [disabled]="categoriesList.length == 0 || generatingFile == true"><i
+                      (click)="getCategoryList(true)" [disabled]="categoriesList.length == 0 || generatingFile == true"><i
                         class="fa fa-download m-r-5"></i></button>
                   </label>
                 </div>

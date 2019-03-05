@@ -448,7 +448,7 @@ export class AddEditCustomerComponent implements OnInit {
       Curloc = { lat: parseFloat(data.latitude), lng: parseFloat(data.longitude) }
     }
     else {
-      Curloc = { lat: 0.0, lng: 0.0 }
+      Curloc = { lat: 13.082680, lng: 80.270721 }
     }
     map = new gmap.Map(document.getElementById("map"), {
       center: Curloc,

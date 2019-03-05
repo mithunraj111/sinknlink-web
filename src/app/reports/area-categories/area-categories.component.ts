@@ -9,6 +9,7 @@ import { AppConstant } from '../../app.constants';
 import { AppMessages } from '../../app-messages';
 import { AppCommonService } from 'src/app/services';
 import { DatePipe } from '@angular/common';
+import downloadService from '../../services/download.service';
 import { Buffer } from 'buffer';
 
 @Component({
@@ -46,6 +47,13 @@ export class AreaCategoriesComponent implements OnInit {
     });
   }
   getAreaCategories() {
+
+    this.getAreaList();
+    this.getCategoryList();
+
+  }
+
+  genFormData() {
     const data = this.areaCategoriesForm.value;
     const todt = this.commonService.formatDate(data.todate);
     const fromdt = this.commonService.formatDate(data.fromdate);
@@ -57,35 +65,58 @@ export class AreaCategoriesComponent implements OnInit {
       fromdate: fromdt + ' 00:00',
       todate: todt + ' 23:59'
     };
-    this.getAreaList(formData);
-    this.getCategoryList(formData);
-
+    return formData;
   }
 
-  getCategoryList(formData) {
+  getCategoryList(download?) {
+    let service;
+    this.generatingFile = false;
     this.loadingIndicator = true;
-    this.reportService.getCategoryWiseCount(formData).subscribe(res => {
-      const response = JSON.parse(res._body);
-      if (response.status) {
+    if (download) {
+      service = this.reportService.getCategoryWiseCount(this.genFormData(), true);
+    } else {
+      service = this.reportService.getCategoryWiseCount(this.genFormData());
+    }
+    service.subscribe(res => {
+      if (download) {
         this.loadingIndicator = false;
-        this.categoriesList = response.data;
+        var buffer = Buffer.from(JSON.parse(res._body).file.data);
+        downloadService(buffer, `CategoryReport-${new DatePipe("en-US").transform(new Date(), "dd-MM-yyyy").toString()}.xlsx`);
+      } else {
+        const response = JSON.parse(res._body);
+        if (response.status) {
+          this.loadingIndicator = false;
+          this.categoriesList = response.data;
+        }
+        this.loadingIndicator = false;
+        this.categorytempFilter = this.categoriesList;
       }
-      this.loadingIndicator = false;
-      this.categorytempFilter = this.categoriesList;
     });
   }
-  getAreaList(formData) {
+  getAreaList(download?) {
+    let service;
     this.loadingIndicator = true;
-    this.reportService.getAreaWiseCount(formData).subscribe(res => {
-      const response = JSON.parse(res._body);
-      if (response.status) {
+    if (download) {
+      service = this.reportService.getAreaWiseCount(this.genFormData(), true);
+    } else {
+      service = this.reportService.getAreaWiseCount(this.genFormData());
+    }
+    service.subscribe(res => {
+      if (download) {
         this.loadingIndicator = false;
-        this.areaList = response.data;
+        var buffer = Buffer.from(JSON.parse(res._body).file.data);
+        this.generatingFile = false;
+        downloadService(buffer, `AreaReport-${new DatePipe("en-US").transform(new Date(), "dd-MM-yyyy").toString()}.xlsx`);
+      } else {
+        const response = JSON.parse(res._body);
+        if (response.status) {
+          this.loadingIndicator = false;
+          this.areaList = response.data;
+        }
+        this.loadingIndicator = false;
+        this.areatempFilter = this.areaList;
       }
-      this.loadingIndicator = false;
-      this.areatempFilter = this.areaList;
-
-    });
+    })
   }
   search(event?) {
     this.areaList = this.commonService.globalSearch(this.areatempFilter, event);
@@ -94,71 +125,5 @@ export class AreaCategoriesComponent implements OnInit {
   searchCategory(event?) {
     this.categoriesList = this.commonService.globalSearch(this.categorytempFilter, event);
     this.categoriestable.offset = 0;
-  }
-  downloadareareport() {
-    this.generatingFile = true;
-    const data = this.areaCategoriesForm.value;
-    const todt = this.commonService.formatDate(data.todate);
-    const fromdt = this.commonService.formatDate(data.fromdate);
-    if (new Date(todt) < new Date(fromdt)) {
-      this.bootstrapAlertService.showError(AppMessages.VALIDATION.AREACATEGORIES.fromdate.max);
-      return false;
-    }
-    const formData = {
-      fromdate: fromdt + ' 00:00',
-      todate: todt + ' 23:59'
-    };
-    this.reportService.areaReportDownload(formData).subscribe((res) => {
-      var buffer = Buffer.from(JSON.parse(res._body).file.data);
-      this.generatingFile = false;
-
-      saveData(buffer, `AreaReport-${new DatePipe("en-US").transform(new Date(), "dd-MM-yyyy").toString()}.xlsx`);
-
-      function saveData(blob, name) {
-        var a = document.createElement("a");
-        document.body.appendChild(a);
-        a.setAttribute("style", "none");
-        blob = new Blob([blob], { type: "octet/stream" });
-        var url = window.URL.createObjectURL(blob);
-        a.href = url;
-        a.download = name;
-        a.click();
-        window.URL.revokeObjectURL(url);
-      }
-    })
-  }
-  downloadcatreport() {
-
-    this.generatingFile = true;
-    const data = this.areaCategoriesForm.value;
-    const todt = this.commonService.formatDate(data.todate);
-    const fromdt = this.commonService.formatDate(data.fromdate);
-    if (new Date(todt) < new Date(fromdt)) {
-      this.bootstrapAlertService.showError(AppMessages.VALIDATION.AREACATEGORIES.fromdate.max);
-      return false;
-    }
-    const formData = {
-      fromdate: fromdt + ' 00:00',
-      todate: todt + ' 23:59'
-    };
-
-    this.reportService.categoryReportDownload(formData).subscribe((res) => {
-      var buffer = Buffer.from(JSON.parse(res._body).file.data);
-      this.generatingFile = false;
-
-      saveData(buffer, `CategoryReport-${new DatePipe("en-US").transform(new Date(), "dd-MM-yyyy").toString()}.xlsx`);
-
-      function saveData(blob, name) {
-        var a = document.createElement("a");
-        document.body.appendChild(a);
-        a.setAttribute("style", "none");
-        blob = new Blob([blob], { type: "octet/stream" });
-        var url = window.URL.createObjectURL(blob);
-        a.href = url;
-        a.download = name;
-        a.click();
-        window.URL.revokeObjectURL(url);
-      }
-    })
   }
 }

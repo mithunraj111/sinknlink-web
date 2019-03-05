@@ -15,6 +15,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AppConstant } from 'src/app/app.constants';
 import { DatePipe } from '@angular/common';
 import { Buffer } from 'buffer';
+import downloadService from '../../services/download.service';
 
 @Component({
   selector: 'app-customerdetail',
@@ -62,10 +63,11 @@ export class CustomerdetailComponent implements OnInit {
       city: ['']
     })
   }
-  getReports() {
+  getReports(download?) {
     const data = this.customerdetailForm.value;
     const todt = this.commonService.formatDate(data.todate);
     const fromdt = this.commonService.formatDate(data.fromdt);
+    this.loadingIndicator = true;
     let area = data.area;
     let categoryid = data.categoryid;
     let biztype = data.biztype;
@@ -96,16 +98,29 @@ export class CustomerdetailComponent implements OnInit {
     if (city != "" && city != undefined && city != null) {
       formData.city = [city];
     }
-    this.loadingIndicator = true;
-    this.reportService.customerDetailReport(formData).subscribe((res) => {
-      const response = JSON.parse(res._body);
-      if (response.status) {
+    let service;
+    if (download) {
+      service = this.reportService.customerDetailReport(formData, true);
+    } else {
+      service = this.reportService.customerDetailReport(formData);
+    }
+    service.subscribe((res) => {
+      if (download) {
+        this.loadingIndicator = true;
+        var buffer = Buffer.from(JSON.parse(res._body).file.data);
+        this.generatingFile = false;
+        downloadService(buffer, `CustomerReport-${new DatePipe("en-US").transform(new Date(), "dd-MM-yyyy").toString()}.xlsx`);
         this.loadingIndicator = false;
-        this.businessList = response.data;
+      } else {
+        this.loadingIndicator = true;
+        const response = JSON.parse(res._body);
+        if (response.status) {
+          this.loadingIndicator = false;
+          this.businessList = response.data;
+        }
+        this.loadingIndicator = false;
+        this.tempFilter = this.businessList;
       }
-      this.loadingIndicator = false;
-      this.tempFilter = this.businessList;
-
     }, err => {
     })
   }
@@ -185,61 +200,4 @@ export class CustomerdetailComponent implements OnInit {
     this.businessList = this.commonService.globalSearch(this.tempFilter, event);
     this.table.offset = 0;
   }
-
-  downloadReport() {
-    this.generatingFile = true;
-    const data = this.customerdetailForm.value;
-    const todt = this.commonService.formatDate(data.todate);
-    const fromdt = this.commonService.formatDate(data.fromdt);
-    let area = data.area;
-    let categoryid = data.categoryid;
-    let biztype = data.biztype;
-    let membershiptype = data.membershiptype;
-    let city = data.city;
-    if (new Date(fromdt) > new Date(todt)) {
-      this.bootstrapAlertService.showError(AppMessages.VALIDATION.DEALERREPORT.fromdate.max);
-      return false;
-    }
-    let formData = {
-      fromdt: fromdt + ' 00:00',
-      todate: todt + ' 23:59',
-
-    } as any;
-
-    if (categoryid != "" && categoryid != undefined && categoryid != null) {
-      formData.categoryid = categoryid;
-    }
-    if (area != "") {
-      formData.area = area;
-    }
-    if (biztype != "") {
-      formData.biztype = biztype;
-    }
-    if (membershiptype != "") {
-      formData.membershiptype = membershiptype;
-    }
-    if (city != "" && city != undefined && city != null) {
-      formData.city = [city];
-    }
-
-    this.reportService.customerDetailReportDownload(formData).subscribe((res) => {
-      var buffer = Buffer.from(JSON.parse(res._body).file.data);
-      this.generatingFile = false;
-
-      saveData(buffer, `CustomerReport-${new DatePipe("en-US").transform(new Date(), "dd-MM-yyyy").toString()}.xlsx`);
-
-      function saveData(blob, name) {
-        var a = document.createElement("a");
-        document.body.appendChild(a);
-        a.setAttribute("style", "none");
-        blob = new Blob([blob], { type: "octet/stream" });
-        var url = window.URL.createObjectURL(blob);
-        a.href = url;
-        a.download = name;
-        a.click();
-        window.URL.revokeObjectURL(url);
-      }
-    })
-  }
-
 }

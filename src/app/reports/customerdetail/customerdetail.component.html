@@ -103,7 +103,7 @@
   </div>
   <div class="col-md-6  col-md-6  text-right header-title ">
     <button type="button" placement="bottom" ngbTooltip="Click to download reports" class="btn btn-primary waves-effect download-btn m-r-5"
-      (click)="downloadReport()" [disabled]="businessList.length == 0 || generatingFile == true"><i class="fa fa-download m-r-5"></i>
+      (click)="getReports(true)" [disabled]="businessList.length == 0 || generatingFile == true"><i class="fa fa-download m-r-5"></i>
     </button>
     <button type="button" placement="bottom" ngbTooltip="Reload" (click)="getReports()" class="btn btn-inverse btn-primary waves-effect m-t-5"><i
         class="ti-reload"></i></button>
