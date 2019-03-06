@@ -154,6 +154,8 @@ export class ProfileComponent implements OnInit {
       const response = JSON.parse(res._body);
       if (response.status) {
         this.bootstrapAlertService.showSucccess(response.message);
+        this.initForm();
+        this.closePassword();
       } else {
         this.bootstrapAlertService.showError(response.message);
       }
