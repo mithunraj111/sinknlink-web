@@ -15,8 +15,7 @@ import { element } from '@angular/core/src/render3/instructions';
 export class ViewConsumerComponent implements OnInit {
   datedisplayformat = AppConstant.API_CONFIG.ANG_DATE.displaydate;
   datetimedisplayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
-  date: any;
-  userfile: any;
+  consumerProfilepic: any;
   emptymessages = AppConstant.EMPTY_MESSAGES.CONSUMERCOUPONS;
   nodata = AppConstant.EMPTY_MESSAGES.FAVOURITES;
   // For Consumer Details.
@@ -41,7 +40,6 @@ export class ViewConsumerComponent implements OnInit {
   public rateStar = '';
 
   constructor(private route: ActivatedRoute, private consumerService: ConsumerService) {
-    this.date = new Date();
     this.route.params.subscribe(params => {
       let id = params.id;
       this.getConsumer(id);
@@ -56,30 +54,29 @@ export class ViewConsumerComponent implements OnInit {
 
   getConsumer(id) {
     this.consumerService.byId(id).subscribe(res => {
-      let response = JSON.parse(res._body);
+      const response = JSON.parse(res._body);
       this.consumer = response.data;
-      if (this.consumer.profileimg != null) {
-        this.userfile = this.consumer.profileimg.docurl;
+      if (this.consumer.user.profileimg != null) {
+        this.consumerProfilepic = this.consumer.user.profileimg.docurl;
       } else {
-        this.userfile = 'assets/images/avatar-blank.png';
+        this.consumerProfilepic = 'assets/images/avatar-blank.png';
       }
     }, err => {
       console.log(err);
-    })
+    });
   }
 
   getConsumerCoupon(id) {
-    this.consumerService.consumerCouponsList({ consumerid: parseInt(id) }).subscribe(res => {
-      let response = JSON.parse(res._body);
+    this.consumerService.consumerCouponsList({ consumerid: Number(id) }).subscribe(res => {
+      const response = JSON.parse(res._body);
       this.consumerCouponsList = response.data;
     }, err => {
       console.log(err);
-    })
+    });
   }
-  i1
   getConsumerFavs(id) {
-    this.consumerService.consumerFavs({ consumerid: parseInt(id) }).subscribe(res => {
-      let response = JSON.parse(res._body);
+    this.consumerService.consumerFavs({ consumerid: Number(id) }).subscribe(res => {
+      const response = JSON.parse(res._body);
       this.consumerFavs = this.groupFavs(response.data);
     }, err => {
       console.log(err);
@@ -87,11 +84,10 @@ export class ViewConsumerComponent implements OnInit {
   }
 
   getConsumerReviews(id) {
-    this.consumerService.consumerReviews({ consumerid: parseInt(id) }).subscribe(res => {
-      let response = JSON.parse(res._body);
-      let businesses = [];
+    this.consumerService.consumerReviews({ consumerid: Number(id) }).subscribe(res => {
+      const response = JSON.parse(res._body);
+      const businesses = [] as any;
       let reviews = {};
-
       if (response.data.length > 0) {
         response.data.forEach(element => {
           if (Lodash.find(businesses, function (o) { return o.membershipid == element.membershipid }) == undefined) businesses.push({ membershipid: element.membershipid, bizname: element.business == null ? "" : element.business.bizname });
@@ -103,7 +99,7 @@ export class ViewConsumerComponent implements OnInit {
 
     }, err => {
       console.log(err);
-    })
+    });
   }
 
   showReviewFor(id) {
@@ -116,16 +112,16 @@ export class ViewConsumerComponent implements OnInit {
       business: [],
       category: [],
       location: []
-    }
+    };
     data.forEach(element => {
-      if (parseInt(element.membershipid)) {
-        groups.business.push(element)
+      if (Number(element.membershipid)) {
+        groups.business.push(element);
       }
-      if (parseInt(element.locationid)) {
-        groups.location.push(element)
+      if (Number(element.locationid)) {
+        groups.location.push(element);
       }
-      if (parseInt(element.categoryid)) {
-        groups.category.push(element)
+      if (Number(element.categoryid)) {
+        groups.category.push(element);
       }
     });
     return groups;
