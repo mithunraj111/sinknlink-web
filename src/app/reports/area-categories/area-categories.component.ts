@@ -91,7 +91,7 @@ export class AreaCategoriesComponent implements OnInit {
     }
     service.subscribe(res => {
       if (download) {
-        this.loadingIndicator = false;
+        this.loadingIndicator = true;
         var buffer = Buffer.from(JSON.parse(res._body).file.data);
         downloadService(buffer, `CategoryReport-${new DatePipe("en-US").transform(new Date(), "dd-MM-yyyy").toString()}.xlsx`);
       } else {
@@ -115,7 +115,7 @@ export class AreaCategoriesComponent implements OnInit {
     }
     service.subscribe(res => {
       if (download) {
-        this.loadingIndicator = false;
+        this.loadingIndicator = true;
         var buffer = Buffer.from(JSON.parse(res._body).file.data);
         this.generatingFile = false;
         downloadService(buffer, `AreaReport-${new DatePipe("en-US").transform(new Date(), "dd-MM-yyyy").toString()}.xlsx`);

@@ -89,7 +89,6 @@ export class AddEditCustomerComponent implements OnInit {
     this.getLookUps();
     this.getCategoryList();
     this.getLocationList();
-    this.loadMap();
   }
 
   getCustomerDetail() {
@@ -428,50 +427,61 @@ export class AddEditCustomerComponent implements OnInit {
 
 
   private loadMap() {
-
-    this.mapService.load('googlemaps').catch(error => { console.log(error); console.log('Inside err') });
+    return new Promise((resolve, reject) => {
+      this.mapService.load('googlemaps').then(suc => {
+        resolve(true);
+      }).catch(error => {
+        reject(false);
+        console.log(error);
+      });
+    })
 
   }
 
   openmap() {
-    let data = this.customerForm.value;
-    let a = this;
-    let w: any = window;
-    let gmap = w.google.maps;
-    let markers = [];
-    let Curloc;
-    let map;
-    // Creating Search field.
-    let location = document.getElementById("controls");
-    let pac_input = document.createElement("input");
-    pac_input.setAttribute("id", "pac-input");
-    pac_input.setAttribute("class", "controls");
-    pac_input.setAttribute("type", "text");
-    pac_input.setAttribute("placeholder", "Search here");
-    pac_input.setAttribute("autocomplete", "on");
-    location.appendChild(pac_input);
-    if (data.latitude && data.longitude !== null) {
-      Curloc = { lat: parseFloat(data.latitude), lng: parseFloat(data.longitude) }
-    }
-    else {
-      Curloc = { lat: 13.082680, lng: 80.270721 }
-    }
-    map = new gmap.Map(document.getElementById("map"), {
-      center: Curloc,
-      zoom: 16,
-      mapTypeControl: false,
-      fullscreenControl: false,
-      mapTypeId: 'roadmap'
-    });
-    var marker = new gmap.Marker({ position: Curloc, map: map, draggable: true })
-    gmap.event.addListener(marker, 'dragend', function () {
-      a.customerlat = marker.getPosition().lat();
-      a.customerlng = marker.getPosition().lng();
-    });
-    markers.push(marker);
-    this.openModal('mapmodal');
-    a.createAutoCompleteSearchBox(gmap, a, markers, map);
+    this.loadMap().then(() => {
+      let data = this.customerForm.value;
+      let a = this;
+      let w: any = window;
+      let gmap = w.google.maps;
+      let markers = [];
+      let Curloc;
+      let map;
+      // Creating Search field.
+      let location = document.getElementById("controls");
+      let pac_input = document.createElement("input");
+      pac_input.setAttribute("id", "pac-input");
+      pac_input.setAttribute("class", "controls");
+      pac_input.setAttribute("type", "text");
+      pac_input.setAttribute("placeholder", "Search here");
+      pac_input.setAttribute("autocomplete", "on");
+      location.appendChild(pac_input);
+      if (data.latitude && data.longitude !== null) {
+        Curloc = { lat: parseFloat(data.latitude), lng: parseFloat(data.longitude) }
+      }
+      else {
+        Curloc = { lat: 13.082680, lng: 80.270721 }
+      }
+      map = new gmap.Map(document.getElementById("map"), {
+        center: Curloc,
+        zoom: 8,
+        mapTypeControl: false,
+        fullscreenControl: false,
+        mapTypeId: 'roadmap'
+      });
+      var marker = new gmap.Marker({ position: Curloc, map: map, draggable: true })
+      gmap.event.addListener(marker, 'dragend', function () {
+        a.customerlat = marker.getPosition().lat();
+        a.customerlng = marker.getPosition().lng();
+      });
+      markers.push(marker);
+      this.openModal('mapmodal');
+      a.createAutoCompleteSearchBox(gmap, a, markers, map);
+    }).catch(err => {
+      alert("Unable to load map");
+    })
   }
+  
   createAutoCompleteSearchBox(gmap, a, markers, map) {
     let s_input = document.getElementById('pac-input');
     var searchBox = new gmap.places.SearchBox(s_input);
