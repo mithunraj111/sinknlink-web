@@ -34,7 +34,7 @@ export class DashboardComponent implements OnInit {
     switch (n) {
       case "today":
         fromDate = new DatePipe("en-US").transform(new Date(), "yyyy-MM-dd").toString() + ' 00:00:00';
-        toDate = new DatePipe("en-US").transform(new Date(), "yyyy-MM-dd").toString() + ' 00:00:00';
+        toDate = new DatePipe("en-US").transform(new Date(), "yyyy-MM-dd").toString() + ' 23:59:59';
         break;
       case "week":
         fromDate = new DatePipe("en-US").transform((function () {
@@ -47,7 +47,7 @@ export class DashboardComponent implements OnInit {
           let date = new Date();
           var lastday = date.getDate() - (date.getDay() - 1) + 6;
           return new Date(date.setDate(lastday));
-        }()), "yyyy-MM-dd").toString() + ' 00:00:00';
+        }()), "yyyy-MM-dd").toString() + ' 23:59:59';
         break;
       case "month":
         fromDate = new DatePipe("en-US").transform((function () {
@@ -57,12 +57,12 @@ export class DashboardComponent implements OnInit {
         toDate = new DatePipe("en-US").transform((function () {
           let date = new Date();
           return new Date(date.getFullYear(), date.getMonth() + 1, 0);
-        }()), "yyyy-MM-dd").toString() + ' 00:00:00';
+        }()), "yyyy-MM-dd").toString() + ' 23:59:59';
         break;
 
       default:
         fromDate = new DatePipe("en-US").transform(new Date(), "yyyy-MM-dd").toString() + ' 00:00:00';
-        toDate = new DatePipe("en-US").transform(new Date(), "yyyy-MM-dd").toString() + ' 00:00:00';
+        toDate = new DatePipe("en-US").transform(new Date(), "yyyy-MM-dd").toString() + ' 23:59:59';
         break;
 
     }

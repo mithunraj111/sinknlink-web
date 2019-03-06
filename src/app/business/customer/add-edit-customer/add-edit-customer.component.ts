@@ -220,9 +220,9 @@ export class AddEditCustomerComponent implements OnInit {
       taxno: [null, Validators.compose([Validators.required, Validators.maxLength(30)])],
       website: ['', Validators.compose([Validators.maxLength(200), Validators.pattern(AppConstant.REGEX.WEBSITE)])],
       regdate: [this.commonService.getCurrentDate('Y'), Validators.required],
-      paymentstatus: ['', Validators.required],
+      paymentstatus: [''],
       membershiptype: [null, Validators.required],
-      paymenttenure: ['', Validators.required],
+      paymenttenure: [''],
       status: [true, Validators.required],
       tncagreed: [false, Validators.required],
       landmark: ['', Validators.maxLength(200)],
@@ -267,15 +267,18 @@ export class AddEditCustomerComponent implements OnInit {
     } else {
       this.savecustomer = true;
       const data = this.customerForm.value;
+      console.log(data);
       const formdata = { ...data } as any;
       if (this.branchFlag && this.parentid) {
         formdata.parentmembershipid = Number(this.parentid);
       }
       if (formdata.membershiptype != AppConstant.MEM_TYPE) {
         const paymentarray = this.paymentTenuresList.find(item =>
-          item.refvalue === formdata.paymenttenure
+          item.refvalue === data.paymenttenure
         );
         formdata.paymenttenure = paymentarray.refid.toString();
+      } else {
+        formdata.paymenttenure = '';
       }
       formdata.workhours = data.starttime + '-' + data.endtime;
       formdata.locationid = Number(data.locationid);

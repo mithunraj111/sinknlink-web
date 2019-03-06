@@ -9,7 +9,6 @@ import { AppConstant } from '../../app.constants';
 import { AppMessages } from '../../app-messages';
 import { LocationService } from 'src/app/services/masters';
 import { LookupService } from 'src/app/services/admin';
-import { DealerService } from 'src/app/services/business';
 import { AppCommonService } from 'src/app/services';
 import { Buffer } from 'buffer';
 import { DatePipe } from '@angular/common';
@@ -96,51 +95,51 @@ export class DealerComponent implements OnInit {
         var buffer = Buffer.from(JSON.parse(res._body).file.data);
         this.generatingFile = false;
         downloadService(buffer, `DealerReport-${new DatePipe("en-US").transform(new Date(), "dd-MM-yyyy").toString()}.xlsx`);
-        this.loadingIndicator = true;
+        this.loadingIndicator = false;
       } else {
         this.loadingIndicator = true;
-          const response = JSON.parse(res._body);
-          if (response.status) {
-            this.loadingIndicator = false;
-            this.dealerReportList = response.data;
-          }
+        const response = JSON.parse(res._body);
+        if (response.status) {
           this.loadingIndicator = false;
-          this.tempFilter = this.dealerReportList;
-      }
-        });
-      }
-      getCities() {
-        this.lookupService.list({ refKey: 'biz_businesscity', status: AppConstant.STATUS_ACTIVE }).subscribe((res) => {
-          const response = JSON.parse(res._body);
-          if (response.status) {
-            response.data.map(item => {
-              item.label = item.refname;
-              item.value = item.refvalue;
-            })
-            this.cityList = this.cityList.concat(response.data);
-          }
-        });
-      }
-
-      citySelect(option) {
-        this.cityName = option.value;
-        this.getArea();
-      }
-      getArea() {
-        this.areaList = [];
-        let condition = { status: AppConstant.STATUS_ACTIVE } as any;
-        if (this.cityName != "") {
-          condition.city = this.cityName;
+          this.dealerReportList = response.data;
         }
-        this.locationService.list(condition).subscribe(res => {
-          const response = JSON.parse(res._body);
-          if (response.status) {
-            response.data.map(item => {
-              item.label = item.area + ' (' + item.pincode + ' )';
-              item.value = item.locationid;
-            });
-            this.areaList = this.areaList.concat(response.data);
-          }
-        });
+        this.loadingIndicator = false;
+        this.tempFilter = this.dealerReportList;
       }
+    });
+  }
+  getCities() {
+    this.lookupService.list({ refKey: 'biz_businesscity', status: AppConstant.STATUS_ACTIVE }).subscribe((res) => {
+      const response = JSON.parse(res._body);
+      if (response.status) {
+        response.data.map(item => {
+          item.label = item.refname;
+          item.value = item.refvalue;
+        })
+        this.cityList = this.cityList.concat(response.data);
+      }
+    });
+  }
+
+  citySelect(option) {
+    this.cityName = option.value;
+    this.getArea();
+  }
+  getArea() {
+    this.areaList = [];
+    let condition = { status: AppConstant.STATUS_ACTIVE } as any;
+    if (this.cityName != "") {
+      condition.city = this.cityName;
     }
+    this.locationService.list(condition).subscribe(res => {
+      const response = JSON.parse(res._body);
+      if (response.status) {
+        response.data.map(item => {
+          item.label = item.area + ' (' + item.pincode + ' )';
+          item.value = item.locationid;
+        });
+        this.areaList = this.areaList.concat(response.data);
+      }
+    });
+  }
+}

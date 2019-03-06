@@ -37,8 +37,8 @@
                     </ngx-datatable-column>
                     <ngx-datatable-column name="Status" [sortable]="false" [flexGrow]="0.5" headerClass="text-center" [cellClass]="'text-center'" [resizeable]="false">
                         <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                            <ui-switch [disabled]="!edit" class="js-small" placement="bottom" (change)="updateRoleStatus(row,rowIndex,false)" [checked]="row.status == 'Active'" [disabled]="row.rolename ==='Admin' || row.rolename ==='Dealer' || row.rolename ==='Customer'" [ngbTooltip]="(row.rolename ==='Admin' || row.rolename ==='Dealer' || row.rolename ==='Customer') ? '' : 'Click to change status'"
-                                color="$primary-color" switchColor="#fff" size="small"></ui-switch>
+                            <ui-switch [disabled]="!edit || ( row.roleid ===1 || row.roleid ===2 || row.roleid ===3)" class="js-small" placement="bottom" (change)="updateRoleStatus(row,rowIndex,false)" [checked]="row.status == 'Active'" [disabled]="row.rolename ==='Admin' || row.rolename ==='Dealer' || row.rolename ==='Customer'"
+                                [ngbTooltip]="(row.rolename ==='Admin' || row.rolename ==='Dealer' || row.rolename ==='Customer') ? '' : 'Click to change status'" color="$primary-color" switchColor="#fff" size="small"></ui-switch>
                         </ng-template>
                     </ngx-datatable-column>
                     <ngx-datatable-column *ngIf="edit || delete" name="Action" [sortable]="false" [flexGrow]="0.5" headerClass="text-center" [cellClass]="'text-center'" [resizeable]="false">
@@ -51,7 +51,7 @@
                             'disabled': ( row.roleid ===1 || row.roleid ===2 || row.roleid ===3)
                           }" *ngIf="delete" placement="bottom" ngbTooltip="Click to delete role" class="m-r-15 crm-action-delete text-danger" (click)="updateRoleStatus(row,rowIndex,true)">
                                 <i class="fa fa-trash"></i></a>
-                            <a placement="bottom" ngbTooltip="Click to copy" class="m-r-15 crm-action-edit text-success" (click)='copyRole(row.roleid)'>
+                            <a placement="bottom" ngbTooltip="Click to copy role" class="m-r-15 crm-action-edit text-success" (click)='copyRole(row.roleid)'>
                                 <i class="fa fa-copy"></i></a>
                         </ng-template>
                     </ngx-datatable-column>
