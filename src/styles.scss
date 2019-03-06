@@ -1530,6 +1530,7 @@ body[themebg-pattern="pattern1"]{
     max-width: 100%;
     .img-responsive{
         vertical-align: bottom;
+        height: 140px;
     }
 }
 .keytype{
@@ -1710,5 +1711,12 @@ select-dropdown{
 .coupon-modal{
     .md-effect-7{
         top: 60px;
+    }
+}
+.modal-size{
+    .input-box{
+        .ng-select{
+            width:100% !important;
+        }
     }
 }

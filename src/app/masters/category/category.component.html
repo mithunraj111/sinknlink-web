@@ -39,9 +39,9 @@
                     </ngx-datatable-column>
                     <ngx-datatable-column *ngIf="edit || delete" name="Action" [sortable]="false" [flexGrow]="0.5" headerClass="text-center" [cellClass]="'text-center'" [resizeable]="false">
                         <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                            <a *ngIf="edit" placement="bottom" ngbTooltip="Click to edit business category" class="m-r-15 crm-action-edit text-primary" (click)='editCategory(row)'>
+                            <a *ngIf="edit" placement="bottom" ngbTooltip="Click to edit category" class="m-r-15 crm-action-edit text-primary" (click)='editCategory(row)'>
                                 <i class="fa fa-pencil"></i></a>
-                            <a *ngIf="delete" placement="bottom" (click)="updateCategoryStatus(row,rowIndex,true)" ngbTooltip="Click to delete business category" class="crm-action-delete text-danger">
+                            <a *ngIf="delete" placement="bottom" (click)="updateCategoryStatus(row,rowIndex,true)" ngbTooltip="Click to delete category" class="crm-action-delete text-danger">
                                 <i class="fa fa-trash"></i></a>
                         </ng-template>
                     </ngx-datatable-column>
