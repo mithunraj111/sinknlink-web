@@ -4,16 +4,15 @@ import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { NgbDateCustomParserFormatter } from '../../shared/elements/dateParser';
 import { LookupService } from 'src/app/services/admin';
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
-import { map as LMap } from 'lodash';
 import { CommonService } from '../../services/common.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder,  } from '@angular/forms';
 import { AppConstant } from '../../app.constants';
-import { PaymentsService } from '../../services/common/payments.service';
 import { ReportService } from '../../services/common';
 import { AppMessages } from '../../app-messages';
 import { Buffer } from 'buffer';
 import { DatePipe } from '@angular/common';
 import downloadService from '../../services/download.service';
+import { LocalStorageService } from 'src/app/services';
 
 @Component({
   selector: 'app-payment',
@@ -38,15 +37,15 @@ export class PaymentComponent implements OnInit {
   generatingFile = false;
   tempFilter = [];
   paymentForm: FormGroup;
-  loadingIndicator: Boolean = false;
-
+  loadingIndicator = false;
+  userstoragedata = {} as any;
   constructor(
     private fb: FormBuilder,
     private commonService: CommonService,
     private bootstrapAlertService: BootstrapAlertService,
-    private paymentService: PaymentsService,
     private lookupService: LookupService,
-    private reportService: ReportService) {
+    private reportService: ReportService, private localStorageService: LocalStorageService) {
+    this.userstoragedata = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER);
   }
 
   ngOnInit() {
@@ -96,6 +95,9 @@ export class PaymentComponent implements OnInit {
     }
     if (paymenttype != "" && paymenttype != undefined && paymenttype != null) {
       formData.paymenttype = [paymenttype];
+    }
+    if (this.userstoragedata.usertype === 'D') {
+      formData.dealerid = this.userstoragedata.userid;
     }
     this.loadingIndicator = true;
 

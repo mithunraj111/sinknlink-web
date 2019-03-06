@@ -2,11 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { LookupService } from 'src/app/services/admin';
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
-import {
-  map as LMap
-} from 'lodash'
 import { LocationService, CategoryService } from 'src/app/services/masters';
-import { CommonService } from 'src/app/services';
+import { CommonService, LocalStorageService } from 'src/app/services';
 import { ReportService } from 'src/app/services/common';
 import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { NgbDateCustomParserFormatter } from 'src/app/shared/elements/dateParser';
@@ -41,7 +38,16 @@ export class CustomerdetailComponent implements OnInit {
   categoryLists = [];
   customerdetailForm: FormGroup;
   businessList = [];
-  constructor(private fb: FormBuilder, private commonService: CommonService, private reportService: ReportService, private lookupService: LookupService, private categoryService: CategoryService, private locationService: LocationService, private bootstrapAlertService: BootstrapAlertService) {
+  userstoragedata = {} as any;
+  constructor(private fb: FormBuilder,
+    private commonService: CommonService,
+    private reportService: ReportService,
+    private lookupService: LookupService,
+    private categoryService: CategoryService,
+    private locationService: LocationService,
+    private bootstrapAlertService: BootstrapAlertService,
+    private localStorageService: LocalStorageService) {
+    this.userstoragedata = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER);
     this.initForm();
   }
 
@@ -56,12 +62,12 @@ export class CustomerdetailComponent implements OnInit {
     this.customerdetailForm = this.fb.group({
       fromdt: [this.commonService.parseDate(new Date())],
       todate: [this.commonService.parseDate(new Date())],
-      biztype: [""],
-      area: [""],
-      categoryid: [""],
-      membershiptype: [""],
+      biztype: [''],
+      area: [''],
+      categoryid: [''],
+      membershiptype: [''],
       city: ['']
-    })
+    });
   }
   getReports(download?) {
     const data = this.customerdetailForm.value;
@@ -83,20 +89,23 @@ export class CustomerdetailComponent implements OnInit {
 
     } as any;
 
-    if (categoryid != "" && categoryid != undefined && categoryid != null) {
+    if (categoryid != '' && categoryid != undefined && categoryid != null) {
       formData.categoryid = categoryid;
     }
-    if (area != "") {
+    if (area != '') {
       formData.area = area;
     }
-    if (biztype != "") {
+    if (biztype != '') {
       formData.biztype = biztype;
     }
-    if (membershiptype != "") {
+    if (membershiptype != '') {
       formData.membershiptype = membershiptype;
     }
-    if (city != "" && city != undefined && city != null) {
+    if (city != '' && city != undefined && city != null) {
       formData.city = [city];
+    }
+    if (this.userstoragedata.usertype === 'D') {
+      formData.dealerid = this.userstoragedata.userid;
     }
     let service;
     if (download) {
@@ -146,7 +155,7 @@ export class CustomerdetailComponent implements OnInit {
   }
   getArea() {
     let condition = { status: AppConstant.STATUS_ACTIVE } as any;
-    if (this.cityName != "") {
+    if (this.cityName != '') {
       condition.city = this.cityName;
     }
     this.locationService.list(condition).subscribe(res => {
@@ -162,7 +171,7 @@ export class CustomerdetailComponent implements OnInit {
   }
 
   getCategory() {
-    this.categoryService.list({}, "").subscribe(res => {
+    this.categoryService.list({}, '').subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
         response.data.map(item => {
