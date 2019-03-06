@@ -321,7 +321,9 @@ export class AddEditCustomerComponent implements OnInit {
             this.bootstrapAlertService.showError(response.message);
           }
         }, err => {
-          this.bootstrapAlertService.showError(err.message);
+          this.savecustomer = false;
+          const error = JSON.parse(err._body);
+          this.bootstrapAlertService.showError(error.message);
         });
       } else {
         formdata.status = AppConstant.STATUS_ACTIVE;
@@ -340,7 +342,8 @@ export class AddEditCustomerComponent implements OnInit {
           }
         }, err => {
           this.savecustomer = false;
-          this.bootstrapAlertService.showError(err.message);
+          const error = JSON.parse(err._body);
+          this.bootstrapAlertService.showError(error.message);
         });
       }
     }
@@ -480,7 +483,7 @@ export class AddEditCustomerComponent implements OnInit {
       alert("Unable to load map");
     })
   }
-  
+
   createAutoCompleteSearchBox(gmap, a, markers, map) {
     let s_input = document.getElementById('pac-input');
     var searchBox = new gmap.places.SearchBox(s_input);

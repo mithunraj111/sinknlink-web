@@ -10,7 +10,7 @@ import * as _ from 'lodash';
 export class DealerCustomersComponent implements OnChanges, OnInit {
   public dealerCustomers: any = [];
   @ViewChild(DatatableComponent) customertable: DatatableComponent;
-  @Input() dealerid = {} as any;
+  @Input() dealerObj = {} as any;
   datedisplayformat = AppConstant.API_CONFIG.ANG_DATE.displaydate;
   emptymessages = AppConstant.EMPTY_MESSAGES.DEALER_CUSTOMER;
   constructor(private customerService: CustomerService) {
@@ -19,11 +19,17 @@ export class DealerCustomersComponent implements OnChanges, OnInit {
   ngOnInit() {
   }
   ngOnChanges(changes: SimpleChanges) {
-    this.getCustomers(changes.dealerid.currentValue);
+    this.getCustomers(changes.dealerObj.currentValue);
   }
-  getCustomers(dealerid) {
-    if (!_.isUndefined(dealerid)) {
-      this.customerService.list({ dealerid: Number(dealerid) }).subscribe((res) => {
+  getCustomers(dealerObj) {
+    if (!_.isUndefined(dealerObj.dealerid)) {
+      const condition = {
+        dealerid: Number(dealerObj.dealerid),
+      } as any;
+      if (!_.isNull(dealerObj.lastcommissionpaiddt)) {
+        condition.commisiondate = dealerObj.lastcommissionpaiddt;
+      }
+      this.customerService.list(condition).subscribe((res) => {
         const response = JSON.parse(res._body);
         if (response.status) {
           this.dealerCustomers = response.data;

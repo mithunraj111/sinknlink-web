@@ -1,4 +1,4 @@
-<div class="header-title addeditpage mb-3">
+<div class="header-title addeditpage">
     <div class="row">
         <div class="col-md-10 col-sm-6">
             <input #dealerPaymentSearch type="text" class="header-search form-control col-md-5 col-sm-5 p-l-0 p-r-0 input-sm full-data-search" placeholder="Search here" (keyup)='search($event)' placement="bottom" ngbTooltip="Type here to search">
@@ -6,7 +6,7 @@
         </div>
     </div>
 </div>
-<div class="header-block">
+<div class="header-block m-t-15">
     <div class="table-header fixed-table-header">
         <div class="card p-r-15 p-l-15">
             <ngx-datatable #dealerpaymttable class="table data-table expandable" [rows]='dealerPayments' [columnMode]="'flex'" [headerHeight]="50" [footerHeight]="50" [limit]="10" [rowHeight]="'auto'" [reorderable]="false" [messages]="emptymessages">
@@ -77,12 +77,12 @@
                         <span class="f-15">{{paymentDetail?.amount|currency : 'INR' : true || '-'}}</span>
                     </div>
                 </div>
-                <div class="row p-t-10 p-b-5">
+                <!-- <div class="row p-t-10 p-b-5">
                     <label class="col-md-4 col-sm-6 col-form-label text-right">Donation :</label>
                     <div class="col-md-6 col-sm-6 m-t-5">
                         <span class="f-15">{{paymentDetail?.donation|currency : 'INR' : true || '-'}}</span>
                     </div>
-                </div>
+                </div> -->
                 <div class="row p-t-10 p-b-5">
                     <label class="col-md-4 col-sm-6 col-form-label text-right">Tax :</label>
                     <div class="col-md-6 col-sm-6 m-t-5">

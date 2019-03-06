@@ -1,12 +1,15 @@
-<div class="header-title addeditpage mb-3">
+<div class="header-title addeditpage">
     <div class="row">
-        <div class="col-md-10 col-sm-6">
+        <div class="col-md-8 col-sm-6">
             <input #customerSearch type="text" class="header-search form-control col-md-5 col-sm-5 p-l-0 p-r-0 input-sm full-data-search" placeholder="Search here" (keyup)='search($event)' placement="bottom" ngbTooltip="Type here to search">
             <button type="button" class="btn search-close col-md-1 col-sm-1 p-l-0 p-r-0" (click)="customerSearch.value='';search();"><i class="fa fa-close"></i></button>
         </div>
+        <div class="col-md-4 col-sm-6">
+            Last Commission paid : {{dealerObj.lastcommissionpaiddt |date:datedisplayformat}}
+        </div>
     </div>
 </div>
-<div class="header-block">
+<div class="header-block m-t-15">
     <div class="table-header fixed-table-header">
         <div class="card p-r-15 p-l-15">
             <ngx-datatable #customerdltable class="table data-table expandable" [rows]='dealerCustomers' [columnMode]="'flex'" [headerHeight]="50" [footerHeight]="50" [limit]="10" [rowHeight]="'auto'" [reorderable]="false" [messages]="emptymessages">

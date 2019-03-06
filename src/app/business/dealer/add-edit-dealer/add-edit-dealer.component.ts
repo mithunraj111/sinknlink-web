@@ -36,6 +36,7 @@ export class AddEditDealerComponent implements OnInit {
   locationList = [];
   adddealer;
   showbutton = true;
+  isAddForm = true;
   constructor(private route: ActivatedRoute,
     private bootstrapAlertService: BootstrapAlertService,
     private dealerService: BusinessService.DealerService,
@@ -49,6 +50,7 @@ export class AddEditDealerComponent implements OnInit {
         this.dealerid = params.id;
         this.getDealerDetails(this.dealerid);
         this.buttontext = AppConstant.BUTTON_TXT.UPDATE;
+        this.isAddForm = false;
       }
     });
   }
@@ -123,6 +125,7 @@ export class AddEditDealerComponent implements OnInit {
           const response = JSON.parse(res._body);
           if (response.status) {
             this.adddealer = false;
+            this.isAddForm = false;
             this.bootstrapAlertService.showSucccess(response.message);
             this.dealerProfileObj = response.data;
           } else {
@@ -131,7 +134,8 @@ export class AddEditDealerComponent implements OnInit {
           }
         }, err => {
           this.adddealer = false;
-          this.bootstrapAlertService.showError(err.message);
+          const error = JSON.parse(err._body);
+          this.bootstrapAlertService.showError(error.message);
         });
       } else {
         formdata.status = AppConstant.STATUS_ACTIVE;
@@ -141,6 +145,7 @@ export class AddEditDealerComponent implements OnInit {
           const response = JSON.parse(res._body);
           if (response.status) {
             this.adddealer = false;
+            this.isAddForm = false;
             this.bootstrapAlertService.showSucccess(response.message);
           } else {
             this.adddealer = false;
@@ -148,7 +153,8 @@ export class AddEditDealerComponent implements OnInit {
           }
         }, err => {
           this.adddealer = false;
-          this.bootstrapAlertService.showError(err.message);
+          const error = JSON.parse(err._body);
+          this.bootstrapAlertService.showError(error.message);
         });
       }
     }
@@ -175,5 +181,7 @@ export class AddEditDealerComponent implements OnInit {
       }
     });
   }
-
+  notifyPayment(event) {
+    this.dealerProfileObj.lastcommissionpaiddt = event.lastcommissionpaiddt;
+  }
 }

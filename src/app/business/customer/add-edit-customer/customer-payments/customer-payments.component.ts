@@ -163,7 +163,8 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
       paymentmode: formData.paymentmode,
       paymentref: formData.paymentref,
       paymenttype: AppConstant.PAYMENT_TYPES[1],
-      paymentstatus: AppConstant.STATUS_SUCCESS
+      paymentstatus: AppConstant.STATUS_SUCCESS,
+      remarks: formData.remarks
     };
     this.save(data);
   }

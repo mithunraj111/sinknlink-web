@@ -29,9 +29,8 @@ export class AddEditRoleComponent implements OnInit {
   disableButton = false;
   permissionModal = false;
   emptymessages = AppConstant.EMPTY_MESSAGES.ADDROLES;
-  loadingIndicator: boolean = true;
+  loadingIndicator = true;
   savepermissions;
-  ischecked: boolean = false;
   mode;
   constructor(
     private route: ActivatedRoute,
@@ -52,9 +51,9 @@ export class AddEditRoleComponent implements OnInit {
       }
     });
     this.route.queryParams.subscribe(params => {
-      if(params.mode!=undefined){
-      this.mode = params.mode;
-      this.getRoleDetail(params.id);
+      if (params.mode != undefined) {
+        this.mode = params.mode;
+        this.getRoleDetail(params.id);
       }
     });
   }
@@ -72,7 +71,7 @@ export class AddEditRoleComponent implements OnInit {
         this.loadingIndicator = false;
         if (response.data.length != 0) {
           this.screensList = JSON.parse(response.data[0].refvalue);
-          if (this.roleid || this.mode == 'copy') {
+          if (this.roleid || this.mode === 'copy') {
             const self = this;
             _.map(this.roleObj.uiactions, function (item, idx) {
               const data = _.find(self.screensList, { screencode: item.screencode });
@@ -144,7 +143,8 @@ export class AddEditRoleComponent implements OnInit {
       formdata.uiactions = this.screensList;
       formdata.updatedby = this.userstoragedata.fullname;
       formdata.updateddt = new Date();
-      if (!_.isUndefined(this.roleObj) && !_.isUndefined(this.roleObj.roleid) && !_.isEmpty(this.roleObj) && !_.isNull(this.roleObj.roleid)) {
+      if (!_.isUndefined(this.roleObj) && !_.isUndefined(this.roleObj.roleid)
+        && !_.isEmpty(this.roleObj) && !_.isNull(this.roleObj.roleid)) {
         formdata.status = this.status ? AppConstant.STATUS_ACTIVE : AppConstant.STATUS_INACTIVE;
         this.roleService.update(formdata, this.roleObj.roleid).subscribe(res => {
           const response = JSON.parse(res._body);
@@ -189,9 +189,9 @@ export class AddEditRoleComponent implements OnInit {
         this.rolename = response.data.rolename;
         this.dataaccess = response.data.dataaccess;
         this.status = response.data.status === AppConstant.STATUS_ACTIVE ? true : false;
-        if (this.mode == 'copy') {
+        if (this.mode === 'copy') {
           this.roleObj.roleid = null;
-          this.rolename = "";
+          this.rolename = '';
         }
       }
     });
@@ -201,7 +201,7 @@ export class AddEditRoleComponent implements OnInit {
     if (this.screensList[rowIndex].checked) {
       this.screensList[rowIndex].assignedpermissions = this.screensList[rowIndex].permissions;
     } else {
-      this.screensList[rowIndex].assignedpermissions = "-";
+      this.screensList[rowIndex].assignedpermissions = '-';
     }
     this.screensList = [...this.screensList];
   }

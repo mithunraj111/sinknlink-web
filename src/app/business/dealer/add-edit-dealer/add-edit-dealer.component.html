@@ -8,8 +8,8 @@
                     </p>
                 </div> -->
                 <div class="col-md-6 col-sm-6 save-button text-right p-r-30">
-                    <button *ngIf="showbutton" type="button" placement="bottom" ngbTooltip="Click to {{buttontext}} dealer" (click)="saveOrUpdate()" class="btn btn-primary waves-effect m-r-10 text-capitalize" [disabled]="adddealer">{{adddealer == true ? 'Saving' : buttontext}}</button>
-                    <button *ngIf="!showbutton" type="button" placement="bottom" (click)="saveOrUpdate()" class="btn btn-primary waves-effect m-r-10 text-capitalize"><i class="fa fa-plus-circle m-r-5"></i>&nbsp;New</button>
+                    <button *ngIf="showbutton && deleartabs.activeId!='2'" type="button" placement="bottom" ngbTooltip="Click to {{buttontext}} dealer" (click)="saveOrUpdate()" class="btn btn-primary waves-effect m-r-10 text-capitalize" [disabled]="adddealer">{{adddealer == true ? 'Saving' : buttontext}}</button>
+                    <button *ngIf="!showbutton && deleartabs.activeId!='2'" type="button" placement="bottom" (click)="saveOrUpdate()" class="btn btn-primary waves-effect m-r-10 text-capitalize"><i class="fa fa-plus-circle m-r-5"></i>&nbsp;New</button>
                     <button type="button" placement="bottom" ngbTooltip="Go back" routerLink="/business/dealer" class="btn btn-inverse btn-primary waves-effect"><i
                             class="fa fa-arrow-circle-left"></i></button>
                 </div>
@@ -78,16 +78,16 @@
                                                             <input type="text" class="form-control" placeholder="Commission (%)" formControlName="commissionpercent">
                                                         </div>
                                                     </div>
-                                                    <!-- <div class="form-group row last-paid">
+                                                    <div *ngIf="dealerid" class="form-group row last-paid">
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Last
                                                             Paid</label>
                                                         <div class="col-md-9 col-sm-6">
                                                             <div class="static-text">
                                                                 <div class="form-control-static">
-                                                                    {{date|date:date_displayformat}}</div>
+                                                                    {{dealerProfileObj.lastcommissionpaiddt|date:date_displayformat}}</div>
                                                             </div>
                                                         </div>
-                                                    </div> -->
+                                                    </div>
                                                     <div *ngIf="dealerid" class="form-group row">
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Status</label>
                                                         <div class="col-md-9 col-sm-6">
@@ -102,17 +102,17 @@
                             </div>
                         </ng-template>
                     </ngb-tab>
-                    <ngb-tab title="Customers" id='2'>
+                    <ngb-tab title="Customers" id='2' [disabled]="isAddForm">
                         <ng-template ngbTabContent>
                             <div [@fadeInOutTranslate]>
-                                <app-dealer-customers [dealerid]="dealerid"></app-dealer-customers>
+                                <app-dealer-customers [dealerObj]="dealerProfileObj"></app-dealer-customers>
                             </div>
                         </ng-template>
                     </ngb-tab>
-                    <ngb-tab title="Payments" id='3'>
+                    <ngb-tab title="Payments" id='3' [disabled]="isAddForm">
                         <ng-template ngbTabContent>
                             <div [@fadeInOutTranslate]>
-                                <app-dealer-payments [dealerid]="dealerid"></app-dealer-payments>
+                                <app-dealer-payments [dealerObj]="dealerProfileObj" (notifyPayment)="notifyPayment($event)"></app-dealer-payments>
                             </div>
                         </ng-template>
                     </ngb-tab>
