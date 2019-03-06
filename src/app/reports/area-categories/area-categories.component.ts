@@ -31,7 +31,8 @@ export class AreaCategoriesComponent implements OnInit {
   generatingFile = false;
   emptymesages = AppConstant.EMPTY_MESSAGES.AREA;
   nodata = AppConstant.EMPTY_MESSAGES.CATEGORY;
-  loadingIndicator: Boolean = false;
+  loadingIndicator = false;
+  formData = {} as any;
   constructor(private bootstrapAlertService: BootstrapAlertService,
     private commonService: CommonService, private fb: FormBuilder,
     private reportService: AppCommonService.ReportService) {
@@ -47,7 +48,17 @@ export class AreaCategoriesComponent implements OnInit {
     });
   }
   getAreaCategories() {
-
+    const data = this.areaCategoriesForm.value;
+    const todt = this.commonService.formatDate(data.todate);
+    const fromdt = this.commonService.formatDate(data.fromdate);
+    if (new Date(todt) < new Date(fromdt)) {
+      this.bootstrapAlertService.showError(AppMessages.VALIDATION.AREACATEGORIES.fromdate.max);
+      return false;
+    }
+    this.formData = {
+      fromdate: fromdt + ' 00:00',
+      todate: todt + ' 23:59'
+    };
     this.getAreaList();
     this.getCategoryList();
 
@@ -60,12 +71,13 @@ export class AreaCategoriesComponent implements OnInit {
     if (new Date(todt) < new Date(fromdt)) {
       this.bootstrapAlertService.showError(AppMessages.VALIDATION.AREACATEGORIES.fromdate.max);
       return false;
+    } else {
+      const formData = {
+        fromdate: fromdt + ' 00:00',
+        todate: todt + ' 23:59'
+      };
+      return formData;
     }
-    const formData = {
-      fromdate: fromdt + ' 00:00',
-      todate: todt + ' 23:59'
-    };
-    return formData;
   }
 
   getCategoryList(download?) {
@@ -73,9 +85,9 @@ export class AreaCategoriesComponent implements OnInit {
     this.generatingFile = false;
     this.loadingIndicator = true;
     if (download) {
-      service = this.reportService.getCategoryWiseCount(this.genFormData(), true);
+      service = this.reportService.getCategoryWiseCount(this.formData, true);
     } else {
-      service = this.reportService.getCategoryWiseCount(this.genFormData());
+      service = this.reportService.getCategoryWiseCount(this.formData);
     }
     service.subscribe(res => {
       if (download) {
