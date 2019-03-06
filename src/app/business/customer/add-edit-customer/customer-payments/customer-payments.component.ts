@@ -25,7 +25,7 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
   addPaymentErrObj = AppMessages.VALIDATION.PAYMENTS;
   paymentMethods = [];
   paymentTenure = [];
-  paymentarray: any ;
+  paymentarray: any;
   userstoragedata = {} as any;
   donationList = [];
   selectedDonation = {} as any;
@@ -70,7 +70,6 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
       this.paymentService.list({ membershipid: customerObj.membershipid }).subscribe(res => {
         const response = JSON.parse(res._body);
         if (response.status) {
-          this.tempFilter = this.payHistoryList;
           this.payHistoryList = response.data;
         }
         let orderedDate = _.orderBy(this.payHistoryList, 'paymentdate', 'desc');
@@ -78,12 +77,13 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
           if (obj.paymentstatus === 'Success') { return obj; }
         });
         this.lastpaid = selectedDate.paymentdate;
+        this.tempFilter = this.payHistoryList;
       });
     }
   }
 
   getDonations() {
-    let today =  new DatePipe("en-US").transform(new Date(), "yyyy-MM-dd").toString();
+    let today = new DatePipe("en-US").transform(new Date(), "yyyy-MM-dd").toString();
     console.log(today);
     let condition = {
       status: AppConstant.STATUS_ACTIVE,
@@ -142,7 +142,7 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
           this.paymentTenure = _.get(groupedData, 'biz_paymenttenure');
         }
       }
-      this.paymentarray = this.paymentTenure.find((item)=>item.refid == this.customerObj.paymenttenure)
+      this.paymentarray = this.paymentTenure.find((item) => item.refid == this.customerObj.paymenttenure)
       var date = new Date(this.lastpaid);
       this.nextdue = date.setDate(date.getDate() + Number(this.paymentarray.refvalue));
     });

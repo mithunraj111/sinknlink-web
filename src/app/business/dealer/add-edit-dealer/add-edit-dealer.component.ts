@@ -145,7 +145,8 @@ export class AddEditDealerComponent implements OnInit {
     this.dealerProfileForm = this.fb.group({
       dealername: [this.dealerProfileObj.dealername, Validators.required],
       contactperson: [this.dealerProfileObj.contactperson, Validators.required],
-      mobileno: [this.dealerProfileObj.mobileno, Validators.required],
+      mobileno: [this.dealerProfileObj.mobileno, Validators.compose([Validators.required,
+      Validators.minLength(10), Validators.maxLength(15), Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')])],
       phoneno: [this.dealerProfileObj.phoneno],
       locationid: [this.dealerProfileObj.locationid.toString(), Validators.required],
       address: [this.dealerProfileObj.address],
