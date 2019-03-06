@@ -371,15 +371,15 @@ textarea {
             border-bottom:1px solid #d3d5d8;
             .datatable-body-cell{
                 border: 0px solid #d3d5d8;
-                font-size: 14px;
+                font-size: 13px;
                 color: #2f3d4a;
                 padding: 3px 10px;
-                font-family: 'proxima_nova_regular', sans-serif;
+                font-family: 'Poppins', sans-serif;
                 font-weight: 500;
                 display: inline-block;
                 vertical-align: middle;
                 width:100%;
-                line-height: 26px;
+                line-height: normal;
 
             &:first-child{
                 padding-left: 12px;
@@ -1699,7 +1699,7 @@ select-dropdown{
 
 .gigs-modal{
     .md-effect-7{
-        top: 45px;
+        top: 55px;
     }
     .saveupdate{
         position: fixed;
@@ -1710,10 +1710,5 @@ select-dropdown{
 .coupon-modal{
     .md-effect-7{
         top: 60px;
-    }
-    .saveupdate{
-        position: fixed;
-        right: 0;
-        bottom: 0px;
     }
 }
