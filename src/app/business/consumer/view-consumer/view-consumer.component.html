@@ -2,8 +2,8 @@
     <div class="fixedheader">
         <div class="header-title m-b-15 pos-fixed">
             <div class="row">
-                <div class="col-md-9 col-sm-9 p-l-0 p-r-0 border-bottom">
-                    <h2 class="m-l-0 m-b-5">Details</h2>
+                <div class="col-md-9 col-sm-9 p-l-0 p-r-0">
+                    <!-- <h2 class="m-l-0 m-b-5">Details</h2> -->
                     <p class="m-b-5 m-l-0" *ngIf="consumer?.membershipid"> Membership ID: {{consumer?.membershipid}}
                     </p>
                 </div>
@@ -48,7 +48,7 @@
                                         <div class="row">
                                             <label class="col-md-3 col-sm-5 col-form-label text-left">Address : </label>
                                             <div class="col-md-7 col-sm-7 m-t-5">
-                                                <span class="f-15">{{consumer?.postaladdress || '-'}} </span>
+                                                <span class="f-15">{{consumer?.address || '-'}} </span>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -58,38 +58,51 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <label class="col-md-3 col-sm-5 col-form-label text-left">Email : </label>
+                                            <label class="col-md-3 col-sm-5 col-form-label text-left">Email ID: </label>
                                             <div class="col-md-7 col-sm-7 m-t-5">
-                                                <span class="f-15">{{consumer?.contactemail || '-'}}</span>
+                                                <span class="f-15">{{consumer?.emailid || '-'}}</span>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <label class="col-md-3 col-sm-5 col-form-label text-left">Social
-                        Ids : </label>
+                                            <label class="col-md-3 col-sm-5 col-form-label text-left">Facebook id : </label>
                                             <div class="col-md-7 col-sm-7 m-t-5">
-                                                <span class="f-15">Facebook id<br />Twitter id<br />Google
-                          id<br />Instagram id</span>
+                                                <span class="f-15">{{consumer.socialid?.facebookid}}</span>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <label class="col-md-3 col-sm-5 col-form-label text-left">Linked Membership
-                        Id : </label>
+                                            <label class="col-md-3 col-sm-5 col-form-label text-left">Twitter id : </label>
+                                            <div class="col-md-7 col-sm-7 m-t-5">
+                                                <span class="f-15">{{consumer.socialid?.twitterid}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-md-3 col-sm-5 col-form-label text-left">Google id : </label>
+                                            <div class="col-md-7 col-sm-7 m-t-5">
+                                                <span class="f-15">{{consumer.socialid?.googleid}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-md-3 col-sm-5 col-form-label text-left">Instagram id : </label>
+                                            <div class="col-md-7 col-sm-7 m-t-5">
+                                                <span class="f-15">{{consumer.socialid?.instagramid}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-md-3 col-sm-5 col-form-label text-left">Linked Membership ID : </label>
                                             <div class="col-md-7 col-sm-7 m-t-5">
                                                 <span class="f-15">{{consumer?.membershipid || '-'}}</span>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <label class="col-md-3 col-sm-5 col-form-label text-left">Signup
-                        date : </label>
+                                            <label class="col-md-3 col-sm-5 col-form-label text-left">Signup date : </label>
                                             <div class="col-md-7 col-sm-7 m-t-5">
-                                                <span class="f-15">{{consumer?.createddt|date:date_displayformat}}</span>
+                                                <span class="f-15">{{consumer?.createddt|date:datetimedisplayformat}}</span>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <label class="col-md-3 col-sm-5 col-form-label text-left">Last login
-                        date : </label>
+                                            <label class="col-md-3 col-sm-5 col-form-label text-left">Last login date : </label>
                                             <div class="col-md-7 col-sm-7 m-t-5">
-                                                <span class="f-15">{{consumer?.user?.lastlogin|date:date_displayformat}}</span>
+                                                <span class="f-15">{{consumer?.user?.lastlogin|date:datetimedisplayformat}}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -121,14 +134,12 @@
                                                 </ngx-datatable-column>
                                                 <ngx-datatable-column prop="claimedon" name="Claimed On" [resizeable]="false">
                                                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                                                        <span class="updatedate">
-                              {{row.updateddt|date:datedisplayformat}}</span>
+                                                        {{row.updateddt|date:datedisplayformat}}
                                                     </ng-template>
                                                 </ngx-datatable-column>
                                                 <ngx-datatable-column prop="expirydt" name="Expiry Date" [resizeable]="false">
                                                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                                                        <span class="updatedate">
-                              {{row.coupon.expirydt|date:datedisplayformat}}</span>
+                                                        {{row.coupon.expirydt|date:datedisplayformat}}
                                                     </ng-template>
                                                 </ngx-datatable-column>
                                             </ngx-datatable>

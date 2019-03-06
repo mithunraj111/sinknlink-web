@@ -1,36 +1,21 @@
 <div class="header-title addeditpage mb-3">
     <div class="row">
-        <div class="col-md-6 col-sm-6">
-            <h3 class="f-18 text-primary m-l-15 p-t-10">Payments</h3>
-        </div>
-        <div class="col-md-6 col-sm-6">
-            <div class="text-right">
-                <label class="col-md-3 p-l-0"><b>Search:</b></label>
-                <input #dealerPaymentSearch type='text'
-                    class="header-search form-control col-md-8 col-sm-8 p-l-0 p-r-0 input-sm full-data-search"
-                    placeholder='Search here' (keyup)='search($event)' placement="bottom"
-                    ngbTooltip="Type here to search" />
-                <button type="button" class="btn search-close col-md-1 col-sm-1 p-l-0 p-r-0"
-                    (click)="dealerPaymentSearch.value='';search();"><i class="fa fa-close"></i></button>
-
-            </div>
+        <div class="col-md-10 col-sm-6">
+            <input #dealerPaymentSearch type="text" class="header-search form-control col-md-5 col-sm-5 p-l-0 p-r-0 input-sm full-data-search" placeholder="Search here" (keyup)='search($event)' placement="bottom" ngbTooltip="Type here to search">
+            <button type="button" class="btn search-close col-md-1 col-sm-1 p-l-0 p-r-0" (click)="dealerPaymentSearch.value='';search();"><i class="fa fa-close"></i></button>
         </div>
     </div>
 </div>
 <div class="header-block">
     <div class="table-header fixed-table-header">
         <div class="card p-r-15 p-l-15">
-            <ngx-datatable #dealerpaymttable class="table data-table expandable" [rows]='dealerPayments'
-                [columnMode]="'flex'" [headerHeight]="50" [footerHeight]="50" [limit]="10" [rowHeight]="'auto'"
-                [reorderable]="false" [messages]="emptymessages">
-                <!-- Row Detail Template -->
-                <ngx-datatable-column prop="paymentdate" name="Payment Date" [resizeable]="false">
+            <ngx-datatable #dealerpaymttable class="table data-table expandable" [rows]='dealerPayments' [columnMode]="'flex'" [headerHeight]="50" [footerHeight]="50" [limit]="10" [rowHeight]="'auto'" [reorderable]="false" [messages]="emptymessages">
+                <ngx-datatable-column prop="paymentdate" name="Date" [resizeable]="false">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                         <span>{{row.paymentdate|date:datedisplayformat}}</span>
                     </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column prop="totalamount" name="Amount" headerClass="text-right"
-                    [cellClass]="'text-right table-padding'" [resizeable]="false">
+                <ngx-datatable-column prop="totalamount" name="Amount" headerClass="text-right" [cellClass]="'text-right table-padding'" [resizeable]="false">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                         <span>{{row.totalamount|currency : 'INR' : true}}</span>
                     </ng-template>
@@ -40,13 +25,12 @@
                         <span>{{row.paymentref}}</span>
                     </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column prop="paymentmode" name=" Mode" [resizeable]="false">
+                <ngx-datatable-column prop="paymentmode" name="Mode" [resizeable]="false">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                         <span>{{row.paymentmode}}</span>
                     </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column prop="paymentstatus" name="Status" [flexGrow]="0.9" headerClass="text-center"
-                    [cellClass]="'text-center'" [resizeable]="false">
+                <ngx-datatable-column prop="paymentstatus" name="Status" [flexGrow]="0.9" headerClass="text-center" [cellClass]="'text-center'" [resizeable]="false">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                         <span>{{row.paymentstatus}}</span>
                     </ng-template>

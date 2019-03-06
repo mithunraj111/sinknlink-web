@@ -14,6 +14,7 @@ import { element } from '@angular/core/src/render3/instructions';
 })
 export class ViewConsumerComponent implements OnInit {
   datedisplayformat = AppConstant.API_CONFIG.ANG_DATE.displaydate;
+  datetimedisplayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   date: any;
   userfile: any;
   emptymessages = AppConstant.EMPTY_MESSAGES.CONSUMERCOUPONS;

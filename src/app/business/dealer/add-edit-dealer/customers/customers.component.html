@@ -1,23 +1,15 @@
 <div class="header-title addeditpage mb-3">
     <div class="row">
-        <div class="col-md-6 col-sm-6">
-            <div class="header-line">
-                <h3 class="f-18 text-primary m-l-15">Customers</h3>
-            </div>
-        </div>
-        <div class="col-md-6 col-sm-6">
-            <div class="text-right p-r-15">
-                <div>[Last Commission paid on]</div>
-                <!-- <div>{{dealerObj?.lastcommissionpaiddt|date:datedisplayformat}}</div> -->
-            </div>
+        <div class="col-md-10 col-sm-6">
+            <input #customerSearch type="text" class="header-search form-control col-md-5 col-sm-5 p-l-0 p-r-0 input-sm full-data-search" placeholder="Search here" (keyup)='search($event)' placement="bottom" ngbTooltip="Type here to search">
+            <button type="button" class="btn search-close col-md-1 col-sm-1 p-l-0 p-r-0" (click)="customerSearch.value='';search();"><i class="fa fa-close"></i></button>
         </div>
     </div>
 </div>
 <div class="header-block">
     <div class="table-header fixed-table-header">
         <div class="card p-r-15 p-l-15">
-            <ngx-datatable #customerdltable class="table data-table expandable" [rows]='dealerCustomers' [columnMode]="'flex'" 
-                [headerHeight]="50" [footerHeight]="50" [limit]="10" [rowHeight]="'auto'" [reorderable]="false" [messages]="emptymessages">
+            <ngx-datatable #customerdltable class="table data-table expandable" [rows]='dealerCustomers' [columnMode]="'flex'" [headerHeight]="50" [footerHeight]="50" [limit]="10" [rowHeight]="'auto'" [reorderable]="false" [messages]="emptymessages">
                 <!-- Row Detail Template -->
                 <ngx-datatable-column prop="bizname" name="Business Name" [resizeable]="false">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>

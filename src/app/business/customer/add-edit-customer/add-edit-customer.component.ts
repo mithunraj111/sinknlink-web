@@ -229,10 +229,10 @@ export class AddEditCustomerComponent implements OnInit {
       mallname: ['']
     });
     this.socialidForm = this.fb.group({
-      fb: [''],
-      gmail: [''],
-      twitter: [''],
-      instagram: [''],
+      facebookid: [''],
+      googleid: [''],
+      twitterid: [''],
+      instagramid: [''],
     });
     this.buttonText = AppConstant.BUTTON_TXT.SAVE;
   }
@@ -266,7 +266,6 @@ export class AddEditCustomerComponent implements OnInit {
     } else {
       this.savecustomer = true;
       const data = this.customerForm.value;
-      console.log(data);
       const formdata = { ...data } as any;
       if (this.branchFlag && this.parentid) {
         formdata.parentmembershipid = Number(this.parentid);

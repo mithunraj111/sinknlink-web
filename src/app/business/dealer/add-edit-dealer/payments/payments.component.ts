@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { AppConstant } from '../../../../app.constants';
-import { PaymentsService } from 'src/app/services/common/payments.service';
+import { CommonService, AppCommonService } from '../../../../services';
 
 @Component({
   selector: 'app-dealer-payments',
@@ -14,9 +14,9 @@ export class DealerPaymentsComponent implements OnChanges, OnInit {
   @Input() dealerid = {} as any;
   @ViewChild(DatatableComponent) table: DatatableComponent;
   emptymessages = AppConstant.EMPTY_MESSAGES.DEALER_PAYMENT;
-
   datedisplayformat = AppConstant.API_CONFIG.ANG_DATE.displaydate;
-  constructor(private paymentService: PaymentsService) {
+  constructor(private paymentService: AppCommonService.PaymentsService,
+    private commonService: CommonService) {
   }
 
   ngOnInit() {
@@ -31,7 +31,6 @@ export class DealerPaymentsComponent implements OnChanges, OnInit {
         if (response.status) {
           this.dealerPayments = response.data;
           this.tempFilter = this.dealerPayments;
-
         }
       });
     }
@@ -44,22 +43,10 @@ export class DealerPaymentsComponent implements OnChanges, OnInit {
   }
   viewPayment(data) {
     this.paymentDetail = data;
-    console.log(this.paymentDetail);
     this.openPaymentModal('paymentDetailModal');
   }
   search(event?) {
-    let val = '';
-    if (event != null && event != undefined) {
-      val = event.target.value.toLowerCase();
-    }
-    const temp = this.tempFilter.filter(item => {
-      for (const key in item) {
-        if (('' + item[key]).toLocaleLowerCase().includes(val)) {
-          return ('' + item[key]).toLocaleLowerCase().includes(val);
-        }
-      }
-    });
-    this.dealerPayments = temp;
+    this.dealerPayments = this.commonService.globalSearch(this.tempFilter, event);
     this.table.offset = 0;
   }
 }

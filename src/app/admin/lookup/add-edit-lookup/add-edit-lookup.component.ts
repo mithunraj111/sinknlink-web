@@ -86,13 +86,11 @@ export class AddEditLookupComponent implements OnInit, OnChanges {
     this.buttonTxt = AppConstant.BUTTON_TXT.SAVE;
     this.savingLookup = false;
   }
-  close(event) {
+  close() {
     this.notifyLookupEntry.emit({ close: true });
   }
   callParent(data) {
-    // setTimeout(() => {
     this.notifyLookupEntry.emit(data);
-    // }, 5000);
   }
   saveOrUpdateLookup() {
     let errMessage: any;
@@ -117,12 +115,12 @@ export class AddEditLookupComponent implements OnInit, OnChanges {
         this.lookupService.update(formdata, this.lookupObj.refid).subscribe(res => {
           const response = JSON.parse(res._body);
           if (response.status) {
-            this.savingLookup = false;
             this.bootstrapAlertService.showSucccess(response.message);
+            this.savingLookup = false;
             this.callParent({ update: false, data: response.data });
           } else {
-            this.savingLookup = false;
             this.bootstrapAlertService.showError(response.message);
+            this.savingLookup = false;
           }
         }, err => {
           this.savingLookup = false;
@@ -135,8 +133,8 @@ export class AddEditLookupComponent implements OnInit, OnChanges {
         this.lookupService.create(formdata).subscribe((res) => {
           const response = JSON.parse(res._body);
           if (response.status) {
-            this.savingLookup = false;
             this.bootstrapAlertService.showSucccess(response.message);
+            this.savingLookup = false;
             this.callParent({ update: false, data: response.data });
           } else {
             this.bootstrapAlertService.showError(response.message);
