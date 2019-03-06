@@ -10,7 +10,6 @@
     <div class="table-header fixed-table-header">
         <div class="card p-r-15 p-l-15">
             <ngx-datatable #customerdltable class="table data-table expandable" [rows]='dealerCustomers' [columnMode]="'flex'" [headerHeight]="50" [footerHeight]="50" [limit]="10" [rowHeight]="'auto'" [reorderable]="false" [messages]="emptymessages">
-                <!-- Row Detail Template -->
                 <ngx-datatable-column prop="bizname" name="Business Name" [resizeable]="false">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                         <span>{{row.bizname}}</span>
@@ -31,11 +30,11 @@
                         <span class="text-center">{{row.regdate|date:datedisplayformat}}</span>
                     </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column name="Status" [sortable]="false" headerClass="text-center" [cellClass]="'text-center'" [resizeable]="false">
+                <!-- <ngx-datatable-column name="Status" [sortable]="false" headerClass="text-center" [cellClass]="'text-center'" [resizeable]="false">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                         <ui-switch [disabled]="true" class="js-small" placement="bottom" ngbTooltip="Click to change status" color="$primary-color" switchColor="#fff" size="small" [checked]="row.status == 'Active'"></ui-switch>
                     </ng-template>
-                </ngx-datatable-column>
+                </ngx-datatable-column> -->
             </ngx-datatable>
         </div>
     </div>

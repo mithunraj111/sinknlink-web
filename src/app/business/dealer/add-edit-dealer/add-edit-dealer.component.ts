@@ -3,19 +3,23 @@ import { AppConstant } from '../../../app.constants';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
 import { fadeInOutTranslate } from '../../../../assets/animations/fadeInOutTranslate';
-import { NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 import { DealerCustomersComponent } from './customers/customers.component';
 import * as _ from 'lodash';
 import { BusinessService, LocalStorageService, MasterService, CommonService } from '../../../services';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AppMessages } from '../../../app-messages';
-
+import { DealerPaymentsComponent } from './payments/payments.component';
+import { NgbDateCustomParserFormatter } from '../../../shared/elements/dateParser';
+import { NgbDateParserFormatter, NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-add-edit-dealer',
   templateUrl: './add-edit-dealer.component.html',
   styleUrls: ['./add-edit-dealer.component.scss'],
   animations: [
     fadeInOutTranslate
+  ],
+  providers: [
+    { provide: NgbDateParserFormatter, useClass: NgbDateCustomParserFormatter }
   ]
 })
 export class AddEditDealerComponent implements OnInit {
@@ -23,6 +27,7 @@ export class AddEditDealerComponent implements OnInit {
   dealerid: number;
   @Output() dealerObj = {} as any;
   @ViewChild(DealerCustomersComponent) dealerCustomers: DealerCustomersComponent;
+  @ViewChild(DealerPaymentsComponent) paymentsComponent: DealerPaymentsComponent;
   @ViewChild('deleartabs') deleartabs: NgbTabset;
   dealerProfileForm: FormGroup;
   dealerProfileErrObj = AppMessages.VALIDATION.DEALER.PROFILE;
@@ -30,6 +35,7 @@ export class AddEditDealerComponent implements OnInit {
   userstoragedata = {} as any;
   locationList = [];
   adddealer;
+  showbutton = true;
   constructor(private route: ActivatedRoute,
     private bootstrapAlertService: BootstrapAlertService,
     private dealerService: BusinessService.DealerService,
@@ -58,11 +64,17 @@ export class AddEditDealerComponent implements OnInit {
     if (this.deleartabs.activeId === '2') {
     }
     if (this.deleartabs.activeId === '3') {
+      this.paymentsComponent.addpayment();
     }
   }
   onTabChange(event) {
     if (event.nextId === '2' && !_.isUndefined(this.dealerid)) {
       this.dealerid = this.dealerid;
+    }
+    if (event.nextId === '6' || event.nextId === '5' || event.nextId === '3') {
+      this.showbutton = false;
+    } else {
+      this.showbutton = true;
     }
   }
 
@@ -145,8 +157,7 @@ export class AddEditDealerComponent implements OnInit {
     this.dealerProfileForm = this.fb.group({
       dealername: [this.dealerProfileObj.dealername, Validators.required],
       contactperson: [this.dealerProfileObj.contactperson, Validators.required],
-      mobileno: [this.dealerProfileObj.mobileno, Validators.compose([Validators.required,
-      Validators.minLength(10), Validators.maxLength(15), Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')])],
+      mobileno: [this.dealerProfileObj.mobileno, Validators.required],
       phoneno: [this.dealerProfileObj.phoneno],
       locationid: [this.dealerProfileObj.locationid.toString(), Validators.required],
       address: [this.dealerProfileObj.address],
@@ -164,4 +175,5 @@ export class AddEditDealerComponent implements OnInit {
       }
     });
   }
+
 }
