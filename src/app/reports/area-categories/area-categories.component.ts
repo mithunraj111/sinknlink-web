@@ -82,8 +82,8 @@ export class AreaCategoriesComponent implements OnInit {
 
   getCategoryList(download?) {
     let service;
-    this.generatingFile = false;
     this.loadingIndicator = true;
+    this.generatingFile = false;
     if (download) {
       service = this.reportService.getCategoryWiseCount(this.formData, true);
     } else {
@@ -94,6 +94,7 @@ export class AreaCategoriesComponent implements OnInit {
         this.loadingIndicator = true;
         var buffer = Buffer.from(JSON.parse(res._body).file.data);
         downloadService(buffer, `CategoryReport-${new DatePipe("en-US").transform(new Date(), "dd-MM-yyyy").toString()}.xlsx`);
+        this.loadingIndicator = false;
       } else {
         const response = JSON.parse(res._body);
         if (response.status) {
@@ -119,6 +120,7 @@ export class AreaCategoriesComponent implements OnInit {
         var buffer = Buffer.from(JSON.parse(res._body).file.data);
         this.generatingFile = false;
         downloadService(buffer, `AreaReport-${new DatePipe("en-US").transform(new Date(), "dd-MM-yyyy").toString()}.xlsx`);
+        this.loadingIndicator = false;
       } else {
         const response = JSON.parse(res._body);
         if (response.status) {
