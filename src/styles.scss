@@ -1,9 +1,9 @@
 
-$font-stack: 'Montserrat', sans-serif;
+$font-stack: 'ProximaNovaSemibold', sans-serif;
 // $primary-color: #03ADED;  // title heading color and list table color //
 $border-color: #004dff; // box border color //
 $button-border-color: #004dff; // all buttons border color, close icon and sidebar title bottom color //
-$primary-text-color: #4b5056; // table header color //
+$primary-text-color: #2f3d4a; // table header color //
 $white-txt: #ffffff;
 $danger-color: #FF5370; // alert error //
 $success-color:#2ed8b6; // alert success //
@@ -13,16 +13,35 @@ $primary-color: #004dff;
 $background: -webkit-linear-gradient(0deg, rgb(0, 77, 255) 50%, rgb(88, 139, 255) 100%);
 
 @font-face {
-    font-family: 'proxima_nova_regular';
-    src: url('assets/fonts/proxima-nova-webfont.eot');
-    src: url('assets/fonts/proxima-nova-webfont.eot?#iefix') format('embedded-opentype'),
-         url('assets/fonts/proxima-nova-webfont.woff2') format('woff2'),
-         url('assets/fonts/proxima-nova-webfont.woff') format('woff'),
-         url('assets/fonts/proxima-nova-webfont.ttf') format('truetype'),
-         url('assets/fonts/proxima-nova-webfont.svg#proxima_nova_regular') format('svg');
-    font-weight: normal;
-    font-style: normal;
-  }
+	font-family: 'ProximaNovaRegular';
+	src: url('/assets/fonts/ProximaNovaRegular.eot');
+    src: url('/assets/fonts/ProximaNovaRegular.eot') format('embedded-opentype'), 
+    url('/assets/fonts/ProximaNovaRegular.woff2') format('woff2'), 
+    url('/assets/fonts/ProximaNovaRegular.woff') format('woff'), 
+    url('/assets/fonts/ProximaNovaRegular.ttf') format('truetype'), 
+    url('/assets/fonts/ProximaNovaRegular.svg#ProximaNovaRegular') format('svg');
+}
+
+@font-face {
+	font-family: 'ProximaNovaSemibold';
+	src: url('/assets/fonts/ProximaNovaSemibold.eot');
+    src: url('/assets/fonts/ProximaNovaSemibold.eot') format('embedded-opentype'), 
+    url('/assets/fonts/ProximaNovaSemibold.woff2') format('woff2'), 
+    url('/assets/fonts/ProximaNovaSemibold.woff') format('woff'), 
+    url('/assets/fonts/ProximaNovaSemibold.ttf') format('truetype'), 
+    url('/assets/fonts/ProximaNovaSemibold.svg#ProximaNovaSemibold') format('svg');
+}
+
+@font-face {
+	font-family: 'ProximaNovaBold';
+	src: url('/assets/fonts/ProximaNovaBold.eot');
+    src: url('/assets/fonts/ProximaNovaBold.eot') format('embedded-opentype'), 
+    url('/assets/fonts/ProximaNovaBold.woff2') format('woff2'), 
+    url('/assets/fonts/ProximaNovaBold.woff') format('woff'), 
+    url('/assets/fonts/ProximaNovaBold.ttf') format('truetype'), 
+    url('/assets/fonts/ProximaNovaBold.svg#ProximaNovaSemibold') format('svg');
+}
+
 // header section //
 .btn-inverse {
     background: #2f3d4a !important;
@@ -40,7 +59,7 @@ p{
     font-weight: 300;  
 }
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'proxima_nova_regular';
+    font-family: $font-stack;
     font-weight: 300;
 }
 .w-100{
@@ -327,7 +346,7 @@ textarea {
             font-size: 13px;
             color: #67757c;
             padding: 3px 10px;
-            font-family: 'Montserrat', sans-serif;
+            font-family: $font-stack, sans-serif;
             font-weight: 500;
             vertical-align: middle;
            
@@ -351,17 +370,14 @@ textarea {
                 border: 0px solid #d3d5d8;
                 color: $primary-text-color;
                 padding: 0px 10px 0 0;
-                font-family: 'Montserrat', sans-serif;
-                font-weight: 600;
-                font-size: 13px;
+                font-family: 'ProximaNovaBold', sans-serif;
+                font-weight: bold;
+                font-size: 15px;
                 width:100%;
 
                 &:first-child{
                  padding-left: 0px;
-            }
-            // .datatable-header-cell-label {
-            //     padding: 0.75rem 15px .75rem 3px;
-            // }    
+            }  
         }
     }
 }
@@ -371,15 +387,15 @@ textarea {
             border-bottom:1px solid #d3d5d8;
             .datatable-body-cell{
                 border: 0px solid #d3d5d8;
-                font-size: 13px;
+                font-size: 14px;
                 color: #2f3d4a;
                 padding: 3px 10px;
-                font-family: 'Poppins', sans-serif;
-                font-weight: 500;
+                font-family: 'ProximaNovaRegular', sans-serif;
+                font-weight: normal;
                 display: inline-block;
                 vertical-align: middle;
                 width:100%;
-                line-height: normal;
+                line-height: 26px;
 
             &:first-child{
                 padding-left: 12px;
@@ -448,9 +464,8 @@ textarea {
     line-height:16px;
 }
 .updatedate{
-    font-size: 11px;
+    font-size: 12px;
     line-height: 16px;
-    font-family: 'Montserrat';
 }
 .table{
     margin-bottom: 10px;
@@ -503,7 +518,7 @@ textarea {
     }
 }
 .js-small{
-    vertical-align: middle;
+    vertical-align: -webkit-baseline-middle;
     display: inline-flex;
 }
 .import-btn{
@@ -1700,7 +1715,7 @@ select-dropdown{
 
 .gigs-modal{
     .md-effect-7{
-        top: 55px;
+        top: 50px;
     }
     .saveupdate{
         position: fixed;
@@ -1711,12 +1726,5 @@ select-dropdown{
 .coupon-modal{
     .md-effect-7{
         top: 60px;
-    }
-}
-.modal-size{
-    .input-box{
-        .ng-select{
-            width:100% !important;
-        }
     }
 }

@@ -2,7 +2,7 @@
 $theme-bg-color: #f3f3f3;
 $theme-font-size:0.875em;
 $theme-font-color: #2f3d4a;
-$theme-font-family:'proxima_nova_regular';
+$theme-font-family:'ProximaNovaRegular';
 // $theme-font-family:'Open Sans', sans-serif;
 // Theme colors variables;
 // all buttons background colors //
@@ -18,18 +18,6 @@ $disabled-color:#03ADED;
 $white-txt: #fff;
 $theme-border:#d6d6d6;
 $light-color:#666;
-
-@font-face {
-    font-family: 'proxima_nova_regular';
-    src: url('/fonts/proxima-nova-webfont.eot');
-    src: url('/fonts/proxima-nova-webfont.eot?#iefix') format('embedded-opentype'),
-         url('/fonts/proxima-nova-webfont.woff2') format('woff2'),
-         url('/fonts/proxima-nova-webfont.woff') format('woff'),
-         url('/fonts/proxima-nova-webfont.ttf') format('truetype'),
-         url('/fonts/proxima-nova-webfont.svg#proxima_nova_regular') format('svg');
-    font-weight: normal;
-    font-style: normal;
-  }
 
 $social-name: facebook,twitter,dribbble,pinterest,youtube,googleplus,instagram,viber,amazon;
 $social-color: #3B5997,#42C0FB,#EC4A89,#BF2131,#E0291D,#C73E2E,#AA7C62,#7B519D,#000;
@@ -95,3 +83,23 @@ $theme-color:(
 
 // Elements color
 $border-color:#ddd;
+
+@font-face {
+	font-family: 'ProximaNovaRegular';
+	src: url('/assets/fonts/ProximaNovaRegular.eot');
+    src: url('/assets/fonts/ProximaNovaRegular.eot') format('embedded-opentype'), 
+    url('/assets/fonts/ProximaNovaRegular.woff2') format('woff2'), 
+    url('/assets/fonts/ProximaNovaRegular.woff') format('woff'), 
+    url('/assets/fonts/ProximaNovaRegular.ttf') format('truetype'), 
+    url('/assets/fonts/ProximaNovaRegular.svg#ProximaNovaRegular') format('svg');
+}
+
+@font-face {
+	font-family: 'ProximaNovaSemibold';
+	src: url('/assets/fonts/ProximaNovaSemibold.eot');
+    src: url('/assets/fonts/ProximaNovaSemibold.eot') format('embedded-opentype'), 
+    url('/assets/fonts/ProximaNovaSemibold.woff2') format('woff2'), 
+    url('/assets/fonts/ProximaNovaSemibold.woff') format('woff'), 
+    url('/assets/fonts/ProximaNovaSemibold.ttf') format('truetype'), 
+    url('/assets/fonts/ProximaNovaSemibold.svg#ProximaNovaSemibold') format('svg');
+}

@@ -634,10 +634,10 @@ ng-select.ng-select > div > div {
     > div.option {
       span.deselect-option {
         color: #fff !important;
-        font-size: 10px !important;
         vertical-align: middle;
-        font-weight: bold;
+        font-weight: normal;
         margin-right: 2px;
+        line-height: 21px !important;
       }
       background-color: $color-blue !important;
       border: 1px solid $color-blue !important;
@@ -783,6 +783,7 @@ ngx-datatable.data-table {
     height: 30px;
     padding: 0 1.2rem;
     font-weight: bold;
+    font-family: 'ProximaNovaBold', sans-serif;
   }
   .datatable-pager {
     margin: 0 10px;
