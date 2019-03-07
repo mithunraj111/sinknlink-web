@@ -404,8 +404,8 @@ export class AddEditCustomerComponent implements OnInit {
   generateEditForm() {
     this.customerObj.categoryid = this.customerObj.categoryid.toString();
     this.customerObj.locationid = this.customerObj.locationid.toString();
-    if (JSON.parse(this.customerObj.locationobj) != null) {
-      this.customerObj.city = !_.isNull(JSON.parse(this.customerObj.locationobj)) ? '' : JSON.parse(this.customerObj.locationobj).city;
+    if (this.customerObj.location != null) {
+      this.customerObj.city = this.customerObj.location.city;
     }
     this.customerObj.regdate = this.commonService.parseDate(this.customerObj.regdate);
     this.customerObj.starttime = this.customerObj.workhours.starttime;
