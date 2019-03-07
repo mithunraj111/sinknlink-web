@@ -37,6 +37,7 @@ export class AddEditDealerComponent implements OnInit {
   adddealer;
   showbutton = true;
   isAddForm = true;
+  datedisplayformat = AppConstant.API_CONFIG.ANG_DATE.displaydate;
   constructor(private route: ActivatedRoute,
     private bootstrapAlertService: BootstrapAlertService,
     private dealerService: BusinessService.DealerService,
@@ -116,6 +117,9 @@ export class AddEditDealerComponent implements OnInit {
       const data = this.dealerProfileForm.value;
       const formdata = { ...data } as any;
       formdata.locationid = Number(data.locationid);
+      if (_.isNaN(Number(data.commissionpercent)) || _.isNull(Number(data.commissionpercent))) {
+        this.bootstrapAlertService.showError(this.dealerProfileErrObj.commissionpercent.invalid);
+      }
       formdata.commissionpercent = Number(data.commissionpercent);
       formdata.updatedby = this.userstoragedata.fullname;
       formdata.updateddt = new Date();

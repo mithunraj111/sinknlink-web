@@ -16,7 +16,7 @@ export class DealerComponent extends BaseService implements OnInit {
   tempFilter = [];
   @ViewChild(DatatableComponent) table: DatatableComponent;
   emptymessages = AppConstant.EMPTY_MESSAGES.DEALER;
-  loadingIndicator: boolean = true;
+  loadingIndicator = true;
 
   datedisplayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   constructor(private router: Router,
@@ -72,8 +72,7 @@ export class DealerComponent extends BaseService implements OnInit {
           this.bootstrapAlertService.showError(response.message);
         }
       });
-    } 
-    else {
+    }  else {
       this.dealerService.update(updateObj, data.dealerid).subscribe(res => {
         const response = JSON.parse(res._body);
         if (response.status) {

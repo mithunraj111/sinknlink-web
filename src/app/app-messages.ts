@@ -216,7 +216,8 @@ export const AppMessages = Object.freeze({
         },
         commissionpercent: {
           required: 'Please enter commission percent',
-          max: 'Commision percent should be less than 100 %'
+          max: 'Commision percent should be less than 100 %',
+          invalid: 'Please enter valid percentage'
         },
       }
     },

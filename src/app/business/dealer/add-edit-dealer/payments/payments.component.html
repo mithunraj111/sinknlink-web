@@ -95,6 +95,12 @@
                         <span class="f-15">{{paymentDetail?.totalamount|currency : 'INR' : true || '-'}}</span>
                     </div>
                 </div>
+                <div class="row p-t-10 p-b-5">
+                    <label class="col-md-4 col-sm-6 col-form-label text-right">Remarks :</label>
+                    <div class="col-md-6 col-sm-6 m-t-5">
+                        <span class="f-15">{{paymentDetail?.remarks}}</span>
+                    </div>
+                </div>
             </div>
         </div>
         <button (click)="closeModal('paymentDetailModal')" aria-label="Close" class="md-close-btn"><i
