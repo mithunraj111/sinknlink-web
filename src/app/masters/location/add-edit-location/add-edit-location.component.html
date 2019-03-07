@@ -15,13 +15,13 @@
                     <div class="form-group required">
                         <label>State</label>
                         <div class="input-box">
-                            <ng-select [allowClear]="true" [ngClass]="'ng-select'" formControlName="state" [options]="stateList" placeholder="Select state"></ng-select>
+                            <ng-select [allowClear]="true" [ngClass]="'ng-select w-100'" formControlName="state" [options]="stateList" placeholder="Select state"></ng-select>
                         </div>
                     </div>
                     <div class="form-group required location-page">
                         <label>City</label>
                         <div class="input-box">
-                            <ng-select [allowClear]="true" [ngClass]="'ng-select'" formControlName="city" [options]="cityList" placeholder="Select City"></ng-select>
+                            <ng-select [allowClear]="true" [ngClass]="'ng-select w-100'" formControlName="city" [options]="cityList" placeholder="Select City"></ng-select>
                         </div>
                     </div>
                     <div *ngIf="locationObj?.locationid" class="form-group ">
