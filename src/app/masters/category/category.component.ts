@@ -99,6 +99,7 @@ export class CategoryComponent extends BaseService implements OnInit {
     this.table.offset = 0;
   }
   notifyCategoryEntry(event) {
+    this.categoryObj = {};
     if (!event.close) {
       this.getCategories();
       this.closeCategoryModal('categorymodal');
