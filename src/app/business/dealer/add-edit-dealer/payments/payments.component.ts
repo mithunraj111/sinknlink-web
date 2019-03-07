@@ -123,10 +123,13 @@ export class DealerPaymentsComponent implements OnChanges, OnInit {
     document.querySelector('#' + event).classList.remove('md-show');
   }
   addpayment() {
+    if (this.dealerCustomersids.length <= 0) {
+      this.bootstrapAlertService.showError('No Customer on boared by this dealer');
+      return false;
+    }
     this.openModal('dealerpaymentmodal');
-    console.log(this.commissionAmt, this.dealerCustomersids.length)
-    this.addPaymentForm.controls['totalamount'].setValue(this.commissionAmt * this.dealerCustomersids.length);
-
+    const amt = (this.commissionAmt * this.dealerCustomersids.length) * (this.dealerObj.commissionpercent / 100);
+    this.addPaymentForm.controls['totalamount'].setValue(amt);
   }
   initPaymentForm() {
     this.addPaymentForm = this.fb.group({
