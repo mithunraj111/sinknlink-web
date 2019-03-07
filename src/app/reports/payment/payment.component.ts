@@ -13,7 +13,7 @@ import { Buffer } from 'buffer';
 import { DatePipe } from '@angular/common';
 import downloadService from '../../services/download.service';
 import { LocalStorageService } from 'src/app/services';
-
+import * as _ from 'lodash';
 @Component({
   selector: 'app-payment',
   templateUrl: './payment.component.html',
@@ -85,18 +85,21 @@ export class PaymentComponent implements OnInit {
       this.bootstrapAlertService.showError(AppMessages.VALIDATION.PAYMENTREPORT.fromdate.max);
       return false;
     }
-    let formData = {
+    const formData = {
       fromdate: fromdt + ' 00:00',
       todate: todt + ' 23:59',
     } as any;
-    if (paymentmode != "" && paymentmode != undefined && paymentmode != null) {
+    if (paymentmode != '' && paymentmode != undefined && paymentmode != null) {
       formData.paymentmode = paymentmode;
     }
-    if (paymenttype != "" && paymenttype != undefined && paymenttype != null) {
+    if (paymenttype != '' && paymenttype != undefined && paymenttype != null) {
       formData.paymenttype = [paymenttype];
     }
-    if (this.userstoragedata.usertype === 'D') {
+    if (this.userstoragedata.roleid === 2) {
       formData.dealerid = this.userstoragedata.userid;
+    }
+    if (this.userstoragedata.roleid === 3 && !_.isNull(this.userstoragedata.customer)) {
+      formData.membershipid = this.userstoragedata.customer.membershipid;
     }
 
     let service;
