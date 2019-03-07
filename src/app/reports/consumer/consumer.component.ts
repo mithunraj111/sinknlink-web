@@ -61,7 +61,6 @@ export class ConsumerComponent implements OnInit {
     const data = this.consumerReportForm.value;
     const todt = this.commonService.formatDate(data.todate);
     const fromdt = this.commonService.formatDate(data.fromdate);
-    this.loadingIndicator = true;
     const city = data.city;
     let area = data.area;
     if (new Date(todt) < new Date(fromdt)) {
@@ -80,18 +79,18 @@ export class ConsumerComponent implements OnInit {
     }
     let service;
     if (download) {
+      this.generatingFile = true;
       service = this.reportService.getConsumerCount(formData, true);
     } else {
+      this.loadingIndicator = true;
       service = this.reportService.getConsumerCount(formData);
     }
 
     service.subscribe(res => {
       if (download) {
-        this.loadingIndicator = false;
         var buffer = Buffer.from(JSON.parse(res._body).file.data);
-        this.generatingFile = false;
         downloadService(buffer, `ConsumerReport-${new DatePipe("en-US").transform(new Date(), "dd-MM-yyyy").toString()}.xlsx`);
-        this.loadingIndicator = true;
+        this.generatingFile = false;
       }
       this.loadingIndicator = true;
       const response = JSON.parse(res._body);
@@ -101,7 +100,6 @@ export class ConsumerComponent implements OnInit {
       }
       this.loadingIndicator = false;
       this.tempFilter = this.consumerList;
-
     });
     this.getArea();
   }

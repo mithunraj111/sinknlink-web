@@ -55,7 +55,7 @@ export class AddEditCustomerComponent implements OnInit {
   customerObj = {} as any;
   branchFlag = false;
   parentid;
-  cityName :string;
+  cityName: string;
   customerlat: any;
   customerlng: any;
   isAddForm = true;
@@ -105,7 +105,7 @@ export class AddEditCustomerComponent implements OnInit {
     });
   }
   getLocationList() {
-    this.locationService.list({city: this.cityName, status: AppConstant.STATUS_ACTIVE }).subscribe(res => {
+    this.locationService.list({ city: this.cityName, status: AppConstant.STATUS_ACTIVE }).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
         response.data.map(item => {
@@ -116,7 +116,7 @@ export class AddEditCustomerComponent implements OnInit {
       }
     });
   }
-  selectCity(option){
+  selectCity(option) {
     this.cityName = option.value;
     this.getLocationList();
   }
@@ -404,8 +404,9 @@ export class AddEditCustomerComponent implements OnInit {
   generateEditForm() {
     this.customerObj.categoryid = this.customerObj.categoryid.toString();
     this.customerObj.locationid = this.customerObj.locationid.toString();
-    this.customerObj.city = JSON.parse(this.customerObj.locationobj);
-    this.customerObj.city = this.customerObj.city.city;
+    if (JSON.parse(this.customerObj.locationobj) != null) {
+      this.customerObj.city = !_.isNull(JSON.parse(this.customerObj.locationobj)) ? '' : JSON.parse(this.customerObj.locationobj).city;
+    }
     this.customerObj.regdate = this.commonService.parseDate(this.customerObj.regdate);
     this.customerObj.starttime = this.customerObj.workhours.starttime;
     this.customerObj.endtime = this.customerObj.workhours.endtime;

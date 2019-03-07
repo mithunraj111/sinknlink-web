@@ -82,20 +82,19 @@ export class AreaCategoriesComponent implements OnInit {
 
   getCategoryList(download?) {
     let service;
-    this.loadingIndicator = true;
-    this.generatingFile = false;
     if (download) {
+      this.generatingFile = true;
       service = this.reportService.getCategoryWiseCount(this.formData, true);
     } else {
       service = this.reportService.getCategoryWiseCount(this.formData);
     }
     service.subscribe(res => {
       if (download) {
-        this.loadingIndicator = true;
         var buffer = Buffer.from(JSON.parse(res._body).file.data);
         downloadService(buffer, `CategoryReport-${new DatePipe("en-US").transform(new Date(), "dd-MM-yyyy").toString()}.xlsx`);
-        this.loadingIndicator = false;
+        this.generatingFile = false;
       } else {
+        this.loadingIndicator = true;
         const response = JSON.parse(res._body);
         if (response.status) {
           this.loadingIndicator = false;
@@ -108,20 +107,19 @@ export class AreaCategoriesComponent implements OnInit {
   }
   getAreaList(download?) {
     let service;
-    this.loadingIndicator = true;
     if (download) {
+      this.generatingFile = true;
       service = this.reportService.getAreaWiseCount(this.genFormData(), true);
     } else {
       service = this.reportService.getAreaWiseCount(this.genFormData());
     }
     service.subscribe(res => {
       if (download) {
-        this.loadingIndicator = true;
         var buffer = Buffer.from(JSON.parse(res._body).file.data);
-        this.generatingFile = false;
         downloadService(buffer, `AreaReport-${new DatePipe("en-US").transform(new Date(), "dd-MM-yyyy").toString()}.xlsx`);
-        this.loadingIndicator = false;
+        this.generatingFile = false;
       } else {
+        this.loadingIndicator = true;
         const response = JSON.parse(res._body);
         if (response.status) {
           this.loadingIndicator = false;
@@ -130,7 +128,7 @@ export class AreaCategoriesComponent implements OnInit {
         this.loadingIndicator = false;
         this.areatempFilter = this.areaList;
       }
-    })
+    });
   }
   search(event?) {
     this.areaList = this.commonService.globalSearch(this.areatempFilter, event);

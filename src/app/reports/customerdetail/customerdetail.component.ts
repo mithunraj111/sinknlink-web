@@ -73,7 +73,6 @@ export class CustomerdetailComponent implements OnInit {
     const data = this.customerdetailForm.value;
     const todt = this.commonService.formatDate(data.todate);
     const fromdt = this.commonService.formatDate(data.fromdt);
-    this.loadingIndicator = true;
     let area = data.area;
     let categoryid = data.categoryid;
     let biztype = data.biztype;
@@ -109,17 +108,17 @@ export class CustomerdetailComponent implements OnInit {
     }
     let service;
     if (download) {
+      this.generatingFile = true;
       service = this.reportService.customerDetailReport(formData, true);
     } else {
+      this.loadingIndicator = true;
       service = this.reportService.customerDetailReport(formData);
     }
     service.subscribe((res) => {
       if (download) {
-        this.loadingIndicator = true;
         var buffer = Buffer.from(JSON.parse(res._body).file.data);
-        this.generatingFile = false;
         downloadService(buffer, `CustomerReport-${new DatePipe("en-US").transform(new Date(), "dd-MM-yyyy").toString()}.xlsx`);
-        this.loadingIndicator = false;
+        this.generatingFile = false;
       } else {
         this.loadingIndicator = true;
         const response = JSON.parse(res._body);
