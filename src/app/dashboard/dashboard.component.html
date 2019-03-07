@@ -50,8 +50,13 @@
     <div class="col-md-12 col-xl-4 m-t-10">
       <div class="card project-task">
         <div class="card-block p-b-10 p-t-20">
-          <button class="btn btn-inverse f-right px-2 py-1 m-b-10" (click)="getData(filterRange);"><i
-              class="ti-reload p-0 middle mr-0 f-16"></i></button>
+          <div class="row">
+            <span class="col-md-9 pt-2"><b>Category wise business count</b></span>
+            <div class="col-md-3">
+              <button class="btn btn-inverse f-right px-2 py-1 m-b-10" (click)="getData(filterRange);"><i
+                class="ti-reload p-0 middle mr-0 f-16"></i></button>
+            </div>
+          </div>
           <div class="table-responsive">
             <table class="table table-hover">
               <thead>
@@ -92,8 +97,8 @@
   <button class="btn btn-primary btn-round px-3" id="dropdownConfig" ngbDropdownToggle><i
       class="fa fa-filter f-14 m-0"></i></button>
   <div ngbDropdownMenu aria-labelledby="dropdownConfig">
-    <a class="dropdown-item" href="javascript:;" (click)="getData('today');">Today</a>
-    <a class="dropdown-item" href="javascript:;" (click)="getData('week');">This week</a>
-    <a class="dropdown-item" href="javascript:;" (click)="getData('month');">This month</a>
+    <a class="dropdown-item" (click)="getData('today');">Today</a>
+    <a class="dropdown-item" (click)="getData('week');">This week</a>
+    <a class="dropdown-item" (click)="getData('month');">This month</a>
   </div>
 </div>

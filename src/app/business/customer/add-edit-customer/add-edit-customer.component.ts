@@ -41,6 +41,7 @@ export class AddEditCustomerComponent implements OnInit {
   @ViewChild('customertabs') customertabs: NgbTabset;
   paymentMethods = [];
   categoryList = [];
+  cityLists = [];
   memberTypes = [];
   businesstypes = [];
   deliveryMethods = [];
@@ -54,6 +55,7 @@ export class AddEditCustomerComponent implements OnInit {
   customerObj = {} as any;
   branchFlag = false;
   parentid;
+  cityName :string;
   customerlat: any;
   customerlng: any;
   isAddForm = true;
@@ -88,7 +90,6 @@ export class AddEditCustomerComponent implements OnInit {
     this.initForm();
     this.getLookUps();
     this.getCategoryList();
-    this.getLocationList();
   }
 
   getCustomerDetail() {
@@ -98,12 +99,13 @@ export class AddEditCustomerComponent implements OnInit {
         if (response.data != null) {
           this.customerObj = response.data;
           this.generateEditForm();
+          this.getLocationList();
         }
       }
     });
   }
   getLocationList() {
-    this.locationService.list({ status: AppConstant.STATUS_ACTIVE }).subscribe(res => {
+    this.locationService.list({city: this.cityName, status: AppConstant.STATUS_ACTIVE }).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
         response.data.map(item => {
@@ -113,6 +115,10 @@ export class AddEditCustomerComponent implements OnInit {
         this.locationList = response.data;
       }
     });
+  }
+  selectCity(option){
+    this.cityName = option.value;
+    this.getLocationList();
   }
   getLookUps() {
     this.lookupService.list({ status: AppConstant.STATUS_ACTIVE }).subscribe(res => {
@@ -130,6 +136,7 @@ export class AddEditCustomerComponent implements OnInit {
           this.deliveryMethods = _.get(groupedData, 'biz_deliverymethods');
           this.mallsList = _.get(groupedData, 'biz_malls');
           this.paymentTenuresList = _.get(groupedData, 'biz_paymenttenure');
+          this.cityLists = _.get(groupedData, 'biz_businesscity');
         }
         if (this.customerid == null) {
           const selectedMemberType = [];
@@ -209,6 +216,7 @@ export class AddEditCustomerComponent implements OnInit {
       postaladdress: ['', Validators.compose([Validators.minLength(1), Validators.maxLength(100)])],
       latitude: [null, Validators.required],
       longitude: [null, Validators.required],
+      city: [''],
       locationid: [null, Validators.required],
       workdays: [null, Validators.required],
       starttime: [null, Validators.required],
@@ -289,6 +297,7 @@ export class AddEditCustomerComponent implements OnInit {
         formdata.paymenttenure = '';
       }
       formdata.workhours = data.starttime + '-' + data.endtime;
+      formdata.city = data.city;
       formdata.locationid = Number(data.locationid);
       formdata.categoryid = Number(data.categoryid);
       formdata.latitude = parseFloat(data.latitude);
@@ -304,6 +313,7 @@ export class AddEditCustomerComponent implements OnInit {
       if (formdata.inmallyn === 'Y') {
         formdata.mallname = formdata.mallname;
       }
+
       formdata.socialids = this.socialidForm.value;
       formdata.workhours = {
         starttime: data.starttime,
@@ -394,6 +404,8 @@ export class AddEditCustomerComponent implements OnInit {
   generateEditForm() {
     this.customerObj.categoryid = this.customerObj.categoryid.toString();
     this.customerObj.locationid = this.customerObj.locationid.toString();
+    this.customerObj.city = JSON.parse(this.customerObj.locationobj);
+    this.customerObj.city = this.customerObj.city.city;
     this.customerObj.regdate = this.commonService.parseDate(this.customerObj.regdate);
     this.customerObj.starttime = this.customerObj.workhours.starttime;
     this.customerObj.endtime = this.customerObj.workhours.endtime;
