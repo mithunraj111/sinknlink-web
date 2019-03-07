@@ -267,6 +267,14 @@ export class AddEditCustomerComponent implements OnInit {
       this.savecustomer = true;
       const data = this.customerForm.value;
       const formdata = { ...data } as any;
+      if (_.isNaN(parseFloat(data.latitude)) || _.isNull(parseFloat(data.latitude))) {
+        this.bootstrapAlertService.showError(this.customerErrObj.latitude.invalid);
+        return false;
+      }
+      if (_.isNaN(parseFloat(data.longitude)) || _.isNull(parseFloat(data.longitude))) {
+        this.bootstrapAlertService.showError(this.customerErrObj.longitude.invalid);
+        return false;
+      }
       if (this.branchFlag && this.parentid) {
         formdata.parentmembershipid = Number(this.parentid);
       }
@@ -274,7 +282,9 @@ export class AddEditCustomerComponent implements OnInit {
         const paymentarray = this.paymentTenuresList.find(item =>
           item.refvalue === data.paymenttenure
         );
-        formdata.paymenttenure = paymentarray.refid.toString();
+        if (!_.isUndefined(paymentarray)) {
+          formdata.paymenttenure = paymentarray.refid.toString();
+        }
       } else {
         formdata.paymenttenure = '';
       }
@@ -341,6 +351,7 @@ export class AddEditCustomerComponent implements OnInit {
             this.bootstrapAlertService.showError(response.message);
           }
         }, err => {
+          console.log(err);
           this.savecustomer = false;
           const error = JSON.parse(err._body);
           this.bootstrapAlertService.showError(error.message);

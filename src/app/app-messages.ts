@@ -262,7 +262,7 @@ export const AppMessages = Object.freeze({
       },
       expirydt: {
         required: 'Please select expiry date',
-        invalid : 'Invalid expiry date'
+        invalid: 'Invalid expiry date'
       },
       description: {
         required: 'Please enter description',
@@ -307,10 +307,12 @@ export const AppMessages = Object.freeze({
         maxlength: 'Postal address should be within 100 characters'
       },
       latitude: {
-        required: 'Please enter latitude '
+        required: 'Please enter latitude ',
+        invalid: 'Please enter valid latitude'
       },
       longitude: {
-        required: 'Please enter longitude'
+        required: 'Please enter longitude',
+        invalid: 'Please enter valid longitude'
       },
       locationid: { required: 'Please select location' },
       workdays: { required: 'Please select work days' },
