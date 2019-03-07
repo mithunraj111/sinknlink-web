@@ -96,7 +96,7 @@ export class PaymentComponent implements OnInit {
       formData.paymenttype = [paymenttype];
     }
     if (this.userstoragedata.roleid === 2) {
-      formData.dealerid = this.userstoragedata.userid;
+      formData.dealerid = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.DEALER).dealerid;
     }
     if (this.userstoragedata.roleid === 3 && !_.isNull(this.userstoragedata.customer)) {
       formData.membershipid = this.userstoragedata.customer.membershipid;

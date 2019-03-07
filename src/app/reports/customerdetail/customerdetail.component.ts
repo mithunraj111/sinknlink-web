@@ -92,7 +92,7 @@ export class CustomerdetailComponent implements OnInit {
       formData.categoryid = categoryid;
     }
     if (area != '') {
-      formData.area = area;
+      formData.locationid = area;
     }
     if (biztype != '') {
       formData.biztype = biztype;
@@ -104,7 +104,7 @@ export class CustomerdetailComponent implements OnInit {
       formData.city = [city];
     }
     if (this.userstoragedata.usertype === 'D') {
-      formData.dealerid = this.userstoragedata.userid;
+      formData.dealerid = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.DEALER).dealerid;
     }
     let service;
     if (download) {
