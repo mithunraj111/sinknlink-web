@@ -72,11 +72,13 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
         if (response.status) {
           this.payHistoryList = response.data;
         }
-        let orderedDate = _.orderBy(this.payHistoryList, 'paymentdate', 'desc');
+        const orderedDate = _.orderBy(this.payHistoryList, 'paymentdate', 'desc');
         selectedDate = _.find(orderedDate, function (obj: any) {
           if (obj.paymentstatus === 'Success') { return obj; }
         });
-        this.lastpaid = selectedDate.paymentdate;
+        if (!_.isUndefined(selectedDate)) {
+          this.lastpaid = selectedDate.paymentdate;
+        }
         this.tempFilter = this.payHistoryList;
       });
     }
@@ -137,14 +139,18 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
             item.value = item.refvalue;
             item.label = item.refvalue;
           });
-          let groupedData = _.groupBy(response.data, 'refkey');
+          const groupedData = _.groupBy(response.data, 'refkey');
           this.paymentMethods = _.get(groupedData, 'biz_paymentmethods');
           this.paymentTenure = _.get(groupedData, 'biz_paymenttenure');
         }
       }
-      this.paymentarray = this.paymentTenure.find((item) => item.refid == this.customerObj.paymenttenure)
-      var date = new Date(this.lastpaid);
-      this.nextdue = date.setDate(date.getDate() + Number(this.paymentarray.refvalue));
+      this.paymentarray = this.paymentTenure.find((item) => item.refid === this.customerObj.paymenttenure)
+      const date = new Date(this.lastpaid);
+      if (!_.isUndefined(this.paymentarray)) {
+        this.nextdue = date.setDate(date.getDate() + Number(this.paymentarray.refvalue));
+      } else {
+        this.nextdue = null;
+      }
     });
   }
 

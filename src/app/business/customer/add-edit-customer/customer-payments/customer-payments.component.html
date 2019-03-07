@@ -7,11 +7,11 @@
             <div class="col-md-12 col-sm-12">
                 <div class="form-group row mb-0">
                     <label class="col-md-3 col-sm-6 col-form-label text-right">Last paid</label>
-                    <span class="col-form-label col-md-9 col-sm-6 f-16">{{lastpaid|date:datedisplayformat}}</span>
+                    <span class="col-form-label col-md-9 col-sm-6 f-16">{{lastpaid==null?'-':lastpaid|date:datedisplayformat}}</span>
                 </div>
                 <div class="form-group row mb-0">
                     <label class="col-md-3 col-sm-6 col-form-label text-right">Next due</label>
-                    <span class="col-form-label col-md-9 col-sm-6">{{nextdue|date:datedisplayformat}}</span>
+                    <span class="col-form-label col-md-9 col-sm-6">{{nextdue==null?'-':nextdue|date:datedisplayformat}}</span>
                 </div>
                 <div class="form group row border-checkbox-section">
                     <label class="col-md-3 col-sm-6 col-form-label text-right">Subscription Amount</label>
