@@ -5,7 +5,7 @@ import { NgbDateCustomParserFormatter } from '../../shared/elements/dateParser';
 import { LookupService } from 'src/app/services/admin';
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
 import { CommonService } from '../../services/common.service';
-import { FormGroup, FormBuilder,  } from '@angular/forms';
+import { FormGroup, FormBuilder, } from '@angular/forms';
 import { AppConstant } from '../../app.constants';
 import { ReportService } from '../../services/common';
 import { AppMessages } from '../../app-messages';
@@ -81,7 +81,6 @@ export class PaymentComponent implements OnInit {
     const fromdt = this.commonService.formatDate(data.fromdate);
     const paymenttype = data.paymenttype;
     const paymentmode = data.paymentmode;
-    this.loadingIndicator = true;
     if (new Date(todt) < new Date(fromdt)) {
       this.bootstrapAlertService.showError(AppMessages.VALIDATION.PAYMENTREPORT.fromdate.max);
       return false;
@@ -99,24 +98,24 @@ export class PaymentComponent implements OnInit {
     if (this.userstoragedata.usertype === 'D') {
       formData.dealerid = this.userstoragedata.userid;
     }
-    this.loadingIndicator = true;
 
     let service;
 
     if (download) {
+      this.generatingFile = false;
       service = this.reportService.paymentReport(formData, true);
     } else {
+      this.loadingIndicator = true;
       service = this.reportService.paymentReport(formData);
     }
 
     service.subscribe(res => {
       if (download) {
-        this.loadingIndicator = true;
         var buffer = Buffer.from(JSON.parse(res._body).file.data);
-        this.generatingFile = false;
         downloadService(buffer, `PaymentReport-${new DatePipe("en-US").transform(new Date(), "dd-MM-yyyy").toString()}.xlsx`);
-        this.loadingIndicator = false;
+        this.generatingFile = false;
       } else {
+        this.loadingIndicator = true;
         const response = JSON.parse(res._body);
         if (response.status) {
           this.loadingIndicator = false;

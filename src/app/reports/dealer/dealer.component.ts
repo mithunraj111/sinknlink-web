@@ -24,7 +24,7 @@ import downloadService from '../../services/download.service';
 export class DealerComponent implements OnInit {
   displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydate;
   emptymesages = AppConstant.EMPTY_MESSAGES.DEALERREPORT;
-  loadingIndicator: Boolean = false;
+  loadingIndicator = false;
 
   @ViewChild(DatatableComponent) table: DatatableComponent;
   dealerReportForm: FormGroup;
@@ -66,11 +66,9 @@ export class DealerComponent implements OnInit {
   getDealerReport(download?) {
 
     const data = this.dealerReportForm.value;
-    this.loadingIndicator = true;
     const todt = this.commonService.formatDate(data.todate);
     const fromdt = this.commonService.formatDate(data.fromdate);
     const city = data.city;
-    this.generatingFile = false;
     let area = data.area;
     if (new Date(todt) < new Date(fromdt)) {
       this.bootstrapAlertService.showError(AppMessages.VALIDATION.DEALERREPORT.fromdate.max);
@@ -87,30 +85,29 @@ export class DealerComponent implements OnInit {
       formData.city = [city];
     } let service;
     if (download) {
+      this.generatingFile = false;
       service = this.reportService.areawiseDealerCount(formData, true);
     } else {
+      this.loadingIndicator = true;
       service = this.reportService.areawiseDealerCount(formData);
     }
     service.subscribe((res) => {
-      this.loadingIndicator = true;
-      this.generatingFile = true;
       if (download) {
         var buffer = Buffer.from(JSON.parse(res._body).file.data);
         downloadService(buffer, `DealerReport-${new DatePipe("en-US").transform(new Date(), "dd-MM-yyyy").toString()}.xlsx`);
-        this.loadingIndicator = false;
+        this.generatingFile = false;
       } else {
         this.loadingIndicator = true;
-          const response = JSON.parse(res._body);
-          if (response.status) {
-            this.loadingIndicator = false;
-            this.dealerReportList = response.data;
-          }
+        const response = JSON.parse(res._body);
+        if (response.status) {
           this.loadingIndicator = false;
-          this.tempFilter = this.dealerReportList;
+          this.dealerReportList = response.data;
+        }
+        this.loadingIndicator = false;
+        this.tempFilter = this.dealerReportList;
       }
-      this.generatingFile = false;
-        });
-      }
+    });
+  }
   getCities() {
     this.lookupService.list({ refKey: 'biz_businesscity', status: AppConstant.STATUS_ACTIVE }).subscribe((res) => {
       const response = JSON.parse(res._body);
