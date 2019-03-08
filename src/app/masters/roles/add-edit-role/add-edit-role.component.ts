@@ -110,12 +110,14 @@ export class AddEditRoleComponent implements OnInit {
   }
   updatePermissions() {
     this.screensList[this.index].assignedpermissions = this.permissions;
+    this.screensList = [...this.screensList];
+    this.closePermissionModal('permission');
     if (_.isEqual(this.screensList[this.index].assignedpermissions, this.screensList[this.index].permissions)) {
       this.screensList[this.index].checked = true;
     }
-    this.screensList = [...this.screensList];
-    this.closePermissionModal('permission');
-
+    else {
+      this.screensList[this.index].checked = false;
+    }
   }
   getRowHeight(row) {
     return row.height;

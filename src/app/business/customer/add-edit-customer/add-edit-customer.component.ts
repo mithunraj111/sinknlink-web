@@ -272,7 +272,6 @@ export class AddEditCustomerComponent implements OnInit {
       this.bootstrapAlertService.showError(errMessage);
       return false;
     } else {
-      this.savecustomer = true;
       const data = this.customerForm.value;
       const formdata = { ...data } as any;
       if (_.isNaN(parseFloat(data.latitude)) || _.isNull(parseFloat(data.latitude))) {
@@ -296,6 +295,7 @@ export class AddEditCustomerComponent implements OnInit {
       } else {
         formdata.paymenttenure = '';
       }
+      this.savecustomer = true;
       formdata.workhours = data.starttime + '-' + data.endtime;
       formdata.city = data.city;
       formdata.locationid = Number(data.locationid);
@@ -333,11 +333,12 @@ export class AddEditCustomerComponent implements OnInit {
         formdata.status = data.status ? AppConstant.STATUS_ACTIVE : AppConstant.STATUS_INACTIVE;
         this.customerService.update(formdata, this.customerObj.membershipid).subscribe(res => {
           const response = JSON.parse(res._body);
-          this.savecustomer = false;
           if (response.status) {
+            this.savecustomer = false;
             this.bootstrapAlertService.showSucccess(response.message);
             this.customerObj = response.data;
           } else {
+            this.savecustomer = false;
             this.bootstrapAlertService.showError(response.message);
           }
         }, err => {
