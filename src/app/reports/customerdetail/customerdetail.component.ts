@@ -164,7 +164,7 @@ export class CustomerdetailComponent implements OnInit {
           item.label = item.area + ' (' + item.pincode + ' )';
           item.value = item.locationid;
         });
-        this.areaList = this.areaList.concat(response.data);
+        this.areaList = response.data;
       }
     });
   }

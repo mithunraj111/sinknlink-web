@@ -86,6 +86,7 @@ export class AreaCategoriesComponent implements OnInit {
       this.generatingFile = true;
       service = this.reportService.getCategoryWiseCount(this.formData, true);
     } else {
+      this.loadingIndicator = true;
       service = this.reportService.getCategoryWiseCount(this.formData);
     }
     service.subscribe(res => {
