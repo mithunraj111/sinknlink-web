@@ -211,8 +211,9 @@ export class MainComponent implements OnInit {
   }
   checkProfile() {
     this.userstoragedata = this.lstorageService.getItem(AppConstant.LOCALSTORAGE.USER);
-    if (this.userstoragedata.profileimg != null) {
+    if (this.userstoragedata.profileimg != null && this.userstoragedata.profileimg.status != "deleted") {
       this.userfile = this.userstoragedata.profileimg.docurl;
+      console.log(this.userfile)
       this.userprofile = true;
     } else {
       this.userprofile = false;

@@ -1,167 +1,156 @@
 <div class="fixedheader">
-    <div class="header-title m-b-15 pos-fixed">
-        <div class="row">
-            <div class="col-md-8 col-sm-8 save-button text-right p-r-30">
-                <button type="button" placement="bottom" ngbTooltip="Click to update profile" (click)="changeProfile()"
-                    class="btn btn-primary waves-effect m-r-10 text-capitalize">
-                    Update</button>
-                <button type="button" placement="bottom" ngbTooltip="Click to change password"
-                    (click)="updatePassword()" class="btn btn-primary waves-effect m-r-10 text-capitalize">Change
-                    Password</button>
-            </div>
-        </div>
+  <div class="header-title m-b-15 pos-fixed">
+    <div class="row">
+      <div class="col-md-8 col-sm-8 save-button text-right p-r-30">
+        <button type="button" placement="bottom" ngbTooltip="Click to update profile" (click)="changeProfile()" class="btn btn-primary waves-effect m-r-10 text-capitalize">
+          Update</button>
+        <button type="button" placement="bottom" ngbTooltip="Click to change password" (click)="updatePassword()" class="btn btn-primary waves-effect m-r-10 text-capitalize">Change
+          Password</button>
+      </div>
     </div>
+  </div>
 </div>
 <div class="col-md-12 col-sm-12">
-    <div class="row">
-        <div class="col-md-8 col-sm-8 p-l-0 p-r-10">
-            <div class="user-form">
-                <form [formGroup]="profileForm">
-                    <div class="card tenants-page tenants-pages m-b-10 m-t-10">
-                        <div class="row p-t-10 p-b-5">
-                            <div class="col-md-12 col-sm-12">
-                                <div class="form-group row required">
-                                    <label class="col-md-3 col-sm-6 col-form-label text-right">Full Name</label>
-                                    <div class="col-md-7 col-sm-6 p-r-0">
-                                        <input type="text" class="form-control" name="fullname"
-                                            formControlName="fullname" placeholder="Full Name">
+  <div class="row">
+    <div class="col-md-8 col-sm-8 p-l-0 p-r-10">
+      <div class="user-form">
+        <form [formGroup]="profileForm">
+          <div class="card tenants-page tenants-pages m-b-10 m-t-10">
+            <div class="row p-t-10 p-b-5">
+              <div class="col-md-12 col-sm-12">
+                <div class="form-group row required">
+                  <label class="col-md-3 col-sm-6 col-form-label text-right">Full Name</label>
+                  <div class="col-md-7 col-sm-6 p-r-0">
+                    <input type="text" class="form-control" name="fullname" formControlName="fullname" placeholder="Full Name">
 
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label class="col-md-3 col-sm-6 col-form-label text-right">Mobile No</label>
-                                    <div class="col-md-7 col-sm-6 p-r-0 p-t-10">
-                                        <span>{{userObj?.mobileno}}</span>
-                                    </div>
-                                </div>
-
-                                <div class="form-group row role-dropdown">
-                                    <label class="col-md-3 col-sm-6 col-form-label text-right">Role</label>
-                                    <div class="col-md-7 col-sm-6 p-r-0 p-t-10">
-                                        <span>{{userObj.role?.rolename}}</span>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-md-3 col-sm-6 col-form-label text-right">Last Login</label>
-                                    <div class="col-md-7 col-sm-6 m-t-5">
-                                        <span>{{userObj.lastlogin|date:displayformat}}</span>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-md-3 col-sm-6 col-form-label text-right">Email ID</label>
-                                    <div class="col-md-7 col-sm-6 p-r-0">
-                                        <input type="text" class="form-control" name="emaiid" formControlName="emailid"
-                                            placeholder="Email ID">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-md-3 col-sm-6 col-form-label text-right">Address</label>
-                                    <div class="col-md-7 col-sm-6 p-r-0">
-                                        <textarea rows="3" cols="3" class="form-control" name="address"
-                                            formControlName="address"></textarea>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-md-3 col-sm-6 col-form-label text-right">Location</label>
-                                    <div class="col-md-7 col-sm-6 p-r-0">
-                                        <ng-select [allowClear]="true" [ngClass]="'ng-select'"
-                                            formControlName="locationid" [options]="locationList"
-                                            placeholder="Select location" [allowClear]="true"></ng-select>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-md-3 col-sm-6 col-form-label text-right">Social ID's</label>
-                                    <div class="col-md-7 col-sm-6 p-r-0">
-                                        <div class="input-group pull-left">
-                                            <input type="text" class="form-control" formControlName="socialid"
-                                                placeholder="Social ID's" readonly>
-                                        </div>
-                                        <div class="input-group-append plus-icon pull-left" (click)='addSocialId();'>
-                                            <span class="fa fa-plus input-group-text"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <div class="col-md-4 c0l-sm-4 m-t-50">
-            <div>
-                <div class="col-md-12 col-sm-12 text-center employee-profile m-t-25">
-                    <div class="form-group">
-                        <label class="custom-file mb-3 profile-page">
-                            <img [src]="userfile" class="img-responsive w-50" alt="" *ngIf="profileimage==true">
-                           <span class="img-radius f-60" *ngIf="profileimage==false">{{userfile}}</span>
-                            <input #userimage type="file" name="userimg" (change)="onFile($event)"
-                                class="custom-file-input">
-                            <span class="custom-file-control"></span>
-                        </label>
-                    </div>
+                  </div>
                 </div>
+
+                <div class="form-group row">
+                  <label class="col-md-3 col-sm-6 col-form-label text-right">Mobile No</label>
+                  <div class="col-md-7 col-sm-6 p-r-0 p-t-10">
+                    <span>{{userObj?.mobileno}}</span>
+                  </div>
+                </div>
+
+                <div class="form-group row role-dropdown">
+                  <label class="col-md-3 col-sm-6 col-form-label text-right">Role</label>
+                  <div class="col-md-7 col-sm-6 p-r-0 p-t-10">
+                    <span>{{userObj.role?.rolename}}</span>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-md-3 col-sm-6 col-form-label text-right">Last Login</label>
+                  <div class="col-md-7 col-sm-6 m-t-5">
+                    <span>{{userObj.lastlogin|date:displayformat}}</span>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-md-3 col-sm-6 col-form-label text-right">Email ID</label>
+                  <div class="col-md-7 col-sm-6 p-r-0">
+                    <input type="text" class="form-control" name="emaiid" formControlName="emailid" placeholder="Email ID">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-md-3 col-sm-6 col-form-label text-right">Address</label>
+                  <div class="col-md-7 col-sm-6 p-r-0">
+                    <textarea rows="3" cols="3" class="form-control" name="address" formControlName="address"></textarea>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-md-3 col-sm-6 col-form-label text-right">Location</label>
+                  <div class="col-md-7 col-sm-6 p-r-0">
+                    <ng-select [allowClear]="true" [ngClass]="'ng-select'" formControlName="locationid" [options]="locationList"
+                      placeholder="Select location" [allowClear]="true"></ng-select>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-md-3 col-sm-6 col-form-label text-right">Social ID's</label>
+                  <div class="col-md-7 col-sm-6 p-r-0">
+                    <div class="input-group pull-left">
+                      <input type="text" class="form-control" formControlName="socialid" placeholder="Social ID's"
+                        readonly>
+                    </div>
+                    <div class="input-group-append plus-icon pull-left" (click)='addSocialId();'>
+                      <span class="fa fa-plus input-group-text"></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-        </div>
+          </div>
+        </form>
+      </div>
     </div>
+    <div class="col-md-4 c0l-sm-4 m-t-50">
+      <div>
+        <div class="col-md-12 col-sm-12 text-center employee-profile m-t-25">
+          <div class="form-group">
+            <label class="custom-file mb-3 profile-page">
+              <button *ngIf="profileimage==true" class="btn" (click)="remove()"><i class="fa fa-close"></i></button>
+              <img [src]="userfile" class="img-responsive w-50" alt="" *ngIf="profileimage==true">
+              <span class="img-radius f-60" *ngIf="profileimage==false">{{userfile}}</span>
+              <input #userimage type="file" name="userimg" (change)="onFile($event)" class="custom-file-input">
+              <span class="custom-file-control"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 <!-- modal -->
 <div class="modal-size addlocation employee-form">
-    <app-modal-animation [modalID]="'profilemodal'" [modalClass]="'md-effect-7'">
-        <h3 class="f-26">Change password</h3>
-        <form [formGroup]="passwordForm">
-            <div class="form-header pt-2">
-                <div class="col-md-12">
-                    <div class="form-group required">
-                        <label>New password</label>
-                        <input type="password" class="form-control" placeholder="New password"
-                            formControlName="newpassword">
-                    </div>
-                    <div class="form-group required">
-                        <label>Confirm password</label>
-                        <input type="password" class="form-control" placeholder="Confirm password"
-                            formControlName="confirmpassword">
-                    </div>
-                </div>
-                <button type="button" placement="top" (click)="changePassword()" ngbTooltip="Click to save password"
-                    class="btn pull-right btn-primary waves-effect 
+  <app-modal-animation [modalID]="'profilemodal'" [modalClass]="'md-effect-7'">
+    <h3 class="f-26">Change password</h3>
+    <form [formGroup]="passwordForm">
+      <div class="form-header pt-2">
+        <div class="col-md-12">
+          <div class="form-group required">
+            <label>New password</label>
+            <input type="password" class="form-control" placeholder="New password" formControlName="newpassword">
+          </div>
+          <div class="form-group required">
+            <label>Confirm password</label>
+            <input type="password" class="form-control" placeholder="Confirm password" formControlName="confirmpassword">
+          </div>
+        </div>
+        <button type="button" placement="top" (click)="changePassword()" ngbTooltip="Click to save password" class="btn pull-right btn-primary waves-effect 
                   m-b-10 m-r-15">Update</button>
-            </div>
-        </form>
-        <button (click)="closePassword()" aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>
-    </app-modal-animation>
+      </div>
+    </form>
+    <button (click)="closePassword()" aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>
+  </app-modal-animation>
 </div>
 
 <div class="modal-size addlocation employee-form">
-    <app-modal-animation [modalID]="'socialidmodal'" [modalClass]="'md-effect-7'">
-        <h3 class="f-26">SocialID</h3>
-        <form [formGroup]="socialForm">
-            <div class="form-header pt-2">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label>Facebook ID</label>
-                        <input type="text" class="form-control" placeholder="Facebook ID" formControlName="facebookid">
-                    </div>
-                    <div class="form-group">
-                        <label>Twitter ID</label>
-                        <input type="text" class="form-control" placeholder="Twitter ID" formControlName="twitterid">
-                    </div>
-                    <div class="form-group">
-                        <label>Google ID</label>
-                        <input type="text" class="form-control" placeholder="Google ID" formControlName="googleid">
-                    </div>
-                    <div class="form-group">
-                        <label>Instagram ID</label>
-                        <input type="text" class="form-control" placeholder="Instagram ID"
-                            formControlName="instagramid">
-                    </div>
-                </div>
-                <button type="button" placement="top" (click)="getsocialid();closeSocialIdModal()"
-                    ngbTooltip="Click to update social id" class="btn pull-right btn-primary waves-effect 
+  <app-modal-animation [modalID]="'socialidmodal'" [modalClass]="'md-effect-7'">
+    <h3 class="f-26">SocialID</h3>
+    <form [formGroup]="socialForm">
+      <div class="form-header pt-2">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label>Facebook ID</label>
+            <input type="text" class="form-control" placeholder="Facebook ID" formControlName="facebookid">
+          </div>
+          <div class="form-group">
+            <label>Twitter ID</label>
+            <input type="text" class="form-control" placeholder="Twitter ID" formControlName="twitterid">
+          </div>
+          <div class="form-group">
+            <label>Google ID</label>
+            <input type="text" class="form-control" placeholder="Google ID" formControlName="googleid">
+          </div>
+          <div class="form-group">
+            <label>Instagram ID</label>
+            <input type="text" class="form-control" placeholder="Instagram ID" formControlName="instagramid">
+          </div>
+        </div>
+        <button type="button" placement="top" (click)="getsocialid();closeSocialIdModal()" ngbTooltip="Click to update social id"
+          class="btn pull-right btn-primary waves-effect 
                   m-b-10 m-r-15">Update</button>
-            </div>
-        </form>
-        <button (click)="closeSocialIdModal()" aria-label="Close" class="md-close-btn"><i
-                class="fa fa-close"></i></button>
-    </app-modal-animation>
+      </div>
+    </form>
+    <button (click)="closeSocialIdModal()" aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>
+  </app-modal-animation>
 </div>

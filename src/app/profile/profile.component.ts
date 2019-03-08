@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AppConstant } from '../app.constants';
-import { LocalStorageService, MasterService, CommonService } from '../services';
+import { LocalStorageService, MasterService, CommonService, AppCommonService } from '../services';
 import * as _ from 'lodash';
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
 import { AppMessages } from '../app-messages';
@@ -32,8 +32,10 @@ export class ProfileComponent implements OnInit {
     private localStorageService: LocalStorageService,
     private userService: MasterService.UserService,
     private bootstrapAlertService: BootstrapAlertService,
-    private commonService: CommonService,
-    private locationService: MasterService.LocationService) {
+    private locationService: MasterService.LocationService,
+    private documentService: AppCommonService.DocumentService,
+    private commonService: CommonService
+  ) {
     this.userstoragedata = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER);
   }
 
@@ -61,6 +63,20 @@ export class ProfileComponent implements OnInit {
       this.userfile = this.userObj.fullname.substring(0, 1);
     }
   }
+  updateuser() {
+    this.userService.byId(this.userstoragedata.userid).subscribe(result => {
+      const userResponse = JSON.parse(result._body);
+      if (userResponse.status) {
+        this.userObj = userResponse.data;
+        this.localStorageService.setItem(AppConstant.LOCALSTORAGE.USER, userResponse.data);
+        this.mainComponent.userstoragedata.fullname = userResponse.data.fullname;
+        this.mainComponent.checkProfile();
+        this.checkProfileImg();
+      }
+
+    });
+  }
+
   getUser() {
     this.userService.byId(this.userstoragedata.userid).subscribe(res => {
       const response = JSON.parse(res._body);
@@ -191,17 +207,7 @@ export class ProfileComponent implements OnInit {
           this.bootstrapAlertService.showSucccess(response.message);
           // this.localStorageService.setItem(AppConstant.LOCALSTORAGE.USER, response.data);
           this.mainComponent.userstoragedata.fullname = response.data.fullname;
-          //  if (this.userimgfile) {
-          this.userService.byId(this.userstoragedata.userid).subscribe(result => {
-            const userResponse = JSON.parse(result._body);
-            if (userResponse.status) {
-              this.userObj = userResponse.data;
-              this.localStorageService.setItem(AppConstant.LOCALSTORAGE.USER, userResponse.data);
-              this.mainComponent.userstoragedata.fullname = userResponse.data.fullname;
-              this.mainComponent.checkProfile();
-              this.checkProfileImg();
-            }
-          });
+          this.updateuser();
           // }
         } else {
           this.bootstrapAlertService.showError(response.message);
@@ -239,5 +245,18 @@ export class ProfileComponent implements OnInit {
       this.userfile = e.target['result'];
     });
     reader.readAsDataURL(event.target.files[0]);
+  }
+
+  remove() {
+    let data = {} as any;
+    let docid = this.userObj.profileimg.docid;
+    data.status = "deleted";
+    let a = this;
+    this.documentService.update(data, docid).subscribe(res => {
+      const response = JSON.parse(res._body);
+      this.profileimage = false;
+      this.userfile = this.userObj.fullname.substring(0, 1);
+      a.updateuser();
+    })
   }
 }
