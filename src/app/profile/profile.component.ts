@@ -188,7 +188,6 @@ export class ProfileComponent implements OnInit {
       this.userService.update(formData, this.userstoragedata.userid).subscribe(res => {
         const response = JSON.parse(res._body);
         if (response.status) {
-
           this.bootstrapAlertService.showSucccess(response.message);
           // this.localStorageService.setItem(AppConstant.LOCALSTORAGE.USER, response.data);
           this.mainComponent.userstoragedata.fullname = response.data.fullname;
@@ -240,9 +239,5 @@ export class ProfileComponent implements OnInit {
       this.userfile = e.target['result'];
     });
     reader.readAsDataURL(event.target.files[0]);
-
   }
-
-
-
 }

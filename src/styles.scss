@@ -1728,3 +1728,10 @@ select-dropdown{
         top: 60px;
     }
 }
+.card.project-task{
+    .amcharts-chart-div{
+        a{
+            display:none !important;
+        }
+    }
+}

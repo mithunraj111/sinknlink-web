@@ -91,19 +91,23 @@ export class VipNumberRegistrationComponent implements OnInit {
   }
 
   getAvailableList() {
-    this.loadingIndicator = true;
-    let service = this.fancynumberService.getList(this.condition);
-    service.subscribe(res => {
-      const response = JSON.parse(res._body);
-      if (response.status) {
-        this.loadingIndicator = false;
-        this.data = response.data;
-        this.tempFilter = this.data;
-      } else {
-        this.bootstrapAlertService.showError(response.message);
-      }
-    });
-  }
+    if(this.currentTab == 'ALLOCATED'){
+      this.getAllocatedBusiness();
+    } else {
+      this.loadingIndicator = true;
+      let service = this.fancynumberService.getList(this.condition);
+      service.subscribe(res => {
+        const response = JSON.parse(res._body);
+        if (response.status) {
+          this.loadingIndicator = false;
+          this.data = response.data;
+          this.tempFilter = this.data;
+        } else {
+          this.bootstrapAlertService.showError(response.message);
+        }
+      });
+    }
+    }
 
   openMyModal(event) {
     document.querySelector('#' + event).classList.add('md-show');

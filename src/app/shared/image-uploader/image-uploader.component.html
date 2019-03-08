@@ -4,9 +4,7 @@
             <div class="dropbox">
                 <input type="file" [disabled]="disablePicker" (change)="selectedImg($event.target.name, $event.target.files)"
                     accept="image/*" class="input-file">
-                <p>Drag your file(s) here to begin
-                    <br>or click to browse
-                </p>
+                <p>Click here to browse your files</p>
             </div>
         </div>
         <div class="col-sm-12 col-md-8 imagePicked">
