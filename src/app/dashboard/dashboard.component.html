@@ -73,7 +73,7 @@
                     </div>
                   </td>
                   <td>
-                    <p class="d-inline-block m-r-20">{( bcount?.count/counts[0]?.count ) *100 | number:'.0-0'}}%</p>
+                    <p class="d-inline-block m-r-20">{{( bcount?.count/counts[0]?.count ) *100 | number:'.0-0'}}%</p>
                     <div class="progress d-inline-block">
                       <div class="progress-bar bg-c-blue" role="progressbar" aria-valuemin="0" aria-valuemax="100"
                         [style.width]="(( bcount?.count/counts[0]?.count ) *100) + '%' ">
