@@ -4,6 +4,7 @@ import { MenuItems } from '../../shared/menu-items/menu-items';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { AppConstant } from 'src/app/app.constants';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
+import { NgxPermissionsService } from 'ngx-permissions';
 
 @Component({
   selector: 'app-main',
@@ -129,7 +130,7 @@ export class MainComponent implements OnInit {
   fullname: any;
   userprofile = false;
   constructor(public menuItems: MenuItems, private router: Router, private route: ActivatedRoute,
-    private lstorageService: LocalStorageService) {
+    private lstorageService: LocalStorageService, private permissionsService: NgxPermissionsService) {
     this.router.events
       .filter(event => event instanceof NavigationEnd)
       .subscribe(() => {
@@ -430,6 +431,7 @@ export class MainComponent implements OnInit {
   }
 
   logout() {
+    this.permissionsService.flushPermissions();
     this.lstorageService.removeItem(AppConstant.LOCALSTORAGE.USER);
     this.lstorageService.removeItem(AppConstant.LOCALSTORAGE.ISAUTHENTICATED);
     this.lstorageService.removeItem(AppConstant.LOCALSTORAGE.SCREENS);

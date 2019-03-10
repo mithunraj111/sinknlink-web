@@ -19,6 +19,7 @@ import { SelectModule } from 'ng-select';
 import { TagInputModule } from 'ngx-chips';
 import { DataTableModule } from 'angular2-datatable';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { NgxPermissionsModule } from 'ngx-permissions';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     FileUploadModule,
     SelectModule,
     TagInputModule,
-    DataTableModule
+    DataTableModule,
+    NgxPermissionsModule.forRoot()
   ],
   providers: [
     MenuItems,
