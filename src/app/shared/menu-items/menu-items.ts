@@ -1,186 +1,5 @@
 import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
-const MENUITEMS = [
-  {
-    state: 'dashboard',
-    short_label: 'D',
-    name: 'Dashboard',
-    type: 'link',
-    icon: 'fa fa-home',
-    code: 'dashboard',
-    data: {
-      title: 'Dashboard'
-    }
-  },
-  {
-    state: 'masters',
-    short_label: 'M',
-    name: 'Masters',
-    type: 'sub',
-    icon: 'fa fa-user',
-    code: 'masters',
-    children: [
-      {
-        state: 'users',
-        name: 'Users',
-        code: 'm_users',
-        data: {
-          title: 'Users'
-        }
-      },
-      {
-        state: 'roles',
-        name: 'Roles',
-        code: 'm_roles',
-        data: {
-          title: 'Roles'
-        }
-      },
-      {
-        state: 'category',
-        name: 'Categories',
-        code: 'm_categories',
-        data: {
-          title: 'Category'
-        }
-      },
-      {
-        state: 'location',
-        name: 'Location',
-        code: 'm_location',
-        data: {
-          title: 'Location'
-        }
-      }
-    ]
-  },
-  {
-    state: 'business',
-    short_label: 'B',
-    name: 'Business',
-    type: 'sub',
-    icon: 'fa fa-line-chart',
-    code: 'business',
-    children: [
-      {
-        state: 'customers',
-        name: 'Customers',
-        code: 'b_customers',
-        data: {
-          title: 'Customers'
-        }
-      },
-      {
-        state: 'consumers',
-        name: 'Consumers',
-        code: 'b_consumers',
-        data: {
-          title: 'Consumers'
-        }
-      },
-      {
-        state: 'dealer',
-        name: 'Dealers',
-        code: 'b_dealers',
-        data: {
-          title: 'Dealers'
-        }
-      }
-    ]
-  },
-  {
-    state: 'admin',
-    short_label: 'A',
-    name: 'Admin',
-    type: 'sub',
-    icon: 'fa fa-user',
-    code: 'admin',
-    children: [
-      {
-        state: 'events',
-        name: 'Events',
-        code: 'a_events',
-        data: {
-          title: 'Events'
-        }
-      },
-      {
-        state: 'donations',
-        name: 'Donations',
-        code: 'a_donations',
-        data: {
-          title: 'Donations'
-        }
-      },
-      {
-        state: 'vipnumberregistration',
-        name: 'VIP Number Registration',
-        code: 'a_vipno',
-        data: {
-          title: 'VIP Number Registration'
-        }
-      },
-      {
-        state: 'lookup',
-        name: 'Look up',
-        code: 'a_lookup',
-        data: {
-          title: 'Look up'
-        }
-      }
-    ]
-  },
-  {
-    state: 'reports',
-    short_label: 'R',
-    name: 'Reports',
-    type: 'sub',
-    icon: 'fa fa-file-text-o',
-    code: 'reports',
-    children: [
-      {
-        state: 'areacategories',
-        name: 'Area & Categories',
-        code: 'r_areacategories',
-        data: {
-          title: 'Area & Categories'
-        }
-      },
-      {
-        state: 'dealer',
-        name: 'Dealer Report',
-        code: 'r_dealer',
-        data: {
-          title: 'Dealer Report'
-        }
-      },
-      {
-        state: 'customerdetail',
-        name: 'Customer Detail Report',
-        code: 'r_customer',
-        data: {
-          title: 'Customer Detail Report'
-        }
-      },
-      {
-        state: 'consumer',
-        name: 'Consumer Report',
-        code: 'r_consumer',
-        data: {
-          title: 'Consumer Report'
-        }
-      },
-      {
-        state: 'payments',
-        name: 'Payment Report',
-        code: 'r_payments',
-        data: {
-          title: 'Payment Report'
-        }
-      }
-    ]
-  }
-];
 
 @Injectable()
 export class MenuItems {
@@ -188,12 +7,13 @@ export class MenuItems {
   constructor() {
   }
   formMenu(availScreens) {
+    const menus = this.getMenus();
     this.menuItems = [];
     const groupedMenus = _.groupBy(availScreens, 'prntscreencode');
     const self = this;
-    const len = MENUITEMS.length;
-    for (let i = 0; i < MENUITEMS.length; i++) {
-      const item = MENUITEMS[i];
+    const len = menus.length;
+    for (let i = 0; i < menus.length; i++) {
+      const item = menus[i];
       if (_.has(groupedMenus, item.code)) {
         const data: any = _.get(groupedMenus, item.code);
         if (!_.isUndefined(data) && _.isUndefined(item.children)) {
@@ -220,5 +40,188 @@ export class MenuItems {
         return self.menuItems;
       }
     }
+  }
+  getMenus() {
+    return [
+      {
+        state: 'dashboard',
+        short_label: 'D',
+        name: 'Dashboard',
+        type: 'link',
+        icon: 'fa fa-home',
+        code: 'dashboard',
+        data: {
+          title: 'Dashboard'
+        }
+      },
+      {
+        state: 'masters',
+        short_label: 'M',
+        name: 'Masters',
+        type: 'sub',
+        icon: 'fa fa-user',
+        code: 'masters',
+        children: [
+          {
+            state: 'users',
+            name: 'Users',
+            code: 'm_users',
+            data: {
+              title: 'Users'
+            }
+          },
+          {
+            state: 'roles',
+            name: 'Roles',
+            code: 'm_roles',
+            data: {
+              title: 'Roles'
+            }
+          },
+          {
+            state: 'category',
+            name: 'Categories',
+            code: 'm_categories',
+            data: {
+              title: 'Category'
+            }
+          },
+          {
+            state: 'location',
+            name: 'Location',
+            code: 'm_location',
+            data: {
+              title: 'Location'
+            }
+          }
+        ]
+      },
+      {
+        state: 'business',
+        short_label: 'B',
+        name: 'Business',
+        type: 'sub',
+        icon: 'fa fa-line-chart',
+        code: 'business',
+        children: [
+          {
+            state: 'customers',
+            name: 'Customers',
+            code: 'b_customers',
+            data: {
+              title: 'Customers'
+            }
+          },
+          {
+            state: 'consumers',
+            name: 'Consumers',
+            code: 'b_consumers',
+            data: {
+              title: 'Consumers'
+            }
+          },
+          {
+            state: 'dealer',
+            name: 'Dealers',
+            code: 'b_dealers',
+            data: {
+              title: 'Dealers'
+            }
+          }
+        ]
+      },
+      {
+        state: 'admin',
+        short_label: 'A',
+        name: 'Admin',
+        type: 'sub',
+        icon: 'fa fa-user',
+        code: 'admin',
+        children: [
+          {
+            state: 'events',
+            name: 'Events',
+            code: 'a_events',
+            data: {
+              title: 'Events'
+            }
+          },
+          {
+            state: 'donations',
+            name: 'Donations',
+            code: 'a_donations',
+            data: {
+              title: 'Donations'
+            }
+          },
+          {
+            state: 'vipnumberregistration',
+            name: 'VIP Number Registration',
+            code: 'a_vipno',
+            data: {
+              title: 'VIP Number Registration'
+            }
+          },
+          {
+            state: 'lookup',
+            name: 'Look up',
+            code: 'a_lookup',
+            data: {
+              title: 'Look up'
+            }
+          }
+        ]
+      },
+      {
+        state: 'reports',
+        short_label: 'R',
+        name: 'Reports',
+        type: 'sub',
+        icon: 'fa fa-file-text-o',
+        code: 'reports',
+        children: [
+          {
+            state: 'areacategories',
+            name: 'Area & Categories',
+            code: 'r_areacategories',
+            data: {
+              title: 'Area & Categories'
+            }
+          },
+          {
+            state: 'dealer',
+            name: 'Dealer Report',
+            code: 'r_dealer',
+            data: {
+              title: 'Dealer Report'
+            }
+          },
+          {
+            state: 'customerdetail',
+            name: 'Customer Detail Report',
+            code: 'r_customer',
+            data: {
+              title: 'Customer Detail Report'
+            }
+          },
+          {
+            state: 'consumer',
+            name: 'Consumer Report',
+            code: 'r_consumer',
+            data: {
+              title: 'Consumer Report'
+            }
+          },
+          {
+            state: 'payments',
+            name: 'Payment Report',
+            code: 'r_payments',
+            data: {
+              title: 'Payment Report'
+            }
+          }
+        ]
+      }
+    ];
   }
 }
