@@ -21,7 +21,7 @@ import { DataTableModule } from 'angular2-datatable';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import { AccessdeniedComponent } from './accessdenied/accessdenied.component';
-
+import { AuthGuard } from './services/auth.guard';
 
 @NgModule({
   declarations: [
@@ -51,7 +51,7 @@ import { AccessdeniedComponent } from './accessdenied/accessdenied.component';
     BootstrapAlertService,
     HttpHandlerService,
     LocalStorageService,
-    CommonService],
+    CommonService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -3,12 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { RolesComponent } from './roles.component';
 import { AddEditRoleComponent } from './add-edit-role/add-edit-role.component';
 import { NgxPermissionsGuard } from 'ngx-permissions';
+import { AuthGuard } from '../../services/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: RolesComponent,
-    canActivate: [NgxPermissionsGuard],
+    canActivate: [AuthGuard, NgxPermissionsGuard],
     data: {
       title: 'Roles',
       icon: 'ti-settings',
@@ -16,7 +17,7 @@ const routes: Routes = [
       status: false,
       permissions: {
         only: ['Roles'],
-        redirectTo: '/accessdenied'
+        redirectTo: '/'
       }
     }
   },

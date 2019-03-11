@@ -2,12 +2,13 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LocationComponent } from './location/location.component';
 import { CategoryComponent } from './category/category.component';
-import { NgxPermissionsGuard } from 'ngx-permissions';
+import { AuthGuard } from '../services/auth.guard';
 
 
 const routes: Routes = [
   {
     path: '',
+    canActivate: [AuthGuard],
     data: {
       title: 'Masters',
       status: false
@@ -15,53 +16,53 @@ const routes: Routes = [
     children: [
       {
         path: 'users',
-        canActivate: [NgxPermissionsGuard],
+        canActivate: [AuthGuard],
         loadChildren: './users/users.module#UsersModule',
         data: {
           title: 'User',
           status: false,
           permissions: {
             only: ['Users'],
-            redirectTo: '/accessdenied'
+            redirectTo: '/'
           }
         }
       },
       {
         path: 'roles',
-        canActivate: [NgxPermissionsGuard],
+        canActivate: [AuthGuard],
         loadChildren: './roles/roles.module#RolesModule',
         data: {
           title: 'Role',
           status: false,
           permissions: {
             only: ['Roles'],
-            redirectTo: '/accessdenied'
+            redirectTo: '/'
           }
         }
       },
       {
         path: 'location',
         component: LocationComponent,
-        canActivate: [NgxPermissionsGuard],
+        canActivate: [AuthGuard],
         data: {
           title: 'Locations',
           status: false,
           permissions: {
             only: ['Location'],
-            redirectTo: '/accessdenied'
+            redirectTo: '/'
           }
         }
       },
       {
         path: 'category',
         component: CategoryComponent,
-        canActivate: [NgxPermissionsGuard],
+        canActivate: [AuthGuard],
         data: {
           title: 'Business Categories',
           status: false,
           permissions: {
             only: ['Categories'],
-            redirectTo: '/accessdenied'
+            redirectTo: '/'
           }
         }
       }

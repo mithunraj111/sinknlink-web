@@ -48,14 +48,14 @@ export class ImageUploaderComponent implements OnInit, OnChanges {
 
         for (let index = 0; index < files.length; index++) {
             const file = files[index];
+            console.log(file);
             if (
                 (file.type == "image/jpg" ||
                     file.type == "image/jpeg" ||
                     file.type == "image/png" ||
                     file.type == "image/bmp" ||
-                    file.type == "image/gif") && file.size < AppConstant.MAX_FILE_SIZE
+                    file.type == "image/gif" || file.type == 'video/mp4') && file.size < AppConstant.MAX_FILE_SIZE
             ) {
-
                 let location = document.getElementsByClassName("imagePicked");
                 let imageFile = document.createElement("img");
                 let imageDeleteIcon = document.createElement("i");
@@ -67,11 +67,10 @@ export class ImageUploaderComponent implements OnInit, OnChanges {
                 this.images.push({ image: file, id: ("img" + (id + 1)).toString() });
 
                 var reader = new FileReader();
-                reader.onload = function (e) {
+                reader.onload = function (e: any) {
                     imageContainer.setAttribute("id", id.toString());
                     imageContainer.setAttribute("class", "extimage");
-
-                    imageFile.setAttribute("src", reader.result.toString());
+                    imageFile.setAttribute("src", e.target.result.toString());
                     imageFile.setAttribute("id", (id + 1).toString());
                     imageFile.setAttribute("class", "extImage_img");
 
@@ -94,7 +93,7 @@ export class ImageUploaderComponent implements OnInit, OnChanges {
                     });
                     imageContainer.appendChild(imageDeleteIcon);
                     imageContainer.appendChild(imageFile);
-                    reader.abort();
+                    // reader.abort();
                 };
                 reader.readAsDataURL(file);
                 location[0].appendChild(imageContainer);

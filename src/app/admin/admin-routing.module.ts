@@ -10,6 +10,7 @@ import { LookupComponent } from './lookup/lookup.component';
 import { AddEditLookupComponent } from './lookup/add-edit-lookup/add-edit-lookup.component';
 import { from } from 'rxjs';
 import { NgxPermissionsGuard } from 'ngx-permissions';
+import { AuthGuard } from '../services/auth.guard';
 
 const routes: Routes = [
   {
@@ -18,13 +19,13 @@ const routes: Routes = [
       {
         path: 'events',
         component: EventsComponent,
-        canActivate: [NgxPermissionsGuard],
+        canActivate: [AuthGuard, NgxPermissionsGuard],
         data: {
           title: 'Events',
           status: false,
           permissions: {
             only: ['Events'],
-            redirectTo: '/accessdenied'
+            redirectTo: '/'
           }
         },
       },
@@ -57,13 +58,13 @@ const routes: Routes = [
       {
         path: 'donations',
         component: DonationsComponent,
-        canActivate: [NgxPermissionsGuard],
+        canActivate: [AuthGuard, NgxPermissionsGuard],
         data: {
           title: 'Donations',
           status: false,
           permissions: {
             only: ['Donations'],
-            redirectTo: '/accessdenied'
+            redirectTo: '/'
           }
         },
       },
@@ -96,13 +97,13 @@ const routes: Routes = [
       {
         path: 'vipnumberregistration',
         component: VipNumberRegistrationComponent,
-        canActivate: [NgxPermissionsGuard],
+        canActivate: [AuthGuard, NgxPermissionsGuard],
         data: {
           title: 'VIP number registration',
           status: false,
           permissions: {
             only: ['VIP Number Registration'],
-            redirectTo: '/accessdenied'
+            redirectTo: '/'
           }
         },
       },
@@ -135,13 +136,13 @@ const routes: Routes = [
       {
         path: 'lookup',
         component: LookupComponent,
-        canActivate: [NgxPermissionsGuard],
+        canActivate: [AuthGuard, NgxPermissionsGuard],
         data: {
           title: 'Lookup',
           status: false,
           permissions: {
             only: ['Lookup'],
-            redirectTo: '/accessdenied'
+            redirectTo: '/'
           }
         },
       },

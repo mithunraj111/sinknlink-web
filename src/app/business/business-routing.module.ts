@@ -13,6 +13,7 @@ import { CustomerPaymentsComponent } from './customer/add-edit-customer/customer
 import { CustomerGalleryComponent } from './customer/add-edit-customer/customer-gallery/customer-gallery.component';
 import { ViewConsumerComponent } from './consumer/view-consumer/view-consumer.component';
 import { NgxPermissionsGuard } from 'ngx-permissions';
+import { AuthGuard } from '../services/auth.guard';
 
 const routes: Routes = [
   {
@@ -21,13 +22,13 @@ const routes: Routes = [
       {
         path: 'customers',
         component: CustomerComponent,
-        canActivate: [NgxPermissionsGuard],
+        canActivate: [AuthGuard, NgxPermissionsGuard],
         data: {
           title: 'Customers',
           status: false,
           permissions: {
             only: ['Customers'],
-            redirectTo: '/accessdenied'
+            redirectTo: '/'
           }
         },
       },
@@ -99,26 +100,26 @@ const routes: Routes = [
       {
         path: 'consumers',
         component: ConsumerComponent,
-        canActivate: [NgxPermissionsGuard],
+        canActivate: [AuthGuard, NgxPermissionsGuard],
         data: {
           title: 'Consumers',
           status: false,
           permissions: {
             only: ['Consumers'],
-            redirectTo: '/accessdenied'
+            redirectTo: '/'
           }
         },
       },
       {
         path: 'dealer',
         component: DealerComponent,
-        canActivate: [NgxPermissionsGuard],
+        canActivate: [AuthGuard, NgxPermissionsGuard],
         data: {
           title: 'Dealers',
           status: false,
           permissions: {
             only: ['Dealers'],
-            redirectTo: '/accessdenied'
+            redirectTo: '/'
           }
         },
       },

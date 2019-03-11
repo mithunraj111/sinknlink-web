@@ -6,6 +6,7 @@ import { DealerComponent } from './dealer/dealer.component';
 import { ConsumerComponent } from './consumer/consumer.component';
 import { CustomerdetailComponent } from './customerdetail/customerdetail.component';
 import { NgxPermissionsGuard } from 'ngx-permissions';
+import { AuthGuard } from '../services/auth.guard';
 
 const routes: Routes = [
   {
@@ -14,65 +15,65 @@ const routes: Routes = [
       {
         path: 'areacategories',
         component: AreaCategoriesComponent,
-        canActivate: [NgxPermissionsGuard],
+        canActivate: [AuthGuard, NgxPermissionsGuard],
         data: {
           title: 'Area & Category Report',
           status: false,
           permissions: {
             only: ['Area & Categories'],
-            redirectTo: '/accessdenied'
+            redirectTo: '/'
           }
         },
       },
       {
         path: 'payments',
         component: PaymentComponent,
-        canActivate: [NgxPermissionsGuard],
+        canActivate: [AuthGuard, NgxPermissionsGuard],
         data: {
           title: 'Payment Report',
           status: false,
           permissions: {
             only: ['Payments'],
-            redirectTo: '/accessdenied'
+            redirectTo: '/'
           }
         },
       },
       {
         path: 'dealer',
         component: DealerComponent,
-        canActivate: [NgxPermissionsGuard],
+        canActivate: [AuthGuard, NgxPermissionsGuard],
         data: {
           title: 'Dealer Report',
           status: false,
           permissions: {
             only: ['Dealer Report'],
-            redirectTo: '/accessdenied'
+            redirectTo: '/'
           }
         },
       },
       {
         path: 'consumer',
         component: ConsumerComponent,
-        canActivate: [NgxPermissionsGuard],
+        canActivate: [AuthGuard, NgxPermissionsGuard],
         data: {
           title: 'Consumer Report',
           status: false,
           permissions: {
             only: ['Consumer Report'],
-            redirectTo: '/accessdenied'
+            redirectTo: '/'
           }
         },
       },
       {
         path: 'customerdetail',
         component: CustomerdetailComponent,
-        canActivate: [NgxPermissionsGuard],
+        canActivate: [AuthGuard, NgxPermissionsGuard],
         data: {
           title: 'Customer Detail Report',
           status: false,
           permissions: {
             only: ['Customer Detail Report'],
-            redirectTo: '/accessdenied'
+            redirectTo: '/'
           }
         },
       }
