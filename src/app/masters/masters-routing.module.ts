@@ -22,7 +22,7 @@ const routes: Routes = [
           status: false,
           permissions: {
             only: ['Users'],
-            redirectTo: '/'
+            redirectTo: '/accessdenied'
           }
         }
       },
@@ -35,7 +35,7 @@ const routes: Routes = [
           status: false,
           permissions: {
             only: ['Roles'],
-            redirectTo: '/'
+            redirectTo: '/accessdenied'
           }
         }
       },
@@ -48,7 +48,7 @@ const routes: Routes = [
           status: false,
           permissions: {
             only: ['Location'],
-            redirectTo: '/'
+            redirectTo: '/accessdenied'
           }
         }
       },
@@ -61,7 +61,7 @@ const routes: Routes = [
           status: false,
           permissions: {
             only: ['Categories'],
-            redirectTo: '/'
+            redirectTo: '/accessdenied'
           }
         }
       }

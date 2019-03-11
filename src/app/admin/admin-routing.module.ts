@@ -9,6 +9,8 @@ import { AddEditVipRegistrationNumberComponent } from './vip-number-registration
 import { LookupComponent } from './lookup/lookup.component';
 import { AddEditLookupComponent } from './lookup/add-edit-lookup/add-edit-lookup.component';
 import { from } from 'rxjs';
+import { NgxPermissionsGuard } from 'ngx-permissions';
+
 const routes: Routes = [
   {
     path: '',
@@ -16,97 +18,157 @@ const routes: Routes = [
       {
         path: 'events',
         component: EventsComponent,
+        canActivate: [NgxPermissionsGuard],
         data: {
           title: 'Events',
-          status: false
+          status: false,
+          permissions: {
+            only: ['Events'],
+            redirectTo: '/accessdenied'
+          }
         },
       },
       {
         path: 'event/create',
         component: AddEditEventComponent,
+        canActivate: [NgxPermissionsGuard],
         data: {
           title: 'Event',
-          status: false
+          status: false,
+          permissions: {
+            only: ['Events'],
+            redirectTo: '/accessdenied'
+          }
         },
       },
       {
         path: 'event/edit/:id',
         component: AddEditEventComponent,
+        canActivate: [NgxPermissionsGuard],
         data: {
           title: 'Event',
-          status: false
+          status: false,
+          permissions: {
+            only: ['Events'],
+            redirectTo: '/accessdenied'
+          }
         },
       },
       {
         path: 'donations',
         component: DonationsComponent,
+        canActivate: [NgxPermissionsGuard],
         data: {
           title: 'Donations',
-          status: false
+          status: false,
+          permissions: {
+            only: ['Donations'],
+            redirectTo: '/accessdenied'
+          }
         },
       },
       {
         path: 'donation/create',
         component: AddEditDonationComponent,
+        canActivate: [NgxPermissionsGuard],
         data: {
           title: 'Donation',
-          status: false
+          status: false,
+          permissions: {
+            only: ['Donations'],
+            redirectTo: '/accessdenied'
+          }
         },
       },
       {
         path: 'donation/edit/:id',
         component: AddEditDonationComponent,
+        canActivate: [NgxPermissionsGuard],
         data: {
           title: 'Donation',
-          status: false
+          status: false,
+          permissions: {
+            only: ['Donations'],
+            redirectTo: '/accessdenied'
+          }
         },
       },
       {
         path: 'vipnumberregistration',
         component: VipNumberRegistrationComponent,
+        canActivate: [NgxPermissionsGuard],
         data: {
           title: 'VIP number registration',
-          status: false
+          status: false,
+          permissions: {
+            only: ['VIP Number Registration'],
+            redirectTo: '/accessdenied'
+          }
         },
       },
       {
         path: 'vipnumberregistration/create',
         component: AddEditVipRegistrationNumberComponent,
+        canActivate: [NgxPermissionsGuard],
         data: {
           title: 'VIP number registration',
-          status: false
+          status: false,
+          permissions: {
+            only: ['VIP Number Registration'],
+            redirectTo: '/accessdenied'
+          }
         },
       },
       {
         path: 'vipnumberregistration/edit/:id',
         component: AddEditVipRegistrationNumberComponent,
+        canActivate: [NgxPermissionsGuard],
         data: {
           title: 'VIP number registration',
-          status: false
+          status: false,
+          permissions: {
+            only: ['VIP Number Registration'],
+            redirectTo: '/accessdenied'
+          }
         },
       },
       {
         path: 'lookup',
         component: LookupComponent,
+        canActivate: [NgxPermissionsGuard],
         data: {
           title: 'Lookup',
-          status: false
+          status: false,
+          permissions: {
+            only: ['Lookup'],
+            redirectTo: '/accessdenied'
+          }
         },
       },
       {
         path: 'lookup/create',
         component: AddEditLookupComponent,
+        canActivate: [NgxPermissionsGuard],
         data: {
           title: 'Lookup',
-          status: false
+          status: false,
+          permissions: {
+            only: ['Lookup'],
+            redirectTo: '/accessdenied'
+          }
         },
       },
       {
         path: 'lookup/edit/:id',
         component: AddEditLookupComponent,
+        canActivate: [NgxPermissionsGuard],
         data: {
           title: 'Lookup',
-          status: false
+          status: false,
+          permissions: {
+            only: ['Lookup'],
+            redirectTo: '/accessdenied'
+          }
         },
       }
     ],

@@ -4,6 +4,7 @@ import { MainComponent } from './layout/main/main.component';
 import { AuthComponent } from './layout/auth/auth.component';
 import { ProfileComponent } from './profile/profile.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { AccessdeniedComponent } from './accessdenied/accessdenied.component';
 
 const routes: Routes = [
   {
@@ -19,7 +20,7 @@ const routes: Routes = [
         path: 'dashboard',
         component: DashboardComponent,
         data: {
-          title: 'Dashboard' 
+          title: 'Dashboard'
         }
       },
       {
@@ -45,6 +46,10 @@ const routes: Routes = [
         path: 'reports',
         loadChildren: './reports/reports.module#ReportsModule'
       },
+      {
+        path: 'accessdenied',
+        component: AccessdeniedComponent
+      }
     ]
   },
   {

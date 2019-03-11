@@ -20,6 +20,7 @@ import { TagInputModule } from 'ngx-chips';
 import { DataTableModule } from 'angular2-datatable';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NgxPermissionsModule } from 'ngx-permissions';
+import { AccessdeniedComponent } from './accessdenied/accessdenied.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { NgxPermissionsModule } from 'ngx-permissions';
     MainComponent,
     AuthComponent,
     ProfileComponent,
-    DashboardComponent
+    DashboardComponent,
+    AccessdeniedComponent
   ],
   imports: [
     BrowserModule,

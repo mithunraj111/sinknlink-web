@@ -7,7 +7,6 @@ import { AppConstant } from '../../app.constants';
 import { BusinessService, LocalStorageService, CommonService } from '../../services';
 import { DashboardComponent } from 'src/app/dashboard/dashboard.component';
 import { routerNgProbeToken } from '@angular/router/src/router_module';
-import { NgxPermissionsService } from 'ngx-permissions';
 import * as _ from 'lodash';
 @Component({
   selector: 'app-login',
@@ -26,7 +25,7 @@ export class LoginComponent implements OnInit {
     private loginService: LoginService,
     private localStorageService: LocalStorageService,
     private dealerService: BusinessService.DealerService,
-    private router: Router, private permissionsService: NgxPermissionsService) {
+    private router: Router) {
     this.loginForm = this.fb.group({
       mobileno: [null, Validators.compose([Validators.required, Validators.maxLength(13)])],
       password: [null, Validators.required],
@@ -57,15 +56,6 @@ export class LoginComponent implements OnInit {
           this.localStorageService.addItem(AppConstant.LOCALSTORAGE.ISAUTHENTICATED, response.status);
           if (response.data.role != null) {
             this.localStorageService.addItem(AppConstant.LOCALSTORAGE.SCREENS, response.data.role.uiactions);
-            let permissions = _.map(response.data.role.uiactions, function (item: any) {
-              if (item.assignedpermissions) {
-                return item.screenname;
-              }
-            });
-            permissions = _.uniq(permissions);
-            permissions = _.compact(permissions);
-            console.log(permissions);
-            this.permissionsService.loadPermissions(permissions);
           }
           if (response.data.roleid === 2) {
             this.dealerService.list({ userid: response.data.userid }).subscribe(resp => {

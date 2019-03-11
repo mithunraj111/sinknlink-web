@@ -5,6 +5,7 @@ import { PaymentComponent } from './payment/payment.component';
 import { DealerComponent } from './dealer/dealer.component';
 import { ConsumerComponent } from './consumer/consumer.component';
 import { CustomerdetailComponent } from './customerdetail/customerdetail.component';
+import { NgxPermissionsGuard } from 'ngx-permissions';
 
 const routes: Routes = [
   {
@@ -13,41 +14,66 @@ const routes: Routes = [
       {
         path: 'areacategories',
         component: AreaCategoriesComponent,
+        canActivate: [NgxPermissionsGuard],
         data: {
           title: 'Area & Category Report',
-          status: false
+          status: false,
+          permissions: {
+            only: ['Area & Categories'],
+            redirectTo: '/accessdenied'
+          }
         },
       },
       {
         path: 'payments',
         component: PaymentComponent,
+        canActivate: [NgxPermissionsGuard],
         data: {
           title: 'Payment Report',
-          status: false
+          status: false,
+          permissions: {
+            only: ['Payments'],
+            redirectTo: '/accessdenied'
+          }
         },
       },
       {
         path: 'dealer',
         component: DealerComponent,
+        canActivate: [NgxPermissionsGuard],
         data: {
           title: 'Dealer Report',
-          status: false
+          status: false,
+          permissions: {
+            only: ['Dealer Report'],
+            redirectTo: '/accessdenied'
+          }
         },
       },
       {
         path: 'consumer',
         component: ConsumerComponent,
+        canActivate: [NgxPermissionsGuard],
         data: {
           title: 'Consumer Report',
-          status: false
+          status: false,
+          permissions: {
+            only: ['Consumer Report'],
+            redirectTo: '/accessdenied'
+          }
         },
       },
       {
         path: 'customerdetail',
         component: CustomerdetailComponent,
+        canActivate: [NgxPermissionsGuard],
         data: {
           title: 'Customer Detail Report',
-          status: false
+          status: false,
+          permissions: {
+            only: ['Customer Detail Report'],
+            redirectTo: '/accessdenied'
+          }
         },
       }
     ],

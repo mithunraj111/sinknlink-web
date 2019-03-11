@@ -12,6 +12,7 @@ import { AddEditDealerComponent } from './dealer/add-edit-dealer/add-edit-dealer
 import { CustomerPaymentsComponent } from './customer/add-edit-customer/customer-payments/customer-payments.component';
 import { CustomerGalleryComponent } from './customer/add-edit-customer/customer-gallery/customer-gallery.component';
 import { ViewConsumerComponent } from './consumer/view-consumer/view-consumer.component';
+import { NgxPermissionsGuard } from 'ngx-permissions';
 
 const routes: Routes = [
   {
@@ -20,113 +21,183 @@ const routes: Routes = [
       {
         path: 'customers',
         component: CustomerComponent,
+        canActivate: [NgxPermissionsGuard],
         data: {
           title: 'Customers',
-          status: false
+          status: false,
+          permissions: {
+            only: ['Customers'],
+            redirectTo: '/accessdenied'
+          }
         },
       },
       {
         path: 'customers/create',
         component: AddEditCustomerComponent,
+        canActivate: [NgxPermissionsGuard],
         data: {
           title: 'Customer',
-          status: false
+          status: false,
+          permissions: {
+            only: ['Customers'],
+            redirectTo: '/accessdenied'
+          }
         },
       },
       {
         path: 'customers/edit/:id',
         component: AddEditCustomerComponent,
+        canActivate: [NgxPermissionsGuard],
         data: {
           title: 'Customer',
-          status: false
+          status: false,
+          permissions: {
+            only: ['Customers'],
+            redirectTo: '/accessdenied'
+          }
         },
       },
       {
         path: 'customers/branches',
         component: CustomerBranchesComponent,
+        canActivate: [NgxPermissionsGuard],
         data: {
           title: 'Customer',
-          status: false
+          status: false,
+          permissions: {
+            only: ['Customers'],
+            redirectTo: '/accessdenied'
+          }
         },
       },
       {
         path: 'customers/gigs',
         component: CustomerGigsComponent,
+        canActivate: [NgxPermissionsGuard],
         data: {
           title: 'Customer',
-          status: false
+          status: false,
+          permissions: {
+            only: ['Customers'],
+            redirectTo: '/accessdenied'
+          }
         },
       },
       {
         path: 'customers/coupons',
         component: CustomerCouponsComponent,
+        canActivate: [NgxPermissionsGuard],
         data: {
           title: 'Customer',
-          status: false
+          status: false,
+          permissions: {
+            only: ['Customers'],
+            redirectTo: '/accessdenied'
+          }
         },
       },
       {
         path: 'consumers',
         component: ConsumerComponent,
+        canActivate: [NgxPermissionsGuard],
         data: {
           title: 'Consumers',
-          status: false
+          status: false,
+          permissions: {
+            only: ['Consumers'],
+            redirectTo: '/accessdenied'
+          }
         },
       },
       {
         path: 'dealer',
         component: DealerComponent,
+        canActivate: [NgxPermissionsGuard],
         data: {
           title: 'Dealers',
-          status: false
+          status: false,
+          permissions: {
+            only: ['Dealers'],
+            redirectTo: '/accessdenied'
+          }
         },
       },
       {
         path: 'dealer/create',
         component: AddEditDealerComponent,
+        canActivate: [NgxPermissionsGuard],
         data: {
           title: 'Dealer',
-          status: false
+          status: false,
+          permissions: {
+            only: ['Dealers'],
+            redirectTo: '/accessdenied'
+          }
         },
       },
       {
         path: 'dealer/edit/:id',
         component: AddEditDealerComponent,
+        canActivate: [NgxPermissionsGuard],
         data: {
           title: 'Dealer',
-          status: false
+          status: false,
+          permissions: {
+            only: ['Dealers'],
+            redirectTo: '/accessdenied'
+          }
         },
       },
       {
         path: 'customers/payment_details',
         component: CustomerPaymentsComponent,
+        canActivate: [NgxPermissionsGuard],
         data: {
           title: 'Customers',
-          status: false
+          status: false,
+          permissions: {
+            only: ['Customers'],
+            redirectTo: '/accessdenied'
+          }
         },
       },
       {
         path: 'customers/gallery',
         component: CustomerGalleryComponent,
+        canActivate: [NgxPermissionsGuard],
         data: {
           title: 'Customers',
-          status: false
+          status: false,
+          permissions: {
+            only: ['Customers'],
+            redirectTo: '/accessdenied'
+          }
         },
       },
       {
         path: 'consumers/view/:id',
         component: ViewConsumerComponent,
+        canActivate: [NgxPermissionsGuard],
         data: {
           title: 'Consumer',
-          status: false
+          status: false,
+          permissions: {
+            only: ['Consumers'],
+            redirectTo: '/accessdenied'
+          }
         },
       },
       {
         path: 'branch',
         component: AddEditCustomerComponent,
+        canActivate: [NgxPermissionsGuard],
         data: {
           title: 'Customers',
-          status: false
+          status: false,
+          permissions: {
+            only: ['Customers'],
+            redirectTo: '/accessdenied'
+          }
         },
       },
     ],
