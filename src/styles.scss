@@ -1739,3 +1739,11 @@ select-dropdown{
     width: 35%;
     margin: auto;
 }
+.star-rating{
+    tr{
+        border-top: none !important;
+    }
+    .br{
+        margin: 0px !important;
+    }
+}

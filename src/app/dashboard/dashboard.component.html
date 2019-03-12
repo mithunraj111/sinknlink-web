@@ -99,15 +99,15 @@
             </div>
           </div>
           <div class="table-responsive">
-            <table class="table table-hover">
-              <thead>
+            <table class="table table-hover star-rating">
+              <!-- <thead>
                 <tr>
                   <th>Rating</th>
                   <th>No. of consumers</th>
                 </tr>
-              </thead>
+              </thead> -->
               <tbody>
-                <tr *ngFor="let bcount of bizcounts">
+                <tr *ngFor="let bcount of bizdefaultrating">
                   <td>
                     <div class="task-contain">
                         <bar-rating class="star-rating" [(rate)]="bcount.label" [max]="5" [readOnly]="true"></bar-rating>
@@ -118,9 +118,6 @@
                   </td>
                 </tr>
               </tbody>
-              <div *ngIf="bizcounts?.length == 0">
-                <h5 class="text-center f-16">No data to display</h5>
-              </div>
             </table>
           </div>
         </div>

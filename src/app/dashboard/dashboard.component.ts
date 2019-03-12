@@ -16,27 +16,23 @@ declare const AmCharts: any;
 })
 export class DashboardComponent implements OnInit {
   counts = [];
-  bizcounts = [{"count":0, "label":5},
-  {"count":0, "label":4},
-  {"count":0, "label":3},
-  {"count":0, "label":2},
-  {"count":0, "label":1}];
-  // bizrating = [
-  //   {"count":0, "label":5},
-  //   {"count":0, "label":4},
-  //   {"count":0, "label":3},
-  //   {"count":0, "label":2},
-  //   {"count":0, "label":1}
-  //   ];
+  bizcounts = [];
+  bizdefaultrating = [
+    { "count": 0, "label": 5 },
+    { "count": 0, "label": 4 },
+    { "count": 0, "label": 3 },
+    { "count": 0, "label": 2 },
+    { "count": 0, "label": 1 }
+  ];
   searchcounts = [];
   service;
   userstoragedata = {} as any;
   constructor(private dashboardService: DashboardService,
     private localStorageService: LocalStorageService,
     config: NgbDropdownConfig) {
-      this.userstoragedata = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER);
-      config.placement = 'top-right';
-      config.autoClose = true;
+    this.userstoragedata = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER);
+    config.placement = 'top-right';
+    config.autoClose = true;
   }
   filterRange: String = "week";
 
@@ -92,7 +88,7 @@ export class DashboardComponent implements OnInit {
   }
   getDashboardCounts(fromDate, toDate) {
     if (this.userstoragedata.roleid == 3) {
-      this.service = this.dashboardService.customer({ "fromDate": fromDate, "toDate": toDate, "memid": this.userstoragedata.customer.membershipid});
+      this.service = this.dashboardService.customer({ "fromDate": fromDate, "toDate": toDate, "memid": this.userstoragedata.customer.membershipid });
     } else {
       this.service = this.dashboardService.getCounts({ "fromDate": fromDate, "toDate": toDate });
     }
@@ -106,7 +102,7 @@ export class DashboardComponent implements OnInit {
   getDashboardBizCounts(fromDate, toDate) {
     this.bizcounts = [];
     if (this.userstoragedata.roleid == 3) {
-      this.service = this.dashboardService.rating({ "fromDate": fromDate, "toDate": toDate, "memid": this.userstoragedata.customer.membershipid});
+      this.service = this.dashboardService.rating({ "fromDate": fromDate, "toDate": toDate, "memid": this.userstoragedata.customer.membershipid });
     } else {
       this.service = this.dashboardService.employeebusinessCount({ "fromDate": fromDate, "toDate": toDate });
     }
@@ -114,18 +110,23 @@ export class DashboardComponent implements OnInit {
       const response = JSON.parse(res._body);
       if (response.status) {
         this.bizcounts = response.data;
-        // if (this.userstoragedata.roleid == 3) {
-        //   _.map(this.bizcounts, function (item) {
-        //     if( item.count == this.bizrating.count ) {
-        //       this.bizrating.label = item.label;
-        //       this.bizcounts.label = this.bizrating.label;
-        //     }
-        //   });
-        // }
+        if (this.userstoragedata.roleid == 3) {
+          const self = this;
+          _.each(this.bizdefaultrating, function (item, idx) {
+            let countObj: any = _.find(self.bizcounts, function (itm) {
+              if (itm.label == item.label) {
+                return itm;
+              }
+            });
+            if (countObj != undefined) {
+              self.bizdefaultrating[idx].count = countObj.count;
+            }
+          });
+        }
       }
     })
   }
-  
+
   getSearchCounts(fromDate, toDate) {
     this.dashboardService.searchCount({ "fromDate": fromDate, "toDate": toDate }).subscribe(res => {
       const response = JSON.parse(res._body);
