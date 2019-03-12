@@ -3,11 +3,10 @@ import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { NgbDateCustomParserFormatter } from '../../shared/elements/dateParser';
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
-import { CommonService } from '../../services/common.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AppConstant } from '../../app.constants';
 import { AppMessages } from '../../app-messages';
-import { AppCommonService } from 'src/app/services';
+import { AppCommonService, BaseService, CommonService } from 'src/app/services';
 import { DatePipe } from '@angular/common';
 import downloadService from '../../services/download.service';
 import { Buffer } from 'buffer';
@@ -19,7 +18,7 @@ import { Buffer } from 'buffer';
     { provide: NgbDateParserFormatter, useClass: NgbDateCustomParserFormatter }
   ],
 })
-export class AreaCategoriesComponent implements OnInit {
+export class AreaCategoriesComponent extends BaseService implements OnInit {
   @ViewChild(DatatableComponent) areaTable: DatatableComponent;
   @ViewChild(DatatableComponent) categoriestable: DatatableComponent;
   areaCategoriesForm: FormGroup;
@@ -36,6 +35,8 @@ export class AreaCategoriesComponent implements OnInit {
   constructor(private bootstrapAlertService: BootstrapAlertService,
     private commonService: CommonService, private fb: FormBuilder,
     private reportService: AppCommonService.ReportService) {
+    super();
+    this.getScreenDetails('r_areacategories');
   }
 
   ngOnInit() {

@@ -218,7 +218,7 @@ export class AddEditCustomerComponent implements OnInit {
       longitude: [null, Validators.required],
       city: [''],
       locationid: [null, Validators.required],
-      workdays: [null, Validators.required],
+      workdays: [_.map(this.workDays, _.property('value')), Validators.required],
       starttime: [null, Validators.required],
       endtime: [null, Validators.required],
       acceptedpayments: [null, Validators.required],

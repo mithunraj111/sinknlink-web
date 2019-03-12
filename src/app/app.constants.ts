@@ -12,7 +12,7 @@ export const AppConstant = Object.freeze({
     DEALER: 'dealer-'
   },
   MAX_FILE_SIZE: 5000000,
-  PERMISSION: ['Create', 'View', 'Edit', 'Delete'],
+  PERMISSION: ['Create', 'View', 'Edit', 'Delete', 'Download'],
   BUTTON_TXT: {
     SAVE: 'Save',
     UPDATE: 'Update'
@@ -83,8 +83,8 @@ export const AppConstant = Object.freeze({
   ],
   // POST_TYPES
   POST_TYPES: [
-    { value: 'Full-time', label: 'Full-time' },
-    { value: 'Part-time', label: 'Part-time' }
+    { value: 'Full Time', label: 'Full Time' },
+    { value: 'Part Time', label: 'Part Time' }
   ],
   DEFAULT_DATA_ACCESS: 'All',
   API_CONFIG: {

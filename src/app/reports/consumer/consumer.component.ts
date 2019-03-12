@@ -3,13 +3,10 @@ import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { NgbDateCustomParserFormatter } from '../../shared/elements/dateParser';
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
-import { CommonService } from '../../services/common.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { CommonService, BaseService, AdminService, MasterService, AppCommonService } from '../../services';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { AppConstant } from '../../app.constants';
 import { AppMessages } from '../../app-messages';
-import { LookupService } from '../../services/admin';
-import { LocationService } from 'src/app/services/masters';
-import { ReportService } from 'src/app/services/common';
 import * as _ from 'lodash';
 import { Buffer } from 'buffer';
 import { DatePipe } from '@angular/common';
@@ -23,7 +20,7 @@ import downloadService from '../../services/download.service';
     { provide: NgbDateParserFormatter, useClass: NgbDateCustomParserFormatter }
   ],
 })
-export class ConsumerComponent implements OnInit {
+export class ConsumerComponent extends BaseService implements OnInit {
   consumerReportForm: FormGroup;
   displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   displaydateformat = AppConstant.API_CONFIG.ANG_DATE.displaydate;
@@ -39,11 +36,14 @@ export class ConsumerComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private lookupService: LookupService,
-    private locationService: LocationService,
+    private lookupService: AdminService.LookupService,
+    private locationService: MasterService.LocationService,
     private commonService: CommonService,
-    private reportService: ReportService,
-    private bootstrapAlertService: BootstrapAlertService) { }
+    private reportService: AppCommonService.ReportService,
+    private bootstrapAlertService: BootstrapAlertService) {
+    super();
+    this.getScreenDetails('r_consumer');
+  }
   ngOnInit() {
     this.initForm();
     this.getCity();

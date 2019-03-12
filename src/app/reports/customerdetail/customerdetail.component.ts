@@ -1,14 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
-import { LookupService } from 'src/app/services/admin';
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
-import { LocationService, CategoryService } from 'src/app/services/masters';
-import { CommonService, LocalStorageService } from 'src/app/services';
-import { ReportService } from 'src/app/services/common';
+import { CommonService, BaseService, MasterService, AdminService, AppCommonService } from 'src/app/services';
 import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { NgbDateCustomParserFormatter } from 'src/app/shared/elements/dateParser';
 import { AppMessages } from 'src/app/app-messages';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { AppConstant } from 'src/app/app.constants';
 import { DatePipe } from '@angular/common';
 import { Buffer } from 'buffer';
@@ -22,7 +19,7 @@ import downloadService from '../../services/download.service';
     { provide: NgbDateParserFormatter, useClass: NgbDateCustomParserFormatter }
   ],
 })
-export class CustomerdetailComponent implements OnInit {
+export class CustomerdetailComponent extends BaseService implements OnInit {
   public configOpenTopBar: any = 'open';
   @ViewChild(DatatableComponent) table: DatatableComponent;
   displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydate;
@@ -41,13 +38,13 @@ export class CustomerdetailComponent implements OnInit {
   userstoragedata = {} as any;
   constructor(private fb: FormBuilder,
     private commonService: CommonService,
-    private reportService: ReportService,
-    private lookupService: LookupService,
-    private categoryService: CategoryService,
-    private locationService: LocationService,
-    private bootstrapAlertService: BootstrapAlertService,
-    private localStorageService: LocalStorageService) {
-    this.userstoragedata = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER);
+    private reportService: AppCommonService.ReportService,
+    private lookupService: AdminService.LookupService,
+    private categoryService: MasterService.CategoryService,
+    private locationService: MasterService.LocationService,
+    private bootstrapAlertService: BootstrapAlertService) {
+    super();
+    this.getScreenDetails('r_customer');
     this.initForm();
   }
 

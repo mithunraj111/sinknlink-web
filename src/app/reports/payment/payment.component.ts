@@ -2,17 +2,14 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { NgbDateCustomParserFormatter } from '../../shared/elements/dateParser';
-import { LookupService } from 'src/app/services/admin';
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
-import { CommonService } from '../../services/common.service';
 import { FormGroup, FormBuilder, } from '@angular/forms';
 import { AppConstant } from '../../app.constants';
-import { ReportService } from '../../services/common';
 import { AppMessages } from '../../app-messages';
 import { Buffer } from 'buffer';
 import { DatePipe } from '@angular/common';
 import downloadService from '../../services/download.service';
-import { LocalStorageService } from 'src/app/services';
+import { AppCommonService, BaseService, CommonService, AdminService } from 'src/app/services';
 import * as _ from 'lodash';
 @Component({
   selector: 'app-payment',
@@ -22,7 +19,7 @@ import * as _ from 'lodash';
     { provide: NgbDateParserFormatter, useClass: NgbDateCustomParserFormatter }
   ],
 })
-export class PaymentComponent implements OnInit {
+export class PaymentComponent extends BaseService implements OnInit {
   displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   displaydateformat = AppConstant.API_CONFIG.ANG_DATE.displaydate;
   @ViewChild(DatatableComponent) table: DatatableComponent;
@@ -43,9 +40,10 @@ export class PaymentComponent implements OnInit {
     private fb: FormBuilder,
     private commonService: CommonService,
     private bootstrapAlertService: BootstrapAlertService,
-    private lookupService: LookupService,
-    private reportService: ReportService, private localStorageService: LocalStorageService) {
-    this.userstoragedata = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER);
+    private lookupService: AdminService.LookupService,
+    private reportService: AppCommonService.ReportService) {
+    super();
+    this.getScreenDetails('r_dealer');
   }
 
   ngOnInit() {
@@ -96,7 +94,7 @@ export class PaymentComponent implements OnInit {
       formData.paymenttype = [paymenttype];
     }
     if (this.userstoragedata.roleid === 2) {
-      formData.dealerid = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.DEALER).dealerid;
+      formData.dealerid = this.dealerdata.dealerid;
     }
     if (this.userstoragedata.roleid === 3 && !_.isNull(this.userstoragedata.customer)) {
       formData.membershipid = this.userstoragedata.customer.membershipid;

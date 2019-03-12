@@ -8,14 +8,17 @@ export class BaseService {
     userstoragedata = {} as any;
     appscreens = [] as any;
     localStorageService: LocalStorageService;
+    dealerdata = {} as any;
     add = false;
     view = false;
     edit = false;
     delete = false;
+    download = false;
     constructor() {
         this.appscreens = [];
         this.localStorageService = new LocalStorageService();
         this.userstoragedata = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER);
+        this.dealerdata = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.DEALER);
         this.appscreens = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.SCREENS);
     }
     // RBAC Implementation
@@ -34,6 +37,9 @@ export class BaseService {
         }
         if (_.includes(current_screen.assignedpermissions, AppConstant.PERMISSION[3])) {
             this.delete = true;
+        }
+        if (_.includes(current_screen.assignedpermissions, AppConstant.PERMISSION[4])) {
+            this.download = true;
         }
     }
 }

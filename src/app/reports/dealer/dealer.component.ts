@@ -3,13 +3,10 @@ import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { NgbDateCustomParserFormatter } from '../../shared/elements/dateParser';
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
-import { CommonService } from '../../services/common.service';
+import { CommonService, MasterService, BaseService, AdminService, AppCommonService } from '../../services';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AppConstant } from '../../app.constants';
 import { AppMessages } from '../../app-messages';
-import { LocationService } from 'src/app/services/masters';
-import { LookupService } from 'src/app/services/admin';
-import { AppCommonService } from 'src/app/services';
 import { Buffer } from 'buffer';
 import { DatePipe } from '@angular/common';
 import downloadService from '../../services/download.service';
@@ -21,7 +18,7 @@ import downloadService from '../../services/download.service';
     { provide: NgbDateParserFormatter, useClass: NgbDateCustomParserFormatter }
   ],
 })
-export class DealerComponent implements OnInit {
+export class DealerComponent extends BaseService implements OnInit {
   displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydate;
   emptymesages = AppConstant.EMPTY_MESSAGES.DEALERREPORT;
   loadingIndicator = false;
@@ -40,10 +37,12 @@ export class DealerComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private commonService: CommonService,
     private bootstrapAlertService: BootstrapAlertService,
-    private locationService: LocationService,
-    private lookupService: LookupService,
+    private locationService: MasterService.LocationService,
+    private lookupService: AdminService.LookupService,
     private reportService: AppCommonService.ReportService
   ) {
+    super();
+    this.getScreenDetails('r_dealer');
     this.initForm();
     this.getCities();
   }
