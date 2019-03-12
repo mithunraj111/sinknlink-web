@@ -22,6 +22,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import { AccessdeniedComponent } from './accessdenied/accessdenied.component';
 import { AuthGuard } from './services/auth.guard';
+import { BarRatingModule } from 'ngx-bar-rating';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { AuthGuard } from './services/auth.guard';
   ],
   imports: [
     BrowserModule,
+    BarRatingModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     SharedModule,

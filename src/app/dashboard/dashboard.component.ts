@@ -3,21 +3,40 @@ import { DashboardService } from "../services/common";
 import * as _ from 'lodash';
 import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
 import { DatePipe } from '@angular/common';
+import { LocalStorageService } from '../services';
+import { AppConstant } from '../app.constants';
+import { fadeInOutTranslate } from '../../assets/animations/fadeInOutTranslate';
 declare const AmCharts: any;
-
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  styleUrls: ['./dashboard.component.scss'],
+  animations: [fadeInOutTranslate]
 })
 export class DashboardComponent implements OnInit {
   counts = [];
-  bizcounts = [];
+  bizcounts = [{"count":0, "label":5},
+  {"count":0, "label":4},
+  {"count":0, "label":3},
+  {"count":0, "label":2},
+  {"count":0, "label":1}];
+  // bizrating = [
+  //   {"count":0, "label":5},
+  //   {"count":0, "label":4},
+  //   {"count":0, "label":3},
+  //   {"count":0, "label":2},
+  //   {"count":0, "label":1}
+  //   ];
   searchcounts = [];
-  constructor(private dashboardService: DashboardService, config: NgbDropdownConfig) {
-    config.placement = 'top-right';
-    config.autoClose = true;
+  service;
+  userstoragedata = {} as any;
+  constructor(private dashboardService: DashboardService,
+    private localStorageService: LocalStorageService,
+    config: NgbDropdownConfig) {
+      this.userstoragedata = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER);
+      config.placement = 'top-right';
+      config.autoClose = true;
   }
   filterRange: String = "week";
 
@@ -72,24 +91,41 @@ export class DashboardComponent implements OnInit {
     this.getSearchCounts(fromDate, toDate);
   }
   getDashboardCounts(fromDate, toDate) {
-    this.dashboardService.getCounts({ "fromDate": fromDate, "toDate": toDate }).subscribe(res => {
+    if (this.userstoragedata.roleid == 3) {
+      this.service = this.dashboardService.customer({ "fromDate": fromDate, "toDate": toDate, "memid": this.userstoragedata.customer.membershipid});
+    } else {
+      this.service = this.dashboardService.getCounts({ "fromDate": fromDate, "toDate": toDate });
+    }
+    this.service.subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
         this.counts = response.data;
-        // console.log('getCounts');
       }
     });
   }
   getDashboardBizCounts(fromDate, toDate) {
     this.bizcounts = [];
-    this.dashboardService.employeebusinessCount({ "fromDate": fromDate, "toDate": toDate }).subscribe(res => {
+    if (this.userstoragedata.roleid == 3) {
+      this.service = this.dashboardService.rating({ "fromDate": fromDate, "toDate": toDate, "memid": this.userstoragedata.customer.membershipid});
+    } else {
+      this.service = this.dashboardService.employeebusinessCount({ "fromDate": fromDate, "toDate": toDate });
+    }
+    this.service.subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
         this.bizcounts = response.data;
-        // console.log('employeebusinessCount');
+        // if (this.userstoragedata.roleid == 3) {
+        //   _.map(this.bizcounts, function (item) {
+        //     if( item.count == this.bizrating.count ) {
+        //       this.bizrating.label = item.label;
+        //       this.bizcounts.label = this.bizrating.label;
+        //     }
+        //   });
+        // }
       }
     })
   }
+  
   getSearchCounts(fromDate, toDate) {
     this.dashboardService.searchCount({ "fromDate": fromDate, "toDate": toDate }).subscribe(res => {
       const response = JSON.parse(res._body);

@@ -19,4 +19,10 @@ export class DashboardService{
     searchCount(data): Observable<any> {
         return this.httpHandler.POST( this.endpoint + AppConstant.API_CONFIG.API_URL.COMMON.DASHBOARD.SEARCH_COUNT, data );
     }
+    customer(data): Observable<any> {
+        return this.httpHandler.POST( this.endpoint + AppConstant.API_CONFIG.API_URL.COMMON.DASHBOARD.CUSTOMER, data );
+    }
+    rating(data): Observable<any> {
+        return this.httpHandler.POST( this.endpoint + AppConstant.API_CONFIG.API_URL.COMMON.DASHBOARD.RATING, data );
+    }
 }

@@ -4,7 +4,7 @@
     <div class="col-md-6 col-xl-3">
       <div class="card bg-c-blue order-card">
         <div class="card-block">
-          <h6 class="m-b-20">Total no. of business</h6>
+          <h6 class="m-b-20">{{counts[0]?.label}}</h6>
           <h2 class="text-right"><i class="ti-shopping-cart f-left p-r-10"></i><span>{{counts[0]?.count}}</span></h2>
           <a class="text-white text-underline" [routerLink]="['/business/customers']">View Business</a>
         </div>
@@ -13,7 +13,7 @@
     <div class="col-md-6 col-xl-3">
       <div class="card bg-c-green order-card">
         <div class="card-block">
-          <h6 class="m-b-20">Total no. of dealers</h6>
+          <h6 class="m-b-20">{{counts[2]?.label}}</h6>
           <h2 class="text-right"><i class="ti-tag f-left p-r-10"></i><span>{{counts[2]?.count}}</span></h2>
           <a class="text-white text-underline" [routerLink]="['/business/dealer']">View Dealers</a>
         </div>
@@ -22,7 +22,7 @@
     <div class="col-md-6 col-xl-3">
       <div class="card bg-c-yellow order-card">
         <div class="card-block">
-          <h6 class="m-b-20">Total no. of consumers</h6>
+          <h6 class="m-b-20">{{counts[1]?.label}}</h6>
           <h2 class="text-right"><i class="ti-mobile f-left p-r-10"></i><span>{{counts[1]?.count}}</span></h2>
           <a class="text-white text-underline" [routerLink]="['/business/consumers']">View Consumers</a>
         </div>
@@ -31,7 +31,7 @@
     <div class="col-md-6 col-xl-3">
       <div class="card bg-c-pink order-card">
         <div class="card-block">
-          <h6 class="m-b-20">Total no. of users</h6>
+          <h6 class="m-b-20">{{counts[3]?.label}}</h6>
           <h2 class="text-right"><i class="ti-user f-left p-r-10"></i><span>{{counts[3]?.count}}</span></h2>
           <a class="text-white text-underline" [routerLink]="['/masters/users']">View Users</a>
         </div>
@@ -48,7 +48,7 @@
       </div>
     </div>
     <div class="col-md-12 col-xl-4 m-t-10">
-      <div class="card project-task">
+      <div [hidden] = "userstoragedata.roleid == 3" class="card project-task">
         <div class="card-block p-b-10 p-t-20">
           <div class="row">
             <span class="col-md-9 pt-2"><b>Category wise business count</b></span>
@@ -69,7 +69,7 @@
                 <tr *ngFor="let bcount of bizcounts">
                   <td>
                     <div class="task-contain">
-                      <p class="d-inline-block m-l-20">{{bcount?.categoryname}}</p>
+                      <p class="d-inline-block m-l-20">{{bcount?.label}}</p>
                     </div>
                   </td>
                   <td>
@@ -79,6 +79,42 @@
                         [style.width]="(( bcount?.count/counts[0]?.count ) *100) + '%' ">
                       </div>
                     </div>
+                  </td>
+                </tr>
+              </tbody>
+              <div *ngIf="bizcounts?.length == 0">
+                <h5 class="text-center f-16">No data to display</h5>
+              </div>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div [hidden] = "userstoragedata.roleid != 3" class="card project-task">
+        <div class="card-block p-b-10 p-t-20">
+          <div class="row">
+            <span class="col-md-9 pt-2"><b>Ratings</b></span>
+            <div class="col-md-3">
+              <button class="btn btn-inverse f-right px-2 py-1 m-b-10" (click)="getData(filterRange);">
+                <i class="ti-reload p-0 middle mr-0 f-16"></i></button>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Rating</th>
+                  <th>No. of consumers</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let bcount of bizcounts">
+                  <td>
+                    <div class="task-contain">
+                        <bar-rating class="star-rating" [(rate)]="bcount.label" [max]="5" [readOnly]="true"></bar-rating>
+                    </div>
+                  </td>
+                  <td>
+                    <p class="d-inline-block">{{bcount?.count}}</p>
                   </td>
                 </tr>
               </tbody>
