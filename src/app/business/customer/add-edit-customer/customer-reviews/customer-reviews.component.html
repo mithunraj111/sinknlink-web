@@ -3,7 +3,7 @@
         <ul class="media-list">
             <li class="media" *ngFor="let review of reviewsList">
                 <a class="media-left">
-                    <div class="profile-image">N</div>
+                    <div class="profile-image">{{review.consumer?.fullname.substring(0,1).toUpperCase()}}</div>
                     <!-- <img class="media-object img-radius comment-img" src="assets/images/avatar-4.jpg"> -->
                 </a>
                 <div class="media-body">
@@ -22,7 +22,8 @@
                     <div class="media mt-2" *ngIf="review.reply!=null">
                         <div class="media-left">
                             <a>
-                                <div class="profile-image">N</div>
+                                <div class="profile-image">{{review.consumer?.fullname.substring(0,1).toUpperCase()}}
+                                </div>
 
                                 <!-- <img class="media-object img-radius comment-img" src="assets/images/avatar-4.jpg"> -->
                             </a>
