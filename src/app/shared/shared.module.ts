@@ -76,6 +76,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     BusinessService.DealerService,
     BusinessService.GigsService,
     BusinessService.ConsumerService,
+    BusinessService.ReviewsService,
     AppCommonService.DocumentService,
     AppCommonService.PaymentsService,
     AppCommonService.ReportService,

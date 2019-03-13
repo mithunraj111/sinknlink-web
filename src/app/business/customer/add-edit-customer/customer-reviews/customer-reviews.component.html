@@ -1,0 +1,43 @@
+<div class="card" *ngIf="!loadingIndicator && reviewsList.length>0">
+    <div class="card-body">
+        <ul class="media-list">
+            <li class="media" *ngFor="let review of reviewsList">
+                <a class="media-left">
+                    <!-- <img class="media-object img-radius comment-img" src="assets/images/avatar-4.jpg"> -->
+                </a>
+                <div class="media-body">
+                    <h6 class="media-heading">{{review.consumer?.fullname}}<span class="f-12 text-muted m-l-5">{{review.updateddt | date:datedisplayformat}}</span></h6>
+                    <div class="stars-example-css review-star">
+                        <bar-rating class="star-rating" [(rate)]="review.rating" [max]="5" [readOnly]="true"></bar-rating>
+                    </div>
+                    <br/>
+                    <p class="m-b-0">{{review.comments}}</p>
+                    <hr>
+                    <!-- Nested media object -->
+                    <div class="media mt-2" *ngIf="review.reply!=null">
+                        <div class="media-left">
+                            <a>
+                                <!-- <img class="media-object img-radius comment-img" src="assets/images/avatar-4.jpg"> -->
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <h6 class="media-heading">
+                                {{review.reply?.updatedby}}<span class="f-12 text-muted m-l-5"> <i class="fa fa-reply" aria-hidden="true"></i> 
+                                {{review.reply?.updateddt | date:datedisplayformat}}</span></h6>
+                            <p class="m-b-0"> {{review.reply?.comments}}</p>
+                            <hr>
+                        </div>
+                    </div>
+
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+<div *ngIf="!loadingIndicator && reviewsList.length==0" class="text-center no-data">
+    <div class="nodata-text nodata-image">
+        <img class="hand-icon" src="assets/images/no-data.png">
+        <h3>No Review(s) posted</h3>
+    </div>
+</div>
+<app-loader [loadingIndicator]="loadingIndicator"></app-loader>

@@ -32,5 +32,5 @@ export class ConsumerService {
     }
     delete(data, id): Observable<any> {
         return this.httpHandler.DELETE(this.endpoint + AppConstant.API_CONFIG.API_URL.BUSINESS.CONSUMER.DELETE, id, data);
-    }    
+    }
 }
