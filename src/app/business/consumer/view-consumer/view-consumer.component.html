@@ -4,8 +4,7 @@
             <div class="row">
                 <div class="col-md-9 col-sm-9 p-l-0 p-r-0">
                     <!-- <h2 class="m-l-0 m-b-5">Details</h2> -->
-                    <p class="m-b-5 m-l-0" *ngIf="consumer?.membershipid"> Membership ID: {{consumer?.membershipid}}
-                    </p>
+                    <!-- <p class="m-b-5 m-l-0" *ngIf="consumer?.membershipid"> Membership ID: {{consumer?.membershipid}}</p> -->
                 </div>
                 <div class="col-md-3 col-sm-3 save-button text-right">
                     <button type="button" placement="bottom" ngbTooltip="Go back" routerLink="/business/consumers" class="btn btn-inverse btn-primary waves-effect"><i
@@ -18,7 +17,7 @@
         <div class="col-md-12 col-sm-12 text-center employee-profile m-t-25">
             <div class="form-group">
                 <div class="avatar-image">
-                    <img [src]="consumerProfilepic" class="img-responsive" alt="employee">
+                    <img [src]="consumerProfilepic" class="img-responsive rounded-circle" alt="employee">
                 </div>
             </div>
         </div>
@@ -224,7 +223,7 @@
                                                 </ngx-datatable-column>
                                                 <ngx-datatable-column prop="inmallyn" name="In Mall" [resizeable]="false">
                                                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                                                        <span>{{row.business.inmallyn}}</span>
+                                                        <span>{{row.business.inmallyn=='Y'?'Yes':'No'}}}</span>
                                                     </ng-template>
                                                 </ngx-datatable-column>
                                             </ngx-datatable>

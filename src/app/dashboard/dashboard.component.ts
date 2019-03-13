@@ -140,7 +140,7 @@ export class DashboardComponent implements OnInit {
       const response = JSON.parse(res._body);
       if (response.status) {
         this.searchcounts = response.data;
-        if (this.userstoragedata !=3 ) {
+        if (this.userstoragedata.roleid !=3 ) {
           this.generateCatCountChart(this.searchcounts.map((d) => {
             return {
               category: d.categoryname,

@@ -14,7 +14,7 @@ export class AdvertisementComponent extends BaseService implements OnInit {
   emptymessages = AppConstant.EMPTY_MESSAGES.EVENTS;
   displaydtimeformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   displaydateformat = AppConstant.API_CONFIG.ANG_DATE.displaydate;
-  loadingIndicator = true;
+  loadingIndicator:boolean = true;
   adList = [];
   tempFilter = [];
 
