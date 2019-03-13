@@ -3,27 +3,35 @@
         <ul class="media-list">
             <li class="media" *ngFor="let review of reviewsList">
                 <a class="media-left">
+                    <div class="profile-image">N</div>
                     <!-- <img class="media-object img-radius comment-img" src="assets/images/avatar-4.jpg"> -->
                 </a>
                 <div class="media-body">
-                    <h6 class="media-heading">{{review.consumer?.fullname}}<span class="f-12 text-muted m-l-5">{{review.updateddt | date:datedisplayformat}}</span></h6>
+                    <a href="javascript:">
+                        <h6 class=" media-heading ">{{review.consumer?.fullname}}<span
+                                class="f-12 text-muted m-l-5">{{review.updateddt | date:datedisplayformat}}</span></h6>
+                    </a>
                     <div class="stars-example-css review-star">
-                        <bar-rating class="star-rating" [(rate)]="review.rating" [max]="5" [readOnly]="true"></bar-rating>
+                        <bar-rating class="star-rating" [(rate)]="review.rating" [max]="5" [readOnly]="true">
+                        </bar-rating>
                     </div>
-                    <br/>
+                    <br />
                     <p class="m-b-0">{{review.comments}}</p>
                     <hr>
                     <!-- Nested media object -->
                     <div class="media mt-2" *ngIf="review.reply!=null">
                         <div class="media-left">
                             <a>
+                                <div class="profile-image">N</div>
+
                                 <!-- <img class="media-object img-radius comment-img" src="assets/images/avatar-4.jpg"> -->
                             </a>
                         </div>
                         <div class="media-body">
                             <h6 class="media-heading">
-                                {{review.reply?.updatedby}}<span class="f-12 text-muted m-l-5"> <i class="fa fa-reply" aria-hidden="true"></i> 
-                                {{review.reply?.updateddt | date:datedisplayformat}}</span></h6>
+                                {{review.reply?.updatedby}}<span class="f-12 text-muted m-l-5"> <i class="fa fa-reply"
+                                        aria-hidden="true"></i>
+                                    {{review.reply?.updateddt | date:datedisplayformat}}</span></h6>
                             <p class="m-b-0"> {{review.reply?.comments}}</p>
                             <hr>
                         </div>

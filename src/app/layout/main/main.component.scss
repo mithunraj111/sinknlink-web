@@ -185,21 +185,3 @@ body[themebg-pattern="pattern1"]{
         }
     }
 }
-.fullname {
-    display: inline-block;
-    width: auto;
-    margin-left: 5px;
-    font-weight: 500 !important;
-    color: #2f3d4a !important;
-    font-family: $font-stack;
-    margin-right: 5px;
-}
-.profile-image {
-    width: 45px;
-    display: inline-block;
-    text-align: center;
-    background: #ccc;
-    border-radius: 100%;
-    line-height: 45px;
-    max-width: 100%;
-}
