@@ -1,0 +1,81 @@
+<div *ngIf="!loadingIndicator">
+  <div *ngIf="tempFilter.length!=0" class="header-block">
+    <div class="fixedheader m-b-15">
+      <div class="header-title">
+        <div class="row">
+          <div class="col-md-6 col-sm-6">
+            <input #adSearch type="text" class="header-search form-control col-md-5 col-sm-5 p-l-0 p-r-0 input-sm full-data-search"
+              placeholder="Search here" (keyup)='search($event)' placement="bottom" ngbTooltip="Type here to search">
+            <button type="button" class="btn search-close col-md-1 col-sm-1 p-l-0 p-r-0" (click)="adSearch.value='';search();"><i
+                class="fa fa-close"></i></button>
+          </div>
+          <div class="col-md-6 col-sm-6 p-r-10 text-right">
+            <button *ngIf="add" type="button" placement="bottom" ngbTooltip="Click to add Ad" class="add-btn btn btn-primary waves-effect m-r-10"
+              (click)='addAd()'><i class="fa fa-plus-circle m-r-5"></i> New</button>
+            <button type="button" placement="bottom" ngbTooltip="Reload" (click)="getAdvertisement()" class="btn btn-inverse btn-primary waves-effect"><i
+                class="ti-reload"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="table-header fixed-table">
+      <div class="card p-r-15 p-l-15">
+        <ngx-datatable #adtable class="table data-table expandable" [rows]='adList' [columnMode]="'flex'"
+          [headerHeight]="50" [footerHeight]="50" [limit]="10" [rowHeight]="'auto'" [reorderable]="false" [messages]="emptymessages">
+          <ngx-datatable-column prop="adname" name="Ad Name" [resizeable]="false">
+            <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+              <span>{{row.adname}}</span>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column prop="addate" name="StartDate" data-type='date' [resizeable]="false" headerClass="text-center"
+            [cellClass]="'text-center'">
+            <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+              <span>{{row.startdate|date:displaydateformat}}</span>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column prop="expirydate" name="ExpiryDate" data-type='date' [resizeable]="false" headerClass="text-center"
+            [cellClass]="'text-center'">
+            <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+              <span>{{row.expirydate|date:displaydateformat}}</span>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column prop="updatedby" name="Updated By" [resizeable]="false">
+            <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+              <span class="updatename">{{row.updatedby}}</span>
+              <span class="updatedate"> {{row.updateddt|date:displaydtimeformat}}</span>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Status" [sortable]="false" [flexGrow]="0.5" [resizeable]="false" headerClass="text-center"
+            [cellClass]="'text-center status'" [resizeable]="false">
+            <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+              <ui-switch [disabled]="!edit" (change)="updateAdvertisement(row,rowIndex,false)" class="js-small"
+                placement="bottom" ngbTooltip="Click to change status" color="$primary-color" switchColor="#fff" size="small"
+                [checked]="row.status == 'Active'"></ui-switch>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column *ngIf="edit || delete" name="Action" [sortable]="false" [flexGrow]="0.5" [resizeable]="false"
+            headerClass="text-center" [cellClass]="'text-center action'" [resizeable]="false">
+            <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+              <a *ngIf="edit" placement="bottom" ngbTooltip="Click to edit ad details" class="m-r-15 crm-action-edit text-primary"
+                (click)='editAdvertisement(row.adid)'>
+                <i class="fa fa-pencil"></i></a>
+              <a *ngIf="delete" placement="bottom" (click)="updateAdvertisement(row,rowIndex,true)" ngbTooltip="Click to delete ad"
+                class="crm-action-delete text-danger">
+                <i class="fa fa-trash"></i></a>
+            </ng-template>
+          </ngx-datatable-column>
+        </ngx-datatable>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="tempFilter.length == 0" class="text-center no-data">
+    <div class="nodata-text nodata-image">
+      <img class="hand-icon" src="assets/images/no-data.png">
+      <h3>No Ad(s) Found</h3>
+      <button *ngIf="add" type="button" placement="bottom" ngbTooltip="Click to add Advertisement" class="add-btn btn btn-primary waves-effect"><i
+          class="fa fa-plus-circle m-r-5"></i>Create
+        Ads</button>
+    </div>
+  </div>
+</div>
+<app-loader [loadingIndicator]="loadingIndicator"></app-loader>

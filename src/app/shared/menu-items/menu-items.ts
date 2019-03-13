@@ -178,6 +178,14 @@ export class MenuItems {
             data: {
               title: 'Look up'
             }
+          },
+          {
+            state: 'advertisement',
+            name: 'Advertisement',
+            code: 'a_advertisement',
+            data: {
+              title: 'Advertisement'
+            }
           }
         ]
       },

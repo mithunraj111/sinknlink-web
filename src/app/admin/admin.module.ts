@@ -17,6 +17,8 @@ import { AddEditVipRegistrationNumberComponent } from './vip-number-registration
 import { LookupComponent } from './lookup/lookup.component';
 import { SelectModule } from 'ng-select';
 import { AddEditLookupComponent } from './lookup/add-edit-lookup/add-edit-lookup.component';
+import { AdvertisementComponent } from './advertisement/advertisement.component';
+import { AddEditAdvertisementComponent } from './advertisement/add-edit-advertisement/add-edit-advertisement.component';
 
 @NgModule({
   imports: [
@@ -39,6 +41,8 @@ import { AddEditLookupComponent } from './lookup/add-edit-lookup/add-edit-lookup
     VipNumberRegistrationComponent,
     AddEditVipRegistrationNumberComponent,
     LookupComponent,
-    AddEditLookupComponent]
+    AddEditLookupComponent,
+    AdvertisementComponent,
+    AddEditAdvertisementComponent]
 })
 export class AdminModule { }

@@ -8,9 +8,10 @@ import { VipNumberRegistrationComponent } from './vip-number-registration/vip-nu
 import { AddEditVipRegistrationNumberComponent } from './vip-number-registration/add-edit-vip-registration-number/add-edit-vip-registration-number.component';
 import { LookupComponent } from './lookup/lookup.component';
 import { AddEditLookupComponent } from './lookup/add-edit-lookup/add-edit-lookup.component';
-import { from } from 'rxjs';
 import { NgxPermissionsGuard } from 'ngx-permissions';
 import { AuthGuard } from '../services/auth.guard';
+import { AdvertisementComponent } from './advertisement/advertisement.component';
+import { AddEditAdvertisementComponent } from './advertisement/add-edit-advertisement/add-edit-advertisement.component';
 
 const routes: Routes = [
   {
@@ -168,6 +169,45 @@ const routes: Routes = [
           status: false,
           permissions: {
             only: ['Lookup'],
+            redirectTo: '/accessdenied'
+          }
+        },
+      },
+      {
+        path: 'advertisement',
+        component: AdvertisementComponent,
+        canActivate: [AuthGuard, NgxPermissionsGuard],
+        data: {
+          title: 'Advertisement',
+          status: false,
+          permission: {
+            only: ['Advertisement'],
+            redirectTo: '/'
+          },
+        },
+      },
+      {
+        path: 'advertisement/create',
+        component: AddEditAdvertisementComponent,
+        canActivate: [NgxPermissionsGuard],
+        data: {
+          title: 'Advertisement',
+          status: false,
+          permission: {
+            only: ['Advertisement'],
+            redirectTo: '/accessdenied'
+          }
+        },
+      },
+      {
+        path: 'advertisement/edit/:id',
+        component: AddEditAdvertisementComponent,
+        canActivate: [NgxPermissionsGuard],
+        data: {
+          title: 'Advertisement',
+          status: false,
+          permission: {
+            only: ['Advertisement'],
             redirectTo: '/accessdenied'
           }
         },

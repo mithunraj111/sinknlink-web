@@ -128,6 +128,13 @@ export const AppConstant = Object.freeze({
           ALLOCATE: 'fancyno/allocate',
           UPDATEALLOCATED: 'fancyno/updateallocation',
           DELETE: 'fancyno/delete/'
+        },
+        ADVERTISEMENT: {
+          CREATE: 'advertisement/create',
+          LIST: 'advertisement',
+          EDIT: 'advertisement/edit/',
+          GETBYID: 'advertisement/',
+          DELETE: 'advertisement/delete/'
         }
       },
       COMMON: {
