@@ -6,6 +6,7 @@ import { DatePipe } from '@angular/common';
 import { LocalStorageService } from '../services';
 import { AppConstant } from '../app.constants';
 import { fadeInOutTranslate } from '../../assets/animations/fadeInOutTranslate';
+import { ConsumerService } from '../services/business';
 declare const AmCharts: any;
 
 @Component({
@@ -17,6 +18,7 @@ declare const AmCharts: any;
 export class DashboardComponent implements OnInit {
   counts = [];
   bizcounts = [];
+  displaydatetimeformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   bizdefaultrating = [
     { "count": 0, "label": 5 },
     { "count": 0, "label": 4 },
@@ -28,6 +30,7 @@ export class DashboardComponent implements OnInit {
   service;
   userstoragedata = {} as any;
   constructor(private dashboardService: DashboardService,
+    private consumerService: ConsumerService,
     private localStorageService: LocalStorageService,
     config: NgbDropdownConfig) {
     this.userstoragedata = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER);
@@ -128,16 +131,23 @@ export class DashboardComponent implements OnInit {
   }
 
   getSearchCounts(fromDate, toDate) {
-    this.dashboardService.searchCount({ "fromDate": fromDate, "toDate": toDate }).subscribe(res => {
+    if (this.userstoragedata.roleid == 3) {
+      this.service = this.consumerService.consumerReviews({ "membershipid":this.userstoragedata.customer.membershipid });
+    } else {
+      this.service = this.dashboardService.searchCount({ "fromDate": fromDate, "toDate": toDate });
+    }
+    this.service.subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
         this.searchcounts = response.data;
-        this.generateCatCountChart(this.searchcounts.map((d) => {
-          return {
-            category: d.categoryname,
-            name: d.count
-          }
-        }));
+        if (this.userstoragedata !=3 ) {
+          this.generateCatCountChart(this.searchcounts.map((d) => {
+            return {
+              category: d.categoryname,
+              name: d.count
+            }
+          }));
+        }
       }
     }, err => {
       console.log(err);

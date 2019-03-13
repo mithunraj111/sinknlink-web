@@ -6,7 +6,6 @@
         <div class="card-block">
           <h6 class="m-b-20">{{counts[0]?.label}}</h6>
           <h2 class="text-right"><i class="ti-shopping-cart f-left p-r-10"></i><span>{{counts[0]?.count}}</span></h2>
-          <a class="text-white text-underline" [routerLink]="['/business/customers']">View Business</a>
         </div>
       </div>
     </div>
@@ -15,7 +14,6 @@
         <div class="card-block">
           <h6 class="m-b-20">{{counts[2]?.label}}</h6>
           <h2 class="text-right"><i class="ti-tag f-left p-r-10"></i><span>{{counts[2]?.count}}</span></h2>
-          <a class="text-white text-underline" [routerLink]="['/business/dealer']">View Dealers</a>
         </div>
       </div>
     </div>
@@ -24,7 +22,6 @@
         <div class="card-block">
           <h6 class="m-b-20">{{counts[1]?.label}}</h6>
           <h2 class="text-right"><i class="ti-mobile f-left p-r-10"></i><span>{{counts[1]?.count}}</span></h2>
-          <a class="text-white text-underline" [routerLink]="['/business/consumers']">View Consumers</a>
         </div>
       </div>
     </div>
@@ -33,11 +30,10 @@
         <div class="card-block">
           <h6 class="m-b-20">{{counts[3]?.label}}</h6>
           <h2 class="text-right"><i class="ti-user f-left p-r-10"></i><span>{{counts[3]?.count}}</span></h2>
-          <a class="text-white text-underline" [routerLink]="['/masters/users']">View Users</a>
         </div>
       </div>
     </div>
-    <div class="col-xl-8 col-md-12 m-t-10">
+    <div [hidden] = "this.userstoragedata.roleid == 3" class="col-xl-8 col-md-12 m-t-10">
       <div class="card project-task">
         <div class="card-header p-t-20 p-b-0">
           <h5>Analytics</h5>
@@ -47,9 +43,39 @@
         </div>
       </div>
     </div>
+    <div *ngIf = "this.userstoragedata.roleid == 3" class="col-xl-8 col-md-12 m-t-10">
+      <div class="card project-task">
+        <div class="card-comment">
+          <div class="card-block-small task-contain">
+            <div class="row">
+              <span class="col-md-9 pt-2 mb-2"><b>Review and Comments</b></span>
+              <div class="col-md-3">
+                <button class="btn btn-inverse f-right px-2 py-1 m-b-10" (click)="getData(filterRange);"><i
+                  class="ti-reload p-0 middle mr-0 f-16"></i></button>
+              </div>
+            </div>
+            <div *ngFor = "let a of searchcounts" class="row">
+              <div class="col-md-1">
+                <h6 class="bg-c-blue d-inline-block text-center">{{a.consumer.fullname.substring(0,1) | uppercase}}</h6>
+              </div>
+              <div class="col-md-11">
+                <div class="f-left p-l-5">
+                  <h5 class="f-14">{{a.consumer.fullname}}</h5>
+                  <p class="mb-0 f-12">{{a.updateddt | date: displaydatetimeformat}}</p>
+                </div>
+                <div class="f-right">
+                  <bar-rating class="star-rating" [(rate)]="a.rating" [max]="5" [readOnly]="true"></bar-rating>
+                </div>
+                <p style="display: inline-block;" class="text-muted p-l-5 w-100 f-12">{{a.comments}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="col-md-12 col-xl-4 m-t-10">
-      <div [hidden] = "userstoragedata.roleid == 3" class="card project-task">
-        <div class="card-block p-b-10 p-t-20">
+      <div *ngIf = "userstoragedata.roleid != 3" class="card project-task">
+        <div class="card-block p-b-10 p-t-15">
           <div class="row">
             <span class="col-md-9 pt-2"><b>Category wise business count</b></span>
             <div class="col-md-3">
@@ -67,9 +93,10 @@
               </thead>
               <tbody>
                 <tr *ngFor="let bcount of bizcounts">
-                  <td>
+                  <td class="py-1">
                     <div class="task-contain">
-                      <p class="d-inline-block m-l-20">{{bcount?.label}}</p>
+                      <h6 class="bg-c-blue d-inline-block text-center">{{bcount?.label.substring(0,1)}}</h6>
+                      <p class="d-inline-block m-l-20">{{bcount?.label.substring(0,10)}}</p>
                     </div>
                   </td>
                   <td>
@@ -82,14 +109,14 @@
                   </td>
                 </tr>
               </tbody>
-              <div *ngIf="bizcounts?.length == 0">
+              <!-- <div *ngIf="bizcounts?.length == 0">
                 <h5 class="text-center f-16">No data to display</h5>
-              </div>
+              </div> -->
             </table>
           </div>
         </div>
       </div>
-      <div [hidden] = "userstoragedata.roleid != 3" class="card project-task">
+      <div *ngIf = "userstoragedata.roleid == 3" class="card project-task">
         <div class="card-block p-b-10 p-t-20">
           <div class="row">
             <span class="col-md-9 pt-2"><b>Ratings</b></span>
@@ -110,7 +137,7 @@
                 <tr *ngFor="let bcount of bizdefaultrating">
                   <td>
                     <div class="task-contain">
-                        <bar-rating class="star-rating" [(rate)]="bcount.label" [max]="5" [readOnly]="true"></bar-rating>
+                      <bar-rating class="star-rating" [(rate)]="bcount.label" [max]="5" [readOnly]="true"></bar-rating>
                     </div>
                   </td>
                   <td>
