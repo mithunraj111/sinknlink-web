@@ -27,8 +27,15 @@ export class ConsumerService {
     consumerFavs(data): Observable<any> {
         return this.httpHandler.POST(this.endpoint + AppConstant.API_CONFIG.API_URL.BUSINESS.CONSUMERFAVORITES.LIST, data);
     }
-    consumerReviews(data): Observable<any> {
-        return this.httpHandler.POST(this.endpoint + AppConstant.API_CONFIG.API_URL.BUSINESS.REVIEWS.LIST, data);
+    consumerReviews(data,limit?,offset?): Observable<any> {
+        let url = this.endpoint + AppConstant.API_CONFIG.API_URL.BUSINESS.REVIEWS.LIST;
+        if (offset) {
+            url += `?offset=${offset}`
+        }
+        if (limit) {
+            url += `&limit=${limit}`
+        }
+        return this.httpHandler.POST(url, data);
     }
     delete(data, id): Observable<any> {
         return this.httpHandler.DELETE(this.endpoint + AppConstant.API_CONFIG.API_URL.BUSINESS.CONSUMER.DELETE, id, data);

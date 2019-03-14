@@ -28,6 +28,7 @@ export class DashboardComponent implements OnInit {
   ];
   searchcounts = [];
   service;
+  loadingIndicator = true;
   userstoragedata = {} as any;
   constructor(private dashboardService: DashboardService,
     private consumerService: ConsumerService,
@@ -37,23 +38,25 @@ export class DashboardComponent implements OnInit {
     config.placement = 'top-right';
     config.autoClose = true;
   }
-  filterRange: String = "week";
+  filterRange: String = "month";
 
   ngOnInit() {
     this.getData(this.filterRange);
   }
-  getData(n) {
-
+  getData(n,filter?) {
+    this.loadingIndicator = true;
     let fromDate;
     let toDate;
 
     this.filterRange = n;
 
     switch (n) {
+
       case "today":
         fromDate = new DatePipe("en-US").transform(new Date(), "yyyy-MM-dd").toString() + ' 00:00:00';
         toDate = new DatePipe("en-US").transform(new Date(), "yyyy-MM-dd").toString() + ' 23:59:59';
         break;
+
       case "week":
         fromDate = new DatePipe("en-US").transform((function () {
           let d = new Date();
@@ -67,6 +70,7 @@ export class DashboardComponent implements OnInit {
           return new Date(date.setDate(lastday));
         }()), "yyyy-MM-dd").toString() + ' 23:59:59';
         break;
+
       case "month":
         fromDate = new DatePipe("en-US").transform((function () {
           let date = new Date();
@@ -79,15 +83,32 @@ export class DashboardComponent implements OnInit {
         break;
 
       default:
-        fromDate = new DatePipe("en-US").transform(new Date(), "yyyy-MM-dd").toString() + ' 00:00:00';
-        toDate = new DatePipe("en-US").transform(new Date(), "yyyy-MM-dd").toString() + ' 23:59:59';
+        fromDate = new DatePipe("en-US").transform((function () {
+          let date = new Date();
+          return new Date(date.getFullYear(), date.getMonth(), 1);
+        }()), "yyyy-MM-dd").toString() + ' 00:00:00';
+        toDate = new DatePipe("en-US").transform((function () {
+          let date = new Date();
+          return new Date(date.getFullYear(), date.getMonth() + 1, 0);
+        }()), "yyyy-MM-dd").toString() + ' 23:59:59';
         break;
-
+        
     }
-
-    this.getDashboardCounts(fromDate, toDate);
-    this.getDashboardBizCounts(fromDate, toDate);
-    this.getSearchCounts(fromDate, toDate);
+    if( filter == undefined ) {
+      this.getDashboardCounts(fromDate, toDate);
+      this.getDashboardBizCounts(fromDate, toDate);
+      this.getSearchCounts(fromDate, toDate);
+    } else {
+      if ( filter == 'getDashboardBizCounts' ) {
+        this.getDashboardBizCounts(fromDate, toDate);
+        this.loadingIndicator = false;
+      } else  {
+        if ( filter == 'getSearchCounts' ) {
+          this.getSearchCounts(fromDate, toDate);
+          this.loadingIndicator = false;
+        }
+      }
+    }
   }
   getDashboardCounts(fromDate, toDate) {
     if (this.userstoragedata.roleid == 3) {
@@ -132,7 +153,7 @@ export class DashboardComponent implements OnInit {
 
   getSearchCounts(fromDate, toDate) {
     if (this.userstoragedata.roleid == 3) {
-      this.service = this.consumerService.consumerReviews({ "membershipid":this.userstoragedata.customer.membershipid });
+      this.service = this.consumerService.consumerReviews({ "membershipid":this.userstoragedata.customer.membershipid },'5','0');
     } else {
       this.service = this.dashboardService.searchCount({ "fromDate": fromDate, "toDate": toDate });
     }
@@ -140,6 +161,7 @@ export class DashboardComponent implements OnInit {
       const response = JSON.parse(res._body);
       if (response.status) {
         this.searchcounts = response.data;
+        this.loadingIndicator = false;
         if (this.userstoragedata.roleid !=3 ) {
           this.generateCatCountChart(this.searchcounts.map((d) => {
             return {
