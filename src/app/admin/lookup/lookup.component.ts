@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, Output } from '@angular/core';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { AppConstant } from '../../app.constants';
-import { AdminService, BaseService } from '../../services';
+import { AdminService, BaseService, CommonService } from '../../services';
 import { AppMessages } from '../../app-messages';
 import * as _ from 'lodash';
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
@@ -23,6 +23,7 @@ export class LookupComponent extends BaseService implements OnInit {
   loadingIndicator = true;
 
   constructor(private lookupService: AdminService.LookupService,
+    private commonService: CommonService,
     private bootstrapAlertService: BootstrapAlertService) {
     super();
     this.getScreenDetails('a_lookup');
@@ -117,18 +118,7 @@ export class LookupComponent extends BaseService implements OnInit {
     }
   }
   search(event?) {
-    let val = '';
-    if (event != null && event != undefined) {
-      val = event.target.value.toLowerCase();
-    }
-    const temp = this.tempFilter.filter(item => {
-      for (const key in item) {
-        if (('' + item[key]).toLocaleLowerCase().includes(val)) {
-          return ('' + item[key]).toLocaleLowerCase().includes(val);
-        }
-      }
-    });
-    this.lookupList = temp;
+    this.lookupList = this.commonService.globalSearch(this.tempFilter, event);
     this.table.offset = 0;
   }
 }

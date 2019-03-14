@@ -20,11 +20,11 @@ export class DashboardComponent implements OnInit {
   bizcounts = [];
   displaydatetimeformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   bizdefaultrating = [
-    { "count": 0, "label": 5 },
-    { "count": 0, "label": 4 },
-    { "count": 0, "label": 3 },
-    { "count": 0, "label": 2 },
-    { "count": 0, "label": 1 }
+    { count: 0, label: 5 },
+    { count: 0, label: 4 },
+    { count: 0, label: 3 },
+    { count: 0, label: 2 },
+    { count: 0, label: 1 }
   ];
   searchcounts = [];
   service;
@@ -38,12 +38,12 @@ export class DashboardComponent implements OnInit {
     config.placement = 'top-right';
     config.autoClose = true;
   }
-  filterRange: String = "month";
+  filterRange: String = 'month';
 
   ngOnInit() {
     this.getData(this.filterRange);
   }
-  getData(n,filter?) {
+  getData(n, filter?) {
     this.loadingIndicator = true;
     let fromDate;
     let toDate;
@@ -52,58 +52,58 @@ export class DashboardComponent implements OnInit {
 
     switch (n) {
 
-      case "today":
-        fromDate = new DatePipe("en-US").transform(new Date(), "yyyy-MM-dd").toString() + ' 00:00:00';
-        toDate = new DatePipe("en-US").transform(new Date(), "yyyy-MM-dd").toString() + ' 23:59:59';
+      case 'today':
+        fromDate = new DatePipe('en-US').transform(new Date(), 'yyyy-MM-dd').toString() + ' 00:00:00';
+        toDate = new DatePipe('en-US').transform(new Date(), 'yyyy-MM-dd').toString() + ' 23:59:59';
         break;
 
-      case "week":
-        fromDate = new DatePipe("en-US").transform((function () {
+      case 'week':
+        fromDate = new DatePipe('en-US').transform((function () {
           let d = new Date();
           var day = d.getDay(),
             diff = d.getDate() - day + (day == 0 ? -6 : 1);
           return new Date(d.setDate(diff));
-        }()), "yyyy-MM-dd").toString() + ' 00:00:00';
-        toDate = new DatePipe("en-US").transform((function () {
+        }()), 'yyyy-MM-dd').toString() + ' 00:00:00';
+        toDate = new DatePipe('en-US').transform((function () {
           let date = new Date();
           var lastday = date.getDate() - (date.getDay() - 1) + 6;
           return new Date(date.setDate(lastday));
-        }()), "yyyy-MM-dd").toString() + ' 23:59:59';
+        }()), 'yyyy-MM-dd').toString() + ' 23:59:59';
         break;
 
-      case "month":
-        fromDate = new DatePipe("en-US").transform((function () {
+      case 'month':
+        fromDate = new DatePipe('en-US').transform((function () {
           let date = new Date();
           return new Date(date.getFullYear(), date.getMonth(), 1);
-        }()), "yyyy-MM-dd").toString() + ' 00:00:00';
-        toDate = new DatePipe("en-US").transform((function () {
+        }()), 'yyyy-MM-dd').toString() + ' 00:00:00';
+        toDate = new DatePipe('en-US').transform((function () {
           let date = new Date();
           return new Date(date.getFullYear(), date.getMonth() + 1, 0);
-        }()), "yyyy-MM-dd").toString() + ' 23:59:59';
+        }()), 'yyyy-MM-dd').toString() + ' 23:59:59';
         break;
 
       default:
-        fromDate = new DatePipe("en-US").transform((function () {
+        fromDate = new DatePipe('en-US').transform((function () {
           let date = new Date();
           return new Date(date.getFullYear(), date.getMonth(), 1);
-        }()), "yyyy-MM-dd").toString() + ' 00:00:00';
-        toDate = new DatePipe("en-US").transform((function () {
+        }()), 'yyyy-MM-dd').toString() + ' 00:00:00';
+        toDate = new DatePipe('en-US').transform((function () {
           let date = new Date();
           return new Date(date.getFullYear(), date.getMonth() + 1, 0);
-        }()), "yyyy-MM-dd").toString() + ' 23:59:59';
+        }()), 'yyyy-MM-dd').toString() + ' 23:59:59';
         break;
-        
+
     }
-    if( filter == undefined ) {
+    if (filter === undefined) {
       this.getDashboardCounts(fromDate, toDate);
       this.getDashboardBizCounts(fromDate, toDate);
       this.getSearchCounts(fromDate, toDate);
     } else {
-      if ( filter == 'getDashboardBizCounts' ) {
+      if (filter === 'getDashboardBizCounts') {
         this.getDashboardBizCounts(fromDate, toDate);
         this.loadingIndicator = false;
-      } else  {
-        if ( filter == 'getSearchCounts' ) {
+      } else {
+        if (filter === 'getSearchCounts') {
           this.getSearchCounts(fromDate, toDate);
           this.loadingIndicator = false;
         }
@@ -111,10 +111,13 @@ export class DashboardComponent implements OnInit {
     }
   }
   getDashboardCounts(fromDate, toDate) {
-    if (this.userstoragedata.roleid == 3) {
-      this.service = this.dashboardService.customer({ "fromDate": fromDate, "toDate": toDate, "memid": this.userstoragedata.customer.membershipid });
+    if (this.userstoragedata.roleid === 3) {
+      this.service = this.dashboardService.customer({
+        fromDate: fromDate, toDate: toDate,
+        memid: this.userstoragedata.customer.membershipid
+      });
     } else {
-      this.service = this.dashboardService.getCounts({ "fromDate": fromDate, "toDate": toDate });
+      this.service = this.dashboardService.getCounts({ fromDate: fromDate, toDate: toDate });
     }
     this.service.subscribe(res => {
       const response = JSON.parse(res._body);
@@ -125,20 +128,23 @@ export class DashboardComponent implements OnInit {
   }
   getDashboardBizCounts(fromDate, toDate) {
     this.bizcounts = [];
-    if (this.userstoragedata.roleid == 3) {
-      this.service = this.dashboardService.rating({ "fromDate": fromDate, "toDate": toDate, "memid": this.userstoragedata.customer.membershipid });
+    if (this.userstoragedata.roleid === 3) {
+      this.service = this.dashboardService.rating({
+        fromDate: fromDate, toDate: toDate,
+        memid: this.userstoragedata.customer.membershipid
+      });
     } else {
-      this.service = this.dashboardService.employeebusinessCount({ "fromDate": fromDate, "toDate": toDate });
+      this.service = this.dashboardService.employeebusinessCount({ fromDate: fromDate, toDate: toDate });
     }
     this.service.subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
         this.bizcounts = response.data;
-        if (this.userstoragedata.roleid == 3) {
+        if (this.userstoragedata.roleid === 3) {
           const self = this;
           _.each(this.bizdefaultrating, function (item, idx) {
-            let countObj: any = _.find(self.bizcounts, function (itm) {
-              if (itm.label == item.label) {
+            const countObj: any = _.find(self.bizcounts, function (itm) {
+              if (itm.label === item.label) {
                 return itm;
               }
             });
@@ -152,28 +158,29 @@ export class DashboardComponent implements OnInit {
   }
 
   getSearchCounts(fromDate, toDate) {
-    if (this.userstoragedata.roleid == 3) {
-      this.service = this.consumerService.consumerReviews({ "membershipid":this.userstoragedata.customer.membershipid },'5','0');
+    if (this.userstoragedata.roleid === 3) {
+      this.service = this.consumerService.consumerReviews(
+        { membershipid: this.userstoragedata.customer.membershipid }, '5', '0');
     } else {
-      this.service = this.dashboardService.searchCount({ "fromDate": fromDate, "toDate": toDate });
+      this.service = this.dashboardService.searchCount({ fromDate: fromDate, toDate: toDate });
     }
     this.service.subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
         this.searchcounts = response.data;
         this.loadingIndicator = false;
-        if (this.userstoragedata.roleid !=3 ) {
+        if (this.userstoragedata.roleid != 3) {
           this.generateCatCountChart(this.searchcounts.map((d) => {
             return {
               category: d.categoryname,
               name: d.count
-            }
+            };
           }));
         }
       }
     }, err => {
       console.log(err);
-    })
+    });
   }
   generateCatCountChart(data) {
     AmCharts.makeChart('analytics-graph', {
