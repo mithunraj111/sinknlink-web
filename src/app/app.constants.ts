@@ -41,6 +41,8 @@ export const AppConstant = Object.freeze({
     }
   },
   // Status
+  AD_PREMIUM: 'Y',
+  AD_NOTPREMIUM: 'N',
   STATUS_ACTIVE: 'Active',
   STATUS_INACTIVE: 'Inactive',
   STATUS_AVAILABLE: 'Available',

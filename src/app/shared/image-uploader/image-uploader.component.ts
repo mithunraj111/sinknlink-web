@@ -31,15 +31,12 @@ export class ImageUploaderComponent implements OnInit, OnChanges {
 
     ngOnChanges(changes: { [propName: string]: SimpleChange }) {
         if (changes['disablePicker'] && changes['disablePicker'].previousValue != changes['disablePicker'].currentValue) {
-            console.log(this.disablePicker);
         }
         if (changes['extimage'] && changes['extimage'].previousValue != changes['extimage'].currentValue) {
-            console.log(this.extimage);
         }
         if (changes['editMode'] && changes['editMode'].previousValue != changes['editMode'].currentValue) {
 
         }
-        console.log(changes);
     }
 
     selectedImg(one, files) {
@@ -48,7 +45,6 @@ export class ImageUploaderComponent implements OnInit, OnChanges {
 
         for (let index = 0; index < files.length; index++) {
             const file = files[index];
-            console.log(file);
             if (
                 (file.type == "image/jpg" ||
                     file.type == "image/jpeg" ||
@@ -108,9 +104,7 @@ export class ImageUploaderComponent implements OnInit, OnChanges {
         let element = document.getElementById(el.target.id);
         element.parentNode.removeChild(element);
 
-        console.log(this.images);
 
-        console.log(this);
 
         // for (let index = 0; index < this.images.length; index++) {
         //     const element = this.images[index];

@@ -10,7 +10,6 @@ import { AppMessages } from 'src/app/app-messages';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { AdminService } from "../../../services";
 
-
 @Component({
   selector: 'app-add-edit-advertisement',
   templateUrl: './add-edit-advertisement.component.html',
@@ -25,6 +24,7 @@ export class AddEditAdvertisementComponent implements OnInit {
   edit: boolean = false;
   buttontext = AppConstant.BUTTON_TXT.SAVE;
   status: boolean = true;
+  ispremium: boolean = true;
   adObj = {} as any;
   savingAd: boolean = false;
   adForm: FormGroup;
@@ -33,7 +33,7 @@ export class AddEditAdvertisementComponent implements OnInit {
   sucMessage;
   processingad;
   statelists = [];
-  catlist = [];
+  categorylist = [];
   images: any = [];
   existing_image: any = [];
 
@@ -82,7 +82,7 @@ export class AddEditAdvertisementComponent implements OnInit {
           item.value = item.categoryid.toString();
           item.label = item.categoryname;
         });
-        this.catlist = response.data;
+        this.categorylist = response.data;
       } else {
         this.bootstrapAlertService.showError(response.message);
       }
@@ -96,8 +96,10 @@ export class AddEditAdvertisementComponent implements OnInit {
       adname: [null, [Validators.required]],
       locationid: [null, [Validators.required]],
       categoryid: [null, [Validators.required]],
+      url: [null, [Validators.required]],
       startdate: [null, [Validators.required]],
       expirydate: [null, [Validators.required]],
+      ispremium: ['Y'],
       description: [null, [Validators.required]],
       status: ['Active']
     });
@@ -106,26 +108,28 @@ export class AddEditAdvertisementComponent implements OnInit {
     this.adService.byId(id).subscribe(res => {
       this.edit = true;
       let response = JSON.parse(res._body);
-      console.log(response);
-
       let adObj = response.data;
       adObj.locationid = adObj.locationid.toString();
       adObj.categoryid = adObj.categoryid.toString();
+      adObj.ispremium = adObj.ispremium == AppConstant.AD_PREMIUM ? true : false;
       adObj.startdate = this.commonService.parseDate(adObj.startdate);
       adObj.expirydate = this.commonService.parseDate(adObj.expirydate);
       adObj.status = response.data.status == AppConstant.STATUS_ACTIVE ? true : false;
-
       this.adForm = this.fb.group({
         adname: [adObj.adname, [Validators.required]],
         locationid: [adObj.locationid, [Validators.required]],
         categoryid: [adObj.categoryid, [Validators.required]],
+        url: [adObj.url, [Validators.required]],
         startdate: [adObj.startdate, [Validators.required]],
         expirydate: [adObj.expirydate, [Validators.required]],
+        ispremium: [adObj.ispremium],
         description: [adObj.description, [Validators.required]],
         status: [adObj.status]
       });
       this.existing_image = [];
-      this.existing_image = response.data.gallery;
+      this.existing_image = response.data.adimages;
+      console.log(this.existing_image);
+      
     }, err => {
       this.savingAd = false;
       console.log(err);
@@ -141,6 +145,7 @@ export class AddEditAdvertisementComponent implements OnInit {
     }
     let data = this.adForm.value;
     data.startdate = this.commonService.formatDate(data.startdate);
+    data.ispremium = data.ispremium ? AppConstant.AD_PREMIUM : AppConstant.AD_NOTPREMIUM;
     data.expirydate = this.commonService.formatDate(data.expirydate);
     data.status = data.status ? AppConstant.STATUS_ACTIVE : AppConstant.STATUS_INACTIVE;
     if (new Date(data.expirydate) < new Date(data.startdate)) {
@@ -151,7 +156,7 @@ export class AddEditAdvertisementComponent implements OnInit {
     if (this.edit) {
       data["updateddt"] = new Date();
       data["updatedby"] = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER).fullname;
-      this.updatead(data);
+      this.updateAd(data);
     } else {
       data.createddt = new Date();
       data.createdby = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER).fullname;
@@ -181,7 +186,8 @@ export class AddEditAdvertisementComponent implements OnInit {
     this.images = files;
   };
 
-  updatead(data) {
+  updateAd(data) {
+
     let formData = new FormData();
     for (let index = 0; index < this.images.length; index++) {
       const element = this.images[index];
@@ -190,10 +196,10 @@ export class AddEditAdvertisementComponent implements OnInit {
     formData.append("data", JSON.stringify(data));
     this.adService.update(formData, this.adid).subscribe(res => {
       this.savingAd = false;
-      let response = JSON.parse(res._body);
+      let response = JSON.parse(res._body);      
       if (response.status) {
         this.bootstrapAlertService.showSucccess(response.message);
-        this.router.navigate(['/admin/ads/']);
+        this.router.navigate(['/admin/advertisement/']);
       } else {
         this.bootstrapAlertService.showError(response.message);
       }

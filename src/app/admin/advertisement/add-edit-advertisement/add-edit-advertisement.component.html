@@ -24,7 +24,7 @@
                   <input formControlName="adname" type="text" class="form-control" placeholder="Advertisement Name">
                 </div>
               </div>
-              <div class="form-group row ">
+              <div class="form-group row required">
                 <label class="col-md-3 col-sm-6 col-form-label text-right">Location</label>
                 <div class="col-md-9 col-sm-6">
                   <ng-select [allowClear]="true" formControlName="locationid" class="ng-select location-title"
@@ -32,12 +32,18 @@
                   </ng-select>
                 </div>
               </div>
-              <div class="form-group row ">
+              <div class="form-group row required">
                 <label class="col-md-3 col-sm-6 col-form-label text-right">Category</label>
                 <div class="col-md-9 col-sm-6">
                   <ng-select [allowClear]="true" formControlName="categoryid" class="ng-select location-title"
-                    placeholder="Select Category" [options]="catlist">
+                    placeholder="Select Category" [options]="categorylist">
                   </ng-select>
+                </div>
+              </div>
+              <div class="form-group row required">
+                <label class="col-md-3 col-sm-6 col-form-label text-right">URL</label>
+                <div class="col-md-9 col-sm-6">
+                  <input formControlName="url" type="text" class="form-control" placeholder="Url to visit">
                 </div>
               </div>
               <div class="form-group row required">
@@ -62,8 +68,14 @@
                   </div>
                 </div>
               </div>
+              <div class="row ">
+                <label class="col-md-3 col-sm-6 col-form-label text-right">Premium</label>
+                <div class="col-md-9 col-sm-6">
+                  <ui-switch class="js-small" color="$primary-color" formControlName="ispremium" switchColor="#fff" size="small"></ui-switch>
+                </div>
+              </div>
               <div class="form-group row required">
-                <label class="col-md-3 col-sm-6 col-form-label text-right">Particulars</label>
+                <label class="col-md-3 col-sm-6 col-form-label text-right">Notes</label>
                 <div class="col-md-9 col-sm-6">
                   <textarea rows="3" cols="3" class="form-control" formControlName="description"></textarea>
                 </div>
@@ -87,8 +99,7 @@
   </div>
   <div class="col-md-9 col-sm-9 p-l-0">
     <div class="card">
-      <app-image-uploader [editMode]="edit" (imageAdded)="imageAdded($event)" [disablePicker]="savingAd"
-        [(extimage)]="existing_image"></app-image-uploader>
+      <app-image-uploader [editMode]="edit" (imageAdded)="imageAdded($event)" [disablePicker]="savingAd" [(extimage)]="existing_image"></app-image-uploader>
     </div>
   </div>
 </div>
