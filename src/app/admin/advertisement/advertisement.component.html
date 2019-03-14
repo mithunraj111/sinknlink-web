@@ -22,18 +22,18 @@
       <div class="card p-r-15 p-l-15">
         <ngx-datatable #adtable class="table data-table expandable" [rows]='adList' [columnMode]="'flex'"
           [headerHeight]="50" [footerHeight]="50" [limit]="10" [rowHeight]="'auto'" [reorderable]="false" [messages]="emptymessages">
-          <ngx-datatable-column prop="adname" name="Ad Name" [resizeable]="false">
+          <ngx-datatable-column prop="adname" name="Advertisement Name" [resizeable]="false">
             <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
               <span>{{row.adname}}</span>
             </ng-template>
           </ngx-datatable-column>
-          <ngx-datatable-column prop="addate" name="StartDate" data-type='date' [resizeable]="false" headerClass="text-center"
+          <ngx-datatable-column prop="addate" name="Start Date" data-type='date' [resizeable]="false" headerClass="text-center"
             [cellClass]="'text-center'">
             <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
               <span>{{row.startdate|date:displaydateformat}}</span>
             </ng-template>
           </ngx-datatable-column>
-          <ngx-datatable-column prop="expirydate" name="ExpiryDate" data-type='date' [resizeable]="false" headerClass="text-center"
+          <ngx-datatable-column prop="expirydate" name="Expiry Date" data-type='date' [resizeable]="false" headerClass="text-center"
             [cellClass]="'text-center'">
             <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
               <span>{{row.expirydate|date:displaydateformat}}</span>
@@ -71,10 +71,10 @@
   <div *ngIf="tempFilter.length == 0" class="text-center no-data">
     <div class="nodata-text nodata-image">
       <img class="hand-icon" src="assets/images/no-data.png">
-      <h3>No Ad(s) Found</h3>
+      <h3>No Advertisement Found</h3>
       <button *ngIf="add" type="button" placement="bottom" ngbTooltip="Click to add Advertisement" class="add-btn btn btn-primary waves-effect"><i
           class="fa fa-plus-circle m-r-5"></i>Create
-        Ads</button>
+        Advertisement</button>
     </div>
   </div>
 </div>

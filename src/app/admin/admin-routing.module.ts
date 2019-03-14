@@ -180,7 +180,7 @@ const routes: Routes = [
         data: {
           title: 'Advertisement',
           status: false,
-          permission: {
+          permissions: {
             only: ['Advertisement'],
             redirectTo: '/'
           },
@@ -193,7 +193,7 @@ const routes: Routes = [
         data: {
           title: 'Advertisement',
           status: false,
-          permission: {
+          permissions: {
             only: ['Advertisement'],
             redirectTo: '/accessdenied'
           }
@@ -206,7 +206,7 @@ const routes: Routes = [
         data: {
           title: 'Advertisement',
           status: false,
-          permission: {
+          permissions: {
             only: ['Advertisement'],
             redirectTo: '/accessdenied'
           }

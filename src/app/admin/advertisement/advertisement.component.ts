@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class AdvertisementComponent extends BaseService implements OnInit {
   @ViewChild(DatatableComponent) table: DatatableComponent;
-  emptymessages = AppConstant.EMPTY_MESSAGES.EVENTS;
+  emptymessages = AppConstant.EMPTY_MESSAGES.ADVERTISEMENT;
   displaydtimeformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   displaydateformat = AppConstant.API_CONFIG.ANG_DATE.displaydate;
   loadingIndicator:boolean = true;

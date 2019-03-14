@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { AppConstant } from '../../app.constants';
 
 @Injectable()
-export class AdvertisementService{
+export class AdvertisementService {
     endpoint: string;
     constructor(private httpHandler: HttpHandlerService) {
         this.endpoint = AppConstant.API_END_POINT;
@@ -24,5 +24,11 @@ export class AdvertisementService{
     delete(data, id): Observable<any> {
         return this.httpHandler.DELETE(this.endpoint + AppConstant.API_CONFIG.API_URL.ADMIN.ADVERTISEMENT.DELETE, id, data);
     }
-    
+    getLocations(data): Observable<any> {
+        return this.httpHandler.POST(this.endpoint + AppConstant.API_CONFIG.API_URL.MASTERS.LOCATION.LIST, data);
+    } 
+    getCategory(data): Observable<any> {
+        return this.httpHandler.POST(this.endpoint + AppConstant.API_CONFIG.API_URL.MASTERS.CATEGORY.LIST, data);
+    }
+
 }

@@ -288,6 +288,7 @@ export const AppConstant = Object.freeze({
     DEALER: { emptyMessage: 'No dealer data to display', totalMessage: 'total' },
     DEALER_CUSTOMER: { emptyMessage: 'No customer data to display', totalMessage: 'total' },
     EVENTS: { emptyMessage: 'No event data to display', totalMessage: 'total' },
+    ADVERTISEMENT: { emptyMessage: 'No advertisement data to display', totalMessage: 'total' },
     DONATIONS: { emptyMessage: 'No donation data to display', totalMessage: 'total' },
     LOOKUP: { emptyMessage: 'No lookup data to display', totalMessage: 'total' },
     VIPNUMBER: { emptyMessage: 'No vip number registration data to display', totalMessage: 'total' },
