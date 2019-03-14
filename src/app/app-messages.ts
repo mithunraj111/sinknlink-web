@@ -6,7 +6,10 @@ export const AppMessages = Object.freeze({
       DELETE_SUCCESS: 'Deleted Successfully'
     },
     LOGIN: {
-      mobileno: { required: 'Please enter mobile number' },
+      mobileno: {
+        required: 'Please enter mobile number',
+        pattern: 'Please enter valid mobile number'
+      },
       password: { required: 'Please enter password' }
     },
     FORGOTPASSWORD: {

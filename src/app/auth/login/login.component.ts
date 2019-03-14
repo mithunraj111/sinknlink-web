@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
     private dealerService: BusinessService.DealerService,
     private router: Router) {
     this.loginForm = this.fb.group({
-      mobileno: [null, Validators.compose([Validators.required, Validators.maxLength(13)])],
+      mobileno: [null, Validators.compose([Validators.required, Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')])],
       password: [null, Validators.required],
     });
   }
