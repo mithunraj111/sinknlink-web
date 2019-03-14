@@ -26,7 +26,7 @@ export class AddEditAdvertisementComponent implements OnInit {
   buttontext = AppConstant.BUTTON_TXT.SAVE;
   status: boolean = true;
   adObj = {} as any;
-  savingad: boolean = false;
+  savingAd: boolean = false;
   adForm: FormGroup;
   adErrObj = AppMessages.VALIDATION.ADVERTISEMENT;
   errMessage;
@@ -127,15 +127,15 @@ export class AddEditAdvertisementComponent implements OnInit {
       this.existing_image = [];
       this.existing_image = response.data.gallery;
     }, err => {
-      this.savingad = false;
+      this.savingAd = false;
       console.log(err);
     });
   }
 
   addAd() {
-    this.savingad = true;
+    this.savingAd = true;
     if (!this.adForm.valid) {
-      this.savingad = false;
+      this.savingAd = false;
       this.bootstrapAlertService.showError(this.commonService.getFormErrorMessage(this.adForm, this.adErrObj));
       return false;
     }
@@ -144,7 +144,7 @@ export class AddEditAdvertisementComponent implements OnInit {
     data.expirydate = this.commonService.formatDate(data.expirydate);
     data.status = data.status ? AppConstant.STATUS_ACTIVE : AppConstant.STATUS_INACTIVE;
     if (new Date(data.expirydate) < new Date(data.startdate)) {
-      this.savingad = false;
+      this.savingAd = false;
       this.bootstrapAlertService.showError(AppMessages.VALIDATION.ADVERTISEMENT.startdate.max);
       return false;
     }
@@ -162,7 +162,7 @@ export class AddEditAdvertisementComponent implements OnInit {
       }
       formData.append("data", JSON.stringify(data));
       this.adService.create(formData).subscribe(res => {
-        this.savingad = false;
+        this.savingAd = false;
         let response = JSON.parse(res._body);
         if (response.status) {
           this.bootstrapAlertService.showSucccess(response.message);
@@ -171,7 +171,7 @@ export class AddEditAdvertisementComponent implements OnInit {
           this.bootstrapAlertService.showError(response.message);
         }
       }, err => {
-        this.savingad = false;
+        this.savingAd = false;
         console.log(err);
       });
     }
@@ -189,7 +189,7 @@ export class AddEditAdvertisementComponent implements OnInit {
     }
     formData.append("data", JSON.stringify(data));
     this.adService.update(formData, this.adid).subscribe(res => {
-      this.savingad = false;
+      this.savingAd = false;
       let response = JSON.parse(res._body);
       if (response.status) {
         this.bootstrapAlertService.showSucccess(response.message);
@@ -198,7 +198,7 @@ export class AddEditAdvertisementComponent implements OnInit {
         this.bootstrapAlertService.showError(response.message);
       }
     }, err => {
-      this.savingad = false;
+      this.savingAd = false;
     });
   }
 }
