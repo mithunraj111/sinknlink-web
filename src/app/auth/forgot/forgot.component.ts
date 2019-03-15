@@ -26,7 +26,7 @@ export class ForgotComponent implements OnInit {
   ngOnInit() {
     this.forgotPasswordForm = this.fb.group({
       mobileno: [null, Validators.compose([
-        Validators.required, Validators.minLength(10), Validators.maxLength(10)])]
+        Validators.required, Validators.minLength(10), Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')])]
     });
   }
 

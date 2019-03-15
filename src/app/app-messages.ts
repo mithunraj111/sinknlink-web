@@ -16,7 +16,8 @@ export const AppMessages = Object.freeze({
       mobileno: {
         required: 'Please enter mobile number',
         minlength: 'Mobile number is not valid',
-        maxlength: 'Mobile number is not valid'
+        maxlength: 'Mobile number is not valid',
+        pattern: 'Please enter valid mobile number'
       }
     },
     CATEGORY: {

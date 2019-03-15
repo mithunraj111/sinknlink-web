@@ -87,7 +87,7 @@
         <div class="col-md-12 col-sm-12 text-center employee-profile m-t-25">
           <div class="form-group">
             <label class="custom-file mb-3 profile-page">
-              <button *ngIf="profileimage==true" class="btn" (click)="remove()"><i class="fa fa-close"></i></button>
+              <button *ngIf="profileimage==true" class="md-close-btn" (click)="remove()"><i class="fa fa-close"></i></button>
               <img [src]="userfile" class="img-responsive w-50" alt="" *ngIf="profileimage==true">
               <span class="img-radius f-60" *ngIf="profileimage==false">{{userfile}}</span>
               <input #userimage type="file" name="userimg" (change)="onFile($event)" class="custom-file-input">

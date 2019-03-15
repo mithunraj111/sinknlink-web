@@ -27,7 +27,7 @@
               <span>{{row.adname}}</span>
             </ng-template>
           </ngx-datatable-column>
-          <ngx-datatable-column prop="addate" name="Start Date" data-type='date' [resizeable]="false" headerClass="text-center"
+          <ngx-datatable-column prop="startdate" name="Start Date" data-type='date' [resizeable]="false" headerClass="text-center"
             [cellClass]="'text-center'">
             <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
               <span>{{row.startdate|date:displaydateformat}}</span>
@@ -72,7 +72,7 @@
     <div class="nodata-text nodata-image">
       <img class="hand-icon" src="assets/images/no-data.png">
       <h3>No Advertisement Found</h3>
-      <button *ngIf="add" type="button" placement="bottom" ngbTooltip="Click to add Advertisement" class="add-btn btn btn-primary waves-effect"><i
+      <button *ngIf="add" type="button" placement="bottom" ngbTooltip="Click to add Advertisement" class="add-btn btn btn-primary waves-effect" (click)='addAd()'><i
           class="fa fa-plus-circle m-r-5"></i>Create
         Advertisement</button>
     </div>
