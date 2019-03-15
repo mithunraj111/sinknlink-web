@@ -9,7 +9,8 @@ export const AppConstant = Object.freeze({
     USER: 'user',
     ISAUTHENTICATED: 'isAuthenticated',
     SCREENS: 'scrcodes-',
-    DEALER: 'dealer-'
+    DEALER: 'dealer-',
+    PERMISSIONS: 'permissions'
   },
   MAX_FILE_SIZE: 5000000,
   PERMISSION: ['Create', 'View', 'Edit', 'Delete', 'Download'],

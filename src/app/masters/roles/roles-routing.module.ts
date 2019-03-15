@@ -17,7 +17,7 @@ const routes: Routes = [
       status: false,
       permissions: {
         only: ['Roles'],
-        redirectTo: '/'
+        redirectTo: '/accessdenied'
       }
     }
   },
@@ -31,7 +31,7 @@ const routes: Routes = [
       caption: 'add role',
       status: false,
       permissions: {
-        only: ['Roles'],
+        only: ['RolesCreate'],
         redirectTo: '/accessdenied'
       }
     }
@@ -46,7 +46,7 @@ const routes: Routes = [
       caption: 'edit role',
       status: false,
       permissions: {
-        only: ['Roles'],
+        only: ['RolesEdit'],
         redirectTo: '/accessdenied'
       }
     }

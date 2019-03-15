@@ -8,6 +8,7 @@ import { BusinessService, LocalStorageService, CommonService } from '../../servi
 import { DashboardComponent } from 'src/app/dashboard/dashboard.component';
 import { routerNgProbeToken } from '@angular/router/src/router_module';
 import * as _ from 'lodash';
+import { NgxPermissionsService } from 'ngx-permissions';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html'
@@ -25,7 +26,7 @@ export class LoginComponent implements OnInit {
     private loginService: LoginService,
     private localStorageService: LocalStorageService,
     private dealerService: BusinessService.DealerService,
-    private router: Router) {
+    private router: Router, private permissionsService: NgxPermissionsService) {
     this.loginForm = this.fb.group({
       mobileno: [null, Validators.compose([Validators.required, Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')])],
       password: [null, Validators.required],
@@ -65,6 +66,17 @@ export class LoginComponent implements OnInit {
               }
             });
           }
+          let permissions: any = [];
+          _.map(response.data.role.uiactions, function (item: any) {
+            if (item.assignedpermissions) {
+              permissions.push(item.screenname);
+              _.map(item.assignedpermissions, function (perms) { permissions.push(item.screenname + perms); });
+            }
+          });
+          permissions = _.uniq(permissions);
+          permissions = _.compact(permissions);
+          this.localStorageService.addItem(AppConstant.LOCALSTORAGE.PERMISSIONS, permissions);
+          this.permissionsService.loadPermissions(permissions);
           this.router.navigate(['dashboard']);
         } else {
           this.signingin = false;

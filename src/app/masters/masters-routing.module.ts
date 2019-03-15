@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LocationComponent } from './location/location.component';
 import { CategoryComponent } from './category/category.component';
 import { AuthGuard } from '../services/auth.guard';
+import { NgxPermissionsGuard } from 'ngx-permissions';
 
 
 const routes: Routes = [
@@ -20,11 +21,7 @@ const routes: Routes = [
         loadChildren: './users/users.module#UsersModule',
         data: {
           title: 'User',
-          status: false,
-          permissions: {
-            only: ['Users'],
-            redirectTo: '/'
-          }
+          status: false
         }
       },
       {
@@ -33,36 +30,32 @@ const routes: Routes = [
         loadChildren: './roles/roles.module#RolesModule',
         data: {
           title: 'Role',
-          status: false,
-          permissions: {
-            only: ['Roles'],
-            redirectTo: '/'
-          }
+          status: false
         }
       },
       {
         path: 'location',
         component: LocationComponent,
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard, NgxPermissionsGuard],
         data: {
           title: 'Locations',
           status: false,
           permissions: {
             only: ['Location'],
-            redirectTo: '/'
+            redirectTo: '/accessdenied'
           }
         }
       },
       {
         path: 'category',
         component: CategoryComponent,
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard, NgxPermissionsGuard],
         data: {
           title: 'Business Categories',
           status: false,
           permissions: {
             only: ['Categories'],
-            redirectTo: '/'
+            redirectTo: '/accessdenied'
           }
         }
       }

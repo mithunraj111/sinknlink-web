@@ -1,21 +1,12 @@
 import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
-import { NgxPermissionsService } from 'ngx-permissions';
 
 @Injectable()
 export class MenuItems {
   menuItems = [] as any;
-  constructor(private permissionsService: NgxPermissionsService) {
+  constructor() {
   }
   formMenu(availScreens) {
-    let permissions = _.map(availScreens, function (item: any) {
-      if (item.assignedpermissions) {
-        return item.screenname;
-      }
-    });
-    permissions = _.uniq(permissions);
-    permissions = _.compact(permissions);
-    this.permissionsService.loadPermissions(permissions);
     const menus = this.getMenus();
     this.menuItems = [];
     const groupedMenus = _.groupBy(availScreens, 'prntscreencode');

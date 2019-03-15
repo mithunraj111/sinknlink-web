@@ -15,18 +15,18 @@ const routes: Routes = [
       status: false,
       permissions: {
         only: ['Users'],
-        redirectTo: '/'
+        redirectTo: '/accessdenied'
       }
     }
   },
   {
     path: 'create',
     component: AddEditUserComponent,
-    canActivate: [NgxPermissionsGuard],
+    canActivate: [AuthGuard, NgxPermissionsGuard],
     data: {
       title: 'User',
       permissions: {
-        only: ['Users'],
+        only: ['UsersCreate'],
         redirectTo: '/accessdenied'
       }
     }
@@ -34,11 +34,11 @@ const routes: Routes = [
   {
     path: 'edit/:id',
     component: AddEditUserComponent,
-    canActivate: [NgxPermissionsGuard],
+    canActivate: [AuthGuard, NgxPermissionsGuard],
     data: {
       title: 'User',
       permissions: {
-        only: ['Users'],
+        only: ['UsersEdit'],
         redirectTo: '/accessdenied'
       }
     }

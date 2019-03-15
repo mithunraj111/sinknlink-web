@@ -6,6 +6,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AccessdeniedComponent } from './accessdenied/accessdenied.component';
 import { AuthGuard } from './services/auth.guard';
+import { NgxPermissionsGuard } from 'ngx-permissions';
 
 const routes: Routes = [
   {
@@ -20,9 +21,13 @@ const routes: Routes = [
       {
         path: 'dashboard',
         component: DashboardComponent,
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard, NgxPermissionsGuard],
         data: {
-          title: 'Dashboard'
+          title: 'Dashboard',
+          permissions: {
+            only: ['Dashboard'],
+            redirectTo: '/accessdenied'
+          }
         }
       },
       {

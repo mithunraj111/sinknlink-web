@@ -16,6 +16,7 @@ import { AddEditAdvertisementComponent } from './advertisement/add-edit-advertis
 const routes: Routes = [
   {
     path: '',
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'events',
@@ -26,7 +27,7 @@ const routes: Routes = [
           status: false,
           permissions: {
             only: ['Events'],
-            redirectTo: '/'
+            redirectTo: '/accessdenied'
           }
         },
       },
@@ -38,7 +39,7 @@ const routes: Routes = [
           title: 'Event',
           status: false,
           permissions: {
-            only: ['Events'],
+            only: ['EventsCreate'],
             redirectTo: '/accessdenied'
           }
         },
@@ -51,7 +52,7 @@ const routes: Routes = [
           title: 'Event',
           status: false,
           permissions: {
-            only: ['Events'],
+            only: ['EventsEdit'],
             redirectTo: '/accessdenied'
           }
         },
@@ -65,7 +66,7 @@ const routes: Routes = [
           status: false,
           permissions: {
             only: ['Donations'],
-            redirectTo: '/'
+            redirectTo: '/accessdenied'
           }
         },
       },
@@ -77,7 +78,7 @@ const routes: Routes = [
           title: 'Donation',
           status: false,
           permissions: {
-            only: ['Donations'],
+            only: ['DonationsCreate'],
             redirectTo: '/accessdenied'
           }
         },
@@ -90,7 +91,7 @@ const routes: Routes = [
           title: 'Donation',
           status: false,
           permissions: {
-            only: ['Donations'],
+            only: ['DonationsEdit'],
             redirectTo: '/accessdenied'
           }
         },
@@ -104,7 +105,7 @@ const routes: Routes = [
           status: false,
           permissions: {
             only: ['VIP Number Registration'],
-            redirectTo: '/'
+            redirectTo: '/accessdenied'
           }
         },
       },
@@ -116,7 +117,7 @@ const routes: Routes = [
           title: 'VIP number registration',
           status: false,
           permissions: {
-            only: ['VIP Number Registration'],
+            only: ['VIP Number RegistrationCreate'],
             redirectTo: '/accessdenied'
           }
         },
@@ -129,7 +130,7 @@ const routes: Routes = [
           title: 'VIP number registration',
           status: false,
           permissions: {
-            only: ['VIP Number Registration'],
+            only: ['VIP Number RegistrationEdit'],
             redirectTo: '/accessdenied'
           }
         },
@@ -143,7 +144,7 @@ const routes: Routes = [
           status: false,
           permissions: {
             only: ['Lookup'],
-            redirectTo: '/'
+            redirectTo: '/accessdenied'
           }
         },
       },
@@ -155,7 +156,7 @@ const routes: Routes = [
           title: 'Lookup',
           status: false,
           permissions: {
-            only: ['Lookup'],
+            only: ['LookupCreate'],
             redirectTo: '/accessdenied'
           }
         },
@@ -168,7 +169,7 @@ const routes: Routes = [
           title: 'Lookup',
           status: false,
           permissions: {
-            only: ['Lookup'],
+            only: ['LookupCreate'],
             redirectTo: '/accessdenied'
           }
         },
@@ -182,7 +183,7 @@ const routes: Routes = [
           status: false,
           permissions: {
             only: ['Advertisement'],
-            redirectTo: '/'
+            redirectTo: '/accessdenied'
           },
         },
       },
@@ -194,7 +195,7 @@ const routes: Routes = [
           title: 'Advertisement',
           status: false,
           permissions: {
-            only: ['Advertisement'],
+            only: ['AdvertisementCreate'],
             redirectTo: '/accessdenied'
           }
         },
@@ -207,7 +208,7 @@ const routes: Routes = [
           title: 'Advertisement',
           status: false,
           permissions: {
-            only: ['Advertisement'],
+            only: ['AdvertisementEdit'],
             redirectTo: '/accessdenied'
           }
         },

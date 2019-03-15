@@ -28,7 +28,7 @@ const routes: Routes = [
           status: false,
           permissions: {
             only: ['Customers'],
-            redirectTo: '/'
+            redirectTo: '/accessdenied'
           }
         },
       },
@@ -40,7 +40,7 @@ const routes: Routes = [
           title: 'Customer',
           status: false,
           permissions: {
-            only: ['Customers'],
+            only: ['CustomersCreate'],
             redirectTo: '/accessdenied'
           }
         },
@@ -53,7 +53,7 @@ const routes: Routes = [
           title: 'Customer',
           status: false,
           permissions: {
-            only: ['Customers'],
+            only: ['CustomersEdit'],
             redirectTo: '/accessdenied'
           }
         },
@@ -106,7 +106,7 @@ const routes: Routes = [
           status: false,
           permissions: {
             only: ['Consumers'],
-            redirectTo: '/'
+            redirectTo: '/accessdenied'
           }
         },
       },
@@ -119,7 +119,7 @@ const routes: Routes = [
           status: false,
           permissions: {
             only: ['Dealers'],
-            redirectTo: '/'
+            redirectTo: '/accessdenied'
           }
         },
       },
@@ -131,7 +131,7 @@ const routes: Routes = [
           title: 'Dealer',
           status: false,
           permissions: {
-            only: ['Dealers'],
+            only: ['DealersCreate'],
             redirectTo: '/accessdenied'
           }
         },
@@ -144,7 +144,7 @@ const routes: Routes = [
           title: 'Dealer',
           status: false,
           permissions: {
-            only: ['Dealers'],
+            only: ['DealersEdit'],
             redirectTo: '/accessdenied'
           }
         },
@@ -183,7 +183,7 @@ const routes: Routes = [
           title: 'Consumer',
           status: false,
           permissions: {
-            only: ['Consumers'],
+            only: ['ConsumersView'],
             redirectTo: '/accessdenied'
           }
         },

@@ -20,8 +20,8 @@ const routes: Routes = [
           title: 'Area & Category Report',
           status: false,
           permissions: {
-            only: ['Area & Categories'],
-            redirectTo: '/'
+            only: ['Area & Category Report'],
+            redirectTo: '/accessdenied'
           }
         },
       },
@@ -34,7 +34,7 @@ const routes: Routes = [
           status: false,
           permissions: {
             only: ['Payments'],
-            redirectTo: '/'
+            redirectTo: '/accessdenied'
           }
         },
       },
@@ -47,7 +47,7 @@ const routes: Routes = [
           status: false,
           permissions: {
             only: ['Dealer Report'],
-            redirectTo: '/'
+            redirectTo: '/accessdenied'
           }
         },
       },
@@ -60,7 +60,7 @@ const routes: Routes = [
           status: false,
           permissions: {
             only: ['Consumer Report'],
-            redirectTo: '/'
+            redirectTo: '/accessdenied'
           }
         },
       },
@@ -73,7 +73,7 @@ const routes: Routes = [
           status: false,
           permissions: {
             only: ['Customer Detail Report'],
-            redirectTo: '/'
+            redirectTo: '/accessdenied'
           }
         },
       }
