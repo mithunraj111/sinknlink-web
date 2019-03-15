@@ -35,7 +35,6 @@ export class PaymentComponent extends BaseService implements OnInit {
   tempFilter = [];
   paymentForm: FormGroup;
   loadingIndicator = false;
-  userstoragedata = {} as any;
   constructor(
     private fb: FormBuilder,
     private commonService: CommonService,

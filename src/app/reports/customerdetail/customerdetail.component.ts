@@ -35,7 +35,6 @@ export class CustomerdetailComponent extends BaseService implements OnInit {
   categoryLists = [];
   customerdetailForm: FormGroup;
   businessList = [];
-  userstoragedata = {} as any;
   constructor(private fb: FormBuilder,
     private commonService: CommonService,
     private reportService: AppCommonService.ReportService,
@@ -100,7 +99,7 @@ export class CustomerdetailComponent extends BaseService implements OnInit {
     if (city != '' && city != undefined && city != null) {
       formData.city = [city];
     }
-    if (this.userstoragedata.usertype === 'D') {
+    if (this.userstoragedata.roleid === 2) {
       formData.dealerid = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.DEALER).dealerid;
     }
     let service;
@@ -127,7 +126,7 @@ export class CustomerdetailComponent extends BaseService implements OnInit {
         this.tempFilter = this.businessList;
       }
     }, err => {
-    })
+    });
   }
 
   getRowHeight(row) {
