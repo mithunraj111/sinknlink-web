@@ -139,10 +139,10 @@ export class AddEditCustomerComponent implements OnInit {
           this.cityLists = _.get(groupedData, 'biz_businesscity');
         }
         if (this.customerid == null) {
-          const selectedMemberType = [];
+          let selectedMemberType;
           _.each(this.memberTypes, function (item) {
             if (item.isdefault === 'Y') {
-              selectedMemberType.push(item.refvalue);
+              selectedMemberType = item.refvalue;
             }
           });
           const selectedBusinessType = [];
@@ -174,6 +174,10 @@ export class AddEditCustomerComponent implements OnInit {
           this.customerForm.controls['acceptedpayments'].setValue(selectedPaymentMethods);
           this.customerForm.controls['deliveryoptions'].setValue(selectedDeliveryOpts);
           this.customerForm.controls['paymenttenure'].setValue(selectedPaymentTenure);
+          this.customerForm.get('paymenttenure').setValidators(Validators.required);
+          this.customerForm.get('paymentstatus').setValidators(Validators.required);
+          this.customerForm.get('paymentstatus').updateValueAndValidity();
+          this.customerForm.get('paymenttenure').updateValueAndValidity();
         }
         if (this.customerObj != null) {
           let paymentObj = {} as any;
@@ -219,8 +223,8 @@ export class AddEditCustomerComponent implements OnInit {
       city: [''],
       locationid: [null, Validators.required],
       workdays: [_.map(this.workDays, _.property('value')), Validators.required],
-      starttime: [null, Validators.required],
-      endtime: [null, Validators.required],
+      starttime: ['09:00', Validators.required],
+      endtime: ['21:00', Validators.required],
       acceptedpayments: [null, Validators.required],
       deliveryoptions: [null, Validators.required],
       socialids: [[]],
