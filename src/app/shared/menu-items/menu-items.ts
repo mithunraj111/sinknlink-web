@@ -59,7 +59,7 @@ export class MenuItems {
         short_label: 'M',
         name: 'Masters',
         type: 'sub',
-        icon: 'fa fa-user',
+        icon: 'fa fa-cogs',
         code: 'masters',
         children: [
           {

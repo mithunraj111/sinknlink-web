@@ -1,4 +1,4 @@
-<div *ngIf="loadingIndicator==false" class="page-body">
+<div *ngIf="loadingIndicator == false" class="page-body">
   <div class="row">
     <!-- order-card start -->
     <div class="col-md-6 col-xl-3">
@@ -33,7 +33,7 @@
         </div>
       </div>
     </div>
-    <div [hidden] = "this.userstoragedata.roleid == 3" class="col-xl-8 col-md-12 m-t-10">
+    <div [hidden]="this.userstoragedata.roleid == 3" class="col-xl-8 col-md-12 m-t-10">
       <div class="card project-task">
         <div class="card-header p-t-20 p-b-0">
           <h5>Popular categories</h5>
@@ -41,47 +41,63 @@
         <div class="card-block">
           <div id="analytics-graph" style="height:365px"></div>
         </div>
+        <div *ngIf="searchcounts.length === 0" class="text-center no-data">
+          <div class="nodata-text nodata-image" style="margin-top: 10% !important;">
+            <img class="hand-icon" src="assets/images/no-data.png">
+            <h3>No Popular Categories Found</h3>
+          </div>
+        </div>
       </div>
     </div>
-    <div *ngIf = "this.userstoragedata.roleid == 3" class="col-xl-8 col-md-12 m-t-10">
+    <div *ngIf="this.userstoragedata.roleid == 3" class="col-xl-8 col-md-12 m-t-10">
       <div class="card project-task">
         <div class="card-block task-contain p-b-10 p-t-20">
           <div class="row">
             <span class="col-md-9 pt-2"><b>Reviews</b></span>
             <div class="col-md-3">
-              <button class="btn btn-inverse f-right px-2 py-1 m-b-10" (click)="getData(filterRange, 'getSearchCounts');"><i
-                class="ti-reload p-0 middle mr-0 f-16"></i></button>
+              <button class="btn btn-inverse f-right px-2 py-1 m-b-10"
+                (click)="getData(filterRange, 'getSearchCounts');"><i
+                  class="ti-reload p-0 middle mr-0 f-16"></i></button>
             </div>
           </div>
-          <div *ngFor = "let scount of searchcounts" class="row">
-            <div class="col-md-1">
-              <h6 class="bg-c-blue d-inline-block text-center">{{scount.consumer.fullname.substring(0,1) | uppercase}}</h6>
+          <div *ngIf="searchcounts.length !== 0">
+            <div *ngFor="let scount of searchcounts" class="row">
+              <div class="col-md-1">
+                <h6 class="bg-c-blue d-inline-block text-center">{{scount.consumer.fullname.substring(0,1) | uppercase}}
+                </h6>
+              </div>
+              <div class="col-md-11">
+                <div class="f-left p-l-5">
+                  <h5 class="f-14">{{scount.consumer.fullname|titlecase}} <span class="f-12">{{scount.updateddt | date: displaydatetimeformat}}</span></h5>
+                </div>
+                <div class="f-right">
+                  <bar-rating class="star-rating" [(rate)]="scount.rating" [max]="5" [readOnly]="true"></bar-rating>
+                </div>
+                <p style="display: inline-block;" class="text-muted p-l-5 w-100 f-14">{{scount.comments}}</p>
+              </div>
             </div>
-            <div class="col-md-11">
-              <div class="f-left p-l-5">
-                <h5 class="f-14">{{scount.consumer.fullname}}</h5>
-                <p class="mb-0 f-12">{{scount.updateddt | date: displaydatetimeformat}}</p>
-              </div>
-              <div class="f-right">
-                <bar-rating class="star-rating" [(rate)]="scount.rating" [max]="5" [readOnly]="true"></bar-rating>
-              </div>
-              <p style="display: inline-block;" class="text-muted p-l-5 w-100 f-12">{{scount.comments}}</p>
+          </div>
+          <div *ngIf="searchcounts.length === 0" class="text-center no-data">
+            <div class="nodata-text nodata-image" style="margin-top: 10% !important;">
+              <img class="hand-icon" src="assets/images/no-data.png">
+              <h3>No Reviews Found</h3>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="col-md-12 col-xl-4 m-t-10">
-      <div *ngIf = "userstoragedata.roleid != 3" class="card project-task">
+      <div *ngIf="userstoragedata.roleid != 3" class="card project-task">
         <div class="card-block p-b-10 p-t-15">
           <div class="row">
             <span class="col-md-9 pt-2"><b>Top Categories</b></span>
             <div class="col-md-3">
-              <button class="btn btn-inverse f-right px-2 py-1 m-b-10" (click)="getData(filterRange, 'getDashboardBizCounts');"><i
-                class="ti-reload p-0 middle mr-0 f-16"></i></button>
+              <button class="btn btn-inverse f-right px-2 py-1 m-b-10"
+                (click)="getData(filterRange, 'getDashboardBizCounts');"><i
+                  class="ti-reload p-0 middle mr-0 f-16"></i></button>
             </div>
           </div>
-          <div class="table-responsive">
+          <div *ngIf="bizcounts.length !== 0" class="table-responsive">
             <table class="table table-hover">
               <thead>
                 <tr>
@@ -112,25 +128,26 @@
               </div> -->
             </table>
           </div>
+          <div *ngIf="bizcounts.length === 0" class="text-center no-data">
+            <div class="nodata-text nodata-image" style="left: 12%; margin-top: 20% !important;">
+              <img class="hand-icon" src="assets/images/no-data.png">
+              <h3>No Top Categories Found</h3>
+            </div>
+          </div>
         </div>
       </div>
-      <div *ngIf = "userstoragedata.roleid == 3" class="card project-task">
+      <div *ngIf="userstoragedata.roleid == 3" class="card project-task">
         <div class="card-block p-b-10 p-t-20">
           <div class="row">
             <span class="col-md-9 pt-2"><b>Ratings</b></span>
             <div class="col-md-3">
-              <button class="btn btn-inverse f-right px-2 py-1 m-b-10" (click)="getData(filterRange, 'getDashboardBizCounts');">
+              <button class="btn btn-inverse f-right px-2 py-1 m-b-10"
+                (click)="getData(filterRange, 'getDashboardBizCounts');">
                 <i class="ti-reload p-0 middle mr-0 f-16"></i></button>
             </div>
           </div>
-          <div class="table-responsive">
+          <div *ngIf="bizcounts.length !== 0" class="table-responsive">
             <table class="table table-hover star-rating">
-              <!-- <thead>
-                <tr>
-                  <th>Rating</th>
-                  <th>No. of consumers</th>
-                </tr>
-              </thead> -->
               <tbody>
                 <tr *ngFor="let bcount of bizdefaultrating">
                   <td>
@@ -144,6 +161,12 @@
                 </tr>
               </tbody>
             </table>
+          </div>
+          <div *ngIf="bizcounts.length === 0" class="text-center no-data">
+            <div class="nodata-text nodata-image" style="left: 12%; margin-top: 20% !important;">
+              <img class="hand-icon" src="assets/images/no-data.png">
+              <h3>No Ratings Found</h3>
+            </div>
           </div>
         </div>
       </div>
@@ -159,5 +182,4 @@
     <a class="dropdown-item" (click)="getData('month');">This month</a>
   </div>
 </div>
-
 <app-loader [loadingIndicator]="loadingIndicator"></app-loader>

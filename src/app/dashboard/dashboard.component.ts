@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DashboardService } from "../services/common";
+import { DashboardService } from '../services/common';
 import * as _ from 'lodash';
 import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
 import { DatePipe } from '@angular/common';
@@ -28,7 +28,7 @@ export class DashboardComponent implements OnInit {
   ];
   searchcounts = [];
   service;
-  loadingIndicator = true;
+  loadingIndicator = false;
   userstoragedata = {} as any;
   constructor(private dashboardService: DashboardService,
     private consumerService: ConsumerService,
@@ -138,6 +138,7 @@ export class DashboardComponent implements OnInit {
     }
     this.service.subscribe(res => {
       const response = JSON.parse(res._body);
+      this.loadingIndicator = false;
       if (response.status) {
         this.bizcounts = response.data;
         if (this.userstoragedata.roleid === 3) {
@@ -154,7 +155,7 @@ export class DashboardComponent implements OnInit {
           });
         }
       }
-    })
+    });
   }
 
   getSearchCounts(fromDate, toDate) {
@@ -168,8 +169,7 @@ export class DashboardComponent implements OnInit {
       const response = JSON.parse(res._body);
       if (response.status) {
         this.searchcounts = response.data;
-        this.loadingIndicator = false;
-        if (this.userstoragedata.roleid != 3) {
+        if (this.userstoragedata.roleid !== 3) {
           this.generateCatCountChart(this.searchcounts.map((d) => {
             return {
               category: d.categoryname,
@@ -237,5 +237,6 @@ export class DashboardComponent implements OnInit {
       },
       'dataProvider': data
     });
+    console.log(data);
   }
 }
