@@ -56,10 +56,6 @@ export class AreaCategoriesComponent extends BaseService implements OnInit {
       this.bootstrapAlertService.showError(AppMessages.VALIDATION.AREACATEGORIES.fromdate.max);
       return false;
     }
-    this.formData = {
-      fromdate: fromdt + ' 00:00',
-      todate: todt + ' 23:59'
-    };
     this.getAreaList();
     this.getCategoryList();
 
@@ -76,7 +72,11 @@ export class AreaCategoriesComponent extends BaseService implements OnInit {
       const formData = {
         fromdate: fromdt + ' 00:00',
         todate: todt + ' 23:59'
-      };
+      } as any;
+
+      if (this.userstoragedata.roleid === 2) {
+        formData.dealerid = this.dealerdata.dealerid;
+      }
       return formData;
     }
   }
@@ -85,10 +85,10 @@ export class AreaCategoriesComponent extends BaseService implements OnInit {
     let service;
     if (download) {
       this.generatingFile = true;
-      service = this.reportService.getCategoryWiseCount(this.formData, true);
+      service = this.reportService.getCategoryWiseCount(this.genFormData(), true);
     } else {
       this.loadingIndicator = true;
-      service = this.reportService.getCategoryWiseCount(this.formData);
+      service = this.reportService.getCategoryWiseCount(this.genFormData());
     }
     service.subscribe(res => {
       if (download) {
