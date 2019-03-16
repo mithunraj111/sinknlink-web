@@ -8,14 +8,11 @@
                     </p>
                 </div>
                 <div class="col-md-6 col-sm-6 save-button text-right p-r-30">
-                    <button *ngIf="showbutton" type="button" placement="bottom" ngbTooltip="Click To {{buttonText}} Customer Details"
-                        (click)="saveOrUpdate()" class="btn btn-primary waves-effect m-r-10 text-capitalize" [disabled]="savecustomer">{{savecustomer
+                    <button *ngIf="showbutton" type="button" placement="bottom" ngbTooltip="Click To {{buttonText}} Customer Details" (click)="saveOrUpdate()" class="btn btn-primary waves-effect m-r-10 text-capitalize" [disabled]="savecustomer">{{savecustomer
                         ==
                         true ? 'Saving' : buttonText}}</button>
-                    <button *ngIf="!showbutton" type="button" placement="bottom" ngbTooltip="Click To {{buttonText}} Customer Details"
-                        (click)="saveOrUpdate()" class="btn btn-primary waves-effect m-r-10 text-capitalize"><i class="fa fa-plus-circle m-r-5"></i>&nbsp;New</button>
-                    <button type="button" placement="bottom" ngbTooltip="Go back" routerLink="/business/customers"
-                        class="btn btn-inverse btn-primary waves-effect"><i class="fa fa-arrow-circle-left"></i></button>
+                    <button *ngIf="!showbutton" type="button" placement="bottom" ngbTooltip="Click To {{buttonText}} Customer Details" (click)="saveOrUpdate()" class="btn btn-primary waves-effect m-r-10 text-capitalize"><i class="fa fa-plus-circle m-r-5"></i>&nbsp;New</button>
+                    <button type="button" placement="bottom" ngbTooltip="Go back" routerLink="/business/customers" class="btn btn-inverse btn-primary waves-effect"><i class="fa fa-arrow-circle-left"></i></button>
                 </div>
             </div>
         </div>
@@ -45,8 +42,7 @@
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Business
                                                             name</label>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <input type="text" class="form-control" placeholder="Business name"
-                                                                formControlName="bizname">
+                                                            <input type="text" class="form-control" placeholder="Business name" formControlName="bizname">
                                                         </div>
                                                     </div>
                                                     <div class="form-group row required">
@@ -54,9 +50,7 @@
                                                             type</label>
                                                         <div class="col-md-9 col-sm-6">
                                                             <div class="input-box">
-                                                                <ng-select [allowClear]="true" [ngClass]="'ng-select'"
-                                                                    [options]="businesstypes" formControlName="biztype"
-                                                                    placeholder="Select business type">
+                                                                <ng-select [allowClear]="true" [ngClass]="'ng-select'" [options]="businesstypes" formControlName="biztype" placeholder="Select business type">
                                                                 </ng-select>
                                                             </div>
                                                         </div>
@@ -65,9 +59,7 @@
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Membership
                                                             type</label>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <ng-select [allowClear]="true" [ngClass]="'ng-select'"
-                                                                [options]="memberTypes" formControlName="membershiptype"
-                                                                (selected)="onMembershipChange($event)" placeholder="Select Membership type">
+                                                            <ng-select [allowClear]="true" [ngClass]="'ng-select'" [options]="memberTypes" formControlName="membershiptype" (selected)="onMembershipChange($event)" placeholder="Select Membership type">
                                                             </ng-select>
                                                         </div>
                                                     </div>
@@ -75,8 +67,7 @@
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Description</label>
                                                         <div class="col-md-9 col-sm-6">
                                                             <div class="input-box">
-                                                                <textarea rows="3" cols="3" class="form-control"
-                                                                    placeholder="Description" formControlName="bizdescription"></textarea>
+                                                                <textarea rows="3" cols="3" class="form-control" placeholder="Description" formControlName="bizdescription"></textarea>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -84,8 +75,7 @@
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Contact
                                                             person</label>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <input type="text" class="form-control" placeholder="Contact person"
-                                                                formControlName="contactperson">
+                                                            <input type="text" class="form-control" placeholder="Contact person" formControlName="contactperson">
                                                         </div>
                                                     </div>
                                                     <div class="form-group row required placeholder-text">
@@ -93,33 +83,28 @@
                                                             Mobile
                                                         </label>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <input type="text" class="form-control" placeholder="Primary Mobile"
-                                                                formControlName="contactmobile">
+                                                            <input type="text" class="form-control" placeholder="Primary Mobile" [readOnly]="!isAddForm" formControlName="contactmobile">
                                                         </div>
                                                     </div>
                                                     <div class="form-group row placeholder-text">
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Alternate
                                                             Mobile Numbers</label>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <tag-input class="tag-chips" [maxItems]="5" placeholder="Mobile Numbers"
-                                                                [secondaryPlaceholder]="'Mobile Numbers'" formControlName="phoneno"></tag-input>
+                                                            <tag-input class="tag-chips" [maxItems]="5" placeholder="Mobile Numbers" [secondaryPlaceholder]="'Mobile Numbers'" formControlName="phoneno"></tag-input>
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Email
                                                             address</label>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <input type="text" class="form-control" placeholder="Email address"
-                                                                formControlName="contactemail">
+                                                            <input type="text" class="form-control" placeholder="Email address" formControlName="contactemail">
                                                         </div>
                                                     </div>
                                                     <div class="form-group row required">
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Category</label>
                                                         <div class="col-md-9 col-sm-6">
                                                             <div class="input-box">
-                                                                <ng-select [allowClear]="true" [ngClass]="'ng-select'"
-                                                                    [options]="categoryList" formControlName="categoryid"
-                                                                    placeholder="Select Category">
+                                                                <ng-select [allowClear]="true" [ngClass]="'ng-select'" [options]="categoryList" formControlName="categoryid" placeholder="Select Category">
                                                                 </ng-select>
                                                             </div>
                                                         </div>
@@ -127,22 +112,19 @@
                                                     <div class="form-group row required placeholder-text">
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Tags</label>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <tag-input class="tag-chips" [maxItems]="5" formControlName="tags"
-                                                                [secondaryPlaceholder]="'Tags'" placeholder="Tags"></tag-input>
+                                                            <tag-input class="tag-chips" [maxItems]="5" formControlName="tags" [secondaryPlaceholder]="'Tags'" placeholder="Tags"></tag-input>
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Address</label>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <textarea rows="3" cols="3" class="form-control"
-                                                                placeholder="Address" formControlName="postaladdress"></textarea>
+                                                            <textarea rows="3" cols="3" class="form-control" placeholder="Address" formControlName="postaladdress"></textarea>
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Landmark</label>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <input type="text" class="form-control" placeholder="Landmark"
-                                                                formControlName="landmark">
+                                                            <input type="text" class="form-control" placeholder="Landmark" formControlName="landmark">
                                                         </div>
                                                     </div>
                                                     <div class="form-group row required">
@@ -152,11 +134,9 @@
                                                             </label>
                                                         </div>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <input type="text" class="form-control" placeholder="Latitude"
-                                                                formControlName="latitude">
+                                                            <input type="text" class="form-control" placeholder="Latitude" formControlName="latitude">
                                                             <span class="p-l-10 f-12 text-muted"><i>Eg., 13.082708</i></span>
-                                                            <input type="text" class="form-control m-t-5" placeholder="Longitude"
-                                                                formControlName="longitude">
+                                                            <input type="text" class="form-control m-t-5" placeholder="Longitude" formControlName="longitude">
                                                             <span class="p-l-10 f-12 text-muted"><i>Eg., 80.270797</i></span>
                                                         </div>
                                                     </div>
@@ -164,9 +144,7 @@
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">City</label>
                                                         <div class="col-md-9 col-sm-6">
                                                             <div class="input-box">
-                                                                <ng-select [allowClear]="true" formControlName='city'
-                                                                    [ngClass]="'ng-select'" [options]="cityLists"
-                                                                    placeholder="Select City" (selected)="selectCity($event)">
+                                                                <ng-select [allowClear]="true" formControlName='city' [ngClass]="'ng-select'" [options]="cityLists" placeholder="Select City" (selected)="selectCity($event)">
                                                                 </ng-select>
                                                             </div>
                                                         </div>
@@ -175,9 +153,7 @@
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Location</label>
                                                         <div class="col-md-9 col-sm-6">
                                                             <div class="input-box">
-                                                                <ng-select [allowClear]="true" [ngClass]="'ng-select'"
-                                                                    [options]="locationList" formControlName="locationid"
-                                                                    placeholder="Select Location">
+                                                                <ng-select [allowClear]="true" [ngClass]="'ng-select'" [options]="locationList" formControlName="locationid" placeholder="Select Location">
                                                                 </ng-select>
                                                             </div>
                                                         </div>
@@ -187,9 +163,7 @@
                                                             days</label>
                                                         <div class="col-md-9 col-sm-6">
                                                             <div class="input-box">
-                                                                <ng-select [allowClear]="true" [ngClass]="'ng-select'"
-                                                                    [options]="workDays" [multiple]="true"
-                                                                    formControlName="workdays" placeholder="Select Work Days">
+                                                                <ng-select [allowClear]="true" [ngClass]="'ng-select'" [options]="workDays" [multiple]="true" formControlName="workdays" placeholder="Select Work Days">
                                                                 </ng-select>
                                                                 <!-- <tag-input class="tag-chips" [onlyFromAutocomplete]="true" formControlName="workdays" [secondaryPlaceholder]="'Select Work Days'" placeholder="Select Work Days">
                                                                     <tag-input-dropdown [showDropdownIfEmpty]="true" [autocompleteItems]="workDays">
@@ -202,8 +176,7 @@
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Work
                                                             hours</label>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <input class="form-control m-b-10" type="time"
-                                                                formControlName="starttime">
+                                                            <input class="form-control m-b-10" type="time" formControlName="starttime">
                                                             <input class="form-control" type="time" formControlName="endtime">
                                                         </div>
                                                     </div>
@@ -212,9 +185,7 @@
                                                             methods</label>
                                                         <div class="col-md-9 col-sm-6">
                                                             <div class="input-box">
-                                                                <ng-select [allowClear]="true" [ngClass]="'ng-select'"
-                                                                    [options]="paymentMethods" [multiple]="true"
-                                                                    formControlName="acceptedpayments" placeholder="Select payment methods">
+                                                                <ng-select [allowClear]="true" [ngClass]="'ng-select'" [options]="paymentMethods" [multiple]="true" formControlName="acceptedpayments" placeholder="Select payment methods">
                                                                 </ng-select>
                                                             </div>
                                                         </div>
@@ -223,9 +194,7 @@
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Delivery
                                                             method</label>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <ng-select [allowClear]="true" [ngClass]="'ng-select'"
-                                                                [options]="deliveryMethods" [multiple]="true"
-                                                                formControlName="deliveryoptions" placeholder="Select delivery method">
+                                                            <ng-select [allowClear]="true" [ngClass]="'ng-select'" [options]="deliveryMethods" [multiple]="true" formControlName="deliveryoptions" placeholder="Select delivery method">
                                                             </ng-select>
                                                         </div>
                                                     </div>
@@ -234,8 +203,7 @@
                                                             ID's</label>
                                                         <div class="col-md-9 col-sm-6">
                                                             <div class="input-group">
-                                                                <input type="text" class="form-control w-75"
-                                                                    placeholder="Social ID's" readonly formControlName="socialids">
+                                                                <input type="text" class="form-control w-75" placeholder="Social ID's" readonly formControlName="socialids">
                                                                 <div class="input-group-append bg-default" (click)='addSocialId();'>
                                                                     <span class="fa fa-plus input-group-text"></span>
                                                                 </div>
@@ -246,21 +214,18 @@
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Tax
                                                             number</label>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <input type="text" class="form-control" placeholder="Tax number"
-                                                                formControlName="taxno">
+                                                            <input type="text" class="form-control" placeholder="Tax number" formControlName="taxno">
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Website</label>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <input type="text" class="form-control" placeholder="Website"
-                                                                formControlName="website">
+                                                            <input type="text" class="form-control" placeholder="Website" formControlName="website">
                                                         </div>
                                                     </div>
                                                     <div class="form-group border-checkbox-section offset-md-3 col-md-5 col-sm-4 m-t-10">
                                                         <div class="border-checkbox-group border-checkbox-group-primary">
-                                                            <input class="border-checkbox" type="checkbox" id="inmall"
-                                                                formControlName="inmallyn" [checked]>
+                                                            <input class="border-checkbox" type="checkbox" id="inmall" formControlName="inmallyn" [checked]>
                                                             <label class="border-checkbox-label" for="inmall">Business
                                                                 In Mall</label>
                                                         </div>
@@ -269,9 +234,7 @@
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Mall
                                                             Name</label>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <ng-select [allowClear]="true" [ngClass]="'ng-select'"
-                                                                [options]="mallsList" formControlName="mallname"
-                                                                placeholder="Select Mall Name">
+                                                            <ng-select [allowClear]="true" [ngClass]="'ng-select'" [options]="mallsList" formControlName="mallname" placeholder="Select Mall Name">
                                                             </ng-select>
                                                         </div>
                                                     </div>
@@ -289,9 +252,7 @@
                                                             Date</label>
                                                         <div class="col-md-9 col-sm-6">
                                                             <div class="input-group">
-                                                                <input class="form-control" placeholder="dd-mm-yyyy"
-                                                                    name="regdt" ngbDatepicker #regdt="ngbDatepicker"
-                                                                    formControlName="regdate">
+                                                                <input class="form-control" placeholder="dd-mm-yyyy" name="regdt" ngbDatepicker #regdt="ngbDatepicker" formControlName="regdate">
                                                                 <div class="input-group-append bg-default" (click)="regdt.toggle()">
                                                                     <span class="fa fa-calendar input-group-text"></span>
                                                                 </div>
@@ -302,9 +263,7 @@
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Payment
                                                             Status</label>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <ng-select [allowClear]="true" [ngClass]="'ng-select'"
-                                                                [options]="paymentStatus" formControlName="paymentstatus"
-                                                                placeholder="Select Payment
+                                                            <ng-select [allowClear]="true" [ngClass]="'ng-select'" [options]="paymentStatus" formControlName="paymentstatus" placeholder="Select Payment
                                                                 Status">
                                                             </ng-select>
                                                         </div>
@@ -313,18 +272,14 @@
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Payment
                                                             Tenure</label>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <ng-select [allowClear]="true" [ngClass]="'ng-select'"
-                                                                [options]="paymentTenuresList" formControlName="paymenttenure"
-                                                                placeholder="Select Payment tenure">
+                                                            <ng-select [allowClear]="true" [ngClass]="'ng-select'" [options]="paymentTenuresList" formControlName="paymenttenure" placeholder="Select Payment tenure">
                                                             </ng-select>
                                                         </div>
                                                     </div>
-                                                    <div class="form-group row required">
+                                                    <div *ngIf="customerObj?.membershipid" class="form-group row required">
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Status</label>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status"
-                                                                color="$primary-color" switchColor="#fff" size="small"
-                                                                formControlName="status"></ui-switch>
+                                                            <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="$primary-color" switchColor="#fff" size="small" formControlName="status"></ui-switch>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -426,8 +381,7 @@
                     <input type="text" class="form-control" formControlName="instagramid" placeholder="Instagram ID">
                 </div>
             </div>
-            <button (click)="update()" type="button" placement="bottom" ngbTooltip="Click to {{buttonText}} Social IDs "
-                class="btn pull-right btn-primary waves-effect m-b-10 mr-3">{{buttonText}}</button>
+            <button (click)="update()" type="button" placement="bottom" ngbTooltip="Click to {{buttonText}} Social IDs " class="btn pull-right btn-primary waves-effect m-b-10 mr-3">{{buttonText}}</button>
         </form>
         <button (click)="closeModal('socialidmodal')" aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>
     </app-modal-animation>

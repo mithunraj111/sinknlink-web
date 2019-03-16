@@ -361,13 +361,11 @@ export class AddEditCustomerComponent implements OnInit {
             this.customerObj = response.data;
             this.isAddForm = false;
             this.bootstrapAlertService.showSucccess(response.message);
-            this.customerForm.get('contactmobile').disable();
           } else {
             this.savecustomer = false;
             this.bootstrapAlertService.showError(response.message);
           }
         }, err => {
-          console.log(err);
           this.savecustomer = false;
           const error = JSON.parse(err._body);
           this.bootstrapAlertService.showError(error.message);
@@ -446,7 +444,6 @@ export class AddEditCustomerComponent implements OnInit {
       this.customerObj.socialids = socialids;
     }
     this.customerForm.patchValue(this.customerObj);
-    this.customerForm.get('contactmobile').disable();
     if (this.customerForm.get('membershiptype').value !== AppConstant.MEM_TYPE) {
       this.customerForm.get('paymenttenure').setValidators(Validators.required);
       this.customerForm.get('paymentstatus').setValidators(Validators.required);
