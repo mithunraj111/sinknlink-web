@@ -451,6 +451,12 @@ export class AddEditCustomerComponent implements OnInit {
       this.customerObj.socialids = socialids;
     }
     this.customerForm.patchValue(this.customerObj);
+    if (this.customerForm.get('membershiptype').value !== AppConstant.MEM_TYPE) {
+      this.customerForm.get('paymenttenure').setValidators(Validators.required);
+      this.customerForm.get('paymentstatus').setValidators(Validators.required);
+      this.customerForm.get('paymentstatus').updateValueAndValidity();
+      this.customerForm.get('paymenttenure').updateValueAndValidity();
+    }
     this.buttonText = AppConstant.BUTTON_TXT.UPDATE;
   }
 
