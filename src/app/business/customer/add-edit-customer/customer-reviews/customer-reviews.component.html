@@ -4,12 +4,10 @@
             <li class="media" *ngFor="let review of reviewsList">
                 <a class="media-left">
                     <div class="profile-image">{{review.consumer?.fullname.substring(0,1).toUpperCase()}}</div>
-                    <!-- <img class="media-object img-radius comment-img" src="assets/images/avatar-4.jpg"> -->
                 </a>
                 <div class="media-body">
-                    <a href="javascript:">
-                        <h6 class=" media-heading ">{{review.consumer?.fullname}}<span
-                                class="f-12 text-muted m-l-5">{{review.updateddt | date:datedisplayformat}}</span></h6>
+                    <a>
+                        <h6 class=" media-heading ">{{review.consumer?.fullname}}<span class="f-12 text-muted m-l-5">{{review.updateddt | date:datedisplayformat}}</span></h6>
                     </a>
                     <div class="stars-example-css review-star">
                         <bar-rating class="star-rating" [(rate)]="review.rating" [max]="5" [readOnly]="true">
@@ -24,8 +22,6 @@
                             <a>
                                 <div class="profile-image">{{review.consumer?.fullname.substring(0,1).toUpperCase()}}
                                 </div>
-
-                                <!-- <img class="media-object img-radius comment-img" src="assets/images/avatar-4.jpg"> -->
                             </a>
                         </div>
                         <div class="media-body">
