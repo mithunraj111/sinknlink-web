@@ -212,7 +212,7 @@ export class AddEditCustomerComponent implements OnInit {
       biztype: [null, Validators.required],
       bizdescription: ['', Validators.compose([Validators.minLength(5), Validators.maxLength(500)])],
       contactperson: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
-      contactmobile: [null, Validators.required],
+      contactmobile: [null, Validators.compose([Validators.required, Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')])],
       contactemail: ['', Validators.compose([Validators.pattern(AppConstant.REGEX.EMAIL), Validators.maxLength(100)])],
       phoneno: [[]],
       categoryid: [null, Validators.required],
@@ -309,7 +309,6 @@ export class AddEditCustomerComponent implements OnInit {
       formdata.regdate = this.commonService.formatDate(data.regdate);
       formdata.updatedby = this.userstoragedata.fullname;
       formdata.updateddt = new Date();
-      formdata.contactmobile = _.map(data.contactmobile, _.property('value'));
       formdata.phoneno = _.map(data.phoneno, _.property('value'));
       formdata.tags = _.map(data.tags, _.property('value'));
       formdata.tncagreed = data.tncagreed ? 'Y' : 'N';
@@ -327,7 +326,8 @@ export class AddEditCustomerComponent implements OnInit {
         lat: data.latitude,
         lng: data.longitude
       };
-
+      formdata.contactmobile = [];
+      formdata.contactmobile[0] = data.contactmobile;
       if (this.userstoragedata.usertype === 'D') {
         formdata.dealerid = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.DEALER).dealerid;
       }
@@ -361,6 +361,7 @@ export class AddEditCustomerComponent implements OnInit {
             this.customerObj = response.data;
             this.isAddForm = false;
             this.bootstrapAlertService.showSucccess(response.message);
+            this.customerForm.get('contactmobile').disable();
           } else {
             this.savecustomer = false;
             this.bootstrapAlertService.showError(response.message);
@@ -418,13 +419,7 @@ export class AddEditCustomerComponent implements OnInit {
     if (this.customerObj.parentmembershipid != null) {
       this.branchFlag = true;
     }
-    this.customerObj.contactmobile = _.map(this.customerObj.contactmobile, function (item) {
-      return {
-        value: item,
-        display: item
-      };
-    });
-
+    this.customerObj.contactmobile = this.customerObj.contactmobile[0];
     this.customerObj.phoneno = _.map(this.customerObj.phoneno, function (item) {
       return {
         value: item,
@@ -451,6 +446,7 @@ export class AddEditCustomerComponent implements OnInit {
       this.customerObj.socialids = socialids;
     }
     this.customerForm.patchValue(this.customerObj);
+    this.customerForm.get('contactmobile').disable();
     if (this.customerForm.get('membershiptype').value !== AppConstant.MEM_TYPE) {
       this.customerForm.get('paymenttenure').setValidators(Validators.required);
       this.customerForm.get('paymentstatus').setValidators(Validators.required);

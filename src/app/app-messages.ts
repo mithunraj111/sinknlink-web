@@ -320,7 +320,10 @@ export const AppMessages = Object.freeze({
         minlength: 'Description should be atleast 5 characters',
         maxlength: 'Description should be within 500 characters'
       },
-      contactmobile: { required: 'Please enter mobile number' },
+      contactmobile: {
+        required: 'Please enter primary mobile number',
+        pattern: 'Please enter valid mobile number'
+      },
       contactemail: {
         required: 'Please enter email address',
         pattern: 'Please enter valid email address',
