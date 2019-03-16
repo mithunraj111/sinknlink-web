@@ -86,6 +86,11 @@ export class CommonService {
             for (const key in item) {
                 if (('' + item[key]).toLocaleLowerCase().includes(val)) {
                     return ('' + item[key]).toLocaleLowerCase().includes(val);
+                } else if (!_.isNull(item[key]) && typeof (item[key]) === 'object') {
+                    _.assign(item, item[key]);
+                    if (('' + item[key]).toLocaleLowerCase().includes(val)) {
+                        return ('' + item[key]).toLocaleLowerCase().includes(val);
+                    }
                 }
             }
         });
