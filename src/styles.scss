@@ -164,10 +164,14 @@ textarea {
     }
     h1{
         font-size: 38px;
-        color: $white-txt;;
+        color:  $white-txt;;
         margin-top: 35px;
     }
 }
+.text-color {
+    color: $primary-color;
+    font-size: 38px;
+    }
 .pcoded-main-container{
     // background: #F6F9FA;
     background: rgba(202, 202, 202, 0.1);
