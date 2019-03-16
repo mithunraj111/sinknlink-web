@@ -61,7 +61,10 @@ export class CustomerGalleryComponent extends BaseService implements OnInit, OnC
       this.documentService.create(formData).subscribe(res => {
         const response = JSON.parse(res._body);
         if (response.status) {
-          this.imagesList = response.data;
+          // this.imagesList = response.data;
+          this.bootstrapAlertService.showSucccess(response.message);
+        } else {
+          this.bootstrapAlertService.showError(response.message);
         }
       });
     }
