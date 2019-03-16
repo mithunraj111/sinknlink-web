@@ -43,12 +43,6 @@
                                                         <span>{{row.price|currency : 'INR' : true}}</span>
                                                     </ng-template>
                                                 </ngx-datatable-column>
-                                                <ngx-datatable-column name="Status" [sortable]="false" [flexGrow]="0.5" headerClass="text-center" [cellClass]="'text-center'" [resizeable]="false">
-                                                    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                                                        <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="$primary-color" (change)="changeStatus(row, rowIndex, false)" switchColor="#fff" size="small" [disabled]="row.fancynostatus == 'Blocked' || row.fancynostatus == 'NA'"
-                                                            [checked]="row.status == 'Active'"></ui-switch>
-                                                    </ng-template>
-                                                </ngx-datatable-column>
                                                 <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.5" headerClass="text-center" [cellClass]="'text-center'" [resizeable]="false">
                                                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                                                         <div class="row checkbox-column text-center">
