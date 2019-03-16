@@ -20,7 +20,7 @@
             <div class="card p-r-10 p-l-10">
                 <ngx-datatable #categorytable class="table data-table expandable" [rows]='categoryList' [columnMode]="'flex'" [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false" [footerHeight]="50" [limit]="10" [messages]="emptymessages">
                     <!-- Row Detail Template -->
-                    <ngx-datatable-column prop="categoryname" name="Business category" [resizeable]="false">
+                    <ngx-datatable-column prop="categoryname" name="Business Category" [resizeable]="false">
                         <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                             <span class="middle">{{row.categoryname}}</span>
                         </ng-template>

@@ -494,7 +494,7 @@ export class AddEditCustomerComponent implements OnInit {
       }
       map = new gmap.Map(document.getElementById("map"), {
         center: Curloc,
-        zoom: 8,
+        zoom: 12,
         mapTypeControl: false,
         fullscreenControl: false,
         mapTypeId: 'roadmap'
