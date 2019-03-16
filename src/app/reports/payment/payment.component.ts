@@ -42,7 +42,7 @@ export class PaymentComponent extends BaseService implements OnInit {
     private lookupService: AdminService.LookupService,
     private reportService: AppCommonService.ReportService) {
     super();
-    this.getScreenDetails('r_dealer');
+    this.getScreenDetails('r_payments');
   }
 
   ngOnInit() {

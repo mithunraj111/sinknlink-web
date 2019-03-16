@@ -203,7 +203,7 @@ export class AddEditRoleComponent implements OnInit {
     if (this.screensList[rowIndex].checked) {
       this.screensList[rowIndex].assignedpermissions = this.screensList[rowIndex].permissions;
     } else {
-      this.screensList[rowIndex].assignedpermissions = '-';
+      this.screensList[rowIndex] = _.omit(this.screensList[rowIndex], ['assignedpermissions']);
     }
     this.screensList = [...this.screensList];
   }
