@@ -129,8 +129,10 @@ export class MainComponent implements OnInit {
   title = '';
   fullname: any;
   userprofile = false;
+  id = 0;
   constructor(public menuItems: MenuItems, private router: Router, private route: ActivatedRoute,
     private lstorageService: LocalStorageService, private permissionsService: NgxPermissionsService) {
+
     this.router.events
       .filter(event => event instanceof NavigationEnd)
       .subscribe(() => {
@@ -140,6 +142,12 @@ export class MainComponent implements OnInit {
           currentRoute = null;
           childrenRoutes.forEach(routes => {
             if (routes.outlet === 'primary') {
+              this.id = 0;
+              routes.params.subscribe(params => {
+                if (params.id !== undefined) {
+                  this.id = params.id;
+                }
+              });
               this.title = routes.snapshot.data.title;
               currentRoute = routes;
             }
@@ -214,7 +222,6 @@ export class MainComponent implements OnInit {
     this.userstoragedata = this.lstorageService.getItem(AppConstant.LOCALSTORAGE.USER);
     if (this.userstoragedata.profileimg != null && this.userstoragedata.profileimg.status != "deleted") {
       this.userfile = this.userstoragedata.profileimg.docurl;
-      console.log(this.userfile)
       this.userprofile = true;
     } else {
       this.userprofile = false;
