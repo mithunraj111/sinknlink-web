@@ -121,7 +121,7 @@
 
                                 <ngx-datatable-column prop="regdate" name="Reg Date" [resizeable]="false" headerClass="reg-date text-center" [cellClass]="'text-center'">
                                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                                        <span>{{row.regdate|date:displayformat}}</span>
+                                        <span>{{row.regdate}}</span>
                                     </ng-template>
                                 </ngx-datatable-column>
 
