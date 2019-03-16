@@ -168,12 +168,7 @@ textarea {
         margin-top: 35px;
     }
 }
-.text-color {
-    color: $primary-color;
-    font-size: 38px;
-    }
 .pcoded-main-container{
-    // background: #F6F9FA;
     background: rgba(202, 202, 202, 0.1);
 }
 
@@ -569,9 +564,6 @@ textarea {
     label{
         font-weight: bold;
     }
-    // .dropdown-menu.show {
-    //     top: -220px !important;
-    // }
 }
 select.form-control:not([size]):not([multiple]){
     height: auto !important;
@@ -629,12 +621,12 @@ select.form-control:not([size]):not([multiple]){
        }
    }
    .btn-primary{
-    padding: 5px 12px;
-    margin-top: -1px;
-   i{
-       margin-right:0;
-   }
-}
+        padding: 5px 12px;
+        margin-top: -1px;
+        i{
+            margin-right:0;
+        }
+    }
 }
 button{
     &:focus{
@@ -1356,39 +1348,35 @@ body[themebg-pattern="pattern1"]{
     }
 }
 .customer-report{
-        border:1px solid $white-txt !important;
-
-        .datatable-header {
-            border-bottom: 1px solid hsl(216, 6%, 84%);
-            margin-left:0px;
-            width:100vw !important;
-            // background: #f7f7f7;
-
-                .datatable-header-cell{
-                    border: 0px solid #d3d5d8;
-                    color: $primary-text-color;
-                    font-family: 'Montserrat', sans-serif;
-                    font-weight: 600;
-                    font-size: 13px;
-                    width:100vw;
-                    overflow: inherit !important;
-
-                    &:first-child{
-                    padding-left: 0px;
-                }   
-            }
+    border:1px solid $white-txt !important;
+    .datatable-header {
+        border-bottom: 1px solid hsl(216, 6%, 84%);
+        margin-left:0px;
+        width:100vw !important;
+        .datatable-header-cell{
+            border: 0px solid #d3d5d8;
+            color: $primary-text-color;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 13px;
+            width:100vw;
+            overflow: inherit !important;
+            &:first-child{
+                padding-left: 0px;
+            }   
         }
-       .datatable-body-row {
-            border-bottom: 1px solid #d3d5d8;
+    }
+    .datatable-body-row {
+        border-bottom: 1px solid #d3d5d8;
         .datatable-body-cell {
-                border: 0px solid #d3d5d8;
-                font-size: 13px;
-                color: #67757c;
-                font-family: 'Poppins', sans-serif;
-                font-weight: 400;
-                white-space: nowrap;
-                width: 100%;
-                max-width:100%;
+            border: 0px solid #d3d5d8;
+            font-size: 13px;
+            color: #67757c;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 400;
+            white-space: nowrap;
+            width: 100%;
+            max-width:100%;
         }
     }
     .datatable-body{
@@ -1435,26 +1423,26 @@ body[themebg-pattern="pattern1"]{
 }
 .payment-report{
     width:98.5%;
-        .form-group{
-            margin-top: 10px;
+    .form-group{
+        margin-top: 10px;
+    }
+    .toggle{
+        color: #2b2f33 !important;
+        width:35px !important; 
+    }
+    .generate-button {
+        padding: 7px 15px;
+    }
+    .card{
+        margin-bottom: 8px;
+        label {
+            font-weight: bold;
+            color: #3e4855;
         }
-        .toggle{
-            color: #2b2f33 !important;
-            width:35px !important; 
+        .ng-select{
+            width: 100%;
         }
-        .generate-button {
-            padding: 7px 15px;
-        }
-        .card{
-            margin-bottom: 8px;
-            label {
-                font-weight: bold;
-                color: #3e4855;
-            }
-            .ng-select{
-                width: 100%;
-            }
-        }  
+    }  
 }
 .payment-table{
     .card-block {
@@ -1471,7 +1459,7 @@ body[themebg-pattern="pattern1"]{
     }
 }
 #pcoded{
-        &[vertical-nav-type="offcanvas"] {
+    &[vertical-nav-type="offcanvas"] {
         .customer-report{
             .datatable-row-wrapper:nth-child(odd) {
                 width: 100%;
@@ -1509,17 +1497,17 @@ body[themebg-pattern="pattern1"]{
                         height: 33px;
                         display:inline-block;
                         box-shadow: 0px 5px 25px 0 rgba(0, 0, 0, 0.25)
-                     }
-                 }
+                    }
+                }
             }
         }
     }
  }
- .fixed-table{
+.fixed-table{
     .card-block {
         padding: 0px 15px 0px 15px;
-     }
- }
+    }
+}
 
 .dt-picker{
     .form-control{
@@ -1693,14 +1681,14 @@ select-dropdown{
             display: block;
             line-height: normal;
             margin-left: 16px;    
-                .border-checkbox-label{
-                    margin-bottom: 12px;
-                    &:before {
-                        width: 20px;
-                        height: 20px;
-                    }
+            .border-checkbox-label{
+                margin-bottom: 12px;
+                &:before {
+                    width: 20px;
+                    height: 20px;
                 }
             }
+        }
         .border-checkbox-label {
             padding-left:5px;
             height:auto;

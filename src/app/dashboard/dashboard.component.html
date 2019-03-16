@@ -4,39 +4,39 @@
     <div class="col-md-6 col-xl-3">
       <div class="card bg-c-blue order-card">
         <div class="card-block">
-          <h6 class="m-b-20">{{counts[0]?.label}}</h6>
-          <h2 class="text-right"><i class="{{counts[0]?.icon}} f-left p-r-10"></i><span>{{counts[0]?.count}}</span></h2>
+          <h6 class="m-b-10 f-18">{{counts[0]?.label}}</h6>
+          <h2 class="text-right"><i class="{{counts[0]?.icon}} f-left p-r-10 mt-1"></i><span>{{counts[0]?.count}}</span></h2>
         </div>
       </div>
     </div>
     <div class="col-md-6 col-xl-3">
       <div class="card bg-c-green order-card">
         <div class="card-block">
-          <h6 class="m-b-20">{{counts[2]?.label}}</h6>
-          <h2 class="text-right"><i class="{{counts[2]?.icon}} f-left p-r-10"></i><span>{{counts[2]?.count}}</span></h2>
+          <h6 class="m-b-10 f-18">{{counts[2]?.label}}</h6>
+          <h2 class="text-right"><i class="{{counts[2]?.icon}} f-left p-r-10 mt-1"></i><span>{{counts[2]?.count}}</span></h2>
         </div>
       </div>
     </div>
     <div class="col-md-6 col-xl-3">
       <div class="card bg-c-yellow order-card">
         <div class="card-block">
-          <h6 class="m-b-20">{{counts[1]?.label}}</h6>
-          <h2 class="text-right"><i class="{{counts[1]?.icon}} f-left p-r-10"></i><span>{{counts[1]?.count}}</span></h2>
+          <h6 class="m-b-10 f-18">{{counts[1]?.label}}</h6>
+          <h2 class="text-right"><i class="{{counts[1]?.icon}} f-left p-r-10 mt-1"></i><span>{{counts[1]?.count}}</span></h2>
         </div>
       </div>
     </div>
     <div class="col-md-6 col-xl-3">
       <div class="card bg-c-pink order-card">
         <div class="card-block">
-          <h6 class="m-b-20">{{counts[3]?.label}}</h6>
-          <h2 class="text-right"><i class="{{counts[3]?.icon}} f-left p-r-10"></i><span>{{counts[3]?.count}}</span></h2>
+          <h6 class="m-b-10 f-18">{{counts[3]?.label}}</h6>
+          <h2 class="text-right"><i class="{{counts[3]?.icon}} f-left p-r-10 mt-1"></i><span>{{counts[3]?.count}}</span></h2>
         </div>
       </div>
     </div>
     <div [hidden]="this.userstoragedata.roleid == 3" class="col-xl-8 col-md-12 m-t-10">
       <div class="card project-task">
         <div class="card-header p-t-20 p-b-0">
-          <h5>Popular categories</h5>
+          <h5>Frequently searched categories</h5>
         </div>
         <div class="card-block">
           <div id="analytics-graph" style="height:365px"></div>
@@ -68,7 +68,7 @@
               </div>
               <div class="col-md-11">
                 <div class="f-left p-l-5">
-                  <h5 class="f-14">{{scount.consumer.fullname|titlecase}} <span class="f-12">{{scount.updateddt | date: displaydatetimeformat}}</span></h5>
+                  <h5 class="f-14">{{scount.consumer.fullname|titlecase}} <span class="f-12 text-muted">{{scount.updateddt | date: displaydatetimeformat}}</span></h5>
                 </div>
                 <div class="f-right">
                   <bar-rating class="star-rating" [(rate)]="scount.rating" [max]="5" [readOnly]="true"></bar-rating>
@@ -90,7 +90,7 @@
       <div *ngIf="userstoragedata.roleid != 3" class="card project-task">
         <div class="card-block p-b-10 p-t-15">
           <div class="row">
-            <span class="col-md-9 pt-2"><b>Top Categories</b></span>
+            <span class="col-md-9 pt-2 card-header"><h5>Top Categories</h5></span>
             <div class="col-md-3">
               <button class="btn btn-inverse f-right px-2 py-1 m-b-10"
                 (click)="getData(filterRange, 'getDashboardBizCounts');"><i
@@ -99,12 +99,6 @@
           </div>
           <div *ngIf="bizcounts.length !== 0" class="table-responsive">
             <table class="table table-hover">
-              <thead>
-                <tr>
-                  <th>Category Name</th>
-                  <th>Business %</th>
-                </tr>
-              </thead>
               <tbody>
                 <tr *ngFor="let bcount of bizcounts">
                   <td class="py-1">
