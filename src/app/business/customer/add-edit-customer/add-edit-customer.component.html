@@ -1,4 +1,4 @@
-<div class="addeditpage">
+<div *ngIf="!loadingIndicator" class="addeditpage">
     <div class="fixedheader">
         <div class="header-title m-b-15 pos-fixed">
             <div class="row">
@@ -84,13 +84,15 @@
                                                         </label>
                                                         <div class="col-md-9 col-sm-6">
                                                             <input type="text" class="form-control" placeholder="Primary Mobile" [readOnly]="!isAddForm" formControlName="contactmobile">
+                                                            <span class="p-l-10 f-12 text-muted"><i>This will be considered as login id</i></span>
                                                         </div>
                                                     </div>
                                                     <div class="form-group row placeholder-text">
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Alternate
                                                             Mobile Numbers</label>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <tag-input class="tag-chips" [maxItems]="5" placeholder="Mobile Numbers" [secondaryPlaceholder]="'Mobile Numbers'" formControlName="phoneno"></tag-input>
+                                                            <tag-input class="tag-chips" [maxItems]="5" placeholder="Alternate Numbers" 
+                                                            [secondaryPlaceholder]="'Alternate Numbers'" formControlName="phoneno"></tag-input>
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
@@ -344,6 +346,7 @@
         </div>
     </div>
 </div>
+<app-loader [loadingIndicator]="loadingIndicator"></app-loader>
 <!-- GEO ADDRESS POP UP STARTS -->
 <div class="modal-size select-input addlocation">
     <app-modal-animation [modalID]="'mapmodal'" [modalClass]="'md-effect-7'">

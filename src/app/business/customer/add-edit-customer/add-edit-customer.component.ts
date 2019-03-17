@@ -33,6 +33,7 @@ export class AddEditCustomerComponent implements OnInit {
   savecustomer;
   workDays = AppConstant.WORKDAYS;
   showbutton = true;
+  loadingIndicator = true;
   @ViewChild(CustomerCouponsComponent) couponComponent: CustomerCouponsComponent;
   @ViewChild(CustomerGigsComponent) gigComponent: CustomerGigsComponent;
   @ViewChild(CustomerSettingsComponent) settingsComponent: CustomerSettingsComponent;
@@ -79,6 +80,9 @@ export class AddEditCustomerComponent implements OnInit {
         this.getCustomerDetail();
         this.isAddForm = false;
       }
+      if(params.id === undefined) {
+        this.loadingIndicator = false;
+      }
       if (params.flag !== undefined) {
         this.branchFlag = true;
         this.parentid = params.parentid;
@@ -113,6 +117,7 @@ export class AddEditCustomerComponent implements OnInit {
           item.label = item.area + '(' + item.pincode + ')';
         });
         this.locationList = response.data;
+        this.loadingIndicator = false;
       }
     });
   }
