@@ -29,7 +29,13 @@
                     </ul>
                     <ul [@mobileHeaderNavRight]="navRight" [ngClass]="navRight" class="nav-right">
                         <li (clickOutside)="notificationOutsideClick('profile')" class="user-profile header-notification" [ngClass]="profileNotificationClass" (click)="toggleProfileNotification()">
-                            <a href="javascript:" [routerLink]="['/profile']">
+                            <a *ngIf="userstoragedata.roleid!=3 && userstoragedata.roleid!=2">
+                                <img [src]="userfile" class="img-radius" alt="" *ngIf="userprofile==true">
+                                <span class="profile-image" *ngIf="userprofile==false">{{userfile}}</span>
+                                <span class="fullname">{{userstoragedata.fullname}}</span>
+                                <!-- <i class="fa fa-chevron-down"></i> -->
+                            </a>
+                            <a *ngIf="userstoragedata.roleid==3 || userstoragedata.roleid==2" [routerLink]="['/profile']">
                                 <img [src]="userfile" class="img-radius" alt="" *ngIf="userprofile==true">
                                 <span class="profile-image" *ngIf="userprofile==false">{{userfile}}</span>
                                 <span class="fullname">{{userstoragedata.fullname}}</span>

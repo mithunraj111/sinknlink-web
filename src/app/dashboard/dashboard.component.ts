@@ -3,7 +3,7 @@ import { DashboardService } from '../services/common';
 import * as _ from 'lodash';
 import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
 import { DatePipe } from '@angular/common';
-import { LocalStorageService } from '../services';
+import { BaseService } from '../services';
 import { AppConstant } from '../app.constants';
 import { fadeInOutTranslate } from '../../assets/animations/fadeInOutTranslate';
 import { ConsumerService } from '../services/business';
@@ -15,7 +15,7 @@ declare const AmCharts: any;
   styleUrls: ['./dashboard.component.scss'],
   animations: [fadeInOutTranslate]
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent extends BaseService implements OnInit {
   counts = [];
   bizcounts = [];
   displaydatetimeformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
@@ -29,12 +29,10 @@ export class DashboardComponent implements OnInit {
   searchcounts = [];
   service;
   loadingIndicator = false;
-  userstoragedata = {} as any;
   constructor(private dashboardService: DashboardService,
     private consumerService: ConsumerService,
-    private localStorageService: LocalStorageService,
     config: NgbDropdownConfig) {
-    this.userstoragedata = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER);
+    super();
     config.placement = 'top-right';
     config.autoClose = true;
   }

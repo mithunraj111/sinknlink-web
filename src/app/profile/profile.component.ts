@@ -26,6 +26,7 @@ export class ProfileComponent implements OnInit {
   userimgfile: any;
   userfile: any;
   profileimage: Boolean = false;
+  loading = true;
   @ViewChild('userimage') userimage: ElementRef;
 
   constructor(private mainComponent: MainComponent, private fb: FormBuilder,
@@ -44,8 +45,6 @@ export class ProfileComponent implements OnInit {
     this.getUser();
     this.userProfileForm();
     this.getLocationList();
-    this.socialidForm();
-    this.getsocialid();
   }
 
   initForm() {
@@ -73,45 +72,31 @@ export class ProfileComponent implements OnInit {
         this.mainComponent.checkProfile();
         this.checkProfileImg();
       }
-
     });
   }
 
   getUser() {
     this.userService.byId(this.userstoragedata.userid).subscribe(res => {
       const response = JSON.parse(res._body);
+      this.loading = false;
       if (response.status) {
         this.userObj = response.data;
         this.checkProfileImg();
         let consumer = {
           emailid: '',
-          locationid: '',
+          locationid: null,
           socialid: null,
           address: ''
         } as any;
         consumer = this.userObj.consumer == null ? consumer : this.userObj.consumer;
-        this.profileForm = this.fb.group({
-          fullname: [this.userObj.fullname, Validators.compose([Validators.required, Validators.minLength(1),
-          Validators.maxLength(50), Validators.pattern('^[a-zA-Z ]*$')])],
-          emailid: [consumer.emailid,
-          Validators.compose([Validators.pattern('([a-z0-9&_\.-]*[@][a-z0-9]+((\.[a-z]{2,3})?\.[a-z]{2,3}))'), Validators.maxLength(100)])],
-          address: [consumer.address, Validators.compose([Validators.minLength(1), Validators.maxLength(100)])],
-          locationid: [consumer.locationid == null ? '' : consumer.locationid.toString(), Validators.compose([])],
-          socialid: ['']
-        });
-        if (consumer.socialid != null) {
-          const socialids = consumer.socialid.facebookid + ',' + consumer.socialid.twitterid + ',' +
-            consumer.socialid.googleid + ',' + consumer.socialid.instagramid;
-          this.profileForm.controls['socialid'].setValue(socialids);
-        }
+        this.userObj.locationid = consumer.locationid == null ? '' : consumer.locationid.toString();
         if (this.userObj.consumer != null) {
-          this.socialForm = this.fb.group({
-            facebookid: [this.userObj.consumer.socialid.facebookid],
-            twitterid: [this.userObj.consumer.socialid.twitterid],
-            googleid: [this.userObj.consumer.socialid.googleid],
-            instagramid: [this.userObj.consumer.socialid.instagramid]
-          });
+          this.userObj.facebookid = consumer.socialid.facebookid;
+          this.userObj.twitterid = consumer.socialid.twitterid;
+          this.userObj.googleid = consumer.socialid.googleid;
+          this.userObj.instagramid = consumer.socialid.instagramid;
         }
+        this.profileForm.patchValue(this.userObj);
       }
     });
   }
@@ -121,11 +106,14 @@ export class ProfileComponent implements OnInit {
       emailid: ['', Validators.compose([Validators.pattern('([a-z0-9&_\.-]*[@][a-z0-9]+((\.[a-z]{2,3})?\.[a-z]{2,3}))'), Validators.maxLength(100)])],
       address: [null, Validators.compose([Validators.minLength(1), Validators.maxLength(100)])],
       locationid: [null, Validators.compose([])],
-      socialid: ['']
+      facebookid: [''],
+      twitterid: [''],
+      googleid: [''],
+      instagramid: [''],
     });
   }
   getLocationList() {
-    this.locationService.list({}).subscribe((res) => {
+    this.locationService.list({ status: AppConstant.STATUS_ACTIVE }).subscribe((res) => {
       const response = JSON.parse(res._body);
       if (response.status) {
         response.data.map(item => {
@@ -135,19 +123,6 @@ export class ProfileComponent implements OnInit {
         this.locationList = response.data;
       }
     });
-  }
-  socialidForm() {
-    this.socialForm = this.fb.group({
-      facebookid: [''],
-      twitterid: [''],
-      googleid: [''],
-      instagramid: [''],
-    });
-  }
-  getsocialid() {
-    let socialids = this.socialForm.value.facebookid + ',' + this.socialForm.value.twitterid + ',' +
-      this.socialForm.value.googleid + ',' + this.socialForm.value.instagramid;
-    this.profileForm.controls['socialid'].setValue(socialids);
   }
 
   changePassword() {
@@ -185,14 +160,16 @@ export class ProfileComponent implements OnInit {
       this.bootstrapAlertService.showError(this.errMessage);
       return false;
     } else {
-      const data = {} as any;
+      const data = { ...this.profileForm.value } as any;
       data.updatedby = this.userstoragedata.fullname;
       data.updateddt = new Date();
-      data.fullname = this.profileForm.value.fullname;
-      data.emailid = this.profileForm.value.emailid;
-      data.address = this.profileForm.value.address;
       data.locationid = Number(this.profileForm.value.locationid);
-      data.socialid = this.socialForm.value;
+      data.socialid = {
+        facebookid: data.facebookid,
+        twitterid: data.twitterid,
+        googleid: data.googleid,
+        instagramid: data.instagramid,
+      };
       const formData = new FormData();
       if (this.userObj.profileimg != null && this.userObj.profileimg.docid) {
         data.docid = this.userObj.profileimg.docid;
@@ -248,15 +225,20 @@ export class ProfileComponent implements OnInit {
   }
 
   remove() {
-    let data = {} as any;
-    let docid = this.userObj.profileimg.docid;
-    data.status = "deleted";
-    let a = this;
-    this.documentService.update(data, docid).subscribe(res => {
-      const response = JSON.parse(res._body);
+    if (this.userObj.profileimg != null) {
+      const data = {} as any;
+      const docid = this.userObj.profileimg.docid;
+      data.status = AppConstant.STATUS_DELETED;
+      const self = this;
+      this.documentService.update(data, docid).subscribe(res => {
+        const response = JSON.parse(res._body);
+        this.profileimage = false;
+        this.userfile = this.userObj.fullname.substring(0, 1);
+        self.updateuser();
+      });
+    } else {
       this.profileimage = false;
-      this.userfile = this.userObj.fullname.substring(0, 1);
-      a.updateuser();
-    })
+      this.userfile = '';
+    }
   }
 }
