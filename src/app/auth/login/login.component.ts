@@ -58,14 +58,6 @@ export class LoginComponent implements OnInit {
           if (response.data.role != null) {
             this.localStorageService.addItem(AppConstant.LOCALSTORAGE.SCREENS, response.data.role.uiactions);
           }
-          if (response.data.roleid === 2) {
-            this.dealerService.list({ userid: response.data.userid }).subscribe(resp => {
-              const result = JSON.parse(resp._body);
-              if (result.status) {
-                this.localStorageService.addItem(AppConstant.LOCALSTORAGE.DEALER, result.data[0]);
-              }
-            });
-          }
           let permissions: any = [];
           _.map(response.data.role.uiactions, function (item: any) {
             if (item.assignedpermissions) {
@@ -77,9 +69,14 @@ export class LoginComponent implements OnInit {
           permissions = _.compact(permissions);
           this.localStorageService.addItem(AppConstant.LOCALSTORAGE.PERMISSIONS, permissions);
           this.permissionsService.loadPermissions(permissions);
-          if(response.data.roleid === 2) {
-            console.log('Sandy dealer');
-            this.router.navigate(['business/customers']);
+          if (response.data.roleid === 2) {
+            this.dealerService.list({ userid: response.data.userid }).subscribe(resp => {
+              const result = JSON.parse(resp._body);
+              if (result.status) {
+                this.localStorageService.addItem(AppConstant.LOCALSTORAGE.DEALER, result.data[0]);
+                this.router.navigate(['business/customers']);
+              }
+            });
           } else {
             this.router.navigate(['dashboard']);
           }
