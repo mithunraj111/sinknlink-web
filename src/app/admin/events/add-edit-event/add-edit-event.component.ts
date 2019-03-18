@@ -10,7 +10,6 @@ import { AppMessages } from 'src/app/app-messages';
 import { LookupService } from 'src/app/services/admin/lookup.service';
 import { EventService } from 'src/app/services/admin/event.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
-import { Alert } from 'selenium-webdriver';
 
 @Component({
   selector: 'app-add-edit-event',
@@ -23,11 +22,11 @@ export class AddEditEventComponent implements OnInit {
 
   isaddForm = true;
   eventid: number;
-  edit: boolean = false;
+  edit = false;
   buttontext = AppConstant.BUTTON_TXT.SAVE;
-  status: boolean = true;
+  status = true;
   eventObj = {} as any;
-  savingEvent: boolean = false;
+  savingEvent = false;
 
   eventForm: FormGroup;
   eventErrObj = AppMessages.VALIDATION.EVENT;
@@ -52,8 +51,7 @@ export class AddEditEventComponent implements OnInit {
         this.buttontext = AppConstant.BUTTON_TXT.UPDATE;
         this.getEventDetail(this.eventid);
       }
-    })
-
+    });
   }
   ngOnInit() {
     this.initEventForm();
@@ -95,7 +93,6 @@ export class AddEditEventComponent implements OnInit {
       eventObj.eventdate = this.commonService.parseDate(eventObj.eventdate);
       eventObj.eventexpirydt = this.commonService.parseDate(eventObj.eventexpirydt);
       eventObj.status = response.data.status == AppConstant.STATUS_ACTIVE ? true : false;
-
       this.eventForm = this.fb.group({
         eventname: [eventObj.eventname, [Validators.required]],
         locationid: [eventObj.locationid, [Validators.required]],
@@ -107,16 +104,14 @@ export class AddEditEventComponent implements OnInit {
       });
       this.existing_image = [];
       this.existing_image = response.data.gallery;
-      console.log(this.existing_image);
     }, err => {
       this.savingEvent = false;
       console.log(err);
     });
   }
   imageAdded(files) {
-    console.log(files);
     this.images = files;
-  };
+  }
   addEvent() {
     this.savingEvent = true;
     if (!this.eventForm.valid) {
@@ -135,8 +130,8 @@ export class AddEditEventComponent implements OnInit {
       return false;
     }
     if (this.edit) {
-      data["updateddt"] = new Date();
-      data["updatedby"] = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER).fullname;
+      data['updateddt'] = new Date();
+      data['updatedby'] = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER).fullname;
       this.updateEvent(data);
     } else {
       data.createddt = new Date();
@@ -144,9 +139,9 @@ export class AddEditEventComponent implements OnInit {
       let formData = new FormData();
       for (let index = 0; index < this.images.length; index++) {
         const element = this.images[index];
-        formData.append("files", element.image);
+        formData.append('files', element.image);
       }
-      formData.append("data", JSON.stringify(data));
+      formData.append('data', JSON.stringify(data));
       this.eventService.create(formData).subscribe(res => {
         this.savingEvent = false;
         let response = JSON.parse(res._body);
@@ -163,13 +158,12 @@ export class AddEditEventComponent implements OnInit {
     }
   }
   updateEvent(data) {
-    
       let formData = new FormData();
       for (let index = 0; index < this.images.length; index++) {
         const element = this.images[index];
-        formData.append("files", element.image);
+        formData.append('files', element.image);
       }
-      formData.append("data", JSON.stringify(data));
+      formData.append('data', JSON.stringify(data));
       this.eventService.update(formData, this.eventid).subscribe(res => {
         this.savingEvent = false;
         let response = JSON.parse(res._body);

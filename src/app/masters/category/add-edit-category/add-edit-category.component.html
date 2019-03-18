@@ -39,9 +39,9 @@
                     </div>
                 </div>
                 <button type="button" placement="top" (click)="saveOrUpdateCategory()"
-                    ngbTooltip="Click to {{buttonTxt}} business category"
+                    ngbTooltip="Click to save business category"
                     class="btn pull-right btn-primary waves-effect m-b-10"
-                    [disabled]="savecategory">{{savecategory == true ? 'Saving' : buttonTxt}}</button>
+                    [disabled]="savecategory">{{savecategory == true ? 'Saving' : 'Save'}}</button>
             </form>
         </div>
         <button aria-label="Close" (click)="close('categorymodal')" class="md-close-btn"><i

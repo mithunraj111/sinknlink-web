@@ -92,8 +92,6 @@ export class AddEditVipRegistrationNumberComponent implements OnInit {
             value: o.fancyid
           }
         });
-        console.log(this.ownedNos);
-        // this.business = response.data[0];
       } else {
         this.bootstrapAlertService.showError(response.message);
       }
@@ -118,7 +116,6 @@ export class AddEditVipRegistrationNumberComponent implements OnInit {
         } else {
           this.fancynumberService.addNumbers(data).subscribe(res => {
             const response = JSON.parse(res._body);
-            console.log(response);
             if (response.status) {
               this.creatingNumbers = false;
               this.bootstrapAlertService.showSucccess(response.message);

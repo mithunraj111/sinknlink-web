@@ -36,7 +36,6 @@ export class LocationComponent extends BaseService implements OnInit {
     document.querySelector('#' + event).classList.add('md-show');
   }
   closeLocationModal(event) {
-    console.log(event);
     document.querySelector('#' + event).classList.remove('md-show');
   }
   getRowHeight(row) {

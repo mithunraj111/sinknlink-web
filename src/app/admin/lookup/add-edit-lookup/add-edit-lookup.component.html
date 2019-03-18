@@ -13,53 +13,50 @@
                         <label>Key Value</label>
                         <input type="text" class="form-control" placeholder="Key value" formControlName="refvalue">
                     </div>
-                    <!-- <div class="form-group">
-            <label>Description </label>
-            <textarea rows="5" cols="50" formControlName="keydesc"></textarea>
-          </div> -->
                     <div class="form-group required">
                         <label>Datatype</label>
                         <div class="input-box">
-                            <ng-select [allowClear]="true" [ngClass]="'ng-select'" placeholder="Select Datatype" [options]="datatypeList" formControlName="datatype"></ng-select>
+                            <ng-select [allowClear]="true" [ngClass]="'ng-select'" placeholder="Select Datatype"
+                                [options]="datatypeList" formControlName="datatype"></ng-select>
                         </div>
                     </div>
-
                     <div class="form-group">
                         <label>Is Default? <small>*</small></label>
                         <div class="form-radio">
                             <div class="radio radio-inline">
                                 <label>
-                  <input type="radio" value="Y" formControlName="defaultvalue">
-                  <i class="helper"></i>Yes
-                </label>
+                                    <input type="radio" value="Y" formControlName="defaultvalue">
+                                    <i class="helper"></i>Yes
+                                </label>
                             </div>
                             <div class="radio radio-inline">
                                 <label>
-                  <input type="radio" value="N" formControlName="defaultvalue">
-                  <i class="helper"></i>No
-                </label>
+                                    <input type="radio" value="N" formControlName="defaultvalue">
+                                    <i class="helper"></i>No
+                                </label>
                             </div>
                         </div>
                     </div>
-
                     <div class="form-group" *ngIf="lookupObj?.refid">
                         <label>Status <small>*</small></label>
                         <div class="form-radio">
                             <div class="radio radio-inline">
                                 <label>
-                  <input type="radio" value="Active" formControlName="status">
-                  <i class="helper"></i>Active
-                </label>
+                                    <input type="radio" value="Active" formControlName="status">
+                                    <i class="helper"></i>Active
+                                </label>
                             </div>
                             <div class="radio radio-inline">
                                 <label>
-                  <input type="radio" value="Inactive" formControlName="status">
-                  <i class="helper"></i>Inactive
-                </label>
+                                    <input type="radio" value="Inactive" formControlName="status">
+                                    <i class="helper"></i>Inactive
+                                </label>
                             </div>
                         </div>
                     </div>
-                    <button type="button" [disabled]="savingLookup" (click)="saveOrUpdateLookup()" placement="top" ngbTooltip="Click to save lookup" class="btn f-15 pull-right btn-primary waves-effect m-b-10">{{savingLookup == true ? 'Saving..':buttonTxt}}</button>
+                    <button type="button" [disabled]="savingLookup" (click)="saveOrUpdateLookup()" placement="top"
+                        ngbTooltip="Click to save lookup"
+                        class="btn f-15 pull-right btn-primary waves-effect m-b-10">{{savingLookup == true ? 'Saving..':'Save'}}</button>
                 </div>
             </div>
         </form>

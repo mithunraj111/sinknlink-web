@@ -22,7 +22,6 @@ export class CommonService {
                 const formControlObj = formGroupObj.controls[key];
                 if (formControlObj instanceof FormControl) {
                     if (formControlObj.errors) {
-                        console.log(errorObj[key][Object.keys(formControlObj.errors)[0]]);
                         return errorObj[key][Object.keys(formControlObj.errors)[0]];
                     }
                 }

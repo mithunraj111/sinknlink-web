@@ -57,7 +57,6 @@ export class AddEditCategoryComponent implements OnInit, OnChanges {
     this.categoryimgfile = event.target.files[0];
     reader.onload = ((e) => {
       this.categoryfile = this.sanitizer.bypassSecurityTrustResourceUrl(e.target['result']);
-      console.log(this.categoryimgfile)
     });
     reader.readAsDataURL(event.target.files[0]);
   }

@@ -10,7 +10,7 @@
                     <div class=" offset-md-6 col-md-6 col-sm-6 save-button text-right p-r-30">
                         <button [disabled]="validatingDonation" type="button" placement="bottom"
                             ngbTooltip="Click to {{buttontext}} donation" (click)="saveOrUpdateDonation()"
-                            class="btn btn-primary waves-effect m-r-10 text-capitalize">{{validatingDonation == true ? 'Saving' : buttontext}}</button>
+                            class="btn btn-primary waves-effect m-r-10 text-capitalize">{{validatingDonation == true ? 'Saving' : 'Save'}}</button>
                         <button type="button" placement="bottom" ngbTooltip="Go back" routerLink="/admin/donations"
                             class="btn btn-inverse btn-primary waves-effect"><i
                                 class="fa fa-arrow-circle-left"></i></button>

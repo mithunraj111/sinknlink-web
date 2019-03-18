@@ -8,7 +8,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CommonService } from 'src/app/services/common.service';
 import { AppMessages } from 'src/app/app-messages';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
-import { AdminService } from "../../../services";
+import { AdminService } from '../../../services';
 
 @Component({
   selector: 'app-add-edit-advertisement',
@@ -21,12 +21,12 @@ export class AddEditAdvertisementComponent implements OnInit {
 
   isaddForm = true;
   adid: number;
-  edit: boolean = false;
+  edit = false;
   buttontext = AppConstant.BUTTON_TXT.SAVE;
-  status: boolean = true;
-  ispremium: boolean = true;
+  status = true;
+  ispremium = true;
   adObj = {} as any;
-  savingAd: boolean = false;
+  savingAd = false;
   adForm: FormGroup;
   adErrObj = AppMessages.VALIDATION.ADVERTISEMENT;
   errMessage;
@@ -50,8 +50,7 @@ export class AddEditAdvertisementComponent implements OnInit {
         this.buttontext = AppConstant.BUTTON_TXT.UPDATE;
         this.getAdDetail(this.adid);
       }
-    })
-
+    });
   }
   ngOnInit() {
     this.initAdForm();
@@ -128,8 +127,6 @@ export class AddEditAdvertisementComponent implements OnInit {
       });
       this.existing_image = [];
       this.existing_image = response.data.adimages;
-      console.log(this.existing_image);
-      
     }, err => {
       this.savingAd = false;
       console.log(err);
@@ -154,8 +151,8 @@ export class AddEditAdvertisementComponent implements OnInit {
       return false;
     }
     if (this.edit) {
-      data["updateddt"] = new Date();
-      data["updatedby"] = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER).fullname;
+      data['updateddt'] = new Date();
+      data['updatedby'] = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER).fullname;
       this.updateAd(data);
     } else {
       data.createddt = new Date();
@@ -163,9 +160,9 @@ export class AddEditAdvertisementComponent implements OnInit {
       let formData = new FormData();
       for (let index = 0; index < this.images.length; index++) {
         const element = this.images[index];
-        formData.append("files", element.image);
+        formData.append('files', element.image);
       }
-      formData.append("data", JSON.stringify(data));
+      formData.append('data', JSON.stringify(data));
       this.adService.create(formData).subscribe(res => {
         this.savingAd = false;
         let response = JSON.parse(res._body);
@@ -191,12 +188,12 @@ export class AddEditAdvertisementComponent implements OnInit {
     let formData = new FormData();
     for (let index = 0; index < this.images.length; index++) {
       const element = this.images[index];
-      formData.append("files", element.image);
+      formData.append('files', element.image);
     }
-    formData.append("data", JSON.stringify(data));
+    formData.append('data', JSON.stringify(data));
     this.adService.update(formData, this.adid).subscribe(res => {
       this.savingAd = false;
-      let response = JSON.parse(res._body);      
+      let response = JSON.parse(res._body);
       if (response.status) {
         this.bootstrapAlertService.showSucccess(response.message);
         this.router.navigate(['/admin/advertisement/']);

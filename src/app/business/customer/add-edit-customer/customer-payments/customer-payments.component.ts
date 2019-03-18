@@ -86,7 +86,6 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
 
   getDonations() {
     let today = new DatePipe("en-US").transform(new Date(), "yyyy-MM-dd").toString();
-    console.log(today);
     let condition = {
       status: AppConstant.STATUS_ACTIVE,
       startdate: today,

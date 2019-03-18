@@ -4,7 +4,7 @@
             <div class="col-md-6 col-sm-6">
             </div>
             <div class="col-md-6 col-sm-6 save-button text-right p-r-30">
-                <button type="button" placement="bottom" ngbTooltip="Click to {{buttontext}} user" (click)="saveOrUpdateUser()" class="btn btn-primary waves-effect m-r-10 text-capitalize" [disabled]="adduser">{{adduser == true ? 'Saving' : buttontext}}</button>
+                <button type="button" placement="bottom" ngbTooltip="Click to save user" (click)="saveOrUpdateUser()" class="btn btn-primary waves-effect m-r-10 text-capitalize" [disabled]="adduser">{{adduser == true ? 'Saving' : 'Save'}}</button>
                 <button type="button" placement="bottom" ngbTooltip="Go back" routerLink="/masters/users" class="btn btn-inverse btn-primary waves-effect"><i class="fa fa-arrow-circle-left"></i></button>
             </div>
         </div>

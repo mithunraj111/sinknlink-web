@@ -40,9 +40,9 @@
                 <button type="button" placement="bottom" ngbTooltip=" Go back" routerLink="/masters/roles"
                     class="btn pull-right btn-inverse btn-primary waves-effect"><i
                         class="fa fa-arrow-circle-left"></i></button>
-                <button type="button" placement="bottom" ngbTooltip="Click to {{buttontext}} role"
+                <button type="button" placement="bottom" ngbTooltip="Click to save role"
                     (click)="saveOrUpdateRole()" [disabled]='disableButton'
-                    class="btn pull-right btn-primary waves-effect m-r-10 text-capitalize">{{disableButton == true ? 'Saving' : buttontext}}</button>
+                    class="btn pull-right btn-primary waves-effect m-r-10 text-capitalize">{{disableButton == true ? 'Saving' : 'Save'}}</button>
             </div>
         </div>
     </div>

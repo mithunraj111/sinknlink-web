@@ -235,6 +235,5 @@ export class DashboardComponent extends BaseService implements OnInit {
       },
       'dataProvider': data
     });
-    console.log(data);
   }
 }

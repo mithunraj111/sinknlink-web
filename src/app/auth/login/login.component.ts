@@ -77,7 +77,12 @@ export class LoginComponent implements OnInit {
           permissions = _.compact(permissions);
           this.localStorageService.addItem(AppConstant.LOCALSTORAGE.PERMISSIONS, permissions);
           this.permissionsService.loadPermissions(permissions);
-          this.router.navigate(['dashboard']);
+          if(response.data.roleid === 2) {
+            console.log('Sandy dealer');
+            this.router.navigate(['business/customers']);
+          } else {
+            this.router.navigate(['dashboard']);
+          }
         } else {
           this.signingin = false;
           this.errMessage = response.message;

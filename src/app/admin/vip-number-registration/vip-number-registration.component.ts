@@ -68,7 +68,6 @@ export class VipNumberRegistrationComponent implements OnInit {
   }
 
   tabChanged(prop) {
-    console.log(prop);
     this.currentTab = prop.nextId;
     this.condition = {
       fancynostatus: prop.nextId
@@ -95,7 +94,6 @@ export class VipNumberRegistrationComponent implements OnInit {
   }
 
   getAvailableList() {
-    console.log(this.currentTab);
     if (this.currentTab === 'ALLOCATED') {
       this.getAllocatedBusiness();
     } else {

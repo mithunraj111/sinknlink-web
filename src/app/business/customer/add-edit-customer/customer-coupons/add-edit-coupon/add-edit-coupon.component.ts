@@ -75,11 +75,15 @@ export class AddEditCouponComponent implements OnInit, OnChanges {
                 const formdata = { ...data } as any;
                 formdata.membershipid = this.customerObj.membershipid;
                 formdata.noofcoupons = Number(data.noofcoupons);
-                formdata.expirydt = this.commonService.formatDate(data.expirydt);
-                if (new Date(this.commonService.formatDate(data.expirydt)) < this.commonService.getCurrentDate()) {
+                console.log(data.expirydt);
+                console.log(new Date(this.commonService.formatDate(data.expirydt)));
+                if (new Date(this.commonService.formatDate(data.expirydt)) <= this.commonService.getCurrentDate()) {
+                    console.log(data.expirydt);
+                    console.log(this.commonService.getCurrentDate());
                     this.bootstrapAlertService.showError(this.couponErrObj.expirydt.invalid);
                     return false;
                 }
+                formdata.expirydt = this.commonService.formatDate(data.expirydt);
                 formdata.updatedby = this.userstoragedata.fullname;
                 formdata.updateddt = new Date();
                 if (!_.isUndefined(this.couponObj) && !_.isUndefined(this.couponObj.couponid) && !_.isEmpty(this.couponObj)) {
