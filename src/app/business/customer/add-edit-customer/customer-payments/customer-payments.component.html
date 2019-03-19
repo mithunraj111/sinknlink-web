@@ -153,7 +153,7 @@
                         </div>
                     </div>
 
-                    <button *ngIf="newPayment" type="button" placement="top" (click)="savePayment()" ngbTooltip="Click to save payment details" class="btn pull-right btn-primary waves-effect 
+                    <button *ngIf="newPayment" type="button" placement="top" (click)="savePayment()" [disabled]="collectpayment == true" ngbTooltip="Click to save payment details" class="btn pull-right btn-primary waves-effect 
                 m-b-10 m-r-15">Save</button>
                 </div>
             </form>

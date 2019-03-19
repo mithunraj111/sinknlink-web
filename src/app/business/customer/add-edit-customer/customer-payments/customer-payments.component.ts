@@ -34,7 +34,7 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
   lastpaid: any;
   subscriptionAmt = 100;
   selfPayment = true;
-
+  collectpayment = false;
   emptymessages = AppConstant.EMPTY_MESSAGES.PAYMENT;
   constructor(private paymentService: AppCommonService.PaymentsService,
     private lookupService: AdminService.LookupService,
@@ -54,7 +54,7 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
   initPaymentForm() {
     this.addPaymentForm = this.fb.group({
       paymentdt: [this.commonService.getCurrentDate('Y'), Validators.required],
-      totalamount: [null, Validators.required],
+      totalamount: [null, Validators.compose([Validators.required, Validators.pattern('^[0-9]*$')])],
       paymentref: ['', Validators.required],
       paymentmode: ['', Validators.required],
       remarks: ['']
@@ -161,6 +161,7 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
       return false;
     }
     const formData = this.addPaymentForm.value;
+    this.collectpayment == true;
     const data = {
       paymentdate: this.commonService.formatDate(formData.paymentdt),
       totalamount: Number(formData.totalamount),
@@ -206,6 +207,7 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
       } else {
         this.bootstrapAlertService.showError(response.message);
       }
+      this.collectpayment == false;
     });
   }
 

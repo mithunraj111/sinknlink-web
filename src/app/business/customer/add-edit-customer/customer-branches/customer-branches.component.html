@@ -39,7 +39,7 @@
                 </ngx-datatable-column>
                 <ngx-datatable-column name="Action" [sortable]="false" [resizeable]="false" headerClass="text-center" [cellClass]="'text-center action'">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                        <a placement="bottom" ngbTooltip="Click to view branch" class="m-r-15 crm-action-edit text-primary text-center" (click)="redirectToBranch(row.membershipid);"><i class="fa fa-eye"></i></a>
+                        <a placement="bottom" ngbTooltip="Click to edit branch" class="m-r-15 crm-action-edit text-primary text-center" (click)="redirectToBranch(row.membershipid);"><i class="fa fa-pencil"></i></a>
                     </ng-template>
                 </ngx-datatable-column>
             </ngx-datatable>

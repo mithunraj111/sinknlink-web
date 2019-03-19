@@ -371,7 +371,7 @@ export const AppMessages = Object.freeze({
     },
     PAYMENTS: {
       paymentdt: { required: 'Please select paid date' },
-      totalamount: { required: 'Please enter amount' },
+      totalamount: { required: 'Please enter amount', pattern: 'Payment should only contain numbers' },
       paymentmode: { required: 'Please select mode of payment' },
       paymentref: { required: 'Please enter payment reference' },
       remarks: {}
