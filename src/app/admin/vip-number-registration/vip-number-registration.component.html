@@ -40,7 +40,7 @@
                                                 </ngx-datatable-column>
                                                 <ngx-datatable-column prop="price" name="Price" [resizeable]="false" headerClass="text-right" [cellClass]="'text-right'">
                                                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                                                        <span>{{row.price|currency : 'INR' : true}}</span>
+                                                        <span>{{row.price|currency : 'INR' : symbol}}</span>
                                                     </ng-template>
                                                 </ngx-datatable-column>
                                                 <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.5" headerClass="text-center" [cellClass]="'text-center'" [resizeable]="false">
@@ -71,25 +71,25 @@
                                     <div class="table-header fixed-table-header">
                                         <div class="card p-r-15 p-l-15">
                                             <ngx-datatable #vipnoregtable class="table data-table expandable" [rows]='blockedList' [columnMode]="'flex'" [headerHeight]="50" [footerHeight]="50" [limit]="10" [rowHeight]="'auto'" [reorderable]="false" [messages]="messages">
-                                                <ngx-datatable-column prop="fancycode" name="VIP Number" [resizeable]="false">
+                                                <ngx-datatable-column prop="fancyno" name="VIP Number" [resizeable]="false">
                                                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                                                        <a *ngIf="row.membershipid >= 1" (click)="goToEdit(row?.membershipid)"><span > {{row?.fancyno}}</span></a>
-                                                        <span *ngIf="row.membershipid < 1">{{row.fancyno}}</span>
+                                                        <a *ngIf="row.membershipid >= 1" (click)="goToEdit(row?.membershipid)"><span class="cursor-pointer"> {{row?.fancyno}}</span></a>
+                                                        <span class="cursor-pointer" *ngIf="row.membershipid < 1">{{row.fancyno}}</span>
                                                     </ng-template>
                                                 </ngx-datatable-column>
                                                 <ngx-datatable-column prop="membershipid" name="Blocked For" [resizeable]="false">
                                                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                                                        <span>{{row.business?.bizname}}-{{row.membershipid}}</span>
+                                                        <span>{{row.business?.bizname}} {{row.membershipid}}</span>
                                                     </ng-template>
                                                 </ngx-datatable-column>
                                                 <ngx-datatable-column prop="Action" name="Action" [resizeable]="false" [sortable]="false">
                                                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                                                        <span><a (click)="unblockNumber(row.fancyid)" style="text-decoration:underline">Unblock</a></span>
+                                                        <span><a (click)="unblockNumber(row.fancyid)" style="text-decoration:underline" class="cursor-pointer">Unblock</a></span>
                                                     </ng-template>
                                                 </ngx-datatable-column>
                                                 <ngx-datatable-column prop="price" name="Price" [resizeable]="false" headerClass="text-right" [cellClass]="'text-right pr-3'">
                                                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                                                        <span>{{row.price|currency : 'INR' : true}}</span>
+                                                        <span>{{row.price|currency : 'INR' : symbol}}</span>
                                                     </ng-template>
                                                 </ngx-datatable-column>
                                             </ngx-datatable>
@@ -108,7 +108,7 @@
                                             <ngx-datatable #vipnoregtable class="table data-table expandable" [rows]='data' [columnMode]="'flex'" [headerHeight]="50" [footerHeight]="50" [limit]="10" [rowHeight]="'auto'" [reorderable]="false" [messages]="nodata">
                                                 <ngx-datatable-column prop="membershipcode" name="VIP Number" [resizeable]="false">
                                                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                                                        <span> <a (click)="goToEdit(row?.membershipid)">{{row?.membershipcode}}</a></span>
+                                                        <span> <a class="fa" (click)="goToEdit(row?.membershipid)">{{row?.membershipcode}}</a></span>
                                                     </ng-template>
                                                 </ngx-datatable-column>
                                                 <ngx-datatable-column prop="bizname" name="Business Name" [resizeable]="false">

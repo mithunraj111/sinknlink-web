@@ -14,7 +14,7 @@
                     <label class="col-md-3 col-sm-6 col-form-label text-right">Subscription Amount</label>
                     <div class="border-checkbox-group border-checkbox-group-primary col-md-7 col-sm-6 ml-1 p-t-5">
                         <input class="border-checkbox" type="checkbox" id="checkbox1" [(ngModel)]="selfPayment">
-                        <label class="border-checkbox-label f-w-300" for="checkbox1">{{subscriptionAmt | currency: 'INR' :true}}</label>
+                        <label class="border-checkbox-label f-w-300" for="checkbox1">{{subscriptionAmt | currency: 'INR' :symbol}}</label>
                     </div>
                 </div>
                 <!-- <div class="form group row border-checkbox-section">
@@ -42,7 +42,7 @@
                 </div>
                 <div class="form-group m-t-10">
                     <label class="col-md-3 col-sm-6 col-form-label text-right p-r-20 p-t-15">Total</label>
-                    <span class="col-form-label col-md-5 col-sm-6 f-16 p-l-0 p-t-15">{{totalamount|currency: 'INR' :true}}</span>
+                    <span class="col-form-label col-md-5 col-sm-6 f-16 p-l-0 p-t-15">{{totalamount|currency: 'INR' :symbol}}</span>
                 </div>
                 <div class="col-md-12 col-sm-12 pay-online">
                     <div class="row">
@@ -86,7 +86,7 @@
                 </ngx-datatable-column>
                 <ngx-datatable-column prop="totalamount" name="Amount" [resizeable]="false" headerClass="text-right" [cellClass]="'text-right table-padding'">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                        <span>{{row.totalamount| currency: 'INR' : true}}</span>
+                        <span>{{row.totalamount| currency: 'INR' : symbol}}</span>
                     </ng-template>
                 </ngx-datatable-column>
                 <ngx-datatable-column prop="paymentmode" name="Mode" [resizeable]="false">

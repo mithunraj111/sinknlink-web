@@ -171,9 +171,9 @@
   <button class="btn btn-primary btn-round px-3" id="dropdownConfig" ngbDropdownToggle><i
       class="fa fa-filter f-14 m-0"></i></button>
   <div ngbDropdownMenu aria-labelledby="dropdownConfig">
-    <a class="dropdown-item" (click)="getData('today');">Today</a>
-    <a class="dropdown-item" (click)="getData('week');">This week</a>
-    <a class="dropdown-item" (click)="getData('month');">This month</a>
+    <a class="cursor-pointer dropdown-item" (click)="getData('today');">Today</a>
+    <a class="cursor-pointer dropdown-item" (click)="getData('week');">This week</a>
+    <a class="cursor-pointer dropdown-item" (click)="getData('month');">This month</a>
   </div>
 </div>
 <app-loader [loadingIndicator]="loadingIndicator"></app-loader>

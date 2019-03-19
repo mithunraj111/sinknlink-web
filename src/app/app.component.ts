@@ -30,7 +30,9 @@ export class AppComponent implements OnInit {
         this.messageList = [];
       }, 2000);
     });
-    const permissions = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.PERMISSIONS);
-    this.permissionsService.loadPermissions(permissions);
+    if (this.localStorageService.getItem(AppConstant.LOCALSTORAGE.ISAUTHENTICATED)) {
+      const permissions = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.PERMISSIONS);
+      this.permissionsService.loadPermissions(permissions);
+    }
   }
 }

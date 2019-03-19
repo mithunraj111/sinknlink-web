@@ -105,7 +105,7 @@
 
                                 <ngx-datatable-column prop="totalamount" name="Amount" [resizeable]="false" headerClass="text-right" [cellClass]="'text-right table-padding'">
                                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                                        <span>{{row.totalamount| currency: 'INR' : true}}</span>
+                                        <span>{{row.totalamount| currency: 'INR' : symbol}}</span>
                                     </ng-template>
                                 </ngx-datatable-column>
 
