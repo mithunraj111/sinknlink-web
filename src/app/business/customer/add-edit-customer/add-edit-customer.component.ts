@@ -80,7 +80,7 @@ export class AddEditCustomerComponent implements OnInit {
         this.getCustomerDetail();
         this.isAddForm = false;
       }
-      if(params.id === undefined) {
+      if (params.id === undefined) {
         this.loadingIndicator = false;
       }
       if (params.flag !== undefined) {
@@ -177,7 +177,7 @@ export class AddEditCustomerComponent implements OnInit {
           this.customerForm.controls['membershiptype'].setValue(selectedMemberType);
           this.customerForm.controls['biztype'].setValue(selectedBusinessType);
           this.customerForm.controls['acceptedpayments'].setValue(selectedPaymentMethods);
-          this.customerForm.controls['deliveryoptions'].setValue(selectedDeliveryOpts);
+          // this.customerForm.controls['deliveryoptions'].setValue(selectedDeliveryOpts);
           this.customerForm.controls['paymenttenure'].setValue(selectedPaymentTenure);
           this.customerForm.get('paymenttenure').setValidators(Validators.required);
           this.customerForm.get('paymentstatus').setValidators(Validators.required);
@@ -231,9 +231,9 @@ export class AddEditCustomerComponent implements OnInit {
       starttime: ['09:00', Validators.required],
       endtime: ['21:00', Validators.required],
       acceptedpayments: [null, Validators.required],
-      deliveryoptions: [null, Validators.required],
+      deliveryoptions: [null],
       socialids: [[]],
-      taxno: [null, Validators.compose([Validators.required, Validators.maxLength(30)])],
+      taxno: ['', Validators.compose([Validators.maxLength(30)])],
       website: ['', Validators.compose([Validators.maxLength(200), Validators.pattern(AppConstant.REGEX.WEBSITE)])],
       regdate: [this.commonService.getCurrentDate('Y'), Validators.required],
       paymentstatus: [''],
@@ -321,7 +321,9 @@ export class AddEditCustomerComponent implements OnInit {
       if (formdata.inmallyn === 'Y') {
         formdata.mallname = formdata.mallname;
       }
-
+      if (formdata.deliveryoptions === null) {
+        formdata.deliveryoptions = [];
+      }
       formdata.socialids = this.socialidForm.value;
       formdata.workhours = {
         starttime: data.starttime,
