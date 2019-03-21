@@ -146,7 +146,10 @@ export const AppConstant = Object.freeze({
           BIZ_COUNT: 'dashboard/bcount',
           SEARCH_COUNT: 'dashboard/scount',
           CUSTOMER: 'dashboard/customer',
-          RATING: 'dashboard/customer/rating'
+          RATING: 'dashboard/customer/rating',
+          DEALER: 'dashboard/dealer',
+          DEALERBIZCOUNT: 'dashboard/dealerbizcount',
+          DEALERREVIEW: 'dashboard/dealer/review'
         },
         REPORT: {
           AREA_COUNT: 'report/area',

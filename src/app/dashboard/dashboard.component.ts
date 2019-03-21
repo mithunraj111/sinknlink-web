@@ -19,6 +19,7 @@ export class DashboardComponent extends BaseService implements OnInit {
   counts = [];
   bizcounts = [];
   displaydatetimeformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
+  displaydateformat = AppConstant.API_CONFIG.ANG_DATE.displaydate;
   bizdefaultrating = [
     { count: 0, label: 5 },
     { count: 0, label: 4 },
@@ -29,6 +30,7 @@ export class DashboardComponent extends BaseService implements OnInit {
   searchcounts = [];
   service;
   loadingIndicator = false;
+  dealerstoragedata = this.localStorageService.getItem('dealer-');
   constructor(private dashboardService: DashboardService,
     private consumerService: ConsumerService,
     config: NgbDropdownConfig) {
@@ -115,7 +117,11 @@ export class DashboardComponent extends BaseService implements OnInit {
         memid: this.userstoragedata.customer.membershipid
       });
     } else {
-      this.service = this.dashboardService.getCounts({ fromDate: fromDate, toDate: toDate });
+      if (this.userstoragedata.roleid === 2) {
+        this.service = this.dashboardService.dealer({ fromDate: fromDate, toDate: toDate, dealerid: this.dealerstoragedata.dealerid});
+      } else {
+        this.service = this.dashboardService.getCounts({ fromDate: fromDate, toDate: toDate });
+      }
     }
     this.service.subscribe(res => {
       const response = JSON.parse(res._body);
@@ -132,13 +138,22 @@ export class DashboardComponent extends BaseService implements OnInit {
         memid: this.userstoragedata.customer.membershipid
       });
     } else {
+      if (this.userstoragedata.roleid === 2) {
+        this.service = this.dashboardService.dealerbizcount({
+          fromDate: fromDate,
+          toDate: toDate,
+          dealerid: this.dealerstoragedata.dealerid
+        });
+      } else {
       this.service = this.dashboardService.employeebusinessCount({ fromDate: fromDate, toDate: toDate });
+      }
     }
     this.service.subscribe(res => {
       const response = JSON.parse(res._body);
       this.loadingIndicator = false;
       if (response.status) {
         this.bizcounts = response.data;
+        console.log(this.bizcounts);
         if (this.userstoragedata.roleid === 3) {
           const self = this;
           _.each(this.bizdefaultrating, function (item, idx) {
@@ -161,13 +176,23 @@ export class DashboardComponent extends BaseService implements OnInit {
       this.service = this.consumerService.consumerReviews(
         { membershipid: this.userstoragedata.customer.membershipid }, '5', '0');
     } else {
-      this.service = this.dashboardService.searchCount({ fromDate: fromDate, toDate: toDate });
+      if (this.userstoragedata.roleid === 2) {
+        this.service = this.dashboardService.dealerreview({
+          fromDate: fromDate,
+          toDate: toDate,
+          dealerid: this.dealerstoragedata.dealerid
+        });
+      } else {
+        this.service = this.dashboardService.searchCount({ fromDate: fromDate, toDate: toDate });
+      }
     }
     this.service.subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
         this.searchcounts = response.data;
-        if (this.userstoragedata.roleid !== 3) {
+        console.log(this.searchcounts);
+        if (this.userstoragedata.roleid !== 3 && this.userstoragedata.roleid !== 2) {
+          console.log('..........');
           this.generateCatCountChart(this.searchcounts.map((d) => {
             return {
               category: d.categoryname,

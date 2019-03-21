@@ -25,4 +25,13 @@ export class DashboardService{
     rating(data): Observable<any> {
         return this.httpHandler.POST( this.endpoint + AppConstant.API_CONFIG.API_URL.COMMON.DASHBOARD.RATING, data );
     }
+    dealer(data): Observable<any> {
+        return this.httpHandler.POST( this.endpoint + AppConstant.API_CONFIG.API_URL.COMMON.DASHBOARD.DEALER, data);
+    }
+    dealerbizcount(data): Observable<any> {
+        return this.httpHandler.POST( this.endpoint + AppConstant.API_CONFIG.API_URL.COMMON.DASHBOARD.DEALERBIZCOUNT, data);
+    }
+    dealerreview(data): Observable<any> {
+        return this.httpHandler.POST( this.endpoint + AppConstant.API_CONFIG.API_URL.COMMON.DASHBOARD.DEALERREVIEW, data);
+    }
 }
