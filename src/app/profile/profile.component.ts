@@ -82,19 +82,29 @@ export class ProfileComponent implements OnInit {
       if (response.status) {
         this.userObj = response.data;
         this.checkProfileImg();
-        let consumer = {
-          emailid: '',
-          locationid: null,
-          socialid: null,
-          address: ''
-        } as any;
-        consumer = this.userObj.consumer == null ? consumer : this.userObj.consumer;
-        this.userObj.locationid = consumer.locationid == null ? '' : consumer.locationid.toString();
-        if (this.userObj.consumer != null) {
-          this.userObj.facebookid = consumer.socialid.facebookid;
-          this.userObj.twitterid = consumer.socialid.twitterid;
-          this.userObj.googleid = consumer.socialid.googleid;
-          this.userObj.instagramid = consumer.socialid.instagramid;
+        if (this.userstoragedata.roleid == 2) {
+          let dealer = {
+            address: '',
+            locationid: null
+          } as any;
+          dealer = this.userObj.dealer == null ? dealer : this.userObj.dealer;
+          this.userObj.locationid = dealer.locationid == null ? '' : dealer.locationid.toString();
+          this.userObj.address = dealer.address;
+        } else {
+          let consumer = {
+            emailid: '',
+            locationid: null,
+            socialid: null,
+            address: ''
+          } as any;
+          consumer = this.userObj.consumer == null ? consumer : this.userObj.consumer;
+          this.userObj.locationid = consumer.locationid == null ? '' : consumer.locationid.toString();
+          if (this.userObj.consumer != null) {
+            this.userObj.facebookid = consumer.socialid.facebookid;
+            this.userObj.twitterid = consumer.socialid.twitterid;
+            this.userObj.googleid = consumer.socialid.googleid;
+            this.userObj.instagramid = consumer.socialid.instagramid;
+          }
         }
         this.profileForm.patchValue(this.userObj);
       }
@@ -182,10 +192,8 @@ export class ProfileComponent implements OnInit {
         const response = JSON.parse(res._body);
         if (response.status) {
           this.bootstrapAlertService.showSucccess(response.message);
-          // this.localStorageService.setItem(AppConstant.LOCALSTORAGE.USER, response.data);
           this.mainComponent.userstoragedata.fullname = response.data.fullname;
           this.updateuser();
-          // }
         } else {
           this.bootstrapAlertService.showError(response.message);
         }

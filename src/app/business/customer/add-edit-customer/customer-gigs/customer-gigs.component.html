@@ -32,7 +32,7 @@
                     </ng-template>
                 </ngx-datatable-column>
 
-                <ngx-datatable-column name="Posted By" [resizeable]="false">
+                <ngx-datatable-column prop="updatedby" name="Posted By" [resizeable]="false">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                         <span class="updatename">{{row.updatedby}}</span>
                         <span class="updatedate">{{row.updateddt|date:datedisplayformat}}</span>
