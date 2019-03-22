@@ -54,6 +54,13 @@
                                                         </div>
                                                     </div>
                                                     <div class="form-group row required">
+                                                        <label class="col-md-3 col-sm-6 col-form-label text-right">City</label>
+                                                        <div class="col-md-9 col-sm-6">
+                                                            <ng-select [ngClass]="'ng-select'" placeholder="Select a City" formControlName="city" [options]="cityList" (selected)="selectCity($event)" [allowClear]="true">
+                                                            </ng-select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row required">
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Location</label>
                                                         <div class="col-md-9 col-sm-6">
                                                             <ng-select [ngClass]="'ng-select'" placeholder="Select a Location" formControlName="locationid" [options]="locationList" [allowClear]="true">

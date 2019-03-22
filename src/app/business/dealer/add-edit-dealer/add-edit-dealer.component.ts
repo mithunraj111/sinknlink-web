@@ -11,6 +11,7 @@ import { AppMessages } from '../../../app-messages';
 import { DealerPaymentsComponent } from './payments/payments.component';
 import { NgbDateCustomParserFormatter } from '../../../shared/elements/dateParser';
 import { NgbDateParserFormatter, NgbTabset } from '@ng-bootstrap/ng-bootstrap';
+import { LookupService } from '../../../services/admin';
 @Component({
   selector: 'app-add-edit-dealer',
   templateUrl: './add-edit-dealer.component.html',
@@ -33,6 +34,8 @@ export class AddEditDealerComponent implements OnInit {
   dealerProfileErrObj = AppMessages.VALIDATION.DEALER.PROFILE;
   dealerProfileObj = {} as any;
   userstoragedata = {} as any;
+  cityList = [];
+  cityName: string;
   locationList = [];
   adddealer;
   showbutton = true;
@@ -43,7 +46,8 @@ export class AddEditDealerComponent implements OnInit {
     private dealerService: BusinessService.DealerService,
     private localStorageService: LocalStorageService,
     private fb: FormBuilder, private commonService: CommonService,
-    private locationService: MasterService.LocationService) {
+    private locationService: MasterService.LocationService,
+    private lookupService:LookupService) {
     this.userstoragedata = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER);
 
     this.route.params.subscribe(params => {
@@ -57,8 +61,24 @@ export class AddEditDealerComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getLocationList();
+    this.getCityList();
     this.initForm();
+  }
+  getCityList() {
+    this.lookupService.list({ refkey: 'biz_businesscity', status: AppConstant.STATUS_ACTIVE }).subscribe(res => {
+      const response = JSON.parse(res._body);
+      if (response.status) {
+        response.data.map(item => {
+          item.label = item.refname;
+          item.value = item.refvalue;
+        });
+        this.cityList = this.cityList.concat(response.data);
+      }
+    });
+  }
+  selectCity(option) {
+    this.cityName = option.value;
+    this.getLocationList();
   }
   saveOrUpdate() {
     if (this.deleartabs.activeId === '1') {
@@ -88,6 +108,7 @@ export class AddEditDealerComponent implements OnInit {
       Validators.minLength(10), Validators.maxLength(15), Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')])],
       contactperson: [null, Validators.compose([Validators.required, Validators.maxLength(50)])],
       phoneno: ['', Validators.compose([Validators.maxLength(15), Validators.pattern('^[0-9 ]*$')])],
+      city: [''],
       locationid: ['', Validators.required],
       address: ['', Validators.maxLength(100)],
       commissionpercent: [null, Validators.compose([Validators.required, Validators.max(100)])],
@@ -95,7 +116,7 @@ export class AddEditDealerComponent implements OnInit {
     });
   }
   getLocationList() {
-    this.locationService.list({}).subscribe((res) => {
+    this.locationService.list({city: this.cityName, status: AppConstant.STATUS_ACTIVE}).subscribe((res) => {
       const response = JSON.parse(res._body);
       if (response.status) {
         response.data.map(item => {
@@ -116,6 +137,7 @@ export class AddEditDealerComponent implements OnInit {
       this.adddealer = true;
       const data = this.dealerProfileForm.value;
       const formdata = { ...data } as any;
+      formdata.city = data.city;
       formdata.locationid = Number(data.locationid);
       if (_.isNaN(Number(data.commissionpercent)) || _.isNull(Number(data.commissionpercent))) {
         this.bootstrapAlertService.showError(this.dealerProfileErrObj.commissionpercent.invalid);
@@ -175,6 +197,9 @@ export class AddEditDealerComponent implements OnInit {
       commissionpercent: [this.dealerProfileObj.commissionpercent, Validators.required],
       status: [this.dealerProfileObj.status === AppConstant.STATUS_ACTIVE ? true : false, Validators.required]
     });
+    if (this.dealerProfileObj.location != null) {
+      this.dealerProfileObj.city = this.dealerProfileObj.location.city;
+    }
   }
   getDealerDetails(id) {
     this.dealerid = id;

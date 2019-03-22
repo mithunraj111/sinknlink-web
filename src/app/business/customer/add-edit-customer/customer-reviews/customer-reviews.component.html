@@ -15,6 +15,18 @@
                     </div>
                     <br />
                     <p class="m-b-0">{{review.comments}}</p>
+                    <div *ngIf="review.reply==null && this.userstoragedata.roleid === 3" >
+                        <form [formGroup]="replyForm">
+                            <div class="input-group input-group-button input-group-primary p-t-10 form-group form-group">
+                                <input class="form-control" placeholder="Write Comment" type="text" formControlName="reply">
+                                <span class="input-group-append">
+                                    <button class="input-group-text cursor-pointer required" (click)="reply(review.reviewid)" >
+                                        <i class="icofont icofont-plus"></i> Reply
+                                    </button>
+                                </span>
+                            </div>
+                        </form>
+                    </div>
                     <hr>
                     <!-- Nested media object -->
                     <div class="media mt-2" *ngIf="review.reply!=null">

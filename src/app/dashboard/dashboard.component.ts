@@ -192,7 +192,6 @@ export class DashboardComponent extends BaseService implements OnInit {
         this.searchcounts = response.data;
         console.log(this.searchcounts);
         if (this.userstoragedata.roleid !== 3 && this.userstoragedata.roleid !== 2) {
-          console.log('..........');
           this.generateCatCountChart(this.searchcounts.map((d) => {
             return {
               category: d.categoryname,

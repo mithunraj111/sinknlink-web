@@ -375,6 +375,9 @@ export const AppMessages = Object.freeze({
       paymentmode: { required: 'Please select mode of payment' },
       paymentref: { required: 'Please enter payment reference' },
       remarks: {}
-    }
+    },
+    REPLY: {
+      reply: { required: 'Please enter a reply' }
+    },
   },
 });
