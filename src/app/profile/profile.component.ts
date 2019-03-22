@@ -164,7 +164,7 @@ export class ProfileComponent implements OnInit {
       this.bootstrapAlertService.showError(err.message);
     });
   }
-  changeProfile() {
+  changeProfile(datavalue?) {
     if (!this.profileForm.valid) {
       this.errMessage = this.commonService.getFormErrorMessage(this.profileForm, this.profileErrObj);
       this.bootstrapAlertService.showError(this.errMessage);
@@ -188,7 +188,13 @@ export class ProfileComponent implements OnInit {
         formData.append('profileimg', this.userimgfile);
       }
       formData.append('data', JSON.stringify(data));
-      this.userService.update(formData, this.userstoragedata.userid).subscribe(res => {
+      let service;
+      if (datavalue) {
+        service = this.userService.update(formData, this.userstoragedata.userid, this.userstoragedata.usertype);
+      } else {
+        service = this.userService.update(formData, this.userstoragedata.userid);
+      }
+      service.subscribe(res => {
         const response = JSON.parse(res._body);
         if (response.status) {
           this.bootstrapAlertService.showSucccess(response.message);
@@ -200,6 +206,7 @@ export class ProfileComponent implements OnInit {
       }, err => {
         this.bootstrapAlertService.showError(err.message);
       });
+
     }
   }
 

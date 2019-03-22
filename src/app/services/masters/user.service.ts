@@ -15,8 +15,12 @@ export class UserService {
     create(data): Observable<any> {
         return this.httpHandler.POST(this.endpoint + AppConstant.API_CONFIG.API_URL.MASTERS.USER.CREATE, data);
     }
-    update(data, id): Observable<any> {
-        return this.httpHandler.POST(this.endpoint + AppConstant.API_CONFIG.API_URL.MASTERS.USER.UPDATE + id, data);
+    update(data, id, datavalue?): Observable<any> {
+        let url = this.endpoint + AppConstant.API_CONFIG.API_URL.MASTERS.USER.UPDATE + id;
+        if (datavalue) {
+            url += `?datavalue=${datavalue}`
+        }
+        return this.httpHandler.POST(url, data);
     }
     byId(id): Observable<any> {
         return this.httpHandler.GET(this.endpoint + AppConstant.API_CONFIG.API_URL.MASTERS.USER.GETBYID + id);
