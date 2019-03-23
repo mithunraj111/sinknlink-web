@@ -153,7 +153,6 @@ export class DashboardComponent extends BaseService implements OnInit {
       this.loadingIndicator = false;
       if (response.status) {
         this.bizcounts = response.data;
-        console.log(this.bizcounts);
         if (this.userstoragedata.roleid === 3) {
           const self = this;
           _.each(this.bizdefaultrating, function (item, idx) {
@@ -190,7 +189,6 @@ export class DashboardComponent extends BaseService implements OnInit {
       const response = JSON.parse(res._body);
       if (response.status) {
         this.searchcounts = response.data;
-        console.log(this.searchcounts);
         if (this.userstoragedata.roleid !== 3 && this.userstoragedata.roleid !== 2) {
           this.generateCatCountChart(this.searchcounts.map((d) => {
             return {
@@ -229,7 +227,8 @@ export class DashboardComponent extends BaseService implements OnInit {
         'fillAlphas': 0.9,
         'bulletColor': '#004dff ',
         'lineColor': '#004dff ',
-        'type': 'smoothedLine',
+        'type': 'column',
+        'columnWidth': 0.4,
         'title': 'Search count',
         'useLineColorForBulletBorder': true,
         'valueField': 'name',

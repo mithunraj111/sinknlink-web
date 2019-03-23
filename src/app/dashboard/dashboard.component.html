@@ -5,7 +5,7 @@
       <div class="card bg-c-blue order-card">
         <div class="card-block">
           <h6 class="m-b-10 f-18">{{counts[0]?.label || '-'}}</h6>
-          <h2 class="text-right"><i class="{{counts[0]?.icon}} f-left p-r-10 mt-1"></i><span>{{counts[0]?.count || '-'}}</span></h2>
+          <h2 class="text-right"><i class="{{counts[0]?.icon}} f-left p-r-10 mt-1"></i><span class="f-20">{{counts[0]?.count || '-'}}</span></h2>
         </div>
       </div>
     </div>
@@ -13,7 +13,9 @@
       <div class="card bg-c-green order-card">
         <div class="card-block">
           <h6 class="m-b-10 f-18">{{counts[2]?.label || '-'}}</h6>
-          <h2 class="text-right"><i class="{{counts[2]?.icon}} f-left p-r-10 mt-1"></i><span>{{counts[2]?.count || '-'}}</span></h2>
+          <h2 class="text-right"><i class="{{counts[2]?.icon}} f-left p-r-10 mt-1"></i>
+            <span class="f-20">{{counts[2]?.count || '-'}}</span>
+          </h2>
         </div>
       </div>
     </div>
@@ -21,7 +23,7 @@
       <div class="card bg-c-yellow order-card">
         <div class="card-block">
           <h6 class="m-b-10 f-18">{{counts[1]?.label || '-'}}</h6>
-          <h2 class="text-right"><i class="{{counts[1]?.icon}} f-left p-r-10 mt-1"></i><span>{{counts[1]?.count || '-'}}</span></h2>
+          <h2 class="text-right"><i class="{{counts[1]?.icon}} f-left p-r-10 mt-1"></i><span class="f-20">{{counts[1]?.count || '-'}}</span></h2>
         </div>
       </div>
     </div>
@@ -29,7 +31,7 @@
       <div class="card bg-c-pink order-card">
         <div class="card-block">
           <h6 class="m-b-10 f-18">{{counts[3]?.label || '-'}}</h6>
-          <h2 class="text-right"><i class="{{counts[3]?.icon}} f-left p-r-10 mt-1"></i><span>{{counts[3]?.count || '-'}}</span></h2>
+          <h2 class="text-right"><i class="{{counts[3]?.icon}} f-left p-r-10 mt-1"></i><span class="f-20">{{counts[3]?.count || '-'}}</span></h2>
         </div>
       </div>
     </div>
@@ -114,7 +116,9 @@
                   <td class="py-1">
                     <div class="task-contain">
                       <h6 class="bg-c-blue d-inline-block text-center">{{bcount?.label.substring(0,1)}}</h6>
-                      <p class="d-inline-block m-l-20">{{bcount?.label.substring(0,10)}}</p>
+                      <p class="d-inline-block m-l-20">
+                        {{bcount?.label.length>15 ? bcount?.label.substring(0,15) + '...': bcount?.label}}
+                      </p>
                     </div>
                   </td>
                   <td>

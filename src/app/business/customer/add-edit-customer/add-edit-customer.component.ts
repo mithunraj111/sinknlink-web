@@ -460,9 +460,7 @@ export class AddEditCustomerComponent implements OnInit {
     this.buttonText = AppConstant.BUTTON_TXT.UPDATE;
   }
 
-  //map starts 
-
-
+  // map starts
   private loadMap() {
     return new Promise((resolve, reject) => {
       this.mapService.load('googlemaps').then(suc => {
@@ -471,8 +469,7 @@ export class AddEditCustomerComponent implements OnInit {
         reject(false);
         console.log(error);
       });
-    })
-
+    });
   }
 
   openmap() {
@@ -485,28 +482,27 @@ export class AddEditCustomerComponent implements OnInit {
       let Curloc;
       let map;
       // Creating Search field.
-      let location = document.getElementById("controls");
-      let pac_input = document.createElement("input");
-      pac_input.setAttribute("id", "pac-input");
-      pac_input.setAttribute("class", "controls");
-      pac_input.setAttribute("type", "text");
-      pac_input.setAttribute("placeholder", "Search here");
-      pac_input.setAttribute("autocomplete", "on");
+      let location = document.getElementById('controls');
+      let pac_input = document.createElement('input');
+      pac_input.setAttribute('id', 'pac-input');
+      pac_input.setAttribute('class', 'controls');
+      pac_input.setAttribute('type', 'text');
+      pac_input.setAttribute('placeholder', 'Search here');
+      pac_input.setAttribute('autocomplete', 'on');
       location.appendChild(pac_input);
       if (data.latitude && data.longitude !== null) {
-        Curloc = { lat: parseFloat(data.latitude), lng: parseFloat(data.longitude) }
+        Curloc = { lat: parseFloat(data.latitude), lng: parseFloat(data.longitude) };
+      } else {
+        Curloc = { lat: 13.082680, lng: 80.270721 };
       }
-      else {
-        Curloc = { lat: 13.082680, lng: 80.270721 }
-      }
-      map = new gmap.Map(document.getElementById("map"), {
+      map = new gmap.Map(document.getElementById('map'), {
         center: Curloc,
         zoom: 12,
         mapTypeControl: false,
         fullscreenControl: false,
         mapTypeId: 'roadmap'
       });
-      var marker = new gmap.Marker({ position: Curloc, map: map, draggable: true })
+      var marker = new gmap.Marker({ position: Curloc, map: map, draggable: true });
       gmap.event.addListener(marker, 'dragend', function () {
         a.customerlat = marker.getPosition().lat();
         a.customerlng = marker.getPosition().lng();
@@ -515,8 +511,8 @@ export class AddEditCustomerComponent implements OnInit {
       this.openModal('mapmodal');
       a.createAutoCompleteSearchBox(gmap, a, markers, map);
     }).catch(err => {
-      alert("Unable to load map");
-    })
+      alert('Unable to load map');
+    });
   }
 
   createAutoCompleteSearchBox(gmap, a, markers, map) {
@@ -538,7 +534,7 @@ export class AddEditCustomerComponent implements OnInit {
       var bounds = new gmap.LatLngBounds();
       places.forEach(function (place) {
         if (!place.geometry) {
-          console.log("Returned place contains no geometry");
+          console.log('Returned place contains no geometry');
           return;
         }
         var marker = new gmap.Marker({
@@ -562,7 +558,7 @@ export class AddEditCustomerComponent implements OnInit {
       });
       map.fitBounds(bounds);
     });
-  };
+  }
   setlocation() {
     this.customerForm.patchValue({
       latitude: this.customerlat,
@@ -587,6 +583,4 @@ export class AddEditCustomerComponent implements OnInit {
     }
   }
 }
-
-
 // map ends
