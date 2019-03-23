@@ -20,6 +20,10 @@ export const AppConstant = Object.freeze({
   },
   // Form Titles
   FORM_TITLE: {
+    USER: {
+      ADD: 'Add User',
+      UPDATE: 'Update User'
+    },
     CATEGORY: {
       ADD: 'Add Business Category',
       UPDATE: 'Update Business Category'

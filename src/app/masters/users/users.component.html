@@ -4,22 +4,29 @@
             <div class="header-title">
                 <div class="row">
                     <div class="col-md-6 col-sm-6">
-                        <input #userSearch type="text" class="header-search form-control col-md-5 col-sm-5 input-sm full-data-search" placeholder="Search here" (keyup)='search($event)' placement="bottom" ngbTooltip="Type here to search">
-                        <button type="button" class="btn search-close col-md-1 col-sm-1 p-l-0 p-r-0" (click)="userSearch.value='';search();"><i
-                            class="fa fa-close"></i></button>
+                        <input #userSearch type="text"
+                            class="header-search form-control col-md-5 col-sm-5 input-sm full-data-search"
+                            placeholder="Search here" (keyup)='search($event)' placement="bottom"
+                            ngbTooltip="Type here to search">
+                        <button type="button" class="btn search-close col-md-1 col-sm-1 p-l-0 p-r-0"
+                            (click)="userSearch.value='';search();"><i class="fa fa-close"></i></button>
                     </div>
                     <div class="col-md-6 col-sm-6 p-r-10 text-right">
-                        <button *ngIf="add" type="button" placement="bottom" ngbTooltip="Click to add user" class="add-btn btn btn-primary waves-effect m-r-10" (click)='addUser()'><i class="fa fa-plus-circle m-r-5"></i> New
+                        <button *ngIf="add" type="button" placement="bottom" ngbTooltip="Click to add user"
+                            class="add-btn btn btn-primary waves-effect m-r-10" (click)='addUser()'><i
+                                class="fa fa-plus-circle m-r-5"></i> New
                         </button>
-                        <button type="button" placement="bottom" ngbTooltip="Reload" (click)="getUsers()" class="btn btn-inverse btn-primary waves-effect"><i
-                            class="ti-reload"></i></button>
+                        <button type="button" placement="bottom" ngbTooltip="Reload" (click)="getUsers()"
+                            class="btn btn-inverse btn-primary waves-effect"><i class="ti-reload"></i></button>
                     </div>
                 </div>
             </div>
         </div>
         <div class="table-header fixed-table">
             <div class="card p-r-10 p-l-10">
-                <ngx-datatable #usertable class="talbe data-table expandable  loader-block m-b-10" [rows]='userList' [columnMode]="'flex'" [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false" [footerHeight]="50" [limit]="10" [messages]="emptymessages">
+                <ngx-datatable #usertable class="talbe data-table expandable  loader-block m-b-10" [rows]='userList'
+                    [columnMode]="'flex'" [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false"
+                    [footerHeight]="50" [limit]="10" [messages]="emptymessages">
                     <!-- Row Detail Template -->
                     <ngx-datatable-column prop="fullname" name="Full Name" [resizeable]="false">
                         <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
@@ -36,23 +43,36 @@
                             <span>{{row.role?.rolename}}</span>
                         </ng-template>
                     </ngx-datatable-column>
+                    <ngx-datatable-column prop="lastlogin" name="Last Login" [resizeable]="false"
+                        [cellClass]="'text-center'" headerClass="text-center">
+                        <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                            <span>{{row.lastlogin|date:displayformat || '-'}}</span>
+                        </ng-template>
+                    </ngx-datatable-column>
                     <ngx-datatable-column prop="updatedby" name="Updated By" [resizeable]="false">
                         <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                             <span class="updatename">{{row.updatedby}}</span>
                             <span class="updatedate"> {{row.updateddt|date:displayformat}}</span>
                         </ng-template>
                     </ngx-datatable-column>
-                    <ngx-datatable-column name="Status" [sortable]="false" [flexGrow]="0.5" [cellClass]="'text-center'" headerClass="text-center" [resizeable]="false">
+                    <ngx-datatable-column name="Status" [sortable]="false" [flexGrow]="0.5" [cellClass]="'text-center'"
+                        headerClass="text-center" [resizeable]="false">
                         <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                            <ui-switch [disabled]="!edit" class="js-small" placement="bottom" ngbTooltip="Click to change status" color="$primary-color" switchColor="#fff" size="small" (change)="changeStatus(row,rowIndex,false)" [checked]="row.status == 'Active'">
+                            <ui-switch [disabled]="!edit" class="js-small" placement="bottom"
+                                ngbTooltip="Click to change status" color="$primary-color" switchColor="#fff"
+                                size="small" (change)="changeStatus(row,rowIndex,false)"
+                                [checked]="row.status == 'Active'">
                             </ui-switch>
                         </ng-template>
                     </ngx-datatable-column>
-                    <ngx-datatable-column *ngIf="edit||delete" name="Action" [sortable]="false" [flexGrow]="0.5" headerClass="text-center" [cellClass]="'text-center'" [resizeable]="false">
+                    <ngx-datatable-column *ngIf="edit||delete" name="Action" [sortable]="false" [flexGrow]="0.5"
+                        headerClass="text-center" [cellClass]="'text-center'" [resizeable]="false">
                         <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                            <a *ngIf="edit" placement="bottom" ngbTooltip="Click to edit user" class="m-r-15 crm-action-edit text-primary" (click)='editUser(row.userid)'>
+                            <a *ngIf="edit" placement="bottom" ngbTooltip="Click to edit user"
+                                class="m-r-15 crm-action-edit text-primary" (click)='editUser(row)'>
                                 <i class="fa fa-pencil"></i></a>
-                            <a *ngIf="delete" placement="bottom" ngbTooltip="Click to delete user" (click)="changeStatus(row,rowIndex,true)" class="crm-action-delete text-danger">
+                            <a *ngIf="delete" placement="bottom" ngbTooltip="Click to delete user"
+                                (click)="changeStatus(row,rowIndex,true)" class="crm-action-delete text-danger">
                                 <i class="fa fa-trash"></i></a>
                         </ng-template>
                     </ngx-datatable-column>
@@ -64,8 +84,11 @@
         <div class="nodata-text nodata-image">
             <img class="hand-icon" src="assets/images/no-data.png">
             <h3>No User(s) Found</h3>
-            <button *ngIf="add" type="button" placement="bottom" ngbTooltip="Click to add user" class="add-btn btn btn-primary waves-effect" (click)='addUser()'><i class="fa fa-plus-circle m-r-5"></i>Create User</button>
+            <button *ngIf="add" type="button" placement="bottom" ngbTooltip="Click to add user"
+                class="add-btn btn btn-primary waves-effect" (click)='addUser()'><i
+                    class="fa fa-plus-circle m-r-5"></i>Create User</button>
         </div>
     </div>
 </div>
 <app-loader [loadingIndicator]="loadingIndicator"></app-loader>
+<app-add-edit-user [userObj]="userObj" (notifyUserEntry)="notifyUserEntry($event)"></app-add-edit-user>

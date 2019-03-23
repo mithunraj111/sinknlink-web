@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppConstant } from '../../app.constants';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
@@ -6,6 +6,7 @@ import { MasterService, LocalStorageService, BaseService, CommonService } from '
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
 import { AppMessages } from 'src/app/app-messages';
 import { LoaderComponent } from '../../shared/loader/loader.component';
+import { AddEditUserComponent } from './add-edit-user/add-edit-user.component';
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html'
@@ -17,6 +18,8 @@ export class UsersComponent extends BaseService implements OnInit {
   noData: boolean = false;
   loadingIndicator: boolean = true;
   @ViewChild(DatatableComponent) table: DatatableComponent;
+  @ViewChild(AddEditUserComponent) locationModal: AddEditUserComponent;
+  @Output() userObj: any = {};
   emptymessages = AppConstant.EMPTY_MESSAGES.USER;
   constructor(private router: Router, private userService: MasterService.UserService,
     private bootstrapAlertService: BootstrapAlertService,
@@ -30,14 +33,20 @@ export class UsersComponent extends BaseService implements OnInit {
   ngOnInit() {
     this.getUsers();
   }
-
+  openUserModal(event) {
+    document.querySelector('#' + event).classList.add('md-show');
+  }
+  closeUserModal(event) {
+    document.querySelector('#' + event).classList.remove('md-show');
+  }
   addUser() {
-    this.router.navigate(['masters/users/create']);
+    this.userObj = {};
+    this.openUserModal('usermodal');
   }
-  editUser(id) {
-    this.router.navigate(['masters/users/edit/' + id]);
+  editUser(data) {
+    this.userObj = data;
+    this.openUserModal('usermodal');
   }
-
   getUsers() {
     this.loadingIndicator = true;
     this.userService.list({ usertype: 'U' }).subscribe((res) => {
@@ -93,6 +102,14 @@ export class UsersComponent extends BaseService implements OnInit {
     this.userList = this.commonService.globalSearch(this.tempFilter, event);
     this.table.offset = 0;
   }
+  notifyUserEntry(event) {
+    if (!event.close) {
+      this.getUsers();
+      this.closeUserModal('usermodal');
+    } else {
+      this.closeUserModal('usermodal');
+    }
 
+  }
 
 }

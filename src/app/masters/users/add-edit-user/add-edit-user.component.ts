@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppConstant } from '../../../app.constants';
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
@@ -28,8 +28,10 @@ export class AddEditUserComponent implements OnInit {
   buttontext = AppConstant.BUTTON_TXT.SAVE;
   displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   userstoragedata = {} as any;
-  userObj = {} as any;
   adduser = false;
+  @Input() userObj = {} as any;
+  @Output() notifyUserEntry: EventEmitter<any> = new EventEmitter();
+  formTitle = AppConstant.FORM_TITLE.USER.ADD;
   constructor(private route: ActivatedRoute,
     private router: Router,
     private bootstrapAlertService: BootstrapAlertService,
@@ -38,14 +40,6 @@ export class AddEditUserComponent implements OnInit {
     private localStorageService: LocalStorageService,
     private userService: UserService,
     private roleService: RoleService) {
-    this.route.params.subscribe(params => {
-      if (params.id !== undefined) {
-        this.isaddForm = false;
-        this.userid = params.id;
-        this.buttontext = AppConstant.BUTTON_TXT.UPDATE;
-        this.getUserDetails();
-      }
-    });
     this.userstoragedata = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER);
   }
   ngOnInit() {
@@ -61,10 +55,38 @@ export class AddEditUserComponent implements OnInit {
       mobileno: [null, Validators.compose([Validators.required, Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$'),
       Validators.maxLength(13)])],
       rolename: [null, Validators.compose([Validators.required])],
-      status: [true],
+      status: [''],
       password: [null, Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(30)])],
     });
     this.userObj = {};
+  }
+  close(event) {
+    this.notifyUserEntry.emit({ close: true });
+  }
+  callParent(data) {
+    this.notifyUserEntry.emit(data);
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+    if (!_.isUndefined(changes.userObj) && !_.isEmpty(changes.userObj.currentValue)) {
+      this.buttontext = AppConstant.BUTTON_TXT.UPDATE;
+      this.formTitle = AppConstant.FORM_TITLE.USER.UPDATE;
+      this.userObj = changes.userObj.currentValue;
+      this.userForm = this.fb.group({
+        fullname: [this.userObj.fullname, Validators.compose([Validators.required, Validators.minLength(1),
+        Validators.maxLength(50), Validators.pattern('^[a-zA-Z ]*$')])],
+        mobileno: [this.userObj.mobileno, Validators.compose([Validators.required,
+        Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$'), Validators.maxLength(13)])],
+        rolename: [this.userObj.roleid.toString(), Validators.compose([Validators.required])],
+        password: [this.userObj.password, Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(30)])],
+        status: [this.userObj.status],
+      });
+    }
+    else {
+      this.initForm();
+      this.buttontext = AppConstant.BUTTON_TXT.SAVE;
+      this.formTitle = AppConstant.FORM_TITLE.USER.ADD;
+    }
+
   }
   saveOrUpdateUser() {
     if (!this.userForm.valid) {
@@ -84,14 +106,14 @@ export class AddEditUserComponent implements OnInit {
       data.updatedby = this.userstoragedata.fullname;
       data.updateddt = new Date();
       if (!_.isUndefined(this.userObj) && !_.isUndefined(this.userObj.userid) && !_.isEmpty(this.userObj)) {
-        data.status = dataValue.status ? AppConstant.STATUS_ACTIVE : AppConstant.STATUS_INACTIVE;
+        data.status = dataValue.status;
         formdata.append('data', JSON.stringify(data));
         this.userService.update(formdata, this.userObj.userid).subscribe(res => {
           const response = JSON.parse(res._body);
           if (response.status) {
             this.adduser = false;
             this.bootstrapAlertService.showSucccess(response.message);
-            this.router.navigate(['/masters/users/']);
+            this.callParent({ update: false, data : response.data });
           } else {
             this.adduser = false;
             this.bootstrapAlertService.showError(response.message);
@@ -108,7 +130,7 @@ export class AddEditUserComponent implements OnInit {
           if (response.status) {
             this.adduser = false;
             this.bootstrapAlertService.showSucccess(response.message);
-            this.router.navigate(['/masters/users/']);
+            this.callParent({ update: true, data: response.data });
           } else {
             this.adduser = false;
             this.bootstrapAlertService.showError(response.message);
@@ -119,23 +141,6 @@ export class AddEditUserComponent implements OnInit {
         });
       }
     }
-  }
-  getUserDetails() {
-    this.userService.byId(this.userid).subscribe(res => {
-      const response = JSON.parse(res._body);
-      if (response.status && !_.isNull(response.data)) {
-        this.userObj = response.data;
-        this.userForm = this.fb.group({
-          fullname: [this.userObj.fullname, Validators.compose([Validators.required, Validators.minLength(1),
-          Validators.maxLength(50), Validators.pattern('^[a-zA-Z ]*$')])],
-          mobileno: [this.userObj.mobileno, Validators.compose([Validators.required,
-          Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$'), Validators.maxLength(13)])],
-          rolename: [this.userObj.roleid.toString(), Validators.compose([Validators.required])],
-          status: [this.userObj.status === AppConstant.STATUS_ACTIVE ? true : false, Validators.compose([Validators.required])],
-          password: [this.userObj.password, Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(30)])],
-        });
-      }
-    });
   }
   getRoleList() {
     this.roleService.list({ status: AppConstant.STATUS_ACTIVE }).subscribe(res => {
