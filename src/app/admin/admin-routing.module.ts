@@ -140,7 +140,7 @@ const routes: Routes = [
         component: LookupComponent,
         canActivate: [AuthGuard, NgxPermissionsGuard],
         data: {
-          title: 'Lookup',
+          title: 'Look up',
           status: false,
           permissions: {
             only: ['Lookup'],

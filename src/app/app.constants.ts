@@ -288,7 +288,7 @@ export const AppConstant = Object.freeze({
     CATEGORIES: { emptyMessage: 'No category data to display', totalMessage: 'total' },
     LOCATION: { emptyMessage: 'No location data to display', totalMessage: 'total' },
     CUSTOMERS: { emptyMessage: 'No customer data to display', totalMessage: 'total' },
-    PAYMENT: { emptyMessage: 'No history data to display', totalMessage: 'total' },
+    PAYMENT: { emptyMessage: 'No payment data to display', totalMessage: 'total' },
     BRANCHES: { emptyMessage: 'No branch data to display', totalMessage: 'total' },
     GIGS: { emptyMessage: 'No gigs data to display', totalMessage: 'total' },
     COUPONS: { emptyMessage: 'No coupon data to display', totalMessage: 'total' },

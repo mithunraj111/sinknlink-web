@@ -47,7 +47,7 @@ export class AddEditDealerComponent implements OnInit {
     private localStorageService: LocalStorageService,
     private fb: FormBuilder, private commonService: CommonService,
     private locationService: MasterService.LocationService,
-    private lookupService:LookupService) {
+    private lookupService: LookupService) {
     this.userstoragedata = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER);
 
     this.route.params.subscribe(params => {
@@ -116,7 +116,7 @@ export class AddEditDealerComponent implements OnInit {
     });
   }
   getLocationList() {
-    this.locationService.list({city: this.cityName, status: AppConstant.STATUS_ACTIVE}).subscribe((res) => {
+    this.locationService.list({ city: this.cityName, status: AppConstant.STATUS_ACTIVE }).subscribe((res) => {
       const response = JSON.parse(res._body);
       if (response.status) {
         response.data.map(item => {
@@ -192,6 +192,7 @@ export class AddEditDealerComponent implements OnInit {
       mobileno: [this.dealerProfileObj.mobileno, Validators.compose([Validators.required,
       Validators.minLength(10), Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')])],
       phoneno: [this.dealerProfileObj.phoneno],
+      city: [this.dealerProfileObj.city, Validators.required],
       locationid: [this.dealerProfileObj.locationid.toString(), Validators.required],
       address: [this.dealerProfileObj.address],
       commissionpercent: [this.dealerProfileObj.commissionpercent, Validators.required],
@@ -200,7 +201,7 @@ export class AddEditDealerComponent implements OnInit {
     if (this.dealerProfileObj.location != null) {
       this.dealerProfileObj.city = this.dealerProfileObj.location.city;
     }
-  }
+    }
   getDealerDetails(id) {
     this.dealerid = id;
     this.dealerService.byId(id).subscribe((res) => {

@@ -5,7 +5,7 @@
             <div class="form-header pt-2">
                 <div class="col-md-12">
                     <div class="form-group required">
-                        <label>Full Name</label>
+                        <label>Name</label>
                         <input type="text" class="form-control" formControlName="fullname" placeholder="Full Name">
                     </div>
                     <div class="form-group required">
@@ -29,7 +29,7 @@
                                     formControlName="password" placeholder="Password">
                                 <span *ngIf='generatepwd'> Password : {{pwd}} </span>
                             </div>
-                            <div class="col-md-3 col-sm-6">
+                            <div class="col-md-3 col-sm-6 p-l-5">
                                 <button type="button" placement="top" ngbTooltip="Click to Generate"
                                     (click)="generatepassword()"
                                     class="add-btn btn btn-primary waves-effect ">Generate</button>

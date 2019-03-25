@@ -236,6 +236,9 @@ export const AppMessages = Object.freeze({
           minlength: 'Phone number should be atleast 10 digits',
           pattern: 'Please enter a valid phone number'
         },
+        city:{
+          required: 'Please select city'
+        },
         locationid: {
           required: 'Please select location'
         },

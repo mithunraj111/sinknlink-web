@@ -75,7 +75,7 @@ export class ViewConsumerComponent implements OnInit {
     });
   }
   getConsumerFavs(id) {
-    this.consumerService.consumerFavs({ consumerid: Number(id) }).subscribe(res => {
+    this.consumerService.consumerFavs({ consumerid: Number(id) ,status: AppConstant.STATUS_ACTIVE}).subscribe(res => {
       const response = JSON.parse(res._body);
       this.consumerFavs = this.groupFavs(response.data);
     }, err => {
