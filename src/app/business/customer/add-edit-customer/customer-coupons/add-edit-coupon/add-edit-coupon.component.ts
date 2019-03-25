@@ -6,12 +6,14 @@ import { BusinessService, LocalStorageService, CommonService } from '../../../..
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import * as _ from 'lodash';
+import { SettingService } from '../../../../../services/masters';
 @Component({
     selector: 'app-add-edit-coupon',
     templateUrl: './add-edit-coupon.component.html'
 })
 export class AddEditCouponComponent implements OnInit, OnChanges {
-
+    settingList;
+    randomcouponcode;
     @ViewChild(DatatableComponent) table: DatatableComponent;
     userstoragedata = {} as any;
     @Input() customerObj = {} as any;
@@ -26,15 +28,27 @@ export class AddEditCouponComponent implements OnInit, OnChanges {
         private commonService: CommonService,
         private couponService: BusinessService.CouponService,
         private fb: FormBuilder,
+        private settingService: SettingService,
         private localStorageService: LocalStorageService) {
     }
     ngOnInit() {
         this.initCouponForm();
         this.userstoragedata = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER);
+        this.settingService.list({ 'settingkey': 'autogencouponyn', 'membershipid': this.customerObj.membershipid }).subscribe((res) => {
+            const response = JSON.parse(res._body);
+            if (response.status) {
+                this.settingList = response.data;
+                console.log(this.settingList);
+                if (this.settingList[0].settingvalue === 'Y') {
+                    this.randomcouponcode = Math.round(Math.random() * 1000000);
+                    this.couponForm.controls['couponcode'].setValue(this.randomcouponcode);
+                }
+            }
+        });
     }
     initCouponForm() {
         this.couponForm = this.fb.group({
-            couponcode: [null, Validators.compose([Validators.required, Validators.maxLength(50)])],
+            couponcode: [this.randomcouponcode, Validators.compose([Validators.required, Validators.maxLength(50)])],
             shortdesc: [null, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])],
             noofcoupons: [null, Validators.compose([Validators.required, Validators.maxLength(11), Validators.pattern('^[0-9]*$')])],
             expirydt: [null, Validators.required],
@@ -48,8 +62,8 @@ export class AddEditCouponComponent implements OnInit, OnChanges {
             this.formTitle = AppConstant.FORM_TITLE.COUPON.UPDATE;
             this.couponObj = changes.couponObj.currentValue;
             this.editCoupon(this.couponObj);
-        } else {
             this.initCouponForm();
+        } else {
             this.buttonTxt = AppConstant.BUTTON_TXT.SAVE;
             this.formTitle = AppConstant.FORM_TITLE.COUPON.ADD;
         }
@@ -75,11 +89,7 @@ export class AddEditCouponComponent implements OnInit, OnChanges {
                 const formdata = { ...data } as any;
                 formdata.membershipid = this.customerObj.membershipid;
                 formdata.noofcoupons = Number(data.noofcoupons);
-                console.log(data.expirydt);
-                console.log(new Date(this.commonService.formatDate(data.expirydt)));
                 if (new Date(this.commonService.formatDate(data.expirydt)) <= this.commonService.getCurrentDate()) {
-                    console.log(data.expirydt);
-                    console.log(this.commonService.getCurrentDate());
                     this.bootstrapAlertService.showError(this.couponErrObj.expirydt.invalid);
                     return false;
                 }
