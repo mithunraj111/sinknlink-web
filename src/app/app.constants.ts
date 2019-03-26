@@ -146,9 +146,9 @@ export const AppConstant = Object.freeze({
       },
       COMMON: {
         DASHBOARD: {
-          ALL_COUNT: 'dashboard/dcount',
-          BIZ_COUNT: 'dashboard/bcount',
-          SEARCH_COUNT: 'dashboard/scount',
+          ALL_COUNT: 'dashboard/employee',
+          BIZ_COUNT: 'dashboard/topcategories',
+          SEARCH_COUNT: 'dashboard/popularcategories',
           CUSTOMER: 'dashboard/customer',
           RATING: 'dashboard/customer/rating',
           DEALER: 'dashboard/dealer',
