@@ -31,6 +31,7 @@ export class AddEditCustomerComponent implements OnInit {
   formTitle: string;
   buttonText = AppConstant.BUTTON_TXT.SAVE;
   savecustomer;
+  buttontext = AppConstant.BUTTON_TEXT.BRANCHES;
   workDays = AppConstant.WORKDAYS;
   showbutton = true;
   loadingIndicator = true;
@@ -407,6 +408,14 @@ export class AddEditCustomerComponent implements OnInit {
     this.customerObj = this.customerObj;
     if (event.nextId === '6' || event.nextId === '5' || event.nextId === '3') {
       this.showbutton = false;
+      if (event.nextId === '6') {
+        this.buttontext = AppConstant.BUTTON_TEXT.COUPON;
+        return false;
+      }
+      if (event.nextId === '5') {
+        this.buttontext = AppConstant.BUTTON_TEXT.GIGS;
+        return false;
+      }
     } else {
       this.showbutton = true;
     }

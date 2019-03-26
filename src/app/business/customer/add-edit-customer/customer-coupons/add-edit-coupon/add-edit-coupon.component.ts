@@ -62,8 +62,8 @@ export class AddEditCouponComponent implements OnInit, OnChanges {
             this.formTitle = AppConstant.FORM_TITLE.COUPON.UPDATE;
             this.couponObj = changes.couponObj.currentValue;
             this.editCoupon(this.couponObj);
-            this.initCouponForm();
         } else {
+            this.initCouponForm();
             this.buttonTxt = AppConstant.BUTTON_TXT.SAVE;
             this.formTitle = AppConstant.FORM_TITLE.COUPON.ADD;
         }
@@ -87,6 +87,7 @@ export class AddEditCouponComponent implements OnInit, OnChanges {
             } else {
                 const data = this.couponForm.value;
                 const formdata = { ...data } as any;
+                formdata.couponcode = data.couponcode.toString();
                 formdata.membershipid = this.customerObj.membershipid;
                 formdata.noofcoupons = Number(data.noofcoupons);
                 if (new Date(this.commonService.formatDate(data.expirydt)) <= this.commonService.getCurrentDate()) {

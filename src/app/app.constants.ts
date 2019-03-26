@@ -18,6 +18,11 @@ export const AppConstant = Object.freeze({
     SAVE: 'Save',
     UPDATE: 'Update'
   },
+  BUTTON_TEXT:{
+    GIGS:'Gigs',
+    COUPON:'Coupon',
+    BRANCHES:'Branch'
+  },
   // Form Titles
   FORM_TITLE: {
     USER: {
