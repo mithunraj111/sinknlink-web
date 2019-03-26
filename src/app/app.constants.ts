@@ -18,7 +18,7 @@ export const AppConstant = Object.freeze({
     SAVE: 'Save',
     UPDATE: 'Update'
   },
-  BUTTON_TEXT:{
+  MESSAGE:{
     GIGS:'Gigs',
     COUPON:'Coupon',
     BRANCHES:'Branch'
