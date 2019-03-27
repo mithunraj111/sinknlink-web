@@ -73,12 +73,12 @@ export class AddEditDealerComponent implements OnInit {
           item.value = item.refvalue;
         });
         this.cityList = this.cityList.concat(response.data);
-        this.getLocationList();
       }
     });
   }
   selectCity(option) {
     this.cityName = option.value;
+    this.getLocationList();
   }
   saveOrUpdate() {
     if (this.deleartabs.activeId === '1') {
@@ -108,7 +108,7 @@ export class AddEditDealerComponent implements OnInit {
       Validators.minLength(10), Validators.maxLength(15), Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')])],
       contactperson: [null, Validators.compose([Validators.required, Validators.maxLength(50)])],
       phoneno: ['', Validators.compose([Validators.maxLength(15), Validators.pattern('^[0-9 ]*$')])],
-      city: [''],
+      city: ['', Validators.required],
       locationid: ['', Validators.required],
       address: ['', Validators.maxLength(100)],
       commissionpercent: [null, Validators.compose([Validators.required, Validators.max(100)])],
@@ -186,6 +186,7 @@ export class AddEditDealerComponent implements OnInit {
     }
   }
   generateEditForm() {
+    this.getLocationList();
     this.dealerProfileForm = this.fb.group({
       dealername: [this.dealerProfileObj.dealername, Validators.required],
       contactperson: [this.dealerProfileObj.contactperson, Validators.required],

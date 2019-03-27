@@ -10,8 +10,10 @@ import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
     selector: 'app-customer-reviews',
     templateUrl: './customer-reviews.component.html'
 })
-export class CustomerReviewsComponent implements OnInit, OnChanges {
+export class CustomerReviewsComponent implements OnInit{
+    showInput = false;
     reviewsList = [];
+    replyComment;
     replybox = false;
     replyForm: FormGroup;
     datedisplayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
@@ -30,16 +32,16 @@ export class CustomerReviewsComponent implements OnInit, OnChanges {
         this.userstoragedata = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER);
         this.initform();
     }
-    ngOnChanges(changes: SimpleChanges) {
-        this.getCustomerReviews(changes.customerObj.currentValue);
-    }
+
     initform() {
         this.replyForm = this.fb.group({
             reply: [null, Validators.required]
         });
+        this.getCustomerReviews(this.customerObj);
     }
 
     getCustomerReviews(customerObj) {
+        this.reviewsList = [];
         this.loadingIndicator = true;
         if (!_.isEmpty(customerObj)) {
             this.reviewService.list({ membershipid: customerObj.membershipid }).subscribe(res => {
@@ -51,28 +53,32 @@ export class CustomerReviewsComponent implements OnInit, OnChanges {
             });
         }
     }
-    reply(i) {
-        if (!this.replyForm.valid) {
+    replyid;
+    toReply (id) {
+        this.openModal('replyModal');
+        this.replyid = id;
+    }
+
+    openModal(event) {
+        document.querySelector('#' + event).classList.add('md-show');
+    }
+    reply() {
+        this.loadingIndicator = true;
+        const data = {} as any;
+        data.comments = this.replyComment;
+        if (this.reply == null) {
             this.bootstrapAlertService.showError(this.errObj.reply.required);
-            return false;
-        } else {
-            this.loadingIndicator = true;
-            const data = {} as any;
-            data.comments = this.replyForm.value.reply;
-            if (this.reply == null) {
-                this.bootstrapAlertService.showError(this.errObj.reply.required);
-            }
-            data.membershipid = this.customerObj.membershipid;
-            data.updatedby = this.userstoragedata.fullname;
-            data.parentreviewid = i;
-            data.status = 'Active';
-            data.updateddt = new Date();
-            this.reviewService.create(data).subscribe((res) => {
-                 const response = JSON.parse(res._body);
-                 this.bootstrapAlertService.showSucccess(response.message);
-            });
+        }
+        data.membershipid = this.customerObj.membershipid;
+        data.updatedby = this.userstoragedata.fullname;
+        data.parentreviewid = this.replyid;
+        data.status = AppConstant.STATUS_ACTIVE;
+        data.updateddt = new Date();
+        this.reviewService.create(data).subscribe((res) => {
+            const response = JSON.parse(res._body);
+            this.bootstrapAlertService.showSucccess(response.message);
             this.loadingIndicator = false;
             this.getCustomerReviews(this.customerObj);
-        }
+        });
     }
 }

@@ -15,7 +15,22 @@
                     </div>
                     <br />
                     <p class="m-b-0">{{review.comments}}</p>
-                    <div *ngIf="review.reply==null && this.userstoragedata.roleid === 3" >
+                    <!-- <div class="m-b-25" *ngIf = "review.reply == null"> -->
+                    <div *ngIf="review.reply==null && this.userstoragedata.roleid === 3" class="m-b-25">
+                        <span> <a (click)="toReply(review.reviewid)" class="m-r-10 f-12">Reply</a> </span>
+                    </div>
+                    <div class="modal-size">
+                        <app-modal-animation [modalID]="'replyModal'" [modalClass]="'md-effect-7'">
+                            <h3>Reply</h3>
+                            <div class="row pb-0">
+                                <textarea class="form-control" placeholder="Write comment..." type="text" [(ngModel)]= replyComment></textarea>
+                            </div>
+                            <span class="input-group-append pull-right">
+                                <button class="input-group-text btn my-2 mr-3" (click)="reply()" >Reply</button>
+                            </span>
+                        </app-modal-animation>
+                    </div>
+                    <!-- <div *ngIf="review.reply==null && this.userstoragedata.roleid === 3" >
                         <form [formGroup]="replyForm">
                             <div class="input-group input-group-button input-group-primary p-t-10 form-group form-group">
                                 <input class="form-control" placeholder="Write Comment" type="text" formControlName="reply">
@@ -27,12 +42,12 @@
                             </div>
                         </form>
                     </div>
-                    <hr>
+                    <hr> -->
                     <!-- Nested media object -->
                     <div class="media mt-2" *ngIf="review.reply!=null">
                         <div class="media-left">
                             <a>
-                                <div class="profile-image">{{review.consumer?.fullname.substring(0,1).toUpperCase()}}
+                                <div class="profile-image">{{review.reply?.updatedby.substring(0,1).toUpperCase()}}
                                 </div>
                             </a>
                         </div>
