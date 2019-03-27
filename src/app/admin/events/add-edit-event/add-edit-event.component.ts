@@ -37,6 +37,7 @@ export class AddEditEventComponent implements OnInit {
 
   images: any = [];
   existing_image: any = [];
+  limit = AppConstant.MAX_FILE_COUNT;
 
   constructor(private localStorageService: LocalStorageService,
     private bootstrapAlertService: BootstrapAlertService,

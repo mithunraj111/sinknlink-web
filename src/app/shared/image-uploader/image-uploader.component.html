@@ -10,12 +10,14 @@
         <div class="col-sm-12 col-md-8 imagePicked">
             <div *ngFor="let img of extimage;let i = index" [id]="'img'+i" class="extimage">
                 <i (click)="removeDoc(img,i)" class="extimage_dicon fa fa-close"></i>
-                <img class="img-responsive" src="{{img.docurl}}">
+                <img *ngIf="img.doctype == 'image'" class="img-responsive" src="{{img.docurl}}">
+                <video *ngIf="img.doctype == 'video'" src="{{img.docurl}}" width="320" height="240" controls="controls" class="video-responsive"></video>
+                
                 <!-- <button aria-label="Close" class="photo-close-btn"><i class="fa fa-close fa-close"></i></button> -->
             </div>
         </div>
     </div>
     <div class="row">
-        
+
     </div>
 </div>

@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  host: 'http://180.12.181.8',
+  host: 'http://localhost',
   port: 2000,
   baseurl: '/bd/'
  };

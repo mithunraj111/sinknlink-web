@@ -13,15 +13,16 @@ export const AppConstant = Object.freeze({
     PERMISSIONS: 'permissions'
   },
   MAX_FILE_SIZE: 5000000,
+  MAX_FILE_COUNT: [1, 5],
   PERMISSION: ['Create', 'View', 'Edit', 'Delete', 'Download'],
   BUTTON_TXT: {
     SAVE: 'Save',
     UPDATE: 'Update'
   },
-  MESSAGE:{
-    GIGS:'Gigs',
-    COUPON:'Coupon',
-    BRANCHES:'Branch'
+  MESSAGE: {
+    GIGS: 'Gigs',
+    COUPON: 'Coupon',
+    BRANCHES: 'Branch'
   },
   // Form Titles
   FORM_TITLE: {

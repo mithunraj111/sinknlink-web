@@ -12,6 +12,7 @@ export class CustomerGalleryComponent extends BaseService implements OnInit, OnC
   @Input() customerObj = {} as any;
   imagesList = [] as any;
   displayImgList = [] as any;
+  limit = AppConstant.MAX_FILE_COUNT;
   constructor(private documentService: AppCommonService.DocumentService,
     private bootstrapAlertService: BootstrapAlertService) {
     super();

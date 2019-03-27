@@ -1763,3 +1763,9 @@ select-dropdown{
 .cursor-pointer {
     cursor: pointer;
 }
+
+.video-responsive{
+    display: inline-block;
+    max-width: 100%;
+    padding: 10px;
+}

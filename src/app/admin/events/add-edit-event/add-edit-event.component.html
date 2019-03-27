@@ -94,7 +94,7 @@
     <div class="col-md-9 col-sm-9 p-l-0">
         <div class="card">
             <!-- (imageAdded)="imageAdded" -->
-            <app-image-uploader [editMode]="edit" (imageAdded)="imageAdded($event)" [disablePicker]="savingEvent"
+            <app-image-uploader [editMode]="edit" (imageAdded)="imageAdded($event)" [disablePicker]="savingEvent" [limit]="limit"
                 [(extimage)]="existing_image"></app-image-uploader>
         </div>
     </div>

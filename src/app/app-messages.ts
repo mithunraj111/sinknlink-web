@@ -236,7 +236,7 @@ export const AppMessages = Object.freeze({
           minlength: 'Phone number should be atleast 10 digits',
           pattern: 'Please enter a valid phone number'
         },
-        city:{
+        city: {
           required: 'Please select city'
         },
         locationid: {
@@ -382,5 +382,6 @@ export const AppMessages = Object.freeze({
     REPLY: {
       reply: { required: 'Please enter a reply' }
     },
+    FILEUPLOAD: 'You are only allowed to upload a maximum of 5 images and 1 video'
   },
 });
