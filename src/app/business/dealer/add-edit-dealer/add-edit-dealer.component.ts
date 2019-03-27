@@ -73,12 +73,12 @@ export class AddEditDealerComponent implements OnInit {
           item.value = item.refvalue;
         });
         this.cityList = this.cityList.concat(response.data);
+        this.getLocationList();
       }
     });
   }
   selectCity(option) {
     this.cityName = option.value;
-    this.getLocationList();
   }
   saveOrUpdate() {
     if (this.deleartabs.activeId === '1') {
@@ -192,16 +192,13 @@ export class AddEditDealerComponent implements OnInit {
       mobileno: [this.dealerProfileObj.mobileno, Validators.compose([Validators.required,
       Validators.minLength(10), Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')])],
       phoneno: [this.dealerProfileObj.phoneno],
-      city: [this.dealerProfileObj.city, Validators.required],
+      city: [this.dealerProfileObj.location.city, Validators.required],
       locationid: [this.dealerProfileObj.locationid.toString(), Validators.required],
       address: [this.dealerProfileObj.address],
       commissionpercent: [this.dealerProfileObj.commissionpercent, Validators.required],
       status: [this.dealerProfileObj.status === AppConstant.STATUS_ACTIVE ? true : false, Validators.required]
     });
-    if (this.dealerProfileObj.location != null) {
-      this.dealerProfileObj.city = this.dealerProfileObj.location.city;
-    }
-    }
+  }
   getDealerDetails(id) {
     this.dealerid = id;
     this.dealerService.byId(id).subscribe((res) => {

@@ -73,7 +73,7 @@
                                             <ngx-datatable #vipnoregtable class="table data-table expandable" [rows]='blockedList' [columnMode]="'flex'" [headerHeight]="50" [footerHeight]="50" [limit]="10" [rowHeight]="'auto'" [reorderable]="false" [messages]="messages">
                                                 <ngx-datatable-column prop="fancyno" name="VIP Number" [resizeable]="false">
                                                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                                                        <a *ngIf="row.membershipid >= 1" (click)="goToEdit(row?.membershipid)"><span class="cursor-pointer"> {{row?.fancyno}}</span></a>
+                                                        <a *ngIf="row.membershipid >= 1" style="text-decoration:underline" (click)="goToEdit(row?.membershipid)"><span class="cursor-pointer"> {{row?.fancyno}}</span></a>
                                                         <span class="cursor-pointer" *ngIf="row.membershipid < 1">{{row.fancyno}}</span>
                                                     </ng-template>
                                                 </ngx-datatable-column>

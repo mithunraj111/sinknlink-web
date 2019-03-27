@@ -5,7 +5,7 @@
             <button type="button" class="btn search-close col-md-1 col-sm-1 p-l-0 p-r-0" (click)="customerSearch.value='';search();"><i class="fa fa-close"></i></button>
         </div>
         <div class="col-md-4 col-sm-6">
-            Last Commission paid : {{dealerObj.lastcommissionpaiddt |date:datedisplayformat}}
+            Last Commission paid : {{dealerObj.lastcommissionpaiddt? (dealerObj.lastcommissionpaiddt|date:datedisplayformat) : '-'}}
         </div>
     </div>
 </div>
