@@ -406,20 +406,21 @@ export class AddEditCustomerComponent implements OnInit {
   }
   onCustomerTabChange(event) {
     this.customerObj = this.customerObj;
-    if (event.nextId === '6') {
-      this.tooltipmessage = AppConstant.MESSAGE.COUPON;
-      return false;
-    }
-    if (event.nextId === '3') {
-      this.tooltipmessage = AppConstant.MESSAGE.BRANCHES;
-      return false;
-    }
-    if (event.nextId === '5') {
-      this.tooltipmessage = AppConstant.MESSAGE.GIGS;
-      return false;
-    }
+    
     if (event.nextId === '6' || event.nextId === '5' || event.nextId === '3') {
       this.showbutton = false;
+      if (event.nextId === '6') {
+        this.tooltipmessage = AppConstant.MESSAGE.COUPON;
+        return false;
+      }
+      if (event.nextId === '3') {
+        this.tooltipmessage = AppConstant.MESSAGE.BRANCHES;
+        return false;
+      }
+      if (event.nextId === '5') {
+        this.tooltipmessage = AppConstant.MESSAGE.GIGS;
+        return false;
+      }
      } else {
       this.showbutton = true;
     }
