@@ -43,7 +43,6 @@ export class ImageUploaderComponent implements OnInit, OnChanges {
 
     selectedImg(one, files) {
 
-
         var a = this;
         let videocount = 0;
         let imagecount = 0;
@@ -185,6 +184,7 @@ export class ImageUploaderComponent implements OnInit, OnChanges {
                 let parentNode = document.getElementById("img" + id);
                 while (parentNode.firstChild) parentNode.removeChild(parentNode.firstChild);
                 this.bootstrapAlertService.showSucccess(response.message);
+                _.remove(this.extimage, function (item: any) { if (item.docid == doc.docid) { return item; } });
             } else {
                 this.bootstrapAlertService.showError(response.message);
             }

@@ -37,6 +37,8 @@ export class AddEditGigComponent implements OnInit, OnChanges {
             salary: [''],
             contactperson: [null, Validators.compose([Validators.required, Validators.maxLength(50)])],
             contactmobile: ['', Validators.compose([Validators.required, Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')])],
+            starttime: [''],
+            endtime: [''],
             description: ['', Validators.maxLength(500)],
             status: [AppConstant.STATUS_ACTIVE, Validators.required]
         });
@@ -56,6 +58,8 @@ export class AddEditGigComponent implements OnInit, OnChanges {
     }
     editGig(data) {
         this.gigObj = data;
+        this.gigObj.starttime = this.gigObj.workhours.starttime;
+        this.gigObj.endtime = this.gigObj.workhours.endtime;
         this.gigForm.patchValue(this.gigObj);
     }
     close() {
@@ -78,11 +82,15 @@ export class AddEditGigComponent implements OnInit, OnChanges {
                 const data = this.gigForm.value;
                 const formdata = { ...data } as any;
                 formdata.membershipid = this.customerObj.membershipid;
+                formdata.workhours = {
+                    starttime: data.starttime,
+                    endtime: data.endtime
+                };
                 formdata.updatedby = this.userstoragedata.fullname;
                 formdata.updateddt = new Date();
                 if (!_.isUndefined(this.gigObj) && !_.isUndefined(this.gigObj.gigid) && !_.isEmpty(this.gigObj)) {
                     formdata.status = data.status;
-                    this.gigsService.update(data, this.gigObj.gigid).subscribe(res => {
+                    this.gigsService.update(formdata, this.gigObj.gigid).subscribe(res => {
                         const response = JSON.parse(res._body);
                         if (response.status) {
                             this.bootstrapAlertService.showSucccess(response.message);

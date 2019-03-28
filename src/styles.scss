@@ -1707,7 +1707,11 @@ select-dropdown{
 
 .gigs-modal{
     .md-effect-7{
-        top: 40px;
+        top: 60px;
+        .gig-modal-height{
+            height: 70vh;
+            overflow-y: scroll;
+        }
     }
     // .saveupdate{
     //     position: fixed;
