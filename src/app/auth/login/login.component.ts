@@ -69,14 +69,17 @@ export class LoginComponent implements OnInit {
           permissions = _.compact(permissions);
           this.localStorageService.addItem(AppConstant.LOCALSTORAGE.PERMISSIONS, permissions);
           this.permissionsService.loadPermissions(permissions);
-          this.router.navigate(['dashboard']);
           if (response.data.roleid === 2) {
+            this.signingin = true;
             this.dealerService.list({ userid: response.data.userid }).subscribe(resp => {
               const result = JSON.parse(resp._body);
               if (result.status) {
                 this.localStorageService.addItem(AppConstant.LOCALSTORAGE.DEALER, result.data[0]);
+                this.router.navigate(['dashboard']);
               }
             });
+          } else {
+            this.router.navigate(['dashboard']);
           }
         } else {
           this.signingin = false;
