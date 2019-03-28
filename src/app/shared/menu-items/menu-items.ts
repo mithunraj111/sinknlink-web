@@ -66,7 +66,7 @@ export class MenuItems {
         children: [
           {
             state: 'users',
-            name: 'Users',
+            name: 'System users',
             code: 'm_users',
             data: {
               title: 'Users'

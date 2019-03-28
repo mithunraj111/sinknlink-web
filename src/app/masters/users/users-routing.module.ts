@@ -11,7 +11,7 @@ const routes: Routes = [
     component: UsersComponent,
     canActivate: [AuthGuard, NgxPermissionsGuard],
     data: {
-      title: 'Users',
+      title: 'System users',
       status: false,
       permissions: {
         only: ['Users'],

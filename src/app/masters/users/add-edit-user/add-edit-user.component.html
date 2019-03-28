@@ -1,4 +1,4 @@
-<div class="modal-size addlocation employee-form gigs-modal">
+<div class="modal-size addlocation employee-form">
     <app-modal-animation [modalID]="'usermodal'" [modalClass]="'md-effect-7'">
         <h3 class="f-26">{{formTitle}}</h3>
         <form [formGroup]="userForm">
@@ -10,7 +10,7 @@
                     </div>
                     <div class="form-group required">
                         <label>Mobile No</label>
-                        <input type="text" class="form-control" formControlName="mobileno" placeholder="Mobile No"
+                        <input type="number" class="form-control" formControlName="mobileno" placeholder="Mobile No"
                             [readonly]="userObj?.userid">
                     </div>
                     <div class="form-group required">
