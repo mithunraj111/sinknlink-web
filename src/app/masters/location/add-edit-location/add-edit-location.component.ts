@@ -101,10 +101,12 @@ export class AddEditLocationComponent implements OnInit, OnChanges {
   }
   callParent(data) {
     // setTimeout(() => {
-      this.notifyLocationEntry.emit(data);
+    this.notifyLocationEntry.emit(data);
     // }, 5000);
   }
-  saveOrUpdateLocation() {
+  saveOrUpdateLocation(locationdata) {
+    locationdata.area = _.trim(locationdata.area);
+    this.locationForm.controls['area'].setValue(locationdata.area);
     if (!this.locationForm.valid) {
       this.errMessage = this.commonService.getFormErrorMessage(this.locationForm, this.locationErrObj);
       this.bootstrapAlertService.showError(this.errMessage);

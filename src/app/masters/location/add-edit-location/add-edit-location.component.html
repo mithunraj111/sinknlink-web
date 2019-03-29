@@ -42,7 +42,7 @@
                         </div>
                     </div>
                 </div>
-                <button type="button" placement="top" (click)="saveOrUpdateLocation()" ngbTooltip="Click to save location" class="btn pull-right btn-primary waves-effect 
+                <button type="button" placement="top" (click)="saveOrUpdateLocation(locationForm.value)" ngbTooltip="Click to save location" class="btn pull-right btn-primary waves-effect 
                     m-b-10 m-r-15" [disabled]="validatingLocation">{{validatingLocation == true ? 'Saving' : 'Save'}}</button>
             </div>
         </form>
