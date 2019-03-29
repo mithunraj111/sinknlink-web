@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
   errMessage;
   signingin;
   authenticated = {} as any;
+  obscureText = true;
 
 
   constructor(private commonService: CommonService,
@@ -34,7 +35,8 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.isLoggedIn()
+    this.obscureText = true;
+    this.isLoggedIn();
   }
   isLoggedIn() {
     this.authenticated = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.ISAUTHENTICATED);

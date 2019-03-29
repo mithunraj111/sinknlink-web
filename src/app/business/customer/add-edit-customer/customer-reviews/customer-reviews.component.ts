@@ -55,6 +55,7 @@ export class CustomerReviewsComponent implements OnInit{
     }
     replyid;
     toReply (id) {
+        this.replyComment = '';
         this.openModal('replyModal');
         this.replyid = id;
     }
@@ -66,8 +67,10 @@ export class CustomerReviewsComponent implements OnInit{
         this.loadingIndicator = true;
         const data = {} as any;
         data.comments = this.replyComment;
-        if (this.reply == null) {
+        if (this.replyComment === null || this.replyComment === undefined || this.replyComment === '') {
             this.bootstrapAlertService.showError(this.errObj.reply.required);
+            this.loadingIndicator = false;
+            return;
         }
         data.membershipid = this.customerObj.membershipid;
         data.updatedby = this.userstoragedata.fullname;

@@ -23,12 +23,14 @@
                     </div>
                     <div class="form-group  required">
                         <label>Password</label>
-                        <div class="row">
-                            <div class="col-md-9 col-sm-6 p-r-0 ">
-                                <input type="password" style="width:100% !important" class="form-control" value={{pwd}}
+                        <div class="row plus-button">
+                            <div class="col-md-8 col-sm-6 p-r-0">
+                                <input [type]="obscureText == true ? 'password' : 'text'" style="width:100% !important" class="form-control" value={{pwd}}
                                     formControlName="password" placeholder="Password">
-                                <span *ngIf='generatepwd'> Password : {{pwd}} </span>
                             </div>
+                            <button class="col-md-1 btn pt-2 obscure-eye" (click) = "obscureText = !obscureText">
+                                <i [ngClass]="obscureText == true ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
+                            </button>
                             <div class="col-md-3 col-sm-6 p-l-5">
                                 <button type="button" placement="top" ngbTooltip="Click to Generate"
                                     (click)="generatepassword()"

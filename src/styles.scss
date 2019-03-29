@@ -1767,6 +1767,9 @@ select-dropdown{
 .cursor-pointer {
     cursor: pointer;
 }
+.cursor-text {
+    cursor: text;
+}
 
 .video-responsive{
     display: inline-block;
@@ -1777,4 +1780,11 @@ input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button{ 
   -webkit-appearance: none; 
   margin: 0; 
+}
+.obscure-eye {
+    &:focus {
+        box-shadow: none !important;
+    }
+    border: 1px solid #cdcdcd;
+    border-left: none;
 }

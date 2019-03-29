@@ -32,6 +32,8 @@ export class AddEditUserComponent implements OnInit {
   @Input() userObj = {} as any;
   @Output() notifyUserEntry: EventEmitter<any> = new EventEmitter();
   formTitle = AppConstant.FORM_TITLE.USER.ADD;
+  obscureText = true;
+
   constructor(private route: ActivatedRoute,
     private router: Router,
     private bootstrapAlertService: BootstrapAlertService,

@@ -6,9 +6,7 @@
                     <div class="profile-image">{{review.consumer?.fullname.substring(0,1).toUpperCase()}}</div>
                 </a>
                 <div class="media-body">
-                    <a>
-                        <h6 class=" media-heading ">{{review.consumer?.fullname}}<span class="f-12 text-muted m-l-5">{{review.updateddt | date:datedisplayformat}}</span></h6>
-                    </a>
+                    <h6 class="media-heading mb-0 cursor-text">{{review.consumer?.fullname}}<span class="f-12 text-muted m-l-5">{{review.updateddt | date:datedisplayformat}}</span></h6>
                     <div class="stars-example-css review-star">
                         <bar-rating class="star-rating" [(rate)]="review.rating" [max]="5" [readOnly]="true">
                         </bar-rating>
@@ -17,7 +15,7 @@
                     <p class="m-b-0">{{review.comments}}</p>
                     <!-- <div class="m-b-25" *ngIf = "review.reply == null"> -->
                     <div *ngIf="review.reply==null && this.userstoragedata.roleid === 3" class="m-b-25">
-                        <span> <a (click)="toReply(review.reviewid)" class="m-r-10 f-12">Reply</a> </span>
+                        <a (click)="toReply(review.reviewid)" class="m-r-10 f-12 cursor-pointer">Reply</a>
                     </div>
                     <div class="modal-size">
                         <app-modal-animation [modalID]="'replyModal'" [modalClass]="'md-effect-7'">
