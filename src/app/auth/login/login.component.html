@@ -35,7 +35,7 @@
                                 <div class="input-group">
                                     <input [type]="obscureText == true ? 'password' : 'text'" class="form-control" name="password"
                                         formControlName="password" placeholder="Password">
-                                        <button class="btn p-0 pl-3 pr-2 obscure-eye" (click) = "obscureText = !obscureText">
+                                        <button type="button" class="btn p-0 pl-3 pr-2 obscure-eye" (click) = "obscureText = !obscureText">
                                             <i [ngClass]="obscureText == true ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
                                         </button>
                                     <span class="md-line"></span>

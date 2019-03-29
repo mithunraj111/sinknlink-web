@@ -35,7 +35,6 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.obscureText = true;
     this.isLoggedIn();
   }
   isLoggedIn() {
