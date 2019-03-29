@@ -38,7 +38,6 @@ export class AddEditCouponComponent implements OnInit, OnChanges {
             const response = JSON.parse(res._body);
             if (response.status) {
                 this.settingList = response.data;
-                console.log(this.settingList);
                 if (this.settingList[0].settingvalue === 'Y') {
                     this.randomcouponcode = Math.round(Math.random() * 1000000);
                     this.couponForm.controls['couponcode'].setValue(this.randomcouponcode);
