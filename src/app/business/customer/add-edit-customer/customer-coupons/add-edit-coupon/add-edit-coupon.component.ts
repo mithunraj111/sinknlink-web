@@ -89,7 +89,9 @@ export class AddEditCouponComponent implements OnInit, OnChanges {
                 formdata.couponcode = data.couponcode.toString();
                 formdata.membershipid = this.customerObj.membershipid;
                 formdata.noofcoupons = Number(data.noofcoupons);
-                if (new Date(this.commonService.formatDate(data.expirydt)) <= this.commonService.getCurrentDate()) {
+                data.expirydt = new Date(this.commonService.formatDate(data.expirydt));
+                data.expirydt = data.expirydt.setHours( 23, 59, 59 );
+                if (new Date(data.expirydt) < this.commonService.getCurrentDate()) {                    
                     this.bootstrapAlertService.showError(this.couponErrObj.expirydt.invalid);
                     return false;
                 }

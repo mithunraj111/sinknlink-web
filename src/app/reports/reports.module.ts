@@ -6,12 +6,13 @@ import { UiSwitchModule } from 'ng2-ui-switch';
 import { SelectModule } from 'ng-select';
 
 import { ReportsRoutingModule } from './reports-routing.module';
-import { AreaCategoriesComponent } from './area-categories/area-categories.component';
+import { CategoriesComponent } from './categories/categories.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PaymentComponent } from './payment/payment.component';
 import { DealerComponent } from './dealer/dealer.component';
 import { ConsumerComponent } from './consumer/consumer.component';
 import { CustomerdetailComponent } from './customerdetail/customerdetail.component';
+import { AreaComponent } from './area/area.component';
 
 @NgModule({
   imports: [
@@ -24,6 +25,6 @@ import { CustomerdetailComponent } from './customerdetail/customerdetail.compone
     FormsModule,
     ReactiveFormsModule
   ],
-  declarations: [AreaCategoriesComponent, PaymentComponent, DealerComponent, ConsumerComponent, CustomerdetailComponent]
+  declarations: [CategoriesComponent, PaymentComponent, DealerComponent, ConsumerComponent, CustomerdetailComponent, AreaComponent]
 })
 export class ReportsModule { }

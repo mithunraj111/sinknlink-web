@@ -1,0 +1,99 @@
+<form [formGroup]="areaForm">
+  <div class="fixedheader payment-report">
+    <div class="report-title pos-fixed">
+      <div class="row">
+        <div class="col-md-12 col-sm-12 m-t-25">
+        </div>
+        <div class="col-lg-12 col-md-12 p-r-0 p-l-0">
+          <div class="card">
+            <div class="row">
+              <div class="col-md-4 col-sm-4 p-r-5">
+                <div class="form-group">
+                  <label>From Date</label>
+                  <div class="input-group">
+                    <input class="form-control" placeholder="dd-mm-yyyy" name="dp" ngbDatepicker #dp="ngbDatepicker"
+                      formControlName="fromdate">
+                    <div class="input-group-append" (click)="dp.toggle()">
+                      <span class="fa fa-calendar input-group-text"></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 col-sm-4 p-l-0 p-r-5">
+                <div class="form-group">
+                  <label>To Date</label>
+                  <div class="input-group">
+                    <input class="form-control" placeholder="dd-mm-yyyy" name="dp" ngbDatepicker #d="ngbDatepicker"
+                      formControlName="todate">
+                    <div class="input-group-append" (click)="d.toggle()">
+                      <span class="fa fa-calendar input-group-text"></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 col-sm-4 m-t-35">
+                <div class="p-r-10">
+                  <button *ngIf="download" type="button" placement="bottom" ngbTooltip="Click to search"
+                    class="btn btn-primary generate-button waves-effect  download-btn" (click)="getArea()"> <i
+                      class="fa fa-search"></i> </button>
+                  <button type="button" placement="bottom" ngbTooltip="Reload" (click)="getArea()"
+                    class="btn btn-inverse btn-primary generate-button waves-effect m-l-10"><i
+                      class="ti-reload"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+<div class="col-lg-12 col-md-12 col-sm-12 reports p-l-0 p-r-0 ">
+  <div class="header-block">
+    <div *ngIf="!loadingIndicator==true">
+      <div class="table-header report-table">
+        <div class="card p-r-15 p-l-15">
+          <div class="row">
+            <div class="col-sm-12 header-title">
+              <label class="dt-cust-search">
+                <div class="row p-l-15">
+                  <input #areaSearch type="text" class="form-control input-sm report-search" placeholder='Search here'
+                    (keyup)='search($event)' />
+                  <button type="button" class="btn search-close" (click)="areaSearch.value='';search();"><i
+                      class="fa fa-close"></i></button>
+                </div>
+              </label>
+              <label class="dt-cust-search f-right">
+                <button *ngIf="download" type="button" placement="bottom" ngbTooltip="Click to download reports"
+                  class="btn btn-primary waves-effect download-btn" (click)="getAreaList(true)"
+                  [disabled]="areaList.length == 0 || generatingFile == true"><i
+                    class="fa fa-download m-r-5"></i></button>
+              </label>
+            </div>
+          </div>
+          <ngx-datatable #areatable class="table data-table expandable m-t-50" [rows]='areaList' [columnMode]="'flex'"
+            [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false" [footerHeight]="50" [limit]="5"
+            [messages]="emptymesages">
+            <ngx-datatable-column prop="area" name="Area" [resizeable]="false">
+              <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                <span>{{row.area}}</span>
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column prop="pincode" name="Pincode" [resizeable]="false">
+              <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                <span>{{row.pincode}}</span>
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column prop="count" name=" Count" [resizeable]="false" headerClass="text-right"
+              [cellClass]="'text-right table-padding'">
+              <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                <span>{{row.count}}</span>
+              </ng-template>
+            </ngx-datatable-column>
+          </ngx-datatable>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-loader [loadingIndicator]="loadingIndicator"></app-loader>

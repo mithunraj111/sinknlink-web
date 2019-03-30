@@ -191,11 +191,19 @@ export class MenuItems {
         code: 'reports',
         children: [
           {
-            state: 'areacategories',
-            name: 'Area & Categories',
-            code: 'r_areacategories',
+            state: 'area',
+            name: 'Area Wise Report',
+            code: 'r_area',
             data: {
-              title: 'Area & Categories'
+              title: 'Area'
+            }
+          },
+          {
+            state: 'categories',
+            name: 'Category Wise Report',
+            code: 'r_categories',
+            data: {
+              title: 'Categories'
             }
           },
           {

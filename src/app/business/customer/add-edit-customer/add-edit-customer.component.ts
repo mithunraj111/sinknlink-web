@@ -14,6 +14,7 @@ import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
 import { AppMessages } from 'src/app/app-messages';
 import { CustomerGalleryComponent } from './customer-gallery/customer-gallery.component';
 import { CustomerBranchesComponent } from './customer-branches/customer-branches.component';
+import { FancyNumberService } from 'src/app/services/admin';
 
 @Component({
   selector: 'app-add-edit-customer',
@@ -34,6 +35,7 @@ export class AddEditCustomerComponent implements OnInit {
   tooltipmessage;
   workDays = AppConstant.WORKDAYS;
   showbutton = true;
+  ownedNos = [];
   loadingIndicator = true;
   @ViewChild(CustomerCouponsComponent) couponComponent: CustomerCouponsComponent;
   @ViewChild(CustomerGigsComponent) gigComponent: CustomerGigsComponent;
@@ -71,8 +73,8 @@ export class AddEditCustomerComponent implements OnInit {
     private bootstrapAlertService: BootstrapAlertService,
     private locationService: MasterService.LocationService,
     private route: ActivatedRoute,
-    private mapService: MapService
-
+    private mapService: MapService,
+    private fancynumberService: FancyNumberService
   ) {
     this.userstoragedata = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER);
     this.route.params.subscribe(params => {
@@ -580,6 +582,7 @@ export class AddEditCustomerComponent implements OnInit {
     });
     this.closeModal('mapmodal');
   }
+// map ends
 
   onMembershipChange(event) {
     if (event.refvalue === AppConstant.MEM_TYPE) {
@@ -596,5 +599,41 @@ export class AddEditCustomerComponent implements OnInit {
       this.customerForm.get('paymenttenure').updateValueAndValidity();
     }
   }
+  editfancyno() {
+    this.openModal('fancynomodal');
+    this.getOwnedFancyNos(this.customerObj.membershipid);
+  }
+  getOwnedFancyNos(id) {
+    this.fancynumberService.getList({
+      membershipid: parseInt(id)
+    }).subscribe(res => {
+      const response = JSON.parse(res._body);
+      if (response.status) {
+        this.ownedNos = _.map(response.data, (o) => {
+          return {
+            label: o.fancyno,
+            value: o.fancyid
+          }
+        });
+      } else {
+        this.bootstrapAlertService.showError(response.message);
+      }
+    });
+  }
+  allocateFancyNos(param?, mid?) {
+    let data = {
+      membershipid: mid,
+      membershipcode: param.label,
+      updatedby: this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER).fullname,
+      fancyid: param.value
+    };
+    this.fancynumberService.updateallocation(data).subscribe(res => {
+      const response = JSON.parse(res._body);
+      if (response.status) {
+        this.bootstrapAlertService.showSucccess(response.message);
+      } else {
+        this.bootstrapAlertService.showError(response.message);
+      }
+    });
+  }
 }
-// map ends

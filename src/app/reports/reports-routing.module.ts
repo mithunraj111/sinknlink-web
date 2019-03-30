@@ -1,26 +1,40 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AreaCategoriesComponent } from './area-categories/area-categories.component';
+import { CategoriesComponent } from './categories/categories.component';
 import { PaymentComponent } from './payment/payment.component';
 import { DealerComponent } from './dealer/dealer.component';
 import { ConsumerComponent } from './consumer/consumer.component';
 import { CustomerdetailComponent } from './customerdetail/customerdetail.component';
 import { NgxPermissionsGuard } from 'ngx-permissions';
 import { AuthGuard } from '../services/auth.guard';
+import { AreaComponent } from './area/area.component';
 
 const routes: Routes = [
   {
     path: '',
     children: [
       {
-        path: 'areacategories',
-        component: AreaCategoriesComponent,
+        path: 'area',
+        component: AreaComponent,
         canActivate: [AuthGuard, NgxPermissionsGuard],
         data: {
-          title: 'Area & Category Report',
+          title: 'Area Report',
           status: false,
           permissions: {
-            only: ['Area & Category Report'],
+            only: ['Area Report'],
+            redirectTo: '/accessdenied'
+          }
+        },
+      },
+      {
+        path: 'categories',
+        component: CategoriesComponent,
+        canActivate: [AuthGuard, NgxPermissionsGuard],
+        data: {
+          title: 'Category Report',
+          status: false,
+          permissions: {
+            only: ['Category Report'],
             redirectTo: '/accessdenied'
           }
         },

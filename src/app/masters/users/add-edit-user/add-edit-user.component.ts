@@ -102,7 +102,7 @@ export class AddEditUserComponent implements OnInit {
       let data = {} as any;
       data.fullname = dataValue.fullname;
       data.usertype = 'U';
-      data.mobileno = dataValue.mobileno;
+      data.mobileno = dataValue.mobileno.toString();
       data.roleid = Number(dataValue.rolename);
       data.password = dataValue.password;
       data.updatedby = this.userstoragedata.fullname;

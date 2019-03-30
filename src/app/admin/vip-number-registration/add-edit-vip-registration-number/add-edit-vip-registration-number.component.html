@@ -60,7 +60,7 @@
             <div class="card tenants-page tenants-pages m-b-10 m-t-30">
                 <div class="form-group row">
                     <label class="col-md-3 col-sm-6 col-form-label text-right">{{business.bizname}}; Membershipid:
-                        {{ business.membershipid }}; Fancy Code: {{ business?.membershipcode }}</label>
+                        {{ business.membershipid }}<br> Fancy Code: {{ business?.membershipcode }}</label>
                     <div class="col-md-9 col-sm-6">
                         <ng-select [ngClass]="'ng-select'" [(ngModel)]="allocated[business.membershipid]" (selected)="allocateFancyNos($event,business.membershipid)" placeholder="Select Fancy Number" [options]="ownedNos"></ng-select>
                     </div>

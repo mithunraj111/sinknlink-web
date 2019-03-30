@@ -12,23 +12,19 @@ import downloadService from '../../services/download.service';
 import { Buffer } from 'buffer';
 
 @Component({
-  selector: 'app-area-categories',
-  templateUrl: './area-categories.component.html',
+  selector: 'app-categories',
+  templateUrl: './categories.component.html',
   providers: [
     { provide: NgbDateParserFormatter, useClass: NgbDateCustomParserFormatter }
   ],
 })
-export class AreaCategoriesComponent extends BaseService implements OnInit {
-  @ViewChild(DatatableComponent) areaTable: DatatableComponent;
+export class CategoriesComponent extends BaseService implements OnInit {
   @ViewChild(DatatableComponent) categoriestable: DatatableComponent;
-  areaCategoriesForm: FormGroup;
+  categoriesForm: FormGroup;
   areaCategoriesObj = AppMessages.VALIDATION.AREACATEGORIES;
-  areatempFilter = [];
-  areaList = [];
   categoriesList = [];
   categorytempFilter = [];
   generatingFile = false;
-  emptymesages = AppConstant.EMPTY_MESSAGES.AREA;
   nodata = AppConstant.EMPTY_MESSAGES.CATEGORY;
   loadingIndicator = false;
   formData = {} as any;
@@ -36,33 +32,32 @@ export class AreaCategoriesComponent extends BaseService implements OnInit {
     private commonService: CommonService, private fb: FormBuilder,
     private reportService: AppCommonService.ReportService) {
     super();
-    this.getScreenDetails('r_areacategories');
+    this.getScreenDetails('r_categories');
   }
 
   ngOnInit() {
     this.initForm();
   }
   initForm() {
-    this.areaCategoriesForm = this.fb.group({
+    this.categoriesForm = this.fb.group({
       fromdate: [this.commonService.parseDate(new Date())],
       todate: [this.commonService.parseDate(new Date())]
     });
   }
   getAreaCategories() {
-    const data = this.areaCategoriesForm.value;
+    const data = this.categoriesForm.value;
     const todt = this.commonService.formatDate(data.todate);
     const fromdt = this.commonService.formatDate(data.fromdate);
     if (new Date(todt) < new Date(fromdt)) {
       this.bootstrapAlertService.showError(AppMessages.VALIDATION.AREACATEGORIES.fromdate.max);
       return false;
     }
-    this.getAreaList();
     this.getCategoryList();
 
   }
 
   genFormData() {
-    const data = this.areaCategoriesForm.value;
+    const data = this.categoriesForm.value;
     const todt = this.commonService.formatDate(data.todate);
     const fromdt = this.commonService.formatDate(data.fromdate);
     if (new Date(todt) < new Date(fromdt)) {
@@ -106,35 +101,6 @@ export class AreaCategoriesComponent extends BaseService implements OnInit {
         this.categorytempFilter = this.categoriesList;
       }
     });
-  }
-  getAreaList(download?) {
-    let service;
-    if (download) {
-      this.generatingFile = true;
-      service = this.reportService.getAreaWiseCount(this.genFormData(), true);
-    } else {
-      service = this.reportService.getAreaWiseCount(this.genFormData());
-    }
-    service.subscribe(res => {
-      if (download) {
-        var buffer = Buffer.from(JSON.parse(res._body).file.data);
-        downloadService(buffer, `AreaReport-${new DatePipe("en-US").transform(new Date(), "dd-MM-yyyy").toString()}.xlsx`);
-        this.generatingFile = false;
-      } else {
-        this.loadingIndicator = true;
-        const response = JSON.parse(res._body);
-        if (response.status) {
-          this.loadingIndicator = false;
-          this.areaList = response.data;
-        }
-        this.loadingIndicator = false;
-        this.areatempFilter = this.areaList;
-      }
-    });
-  }
-  search(event?) {
-    this.areaList = this.commonService.globalSearch(this.areatempFilter, event);
-    this.areaTable.offset = 0;
   }
   searchCategory(event?) {
     this.categoriesList = this.commonService.globalSearch(this.categorytempFilter, event);
