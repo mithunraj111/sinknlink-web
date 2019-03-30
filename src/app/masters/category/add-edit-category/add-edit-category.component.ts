@@ -53,12 +53,16 @@ export class AddEditCategoryComponent implements OnInit, OnChanges {
     // }, 5000);
   }
   onFile(event) {
-    const reader = new FileReader();
-    this.categoryimgfile = event.target.files[0];
-    reader.onload = ((e) => {
-      this.categoryfile = this.sanitizer.bypassSecurityTrustResourceUrl(e.target['result']);
-    });
-    reader.readAsDataURL(event.target.files[0]);
+    var file = event.target.files[0];
+    if (file.type == 'image/svg+xml') {
+      const reader = new FileReader();
+      this.categoryimgfile = event.target.files[0];
+      reader.onload = ((e) => {
+        this.categoryfile = this.sanitizer.bypassSecurityTrustResourceUrl(e.target['result']);
+      });
+      reader.readAsDataURL(event.target.files[0]);
+
+    }
   }
   initForm() {
     this.categoryForm = this.fb.group({
@@ -141,6 +145,7 @@ export class AddEditCategoryComponent implements OnInit, OnChanges {
             this.bootstrapAlertService.showError(response.message);
           }
         }, err => {
+          this.savecategory = false;
         });
       }
     }

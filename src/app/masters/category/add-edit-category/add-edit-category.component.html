@@ -14,7 +14,7 @@
                         <div class="form-group">
                             <label>Business Category Image</label>
                             <input #categoryimage type="file" class="form-control" name="categoryimg"
-                                (change)="onFile($event)">
+                            accept='image/svg+xml'(change)="onFile($event)">
                         </div>
                         <img *ngIf="categoryfile!=undefined && categoryfile!=null" [src]="categoryfile" alt="">
                         <div class="form-group" *ngIf="categoryObj?.categoryid">
