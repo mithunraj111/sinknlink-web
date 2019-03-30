@@ -32,16 +32,18 @@
                 <div class="form-group row">
                   <label class="col-md-3 col-sm-6 col-form-label text-right">Mobile No</label>
                   <div class="col-md-7 col-sm-6 p-r-0 p-t-10">
-                    <span>{{userObj?.mobileno}}</span>
+                    <!-- <span>{{userObj?.mobileno}}</span> -->
+                    <input type="text" class="form-control" name="mobileno" formControlName="mobileno"  [readOnly]="this.userstoragedata.usertype == 'D'"
+                    placeholder="Mobile Number">
                   </div>
                 </div>
 
-                <div class="form-group row role-dropdown">
+                <!-- <div class="form-group row role-dropdown">
                   <label class="col-md-3 col-sm-6 col-form-label text-right">Role</label>
                   <div class="col-md-7 col-sm-6 p-r-0 p-t-10">
                     <span>{{userObj.role?.rolename}}</span>
                   </div>
-                </div>
+                </div> -->
                 <!-- <div class="form-group row">
                   <label class="col-md-3 col-sm-6 col-form-label text-right">Last Login</label>
                   <div class="col-md-7 col-sm-6 m-t-5">

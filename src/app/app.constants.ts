@@ -79,6 +79,7 @@ export const AppConstant = Object.freeze({
     { label: 'Business Type', value: 'biz_businesstype' },
     { label: 'Business City', value: 'biz_businesscity' },
     { label: 'Payment Tenure', value: 'biz_paymenttenure' },
+    { label: 'Change Number Request', value: 'user_setting' }
   ],
   PAYMENT_STATUS: [
     { label: 'Paid', value: 'Paid' },

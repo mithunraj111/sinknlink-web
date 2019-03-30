@@ -113,6 +113,7 @@ export class ProfileComponent implements OnInit {
   userProfileForm() {
     this.profileForm = this.fb.group({
       fullname: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50), Validators.pattern('^[a-zA-Z ]*$')])],
+      mobileno: [null, Validators.required],
       emailid: ['', Validators.compose([Validators.pattern('([a-z0-9&_\.-]*[@][a-z0-9]+((\.[a-z]{2,3})?\.[a-z]{2,3}))'), Validators.maxLength(100)])],
       address: [null, Validators.compose([Validators.minLength(1), Validators.maxLength(100)])],
       locationid: [null, Validators.compose([])],
@@ -170,7 +171,8 @@ export class ProfileComponent implements OnInit {
       this.bootstrapAlertService.showError(this.errMessage);
       return false;
     } else {
-      const data = { ...this.profileForm.value } as any;
+      let data = { ...this.profileForm.value } as any;
+      data = _.omit(data, 'mobileno');
       data.updatedby = this.userstoragedata.fullname;
       data.updateddt = new Date();
       data.locationid = Number(this.profileForm.value.locationid);
@@ -180,6 +182,10 @@ export class ProfileComponent implements OnInit {
         googleid: data.googleid,
         instagramid: data.instagramid,
       };
+      if (this.userObj.mobileno != this.profileForm.value.mobileno) {
+        data.frommobileno = this.userObj.mobileno;
+        data.tomobileno = this.profileForm.value.mobileno;
+      }
       const formData = new FormData();
       if (this.userObj.profileimg != null && this.userObj.profileimg.docid) {
         data.docid = this.userObj.profileimg.docid;
@@ -199,6 +205,7 @@ export class ProfileComponent implements OnInit {
         if (response.status) {
           this.bootstrapAlertService.showSucccess(response.message);
           this.mainComponent.userstoragedata.fullname = response.data.fullname;
+          this.mainComponent.userstoragedata.mobileno = response.data.mobileno;
           this.updateuser();
         } else {
           this.bootstrapAlertService.showError(response.message);
