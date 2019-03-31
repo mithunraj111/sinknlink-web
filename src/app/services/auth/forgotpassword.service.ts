@@ -10,6 +10,7 @@ export class ForgotPasswordService {
         this.endpoint = AppConstant.API_END_POINT;
     }
     sendPassword(data): Observable<any> {
+        data.auth = 'Authentication';
         return this.httpHandler.POST(this.endpoint + AppConstant.API_CONFIG.API_URL.AUTH.FORGOTPWD, data);
     }
 }

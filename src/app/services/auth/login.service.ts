@@ -10,6 +10,7 @@ export class LoginService {
         this.endpoint = AppConstant.API_END_POINT;
     }
     login(data): Observable<any> {
+        data.auth = 'Authentication';
         return this.httpHandler.POST(this.endpoint + AppConstant.API_CONFIG.API_URL.AUTH.LOGIN, data);
     }
 }
