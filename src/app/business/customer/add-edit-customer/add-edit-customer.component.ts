@@ -483,7 +483,6 @@ export class AddEditCustomerComponent implements OnInit {
         resolve(true);
       }).catch(error => {
         reject(false);
-        console.log(error);
       });
     });
   }
@@ -550,7 +549,6 @@ export class AddEditCustomerComponent implements OnInit {
       var bounds = new gmap.LatLngBounds();
       places.forEach(function (place) {
         if (!place.geometry) {
-          console.log('Returned place contains no geometry');
           return;
         }
         var marker = new gmap.Marker({

@@ -199,7 +199,6 @@ export class DashboardComponent extends BaseService implements OnInit {
         }
       }
     }, err => {
-      console.log(err);
     });
   }
   generateCatCountChart(data) {

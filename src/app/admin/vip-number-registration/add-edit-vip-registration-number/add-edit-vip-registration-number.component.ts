@@ -76,7 +76,6 @@ export class AddEditVipRegistrationNumberComponent implements OnInit {
         this.bootstrapAlertService.showError(response.message);
       }
     }, err => {
-      console.log(err);
     });
   }
 

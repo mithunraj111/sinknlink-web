@@ -58,7 +58,6 @@ export class LookupComponent extends BaseService implements OnInit {
         this.tempFilter = this.lookupList;
       }
     }, err => {
-      console.log(err);
     });
   }
   openLookupModal(event) {

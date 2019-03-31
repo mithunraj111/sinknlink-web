@@ -62,7 +62,6 @@ export class ViewConsumerComponent implements OnInit {
         this.consumerProfilepic = 'assets/images/avatar-blank.png';
       }
     }, err => {
-      console.log(err);
     });
   }
 
@@ -71,7 +70,6 @@ export class ViewConsumerComponent implements OnInit {
       const response = JSON.parse(res._body);
       this.consumerCouponsList = response.data;
     }, err => {
-      console.log(err);
     });
   }
   getConsumerFavs(id) {
@@ -79,7 +77,6 @@ export class ViewConsumerComponent implements OnInit {
       const response = JSON.parse(res._body);
       this.consumerFavs = this.groupFavs(response.data);
     }, err => {
-      console.log(err);
     })
   }
 
@@ -98,7 +95,6 @@ export class ViewConsumerComponent implements OnInit {
       }
 
     }, err => {
-      console.log(err);
     });
   }
 

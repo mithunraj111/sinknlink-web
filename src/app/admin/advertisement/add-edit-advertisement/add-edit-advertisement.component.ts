@@ -70,7 +70,6 @@ export class AddEditAdvertisementComponent implements OnInit {
         this.bootstrapAlertService.showError(response.message);
       }
     }, err => {
-      console.log(err);
     });
   }
   getcategory() {
@@ -86,7 +85,6 @@ export class AddEditAdvertisementComponent implements OnInit {
         this.bootstrapAlertService.showError(response.message);
       }
     }, err => {
-      console.log(err);
     });
   }
 
@@ -129,7 +127,6 @@ export class AddEditAdvertisementComponent implements OnInit {
       this.existing_image = response.data.adimages;
     }, err => {
       this.savingAd = false;
-      console.log(err);
     });
   }
 
@@ -174,7 +171,6 @@ export class AddEditAdvertisementComponent implements OnInit {
         }
       }, err => {
         this.savingAd = false;
-        console.log(err);
       });
     }
   }
