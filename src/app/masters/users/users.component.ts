@@ -26,7 +26,7 @@ export class UsersComponent extends BaseService implements OnInit {
     private commonService: CommonService,
   ) {
     super();
-    this.getScreenDetails('m_users');
+    this.getScreenDetails('m_systemusers');
 
   }
 

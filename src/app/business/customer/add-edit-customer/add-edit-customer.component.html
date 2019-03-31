@@ -5,7 +5,7 @@
                 <div class="col-md-6 col-sm-6">
                 </div>
                 <div class="col-md-6 col-sm-6 save-button text-right p-r-30">
-                    <button type="button" placement="bottom" ngbTooltip="Click to edit membership code" (click)="editfancyno()" class="btn btn-primary waves-effect m-r-10 text-capitalize"><i class="fa fa-pencil"></i> Membership code</button>
+                    <button type="button" placement="bottom" ngbTooltip="Click to edit shop no." (click)="editfancyno()" class="btn btn-primary waves-effect m-r-10 text-capitalize"><i class="fa fa-pencil"></i> Shop no.</button>
                     <button *ngIf="showbutton" type="button" placement="bottom" ngbTooltip="Click to {{buttonText}} customer" (click)="saveOrUpdate()" class="btn btn-primary waves-effect m-r-10 text-capitalize" [disabled]="savecustomer">{{savecustomer
                         ==
                         true ? 'Saving' : buttonText}}</button>

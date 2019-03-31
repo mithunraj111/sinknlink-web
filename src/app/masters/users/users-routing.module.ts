@@ -14,7 +14,7 @@ const routes: Routes = [
       title: 'System users',
       status: false,
       permissions: {
-        only: ['Users'],
+        only: ['System users'],
         redirectTo: '/accessdenied'
       }
     }

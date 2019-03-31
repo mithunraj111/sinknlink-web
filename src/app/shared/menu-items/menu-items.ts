@@ -67,9 +67,9 @@ export class MenuItems {
           {
             state: 'users',
             name: 'System users',
-            code: 'm_users',
+            code: 'm_systemusers',
             data: {
-              title: 'Users'
+              title: 'System users'
             }
           },
           {
