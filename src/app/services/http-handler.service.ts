@@ -11,8 +11,10 @@ export class HttpHandlerService {
     constructor(private http: Http, private localStorageService: LocalStorageService) {
         this.userstoragedata = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER);
         this.headers = new Headers();
-        this.headers.append('Authorization',
-            this.userstoragedata.token);
+        if (this.userstoragedata) {
+            this.headers.append('Authorization',
+                this.userstoragedata.token);
+        }
     }
 
     GET(url: string, options?): Observable<any> {

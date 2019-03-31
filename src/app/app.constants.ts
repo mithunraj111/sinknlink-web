@@ -14,6 +14,7 @@ export const AppConstant = Object.freeze({
   },
   MAX_FILE_SIZE: 5000000,
   MAX_FILE_COUNT: [1, 5],
+  AUTHENTICATION: 'Authentication',
   PERMISSION: ['Create', 'View', 'Edit', 'Delete', 'Download'],
   BUTTON_TXT: {
     SAVE: 'Save',
