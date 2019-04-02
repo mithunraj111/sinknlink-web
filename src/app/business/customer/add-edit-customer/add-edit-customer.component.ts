@@ -64,6 +64,7 @@ export class AddEditCustomerComponent implements OnInit {
   customerlng: any;
   isAddForm = true;
   msg: string;
+  lookupList: any = [];
   constructor(private fb: FormBuilder,
     private categoryService: MasterService.CategoryService,
     private lookupService: AdminService.LookupService,
@@ -126,6 +127,12 @@ export class AddEditCustomerComponent implements OnInit {
   }
   selectCity(option) {
     this.cityName = option.value;
+    this.mallsList = [];
+    this.lookupList.forEach(element => {
+      if (element.refname === option.value) {
+        this.mallsList.push(element);
+      }
+    });
     this.getLocationList();
   }
   getLookUps() {
@@ -136,13 +143,19 @@ export class AddEditCustomerComponent implements OnInit {
           response.data.map(item => {
             item.value = item.refvalue;
             item.label = item.refname;
+            if (item.refkey === 'biz_malls') {
+              item.label = item.refvalue;
+            }
           });
           const groupedData = _.groupBy(response.data, 'refkey');
           this.memberTypes = _.get(groupedData, 'biz_membertype');
           this.businesstypes = _.get(groupedData, 'biz_businesstype');
           this.paymentMethods = _.get(groupedData, 'biz_paymentmethods');
           this.deliveryMethods = _.get(groupedData, 'biz_deliverymethods');
-          this.mallsList = _.get(groupedData, 'biz_malls');
+          if (!this.isAddForm) {
+            this.mallsList = _.get(groupedData, 'biz_malls');
+          }
+          this.lookupList = _.get(groupedData, 'biz_malls');
           this.paymentTenuresList = _.get(groupedData, 'biz_paymenttenure');
           this.cityLists = _.get(groupedData, 'biz_businesscity');
         }
@@ -408,7 +421,7 @@ export class AddEditCustomerComponent implements OnInit {
   }
   onCustomerTabChange(event) {
     this.customerObj = this.customerObj;
-    
+
     if (event.nextId === '6' || event.nextId === '5' || event.nextId === '3') {
       this.showbutton = false;
       if (event.nextId === '6') {
@@ -423,7 +436,7 @@ export class AddEditCustomerComponent implements OnInit {
         this.tooltipmessage = AppConstant.MESSAGE.GIGS;
         return false;
       }
-     } else {
+    } else {
       this.showbutton = true;
     }
   }
@@ -580,7 +593,7 @@ export class AddEditCustomerComponent implements OnInit {
     });
     this.closeModal('mapmodal');
   }
-// map ends
+  // map ends
 
   onMembershipChange(event) {
     if (event.refvalue === AppConstant.MEM_TYPE) {
