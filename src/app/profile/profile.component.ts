@@ -14,7 +14,6 @@ import { MainComponent } from '../layout/main/main.component';
 })
 
 export class ProfileComponent implements OnInit {
-  passwordForm: FormGroup;
   profileForm: FormGroup;
   socialForm: FormGroup;
   userObj = {} as any;
@@ -41,18 +40,12 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.initForm();
     this.getUser();
     this.userProfileForm();
     this.getLocationList();
   }
 
-  initForm() {
-    this.passwordForm = this.fb.group({
-      newpassword: [null, Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(30)])],
-      confirmpassword: [null, Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(30)])],
-    });
-  }
+
   checkProfileImg() {
     if (this.userObj.profileimg != null) {
       this.userfile = this.userObj.profileimg.docurl;
@@ -136,35 +129,7 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  changePassword() {
-    if (!this.passwordForm.valid) {
-      this.errMessage = this.commonService.getFormErrorMessage(this.passwordForm, this.profileErrObj);
-      this.bootstrapAlertService.showError(this.errMessage);
-      return false;
-    }
-    if (this.passwordForm.value['newpassword'] != this.passwordForm.value['confirmpassword']) {
-      this.bootstrapAlertService.showError(AppMessages.VALIDATION.PROFILE.newpassword.equal);
-      return false;
-    }
-    let formdata = {} as any;
-    formdata.updatedby = this.userstoragedata.fullname;
-    formdata.updateddt = new Date();
-    formdata.password = this.passwordForm.value.confirmpassword;
-    const formData = new FormData();
-    formData.append('data', JSON.stringify(formdata));
-    this.userService.update(formData, this.userstoragedata.userid).subscribe(res => {
-      const response = JSON.parse(res._body);
-      if (response.status) {
-        this.bootstrapAlertService.showSucccess(response.message);
-        this.initForm();
-        this.closePassword();
-      } else {
-        this.bootstrapAlertService.showError(response.message);
-      }
-    }, err => {
-      this.bootstrapAlertService.showError(err.message);
-    });
-  }
+
   changeProfile(datavalue?) {
     if (!this.profileForm.valid) {
       this.errMessage = this.commonService.getFormErrorMessage(this.profileForm, this.profileErrObj);
@@ -222,12 +187,6 @@ export class ProfileComponent implements OnInit {
   }
   closeProfileModal(event) {
     document.querySelector('#' + event).classList.remove('md-show');
-  }
-  updatePassword() {
-    this.openProfileModal('profilemodal');
-  }
-  closePassword() {
-    this.closeProfileModal('profilemodal');
   }
   addSocialId() {
     this.openProfileModal('socialidmodal');

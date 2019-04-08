@@ -5,6 +5,10 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { AppConstant } from 'src/app/app.constants';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { NgxPermissionsService } from 'ngx-permissions';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { MasterService, CommonService } from 'src/app/services';
+import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
+import { AppMessages } from 'src/app/app-messages';
 
 @Component({
   selector: 'app-main',
@@ -122,7 +126,6 @@ export class MainComponent implements OnInit {
   public itemBorder: boolean;
 
   public availScreens: any = [];
-
   public config: any;
   userstoragedata = {} as any;
   userfile: string;
@@ -130,8 +133,14 @@ export class MainComponent implements OnInit {
   fullname: any;
   userprofile = false;
   id = 0;
+  passwordForm: FormGroup;
+  errMessage;
+  profileErrObj = AppMessages.VALIDATION.PROFILE;
+  showProfile: boolean;
+
   constructor(public menuItems: MenuItems, private router: Router, private route: ActivatedRoute,
-    private lstorageService: LocalStorageService, private permissionsService: NgxPermissionsService) {
+    private lstorageService: LocalStorageService, private permissionsService: NgxPermissionsService, private userService: MasterService.UserService, private bootstrapAlertService: BootstrapAlertService,
+    private commonService: CommonService, private fb: FormBuilder) {
 
     this.router.events
       .filter(event => event instanceof NavigationEnd)
@@ -218,6 +227,7 @@ export class MainComponent implements OnInit {
     // side-bar image
     /*this.setLayoutType('img');*/
   }
+
   checkProfile() {
     this.userstoragedata = this.lstorageService.getItem(AppConstant.LOCALSTORAGE.USER);
     if (this.userstoragedata.profileimg != null && this.userstoragedata.profileimg.status != "deleted") {
@@ -230,12 +240,61 @@ export class MainComponent implements OnInit {
   }
   ngOnInit() {
     this.setBackgroundPattern('pattern1');
-
     this.availScreens = this.menuItems.formMenu(this.lstorageService.getItem(AppConstant.LOCALSTORAGE.SCREENS));
-
+    this.initForm();
     /*document.querySelector('body').classList.remove('dark');*/
   }
-
+  
+  //Change password
+  openProfileModal(event) {
+    document.querySelector('#' + event).classList.add('md-show');
+  }
+  updatePassword() {
+    this.initForm();
+    this.openProfileModal('profilemodal');
+  }
+  initForm() {
+    this.passwordForm = this.fb.group({
+      newpassword: [null, Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(30)])],
+      confirmpassword: [null, Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(30)])],
+    });
+  }
+  changePassword() {
+    if (!this.passwordForm.valid) {
+      this.errMessage = this.commonService.getFormErrorMessage(this.passwordForm, this.profileErrObj);
+      this.bootstrapAlertService.showError(this.errMessage);
+      return false;
+    }
+    if (this.passwordForm.value['newpassword'] != this.passwordForm.value['confirmpassword']) {
+      this.bootstrapAlertService.showError(AppMessages.VALIDATION.PROFILE.newpassword.equal);
+      return false;
+    }
+    let formdata = {} as any;
+    formdata.updatedby = this.userstoragedata.fullname;
+    formdata.updateddt = new Date();
+    formdata.password = this.passwordForm.value.confirmpassword;
+    const formData = new FormData();
+    formData.append('data', JSON.stringify(formdata));
+    this.userService.update(formData, this.userstoragedata.userid).subscribe(res => {
+      const response = JSON.parse(res._body);
+      if (response.status) {
+        this.bootstrapAlertService.showSucccess(AppMessages.VALIDATION.PROFILE.confirmpassword.common);
+        this.initForm();
+        this.closePassword();
+      } else {
+        this.bootstrapAlertService.showError(response.message);
+      }
+    }, err => {
+      this.bootstrapAlertService.showError(err.message);
+    });
+  }
+  closeProfileModal(event) {
+    document.querySelector('#' + event).classList.remove('md-show');
+  }
+  closePassword() {
+  this.closeProfileModal('profilemodal');
+  }
+  //
   onResize(event) {
     this.windowWidth = event.target.innerWidth;
     this.setHeaderAttributes(this.windowWidth);

@@ -5,9 +5,7 @@
         <button type="button" placement="bottom" ngbTooltip="Click to update profile" (click)="changeProfile(this.userstoragedata.usertype)"
           class="btn btn-primary waves-effect m-r-10 text-capitalize">
           Update</button>
-        <button type="button" placement="bottom" ngbTooltip="Click to change password" (click)="updatePassword()"
-          class="btn btn-primary waves-effect m-r-10 text-capitalize">Change
-          Password</button>
+        
       </div>
     </div>
   </div>
@@ -122,28 +120,4 @@
       </div>
     </div>
   </div>
-</div>
-<!-- modal -->
-<div class="modal-size addlocation employee-form">
-  <app-modal-animation [modalID]="'profilemodal'" [modalClass]="'md-effect-7'">
-    <h3 class="f-26">Change password</h3>
-    <form [formGroup]="passwordForm">
-      <div class="form-header pt-2">
-        <div class="col-md-12">
-          <div class="form-group required">
-            <label>New password</label>
-            <input type="password" class="form-control" placeholder="New password" formControlName="newpassword">
-          </div>
-          <div class="form-group required">
-            <label>Confirm password</label>
-            <input type="password" class="form-control" placeholder="Confirm password"
-              formControlName="confirmpassword">
-          </div>
-        </div>
-        <button type="button" placement="top" (click)="changePassword()" ngbTooltip="Click to save password" class="btn pull-right btn-primary waves-effect 
-                  m-b-10 m-r-15">Update</button>
-      </div>
-    </form>
-    <button (click)="closePassword()" aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>
-  </app-modal-animation>
 </div>

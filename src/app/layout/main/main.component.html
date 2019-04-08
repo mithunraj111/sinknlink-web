@@ -1,12 +1,18 @@
-<div id="pcoded" class="pcoded" [attr.nav-type]="navType" [attr.theme-layout]="themeLayout" [attr.vertical-placement]="verticalPlacement" [attr.vertical-layout]="verticalLayout" [attr.pcoded-device-type]="pcodedDeviceType" [attr.vertical-nav-type]="verticalNavType"
-    [attr.vertical-effect]="verticalEffect" [attr.vnavigation-view]="vnavigationView" [attr.fream-type]="freamType" [attr.sidebar-img]="sidebarImg" [attr.sidebar-img-type]="sidebarImgType" [attr.layout-type]="layoutType" (window:resize)="onResize($event)">
+<div id="pcoded" class="pcoded" [attr.nav-type]="navType" [attr.theme-layout]="themeLayout"
+    [attr.vertical-placement]="verticalPlacement" [attr.vertical-layout]="verticalLayout"
+    [attr.pcoded-device-type]="pcodedDeviceType" [attr.vertical-nav-type]="verticalNavType"
+    [attr.vertical-effect]="verticalEffect" [attr.vnavigation-view]="vnavigationView" [attr.fream-type]="freamType"
+    [attr.sidebar-img]="sidebarImg" [attr.sidebar-img-type]="sidebarImgType" [attr.layout-type]="layoutType"
+    (window:resize)="onResize($event)">
     <div class="pcoded-overlay-box"></div>
     <div class="pcoded-container navbar-wrapper">
-        <nav class="navbar header-navbar navbar-title pcoded-header main-header" [attr.header-theme]="headerTheme" [attr.pcoded-header-position]="pcodedHeaderPosition">
+        <nav class="navbar header-navbar navbar-title pcoded-header main-header" [attr.header-theme]="headerTheme"
+            [attr.pcoded-header-position]="pcodedHeaderPosition">
             <div class="navbar-wrapper">
                 <div class="navbar-logo">
 
-                    <a class="mobile-menu" id="mobile-collapse" href="javascript:" (click)="toggleOpened()" [exclude]="'#main_navbar'" (clickOutside)="onClickedOutsideSidebar($event)">
+                    <a class="mobile-menu" id="mobile-collapse" href="javascript:" (click)="toggleOpened()"
+                        [exclude]="'#main_navbar'" (clickOutside)="onClickedOutsideSidebar($event)">
                         <i class="ti-menu"></i>
                     </a>
                     <a [routerLink]="['/dashboard']" style="margin-top:7px;">
@@ -28,34 +34,39 @@
                         </li>
                     </ul>
                     <ul [@mobileHeaderNavRight]="navRight" [ngClass]="navRight" class="nav-right">
-                        <li (clickOutside)="notificationOutsideClick('profile')" class="user-profile header-notification" [ngClass]="profileNotificationClass" (click)="toggleProfileNotification()">
+                        <li (clickOutside)="notificationOutsideClick('profile')"
+                            class="user-profile header-notification" [ngClass]="profileNotificationClass"
+                            (click)="toggleProfileNotification()">
                             <a *ngIf="userstoragedata.roleid!=3 && userstoragedata.roleid!=2">
                                 <img [src]="userfile" class="img-radius" alt="" *ngIf="userprofile==true">
                                 <span class="profile-image" *ngIf="userprofile==false">{{userfile}}</span>
                                 <span class="fullname">{{userstoragedata.fullname}}</span>
-                                <!-- <i class="fa fa-chevron-down"></i> -->
+                                <i class="fa fa-chevron-down"></i>
                             </a>
-                            <a *ngIf="userstoragedata.roleid==3 || userstoragedata.roleid==2" [routerLink]="['/profile']">
+                            <a *ngIf="userstoragedata.roleid==3 || userstoragedata.roleid==2"
+                               >
                                 <img [src]="userfile" class="img-radius" alt="" *ngIf="userprofile==true">
                                 <span class="profile-image" *ngIf="userprofile==false">{{userfile}}</span>
                                 <span class="fullname">{{userstoragedata.fullname}}</span>
-                                <!-- <i class="fa fa-chevron-down"></i> -->
+                                <i class="fa fa-chevron-down"></i>
                             </a>
-                            <a class="btn logout-btn" placement="bottom" ngbTooltip="Logout" (click)="logout()"><i class="icofont-logout"></i></a>
+                            <a class="btn logout-btn" placement="bottom" ngbTooltip="Logout" (click)="logout()"><i
+                                    class="icofont-logout"></i></a>
 
-                            <!-- <ul [@notificationBottom]="profileNotification"
+                            <ul  [@notificationBottom]="profileNotification"
                                 class="show-notification profile-notification">
-                                <li>
-                                    <a [routerLink]="['/profile']">
+                                <li *ngIf="userstoragedata.roleid==3 || userstoragedata.roleid==2">
+                                    <a 
+                                        [routerLink]="['/profile']">
                                         <i class="ti-user"></i> Profile
                                     </a>
                                 </li>
                                 <li>
-                                    <a (click)="logout()">
-                                        <i class="fa fa-sign-out"></i> Logout
+                                    <a (click)="updatePassword()">
+                                        <i class="fa fa-key"></i> Change password
                                     </a>
                                 </li>
-                            </ul> -->
+                            </ul>
                         </li>
                     </ul>
                 </div>
@@ -63,10 +74,13 @@
         </nav>
         <div class="pcoded-main-container" [style.margin-top]="headerFixedMargin">
             <div class="pcoded-wrapper">
-                <nav id="main_navbar" class="pcoded-navbar main-navbar" (clickOutside)="onClickedOutsideSidebar($event)" [exclude]="'#mobile-collapse'" [attr.pcoded-header-position]="pcodedHeaderPosition" [attr.navbar-theme]="navBarTheme" [attr.active-item-theme]="activeItemTheme"
-                    sub-item-theme="theme2" active-item-style="style0" [attr.pcoded-navbar-position]="pcodedSidebarPosition">
+                <nav id="main_navbar" class="pcoded-navbar main-navbar" (clickOutside)="onClickedOutsideSidebar($event)"
+                    [exclude]="'#mobile-collapse'" [attr.pcoded-header-position]="pcodedHeaderPosition"
+                    [attr.navbar-theme]="navBarTheme" [attr.active-item-theme]="activeItemTheme" sub-item-theme="theme2"
+                    active-item-style="style0" [attr.pcoded-navbar-position]="pcodedSidebarPosition">
                     <div class="pcoded-inner-navbar main-menu" appAccordion>
-                        <perfect-scrollbar [style.max-width]="'236px'" [style.max-height]="sidebarFixedHeight" [config]="config">
+                        <perfect-scrollbar [style.max-width]="'236px'" [style.max-height]="sidebarFixedHeight"
+                            [config]="config">
                             <span class="d-color">
 
                                 <!-- <div class="pcoded-navigation-label" [attr.menu-title-theme]="menuTitleTheme"></div> -->
@@ -82,76 +96,98 @@
                                             target="{{asideItem.target ? '_blank' : '_self'}}" appAccordionToggle>
                                             <span class="pcoded-micon"><i class="{{ asideItem.icon }}"></i><b>{{
                                                     asideItem.short_label }}</b></span>
-                            <span class="pcoded-mtext">{{ asideItem.name }}</span>
-                            <span *ngFor="let asideBadge of asideItem.badge" class="pcoded-badge label label-{{ asideBadge.type }}">{{asideBadge.value}}</span>
-                            <span class="pcoded-mcaret"></span>
-                            </a>
-                            </li>
+                                            <span class="pcoded-mtext">{{ asideItem.name }}</span>
+                                            <span *ngFor="let asideBadge of asideItem.badge"
+                                                class="pcoded-badge label label-{{ asideBadge.type }}">{{asideBadge.value}}</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                    </li>
 
-                            <li [routerLinkActive]="['active']" *ngIf="asideItem.type === 'link'" appAccordionLink group="{{asideItem.state}}">
-                                <a [routerLink]="['/', asideItem.main_state, asideItem.state]" target="{{asideItem.target ? '_blank' : '_self'}}" appAccordionToggle *ngIf="asideItem.main_state; else mainContent">
-                                    <span class="pcoded-micon"><i class="{{ asideItem.icon }}"></i><b>{{
+                                    <li [routerLinkActive]="['active']" *ngIf="asideItem.type === 'link'"
+                                        appAccordionLink group="{{asideItem.state}}">
+                                        <a [routerLink]="['/', asideItem.main_state, asideItem.state]"
+                                            target="{{asideItem.target ? '_blank' : '_self'}}" appAccordionToggle
+                                            *ngIf="asideItem.main_state; else mainContent">
+                                            <span class="pcoded-micon"><i class="{{ asideItem.icon }}"></i><b>{{
                                                     asideItem.short_label }}</b></span>
-                                    <span class="pcoded-mtext">{{ asideItem.name }}</span>
-                                    <span *ngFor="let asideBadge of asideItem.badge" class="pcoded-badge label label-{{ asideBadge.type }}">{{asideBadge.value}}</span>
-                                    <span class="pcoded-mcaret"></span>
-                                </a>
-                                <ng-template #mainContent>
-                                    <a [routerLink]="['/', asideItem.state]" target="{{asideItem.target ? '_blank' : '_self'}}" appAccordionToggle>
-                                        <span class="pcoded-micon"><i class="{{ asideItem.icon }}"></i><b>{{
+                                            <span class="pcoded-mtext">{{ asideItem.name }}</span>
+                                            <span *ngFor="let asideBadge of asideItem.badge"
+                                                class="pcoded-badge label label-{{ asideBadge.type }}">{{asideBadge.value}}</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                        <ng-template #mainContent>
+                                            <a [routerLink]="['/', asideItem.state]"
+                                                target="{{asideItem.target ? '_blank' : '_self'}}" appAccordionToggle>
+                                                <span class="pcoded-micon"><i class="{{ asideItem.icon }}"></i><b>{{
                                                         asideItem.short_label }}</b></span>
-                                        <span class="pcoded-mtext">{{ asideItem.name }}</span>
-                                        <span *ngFor="let asideBadge of asideItem.badge" class="pcoded-badge label label-{{ asideBadge.type }}">{{asideBadge.value}}</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </ng-template>
-                            </li>
-                            <li [routerLinkActive]="['active']" *ngIf="asideItem.type === 'sub'" class="pcoded-hasmenu" [attr.dropdown-icon]="dropDownIcon" [attr.subitem-icon]="subItemIcon" appAccordionLink group="{{asideItem.state}}">
-                                <a [routerLinkActive]="['active']" href="javascript:;" appAccordionToggle>
-                                    <span class="pcoded-micon"><i class="{{ asideItem.icon }}"></i><b>{{
+                                                <span class="pcoded-mtext">{{ asideItem.name }}</span>
+                                                <span *ngFor="let asideBadge of asideItem.badge"
+                                                    class="pcoded-badge label label-{{ asideBadge.type }}">{{asideBadge.value}}</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </ng-template>
+                                    </li>
+                                    <li [routerLinkActive]="['active']" *ngIf="asideItem.type === 'sub'"
+                                        class="pcoded-hasmenu" [attr.dropdown-icon]="dropDownIcon"
+                                        [attr.subitem-icon]="subItemIcon" appAccordionLink group="{{asideItem.state}}">
+                                        <a [routerLinkActive]="['active']" href="javascript:;" appAccordionToggle>
+                                            <span class="pcoded-micon"><i class="{{ asideItem.icon }}"></i><b>{{
                                                     asideItem.short_label }}</b></span>
-                                    <span class="pcoded-mtext">{{ asideItem.name }}</span>
-                                    <span *ngFor="let asideBadge of asideItem.badge" class="pcoded-badge label label-{{ asideBadge.type }}">{{asideBadge.value}}</span>
-                                    <span class="pcoded-mcaret"></span>
-                                </a>
-                                <ul class="pcoded-submenu">
-                                    <ng-template ngFor let-asideChildren [ngForOf]="asideItem.children">
-                                        <li [routerLinkActive]="['active']" *ngIf="asideChildren.type !== 'sub'">
-                                            <a [routerLink]="['/', asideItem.state, asideChildren.state]" target="{{asideChildren.target ? '_blank' : '_self'}}">
-                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext">{{ asideChildren.name }} </span>
-                                                <span *ngFor="let asideChildrenBadge of asideChildren.badge" class="pcoded-badge label label-{{ asideChildrenBadge.type }}">{{asideChildrenBadge.value}}</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                        </li>
+                                            <span class="pcoded-mtext">{{ asideItem.name }}</span>
+                                            <span *ngFor="let asideBadge of asideItem.badge"
+                                                class="pcoded-badge label label-{{ asideBadge.type }}">{{asideBadge.value}}</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                        <ul class="pcoded-submenu">
+                                            <ng-template ngFor let-asideChildren [ngForOf]="asideItem.children">
+                                                <li [routerLinkActive]="['active']"
+                                                    *ngIf="asideChildren.type !== 'sub'">
+                                                    <a [routerLink]="['/', asideItem.state, asideChildren.state]"
+                                                        target="{{asideChildren.target ? '_blank' : '_self'}}">
+                                                        <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                        <span class="pcoded-mtext">{{ asideChildren.name }} </span>
+                                                        <span *ngFor="let asideChildrenBadge of asideChildren.badge"
+                                                            class="pcoded-badge label label-{{ asideChildrenBadge.type }}">{{asideChildrenBadge.value}}</span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
 
-                                        <li [routerLinkActive]="['active']" class="pcoded-hasmenu" [attr.dropdown-icon]="dropDownIcon" [attr.subitem-icon]="subItemIcon" *ngIf="asideChildren.type === 'sub'" appAccordionLink group="sub-toggled">
-                                            <a href="javascript:;" appAccordionToggle>
-                                                <span class="pcoded-micon"><i
+                                                <li [routerLinkActive]="['active']" class="pcoded-hasmenu"
+                                                    [attr.dropdown-icon]="dropDownIcon"
+                                                    [attr.subitem-icon]="subItemIcon"
+                                                    *ngIf="asideChildren.type === 'sub'" appAccordionLink
+                                                    group="sub-toggled">
+                                                    <a href="javascript:;" appAccordionToggle>
+                                                        <span class="pcoded-micon"><i
                                                                 class="ti-direction-alt"></i></span>
-                                                <span class="pcoded-mtext">{{ asideChildren.name }}</span>
-                                                <span *ngFor="let asideChildrenBadge of asideChildren.badge" class="pcoded-badge label label-{{ asideChildrenBadge.type }}">{{asideChildrenBadge.value}}</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                            <ul class="pcoded-submenu">
-                                                <ng-template ngFor let-asideChildrenSub [ngForOf]="asideChildren.children">
-                                                    <li [routerLinkActive]="['active']">
-                                                        <a [routerLink]="['/', asideItem.state, asideChildren.state, asideChildrenSub.state]" target="{{asideChildrenSub.target ? '_blank' : '_self'}}">
-                                                            <span class="pcoded-micon"><i
+                                                        <span class="pcoded-mtext">{{ asideChildren.name }}</span>
+                                                        <span *ngFor="let asideChildrenBadge of asideChildren.badge"
+                                                            class="pcoded-badge label label-{{ asideChildrenBadge.type }}">{{asideChildrenBadge.value}}</span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                    <ul class="pcoded-submenu">
+                                                        <ng-template ngFor let-asideChildrenSub
+                                                            [ngForOf]="asideChildren.children">
+                                                            <li [routerLinkActive]="['active']">
+                                                                <a [routerLink]="['/', asideItem.state, asideChildren.state, asideChildrenSub.state]"
+                                                                    target="{{asideChildrenSub.target ? '_blank' : '_self'}}">
+                                                                    <span class="pcoded-micon"><i
                                                                             class="ti-angle-right"></i></span>
-                                                            <span class="pcoded-mtext">{{ asideChildrenSub.name
+                                                                    <span class="pcoded-mtext">{{ asideChildrenSub.name
                                                                         }}</span>
-                                                            <span *ngFor="let asideChildrenSubBadge of asideChildrenSub.badge" class="pcoded-badge label label-{{ asideChildrenSubBadge.type }}">{{asideChildrenSubBadge.value}}</span>
-                                                            <span class="pcoded-mcaret"></span>
-                                                        </a>
-                                                    </li>
-                                                </ng-template>
-                                            </ul>
-                                        </li>
-                                    </ng-template>
+                                                                    <span
+                                                                        *ngFor="let asideChildrenSubBadge of asideChildrenSub.badge"
+                                                                        class="pcoded-badge label label-{{ asideChildrenSubBadge.type }}">{{asideChildrenSubBadge.value}}</span>
+                                                                    <span class="pcoded-mcaret"></span>
+                                                                </a>
+                                                            </li>
+                                                        </ng-template>
+                                                    </ul>
+                                                </li>
+                                            </ng-template>
+                                        </ul>
+                                    </li>
                                 </ul>
-                            </li>
-                            </ul>
                             </span>
                             <!-- <ul class="logout-btn">
                                 <li>
@@ -184,30 +220,36 @@
                                 </li>
                                 <li>
                                     <div class="theme-color">
-                                        <a href="javascript:" (click)="setNavBarTheme('themelight1')" navbar-theme="themelight1" placement="top" ngbTooltip="Light Sidebar">
+                                        <a href="javascript:" (click)="setNavBarTheme('themelight1')"
+                                            navbar-theme="themelight1" placement="top" ngbTooltip="Light Sidebar">
                                             <span class="head"></span>
                                             <span class="cont"></span>
                                         </a>
-                                        <a href="javascript:" (click)="setNavBarTheme('theme1')" navbar-theme="theme1" placement="top" ngbTooltip="Dark Sidebar">
+                                        <a href="javascript:" (click)="setNavBarTheme('theme1')" navbar-theme="theme1"
+                                            placement="top" ngbTooltip="Dark Sidebar">
                                             <span class="head"></span>
                                             <span class="cont"></span>
                                         </a>
-                                        <a href="javascript:" (click)="setLayoutType('img')" layout-type="img" placement="top" ngbTooltip="Sidebar with image">
+                                        <a href="javascript:" (click)="setLayoutType('img')" layout-type="img"
+                                            placement="top" ngbTooltip="Sidebar with image">
                                             <span class="head"></span>
                                             <span class="cont"></span>
                                         </a>
-                                        <a href="javascript:" (click)="setLayoutType('light')" layout-type="light" placement="top" ngbTooltip="Light Layout">
+                                        <a href="javascript:" (click)="setLayoutType('light')" layout-type="light"
+                                            placement="top" ngbTooltip="Light Layout">
                                             <span class="head"></span>
                                             <span class="cont"></span>
                                         </a>
-                                        <a href="javascript:" (click)="setLayoutType('dark')" layout-type="dark" placement="top" ngbTooltip="Dark Layout">
+                                        <a href="javascript:" (click)="setLayoutType('dark')" layout-type="dark"
+                                            placement="top" ngbTooltip="Dark Layout">
                                             <span class="head"></span>
                                             <span class="cont"></span>
                                         </a>
                                     </div>
                                 </li>
                             </ul>
-                            <perfect-scrollbar [style.max-width]="'100%'" [style.max-height]="'calc(100vh - 315px)'" [config]="config">
+                            <perfect-scrollbar [style.max-width]="'100%'" [style.max-height]="'calc(100vh - 315px)'"
+                                [config]="config">
                                 <div class="style-cont m-t-10">
                                     <div class="md-tabs">
                                         <ngb-tabset>
@@ -229,16 +271,27 @@
                                                                     </label>
                                                                 </div>
                                                             </li>
-                                                            <li class="theme-option" id="bg-pattern-visiblity" [ngClass]="displayBoxLayout">
+                                                            <li class="theme-option" id="bg-pattern-visiblity"
+                                                                [ngClass]="displayBoxLayout">
                                                                 <div class="theme-color">
                                                                     <!-- <a href="javascript:" class="small"
                                                                         (click)="setBackgroundPattern('pattern1')"
                                                                         themebg-pattern="pattern1"></a> -->
-                                                                    <a href="javascript:" class="small" (click)="setBackgroundPattern('pattern2')" themebg-pattern="pattern2"></a>
-                                                                    <a href="javascript:" class="small" (click)="setBackgroundPattern('pattern3')" themebg-pattern="pattern3"></a>
-                                                                    <a href="javascript:" class="small" (click)="setBackgroundPattern('pattern4')" themebg-pattern="pattern4"></a>
-                                                                    <a href="javascript:" class="small" (click)="setBackgroundPattern('pattern5')" themebg-pattern="pattern5"></a>
-                                                                    <a href="javascript:" class="small" (click)="setBackgroundPattern('pattern6')" themebg-pattern="pattern6"></a>
+                                                                    <a href="javascript:" class="small"
+                                                                        (click)="setBackgroundPattern('pattern2')"
+                                                                        themebg-pattern="pattern2"></a>
+                                                                    <a href="javascript:" class="small"
+                                                                        (click)="setBackgroundPattern('pattern3')"
+                                                                        themebg-pattern="pattern3"></a>
+                                                                    <a href="javascript:" class="small"
+                                                                        (click)="setBackgroundPattern('pattern4')"
+                                                                        themebg-pattern="pattern4"></a>
+                                                                    <a href="javascript:" class="small"
+                                                                        (click)="setBackgroundPattern('pattern5')"
+                                                                        themebg-pattern="pattern5"></a>
+                                                                    <a href="javascript:" class="small"
+                                                                        (click)="setBackgroundPattern('pattern6')"
+                                                                        themebg-pattern="pattern6"></a>
                                                                 </div>
                                                             </li>
                                                             <li class="theme-option">
@@ -279,7 +332,8 @@
                                                             <li class="theme-option">
                                                                 <p class="sub-title drp-title">Menu Type</p>
                                                                 <div class="form-radio" id="menu-effect">
-                                                                    <div class="radio radiofill radio-primary radio-inline" ngbTooltip="Color icon">
+                                                                    <div class="radio radiofill radio-primary radio-inline"
+                                                                        ngbTooltip="Color icon">
                                                                         <label>
                                                                             <input type="radio" name="radio" value="st1"
                                                                                 (click)="this.navType=$event.target.value">
@@ -288,7 +342,8 @@
                                                                                     class="ti-home"></i></span>
                                                                         </label>
                                                                     </div>
-                                                                    <div class="radio radiofill radio-success radio-inline" ngbTooltip="Simple icon">
+                                                                    <div class="radio radiofill radio-success radio-inline"
+                                                                        ngbTooltip="Simple icon">
                                                                         <label>
                                                                             <input type="radio" name="radio" value="st2"
                                                                                 (click)="this.navType=$event.target.value"
@@ -302,7 +357,9 @@
                                                             </li>
                                                             <li class="theme-option">
                                                                 <p class="sub-title drp-title">SideBar Effect</p>
-                                                                <select id="vertical-menu-effect" class="form-control minimal" (change)="this.verticalEffect=$event.target.value">
+                                                                <select id="vertical-menu-effect"
+                                                                    class="form-control minimal"
+                                                                    (change)="this.verticalEffect=$event.target.value">
                                                                     <option value="shrink" selected>shrink</option>
                                                                     <option value="overlay">overlay</option>
                                                                     <option value="push">Push</option>
@@ -310,7 +367,9 @@
                                                             </li>
                                                             <li class="theme-option">
                                                                 <p class="sub-title drp-title">Hide/Show Border</p>
-                                                                <select id="vertical-border-style" class="form-control minimal" (change)="this.itemBorderStyle=$event.target.value">
+                                                                <select id="vertical-border-style"
+                                                                    class="form-control minimal"
+                                                                    (change)="this.itemBorderStyle=$event.target.value">
                                                                     <option value="solid" selected>Style 1</option>
                                                                     <option value="dotted">Style 2</option>
                                                                     <option value="dashed">Style 3</option>
@@ -319,7 +378,9 @@
                                                             </li>
                                                             <li class="theme-option">
                                                                 <p class="sub-title drp-title">Drop-Down Icon</p>
-                                                                <select id="vertical-dropdown-icon" class="form-control minimal" (change)="this.dropDownIcon=$event.target.value">
+                                                                <select id="vertical-dropdown-icon"
+                                                                    class="form-control minimal"
+                                                                    (change)="this.dropDownIcon=$event.target.value">
                                                                     <option value="style1" selected>Style 1</option>
                                                                     <option value="style2">style 2</option>
                                                                     <option value="style3" selected>style 3</option>
@@ -328,7 +389,9 @@
                                                             <li class="theme-option">
                                                                 <p class="sub-title drp-title">Sub Menu Drop-down Icon
                                                                 </p>
-                                                                <select id="vertical-subitem-icon" class="form-control minimal" (change)="this.subItemIcon=$event.target.value">
+                                                                <select id="vertical-subitem-icon"
+                                                                    class="form-control minimal"
+                                                                    (change)="this.subItemIcon=$event.target.value">
                                                                     <option value="style1">Style 1</option>
                                                                     <option value="style2">style 2</option>
                                                                     <option value="style3">style 3</option>
@@ -352,26 +415,38 @@
                                             <li><span class="selector-title">Dark</span></li>
                                             <li class="theme-option">
                                                 <div class="theme-color">
-                                                    <a href="javascript:" class="header-theme" (click)="this.activeItemTheme=this.headerTheme='theme1'" header-theme="theme1">
+                                                    <a href="javascript:" class="header-theme"
+                                                        (click)="this.activeItemTheme=this.headerTheme='theme1'"
+                                                        header-theme="theme1">
                                                         <span class="head"></span>
                                                         <span class="cont"></span>
                                                     </a>
-                                                    <a href="javascript:" class="header-theme" (click)="this.activeItemTheme=this.headerTheme='theme2'" header-theme="theme2">
+                                                    <a href="javascript:" class="header-theme"
+                                                        (click)="this.activeItemTheme=this.headerTheme='theme2'"
+                                                        header-theme="theme2">
                                                         <span class="head"></span>
                                                         <span class="cont"></span></a>
-                                                    <a href="javascript:" class="header-theme" (click)="this.activeItemTheme=this.headerTheme='theme3'" header-theme="theme3">
+                                                    <a href="javascript:" class="header-theme"
+                                                        (click)="this.activeItemTheme=this.headerTheme='theme3'"
+                                                        header-theme="theme3">
                                                         <span class="head"></span>
                                                         <span class="cont"></span>
                                                     </a>
-                                                    <a href="javascript:" class="header-theme" (click)="this.activeItemTheme=this.headerTheme='theme4'" header-theme="theme4">
+                                                    <a href="javascript:" class="header-theme"
+                                                        (click)="this.activeItemTheme=this.headerTheme='theme4'"
+                                                        header-theme="theme4">
                                                         <span class="head"></span>
                                                         <span class="cont"></span>
                                                     </a>
-                                                    <a href="javascript:" class="header-theme" (click)="this.activeItemTheme=this.headerTheme='theme5'" header-theme="theme5">
+                                                    <a href="javascript:" class="header-theme"
+                                                        (click)="this.activeItemTheme=this.headerTheme='theme5'"
+                                                        header-theme="theme5">
                                                         <span class="head"></span>
                                                         <span class="cont"></span>
                                                     </a>
-                                                    <a href="javascript:" class="header-theme" (click)="this.activeItemTheme=this.headerTheme='theme6'" header-theme="theme6">
+                                                    <a href="javascript:" class="header-theme"
+                                                        (click)="this.activeItemTheme=this.headerTheme='theme6'"
+                                                        header-theme="theme6">
                                                         <span class="head"></span>
                                                         <span class="cont"></span>
                                                     </a>
@@ -380,26 +455,38 @@
                                             <li><span class="selector-title">light</span></li>
                                             <li class="theme-option">
                                                 <div class="theme-color">
-                                                    <a href="javascript:" class="header-theme" (click)="this.activeItemTheme='theme7';this.headerTheme='themelight1'" header-theme="themelight1">
+                                                    <a href="javascript:" class="header-theme"
+                                                        (click)="this.activeItemTheme='theme7';this.headerTheme='themelight1'"
+                                                        header-theme="themelight1">
                                                         <span class="head"></span>
                                                         <span class="cont"></span>
                                                     </a>
-                                                    <a href="javascript:" class="header-theme" (click)="this.activeItemTheme='theme8';this.headerTheme='themelight2'" header-theme="themelight2">
+                                                    <a href="javascript:" class="header-theme"
+                                                        (click)="this.activeItemTheme='theme8';this.headerTheme='themelight2'"
+                                                        header-theme="themelight2">
                                                         <span class="head"></span>
                                                         <span class="cont"></span>
                                                     </a>
-                                                    <a href="javascript:" class="header-theme" (click)="this.activeItemTheme='theme9';this.headerTheme='themelight3'" header-theme="themelight3">
+                                                    <a href="javascript:" class="header-theme"
+                                                        (click)="this.activeItemTheme='theme9';this.headerTheme='themelight3'"
+                                                        header-theme="themelight3">
                                                         <span class="head"></span>
                                                         <span class="cont"></span>
                                                     </a>
-                                                    <a href="javascript:" class="header-theme" (click)="this.activeItemTheme='theme10';this.headerTheme='themelight4'" header-theme="themelight4">
+                                                    <a href="javascript:" class="header-theme"
+                                                        (click)="this.activeItemTheme='theme10';this.headerTheme='themelight4'"
+                                                        header-theme="themelight4">
                                                         <span class="head"></span>
                                                         <span class="cont"></span></a>
-                                                    <a href="javascript:" class="header-theme" (click)="this.activeItemTheme='theme11';this.headerTheme='themelight5'" header-theme="themelight5">
+                                                    <a href="javascript:" class="header-theme"
+                                                        (click)="this.activeItemTheme='theme11';this.headerTheme='themelight5'"
+                                                        header-theme="themelight5">
                                                         <span class="head"></span>
                                                         <span class="cont"></span>
                                                     </a>
-                                                    <a href="javascript:" class="header-theme" (click)="this.activeItemTheme='theme12';this.headerTheme='themelight6'" header-theme="themelight6">
+                                                    <a href="javascript:" class="header-theme"
+                                                        (click)="this.activeItemTheme='theme12';this.headerTheme='themelight6'"
+                                                        header-theme="themelight6">
                                                         <span class="head"></span>
                                                         <span class="cont"></span>
                                                     </a>
@@ -410,11 +497,16 @@
                                             </li>
                                             <li class="theme-option">
                                                 <div class="theme-color">
-                                                    <a href="javascript:" class="navbg-pattern image" (click)="this.sidebarImgType='img1'" navbg-pattern="img1"></a>
-                                                    <a href="javascript:" class="navbg-pattern image" (click)="this.sidebarImgType='img2'" navbg-pattern="img2"></a>
-                                                    <a href="javascript:" class="navbg-pattern image" (click)="this.sidebarImgType='img3'" navbg-pattern="img3"></a>
-                                                    <a href="javascript:" class="navbg-pattern image" (click)="this.sidebarImgType='img4'" navbg-pattern="img4"></a>
-                                                    <a href="javascript:" class="navbg-pattern image" (click)="this.sidebarImgType='img5'" navbg-pattern="img5"></a>
+                                                    <a href="javascript:" class="navbg-pattern image"
+                                                        (click)="this.sidebarImgType='img1'" navbg-pattern="img1"></a>
+                                                    <a href="javascript:" class="navbg-pattern image"
+                                                        (click)="this.sidebarImgType='img2'" navbg-pattern="img2"></a>
+                                                    <a href="javascript:" class="navbg-pattern image"
+                                                        (click)="this.sidebarImgType='img3'" navbg-pattern="img3"></a>
+                                                    <a href="javascript:" class="navbg-pattern image"
+                                                        (click)="this.sidebarImgType='img4'" navbg-pattern="img4"></a>
+                                                    <a href="javascript:" class="navbg-pattern image"
+                                                        (click)="this.sidebarImgType='img5'" navbg-pattern="img5"></a>
                                                 </div>
                                             </li>
                                             <li>
@@ -422,18 +514,30 @@
                                             </li>
                                             <li class="theme-option">
                                                 <div class="theme-color">
-                                                    <a href="javascript:" (click)="this.activeItemTheme='theme1'" class="small" active-item-theme="theme1"></a>
-                                                    <a href="javascript:" (click)="this.activeItemTheme='theme2'" class="small" active-item-theme="theme2"></a>
-                                                    <a href="javascript:" (click)="this.activeItemTheme='theme3'" class="small" active-item-theme="theme3"></a>
-                                                    <a href="javascript:" (click)="this.activeItemTheme='theme4'" class="small" active-item-theme="theme4"></a>
-                                                    <a href="javascript:" (click)="this.activeItemTheme='theme5'" class="small" active-item-theme="theme5"></a>
-                                                    <a href="javascript:" (click)="this.activeItemTheme='theme6'" class="small" active-item-theme="theme6"></a>
-                                                    <a href="javascript:" (click)="this.activeItemTheme='theme7'" class="small" active-item-theme="theme7"></a>
-                                                    <a href="javascript:" (click)="this.activeItemTheme='theme8'" class="small" active-item-theme="theme8"></a>
-                                                    <a href="javascript:" (click)="this.activeItemTheme='theme9'" class="small" active-item-theme="theme9"></a>
-                                                    <a href="javascript:" (click)="this.activeItemTheme='theme10'" class="small" active-item-theme="theme10"></a>
-                                                    <a href="javascript:" (click)="this.activeItemTheme='theme11'" class="small" active-item-theme="theme11"></a>
-                                                    <a href="javascript:" (click)="this.activeItemTheme='theme12'" class="small" active-item-theme="theme12"></a>
+                                                    <a href="javascript:" (click)="this.activeItemTheme='theme1'"
+                                                        class="small" active-item-theme="theme1"></a>
+                                                    <a href="javascript:" (click)="this.activeItemTheme='theme2'"
+                                                        class="small" active-item-theme="theme2"></a>
+                                                    <a href="javascript:" (click)="this.activeItemTheme='theme3'"
+                                                        class="small" active-item-theme="theme3"></a>
+                                                    <a href="javascript:" (click)="this.activeItemTheme='theme4'"
+                                                        class="small" active-item-theme="theme4"></a>
+                                                    <a href="javascript:" (click)="this.activeItemTheme='theme5'"
+                                                        class="small" active-item-theme="theme5"></a>
+                                                    <a href="javascript:" (click)="this.activeItemTheme='theme6'"
+                                                        class="small" active-item-theme="theme6"></a>
+                                                    <a href="javascript:" (click)="this.activeItemTheme='theme7'"
+                                                        class="small" active-item-theme="theme7"></a>
+                                                    <a href="javascript:" (click)="this.activeItemTheme='theme8'"
+                                                        class="small" active-item-theme="theme8"></a>
+                                                    <a href="javascript:" (click)="this.activeItemTheme='theme9'"
+                                                        class="small" active-item-theme="theme9"></a>
+                                                    <a href="javascript:" (click)="this.activeItemTheme='theme10'"
+                                                        class="small" active-item-theme="theme10"></a>
+                                                    <a href="javascript:" (click)="this.activeItemTheme='theme11'"
+                                                        class="small" active-item-theme="theme11"></a>
+                                                    <a href="javascript:" (click)="this.activeItemTheme='theme12'"
+                                                        class="small" active-item-theme="theme12"></a>
                                                 </div>
                                             </li>
                                             <li>
@@ -441,12 +545,24 @@
                                             </li>
                                             <li class="theme-option">
                                                 <div class="theme-color">
-                                                    <a href="javascript:" class="small" (click)="this.menuTitleTheme='theme1'" lheader-theme="theme1"></a>
-                                                    <a href="javascript:" class="small" (click)="this.menuTitleTheme='theme2'" lheader-theme="theme2"></a>
-                                                    <a href="javascript:" class="small" (click)="this.menuTitleTheme='theme3'" lheader-theme="theme3"></a>
-                                                    <a href="javascript:" class="small" (click)="this.menuTitleTheme='theme4'" lheader-theme="theme4"></a>
-                                                    <a href="javascript:" class="small" (click)="this.menuTitleTheme='theme5'" lheader-theme="theme5"></a>
-                                                    <a href="javascript:" class="small" (click)="this.menuTitleTheme='theme6'" lheader-theme="theme6"></a>
+                                                    <a href="javascript:" class="small"
+                                                        (click)="this.menuTitleTheme='theme1'"
+                                                        lheader-theme="theme1"></a>
+                                                    <a href="javascript:" class="small"
+                                                        (click)="this.menuTitleTheme='theme2'"
+                                                        lheader-theme="theme2"></a>
+                                                    <a href="javascript:" class="small"
+                                                        (click)="this.menuTitleTheme='theme3'"
+                                                        lheader-theme="theme3"></a>
+                                                    <a href="javascript:" class="small"
+                                                        (click)="this.menuTitleTheme='theme4'"
+                                                        lheader-theme="theme4"></a>
+                                                    <a href="javascript:" class="small"
+                                                        (click)="this.menuTitleTheme='theme5'"
+                                                        lheader-theme="theme5"></a>
+                                                    <a href="javascript:" class="small"
+                                                        (click)="this.menuTitleTheme='theme6'"
+                                                        lheader-theme="theme6"></a>
                                                 </div>
                                             </li>
                                         </ul>
@@ -459,4 +575,30 @@
             </div>
         </div>
     </div>
+</div>
+<!-- change password -->
+<div class="modal-size addlocation employee-form">
+    <app-modal-animation [modalID]="'profilemodal'" [modalClass]="'md-effect-7'">
+        <h3 class="f-26">Change password</h3>
+        <form [formGroup]="passwordForm">
+            <div class="form-header pt-2">
+                <div class="col-md-12">
+                    <div class="form-group required">
+                        <label>New password</label>
+                        <input type="password" class="form-control" placeholder="New password"
+                            formControlName="newpassword">
+                    </div>
+                    <div class="form-group required">
+                        <label>Confirm password</label>
+                        <input type="password" class="form-control" placeholder="Confirm password"
+                            formControlName="confirmpassword">
+                    </div>
+                </div>
+                <button type="button" placement="top" (click)="changePassword()" ngbTooltip="Click to save password"
+                    class="btn pull-right btn-primary waves-effect 
+                    m-b-10 m-r-15">Update</button>
+            </div>
+        </form>
+        <button (click)="closePassword()" aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>
+    </app-modal-animation>
 </div>

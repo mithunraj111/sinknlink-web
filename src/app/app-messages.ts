@@ -147,12 +147,13 @@ export const AppMessages = Object.freeze({
         required: 'Please enter new password',
         minlength: 'Please enter password atleast 8 characters',
         maxlength: 'Please enter password within 30 characters',
-        equal: 'New password and confirm password should be equal '
+        equal: 'New password and confirm password should be same '
       },
       confirmpassword: {
         required: 'Please enter confirm password',
         minlength: 'Please enter password atleast 8 characters',
         maxlength: 'Please enter password within 30 characters',
+        common:'Password updated successfully'
       },
       fullname: {
         required: 'Please enter full name',
@@ -169,6 +170,7 @@ export const AppMessages = Object.freeze({
         minlength: 'please enter address atleast 1 characters',
         maxlength: 'Please enter address should be within 100 characters',
       }
+     
     },
     LOCATION: {
       pincode: {
