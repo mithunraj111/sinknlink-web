@@ -7,10 +7,15 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
 import { AppMessages } from 'src/app/app-messages';
 import { DatePipe } from '@angular/common';
+import { RazarpayService } from '../../../../services/razorpay.service';
+declare var Razorpay: any;
 @Component({
   selector: 'app-customer-payments',
   templateUrl: './customer-payments.component.html',
-  styleUrls: ['./customer-payments.component.scss']
+  styleUrls: ['./customer-payments.component.scss'],
+  providers: [
+    RazarpayService
+  ],
 })
 export class CustomerPaymentsComponent implements OnInit, OnChanges {
   payHistoryList = [];
@@ -32,9 +37,11 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
   totalamount = 0;
   nextdue: any;
   lastpaid: any;
-  subscriptionAmt = 100;
+  subscriptionAmt;
   selfPayment = true;
   collectpayment = false;
+  razarresponse: any;
+  authentication: any;
   emptymessages = AppConstant.EMPTY_MESSAGES.PAYMENT;
   constructor(private paymentService: AppCommonService.PaymentsService,
     private lookupService: AdminService.LookupService,
@@ -42,8 +49,8 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
     private fb: FormBuilder,
     private donationService: AdminService.DonationService,
     private bootstrapAlertService: BootstrapAlertService,
-    private localStorageService: LocalStorageService) {
-    this.totalamount = this.subscriptionAmt;
+    private localStorageService: LocalStorageService,
+    private razarpayService: RazarpayService) {
     this.getDonations();
     this.userstoragedata = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER);
   }
@@ -63,6 +70,25 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     this.getPaymentHistory(changes.customerObj.currentValue);
     this.getLookUps();
+  }
+  onlinePay() {
+    this.razarpayService.loadrazarpay().then(() => {
+      let self = this;
+      const options = {
+        key: this.authentication,
+        amount: this.totalamount * 100,
+        name: this.customerObj.bizname,
+        currency: 'INR',
+        description: 'Paid by online',
+        handler: function (response) {
+          if (response.razorpay_payment_id) {
+            self.saveOnlinePayment(response.razorpay_payment_id);
+          }
+        }
+      };
+      let rasar = new Razorpay(options);
+      rasar.open();
+    });
   }
   getPaymentHistory(customerObj) {
     let selectedDate = [] as any;
@@ -137,13 +163,20 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
           response.data.map(item => {
             item.value = item.refvalue;
             item.label = item.refvalue;
+            if (item.refkey === 'biz_plan') {
+              this.subscriptionAmt = item.refvalue;
+              this.totalamount = this.subscriptionAmt;
+            }
+            if (item.refkey === 'biz_razar') {
+              this.authentication = item.refvalue;
+            }
           });
           const groupedData = _.groupBy(response.data, 'refkey');
           this.paymentMethods = _.get(groupedData, 'biz_paymentmethods');
           this.paymentTenure = _.get(groupedData, 'biz_paymenttenure');
         }
       }
-      this.paymentarray = this.paymentTenure.find((item) => item.refid === this.customerObj.paymenttenure)
+      this.paymentarray = this.paymentTenure.find((item) => item.refid === Number(this.customerObj.paymenttenure));
       const date = new Date(this.lastpaid);
       if (!_.isUndefined(this.paymentarray)) {
         this.nextdue = date.setDate(date.getDate() + Number(this.paymentarray.refvalue));
@@ -161,7 +194,7 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
       return false;
     }
     const formData = this.addPaymentForm.value;
-    this.collectpayment == true;
+    this.collectpayment = true;
     const data = {
       paymentdate: this.commonService.formatDate(formData.paymentdt),
       totalamount: Number(formData.totalamount),
@@ -170,7 +203,9 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
       paymentref: formData.paymentref,
       paymenttype: AppConstant.PAYMENT_TYPES[1],
       paymentstatus: AppConstant.STATUS_SUCCESS,
-      remarks: formData.remarks
+      remarks: formData.remarks,
+      updateddt: new Date(),
+      updatedby: this.userstoragedata.fullname
     };
     this.save(data);
   }
@@ -184,15 +219,20 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
     this.totalamount = this.subscriptionAmt + donationAmt;
   }
 
-  saveOnlinePayment() {
+  saveOnlinePayment(onlinepaymentid) {
     const data = {
+      paymentref: onlinepaymentid,
       paymentdate: new Date(),
-      totalamount: this.totalamount,
+      amount: Number(this.totalamount),
+      totalamount: Number(this.totalamount),
       membershipid: this.customerObj.membershipid,
-      paymentmode: 'NEFT',
-      paymentref: '',
+      reference: 'Online#',
+      paymentmode: 'Razarpay',
+      remarks: 'Paid',
       paymenttype: AppConstant.PAYMENT_TYPES[0],
-      paymentstatus: AppConstant.STATUS_SUCCESS
+      paymentstatus: AppConstant.STATUS_SUCCESS,
+      updateddt: new Date(),
+      updatedby: this.userstoragedata.fullname
     };
     this.save(data);
   }
@@ -201,13 +241,15 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
     this.paymentService.create(data).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
-        this.payHistoryList = [response.data, ...this.payHistoryList];
-        this.bootstrapAlertService.showSucccess(response.message);
-        this.closeModal('customerpaymentmodal');
+        if (data.paymenttype === AppConstant.PAYMENT_TYPES[1]) {
+          this.bootstrapAlertService.showSucccess(response.message);
+          this.closeModal('customerpaymentmodal');
+        }
+        this.getPaymentHistory(this.customerObj);
       } else {
         this.bootstrapAlertService.showError(response.message);
       }
-      this.collectpayment == false;
+      this.collectpayment = false;
     });
   }
 

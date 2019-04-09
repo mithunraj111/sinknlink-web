@@ -288,7 +288,9 @@ export const AppConstant = Object.freeze({
     EMAIL: '([a-z0-9&_\.-]*[@][a-z0-9]+((\.[a-z]{2,3})?\.[a-z]{2,3}))',
   },
 
-  //Do not change this variables//
+  // Razarpay
+  RAZARPAYSCRIPT: 'https://checkout.razorpay.com/v1/checkout.js',
+  // Do not change this variables//
 
   EMPTY_MESSAGES: {
     USER: { emptyMessage: 'No user data to display', totalMessage: 'total' },
