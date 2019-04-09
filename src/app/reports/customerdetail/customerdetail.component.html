@@ -150,13 +150,13 @@
 
                                 <ngx-datatable-column prop="gigcount" name="Gigs" [resizeable]="false" headerClass="text-right" [cellClass]="'text-right'">
                                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                                        <span>{{row.gigcount}}</span>
+                                        <span>{{row.gigs.length}}</span>
                                     </ng-template>
                                 </ngx-datatable-column>
 
                                 <ngx-datatable-column prop="couponcount" name="Coupons" [resizeable]="false" headerClass="text-right" [cellClass]="'text-right'">
                                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                                        <span>{{row.couponcount}}</span>
+                                        <span>{{row.coupons.length}}</span>
                                     </ng-template>
                                 </ngx-datatable-column>
 
