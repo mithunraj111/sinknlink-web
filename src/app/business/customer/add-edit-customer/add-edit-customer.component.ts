@@ -350,7 +350,7 @@ export class AddEditCustomerComponent implements OnInit {
         lng: data.longitude
       };
       formdata.contactmobile = [];
-      formdata.contactmobile[0] = data.contactmobile;
+      formdata.contactmobile[0] = (data.contactmobile).toString();
       if (this.userstoragedata.usertype === 'D') {
         formdata.dealerid = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.DEALER).dealerid;
       }
