@@ -41,7 +41,8 @@ export const AppMessages = Object.freeze({
     },
     EVENT: {
       eventname: {
-        required: 'Event name is required'
+        required: 'Event name is required',
+        maxlength:'Please enter Event name within 50 characters'
       },
       locationid: {
         required: 'Location is required'
@@ -54,10 +55,12 @@ export const AppMessages = Object.freeze({
         required: 'Event end date is requried'
       },
       address: {
-        required: 'Address is requried'
+        required: 'Address is requried',
+        maxlength:'Please enter address within 100 characters'
       },
       description: {
-        required: 'Description is requried'
+        required: 'Description is requried',
+        maxlength:'Please enter description within 500 characters'
       }
     },
     ADVERTISEMENT: {

@@ -76,12 +76,15 @@ export class AddEditEventComponent implements OnInit {
   }
   initEventForm() {
     this.eventForm = this.fb.group({
-      eventname: [null, [Validators.required]],
+      eventname: [null, Validators.compose([Validators.required,
+      Validators.maxLength(50)])],
       locationid: [null, [Validators.required]],
       eventdate: [null, [Validators.required]],
       eventexpirydt: [null, [Validators.required]],
-      address: [null, [Validators.required]],
-      description: [null, [Validators.required]],
+      address: [null, Validators.compose([Validators.required,
+      Validators.maxLength(100)])],
+      description: [null, Validators.compose([Validators.required,
+      Validators.maxLength(500)])],
       status: ['Active']
     });
   }
@@ -124,7 +127,7 @@ export class AddEditEventComponent implements OnInit {
     let data = form_data;
     data.eventdate = this.commonService.formatDate(data.eventdate);
     data.eventexpirydt = this.commonService.formatDate(data.eventexpirydt);
-    data.status = data.status?AppConstant.STATUS_ACTIVE:AppConstant.STATUS_INACTIVE;
+    data.status = data.status ? AppConstant.STATUS_ACTIVE : AppConstant.STATUS_INACTIVE;
     if (new Date(data.eventexpirydt) < new Date(data.eventdate)) {
       this.savingEvent = false;
       this.bootstrapAlertService.showError(AppMessages.VALIDATION.EVENT.eventdate.max);
@@ -159,23 +162,23 @@ export class AddEditEventComponent implements OnInit {
     }
   }
   updateEvent(data) {
-      let formData = new FormData();
-      for (let index = 0; index < this.images.length; index++) {
-        const element = this.images[index];
-        formData.append('files', element.image);
-      }
-      formData.append('data', JSON.stringify(data));
-      this.eventService.update(formData, this.eventid).subscribe(res => {
-        this.savingEvent = false;
-        let response = JSON.parse(res._body);
-        if (response.status) {
-          this.bootstrapAlertService.showSucccess(response.message);
-          this.router.navigate(['/admin/events/']);
-        } else {
-          this.bootstrapAlertService.showError(response.message);
-        }
-      }, err => {
-        this.savingEvent = false;
-      });
+    let formData = new FormData();
+    for (let index = 0; index < this.images.length; index++) {
+      const element = this.images[index];
+      formData.append('files', element.image);
     }
+    formData.append('data', JSON.stringify(data));
+    this.eventService.update(formData, this.eventid).subscribe(res => {
+      this.savingEvent = false;
+      let response = JSON.parse(res._body);
+      if (response.status) {
+        this.bootstrapAlertService.showSucccess(response.message);
+        this.router.navigate(['/admin/events/']);
+      } else {
+        this.bootstrapAlertService.showError(response.message);
+      }
+    }, err => {
+      this.savingEvent = false;
+    });
+  }
 }

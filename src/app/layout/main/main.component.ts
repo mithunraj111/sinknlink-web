@@ -137,7 +137,8 @@ export class MainComponent implements OnInit {
   errMessage;
   profileErrObj = AppMessages.VALIDATION.PROFILE;
   showProfile: boolean;
-
+  obscureText = true;
+  passwordText = true;
   constructor(public menuItems: MenuItems, private router: Router, private route: ActivatedRoute,
     private lstorageService: LocalStorageService, private permissionsService: NgxPermissionsService, private userService: MasterService.UserService, private bootstrapAlertService: BootstrapAlertService,
     private commonService: CommonService, private fb: FormBuilder) {
