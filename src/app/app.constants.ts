@@ -63,6 +63,7 @@ export const AppConstant = Object.freeze({
   STATUS_INVALID: 'Invalid',
   STATUS_BLOCKED: 'Blocked',
   STATUS_SUCCESS: 'Success',
+  STATUS_FAILED: 'Failed',
   STATUS_ALLOCATED: 'Allocated',
   MEM_TYPE: 'Free',
   // Datatypes array

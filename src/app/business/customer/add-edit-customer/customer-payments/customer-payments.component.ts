@@ -84,6 +84,11 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
           if (response.razorpay_payment_id) {
             self.saveOnlinePayment(response.razorpay_payment_id);
           }
+        },
+        modal: {
+          ondismiss: function () {
+            self.saveOnlinePayment('');
+          }
         }
       };
       let rasar = new Razorpay(options);
@@ -167,7 +172,7 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
               this.subscriptionAmt = item.refvalue;
               this.totalamount = this.subscriptionAmt;
             }
-            if (item.refkey === 'biz_razar') {
+            if (item.refkey === 'biz_razar' && item.refname === 'Authentication key') {
               this.authentication = item.refvalue;
             }
           });
@@ -221,19 +226,24 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
 
   saveOnlinePayment(onlinepaymentid) {
     const data = {
-      paymentref: onlinepaymentid,
       paymentdate: new Date(),
       amount: Number(this.totalamount),
       totalamount: Number(this.totalamount),
       membershipid: this.customerObj.membershipid,
       reference: 'Online#',
       paymentmode: 'Razarpay',
-      remarks: 'Paid',
       paymenttype: AppConstant.PAYMENT_TYPES[0],
-      paymentstatus: AppConstant.STATUS_SUCCESS,
       updateddt: new Date(),
       updatedby: this.userstoragedata.fullname
-    };
+    } as any;
+    if (onlinepaymentid !== '') {
+      data.paymentref = onlinepaymentid;
+      data.paymentstatus = AppConstant.STATUS_SUCCESS;
+    } else {
+      data.paymentref = 'Payment cancelled';
+      data.remarks = 'Payment cancelled';
+      data.paymentstatus = AppConstant.STATUS_FAILED;
+    }
     this.save(data);
   }
 
