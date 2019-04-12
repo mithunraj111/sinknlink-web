@@ -53,7 +53,7 @@ export class AddEditUserComponent implements OnInit {
   initForm() {
     this.userForm = this.fb.group({
       fullname: [null, Validators.compose([Validators.required, Validators.minLength(1),
-      Validators.maxLength(50), Validators.pattern('^[a-zA-Z ]*$')])],
+      Validators.maxLength(50), Validators.pattern('[a-z A-Z0-9\\_\\"]+$')])],
       mobileno: [null, Validators.compose([Validators.required, Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$'),
       Validators.maxLength(13)])],
       rolename: [null, Validators.compose([Validators.required])],

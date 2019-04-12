@@ -99,6 +99,7 @@ export class LocationComponent extends BaseService implements OnInit {
 
   }
   notifyLocationEntry(event) {
+    this.locationObj = {};
     if (!event.close) {
       this.getLocations();
       this.closeLocationModal('locationmodal');
