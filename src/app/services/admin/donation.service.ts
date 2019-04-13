@@ -9,8 +9,15 @@ export class DonationService {
     constructor(private httpHandler: HttpHandlerService) {
         this.endpoint = AppConstant.API_END_POINT;
     }
-    list(data): Observable<any> {
-        return this.httpHandler.POST(this.endpoint + AppConstant.API_CONFIG.API_URL.ADMIN.DONATION.LIST, data);
+    list(data, offset?, limit?): Observable<any> {
+        let url = this.endpoint + AppConstant.API_CONFIG.API_URL.ADMIN.DONATION.LIST;
+        if (offset !== undefined) {
+            url += '?offset=' + offset;
+        }
+        if (limit !== undefined) {
+            url += '&limit=' + limit;
+        }
+        return this.httpHandler.POST(url, data);
     }
     create(data): Observable<any> {
         return this.httpHandler.POST(this.endpoint + AppConstant.API_CONFIG.API_URL.ADMIN.DONATION.CREATE, data);

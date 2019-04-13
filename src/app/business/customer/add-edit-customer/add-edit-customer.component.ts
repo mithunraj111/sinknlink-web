@@ -133,6 +133,8 @@ export class AddEditCustomerComponent implements OnInit {
         this.mallsList.push(element);
       }
     });
+    this.customerForm.get('locationid').setValidators(Validators.required);
+    this.customerForm.get('locationid').updateValueAndValidity();
     this.getLocationList();
   }
   getLookUps() {
@@ -241,7 +243,7 @@ export class AddEditCustomerComponent implements OnInit {
       postaladdress: ['', Validators.compose([Validators.minLength(1), Validators.maxLength(100)])],
       latitude: [null, Validators.required],
       longitude: [null, Validators.required],
-      city: [''],
+      city: ['', Validators.required],
       locationid: [null, Validators.required],
       workdays: [_.map(this.workDays, _.property('value')), Validators.required],
       starttime: ['09:00', Validators.required],
@@ -478,6 +480,16 @@ export class AddEditCustomerComponent implements OnInit {
         }
       });
       this.customerObj.socialids = socialids;
+    }
+    let paymentObj = {} as any;
+    const self = this;
+    paymentObj = _.find(this.paymentTenuresList, function (item) {
+      if (item.refid === Number(self.customerObj.paymenttenure)) {
+        return item;
+      }
+    });
+    if (!_.isUndefined(paymentObj)) {
+      this.customerObj.paymenttenure = paymentObj.refvalue;
     }
     this.customerForm.patchValue(this.customerObj);
     if (this.customerForm.get('membershiptype').value !== AppConstant.MEM_TYPE) {

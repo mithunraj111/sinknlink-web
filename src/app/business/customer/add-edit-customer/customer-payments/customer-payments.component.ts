@@ -38,7 +38,6 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
   nextdue: any;
   lastpaid: any;
   subscriptionAmt;
-  selfPayment = true;
   collectpayment = false;
   razarresponse: any;
   authentication: any;
@@ -64,7 +63,7 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
       totalamount: [null, Validators.compose([Validators.required, Validators.pattern('^[0-9]*$')])],
       paymentref: ['', Validators.required],
       paymentmode: ['', Validators.required],
-      remarks: ['']
+      remarks: ['', Validators.maxLength(100)]
     });
   }
   ngOnChanges(changes: SimpleChanges) {
@@ -121,8 +120,10 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
       status: AppConstant.STATUS_ACTIVE,
       startdate: today,
       enddate: today
-    }
-    this.donationService.list(condition).subscribe(res => {
+    };
+    const limit = 1;
+    const offset = 0;
+    this.donationService.list(condition, offset, limit).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
         this.donationList = response.data;
@@ -218,10 +219,10 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
     let donationAmt = 0;
     _.map(this.donationList, function (item) {
       if (item.selected && item.selectedAmt) {
-        donationAmt = donationAmt + Number(item.selectedAmt);
+        donationAmt = Number(donationAmt) + Number(item.selectedAmt);
       }
     });
-    this.totalamount = this.subscriptionAmt + donationAmt;
+    this.totalamount = Number(this.subscriptionAmt) + Number(donationAmt);
   }
 
   saveOnlinePayment(onlinepaymentid) {

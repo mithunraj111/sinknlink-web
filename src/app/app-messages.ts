@@ -42,7 +42,7 @@ export const AppMessages = Object.freeze({
     EVENT: {
       eventname: {
         required: 'Event name is required',
-        maxlength:'Please enter Event name within 50 characters'
+        maxlength: 'Please enter Event name within 50 characters'
       },
       locationid: {
         required: 'Location is required'
@@ -56,11 +56,11 @@ export const AppMessages = Object.freeze({
       },
       address: {
         required: 'Address is requried',
-        maxlength:'Please enter address within 100 characters'
+        maxlength: 'Please enter address within 100 characters'
       },
       description: {
         required: 'Description is requried',
-        maxlength:'Please enter description within 500 characters'
+        maxlength: 'Please enter description within 500 characters'
       }
     },
     ADVERTISEMENT: {
@@ -156,7 +156,7 @@ export const AppMessages = Object.freeze({
         required: 'Please enter confirm password',
         minlength: 'Please enter password atleast 8 characters',
         maxlength: 'Please enter password within 30 characters',
-        common:'Password updated successfully'
+        common: 'Password updated successfully'
       },
       fullname: {
         required: 'Please enter full name',
@@ -173,7 +173,7 @@ export const AppMessages = Object.freeze({
         minlength: 'please enter address atleast 1 characters',
         maxlength: 'Please enter address should be within 100 characters',
       }
-     
+
     },
     LOCATION: {
       pincode: {
@@ -354,6 +354,7 @@ export const AppMessages = Object.freeze({
         required: 'Please enter longitude',
         invalid: 'Please enter valid longitude'
       },
+      city: { required: 'Please select city' },
       locationid: { required: 'Please select location' },
       workdays: { required: 'Please select work days' },
       starttime: { required: 'Please enter work hours' },
@@ -382,7 +383,7 @@ export const AppMessages = Object.freeze({
       totalamount: { required: 'Please enter amount', pattern: 'Payment should only contain numbers' },
       paymentmode: { required: 'Please select mode of payment' },
       paymentref: { required: 'Please enter payment reference' },
-      remarks: {}
+      remarks: { maxlength: 'payment reference should be within 100 characters'}
     },
     REPLY: {
       reply: { required: 'Please enter a reply' }
