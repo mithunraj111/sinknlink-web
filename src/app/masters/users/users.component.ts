@@ -103,6 +103,7 @@ export class UsersComponent extends BaseService implements OnInit {
     this.table.offset = 0;
   }
   notifyUserEntry(event) {
+    this.userObj = [];
     if (!event.close) {
       this.getUsers();
       this.closeUserModal('usermodal');
