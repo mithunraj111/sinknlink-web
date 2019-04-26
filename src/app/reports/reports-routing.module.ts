@@ -83,7 +83,7 @@ const routes: Routes = [
         component: CustomerdetailComponent,
         canActivate: [AuthGuard, NgxPermissionsGuard],
         data: {
-          title: 'Customer Detail Report',
+          title: 'Customer Report',
           status: false,
           permissions: {
             only: ['Customer Detail Report'],

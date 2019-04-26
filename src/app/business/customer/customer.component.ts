@@ -32,6 +32,16 @@ export class CustomerComponent extends BaseService implements OnInit {
   ngOnInit() {
 
   }
+
+  getNextDue(duedate: string) {
+    console.log(duedate);
+    if (duedate !== null && duedate !== "") {
+      return Math.round((new Date(duedate) - new Date()) / (1000 * 60 * 60 * 24)) + " Days";
+    }else{
+      return "-";
+    }
+  }
+
   getCustomerList() {
     const condition = {} as any;
     if (this.userstoragedata.roleid === 2) {

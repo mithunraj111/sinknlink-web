@@ -318,6 +318,18 @@ export class AddEditCustomerComponent implements OnInit {
         );
         if (!_.isUndefined(paymentarray)) {
           formdata.paymenttenure = paymentarray.refid.toString();
+
+          var date = new Date();
+
+          if (paymentarray.refname == "Yearly") {
+            formdata.nextdue = new Date(date.setDate(date.getDate() + 365)).toISOString();
+          } else if (paymentarray.refname == "Half Yearly") {
+            formdata.nextdue = new Date(date.setDate(date.getDate() + 183)).toISOString();
+          } else if (paymentarray.refname == "Quarterly") {
+            formdata.nextdue = new Date(date.setDate(date.getDate() + 90)).toISOString();
+          } else if (paymentarray.refname == "Monthly") {
+            formdata.nextdue = new Date(date.setDate(date.getDate() + 28)).toISOString();
+          }
         }
       } else {
         formdata.paymenttenure = '';

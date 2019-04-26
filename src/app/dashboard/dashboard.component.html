@@ -2,7 +2,7 @@
   <div class="row">
     <!-- order-card start -->
     <div class="col-md-6 col-xl-3">
-      <div class="card bg-c-blue order-card">
+      <div (click)="navigateOnCardClick(counts[0]?.label)" class="card bg-c-blue order-card">
         <div class="card-block">
           <h6 class="m-b-10 f-18">{{counts[0]?.label || '-'}}</h6>
           <h2 class="text-right"><i class="{{counts[0]?.icon}} f-left p-r-10 mt-1"></i><span class="f-20">{{counts[0]?.count || '-'}}</span></h2>
@@ -10,7 +10,7 @@
       </div>
     </div>
     <div class="col-md-6 col-xl-3">
-      <div class="card bg-c-green order-card">
+      <div (click)="navigateOnCardClick(counts[2]?.label)" class="card bg-c-green order-card">
         <div class="card-block">
           <h6 class="m-b-10 f-18">{{counts[2]?.label || '-'}}</h6>
           <h2 class="text-right"><i class="{{counts[2]?.icon}} f-left p-r-10 mt-1"></i>
@@ -20,7 +20,7 @@
       </div>
     </div>
     <div class="col-md-6 col-xl-3">
-      <div class="card bg-c-yellow order-card">
+      <div (click)="navigateOnCardClick(counts[1]?.label)" class="card bg-c-yellow order-card">
         <div class="card-block">
           <h6 class="m-b-10 f-18">{{counts[1]?.label || '-'}}</h6>
           <h2 class="text-right"><i class="{{counts[1]?.icon}} f-left p-r-10 mt-1"></i><span class="f-20">{{counts[1]?.count || '-'}}</span></h2>
@@ -28,7 +28,7 @@
       </div>
     </div>
     <div class="col-md-6 col-xl-3">
-      <div class="card bg-c-pink order-card">
+      <div (click)="navigateOnCardClick(counts[3]?.label)" class="card bg-c-pink order-card">
         <div class="card-block">
           <h6 class="m-b-10 f-18">{{counts[3]?.label || '-'}}</h6>
           <h2 class="text-right"><i class="{{counts[3]?.icon}} f-left p-r-10 mt-1"></i><span class="f-20">{{counts[3]?.count || '-'}}</span></h2>

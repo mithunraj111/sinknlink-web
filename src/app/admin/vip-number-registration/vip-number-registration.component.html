@@ -3,19 +3,26 @@
         <div class="col-md-9 col-sm-9 p-r-0">
             <div class="row">
                 <div class="col-md-6 col-sm-6">
-                    <input #vipnoregSearch type="text" (keyup)='search($event)' class="header-search form-control col-md-8 col-sm-8 p-l-0 input-sm full-data-search" placeholder="Search here" placement="bottom" ngbTooltip="Type here to search">
-                    <button type="button" class="btn search-close col-md-1 col-sm-1 p-l-0 p-r-0" (click)="vipnoregSearch.value='';search();"><i class="fa fa-close"></i></button>
+                    <input #vipnoregSearch type="text" (keyup)='search($event)'
+                        class="header-search form-control col-md-8 col-sm-8 p-l-0 input-sm full-data-search"
+                        placeholder="Search here" placement="bottom" ngbTooltip="Type here to search">
+                    <button type="button" class="btn search-close col-md-1 col-sm-1 p-l-0 p-r-0"
+                        (click)="vipnoregSearch.value='';search();"><i class="fa fa-close"></i></button>
                 </div>
                 <div class="col-md-6 col-sm-6 save-button text-right p-r-30">
                     <div *ngIf="currentTab == 'Available'" ngbDropdown class="dropdown-primary">
-                        <button ngbDropdownToggle class="m-r-10 add-btn btn btn-primary waves-effect" type="button">Action</button>
+                        <button ngbDropdownToggle class="m-r-10 add-btn btn btn-primary waves-effect"
+                            type="button">Action</button>
                         <div ngbDropdownMenu>
                             <a class="dropdown-item waves-light waves-effect" (click)='blockVipNumber()'>Block</a>
                             <a class="dropdown-item waves-light waves-effect" (click)='allocateVipNumber()'>Allocate</a>
                         </div>
                     </div>
-                    <button type="button" placement="bottom" ngbTooltip="Click to add" class="m-r-10 add-btn btn btn-primary waves-effect" (click)='addVipRegistration()'><i class="fa fa-plus-circle m-r-5"></i> New</button>
-                    <button type="button" placement="bottom" ngbTooltip="Reload" (click)="getAvailableList()" class="btn btn-inverse btn-primary waves-effect"><i class="ti-reload"></i></button>
+                    <button type="button" placement="bottom" ngbTooltip="Click to add"
+                        class="m-r-10 add-btn btn btn-primary waves-effect" (click)='addVipRegistration()'><i
+                            class="fa fa-plus-circle m-r-5"></i> New</button>
+                    <button type="button" placement="bottom" ngbTooltip="Reload" (click)="getAvailableList()"
+                        class="btn btn-inverse btn-primary waves-effect"><i class="ti-reload"></i></button>
                 </div>
             </div>
         </div>
@@ -32,27 +39,47 @@
                                 <div *ngIf="!loadingIndicator">
                                     <div class="table-header fixed-table-header">
                                         <div class="card p-r-15 p-l-15">
-                                            <ngx-datatable #vipnoregtable class="table data-table expandable" [rows]='data' [columnMode]="'flex'" [headerHeight]="50" [footerHeight]="50" [limit]="10" [rowHeight]="'auto'" [reorderable]="false" [selectionType]="'checkbox'" [messages]="emptymessages">
-                                                <ngx-datatable-column prop="fancyno" name="VIP Number" [resizeable]="false">
-                                                    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                                            <ngx-datatable #vipnoregtable class="table data-table expandable"
+                                                [rows]='data' [columnMode]="'flex'" [headerHeight]="50"
+                                                [footerHeight]="50" [limit]="10" [rowHeight]="'auto'"
+                                                [reorderable]="false" [selectionType]="'checkbox'"
+                                                [messages]="emptymessages">
+                                                <ngx-datatable-column prop="fancyno" name="VIP Number"
+                                                    [resizeable]="false">
+                                                    <ng-template let-rowIndex="rowIndex" let-row="row"
+                                                        ngx-datatable-cell-template>
                                                         <span>{{row.fancyno}}</span>
                                                     </ng-template>
                                                 </ngx-datatable-column>
-                                                <ngx-datatable-column prop="price" name="Price" [resizeable]="false" headerClass="text-right" [cellClass]="'text-right'">
-                                                    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                                                <ngx-datatable-column prop="price" name="Price" [resizeable]="false"
+                                                    headerClass="text-right" [cellClass]="'text-right'">
+                                                    <ng-template let-rowIndex="rowIndex" let-row="row"
+                                                        ngx-datatable-cell-template>
                                                         <span>{{row.price|currency : 'INR' : symbol}}</span>
                                                     </ng-template>
                                                 </ngx-datatable-column>
-                                                <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.5" headerClass="text-center" [cellClass]="'text-center'" [resizeable]="false">
-                                                    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                                                <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.5"
+                                                    headerClass="text-center" [cellClass]="'text-center'"
+                                                    [resizeable]="false">
+                                                    <ng-template let-rowIndex="rowIndex" let-row="row"
+                                                        ngx-datatable-cell-template>
                                                         <div class="row checkbox-column text-center">
-                                                            <div *ngIf="row.fancynostatus == 'Available'" class="border-checkbox-section">
-                                                                <div class="border-checkbox-group border-checkbox-group-primary m-r-15">
-                                                                    <input (change)="onNumberSelect(row.fancyid,row.fancyno)" class="border-checkbox" type="checkbox" [(ngModel)]="checks[rowIndex]" id={{rowIndex}}>
-                                                                    <label class="border-checkbox-label" for="{{rowIndex}}"></label>
+                                                            <div *ngIf="row.fancynostatus == 'Available'"
+                                                                class="border-checkbox-section">
+                                                                <div
+                                                                    class="border-checkbox-group border-checkbox-group-primary m-r-15">
+                                                                    <input
+                                                                        (change)="onNumberSelect(row.fancyid,row.fancyno)"
+                                                                        class="border-checkbox" type="checkbox"
+                                                                        [(ngModel)]="checks[rowIndex]" id={{rowIndex}}>
+                                                                    <label class="border-checkbox-label"
+                                                                        for="{{rowIndex}}"></label>
                                                                 </div>
                                                             </div>
-                                                            <a (click)="changeStatus(row, rowIndex, true)" placement="bottom" ngbTooltip="Click to delete registration details" class="crm-action-delete text-danger">
+                                                            <a (click)="changeStatus(row, rowIndex, true)"
+                                                                placement="bottom"
+                                                                ngbTooltip="Click to delete registration details"
+                                                                class="crm-action-delete text-danger">
                                                                 <i class="fa fa-trash"></i></a>
                                                         </div>
                                                     </ng-template>
@@ -70,25 +97,49 @@
                                 <div *ngIf="!loadingIndicator">
                                     <div class="table-header fixed-table-header">
                                         <div class="card p-r-15 p-l-15">
-                                            <ngx-datatable #vipnoregtable class="table data-table expandable" [rows]='blockedList' [columnMode]="'flex'" [headerHeight]="50" [footerHeight]="50" [limit]="10" [rowHeight]="'auto'" [reorderable]="false" [messages]="messages">
-                                                <ngx-datatable-column prop="fancyno" name="VIP Number" [resizeable]="false">
-                                                    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                                                        <a *ngIf="row.membershipid >= 1" style="text-decoration:underline" (click)="goToEdit(row?.membershipid)"><span class="cursor-pointer"> {{row?.fancyno}}</span></a>
-                                                        <span class="cursor-pointer" *ngIf="row.membershipid < 1">{{row.fancyno}}</span>
+                                            <ngx-datatable #vipnoregtable class="table data-table expandable"
+                                                [rows]='blockedList' [columnMode]="'flex'" [headerHeight]="50"
+                                                [footerHeight]="50" [limit]="10" [rowHeight]="'auto'"
+                                                [reorderable]="false" [messages]="messages">
+                                                <ngx-datatable-column prop="fancyno" name="VIP Number"
+                                                    [resizeable]="false">
+                                                    <ng-template let-rowIndex="rowIndex" let-row="row"
+                                                        ngx-datatable-cell-template>
+                                                        <a *ngIf="row.membershipid >= 1"
+                                                            style="text-decoration:underline"
+                                                            (click)="goToEdit(row?.membershipid)"><span
+                                                                class="cursor-pointer"> {{row?.fancyno}}</span></a>
+                                                        <span class="cursor-pointer"
+                                                            *ngIf="row.membershipid < 1">{{row.fancyno}}</span>
                                                     </ng-template>
                                                 </ngx-datatable-column>
-                                                <ngx-datatable-column prop="membershipid" name="Blocked For" [resizeable]="false">
-                                                    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                                                <ngx-datatable-column prop="membershipid" name="Blocked For"
+                                                    [resizeable]="false">
+                                                    <ng-template let-rowIndex="rowIndex" let-row="row"
+                                                        ngx-datatable-cell-template>
                                                         <span>{{row.business?.bizname}} {{row.membershipid}}</span>
                                                     </ng-template>
                                                 </ngx-datatable-column>
-                                                <ngx-datatable-column prop="Action" name="Action" [resizeable]="false" [sortable]="false">
-                                                    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                                                        <span><a (click)="unblockNumber(row.fancyid)" style="text-decoration:underline" class="cursor-pointer">Unblock</a></span>
+                                                <ngx-datatable-column prop="remaraks" name="Remarks"
+                                                    [resizeable]="false">
+                                                    <ng-template let-rowIndex="rowIndex" let-row="row"
+                                                        ngx-datatable-cell-template>
+                                                        <span>{{row.remarks}}</span>
                                                     </ng-template>
                                                 </ngx-datatable-column>
-                                                <ngx-datatable-column prop="price" name="Price" [resizeable]="false" headerClass="text-right" [cellClass]="'text-right pr-3'">
-                                                    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                                                <ngx-datatable-column prop="Action" name="Action" [resizeable]="false"
+                                                    [sortable]="false">
+                                                    <ng-template let-rowIndex="rowIndex" let-row="row"
+                                                        ngx-datatable-cell-template>
+                                                        <span><a (click)="unblockNumber(row.fancyid)"
+                                                                style="text-decoration:underline"
+                                                                class="cursor-pointer">Unblock</a></span>
+                                                    </ng-template>
+                                                </ngx-datatable-column>
+                                                <ngx-datatable-column prop="price" name="Price" [resizeable]="false"
+                                                    headerClass="text-right" [cellClass]="'text-right pr-3'">
+                                                    <ng-template let-rowIndex="rowIndex" let-row="row"
+                                                        ngx-datatable-cell-template>
                                                         <span>{{row.price|currency : 'INR' : symbol}}</span>
                                                     </ng-template>
                                                 </ngx-datatable-column>
@@ -105,25 +156,39 @@
                                 <div *ngIf="!loadingIndicator">
                                     <div class="table-header view-table fixed-table-header">
                                         <div class="card p-r-15 p-l-15">
-                                            <ngx-datatable #vipnoregtable class="table data-table expandable" [rows]='data' [columnMode]="'flex'" [headerHeight]="50" [footerHeight]="50" [limit]="10" [rowHeight]="'auto'" [reorderable]="false" [messages]="nodata">
-                                                <ngx-datatable-column prop="membershipcode" name="VIP Number" [resizeable]="false">
-                                                    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                                                        <span> 
-                                                            <a class="fa" style="text-decoration: underline;" (click)="goToEdit(row?.membershipid)">{{row?.membershipcode}}</a></span>
+                                            <ngx-datatable #vipnoregtable class="table data-table expandable"
+                                                [rows]='data' [columnMode]="'flex'" [headerHeight]="50"
+                                                [footerHeight]="50" [limit]="10" [rowHeight]="'auto'"
+                                                [reorderable]="false" [messages]="nodata">
+                                                <ngx-datatable-column prop="membershipcode" name="VIP Number"
+                                                    [resizeable]="false">
+                                                    <ng-template let-rowIndex="rowIndex" let-row="row"
+                                                        ngx-datatable-cell-template>
+                                                        <span>
+                                                            <a class="fa" style="text-decoration: underline;"
+                                                                (click)="goToEdit(row?.membershipid)">{{row?.membershipcode}}</a></span>
                                                     </ng-template>
                                                 </ngx-datatable-column>
-                                                <ngx-datatable-column prop="bizname" name="Business Name" [resizeable]="false">
-                                                    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                                                <ngx-datatable-column prop="bizname" name="Business Name"
+                                                    [resizeable]="false">
+                                                    <ng-template let-rowIndex="rowIndex" let-row="row"
+                                                        ngx-datatable-cell-template>
                                                         <span>{{row.bizname}}</span>
                                                     </ng-template>
                                                 </ngx-datatable-column>
-                                                <ngx-datatable-column prop="contactperson" name="Contact Name" [resizeable]="false" headerClass="text-left" [cellClass]="'text-left'">
-                                                    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                                                <ngx-datatable-column prop="contactperson" name="Contact Name"
+                                                    [resizeable]="false" headerClass="text-left"
+                                                    [cellClass]="'text-left'">
+                                                    <ng-template let-rowIndex="rowIndex" let-row="row"
+                                                        ngx-datatable-cell-template>
                                                         <span>{{row.contactperson}}</span>
                                                     </ng-template>
                                                 </ngx-datatable-column>
-                                                <ngx-datatable-column prop="contactmobile" name="Contact Details" [resizeable]="false" headerClass="text-left" [cellClass]="'text-left'">
-                                                    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                                                <ngx-datatable-column prop="contactmobile" name="Contact Details"
+                                                    [resizeable]="false" headerClass="text-left"
+                                                    [cellClass]="'text-left'">
+                                                    <ng-template let-rowIndex="rowIndex" let-row="row"
+                                                        ngx-datatable-cell-template>
                                                         <span class="updatename">{{row?.contactmobile[0]}}</span>
                                                         <span class="updatedate">{{row?.contactemail}}</span>
                                                     </ng-template>
@@ -150,7 +215,8 @@
             <div class="form-group required">
                 <label>Select Business</label>
                 <div class="col-md-12 p-l-0 p-r-0">
-                    <ng-select [(ngModel)]="selectedBiz" class="ng-select location-title" placeholder="Select Business" [options]="parentBiz">
+                    <ng-select [(ngModel)]="selectedBiz" class="ng-select location-title" placeholder="Select Business"
+                        [options]="parentBiz">
                     </ng-select>
                 </div>
             </div>
@@ -160,8 +226,10 @@
                     <textarea [(ngModel)]="blockRemarks" name="remarks" id="block_remarks"></textarea>
                 </div>
             </div>
-            <button (click)="blockorallocateNumber()" type="button" placement="top" ngbTooltip="Click to Save" class="btn pull-right btn-primary waves-effect m-b-10">Save</button>
+            <button (click)="blockorallocateNumber()" type="button" placement="top" ngbTooltip="Click to Save"
+                class="btn pull-right btn-primary waves-effect m-b-10">Save</button>
         </div>
-        <button (click)="closeMyModal($event)" aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>
+        <button (click)="closeMyModal($event)" aria-label="Close" class="md-close-btn"><i
+                class="fa fa-close"></i></button>
     </app-modal-animation>
 </div>

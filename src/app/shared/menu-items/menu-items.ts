@@ -216,10 +216,10 @@ export class MenuItems {
           },
           {
             state: 'customerdetail',
-            name: 'Customer Detail Report',
+            name: 'Customer Report',
             code: 'r_customer',
             data: {
-              title: 'Customer Detail Report'
+              title: 'Customer Report'
             }
           },
           {

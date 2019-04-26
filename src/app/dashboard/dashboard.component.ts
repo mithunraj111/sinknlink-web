@@ -7,6 +7,7 @@ import { BaseService } from '../services';
 import { AppConstant } from '../app.constants';
 import { fadeInOutTranslate } from '../../assets/animations/fadeInOutTranslate';
 import { ConsumerService } from '../services/business';
+import { Router } from '@angular/router';
 declare const AmCharts: any;
 
 @Component({
@@ -31,10 +32,13 @@ export class DashboardComponent extends BaseService implements OnInit {
   service;
   loadingIndicator = false;
   dealerstoragedata = this.localStorageService.getItem('dealer-');
+  router:Router;
+
   constructor(private dashboardService: DashboardService,
     private consumerService: ConsumerService,
-    config: NgbDropdownConfig) {
+    config: NgbDropdownConfig,router:Router) {
     super();
+    this.router = router;
     config.placement = 'top-right';
     config.autoClose = true;
   }
@@ -257,5 +261,19 @@ export class DashboardComponent extends BaseService implements OnInit {
       },
       'dataProvider': data
     });
+  }
+  navigateOnCardClick(title:String){
+    if(title.includes("Customers")){
+      this.router.navigate(["/business/customers"]);
+    }
+    if(title.includes("Dealers")){
+      this.router.navigate(["/business/dealer"]);
+    }
+    if(title.includes("Consumers")){
+      this.router.navigate(["/business/consumers"]);
+    }
+    if(title.includes("System Users")){
+      this.router.navigate(["/masters/users"]);
+    }
   }
 }
