@@ -34,10 +34,10 @@ export class CustomerComponent extends BaseService implements OnInit {
   }
 
   getNextDue(duedate: string) {
-    console.log(duedate);
+    var dd: any = duedate;
     if (duedate !== null && duedate !== "") {
-      return Math.round((new Date(duedate) - new Date()) / (1000 * 60 * 60 * 24)) + " Days";
-    }else{
+      return Math.round((+new Date(dd) - +new Date()) / (1000 * 60 * 60 * 24)) + " Days";
+    } else {
       return "-";
     }
   }
