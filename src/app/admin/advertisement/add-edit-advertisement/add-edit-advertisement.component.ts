@@ -9,6 +9,7 @@ import { CommonService } from 'src/app/services/common.service';
 import { AppMessages } from 'src/app/app-messages';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { AdminService } from '../../../services';
+import { LookupService } from 'src/app/services/admin';
 
 @Component({
   selector: 'app-add-edit-advertisement',
@@ -36,13 +37,18 @@ export class AddEditAdvertisementComponent implements OnInit {
   categorylist = [];
   images: any = [];
   existing_image: any = [];
+  cityList = [];
+  mallsList = [];
+  cityName: string;
+  lookupList: any = [];
 
   constructor(private localStorageService: LocalStorageService,
     private bootstrapAlertService: BootstrapAlertService,
     private commonService: CommonService,
     private fb: FormBuilder, private route: ActivatedRoute,
     private adService: AdminService.AdvertisementService,
-    private router: Router
+    private router: Router,
+    private lookupService: LookupService
   ) {
     this.route.params.subscribe(params => {
       if (params.id !== undefined) {
@@ -54,11 +60,35 @@ export class AddEditAdvertisementComponent implements OnInit {
   }
   ngOnInit() {
     this.initAdForm();
-    this.getLocations();
+    this.getCity(); 
     this.getcategory();
   }
+  getCity () {
+    this.lookupService.list({ refkey: 'biz_businesscity', status: AppConstant.STATUS_ACTIVE }).subscribe(res => {
+      const response = JSON.parse(res._body);
+      if (response.status) {
+        response.data.map(item => {
+          item.label = item.refname;
+          item.value = item.refvalue;
+        });
+        this.cityList = this.cityList.concat(response.data);
+      }
+    });
+  }
+  selectCity(option) {
+    this.cityName = option.value;
+    this.mallsList = [];
+    this.lookupList.forEach(element => {
+      if (element.refname === option.value) {
+        this.mallsList.push(element);
+      }
+    });
+    this.adForm.get('locationid').setValidators(Validators.required);
+    this.adForm.get('locationid').updateValueAndValidity();
+    this.getLocations();
+  }
   getLocations() {
-    this.adService.getLocations({ status: AppConstant.STATUS_ACTIVE }).subscribe(res => {
+    this.adService.getLocations({ city: this.cityName, status: AppConstant.STATUS_ACTIVE }).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
         response.data.map(item => {
@@ -91,6 +121,7 @@ export class AddEditAdvertisementComponent implements OnInit {
   initAdForm() {
     this.adForm = this.fb.group({
       adname: [null, [Validators.required]],
+      city: [null, [Validators.required]],
       locationid: [null, [Validators.required]],
       categoryid: [null, [Validators.required]],
       url: [null, [Validators.required]],
@@ -114,6 +145,7 @@ export class AddEditAdvertisementComponent implements OnInit {
       adObj.status = response.data.status == AppConstant.STATUS_ACTIVE ? true : false;
       this.adForm = this.fb.group({
         adname: [adObj.adname, [Validators.required]],
+        city: [adObj.adlocation.city, Validators.required],
         locationid: [adObj.locationid, [Validators.required]],
         categoryid: [adObj.categoryid, [Validators.required]],
         url: [adObj.url, [Validators.required]],
@@ -128,6 +160,7 @@ export class AddEditAdvertisementComponent implements OnInit {
     }, err => {
       this.savingAd = false;
     });
+    this.getLocations();
   }
 
   addAd() {

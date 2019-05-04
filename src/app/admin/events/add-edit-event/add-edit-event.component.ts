@@ -27,6 +27,8 @@ export class AddEditEventComponent implements OnInit {
   status = true;
   eventObj = {} as any;
   savingEvent = false;
+  mallsList = [];
+  cityList = [];
 
   eventForm: FormGroup;
   eventErrObj = AppMessages.VALIDATION.EVENT;
@@ -34,10 +36,12 @@ export class AddEditEventComponent implements OnInit {
   sucMessage;
   processingEvent;
   statelists = [];
+  cityName: string;
 
   images: any = [];
   existing_image: any = [];
   limit = AppConstant.MAX_FILE_COUNT;
+  lookupList: any = [];
 
   constructor(private localStorageService: LocalStorageService,
     private bootstrapAlertService: BootstrapAlertService,
@@ -56,10 +60,35 @@ export class AddEditEventComponent implements OnInit {
   }
   ngOnInit() {
     this.initEventForm();
+    this.getCity();
+  }
+  getCity () {
+    this.lookupService.list({ refkey: 'biz_businesscity', status: AppConstant.STATUS_ACTIVE }).subscribe(res => {
+      const response = JSON.parse(res._body);
+      console.log(response);
+      if (response.status) {
+        response.data.map(item => {
+          item.label = item.refname;
+          item.value = item.refvalue;
+        });
+        this.cityList = this.cityList.concat(response.data);
+      }
+    });
+  }
+  selectCity(option) {
+    this.cityName = option.value;
+    this.mallsList = [];
+    this.lookupList.forEach(element => {
+      if (element.refname === option.value) {
+        this.mallsList.push(element);
+      }
+    });
+    this.eventForm.get('locationid').setValidators(Validators.required);
+    this.eventForm.get('locationid').updateValueAndValidity();
     this.getLocations();
   }
   getLocations() {
-    this.eventService.getLocations({ status: AppConstant.STATUS_ACTIVE }).subscribe(res => {
+    this.eventService.getLocations({ city: this.cityName, status: AppConstant.STATUS_ACTIVE }).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
         response.data.map(item => {
@@ -78,6 +107,7 @@ export class AddEditEventComponent implements OnInit {
     this.eventForm = this.fb.group({
       eventname: [null, Validators.compose([Validators.required,
       Validators.maxLength(50)])],
+      city: [null, Validators.required],
       locationid: [null, [Validators.required]],
       eventdate: [null, [Validators.required]],
       eventexpirydt: [null, [Validators.required]],
@@ -93,12 +123,14 @@ export class AddEditEventComponent implements OnInit {
       this.edit = true;
       let response = JSON.parse(res._body);
       let eventObj = response.data;
+      console.log(eventObj);
       eventObj.locationid = eventObj.locationid.toString();
       eventObj.eventdate = this.commonService.parseDate(eventObj.eventdate);
       eventObj.eventexpirydt = this.commonService.parseDate(eventObj.eventexpirydt);
       eventObj.status = response.data.status == AppConstant.STATUS_ACTIVE ? true : false;
       this.eventForm = this.fb.group({
         eventname: [eventObj.eventname, [Validators.required]],
+        city: [eventObj.location.city, Validators.required],
         locationid: [eventObj.locationid, [Validators.required]],
         eventdate: [eventObj.eventdate, [Validators.required]],
         eventexpirydt: [eventObj.eventexpirydt, [Validators.required]],
@@ -112,6 +144,7 @@ export class AddEditEventComponent implements OnInit {
       this.savingEvent = false;
       console.log(err);
     });
+    this.getLocations();
   }
   imageAdded(files) {
     this.images = files;

@@ -24,16 +24,17 @@
                             <span>{{row.membershipid}}</span>
                         </ng-template>
                     </ngx-datatable-column>
-                    <ngx-datatable-column prop="bizname" name="Business Name" [resizeable]="false">
+                    <ngx-datatable-column prop="bizname" name="Name" [resizeable]="false">
                         <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                            <span>{{row.bizname}}</span>
+                            <span class="updatename">{{row.bizname}}</span>
+                            <span class="updatedate">{{row.contactmobile[0]}}</span>
                         </ng-template>
                     </ngx-datatable-column>
-                    <ngx-datatable-column prop="contactmobile" name="Mobile No." [resizeable]="false">
+                    <!-- <ngx-datatable-column prop="contactmobile" name="Mobile" [resizeable]="false">
                         <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                             <span>{{row.contactmobile[0]}}</span>
                         </ng-template>
-                    </ngx-datatable-column>
+                    </ngx-datatable-column> -->
                     <ngx-datatable-column prop="location.city" name="City" [resizeable]="false">
                         <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                             <span class="updatename">{{row.location?.city}}</span>
@@ -50,7 +51,7 @@
                             <span>{{getNextDue(row.nextdue)}}</span>
                         </ng-template>
                     </ngx-datatable-column>
-                    <ngx-datatable-column prop="paymentstatus" name="Payment Status" [resizeable]="false">
+                    <ngx-datatable-column prop="paymentstatus" name="Payment Status" [resizeable]="false" headerClass="no-padding">
                         <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                             <span>{{row.paymentstatus}}</span>
                         </ng-template>
