@@ -67,6 +67,7 @@ export class CustomerdetailComponent extends BaseService implements OnInit {
   }
   getReports(download?) {
     const data = this.customerdetailForm.value;
+    data.city= this.cityName;
     const todt = this.commonService.formatDate(data.todate);
     const fromdt = this.commonService.formatDate(data.fromdt);
     let area = data.area;
@@ -81,7 +82,6 @@ export class CustomerdetailComponent extends BaseService implements OnInit {
     let formData = {
       fromdt: fromdt + ' 00:00',
       todate: todt + ' 23:59',
-
     } as any;
 
     if (categoryid != '' && categoryid != undefined && categoryid != null) {
@@ -97,12 +97,13 @@ export class CustomerdetailComponent extends BaseService implements OnInit {
       formData.membershiptype = membershiptype;
     }
     if (city != '' && city != undefined && city != null) {
-      formData.city = [city];
+      formData.city = city;
     }
     if (this.userstoragedata.roleid === 2) {
       formData.dealerid = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.DEALER).dealerid;
     }
     let service;
+    console.log(formData);
     if (download) {
       this.generatingFile = true;
       service = this.reportService.customerDetailReport(formData, true);
@@ -146,6 +147,7 @@ export class CustomerdetailComponent extends BaseService implements OnInit {
   }
   selectCity(option) {
     this.cityName = option.value;
+    this.customerdetailForm.value.city = this.cityName;
     this.getArea();
   }
   getArea() {

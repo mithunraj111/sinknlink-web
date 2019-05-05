@@ -62,7 +62,7 @@ export class AddEditEventComponent implements OnInit {
     this.initEventForm();
     this.getCity();
   }
-  getCity () {
+  getCity() {
     this.lookupService.list({ refkey: 'biz_businesscity', status: AppConstant.STATUS_ACTIVE }).subscribe(res => {
       const response = JSON.parse(res._body);
       console.log(response);
@@ -157,10 +157,16 @@ export class AddEditEventComponent implements OnInit {
       return false;
     }
     let form_data = this.eventForm.value;
-    let data = form_data;
+    const data = form_data;
     data.eventdate = this.commonService.formatDate(data.eventdate);
     data.eventexpirydt = this.commonService.formatDate(data.eventexpirydt);
     data.status = data.status ? AppConstant.STATUS_ACTIVE : AppConstant.STATUS_INACTIVE;
+    data.eventdate = new Date(this.commonService.formatDate(data.eventdate));
+    data.eventdate = data.eventdate.setHours(23, 59, 59);
+    if (new Date(data.eventdate) < this.commonService.getCurrentDate()) {
+      this.bootstrapAlertService.showError('Error');
+      return false;
+    }
     if (new Date(data.eventexpirydt) < new Date(data.eventdate)) {
       this.savingEvent = false;
       this.bootstrapAlertService.showError(AppMessages.VALIDATION.EVENT.eventdate.max);
