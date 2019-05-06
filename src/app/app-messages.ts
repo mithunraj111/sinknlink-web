@@ -354,6 +354,7 @@ export const AppMessages = Object.freeze({
         required: 'Please enter longitude',
         invalid: 'Please enter valid longitude'
       },
+      landmark: { maxlength: 'Landmark should be within 50 characters' },
       city: { required: 'Please select city' },
       locationid: { required: 'Please select location' },
       workdays: { required: 'Please select work days' },

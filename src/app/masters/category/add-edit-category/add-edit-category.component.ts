@@ -115,7 +115,7 @@ export class AddEditCategoryComponent implements OnInit, OnChanges {
       data.updatedby = this.userstoragedata.fullname;
       data.updateddt = new Date();
       if (!_.isUndefined(this.categoryObj) && !_.isUndefined(this.categoryObj.categoryid) && !_.isEmpty(this.categoryObj)) {
-        data.status = data.status;
+        data.status = this.categoryForm.value.status;
         formdata.append('data', JSON.stringify(data));
         this.categoryService.update(formdata, this.categoryObj.categoryid).subscribe(res => {
           const response = JSON.parse(res._body);

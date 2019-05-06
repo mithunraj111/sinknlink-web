@@ -259,7 +259,7 @@ export class AddEditCustomerComponent implements OnInit {
       paymenttenure: [''],
       status: [true, Validators.required],
       tncagreed: [false, Validators.required],
-      landmark: ['', Validators.maxLength(200)],
+      landmark: ['', Validators.maxLength(50)],
       inmallyn: [false],
       mallname: ['']
     });
