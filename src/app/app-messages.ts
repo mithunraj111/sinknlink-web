@@ -119,7 +119,8 @@ export const AppMessages = Object.freeze({
       },
       startdate: {
         required: 'Start date is required',
-        max: 'Start Date should be smaller than End Date'
+        max: 'Start Date should be smaller than End Date',
+        min: 'Start Date should be greater than Current Date'
       },
       enddate: {
         required: 'End date is required'

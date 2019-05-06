@@ -64,8 +64,13 @@ export class AddEditDonationComponent implements OnInit {
     const data = this.donationForm.value;
     const startdt = this.commonService.formatDate(data.startdate);
     const enddt = this.commonService.formatDate(data.enddate);
+    let donationstartdate = new Date(this.commonService.formatDate(data.startdate));
+    let donationstartdt = donationstartdate.setHours( 23, 59, 59 );
     if (new Date(enddt) < new Date(startdt)) {
       this.bootstrapAlertService.showError(AppMessages.VALIDATION.DONATION.startdate.max);
+      return false;
+    } else if( new Date(donationstartdt) < this.commonService.getCurrentDate() ) {
+      this.bootstrapAlertService.showError(AppMessages.VALIDATION.DONATION.startdate.min);
       return false;
     } else {
       this.validatingDonation = true;

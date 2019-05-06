@@ -15,7 +15,8 @@
                     <p class="m-b-0">{{review.comments}}</p>
                     <!-- <div class="m-b-25" *ngIf = "review.reply == null"> -->
                     <div *ngIf="review.reply==null && this.userstoragedata.roleid === 3" class="m-b-25">
-                        <button (click)="toReply(review.reviewid)" class="btn btn-primary waves-effect text-uppercase py-1 px-2">Reply</button>
+                        <button (click)="toReply(review.reviewid)" class="btn btn-primary waves-effect text-uppercase py-1 px-2">
+                            <i class="fa fa-mail-reply"></i> Reply</button>
                     </div>
                     <div class="modal-size">
                         <app-modal-animation [modalID]="'replyModal'" [modalClass]="'md-effect-7'">
