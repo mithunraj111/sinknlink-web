@@ -161,18 +161,17 @@ export class AddEditEventComponent implements OnInit {
     data.eventdate = this.commonService.formatDate(data.eventdate);
     data.eventexpirydt = this.commonService.formatDate(data.eventexpirydt);
     data.status = data.status ? AppConstant.STATUS_ACTIVE : AppConstant.STATUS_INACTIVE;
-    data.eventdate = new Date(this.commonService.formatDate(data.eventdate));
-    data.eventdate = data.eventdate.setHours(23, 59, 59);
-    if (new Date(data.eventdate) < this.commonService.getCurrentDate()) {
-      this.bootstrapAlertService.showError('Error');
+    let eventdt = new Date(data.eventdate);
+    let eventstartdt = eventdt.setHours(23, 59, 59);
+    if (new Date(eventstartdt) < this.commonService.getCurrentDate()) {
+      this.savingEvent = false;
+      this.bootstrapAlertService.showError(AppMessages.VALIDATION.EVENT.eventdate.min);
       return false;
-    }
-    if (new Date(data.eventexpirydt) < new Date(data.eventdate)) {
+    } else if (new Date(data.eventexpirydt) < new Date(data.eventdate)) {
       this.savingEvent = false;
       this.bootstrapAlertService.showError(AppMessages.VALIDATION.EVENT.eventdate.max);
       return false;
-    }
-    if (this.edit) {
+    } else if (this.edit) {
       data['updateddt'] = new Date();
       data['updatedby'] = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER).fullname;
       this.updateEvent(data);

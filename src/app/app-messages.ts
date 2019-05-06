@@ -49,7 +49,8 @@ export const AppMessages = Object.freeze({
       },
       eventdate: {
         required: 'Event start date is requried',
-        max: 'Start Date should be smaller than End Date'
+        max: 'Start Date should be smaller than End Date',
+        min: 'Start Date should be greater than or equal to Current Date'
       },
       eventexpirydt: {
         required: 'Event end date is requried'
@@ -120,7 +121,7 @@ export const AppMessages = Object.freeze({
       startdate: {
         required: 'Start date is required',
         max: 'Start Date should be smaller than End Date',
-        min: 'Start Date should be greater than Current Date'
+        min: 'Start Date should be greater than or equal to the Current Date'
       },
       enddate: {
         required: 'End date is required'
@@ -385,7 +386,7 @@ export const AppMessages = Object.freeze({
       totalamount: { required: 'Please enter amount', pattern: 'Payment should only contain numbers' },
       paymentmode: { required: 'Please select mode of payment' },
       paymentref: { required: 'Please enter payment reference' },
-      remarks: { maxlength: 'payment reference should be within 100 characters'}
+      remarks: { maxlength: 'Remarks should be within 100 characters'}
     },
     REPLY: {
       reply: { required: 'Please enter a reply' }

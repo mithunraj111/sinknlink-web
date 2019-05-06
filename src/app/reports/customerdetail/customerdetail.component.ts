@@ -75,6 +75,7 @@ export class CustomerdetailComponent extends BaseService implements OnInit {
     let biztype = data.biztype;
     let membershiptype = data.membershiptype;
     let city = data.city;
+    console.log(city);
     if (new Date(fromdt) > new Date(todt)) {
       this.bootstrapAlertService.showError(AppMessages.VALIDATION.DEALERREPORT.fromdate.max);
       return false;
@@ -147,6 +148,12 @@ export class CustomerdetailComponent extends BaseService implements OnInit {
   }
   selectCity(option) {
     this.cityName = option.value;
+    this.customerdetailForm.value.city = this.cityName;
+    this.getArea();
+  }
+  onClear() {
+    this.cityName = '' ;
+    console.log('empty');
     this.customerdetailForm.value.city = this.cityName;
     this.getArea();
   }

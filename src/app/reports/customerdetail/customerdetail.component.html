@@ -50,7 +50,7 @@
                             <div class="form-group locationlist">
                                 <label>City</label>
                                 <div class="input-group">
-                                    <ng-select formcontrolName="city" [options]="cityList" (selected)="selectCity($event)" [allowClear]="true" [ngClass]="'ng-select'" placeholder="All">
+                                    <ng-select #select formcontrolName="city" [options]="cityList" (clear)="onClear()" (selected)="selectCity($event)" [allowClear]="true" [ngClass]="'ng-select'" placeholder="All">
                                     </ng-select>
                                 </div>
                             </div>
@@ -106,7 +106,7 @@
                 <div *ngIf="!loadingIndicator">
                     <div class="report-table payment-table">
                         <div class="card p-r-15 p-l-15">
-                            <ngx-datatable #businesstable class="table  customer-report data-table expandable" [rows]='businessList' [columnMode]="'flex'" [headerHeight]="50" [footerHeight]="40" [rowHeight]="'auto'" [scrollbarV]="false" [scrollbarH]="true" [limit]="5" [messages]="emptymessages">
+                            <ngx-datatable class="table customer-report data-table" [rows]='businessList' [columnMode]="'flex'" [headerHeight]="50" [footerHeight]="40" [rowHeight]="'auto'" [scrollbarV]="false" [scrollbarH]="true" [limit]="5" [messages]="emptymessages">
 
                                 <ngx-datatable-column prop="bizname" name="Name" [resizeable]="false">
                                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
