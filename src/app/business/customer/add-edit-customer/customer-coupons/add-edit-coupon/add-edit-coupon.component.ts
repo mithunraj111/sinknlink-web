@@ -51,6 +51,7 @@ export class AddEditCouponComponent implements OnInit, OnChanges {
             shortdesc: [null, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])],
             noofcoupons: [null, Validators.compose([Validators.required, Validators.maxLength(11), Validators.pattern('^[0-9]*$')])],
             expirydt: [null, Validators.required],
+            startdate: [null, Validators.required],
             description: ['', Validators.compose([Validators.minLength(3), Validators.maxLength(500)])],
             status: [true, Validators.required]
         });
@@ -90,9 +91,10 @@ export class AddEditCouponComponent implements OnInit, OnChanges {
                 formdata.membershipid = this.customerObj.membershipid;
                 formdata.noofcoupons = Number(data.noofcoupons);
                 formdata.expirydt = this.commonService.formatDate(data.expirydt);
+                formdata.startdate = this.commonService.formatDate(data.startdate);
                 data.expirydt = new Date(this.commonService.formatDate(data.expirydt));
                 data.expirydt = data.expirydt.setHours( 23, 59, 59 );
-                if (new Date(data.expirydt) < this.commonService.getCurrentDate()) {                    
+                if (new Date(data.expirydt) < this.commonService.getCurrentDate() || new Date(data.expirydt) < this.commonService.getCurrentDate()) {                    
                     this.bootstrapAlertService.showError(this.couponErrObj.expirydt.invalid);
                     return false;
                 }
@@ -133,7 +135,9 @@ export class AddEditCouponComponent implements OnInit, OnChanges {
     editCoupon(data) {
         this.couponObj = data;
         const expirydt = this.commonService.parseDate(new Date(this.couponObj.expirydt));
+        const startdate = this.commonService.parseDate(new Date(this.couponObj.startdate));
         this.couponForm.patchValue(this.couponObj);
         this.couponForm.controls['expirydt'].setValue(expirydt);
+        this.couponForm.controls['startdate'].setValue(startdate);
     }
 }
