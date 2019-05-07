@@ -35,6 +35,7 @@ export class AddEditGigComponent implements OnInit, OnChanges {
             postname: [null, Validators.compose([Validators.required, Validators.maxLength(50)])],
             posttype: [null, Validators.required],
             salary: [''],
+            totalvacancy: [''],
             contactperson: [null, Validators.compose([Validators.required, Validators.maxLength(50)])],
             contactmobile: ['', Validators.compose([Validators.required, Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')])],
             starttime: [''],
