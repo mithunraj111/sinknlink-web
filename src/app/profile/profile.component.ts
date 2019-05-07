@@ -60,6 +60,8 @@ export class ProfileComponent implements OnInit {
       const userResponse = JSON.parse(result._body);
       if (userResponse.status) {
         this.userObj = userResponse.data;
+        this.userObj.token = this.mainComponent.userstoragedata.token;
+        userResponse.data.token = this.mainComponent.userstoragedata.token;
         this.localStorageService.setItem(AppConstant.LOCALSTORAGE.USER, userResponse.data);
         this.mainComponent.userstoragedata.fullname = userResponse.data.fullname;
         this.mainComponent.checkProfile();

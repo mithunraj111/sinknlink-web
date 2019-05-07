@@ -32,7 +32,7 @@
         <div class="card-block">
           <h6 class="m-b-10 f-18">{{counts[3]?.label || '-'}}</h6>
           <h2 *ngIf="this.userstoragedata.roleid != 2" class="text-right"><i class="{{counts[3]?.icon}} f-left p-r-10 mt-1"></i><span class="f-16">{{counts[3]?.count || '-'}}</span></h2>
-          <h2 *ngIf="this.userstoragedata.roleid == 2" class="text-right"><i class="{{counts[3]?.icon}} f-left p-r-10 mt-1"></i><span class="f-16">{{this.userstoragedata.lastlogin || '-' |date: displaydatetimeformat}}</span></h2>
+          <h2 *ngIf="this.userstoragedata.roleid == 2" class="text-right"><i class="{{counts[3]?.icon}} f-left p-r-10 mt-1"></i><span class="f-16">{{( this.userstoragedata.lastlogin | date: displaydatetimeformat ) || '-' }}</span></h2>
         </div>
       </div>
     </div>

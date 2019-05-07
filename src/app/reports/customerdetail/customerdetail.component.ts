@@ -75,7 +75,6 @@ export class CustomerdetailComponent extends BaseService implements OnInit {
     let biztype = data.biztype;
     let membershiptype = data.membershiptype;
     let city = data.city;
-    console.log(city);
     if (new Date(fromdt) > new Date(todt)) {
       this.bootstrapAlertService.showError(AppMessages.VALIDATION.DEALERREPORT.fromdate.max);
       return false;
