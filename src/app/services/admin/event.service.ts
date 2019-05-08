@@ -9,8 +9,12 @@ export class EventService {
     constructor(private httpHandler: HttpHandlerService) {
         this.endpoint = AppConstant.API_END_POINT;
     }
-    list(data): Observable<any> {
-        return this.httpHandler.POST(this.endpoint + AppConstant.API_CONFIG.API_URL.ADMIN.EVENT.LIST, data);
+    list(data, upcoming?): Observable<any> {
+        let url = this.endpoint + AppConstant.API_CONFIG.API_URL.ADMIN.EVENT.LIST;
+        if (upcoming) {
+            url += `?upcoming=${true}`;
+        }
+        return this.httpHandler.POST(url, data);
     }
     create(data): Observable<any> {
         return this.httpHandler.POST(this.endpoint + AppConstant.API_CONFIG.API_URL.ADMIN.EVENT.CREATE, data);

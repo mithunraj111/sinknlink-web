@@ -19,6 +19,7 @@ export class EventsComponent extends BaseService implements OnInit {
   eventsList = [];
   displaydtimeformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   displaydateformat = AppConstant.API_CONFIG.ANG_DATE.displaydate;
+  service;
   loadingIndicator: boolean = true;
   constructor(private router: Router,
     private bootstrapAlertService: BootstrapAlertService,
@@ -32,7 +33,12 @@ export class EventsComponent extends BaseService implements OnInit {
   }
   getEvents() {
     this.loadingIndicator = true;
-    this.eventService.list({}).subscribe(res => {
+    if ( this.userstoragedata.roleid === 3 ) {
+      this.service = this.eventService.list({},true); 
+    } else {
+      this.service = this.eventService.list({},true);
+    }
+    this.service.subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
         this.loadingIndicator = false;

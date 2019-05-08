@@ -5,6 +5,7 @@ import { AppConstant } from '../../app.constants';
 import { AdminService, BaseService, CommonService } from '../../services';
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
 import { AppMessages } from '../../app-messages';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-donations',
@@ -32,7 +33,21 @@ export class DonationsComponent extends BaseService implements OnInit {
   }
   getDonations() {
     this.loadingIndicator = true;
-    this.donationService.list({}).subscribe(res => {
+    let service;
+    if (this.userstoragedata.roleid == 3 ) {
+      let today = new DatePipe("en-US").transform(new Date(), "yyyy-MM-dd").toString();
+      let condition = {
+        status: AppConstant.STATUS_ACTIVE,
+        startdate: today,
+        enddate: today
+      };
+      const limit = 1;
+      const offset = 0;
+      service = this.donationService.list(condition, offset, limit);
+    } else {
+      service = this.donationService.list({});
+    }
+    service.subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
         this.loadingIndicator = false;
