@@ -1799,3 +1799,13 @@ input[type=number]::-webkit-outer-spin-button{
 .image.form-control {
     height: auto !important;
 }
+.customertable {
+    .w-55 {
+        width: 55% !important;
+    }
+    .datatable-body-cell{
+        &:first-child{
+            width: 55% !important; 
+        }
+    }
+}

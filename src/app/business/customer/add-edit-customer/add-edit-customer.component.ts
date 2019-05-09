@@ -15,6 +15,7 @@ import { AppMessages } from 'src/app/app-messages';
 import { CustomerGalleryComponent } from './customer-gallery/customer-gallery.component';
 import { CustomerBranchesComponent } from './customer-branches/customer-branches.component';
 import { FancyNumberService } from 'src/app/services/admin';
+import { CustomerPaymentsComponent } from './customer-payments/customer-payments.component';
 
 @Component({
   selector: 'app-add-edit-customer',
@@ -35,9 +36,11 @@ export class AddEditCustomerComponent implements OnInit {
   tooltipmessage;
   workDays = AppConstant.WORKDAYS;
   showbutton = true;
+  hidebutton = false
   ownedNos = [];
   loadingIndicator = true;
   @ViewChild(CustomerCouponsComponent) couponComponent: CustomerCouponsComponent;
+  @ViewChild(CustomerPaymentsComponent) paymentComponent: CustomerPaymentsComponent;
   @ViewChild(CustomerGigsComponent) gigComponent: CustomerGigsComponent;
   @ViewChild(CustomerSettingsComponent) settingsComponent: CustomerSettingsComponent;
   @ViewChild(CustomerGalleryComponent) galleryComponent: CustomerGalleryComponent;
@@ -415,6 +418,8 @@ export class AddEditCustomerComponent implements OnInit {
       case '1':
         this.saveOrUpdateBusiness();
         break;
+      case '2':
+        this.paymentComponent.addpayment();
       case '3':
         this.branchComponent.newBranch();
         break;
@@ -435,11 +440,18 @@ export class AddEditCustomerComponent implements OnInit {
   }
   onCustomerTabChange(event) {
     this.customerObj = this.customerObj;
-
-    if (event.nextId === '6' || event.nextId === '5' || event.nextId === '3') {
+    if (event.nextId === '6' || event.nextId === '5' || event.nextId === '3' || event.nextId === '2' || event.nextId === '8') {
       this.showbutton = false;
+      this.hidebutton = true
       if (event.nextId === '6') {
         this.tooltipmessage = AppConstant.MESSAGE.COUPON;
+        return false;
+      }
+      if (event.nextId === '2') {
+        if ( this.userstoragedata.roleid !== 1 ) {
+          this.hidebutton = false;
+        }
+        this.tooltipmessage = AppConstant.MESSAGE.PAYMENTS;
         return false;
       }
       if (event.nextId === '3') {
@@ -450,8 +462,14 @@ export class AddEditCustomerComponent implements OnInit {
         this.tooltipmessage = AppConstant.MESSAGE.GIGS;
         return false;
       }
+      if (event.nextId === '8') {
+        this.hidebutton = false;
+        this.showbutton = false;
+        return false;
+      }
     } else {
       this.showbutton = true;
+      this.hidebutton = false;
     }
   }
 

@@ -23,7 +23,8 @@ export const AppConstant = Object.freeze({
   MESSAGE: {
     GIGS: 'Gigs',
     COUPON: 'Coupon',
-    BRANCHES: 'Branch'
+    BRANCHES: 'Branch',
+    PAYMENTS: 'Payment'
   },
   // Form Titles
   FORM_TITLE: {

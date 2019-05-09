@@ -60,7 +60,6 @@ export class SubscriptionComponent extends BaseService implements OnInit {
       }
     getReports(download?) {
       const data = this.subscriptionForm.value;
-      data.city = this.cityName;
       let area = data.area;
       let status = data.status;
       let city = data.city;
@@ -120,10 +119,7 @@ export class SubscriptionComponent extends BaseService implements OnInit {
     }
     selectCity(selectedCity) {
         this.cityName = selectedCity.value;
-        // this.subscriptionForm.value.city = this.cityName;
         this.getAreaLists();
-        console.log('...');
-
     }
     getAreaLists() {
         let condition = { status: AppConstant.STATUS_ACTIVE } as any;
