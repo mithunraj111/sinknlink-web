@@ -8,6 +8,7 @@ import { CustomerdetailComponent } from './customerdetail/customerdetail.compone
 import { NgxPermissionsGuard } from 'ngx-permissions';
 import { AuthGuard } from '../services/auth.guard';
 import { AreaComponent } from './area/area.component';
+import { SubscriptionComponent } from './subscription/subscription.component'
 
 const routes: Routes = [
   {
@@ -87,6 +88,19 @@ const routes: Routes = [
           status: false,
           permissions: {
             only: ['Customer Detail Report'],
+            redirectTo: '/accessdenied'
+          }
+        },
+      },
+      {
+        path: 'subscription',
+        component: SubscriptionComponent,
+        canActivate: [AuthGuard, NgxPermissionsGuard],
+        data: {
+          title: 'Subscription Report',
+          status: false,
+          permissions: {
+            only: ['Subscription Report'],
             redirectTo: '/accessdenied'
           }
         },

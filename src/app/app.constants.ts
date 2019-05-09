@@ -171,7 +171,8 @@ export const AppConstant = Object.freeze({
           CONSUMER_COUNT: 'report/consumer',
           DEALER_COUNT: 'report/dealer',
           CUSTOMER_DETAIL: 'report/customerdetails',
-          PAYMENT_STATUS: 'report/paymentstatus'
+          PAYMENT_STATUS: 'report/paymentstatus',
+          SUBSCRIPTION_DUE: 'report/subscriptiondue'
         },
         DOCUMENT: {
           CREATE: 'document/create',
@@ -320,8 +321,8 @@ export const AppConstant = Object.freeze({
     CONSUMER: { emptyMessage: 'No consumer report data to display', totalMessage: 'total' },
     DEALERREPORT: { emptyMessage: 'No dealer report data to display', totalMessage: 'total' },
     PAYMENTREPORT: { emptyMessage: 'No payment report data to display', totalMessage: 'total' },
-    DEALER_PAYMENT: { emptyMessage: 'No payment data to display', totalMessage: 'total' }
-
+    DEALER_PAYMENT: { emptyMessage: 'No payment data to display', totalMessage: 'total' },
+    SUBSCRIPTION_DUE: { emptyMessage: 'No payment data to display', totalMessage: 'total' }
   }
 
 });

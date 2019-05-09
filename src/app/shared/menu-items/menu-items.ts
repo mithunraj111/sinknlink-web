@@ -237,6 +237,14 @@ export class MenuItems {
             data: {
               title: 'Payment Report'
             }
+          },
+          {
+            state: 'subscription',
+            name: 'Subscription Report',
+            code: 'r_subscription',
+            data: {
+              title: 'Subscription Report'
+            }
           }
         ]
       }

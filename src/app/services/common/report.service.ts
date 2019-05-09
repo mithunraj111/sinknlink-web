@@ -45,14 +45,17 @@ export class ReportService {
         return this.httpHandler.POST(url, data);
     }
     paymentReport(data,download?): Observable<any> {
-
         let url = this.endpoint + AppConstant.API_CONFIG.API_URL.COMMON.REPORT.PAYMENT_STATUS;
-
         if(download){
             url += `?download=${true}`
         }
-
         return this.httpHandler.POST(url, data);
     }
-
+    subscriptionDueReport(data,download?): Observable<any> {
+        let url =  this.endpoint + AppConstant.API_CONFIG.API_URL.COMMON.REPORT.SUBSCRIPTION_DUE ;
+        if(download){
+            url += `?download=${true}`
+        }
+        return this.httpHandler.POST(url, data);
+    }
 }
