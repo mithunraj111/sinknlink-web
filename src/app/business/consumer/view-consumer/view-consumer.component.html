@@ -210,7 +210,8 @@
                                                                             </span>
                                                                         </h6>
                                                                     </a>
-                                                                    <div class="stars-example-css star-rating review-star">
+                                                                    <div
+                                                                        class="stars-example-css star-rating review-star">
                                                                         <bar-rating [(rate)]="rateStar" [max]="5"
                                                                             [readOnly]="true"></bar-rating>
                                                                     </div>
@@ -233,7 +234,8 @@
                                                                                     {{bizReview?.reply?.updateddt | date:datetimedisplayformat}}
                                                                                 </span>
                                                                             </h6>
-                                                                            <p class="mb-0 ml-0"> {{bizReview?.reply?.comments}}</p>
+                                                                            <p class="mb-0 ml-0">
+                                                                                {{bizReview?.reply?.comments}}</p>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -268,21 +270,21 @@
                                                     [resizeable]="false">
                                                     <ng-template let-rowIndex="rowIndex" let-row="row"
                                                         ngx-datatable-cell-template>
-                                                        <span>{{row.business.bizname}}</span>
+                                                        <span>{{row.business?.bizname}}</span>
                                                     </ng-template>
                                                 </ngx-datatable-column>
                                                 <ngx-datatable-column prop="biztype" name="Date" name="Business Type"
                                                     [resizeable]="false">
                                                     <ng-template let-rowIndex="rowIndex" let-row="row"
                                                         ngx-datatable-cell-template>
-                                                        <span>{{row.business.biztype}}</span>
+                                                        <span>{{row.business?.biztype}}</span>
                                                     </ng-template>
                                                 </ngx-datatable-column>
                                                 <ngx-datatable-column prop="postaladdress" name="Postal Address"
                                                     [resizeable]="false">
                                                     <ng-template let-rowIndex="rowIndex" let-row="row"
                                                         ngx-datatable-cell-template>
-                                                        <span>{{row.business.postaladdress}}</span>
+                                                        <span>{{row.business?.postaladdress}}</span>
                                                     </ng-template>
                                                 </ngx-datatable-column>
                                                 <ngx-datatable-column prop="inmallyn" name="In Mall"
@@ -296,30 +298,33 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- <div class="row">
-                                    <div class="col-md-6 p-r-0">
-                                        <div class="card  z-depth-bottom-1 ">
-                                            <div class="header-title m-t-10">
-                                                <h3 class="f-18 text-primary m-l-15">Preferred Category</h3>
-                                            </div>
-                                            <div class="fav-title">
-                                                <div *ngIf="consumerFavs.category.length > 0">
-                                                    <div class="row">
-                                                        <div *ngFor="let cat of consumerFavs.category"
-                                                            class="col-sm-12 col-md-4 text-center p-4">
-                                                            <div> <img class="img-fluid img-100 p-b-10"
-                                                                    src={{cat.category.categoryimage.docurl}}></div>
-                                                            <div>{{cat.category.categoryname}}</div>
-                                                        </div>
+                                <div class="col-md-12 card">
+                                    <div class="header-title m-t-10">
+                                        <h3 class="f-18 text-primary m-l-15">Preferred Category</h3>
+                                    </div>
+                                    <div class="fav-title">
+                                        <div *ngIf="consumerFavs.category.length > 0">
+                                            <div class="row">
+                                                <div *ngFor="let cat of consumerFavs.category"
+                                                    class="col-sm-12 col-md-2 text-center p-4">
+                                                    <div>
+                                                        <img class="img-fluid img-100 p-b-10"
+                                                            *ngIf="cat.category.categoryimage.docurl !== 'http://180.12.181.8:2000/category/'"
+                                                            src={{cat.category.categoryimage.docurl}}>
+                                                        <h1 style="font-size: 35px !important;"
+                                                            *ngIf="cat.category.categoryimage.docurl === 'http://180.12.181.8:2000/category/'">
+                                                            {{cat.category.categoryname.substring(0,1)}}</h1>
                                                     </div>
-                                                </div>
-                                                <div *ngIf="consumerFavs.category.length == 0" class="m-l-15">
-                                                    <h3 class="f-14">Nothing Found</h3>
+                                                    <div>{{cat.category.categoryname}}</div>
                                                 </div>
                                             </div>
                                         </div>
+                                        <div *ngIf="consumerFavs.category.length == 0" class="m-l-15">
+                                            <h3 class="f-14">{{nodata.emptymessages}}</h3>
+                                        </div>
                                     </div>
-                                    <div class="col-md-6 ">
+                                </div>
+                                <!-- <div class="col-md-6 ">
                                         <div class="card  z-depth-bottom-1">
                                             <div class="header-title m-t-10">
                                                 <h3 class="f-18 text-primary m-l-15">Preferred Location</h3>
@@ -337,8 +342,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div> -->
+                                    </div> -->
                             </div>
                         </ng-template>
                     </ngb-tab>

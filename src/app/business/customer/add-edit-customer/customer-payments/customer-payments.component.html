@@ -4,11 +4,22 @@
             <div class="col-md-12 col-sm-12">
                 <div class="form-group row mb-0">
                     <label class="col-md-3 col-sm-6 col-form-label text-right">Last paid</label>
-                    <span class="col-form-label col-md-9 col-sm-6 f-16">{{lastpaid==null?'-':lastpaid|date:datedisplayformat}}</span>
+                    <span
+                        class="col-form-label col-md-9 col-sm-6 f-16">{{lastpaid==null?'-':lastpaid|date:datedisplayformat}}</span>
                 </div>
                 <div class="form-group row mb-0">
                     <label class="col-md-3 col-sm-6 col-form-label text-right">Next due</label>
-                    <span class="col-form-label col-md-9 col-sm-6">{{nextdue==null?'-':nextdue|date:datedisplayformat}}</span>
+                    <span
+                        class="col-form-label col-md-9 col-sm-6">{{nextdue==null?'-':nextdue|date:datedisplayformat}}</span>
+                </div>
+                <div class="form-group row required">
+                    <label class="col-md-3 col-sm-6 col-form-label text-right">Payment
+                        Tenure</label>
+                    <div class="col-md-9 col-sm-6">
+                        <ng-select [allowClear]="true" [ngClass]="'ng-select'" [options]="paymentTenure"
+                            placeholder="Select Payment tenure">
+                        </ng-select>
+                    </div>
                 </div>
                 <div class="form group row border-checkbox-section">
                     <label class="col-md-3 col-sm-6 col-form-label text-right">Subscription Amount</label>
@@ -29,8 +40,10 @@
                     <h3 class="f-18 text-primary m-l-10">Donate for a cause</h3>
                 </div>
                 <div *ngFor="let donation of donationList; index as i" class="form-group row border-checkbox-section">
-                    <div class="border-checkbox-group border-checkbox-group-primary col-md-3 text-right col-sm-6 m-l-5 p-t-5">
-                        <input class="border-checkbox" type="checkbox" id={{i}} [(ngModel)]="donation.selected" (change)="donationChecked()">
+                    <div
+                        class="border-checkbox-group border-checkbox-group-primary col-md-3 text-right col-sm-6 m-l-5 p-t-5">
+                        <input class="border-checkbox" type="checkbox" id={{i}} [(ngModel)]="donation.selected"
+                            (change)="donationChecked()">
                         <label class="border-checkbox-label" for={{i}}>{{donation.charityname}}
                             <a placement="bottom" ngbTooltip="Click to view donation cause"
                                 (click)="viewDonationCause(donation);"><i class="fa fa-question-circle"
@@ -38,18 +51,21 @@
                         </label>
                     </div>
                     <div class=" col-md-8 col-sm-6 p-l-0 p-r-20">
-                        <input type="text" class="form-control" [(ngModel)]="donation.selectedAmt" (ngModelChange)="donationChecked()" placeholder="Amount">
+                        <input type="text" class="form-control" [(ngModel)]="donation.selectedAmt"
+                            (ngModelChange)="donationChecked()" placeholder="Amount">
                     </div>
                 </div>
                 <div class="form-group m-t-10">
                     <label class="col-md-3 col-sm-6 col-form-label text-right p-r-20 p-t-15">Total</label>
-                    <span class="col-form-label col-md-5 col-sm-6 f-16 p-l-0 p-t-15">{{totalamount|currency: 'INR' :symbol}}</span>
+                    <span
+                        class="col-form-label col-md-5 col-sm-6 f-16 p-l-0 p-t-15">{{totalamount|currency: 'INR' :symbol}}</span>
                 </div>
                 <div class="col-md-12 col-sm-12 pay-online">
                     <div class="row">
                         <div class="col-md-3 col-sm-3"></div>
                         <div class="col-md-9 col-sm-9 p-l-0 p-r-0 header-title">
-                            <button type="button" placement="bottom" ngbTooltip="Click to pay online" class="btn btn-primary pull-right" (click)="onlinePay()">Pay
+                            <button type="button" placement="bottom" ngbTooltip="Click to pay online"
+                                class="btn btn-primary pull-right" (click)="onlinePay()">Pay
                                 online</button>
                         </div>
                     </div>
@@ -62,27 +78,36 @@
         </div> -->
         <div class="row p-l-15">
             <div class="col-md-10 col-sm-6">
-                <input #customerPaymentSearch type="text" class="header-search form-control col-md-5 col-sm-5 p-l-0 p-r-0 input-sm full-data-search" placeholder="Search here" (keyup)='search($event)' placement="bottom" ngbTooltip="Type here to search">
-                <button type="button" class="btn search search-close col-md-1 col-sm-1 p-l-0 p-r-0" (click)="customerPaymentSearch.value='';search();"><i class="fa fa-close"></i></button>
+                <input #customerPaymentSearch type="text"
+                    class="header-search form-control col-md-5 col-sm-5 p-l-0 p-r-0 input-sm full-data-search"
+                    placeholder="Search here" (keyup)='search($event)' placement="bottom"
+                    ngbTooltip="Type here to search">
+                <button type="button" class="btn search search-close col-md-1 col-sm-1 p-l-0 p-r-0"
+                    (click)="customerPaymentSearch.value='';search();"><i class="fa fa-close"></i></button>
             </div>
-            <div class="col-md-2 col-sm-6 p-l-0 p-r-30 text-right" *ngIf="userstoragedata.roleid != 2 && userstoragedata.roleid!=3">
+            <div class="col-md-2 col-sm-6 p-l-0 p-r-30 text-right"
+                *ngIf="userstoragedata.roleid != 2 && userstoragedata.roleid!=3">
             </div>
         </div>
     </div>
     <div class="table-header view-table fixed-table-header">
         <div class="card p-r-15 p-l-15">
-            <ngx-datatable #customerpaymttable class="table data-table expandable" [rows]='payHistoryList' [columnMode]="'flex'" [headerHeight]="50" [footerHeight]="50" [limit]="5" [rowHeight]="'auto'" [reorderable]="false" [messages]="emptymessages">
+            <ngx-datatable #customerpaymttable class="table data-table expandable" [rows]='payHistoryList'
+                [columnMode]="'flex'" [headerHeight]="50" [footerHeight]="50" [limit]="5" [rowHeight]="'auto'"
+                [reorderable]="false" [messages]="emptymessages">
                 <ngx-datatable-column prop="paymentref" name="Reference#" [resizeable]="false">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                         <span>{{row.paymentref}}</span>
                     </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column prop="paymentdate" name="Date" [resizeable]="false" [cellClass]="'text-center'" headerClass="text-center">
+                <ngx-datatable-column prop="paymentdate" name="Date" [resizeable]="false" [cellClass]="'text-center'"
+                    headerClass="text-center">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                         <span>{{row.paymentdate|date:datedisplayformat}}</span>
                     </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column prop="totalamount" name="Amount" [resizeable]="false" headerClass="text-right" [cellClass]="'text-right table-padding'">
+                <ngx-datatable-column prop="totalamount" name="Amount" [resizeable]="false" headerClass="text-right"
+                    [cellClass]="'text-right table-padding'">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                         <span>{{row.totalamount| currency: 'INR' : symbol}}</span>
                     </ng-template>
@@ -92,14 +117,17 @@
                         <span>{{row.paymentmode}}</span>
                     </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column prop="paymentstatus" name="Status" [sortable]="false" [resizeable]="false" [cellClass]="'text-center status'" headerClass="text-right">
+                <ngx-datatable-column prop="paymentstatus" name="Status" [sortable]="false" [resizeable]="false"
+                    [cellClass]="'text-center status'" headerClass="text-right">
                     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
                         <span>{{row.paymentstatus}}</span>
                     </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column name="Action" [sortable]="false" [resizeable]="false" [cellClass]="'text-center action'" headerClass="text-right">
+                <ngx-datatable-column name="Action" [sortable]="false" [resizeable]="false"
+                    [cellClass]="'text-center action'" headerClass="text-right">
                     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-                        <a placement="bottom" ngbTooltip="Click to view payment" class="m-r-15 crm-action-edit text-primary text-center" (click)="viewpayment(row);"><i
+                        <a placement="bottom" ngbTooltip="Click to view payment"
+                            class="m-r-15 crm-action-edit text-primary text-center" (click)="viewpayment(row);"><i
                                 class="fa fa-eye"></i></a>
                     </ng-template>
                 </ngx-datatable-column>
@@ -116,30 +144,38 @@
                         <div class="form-group required">
                             <label>Paid date</label>
                             <div class="input-group mb-0">
-                                <input class="form-control" placeholder="dd-mm-yyyy" name="dp" formControlName="paymentdt" ngbDatepicker #dp1="ngbDatepicker" [readonly]="viewPayment">
-                                <div class="input-group-append bg-default" (click)="dp1.toggle()" [ngClass]="{'disabled': viewPayment }">
+                                <input class="form-control" placeholder="dd-mm-yyyy" name="dp"
+                                    formControlName="paymentdt" ngbDatepicker #dp1="ngbDatepicker"
+                                    [readonly]="viewPayment">
+                                <div class="input-group-append bg-default" (click)="dp1.toggle()"
+                                    [ngClass]="{'disabled': viewPayment }">
                                     <span class="fa fa-calendar input-group-text"></span>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group required">
                             <label>Amount</label>
-                            <input type="number" class="form-control" placeholder="Amount" formControlName="totalamount" [readonly]="viewPayment">
+                            <input type="number" class="form-control" placeholder="Amount" formControlName="totalamount"
+                                [readonly]="viewPayment">
                         </div>
                         <div class="form-group required" *ngIf="!viewPayment">
                             <label>Reference</label>
-                            <input type="text" class="form-control" placeholder="Reference" formControlName="paymentref" [readonly]="viewPayment">
+                            <input type="text" class="form-control" placeholder="Reference" formControlName="paymentref"
+                                [readonly]="viewPayment">
                         </div>
                         <div class="form-group required">
                             <label>Mode of payment</label>
                             <div class="input-box">
-                                <ng-select [allowClear]="true" [ngClass]="'ng-select w-100'" [options]="paymentMethods" formControlName="paymentmode" placeholder="Select payment methods" [disabled] = "viewPayment">
+                                <ng-select [allowClear]="true" [ngClass]="'ng-select w-100'" [options]="paymentMethods"
+                                    formControlName="paymentmode" placeholder="Select payment methods"
+                                    [disabled]="viewPayment">
                                 </ng-select>
                             </div>
                         </div>
                         <div class="form-group">
                             <label>Remarks</label>
-                            <textarea rows="3" cols="3" class="form-control" formControlName="remarks" [readonly]="viewPayment"></textarea>
+                            <textarea rows="3" cols="3" class="form-control" formControlName="remarks"
+                                [readonly]="viewPayment"></textarea>
                         </div>
                         <div class="form-group row" *ngIf="viewPayment">
                             <label class="col-md-3 col-sm-6 col-form-label">Reference</label>
@@ -151,7 +187,8 @@
                         </div>
                     </div>
 
-                    <button *ngIf="newPayment" type="button" placement="top" (click)="savePayment()" [disabled]="collectpayment == true" ngbTooltip="Click to save payment details" class="btn pull-right btn-primary waves-effect 
+                    <button *ngIf="newPayment" type="button" placement="top" (click)="savePayment()"
+                        [disabled]="collectpayment == true" ngbTooltip="Click to save payment details" class="btn pull-right btn-primary waves-effect 
                 m-b-10 m-r-15">Save</button>
                 </div>
             </form>

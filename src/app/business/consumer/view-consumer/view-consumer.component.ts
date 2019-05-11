@@ -18,6 +18,7 @@ export class ViewConsumerComponent implements OnInit {
   consumerProfilepic: any;
   emptymessages = AppConstant.EMPTY_MESSAGES.CONSUMERCOUPONS;
   nodata = AppConstant.EMPTY_MESSAGES.FAVOURITES;
+  showCategoryImage = 'http://180.12.181.8:2000/category/';
   // For Consumer Details.
   consumer: any = {};
 
@@ -41,6 +42,7 @@ export class ViewConsumerComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private consumerService: ConsumerService) {
     this.route.params.subscribe(params => {
+      console.log(this.nodata);
       let id = params.id;
       this.getConsumer(id);
       this.getConsumerCoupon(id);
@@ -56,6 +58,7 @@ export class ViewConsumerComponent implements OnInit {
     this.consumerService.byId(id).subscribe(res => {
       const response = JSON.parse(res._body);
       this.consumer = response.data;
+      console.log(this.consumer.user.profileimg);
       if (this.consumer.user.profileimg != null) {
         this.consumerProfilepic = this.consumer.user.profileimg.docurl;
       } else {
@@ -76,6 +79,7 @@ export class ViewConsumerComponent implements OnInit {
     this.consumerService.consumerFavs({ consumerid: Number(id) ,status: AppConstant.STATUS_ACTIVE}).subscribe(res => {
       const response = JSON.parse(res._body);
       this.consumerFavs = this.groupFavs(response.data);
+      console.log(this.consumerFavs);
     }, err => {
     })
   }
@@ -110,8 +114,10 @@ export class ViewConsumerComponent implements OnInit {
       location: []
     };
     data.forEach(element => {
+      console.log(element);
       if (Number(element.membershipid)) {
         groups.business.push(element);
+        console.log(element)
       }
       if (Number(element.locationid)) {
         groups.location.push(element);

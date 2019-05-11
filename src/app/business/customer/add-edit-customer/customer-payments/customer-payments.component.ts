@@ -168,10 +168,11 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
         if (response.data.length > 0) {
           response.data.map(item => {
             item.value = item.refvalue;
-            item.label = item.refvalue;
+            item.label = item.refname;
             if (item.refkey === 'biz_plan') {
               this.subscriptionAmt = item.refvalue;
               this.totalamount = this.subscriptionAmt;
+              console.log(item.refkey + '->' + item.refvalue);
             }
             if (item.refkey === 'biz_razar' && item.refname === 'Authentication key') {
               this.authentication = item.refvalue;
@@ -182,6 +183,7 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
           this.paymentTenure = _.get(groupedData, 'biz_paymenttenure');
         }
       }
+      
       this.paymentarray = this.paymentTenure.find((item) => item.refid === Number(this.customerObj.paymenttenure));
       const date = new Date(this.lastpaid);
       if (!_.isUndefined(this.paymentarray)) {

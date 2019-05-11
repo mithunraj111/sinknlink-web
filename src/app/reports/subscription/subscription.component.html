@@ -103,7 +103,7 @@
                                 <ngx-datatable-column prop="status" name="Status" [resizeable]="false"
                                     headerClass="bizs-type">
                                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                                        <label *ngIf="row.status === 'Overdue'" class="label label-danger">Overdue</label>
+                                        <label *ngIf="row.status === 'Overdue'" class="label label-danger">{{row.status}}</label>
                                         <label *ngIf="row.status === 'Today'" class="label label-warning">{{row.status}}</label>
                                         <label *ngIf="row.status === 'Upcoming'" class="label label-success">{{row.status}}</label>
                                     </ng-template>
