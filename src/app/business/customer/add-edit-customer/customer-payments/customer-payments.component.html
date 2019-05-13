@@ -4,32 +4,31 @@
             <div class="col-md-12 col-sm-12">
                 <div class="form-group row mb-0">
                     <div class="col-md-6">
-                        <h3 class="text-primary">SUBSCRIPTION PLANS</h3>
                     </div>
-                    <div class="col-form-label col-md-2 col-sm-6 m-auto">
-                        <label for="lastPaid" class="text-primary">Last Paid</label><br />
+                    <div class="col-form-label col-md-3 col-sm-6 m-auto text-center">
+                        <label for="lastPaid" class="mb-0">Last Paid &nbsp;</label>
                         <span #lastPaid>{{lastpaid==null?'-':lastpaid|date:datedisplayformat}}</span>
                     </div>
-                    <div class="col-form-label col-md-2 col-sm-6 m-auto">
-                        <label for="nextDue" class="text-primary">Next Due</label><br />
+                    <div class="col-form-label col-md-3 col-sm-6 m-auto">
+                        <label for="nextDue" class="mb-0">Next Due &nbsp;</label>
                         <span #nextDue>{{nextdue == null ? '-' : nextdue | date:datedisplayformat}}</span>
                     </div>
                 </div>
                 <div class="btn-group btn-group-toggle row mx-auto w-100 my-3" ngbRadioGroup name="radioBasic"
                     [(ngModel)]="subscriptionPlan">
-                    <label ngbButtonLabel class="btn-primary mx-2 subscriptionplan-label">
+                    <label ngbButtonLabel class="btn-inverse mx-2 subscriptionplan-label">
                         <input ngClass="subscriptionPlan ==='360'? 'active':''" ngbButton type="radio" [value]="360">
                         {{this.paymentTenure[0]?.refname}}<br />{{this.paymentTenure[0]?.refvalue | currency: 'INR' :symbol}}
                     </label>
-                    <label ngbButtonLabel class="btn-primary mx-2 subscriptionplan-label">
+                    <label ngbButtonLabel class="btn-inverse mx-2 subscriptionplan-label">
                         <input ngClass="subscriptionPlan ==='180'? 'active':''" ngbButton type="radio" [value]="180">
                         {{this.paymentTenure[1]?.refname}}<br />{{this.paymentTenure[1]?.refvalue | currency: 'INR' :symbol}}
                     </label>
-                    <label ngbButtonLabel class="btn-primary mx-2 subscriptionplan-label">
+                    <label ngbButtonLabel class="btn-inverse mx-2 subscriptionplan-label">
                         <input ngClass="subscriptionPlan ==='180'? 'active':''" ngbButton type="radio" value="90">
                         {{this.paymentTenure[2]?.refname}}<br />{{this.paymentTenure[2]?.refvalue | currency: 'INR' :symbol}}
                     </label>
-                    <label ngbButtonLabel class="btn-primary mx-2 subscriptionplan-label">
+                    <label ngbButtonLabel class="btn-inverse mx-2 subscriptionplan-label">
                         <input ngClass="subscriptionPlan ==='180'? 'active':''" ngbButton type="radio" [value]="30">
                         {{this.paymentTenure[3]?.refname}}<br />{{this.paymentTenure[3]?.refvalue | currency: 'INR' :symbol}}
                     </label>

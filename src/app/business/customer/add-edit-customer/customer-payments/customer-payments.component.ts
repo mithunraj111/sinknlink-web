@@ -171,10 +171,9 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
           response.data.map(item => {
             item.value = item.refvalue;
             item.label = item.refname;
-            if (item.refkey === 'biz_plan') {
-              this.subscriptionAmt = item.refvalue;
-              this.totalamount = this.subscriptionAmt;
-            }
+            // if (item.refkey === 'biz_plan') {
+            //   this.subscriptionAmt = item.refvalue;
+            // }
             if (item.refkey === 'biz_razar' && item.refname === 'Authentication key') {
               this.authentication = item.refvalue;
             }
@@ -192,6 +191,7 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
         this.nextdue = null;
       }
       this.subscriptionPlan = this.paymentarray.refvalue;
+      this.totalamount = this.subscriptionPlan;
     });
   }
 
@@ -225,7 +225,7 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
         donationAmt = Number(donationAmt) + Number(item.selectedAmt);
       }
     });
-    this.totalamount = Number(this.subscriptionAmt) + Number(donationAmt);
+    this.totalamount = Number(this.subscriptionPlan) + Number(donationAmt);
   }
 
   saveOnlinePayment(onlinepaymentid) {
