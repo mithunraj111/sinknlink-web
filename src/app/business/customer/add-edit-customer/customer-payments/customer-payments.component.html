@@ -15,32 +15,6 @@
                         <span #nextDue>{{nextdue == null ? '-' : nextdue | date:datedisplayformat}}</span>
                     </div>
                 </div>
-                <div class="form-group row mx-2" btnRadioGroup [(ngModel)]="subscriptionPlan">
-                    <div class="col-md-3">
-                        <label ngClass="subscriptionPlan ==='360'? 'active':''" btnRadio="360" uncheckable
-                            class="btn m-auto bg-c-blue subscriptionplan-label" tabindex="0" role="button">
-                            Yearly<br />{{'360'| currency: 'INR' :symbol}}
-                        </label>
-                    </div>
-                    <div class="col-md-3">
-                        <label ngClass="subscriptionPlan ==='180'? 'active':''" btnRadio="180" uncheckable
-                            class="btn m-auto bg-c-blue subscriptionplan-label" tabindex="0" role="button">
-                            Half-Yearly<br />{{'180'| currency: 'INR' :symbol}}
-                        </label>
-                    </div>
-                    <div class="col-md-3">
-                        <label ngClass="subscriptionPlan ==='90'? 'active':''" btnRadio="90" uncheckable
-                            class="btn m-auto bg-c-blue subscriptionplan-label active" tabindex="0" role="button">
-                            Quarterly<br />{{'90'| currency: 'INR' :symbol}}
-                        </label>
-                    </div>
-                    <div class="col-md-3">
-                        <label ngClass="subscriptionPlan ==='30'? 'active':''" btnRadio="30" uncheckable
-                            class="btn m-auto bg-c-blue subscriptionplan-label" tabindex="0" role="button">
-                            Monthly<br />{{'30'| currency: 'INR' :symbol}}
-                        </label>
-                    </div>
-                </div>
                 <div class="btn-group btn-group-toggle row mx-auto w-100 my-3" ngbRadioGroup name="radioBasic"
                     [(ngModel)]="subscriptionPlan">
                     <label ngbButtonLabel class="btn-primary mx-2 subscriptionplan-label">
@@ -49,7 +23,7 @@
                     </label>
                     <label ngbButtonLabel class="btn-primary mx-2 subscriptionplan-label">
                         <input ngClass="subscriptionPlan ==='180'? 'active':''" ngbButton type="radio" [value]="180">
-                        {{this.paymentTenure[1]?.refname + '1'}}<br />{{this.paymentTenure[1]?.refvalue | currency: 'INR' :symbol}}
+                        {{this.paymentTenure[1]?.refname}}<br />{{this.paymentTenure[1]?.refvalue | currency: 'INR' :symbol}}
                     </label>
                     <label ngbButtonLabel class="btn-primary mx-2 subscriptionplan-label">
                         <input ngClass="subscriptionPlan ==='180'? 'active':''" ngbButton type="radio" value="90">
@@ -81,7 +55,7 @@
                 <div *ngFor="let donation of donationList; index as i" class="form-group row border-checkbox-section">
                     <div class="border-checkbox-group border-checkbox-group-primary ml-4 p-t-5">
                         <input class="border-checkbox" type="checkbox" id={{i}} [(ngModel)]="donation.selected"
-                            (change)="donationChecked()">
+                            (change)="donationChecked()"  checked="">
                         <label class="border-checkbox-label" for={{i}}>{{donation.charityname}}
                             <a placement="bottom" ngbTooltip="Click to view donation cause"
                                 (click)="viewDonationCause(donation);"><i class="fa fa-question-circle"
