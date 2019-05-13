@@ -3,32 +3,71 @@
         <div class="row">
             <div class="col-md-12 col-sm-12">
                 <div class="form-group row mb-0">
-                    <label class="col-md-3 col-sm-6 col-form-label text-right">Last paid</label>
-                    <span
-                        class="col-form-label col-md-9 col-sm-6 f-16">{{lastpaid==null?'-':lastpaid|date:datedisplayformat}}</span>
-                </div>
-                <div class="form-group row mb-0">
-                    <label class="col-md-3 col-sm-6 col-form-label text-right">Next due</label>
-                    <span
-                        class="col-form-label col-md-9 col-sm-6">{{nextdue==null?'-':nextdue|date:datedisplayformat}}</span>
-                </div>
-                <div class="form-group row required">
-                    <label class="col-md-3 col-sm-6 col-form-label text-right">Payment
-                        Tenure</label>
-                    <div class="col-md-9 col-sm-6">
-                        <ng-select [allowClear]="true" [ngClass]="'ng-select'" [options]="paymentTenure"
-                            placeholder="Select Payment tenure">
-                        </ng-select>
+                    <div class="col-md-6">
+                        <h3 class="text-primary">SUBSCRIPTION PLANS</h3>
+                    </div>
+                    <div class="col-form-label col-md-2 col-sm-6 m-auto">
+                        <label for="lastPaid" class="text-primary">Last Paid</label><br />
+                        <span #lastPaid>{{lastpaid==null?'-':lastpaid|date:datedisplayformat}}</span>
+                    </div>
+                    <div class="col-form-label col-md-2 col-sm-6 m-auto">
+                        <label for="nextDue" class="text-primary">Next Due</label><br />
+                        <span #nextDue>{{nextdue == null ? '-' : nextdue | date:datedisplayformat}}</span>
                     </div>
                 </div>
-                <div class="form group row border-checkbox-section">
+                <div class="form-group row mx-2" btnRadioGroup [(ngModel)]="subscriptionPlan">
+                    <div class="col-md-3">
+                        <label ngClass="subscriptionPlan ==='360'? 'active':''" btnRadio="360" uncheckable
+                            class="btn m-auto bg-c-blue subscriptionplan-label" tabindex="0" role="button">
+                            Yearly<br />{{'360'| currency: 'INR' :symbol}}
+                        </label>
+                    </div>
+                    <div class="col-md-3">
+                        <label ngClass="subscriptionPlan ==='180'? 'active':''" btnRadio="180" uncheckable
+                            class="btn m-auto bg-c-blue subscriptionplan-label" tabindex="0" role="button">
+                            Half-Yearly<br />{{'180'| currency: 'INR' :symbol}}
+                        </label>
+                    </div>
+                    <div class="col-md-3">
+                        <label ngClass="subscriptionPlan ==='90'? 'active':''" btnRadio="90" uncheckable
+                            class="btn m-auto bg-c-blue subscriptionplan-label active" tabindex="0" role="button">
+                            Quarterly<br />{{'90'| currency: 'INR' :symbol}}
+                        </label>
+                    </div>
+                    <div class="col-md-3">
+                        <label ngClass="subscriptionPlan ==='30'? 'active':''" btnRadio="30" uncheckable
+                            class="btn m-auto bg-c-blue subscriptionplan-label" tabindex="0" role="button">
+                            Monthly<br />{{'30'| currency: 'INR' :symbol}}
+                        </label>
+                    </div>
+                </div>
+                <div class="btn-group btn-group-toggle row mx-auto w-100 my-3" ngbRadioGroup name="radioBasic"
+                    [(ngModel)]="subscriptionPlan">
+                    <label ngbButtonLabel class="btn-primary mx-2 subscriptionplan-label">
+                        <input ngClass="subscriptionPlan ==='360'? 'active':''" ngbButton type="radio" [value]="360">
+                        {{this.paymentTenure[0]?.refname}}<br />{{this.paymentTenure[0]?.refvalue | currency: 'INR' :symbol}}
+                    </label>
+                    <label ngbButtonLabel class="btn-primary mx-2 subscriptionplan-label">
+                        <input ngClass="subscriptionPlan ==='180'? 'active':''" ngbButton type="radio" [value]="180">
+                        {{this.paymentTenure[1]?.refname + '1'}}<br />{{this.paymentTenure[1]?.refvalue | currency: 'INR' :symbol}}
+                    </label>
+                    <label ngbButtonLabel class="btn-primary mx-2 subscriptionplan-label">
+                        <input ngClass="subscriptionPlan ==='180'? 'active':''" ngbButton type="radio" value="90">
+                        {{this.paymentTenure[2]?.refname}}<br />{{this.paymentTenure[2]?.refvalue | currency: 'INR' :symbol}}
+                    </label>
+                    <label ngbButtonLabel class="btn-primary mx-2 subscriptionplan-label">
+                        <input ngClass="subscriptionPlan ==='180'? 'active':''" ngbButton type="radio" [value]="30">
+                        {{this.paymentTenure[3]?.refname}}<br />{{this.paymentTenure[3]?.refvalue | currency: 'INR' :symbol}}
+                    </label>
+                </div>
+                <!-- <div class="form group row border-checkbox-section">
                     <label class="col-md-3 col-sm-6 col-form-label text-right">Subscription Amount</label>
                     <div class="border-checkbox-group border-checkbox-group-primary col-md-7 col-sm-6 ml-1 p-t-5">
-                        <!-- <input class="border-checkbox" type="checkbox" id="checkbox1" [(ngModel)]="selfPayment"> -->
-                        <!-- <label class="border-checkbox-label f-w-300" for="checkbox1">{{subscriptionAmt | currency: 'INR' :symbol}}</label> -->
-                        {{subscriptionAmt | currency: 'INR' :symbol}}
+                        <input class="border-checkbox" type="checkbox" id="checkbox1" [(ngModel)]="selfPayment">
+                        <label class="border-checkbox-label f-w-300" for="checkbox1">{{subscriptionAmt | currency: 'INR' :symbol}}</label>
+                        {{subscriptionPlan | currency: 'INR' :symbol}}
                     </div>
-                </div>
+                </div> -->
                 <!-- <div class="form group row border-checkbox-section">
                     <label class="col-md-3 col-sm-6 col-form-label text-right">Associated Branch</label>
                     <div class="border-checkbox-group border-checkbox-group-primary col-md-7 col-sm-6 ml-1 p-t-5">
@@ -36,12 +75,11 @@
                         <label class="border-checkbox-label f-w-300" for="checkbox2">1,500 + Tax</label>
                     </div>
                 </div> -->
-                <div class="header-title m-t-20 mb-3" *ngIf="donationList.length>0">
+                <!-- <div class="header-title m-t-20 mb-3" *ngIf="donationList.length>0">
                     <h3 class="f-18 text-primary m-l-10">Donate for a cause</h3>
-                </div>
+                </div> -->
                 <div *ngFor="let donation of donationList; index as i" class="form-group row border-checkbox-section">
-                    <div
-                        class="border-checkbox-group border-checkbox-group-primary col-md-3 text-right col-sm-6 m-l-5 p-t-5">
+                    <div class="border-checkbox-group border-checkbox-group-primary ml-4 p-t-5">
                         <input class="border-checkbox" type="checkbox" id={{i}} [(ngModel)]="donation.selected"
                             (change)="donationChecked()">
                         <label class="border-checkbox-label" for={{i}}>{{donation.charityname}}
@@ -50,23 +88,22 @@
                                     aria-hidden="true"></i></a>
                         </label>
                     </div>
-                    <div class=" col-md-8 col-sm-6 p-l-0 p-r-20">
+                    <div class="p-l-0 p-r-20">
                         <input type="text" class="form-control" [(ngModel)]="donation.selectedAmt"
                             (ngModelChange)="donationChecked()" placeholder="Amount">
                     </div>
                 </div>
-                <div class="form-group m-t-10">
+                <!-- <div class="form-group m-t-10">
                     <label class="col-md-3 col-sm-6 col-form-label text-right p-r-20 p-t-15">Total</label>
                     <span
                         class="col-form-label col-md-5 col-sm-6 f-16 p-l-0 p-t-15">{{totalamount|currency: 'INR' :symbol}}</span>
-                </div>
+                </div> -->
                 <div class="col-md-12 col-sm-12 pay-online">
                     <div class="row">
-                        <div class="col-md-3 col-sm-3"></div>
-                        <div class="col-md-9 col-sm-9 p-l-0 p-r-0 header-title">
+                        <div style="width:94%">
                             <button type="button" placement="bottom" ngbTooltip="Click to pay online"
-                                class="btn btn-primary pull-right" (click)="onlinePay()">Pay
-                                online</button>
+                                class="btn btn-primary pull-right" (click)="onlinePay()">
+                                {{totalamount | currency: 'INR' :symbol}} - Pay online</button>
                         </div>
                     </div>
                 </div>
@@ -74,8 +111,6 @@
         </div>
     </div>
     <div class="header-title addeditpage mb-3">
-        <!-- <div class="col-md-6 col-sm-6" *ngIf="userstoragedata.roleid!=2">
-        </div> -->
         <div class="row p-l-15">
             <div class="col-md-10 col-sm-6">
                 <input #customerPaymentSearch type="text"
