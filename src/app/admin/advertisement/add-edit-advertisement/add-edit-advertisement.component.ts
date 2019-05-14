@@ -145,7 +145,7 @@ export class AddEditAdvertisementComponent implements OnInit {
       adObj.status = response.data.status == AppConstant.STATUS_ACTIVE ? true : false;
       this.adForm = this.fb.group({
         adname: [adObj.adname, [Validators.required]],
-        city: [adObj.adlocation.city, Validators.required],
+        city: [adObj.city, Validators.required],
         locationid: [adObj.locationid, [Validators.required]],
         categoryid: [adObj.categoryid, [Validators.required]],
         url: [adObj.url, [Validators.required]],

@@ -20,6 +20,7 @@ declare var Razorpay: any;
 })
 export class CustomerPaymentsComponent implements OnInit, OnChanges {
   subscriptionPlan;
+  noDonation = true;
   payHistoryList = [];
   tempFilter = [];
   @ViewChild(DatatableComponent) table: DatatableComponent;
@@ -43,6 +44,8 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
   collectpayment = false;
   razarresponse: any;
   authentication: any;
+  selectedplanamt = 0;
+  donationAmt = 0;
   emptymessages = AppConstant.EMPTY_MESSAGES.PAYMENT;
   constructor(private paymentService: AppCommonService.PaymentsService,
     private lookupService: AdminService.LookupService,
@@ -69,8 +72,14 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
     });
   }
   ngOnChanges(changes: SimpleChanges) {
+    this.customerObj = changes.customerObj.currentValue;
     this.getPaymentHistory(changes.customerObj.currentValue);
     this.getLookUps();
+  }
+  getSubscriptionamount() {
+    this.selectedplanamt = 0;
+    this.selectedplanamt = this.subscriptionPlan;
+    this.totalamount = Number(this.selectedplanamt) + Number(this.donationAmt);
   }
   onlinePay() {
     this.razarpayService.loadrazarpay().then(() => {
@@ -183,15 +192,20 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
           this.paymentTenure = _.get(groupedData, 'biz_paymenttenure');
         }
       }
-      this.paymentarray = this.paymentTenure.find((item) => item.refid === Number(this.customerObj.paymenttenure));
+      let self = this;
+      self.paymentarray = _.find(self.paymentTenure,function(item:any){
+        if(item.refvalue === self.customerObj.paymenttenure){
+          return item;
+        }
+      })
       const date = new Date(this.lastpaid);
+      this.subscriptionPlan = Number(self.paymentarray.refvalue);
+      this.totalamount = this.subscriptionPlan;
       if (!_.isUndefined(this.paymentarray)) {
-        this.nextdue = date.setDate(date.getDate() + Number(this.paymentarray.refvalue));
+        this.nextdue = date.setDate(date.getDate() + Number(this.subscriptionPlan));
       } else {
         this.nextdue = null;
       }
-      this.subscriptionPlan = this.paymentarray.refvalue;
-      this.totalamount = this.subscriptionPlan;
     });
   }
 
@@ -219,13 +233,14 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
     this.save(data);
   }
   donationChecked() {
-    let donationAmt = 0;
-    _.map(this.donationList, function (item) {
+    this.donationAmt = 0;
+    let self =this;
+    _.map(self.donationList, function (item) {
       if (item.selected && item.selectedAmt) {
-        donationAmt = Number(donationAmt) + Number(item.selectedAmt);
+        self.donationAmt = Number(self.donationAmt) + Number(item.selectedAmt);
       }
     });
-    this.totalamount = Number(this.subscriptionPlan) + Number(donationAmt);
+    this.totalamount = Number(this.selectedplanamt) + Number(this.donationAmt);
   }
 
   saveOnlinePayment(onlinepaymentid) {

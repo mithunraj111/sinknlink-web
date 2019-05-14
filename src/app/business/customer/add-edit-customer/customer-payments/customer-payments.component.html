@@ -17,19 +17,23 @@
                 <div class="btn-group btn-group-toggle row mx-auto w-100 my-3" ngbRadioGroup name="radioBasic"
                     [(ngModel)]="subscriptionPlan">
                     <label ngbButtonLabel class="btn-inverse mx-2 subscriptionplan-label">
-                        <input ngClass="subscriptionPlan ==='360'? 'active':''" ngbButton type="radio" [value]="360">
+                        <input ngClass="subscriptionPlan ==='360'? 'active':''" ngbButton type="radio" [value]="360"
+                        (change)="getSubscriptionamount()">
                         {{this.paymentTenure[0]?.refname}}<br />{{this.paymentTenure[0]?.refvalue | currency: 'INR' :symbol}}
                     </label>
                     <label ngbButtonLabel class="btn-inverse mx-2 subscriptionplan-label">
-                        <input ngClass="subscriptionPlan ==='180'? 'active':''" ngbButton type="radio" [value]="180">
+                        <input ngClass="subscriptionPlan ==='180'? 'active':''" ngbButton type="radio" [value]="180"
+                        (change)="getSubscriptionamount()">
                         {{this.paymentTenure[1]?.refname}}<br />{{this.paymentTenure[1]?.refvalue | currency: 'INR' :symbol}}
                     </label>
                     <label ngbButtonLabel class="btn-inverse mx-2 subscriptionplan-label">
-                        <input ngClass="subscriptionPlan ==='180'? 'active':''" ngbButton type="radio" value="90">
+                        <input ngClass="subscriptionPlan ==='90'? 'active':''" ngbButton type="radio" value="90"
+                        (change)="getSubscriptionamount()">
                         {{this.paymentTenure[2]?.refname}}<br />{{this.paymentTenure[2]?.refvalue | currency: 'INR' :symbol}}
                     </label>
                     <label ngbButtonLabel class="btn-inverse mx-2 subscriptionplan-label">
-                        <input ngClass="subscriptionPlan ==='180'? 'active':''" ngbButton type="radio" [value]="30">
+                        <input ngClass="subscriptionPlan ==='30'? 'active':''" ngbButton type="radio" [value]="30"
+                        (change)="getSubscriptionamount()">
                         {{this.paymentTenure[3]?.refname}}<br />{{this.paymentTenure[3]?.refvalue | currency: 'INR' :symbol}}
                     </label>
                 </div>
@@ -48,9 +52,6 @@
                         <label class="border-checkbox-label f-w-300" for="checkbox2">1,500 + Tax</label>
                     </div>
                 </div> -->
-                <!-- <div class="header-title m-t-20 mb-3" *ngIf="donationList.length>0">
-                    <h3 class="f-18 text-primary m-l-10">Donate for a cause</h3>
-                </div> -->
                 <div *ngFor="let donation of donationList; index as i" class="form-group row border-checkbox-section">
                     <div class="border-checkbox-group border-checkbox-group-primary ml-4 p-t-5">
                         <input class="border-checkbox" type="checkbox" id={{i}} [(ngModel)]="donation.selected"
@@ -66,17 +67,14 @@
                             (ngModelChange)="donationChecked()" placeholder="Amount">
                     </div>
                 </div>
-                <!-- <div class="form-group m-t-10">
-                    <label class="col-md-3 col-sm-6 col-form-label text-right p-r-20 p-t-15">Total</label>
-                    <span
-                        class="col-form-label col-md-5 col-sm-6 f-16 p-l-0 p-t-15">{{totalamount|currency: 'INR' :symbol}}</span>
-                </div> -->
                 <div class="col-md-12 col-sm-12 pay-online">
                     <div class="row">
                         <div style="width:94%">
                             <button type="button" placement="bottom" ngbTooltip="Click to pay online"
                                 class="btn btn-primary pull-right" (click)="onlinePay()">
-                                {{totalamount | currency: 'INR' :symbol}} - Pay online</button>
+                                <!-- <span *ngIf = "noDonation">{{subscriptionPlan| currency: 'INR' :symbol}}</span>  -->
+                                <span>{{totalamount| currency: 'INR' :symbol}}</span>- Pay online
+                            </button>
                         </div>
                     </div>
                 </div>
