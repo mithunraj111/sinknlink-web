@@ -27,6 +27,7 @@ import { BarRatingModule } from 'ngx-bar-rating';
 import { AddEditGigComponent } from './customer/add-edit-customer/customer-gigs/add-edit-gigs/add-edit-gigs.component';
 import { AddEditCouponComponent } from './customer/add-edit-customer/customer-coupons/add-edit-coupon/add-edit-coupon.component';
 import { CustomerReviewsComponent } from './customer/add-edit-customer/customer-reviews/customer-reviews.component';
+import { CustomerFollowersComponent } from './customer/add-edit-customer/customer-followers/customer-followers.component';
 
 
 @NgModule({
@@ -61,7 +62,8 @@ import { CustomerReviewsComponent } from './customer/add-edit-customer/customer-
     CustomerSettingsComponent,
     AddEditGigComponent,
     AddEditCouponComponent,
-    CustomerReviewsComponent
+    CustomerReviewsComponent,
+    CustomerFollowersComponent
   ]
 })
 export class BusinessModule { }

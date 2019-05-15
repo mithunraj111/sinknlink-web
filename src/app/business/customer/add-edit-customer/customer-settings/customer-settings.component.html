@@ -1,65 +1,90 @@
 <form [formGroup]="settingForm">
     <div class="employee-form">
-        <div class="card tenants-page tenants-pages m-b-10">
-            <div class="row p-t-10 p-b-5">
+        <div class="card px-4 pt-3 business-settings m-b-10">
+            <div class="row p-t-10 p-b-5 pr-3">
                 <div class="col-md-12 col-sm-12">
                     <div class="form-group row">
-                        <label class="col-md-3 col-sm-6 col-form-label text-right">Business search&nbsp;
-                            <a placement="bottom"
-                                (click)="viewDonationCause(donation);"><i class="fa fa-question-circle"
-                                    aria-hidden="true"></i></a></label>
-                        <div class="col-md-9 col-sm-6">
-                            <ui-switch class="js-small" placement="bottom" color="$primary-color" switchColor="#fff"
-                                size="small" formControlName="bizsearch"></ui-switch>
+                        <label class="col-md-10 col-sm-6 col-form-label">Business search&nbsp;
+                            <!-- <a placement="bottom" ngbTooltip={{bizSearchSetting}}
+                                (click)="viewDonationCause(donation);">
+                                <i class="fa fa-question-circle" aria-hidden="true"></i>
+                            </a> -->
+                            <p>A long line to test the font size, color and placement of the description for the
+                                settings provided</p>
+                        </label>
+                        <div class="col-md-2 col-sm-6 setting-action">
+                            <ui-switch class="js-medium pull-right" placement="bottom" color="$primary-color"
+                                switchColor="#fff" size="small" formControlName="bizsearch"></ui-switch>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-3 col-sm-6 col-form-label text-right">Chat support&nbsp;
-                            <a placement="bottom"
-                                (click)="viewDonationCause(donation);"><i class="fa fa-question-circle"
-                                    aria-hidden="true"></i></a></label>
-                        <div class="col-md-9 col-sm-6">
-                            <ui-switch class="js-small" placement="bottom" color="$primary-color" switchColor="#fff"
-                                size="small" formControlName="chatyn"></ui-switch>
+                        <label class="col-md-10 col-sm-6 col-form-label">Chat support&nbsp;
+                            <!-- <a placement="bottom" ngbTooltip={{chatSupportSetting}}
+                                (click)="viewDonationCause(donation);">
+                                <i class="fa fa-question-circle" aria-hidden="true"></i>
+                            </a> -->
+                            <p>A long line to test the font size and placement of the description for the
+                                settings provided. A long line to test</p>
+                        </label>
+                        <div class="col-md-2 col-sm-6 setting-action">
+                            <ui-switch class="js-medium pull-right" placement="bottom" color="$primary-color"
+                                switchColor="#fff" size="small" formControlName="chatyn"></ui-switch>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-3 col-sm-6 col-form-label text-right">Business hours&nbsp;
-                            <a placement="bottom"
-                                (click)="viewDonationCause(donation);"><i class="fa fa-question-circle"
-                                    aria-hidden="true"></i></a></label>
-                        <div class="col-md-9 col-sm-6">
-                            <input class="form-control m-b-10" type="time" formControlName="starttime">
-                            <input class="form-control" type="time" formControlName="endtime">
+                        <label class="col-md-10 col-sm-6 col-form-label">Open now&nbsp;
+                            <!-- <a placement="bottom" ngbTooltip={{openNowSetting}} (click)="viewDonationCause(donation);">
+                                <i class="fa fa-question-circle" aria-hidden="true"></i>
+                            </a> -->
+                            <p>A long line to test the font size, color and placement of the description for the
+                                settings provided. A long line to test the font size, color and placement of the
+                                description for the settings provided</p>
+                        </label>
+                        <div class="col-md-2 col-sm-6 setting-action">
+                            <ui-switch class="js-medium pull-right" placement="bottom" color="$primary-color"
+                                switchColor="#fff" size="small" formControlName="openyn"></ui-switch>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-3 col-sm-6 col-form-label text-right">Open now&nbsp;
-                            <a placement="bottom" (click)="viewDonationCause(donation);"><i
-                                    class="fa fa-question-circle" aria-hidden="true"></i></a></label>
-                        <div class="col-md-9 col-sm-6">
-                            <ui-switch class="js-small" placement="bottom" color="$primary-color" switchColor="#fff"
-                                size="small" formControlName="openyn"></ui-switch>
+                        <label class="col-md-10 col-sm-6 col-form-label">Auto Generate Coupon code&nbsp;
+                            <!-- <a placement="bottom" ngbTooltip={{autoGenerationCouponSetting}}
+                                (click)="viewDonationCause(donation);">
+                                <i class="fa fa-question-circle" aria-hidden="true"></i>
+                            </a> -->
+                            <p>A long line to test the font size, color and placement of the description for the
+                                settings provided</p>
+                        </label>
+                        <div class="col-md-2 col-sm-6 setting-action">
+                            <ui-switch class="js-medium pull-right" placement="bottom" color="$primary-color"
+                                switchColor="#fff" size="small" formControlName="coupongenyn"></ui-switch>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-3 col-sm-6 col-form-label text-right">Auto Generate Coupon code&nbsp;
-                            <a placement="bottom"
-                                (click)="viewDonationCause(donation);"><i class="fa fa-question-circle"
-                                    aria-hidden="true"></i></a></label>
-                        <div class="col-md-9 col-sm-6">
-                            <ui-switch class="js-small" placement="bottom" color="$primary-color" switchColor="#fff"
-                                size="small" formControlName="coupongenyn"></ui-switch>
+                        <label class="col-md-10 col-sm-6 col-form-label">Notification&nbsp;
+                            <!-- <a placement="bottom" ngbTooltip={{notificationSetting}}
+                                (click)="viewDonationCause(donation);">
+                                <i class="fa fa-question-circle" aria-hidden="true"></i>
+                            </a> -->
+                            <p>A long line to test the font size, color and placement of the description for the
+                                settings provided</p>
+                        </label>
+                        <div class="col-md-2 col-sm-6 setting-action">
+                            <ui-switch class="js-medium pull-right" placement="bottom" color="$primary-color"
+                                switchColor="#fff" size="small" formControlName="notificationyn"></ui-switch>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-3 col-sm-6 col-form-label text-right">Notification&nbsp;
-                            <a placement="bottom"
-                                (click)="viewDonationCause(donation);"><i class="fa fa-question-circle"
-                                    aria-hidden="true"></i></a></label>
-                        <div class="col-md-9 col-sm-6">
-                            <ui-switch class="js-small" placement="bottom" color="$primary-color" switchColor="#fff"
-                                size="small" formControlName="notificationyn"></ui-switch>
+                        <label class="col-md-10 col-sm-6 col-form-label">Business hours&nbsp;
+                            <!-- <a placement="bottom" ngbTooltip={{bizHourSetting}} (click)="viewDonationCause(donation);">
+                                    <i class="fa fa-question-circle" aria-hidden="true"></i>
+                                </a> -->
+                            <p>A long line to test the font size, color and placement of the description for the
+                                settings provided font size, color and placement of the description.</p>
+                        </label>
+                        <div class="col-md-2 col-sm-6 pr-0 setting-action">
+                            <input class="form-control m-b-10 ml-auto pull-right" type="time"
+                                formControlName="starttime">
+                            <input class="form-control pull-right ml-auto" type="time" formControlName="endtime">
                         </div>
                     </div>
                 </div>

@@ -440,7 +440,7 @@ export class AddEditCustomerComponent implements OnInit {
   }
   onCustomerTabChange(event) {
     this.customerObj = this.customerObj;
-    if (event.nextId === '6' || event.nextId === '5' || event.nextId === '3' || event.nextId === '2' || event.nextId === '8') {
+    if ( event.nextId === '9' || event.nextId === '8' || event.nextId === '6' || event.nextId === '5' || event.nextId === '3' || event.nextId === '2' ) {
       this.showbutton = false;
       this.hidebutton = true
       if (event.nextId === '6') {
@@ -463,6 +463,11 @@ export class AddEditCustomerComponent implements OnInit {
         return false;
       }
       if (event.nextId === '8') {
+        this.hidebutton = false;
+        this.showbutton = false;
+        return false;
+      }
+      if (event.nextId === '9') {
         this.hidebutton = false;
         this.showbutton = false;
         return false;

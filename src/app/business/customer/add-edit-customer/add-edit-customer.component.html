@@ -449,6 +449,13 @@
                             </div>
                         </ng-template>
                     </ngb-tab>
+                    <ngb-tab title="Followers" id='9' [disabled]='isAddForm'>
+                        <ng-template ngbTabContent>
+                            <div [@fadeInOutTranslate]>
+                                <app-customer-followers [customerObj]="customerObj"></app-customer-followers>
+                            </div>
+                        </ng-template>
+                    </ngb-tab>
                 </ngb-tabset>
             </div>
         </div>

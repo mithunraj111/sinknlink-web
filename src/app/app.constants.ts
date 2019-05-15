@@ -306,6 +306,7 @@ export const AppConstant = Object.freeze({
     BRANCHES: { emptyMessage: 'No branch data to display', totalMessage: 'total' },
     GIGS: { emptyMessage: 'No gigs data to display', totalMessage: 'total' },
     COUPONS: { emptyMessage: 'No coupon data to display', totalMessage: 'total' },
+    FOLLOWERS: { emptyMessage: 'No followers to display', totalMessage: 'total'},
     CONSUMERS: { emptyMessage: 'No consumer data to display', totalMessage: 'total' },
     CONSUMERCOUPONS: { emptyMessage: 'No coupon data to display', totalMessage: 'total' },
     FAVOURITES: { emptyMessage: 'No favourite data to display', totalMessage: 'total' },

@@ -194,13 +194,13 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
       }
       let self = this;
       self.paymentarray = _.find(self.paymentTenure,function(item:any){
-        if(item.refvalue === self.customerObj.paymenttenure){
+        if(item.refid == self.customerObj.paymenttenure){
           return item;
         }
       })
       const date = new Date(this.lastpaid);
-      this.subscriptionPlan = Number(self.paymentarray.refvalue);
-      this.totalamount = this.subscriptionPlan;
+      this.subscriptionPlan = self.paymentarray.refvalue;
+      this.totalamount = Number(this.subscriptionPlan);
       if (!_.isUndefined(this.paymentarray)) {
         this.nextdue = date.setDate(date.getDate() + Number(this.subscriptionPlan));
       } else {
