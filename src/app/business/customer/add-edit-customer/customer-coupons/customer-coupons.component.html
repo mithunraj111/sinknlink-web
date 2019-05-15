@@ -1,8 +1,12 @@
 <div class="header-title addeditpage">
     <div class="row">
         <div class="col-md-10 col-sm-6">
-            <input #couponsSearch type="text" class="header-search form-control col-md-5 col-sm-5 p-l-0 p-r-0 input-sm full-data-search" placeholder="Search here" (keyup)='search($event)' placement="bottom" ngbTooltip="Type here to search">
-            <button type="button" class="btn search-close col-md-1 col-sm-1 p-l-0 p-r-0" (click)="couponsSearch.value='';search();"><i class="fa fa-close"></i></button>
+            <input #couponsSearch type="text"
+                class="header-search form-control col-md-5 col-sm-5 p-l-0 p-r-0 input-sm full-data-search"
+                placeholder="Search here" (keyup)='searchConsumer($event)' placement="bottom"
+                ngbTooltip="Type here to search">
+            <button type="button" class="btn search-close col-md-1 col-sm-1 p-l-0 p-r-0"
+                (click)="couponsSearch.value='';search();"><i class="fa fa-close"></i></button>
         </div>
         <!-- <div class="col-md-6 col-sm-6 p-r-10 text-right">
             <button type="button" placement="bottom" ngbTooltip="Reload" (click)="getCouponList(customerObj)" class="btn btn-inverse btn-primary waves-effect"><i
@@ -13,37 +17,52 @@
 <div class="header-block m-t-15">
     <div class="table-header fixed-table-header">
         <div class="card p-r-15 p-l-15">
-            <ngx-datatable #couponstable class="table data-table expandable" [rows]='couponList' [columnMode]="'flex'" [headerHeight]="50" [footerHeight]="50" [limit]="5" [rowHeight]="'auto'" [reorderable]="false" [messages]="emptymessages">
+            <ngx-datatable #couponstable class="table data-table expandable" [rows]='couponList' [columnMode]="'flex'"
+                [headerHeight]="50" [footerHeight]="50" [limit]="5" [rowHeight]="'auto'" [reorderable]="false"
+                [messages]="emptymessages">
                 <ngx-datatable-column prop="couponcode" name="Coupon code" [resizeable]="false">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                         <span>{{row.couponcode}}</span>
                     </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column prop="noofcoupons" name="No. of coupons" [resizeable]="false">
+                <ngx-datatable-column prop="noofcoupons" name="No. of coupons" [resizeable]="false"
+                    [cellClass]="'text-right'" headerClass="text-right">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                         <span>{{row.noofcoupons}}</span>
                     </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column prop="consumercoupons" name="Claimed" [resizeable]="false">
+                <ngx-datatable-column prop="consumercoupons" name="Claimed" [resizeable]="false"
+                    [cellClass]="'text-right'" headerClass="text-right">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                        <span>{{row.consumercoupons?.length}}</span>
+                        <span>{{row.consumercoupons?.length}}
+                            <!-- <button *ngIf= "userstoragedata.roleid === 3 && row.consumercoupons?.length > 0" class="btn obscure-eye" (click)="show = !show"><i [ngClass]="show == true ? 'fa fa-eye' : 'fa fa-eye-slash'"></i></button> -->
+                            <button class="btn btn-nofocus pl-1 pr-2"
+                                (click)=viewClaimers(row)><i class="fa fa-tags"></i></button>
+                        </span>
                     </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column prop="expirydt" name="Expires at" [resizeable]="false" [cellClass]="'text-center'" headerClass="text-right">
+                <ngx-datatable-column prop="expirydt" name="Expires at" [resizeable]="false" [cellClass]="'text-center'"
+                    headerClass="text-center">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                         <span>{{row.expirydt|date:datedisplayformat}}</span>
                     </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column name="Status" [sortable]="false" [flexGrow]="0.5" [cellClass]="'text-center'" headerClass="text-right">
+                <ngx-datatable-column name="Status" [sortable]="false" [flexGrow]="0.5" [cellClass]="'text-center'"
+                    headerClass="text-right">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                        <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="$primary-color" switchColor="#fff" size="small" [checked]="row.status == 'Active'" (change)="updateCoupon(row,rowIndex,false)"></ui-switch>
+                        <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status"
+                            color="$primary-color" switchColor="#fff" size="small" [checked]="row.status == 'Active'"
+                            (change)="updateCoupon(row,rowIndex,false)"></ui-switch>
                     </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.5" [cellClass]="'text-center'" headerClass="text-right">
+                <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.5" [cellClass]="'text-center'"
+                    headerClass="text-right">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                        <a placement="bottom" ngbTooltip="Click to edit coupons" class="m-r-15 crm-action-edit text-primary" (click)="editCoupon(row)">
+                        <a placement="bottom" ngbTooltip="Click to edit coupons"
+                            class="m-r-15 crm-action-edit text-primary" (click)="editCoupon(row)">
                             <i class="fa fa-pencil"></i></a>
-                        <a placement="bottom" ngbTooltip="Click to delete coupons" class="crm-action-delete text-danger" (click)="updateCoupon(row,rowIndex,true)">
+                        <a placement="bottom" ngbTooltip="Click to delete coupons" class="crm-action-delete text-danger"
+                            (click)="updateCoupon(row,rowIndex,true)">
                             <i class="fa fa-trash"></i></a>
                     </ng-template>
                 </ngx-datatable-column>
@@ -51,4 +70,54 @@
         </div>
     </div>
 </div>
-<app-add-edit-coupon [couponObj]="couponObj" [customerObj]="customerObj" (notifyCouponChange)="notifyCouponChange($event)"></app-add-edit-coupon>
+<div class="modal-size gigs-modal">
+    <app-modal-animation [modalID]="'couponClaimerModal'" [modalClass]="'md-effect-7'">
+        <h3>Coupon Claimers</h3>
+        <div class="header-title pb-0">
+            <div class="row">
+                <div class="col-md-12">
+                    <input #couponclaimerSearch type="text"
+                        class="form-control input-sm col-md-5 col-sm-5 full-data-search" placeholder="Search here"
+                        (keyup)='searchClaimer($event)' placement="bottom" ngbTooltip="Type here to search">
+                    <button type="button" class="btn search-close search col-md-1 col-sm-1"
+                        (click)="customerSearch.value='';search();"><i class="fa fa-close"></i>
+                    </button>
+                </div>
+                <!-- <div class="col-md-6 col-sm-6 p-r-10 text-right">
+                    <button *ngIf="add" type="button" placement="bottom" ngbTooltip="Click to add customer"
+                        class="add-btn btn btn-primary waves-effect m-r-10" (click)='addCustomer()'><i
+                            class="fa fa-plus-circle m-r-5"></i> New</button>
+                    <button type="button" placement="bottom" ngbTooltip="Reload" (click)="getCustomerList()"
+                        class="btn btn-inverse btn-primary waves-effect"><i class="ti-reload "></i></button>
+                </div> -->
+            </div>
+        </div>
+        <div class="table-header fixed-table-header pt-0 p-r-15 p-l-15">
+            <ngx-datatable #couponclaimertable class="table data-table expandable" [rows]='claimerList'
+                [columnMode]="'flex'" [headerHeight]="50" [footerHeight]="50" [limit]="5" [rowHeight]="'auto'"
+                [reorderable]="false" [messages]="emptymessages">
+                <ngx-datatable-column prop="consumer.fullname" name="Full Name" [resizeable]="false">
+                    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                        <span>{{row.consumer.fullname}}</span>
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column prop="consumer.mobileno" name="Mobile" [resizeable]="false">
+                    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                        <span>{{row.consumer.mobileno}}</span>
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Status" [sortable]="false" [resizeable]="false" headerClass="text-center"
+                    [cellClass]="'text-center status'" [flexGrow]="0.2">
+                    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                        <button *ngIf="row.status === 'Claimed'" class="btn btn-primary py-1 px-2"
+                            (click)=editClaimers(row,rowIndex)>{{row.status}}</button>
+                        <label *ngIf="row.status === 'Redeemed'">{{row.status}}</label>
+                    </ng-template>
+                </ngx-datatable-column>
+            </ngx-datatable>
+        </div>
+        <button (click)="closeClaimer()" aria-label="Close" class="md-close-btn"><i class="fa fa-close"></i></button>
+    </app-modal-animation>
+</div>
+<app-add-edit-coupon [couponObj]="couponObj" [customerObj]="customerObj"
+    (notifyCouponChange)="notifyCouponChange($event)"></app-add-edit-coupon>

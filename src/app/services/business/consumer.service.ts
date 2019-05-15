@@ -24,6 +24,9 @@ export class ConsumerService {
     consumerCouponsList(data): Observable<any> {
         return this.httpHandler.POST(this.endpoint + AppConstant.API_CONFIG.API_URL.BUSINESS.CONSUMERCOUPON.LIST, data);
     }
+    consumerCouponsEdit(data, id): Observable<any> {
+        return this.httpHandler.POST(this.endpoint + AppConstant.API_CONFIG.API_URL.BUSINESS.CONSUMERCOUPON.UPDATE + id, data);
+    }
     consumerFavs(data): Observable<any> {
         return this.httpHandler.POST(this.endpoint + AppConstant.API_CONFIG.API_URL.BUSINESS.CONSUMERFAVORITES.LIST, data);
     }

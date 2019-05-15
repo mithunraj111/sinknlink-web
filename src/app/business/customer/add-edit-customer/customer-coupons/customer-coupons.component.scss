@@ -1,3 +1,10 @@
 .search{
-    right:8%;
+    right: 12% !important;
+    bottom: 45% !important
+}
+.table-header .data-table .datatable-row-wrapper:nth-child(odd) {
+    background-color: #ffffff !important;
+}
+.btn-nofocus:focus {
+    box-shadow: none !important;
 }

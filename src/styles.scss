@@ -1709,7 +1709,7 @@ select-dropdown{
     .md-effect-7{
         top: 60px;
         .gig-modal-height{
-            height: 70vh;
+            max-height: 70vh;
             overflow-y: scroll;
         }
     }
@@ -1840,4 +1840,7 @@ input[type=number]::-webkit-outer-spin-button{
             right: 0;
         }
     }
+}
+.table-header .data-table .datatable-row-wrapper:nth-child(odd) {
+    background-color: #ffffff !important;
 }
