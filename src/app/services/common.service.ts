@@ -77,7 +77,9 @@ export class CommonService {
         }
     }
     globalSearch(tempFilter, event) {
+        console.log(tempFilter);
         let val = '';
+        console.log(tempFilter);
         if (!_.isNull(event) && !_.isUndefined(event)) {
             val = event.target.value.toLowerCase();
         }

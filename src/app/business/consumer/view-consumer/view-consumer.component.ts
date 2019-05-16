@@ -19,6 +19,7 @@ export class ViewConsumerComponent implements OnInit {
   emptymessages = AppConstant.EMPTY_MESSAGES.CONSUMERCOUPONS;
   nodata = AppConstant.EMPTY_MESSAGES.FAVOURITES;
   showCategoryImage = 'http://180.12.181.8:2000/category/';
+  showRating = false;
   // For Consumer Details.
   consumer: any = {};
 
@@ -95,6 +96,7 @@ export class ViewConsumerComponent implements OnInit {
         });
         reviews = Lodash.groupBy(response.data, 'membershipid');
         this.reviewedBiz = businesses;
+        console.log(response.data);
         this.reviews = reviews;
       }
 
@@ -103,8 +105,10 @@ export class ViewConsumerComponent implements OnInit {
   }
 
   showReviewFor(id) {
+    console.log(id);
     this.bizReview = this.reviews[id].sort(function (a, b) { return a.reviewid - b.reviewid })[0];
     this.rateStar = this.bizReview.rating;
+    this.showRating = true;
   }
 
   groupFavs(data) {
@@ -114,10 +118,8 @@ export class ViewConsumerComponent implements OnInit {
       location: []
     };
     data.forEach(element => {
-      console.log(element);
       if (Number(element.membershipid)) {
         groups.business.push(element);
-        console.log(element)
       }
       if (Number(element.locationid)) {
         groups.location.push(element);

@@ -113,6 +113,12 @@ export class AddEditCustomerComponent implements OnInit {
           this.getLocationList();
         }
       }
+      console.log(this.customerObj);
+      console.log(this.customerObj.status == 'Inactive');
+      console.log(this.userstoragedata.roleid == 3);
+      if (this.customerObj.status == 'Inactive' && this.userstoragedata.roleid == 3) {
+        alert('Hi');
+      }
     });
   }
   getLocationList() {

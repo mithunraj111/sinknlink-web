@@ -1719,6 +1719,12 @@ select-dropdown{
     //     bottom: 0px;
     // }
 }
+.modal-size.customercoupon-modal {
+    .md-modal{
+        width: 600px !important;
+        max-width: 100% !important;
+    }
+}
 .coupon-modal{
     .md-effect-7{
         top: 60px;

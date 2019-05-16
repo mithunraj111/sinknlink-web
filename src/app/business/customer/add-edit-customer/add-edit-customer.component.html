@@ -407,49 +407,49 @@
                             </div>
                         </ng-template>
                     </ngb-tab>
-                    <ngb-tab title="Branches" id='3' [disabled]="isAddForm" *ngIf="!branchFlag">
+                    <ngb-tab title="Branches" id='3' [disabled]="isAddForm || (customerObj.status === false && userstoragedata.roleid === 3)" *ngIf="!branchFlag">
                         <ng-template ngbTabContent>
                             <div [@fadeInOutTranslate]>
                                 <app-customer-branches [customerObj]="customerObj"></app-customer-branches>
                             </div>
                         </ng-template>
                     </ngb-tab>
-                    <ngb-tab title="Settings" id='4' [disabled]="isAddForm">
+                    <ngb-tab title="Settings" id='4' [disabled]="isAddForm || (customerObj.status === false && userstoragedata.roleid === 3)">
                         <ng-template ngbTabContent>
                             <div [@fadeInOutTranslate]>
                                 <app-customer-settings [customerObj]="customerObj"></app-customer-settings>
                             </div>
                         </ng-template>
                     </ngb-tab>
-                    <ngb-tab title="Gigs" id='5' [disabled]="isAddForm">
+                    <ngb-tab title="Gigs" id='5' [disabled]="isAddForm || (customerObj.status === false && userstoragedata.roleid === 3)">
                         <ng-template ngbTabContent>
                             <div [@fadeInOutTranslate]>
                                 <app-customer-gigs [customerObj]="customerObj"></app-customer-gigs>
                             </div>
                         </ng-template>
                     </ngb-tab>
-                    <ngb-tab title="Coupons" id='6' [disabled]="isAddForm">
+                    <ngb-tab title="Coupons" id='6' [disabled]="isAddForm || (customerObj.status === false && userstoragedata.roleid === 3)">
                         <ng-template ngbTabContent>
                             <div [@fadeInOutTranslate]>
                                 <app-customer-coupons [customerObj]="customerObj"></app-customer-coupons>
                             </div>
                         </ng-template>
                     </ngb-tab>
-                    <ngb-tab title="Gallery" id='7' [disabled]="isAddForm">
+                    <ngb-tab title="Gallery" id='7' [disabled]="isAddForm || (customerObj.status === false && userstoragedata.roleid === 3)">
                         <ng-template ngbTabContent>
                             <div [@fadeInOutTranslate]>
                                 <app-customer-gallery [customerObj]="customerObj"></app-customer-gallery>
                             </div>
                         </ng-template>
                     </ngb-tab>
-                    <ngb-tab title="Reviews" id='8' [disabled]="isAddForm">
+                    <ngb-tab title="Reviews" id='8' [disabled]="isAddForm || (customerObj.status === false && userstoragedata.roleid === 3)">
                         <ng-template ngbTabContent>
                             <div [@fadeInOutTranslate]>
                                 <app-customer-reviews [customerObj]="customerObj"></app-customer-reviews>
                             </div>
                         </ng-template>
                     </ngb-tab>
-                    <ngb-tab title="Followers" id='9' [disabled]='isAddForm'>
+                    <ngb-tab title="Followers" id='9' [disabled]="isAddForm || (customerObj.status === false && userstoragedata.roleid === 3)">
                         <ng-template ngbTabContent>
                             <div [@fadeInOutTranslate]>
                                 <app-customer-followers [customerObj]="customerObj"></app-customer-followers>

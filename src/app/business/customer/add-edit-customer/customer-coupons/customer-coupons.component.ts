@@ -19,6 +19,7 @@ export class CustomerCouponsComponent implements OnInit, OnChanges {
   claimerList = [];
   redeemedStatus = true;
   @ViewChild(DatatableComponent) table: DatatableComponent;
+  @ViewChild(DatatableComponent) table2: DatatableComponent;
   datedisplayformat = AppConstant.API_CONFIG.ANG_DATE.displaydate;
   userstoragedata = {} as any;
   @Input() customerObj = {} as any;
@@ -54,8 +55,8 @@ export class CustomerCouponsComponent implements OnInit, OnChanges {
       const response = JSON.parse(res._body);
       if (response.status) {
         this.claimerList = response.data;
-        this.tempFilter2 = this.claimerList;
       }
+      this.tempFilter2 = this.claimerList;
     });
     document.querySelector('#couponClaimerModal').classList.add('md-show');
   }
@@ -69,7 +70,6 @@ export class CustomerCouponsComponent implements OnInit, OnChanges {
       };
       this.consumerService.consumerCouponsEdit(updateObj, data.consumercouponid).subscribe(res => {
         const response = JSON.parse(res._body);
-        console.log(response.body);
         if (response.status) {
           this.bootstrapAlertService.showSucccess(response.message);
           this.claimerList[index].status = response.data.status;
@@ -89,9 +89,16 @@ export class CustomerCouponsComponent implements OnInit, OnChanges {
   }
   searchClaimer(event?) {
     this.claimerList = this.commonService.globalSearch(this.tempFilter2, event);
-    this.table.offset = 0;
+    this.table2.offset = 0;
   }
-
+  updateClaimer(data, index, flag) {
+    const updateObj = {
+      updateddt: new Date(),
+      updatedby: this.userstoragedata.fullname,
+      status: flag ? AppConstant.STATUS_DELETED :
+        (data.status === "Claimed" ? 'Redeemed' : 'Claimed')
+    };
+  }
   updateCoupon(data, index, flag) {
     const updateObj = {
       updateddt: new Date(),

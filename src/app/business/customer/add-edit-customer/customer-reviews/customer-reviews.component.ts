@@ -35,7 +35,7 @@ export class CustomerReviewsComponent implements OnInit{
 
     initform() {
         this.replyForm = this.fb.group({
-            reply: [null, Validators.required]
+            reply: [null, Validators.compose([Validators.required, Validators.maxLength(100)])]
         });
         this.getCustomerReviews(this.customerObj);
     }
@@ -64,11 +64,17 @@ export class CustomerReviewsComponent implements OnInit{
         document.querySelector('#' + event).classList.add('md-show');
     }
     reply() {
+        console.log(this.replyComment.length);
         this.loadingIndicator = true;
         const data = {} as any;
         data.comments = this.replyComment;
         if (this.replyComment === null || this.replyComment === undefined || this.replyComment === '') {
             this.bootstrapAlertService.showError(this.errObj.reply.required);
+            this.loadingIndicator = false;
+            return;
+        }
+        if (this.replyComment.length > 100) {
+            this.bootstrapAlertService.showError(this.errObj.reply.maxlength);
             this.loadingIndicator = false;
             return;
         }

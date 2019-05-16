@@ -66,31 +66,31 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <label class="col-md-3 col-sm-5 col-form-label text-left">Facebook id :
+                                            <label class="col-md-3 col-sm-5 col-form-label text-left">Facebook ID :
                                             </label>
                                             <div class="col-md-7 col-sm-7 m-t-5">
-                                                <span class="f-15">{{consumer.socialid?.facebookid}}</span>
+                                                <span class="f-15">{{consumer.socialid?.facebookid || '-'}}</span>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <label class="col-md-3 col-sm-5 col-form-label text-left">Twitter id :
+                                            <label class="col-md-3 col-sm-5 col-form-label text-left">Twitter ID :
                                             </label>
                                             <div class="col-md-7 col-sm-7 m-t-5">
-                                                <span class="f-15">{{consumer.socialid?.twitterid}}</span>
+                                                <span class="f-15">{{consumer.socialid?.twitterid || '-'}}</span>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <label class="col-md-3 col-sm-5 col-form-label text-left">Google id :
+                                            <label class="col-md-3 col-sm-5 col-form-label text-left">Google ID :
                                             </label>
                                             <div class="col-md-7 col-sm-7 m-t-5">
-                                                <span class="f-15">{{consumer.socialid?.googleid}}</span>
+                                                <span class="f-15">{{consumer.socialid?.googleid || '-'}}</span>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <label class="col-md-3 col-sm-5 col-form-label text-left">Instagram id :
+                                            <label class="col-md-3 col-sm-5 col-form-label text-left">Instagram ID :
                                             </label>
                                             <div class="col-md-7 col-sm-7 m-t-5">
-                                                <span class="f-15">{{consumer.socialid?.instagramid}}</span>
+                                                <span class="f-15">{{consumer.socialid?.instagramid || '-'}}</span>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -193,15 +193,15 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-12 col-md-7">
-                                                    <div class=" p-10 m-b-10">
-                                                        <div *ngIf="bizReview?.comments" class="col-sm-12 col-md-8">
+                                                    <div class="p-10 m-b-10">
+                                                        <div *ngIf="showRating" class="col-sm-12 col-md-12">
                                                             <div class="row">
-                                                                <a class="media-left">
+                                                                <a class="col-md-2">
                                                                     <div class="profile-image">
                                                                         {{bizReview?.consumer?.fullname.substring(0,1).toUpperCase()}}
                                                                     </div>
                                                                 </a>
-                                                                <div>
+                                                                <div class="col-md-10">
                                                                     <a>
                                                                         <h6 class=" media-heading mb-0">
                                                                             {{bizReview?.consumer?.fullname | titlecase}}

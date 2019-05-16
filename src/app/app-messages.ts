@@ -389,7 +389,7 @@ export const AppMessages = Object.freeze({
       remarks: { maxlength: 'Remarks should be within 100 characters'}
     },
     REPLY: {
-      reply: { required: 'Please enter a reply' }
+      reply: { required: 'Please enter a reply', maxlength: 'Reply should be within 100 Characters'}
     },
     FILEUPLOAD: 'You are only allowed to upload a maximum of 5 images and 1 video'
   },

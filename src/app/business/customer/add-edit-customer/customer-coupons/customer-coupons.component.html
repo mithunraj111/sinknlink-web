@@ -70,7 +70,7 @@
         </div>
     </div>
 </div>
-<div class="modal-size gigs-modal">
+<div class="modal-size customercoupon-modal">
     <app-modal-animation [modalID]="'couponClaimerModal'" [modalClass]="'md-effect-7'">
         <h3>Coupon Claimers</h3>
         <div class="header-title pb-0">
@@ -80,7 +80,7 @@
                         class="form-control input-sm col-md-5 col-sm-5 full-data-search" placeholder="Search here"
                         (keyup)='searchClaimer($event)' placement="bottom" ngbTooltip="Type here to search">
                     <button type="button" class="btn search-close search col-md-1 col-sm-1"
-                        (click)="customerSearch.value='';search();"><i class="fa fa-close"></i>
+                        (click)="couponclaimerSearch.value='';searchClaimer();"><i class="fa fa-close"></i>
                     </button>
                 </div>
                 <!-- <div class="col-md-6 col-sm-6 p-r-10 text-right">

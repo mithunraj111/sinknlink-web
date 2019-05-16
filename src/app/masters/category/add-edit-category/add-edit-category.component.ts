@@ -54,15 +54,14 @@ export class AddEditCategoryComponent implements OnInit, OnChanges {
   }
   onFile(event) {
     var file = event.target.files[0];
-    if (file.type == 'image/svg+xml') {
+    // if (file.type == 'image/svg+xml') {
       const reader = new FileReader();
       this.categoryimgfile = event.target.files[0];
       reader.onload = ((e) => {
         this.categoryfile = this.sanitizer.bypassSecurityTrustResourceUrl(e.target['result']);
       });
       reader.readAsDataURL(event.target.files[0]);
-
-    }
+    // }
   }
   initForm() {
     this.categoryForm = this.fb.group({
@@ -102,6 +101,7 @@ export class AddEditCategoryComponent implements OnInit, OnChanges {
       return false;
     } else {
       const formdata = new FormData();
+      console.log(this.categoryfile);
       if (_.isUndefined(this.categoryfile) || _.isNull(this.categoryfile)) {
         this.bootstrapAlertService.showError(this.categoryErrObj.categoryimg);
         return false;
@@ -121,8 +121,8 @@ export class AddEditCategoryComponent implements OnInit, OnChanges {
           const response = JSON.parse(res._body);
           if (response.status) {
             this.savecategory = false;
-            this.callParent({ update: false, data: response.data });
             this.bootstrapAlertService.showSucccess(response.message);
+            this.callParent({ update: false, data: response.data });
           } else {
             this.savecategory = false;
             this.bootstrapAlertService.showError(response.message);
@@ -141,6 +141,7 @@ export class AddEditCategoryComponent implements OnInit, OnChanges {
             this.bootstrapAlertService.showSucccess(response.message);
             this.callParent({ update: true, data: response.data });
           } else {
+            console.log(response);
             this.savecategory = false;
             this.bootstrapAlertService.showError(response.message);
           }
