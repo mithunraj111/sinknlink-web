@@ -25,10 +25,11 @@
                         <label>Password</label>
                         <div class="row plus-button">
                             <div class="col-md-8 col-sm-6 p-r-0">
-                                <input [type]="obscureText == true ? 'password' : 'text'" style="width:100% !important" class="form-control" value={{pwd}}
-                                    formControlName="password" placeholder="Password">
+                                <input [type]="obscureText == true ? 'password' : 'text'" style="width:100% !important"
+                                    class="form-control" value={{pwd}} formControlName="password"
+                                    placeholder="Password">
                             </div>
-                            <button class="col-md-1 btn pt-2 obscure-eye" (click) = "obscureText = !obscureText">
+                            <button class="col-md-1 btn pt-2 obscure-eye" (click)="obscureText = !obscureText">
                                 <i [ngClass]="obscureText == true ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
                             </button>
                             <div class="col-md-3 col-sm-6 p-l-5">
@@ -58,9 +59,9 @@
                         </div>
                     </div>
                 </div>
-                <button type="button" placement="top" ngbTooltip="Click to save system user" (click)="saveOrUpdateUser()"
-                    class="btn pull-right btn-primary waves-effect 
-                m-b-10 m-r-15" [disabled]="adduser">{{adduser == true ? 'Saving' : 'Save'}}</button>
+                <button type="button" placement="top" [ngbTooltip]="!adduser ? 'Click to save system user' : ''"
+                    (click)="saveOrUpdateUser()" class="btn pull-right btn-primary waves-effect m-b-10 m-r-15"
+                    [disabled]="adduser">{{adduser == true ? 'Saving' : 'Save'}}</button>
 
             </div>
         </form>

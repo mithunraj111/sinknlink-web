@@ -54,7 +54,9 @@ export class CustomerCouponsComponent implements OnInit, OnChanges {
     this.consumerService.consumerCouponsList({ couponid: data.couponid }).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
-        this.claimerList = response.data;
+        this.claimerList = _.map(response.data,function(item){
+          return _.omit(item,'coupon');
+        });
       }
       this.tempFilter2 = this.claimerList;
     });

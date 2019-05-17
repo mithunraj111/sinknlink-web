@@ -101,7 +101,6 @@ export class AddEditCategoryComponent implements OnInit, OnChanges {
       return false;
     } else {
       const formdata = new FormData();
-      console.log(this.categoryfile);
       if (_.isUndefined(this.categoryfile) || _.isNull(this.categoryfile)) {
         this.bootstrapAlertService.showError(this.categoryErrObj.categoryimg);
         return false;
@@ -119,12 +118,11 @@ export class AddEditCategoryComponent implements OnInit, OnChanges {
         formdata.append('data', JSON.stringify(data));
         this.categoryService.update(formdata, this.categoryObj.categoryid).subscribe(res => {
           const response = JSON.parse(res._body);
+          this.savecategory = false;
           if (response.status) {
-            this.savecategory = false;
             this.bootstrapAlertService.showSucccess(response.message);
             this.callParent({ update: false, data: response.data });
           } else {
-            this.savecategory = false;
             this.bootstrapAlertService.showError(response.message);
           }
         });
@@ -136,13 +134,11 @@ export class AddEditCategoryComponent implements OnInit, OnChanges {
         formdata.append('data', JSON.stringify(data));
         this.categoryService.create(formdata).subscribe((res) => {
           const response = JSON.parse(res._body);
+          this.savecategory = false;
           if (response.status) {
-            this.savecategory = false;
             this.bootstrapAlertService.showSucccess(response.message);
             this.callParent({ update: true, data: response.data });
           } else {
-            console.log(response);
-            this.savecategory = false;
             this.bootstrapAlertService.showError(response.message);
           }
         }, err => {

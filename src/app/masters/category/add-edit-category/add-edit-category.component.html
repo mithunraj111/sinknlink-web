@@ -38,8 +38,8 @@
                         </div>
                     </div>
                 </div>
-                <button type="button" placement="bottom" (click)="saveOrUpdateCategory()"
-                    ngbTooltip="Click to save business category"
+                <button type="button" placement="top" (click)="saveOrUpdateCategory()"
+                    [ngbTooltip]="!savecategory ? 'Click to save business category' : ''"
                     class="btn pull-right btn-primary waves-effect m-b-10"
                     [disabled]="savecategory">{{savecategory == true ? 'Saving' : 'Save'}}</button>
             </form>
