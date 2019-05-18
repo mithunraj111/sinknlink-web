@@ -23,6 +23,7 @@ import { NgxPermissionsModule } from 'ngx-permissions';
 import { AccessdeniedComponent } from './accessdenied/accessdenied.component';
 import { AuthGuard } from './services/auth.guard';
 import { BarRatingModule } from 'ngx-bar-rating';
+import { BusinessModule } from './business/business.module';
 
 @NgModule({
   declarations: [
@@ -46,8 +47,10 @@ import { BarRatingModule } from 'ngx-bar-rating';
     SelectModule,
     TagInputModule,
     DataTableModule,
-    NgxPermissionsModule.forRoot()
+    NgxPermissionsModule.forRoot(),
+    BusinessModule
   ],
+  exports: [],
   providers: [
     MenuItems,
     BootstrapAlertService,

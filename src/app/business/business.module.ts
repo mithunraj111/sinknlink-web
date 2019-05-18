@@ -64,6 +64,8 @@ import { CustomerFollowersComponent } from './customer/add-edit-customer/custome
     AddEditCouponComponent,
     CustomerReviewsComponent,
     CustomerFollowersComponent
-  ]
+  ],
+  exports: [
+    AddEditCustomerComponent]
 })
 export class BusinessModule { }

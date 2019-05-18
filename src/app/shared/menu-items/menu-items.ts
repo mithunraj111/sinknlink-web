@@ -1,19 +1,23 @@
 import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
+import { BaseService } from 'src/app/services';
+import { AppConstant } from 'src/app/app.constants';
 
 @Injectable()
-export class MenuItems {
+export class MenuItems extends BaseService {
   menuItems = [] as any;
   constructor() {
+    super();
   }
   formMenu(availScreens) {
-    const menus = this.getMenus();
     this.menuItems = [];
     const groupedMenus = _.groupBy(availScreens, 'prntscreencode');
     const self = this;
+    const menus = this.getMenus();
     const len = menus.length;
     for (let i = 0; i < menus.length; i++) {
       const item = menus[i];
+      const roleid = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER).roleid;
       if (_.has(groupedMenus, item.code)) {
         const data: any = _.get(groupedMenus, item.code);
         if (!_.isUndefined(data) && _.isUndefined(item.children)) {
@@ -23,15 +27,33 @@ export class MenuItems {
         } else if (!_.isUndefined(data) && !_.isUndefined(item.children)) {
           const app_child = item.children;
           const locChildren = [] as any;
-          _.map(data, function (actual) {
-            let hasdata = {} as any;
-            hasdata = _.find(app_child, { code: actual.screencode });
-            if (!_.isUndefined(actual.assignedpermissions)) {
-              if (!_.isUndefined(hasdata) && actual.assignedpermissions.length > 0) {
-                locChildren.push(hasdata);
+          if (roleid === 3 && item.code === 'business') {
+            self.menuItems.push(
+              {
+                state: 'mybusiness',
+                short_label: 'M',
+                name: 'My Business',
+                type: 'link',
+                icon: 'fa fa-home',
+                code: 'dashboard',
+                data: {
+                  title: 'My Business'
+                }
               }
-            }
-          });
+            );
+          } else {
+            _.map(data, function (actual) {
+              let hasdata = {} as any;
+              console.log(actual.screencode);
+              hasdata = _.find(app_child, { code: actual.screencode });
+              if (!_.isUndefined(actual.assignedpermissions)) {
+                if (!_.isUndefined(hasdata) && actual.assignedpermissions.length > 0) {
+                  locChildren.push(hasdata);
+                }
+              }
+
+            });
+          }
           if (locChildren.length > 0) {
             item.children = locChildren;
             self.menuItems.push(item);

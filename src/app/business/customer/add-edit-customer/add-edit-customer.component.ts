@@ -36,7 +36,7 @@ export class AddEditCustomerComponent implements OnInit {
   tooltipmessage;
   workDays = AppConstant.WORKDAYS;
   showbutton = true;
-  hidebutton = false
+  hidebutton = false;
   ownedNos = [];
   loadingIndicator = true;
   @ViewChild(CustomerCouponsComponent) couponComponent: CustomerCouponsComponent;
@@ -95,6 +95,11 @@ export class AddEditCustomerComponent implements OnInit {
         this.parentid = params.parentid;
       }
     });
+    if (this.userstoragedata.roleid === 3) {
+      this.customerid = this.userstoragedata.customer.membershipid;
+      this.getCustomerDetail();
+      this.isAddForm = false;
+    }
   }
 
   ngOnInit() {
@@ -112,12 +117,6 @@ export class AddEditCustomerComponent implements OnInit {
           this.generateEditForm();
           this.getLocationList();
         }
-      }
-      console.log(this.customerObj);
-      console.log(this.customerObj.status == 'Inactive');
-      console.log(this.userstoragedata.roleid == 3);
-      if (this.customerObj.status == 'Inactive' && this.userstoragedata.roleid == 3) {
-        alert('Hi');
       }
     });
   }
@@ -446,7 +445,7 @@ export class AddEditCustomerComponent implements OnInit {
   }
   onCustomerTabChange(event) {
     this.customerObj = this.customerObj;
-    if ( event.nextId === '9' || event.nextId === '8' || event.nextId === '6' || event.nextId === '5' || event.nextId === '3' || event.nextId === '2' ) {
+    if (event.nextId === '9' || event.nextId === '8' || event.nextId === '6' || event.nextId === '5' || event.nextId === '3' || event.nextId === '2') {
       this.showbutton = false;
       this.hidebutton = true
       if (event.nextId === '6') {
@@ -454,7 +453,7 @@ export class AddEditCustomerComponent implements OnInit {
         return false;
       }
       if (event.nextId === '2') {
-        if ( this.userstoragedata.roleid !== 1 ) {
+        if (this.userstoragedata.roleid !== 1) {
           this.hidebutton = false;
         }
         this.tooltipmessage = AppConstant.MESSAGE.PAYMENTS;

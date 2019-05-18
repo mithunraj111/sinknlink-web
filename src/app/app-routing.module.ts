@@ -7,6 +7,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AccessdeniedComponent } from './accessdenied/accessdenied.component';
 import { AuthGuard } from './services/auth.guard';
 import { NgxPermissionsGuard } from 'ngx-permissions';
+import { AddEditCustomerComponent } from './business/customer/add-edit-customer/add-edit-customer.component';
 
 const routes: Routes = [
   {
@@ -28,6 +29,14 @@ const routes: Routes = [
             only: ['Dashboard'],
             redirectTo: '/accessdenied'
           }
+        }
+      },
+      {
+        path: 'mybusiness',
+        component: AddEditCustomerComponent,
+        canActivate: [AuthGuard, NgxPermissionsGuard],
+        data: {
+          title: 'My Business'
         }
       },
       {
