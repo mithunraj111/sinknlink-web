@@ -36,7 +36,7 @@ export class EventsComponent extends BaseService implements OnInit {
     if ( this.userstoragedata.roleid === 3 ) {
       this.service = this.eventService.list({},true); 
     } else {
-      this.service = this.eventService.list({},true);
+      this.service = this.eventService.list({});
     }
     this.service.subscribe(res => {
       const response = JSON.parse(res._body);
@@ -46,6 +46,7 @@ export class EventsComponent extends BaseService implements OnInit {
         this.tempFilter = this.eventsList;
       }
     });
+    console.log(this.eventsList)
   }
   addEvent() {
     this.router.navigate(['admin/event/create']);

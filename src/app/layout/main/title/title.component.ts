@@ -24,7 +24,7 @@ export class TitleComponent {
           });
         } while (currentRoute);
         if (title !== undefined) {
-          this.titleService.setTitle('Business Directory | ' + title);
+          this.titleService.setTitle('Sink n Link | ' + title);
         }
       });
   }

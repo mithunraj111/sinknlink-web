@@ -11,7 +11,7 @@
                     </div>
                     <div class="col-form-label col-md-3 col-sm-6 m-auto">
                         <label for="nextDue" class="mb-0">Next Due &nbsp;</label>
-                        <span #nextDue>{{nextdue == null ? '-' : nextdue | date:datedisplayformat}}</span>
+                        <span>{{customerObj.nextdue | date:datedisplayformat}}</span>
                     </div>
                 </div>
                 <div class="btn-group btn-group-toggle row mx-auto w-100 my-3" ngbRadioGroup name="radioBasic"
@@ -52,18 +52,18 @@
                         <label class="border-checkbox-label f-w-300" for="checkbox2">1,500 + Tax</label>
                     </div>
                 </div> -->
-                <div *ngFor="let donation of donationList; index as i" class="form-group row border-checkbox-section">
+                <div *ngIf="donationList.length != 0" class="form-group row border-checkbox-section">
                     <div class="border-checkbox-group border-checkbox-group-primary ml-4 p-t-5">
-                        <input class="border-checkbox" type="checkbox" id={{i}} [(ngModel)]="donation.selected"
-                            (change)="donationChecked()"  checked="">
-                        <label class="border-checkbox-label" for={{i}}>{{donation.charityname}}
+                        <input class="border-checkbox" type="checkbox" id="donationid" [(ngModel)]="donationList[0].selected"
+                            (change)="donationChecked()">
+                        <label class="border-checkbox-label" for="donationid">{{donationList[0].charityname}}
                             <a placement="bottom" ngbTooltip="Click to view donation cause"
-                                (click)="viewDonationCause(donation);"><i class="fa fa-question-circle"
+                                (click)="viewDonationCause(donationList[0]);"><i class="fa fa-question-circle"
                                     aria-hidden="true"></i></a>
                         </label>
                     </div>
                     <div class="p-l-0 p-r-20">
-                        <input type="text" class="form-control" [(ngModel)]="donation.selectedAmt"
+                        <input type="text" class="form-control" [(ngModel)]="donationList[0].selectedAmt"
                             (ngModelChange)="donationChecked()" placeholder="Amount">
                     </div>
                 </div>

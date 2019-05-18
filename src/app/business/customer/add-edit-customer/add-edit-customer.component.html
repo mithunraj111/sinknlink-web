@@ -20,7 +20,7 @@
                         class="btn btn-primary waves-effect m-r-10 text-capitalize"><i
                             class="fa fa-plus-circle m-r-5"></i>&nbsp;New</button>
                     <button type="button" placement="bottom" ngbTooltip="Go back" routerLink="/business/customers"
-                        class="btn btn-inverse btn-primary waves-effect"><i
+                        class="btn btn-inverse btn-primary waves-effect" *ngIf="userstoragedata.roleid !== 3"><i
                             class="fa fa-arrow-circle-left"></i></button>
                 </div>
             </div>

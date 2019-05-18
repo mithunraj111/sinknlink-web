@@ -61,6 +61,7 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.initPaymentForm();
+    this.getLookUps();
   }
   initPaymentForm() {
     this.addPaymentForm = this.fb.group({
@@ -74,12 +75,12 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     this.customerObj = changes.customerObj.currentValue;
     this.getPaymentHistory(changes.customerObj.currentValue);
-    this.getLookUps();
   }
   getSubscriptionamount() {
     this.selectedplanamt = 0;
     this.selectedplanamt = this.subscriptionPlan;
     this.totalamount = Number(this.selectedplanamt) + Number(this.donationAmt);
+
   }
   onlinePay() {
     this.razarpayService.loadrazarpay().then(() => {
@@ -138,6 +139,8 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
       const response = JSON.parse(res._body);
       if (response.status) {
         this.donationList = response.data;
+        this.donationList[0].selected = true;
+        this.donationChecked();
       }
     });
   }
@@ -180,9 +183,6 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
           response.data.map(item => {
             item.value = item.refvalue;
             item.label = item.refname;
-            // if (item.refkey === 'biz_plan') {
-            //   this.subscriptionAmt = item.refvalue;
-            // }
             if (item.refkey === 'biz_razar' && item.refname === 'Authentication key') {
               this.authentication = item.refvalue;
             }
@@ -199,13 +199,9 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
         }
       })
       const date = new Date(this.lastpaid);
-      this.subscriptionPlan = self.paymentarray.refvalue;
+      this.subscriptionPlan = self.paymentarray==undefined?0:Number(self.paymentarray.refvalue);
+      this.selectedplanamt = this.subscriptionPlan;
       this.totalamount = Number(this.subscriptionPlan);
-      if (!_.isUndefined(this.paymentarray)) {
-        this.nextdue = date.setDate(date.getDate() + Number(this.subscriptionPlan));
-      } else {
-        this.nextdue = null;
-      }
     });
   }
 
