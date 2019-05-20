@@ -34,7 +34,7 @@ export class EventsComponent extends BaseService implements OnInit {
   getEvents() {
     this.loadingIndicator = true;
     if ( this.userstoragedata.roleid === 3 ) {
-      this.service = this.eventService.list({},true); 
+      this.service = this.eventService.list({status: AppConstant.STATUS_ACTIVE},true); 
     } else {
       this.service = this.eventService.list({});
     }
@@ -46,7 +46,6 @@ export class EventsComponent extends BaseService implements OnInit {
         this.tempFilter = this.eventsList;
       }
     });
-    console.log(this.eventsList)
   }
   addEvent() {
     this.router.navigate(['admin/event/create']);

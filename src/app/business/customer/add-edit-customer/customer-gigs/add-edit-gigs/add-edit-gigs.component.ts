@@ -102,6 +102,7 @@ export class AddEditGigComponent implements OnInit, OnChanges {
                         }
                     });
                 } else {
+                    formdata.bizname = this.customerObj.bizname;
                     formdata.status = AppConstant.STATUS_ACTIVE;
                     formdata.createdby = this.userstoragedata.fullname;
                     formdata.createddt = new Date();

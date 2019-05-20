@@ -87,6 +87,7 @@ export class AddEditCouponComponent implements OnInit, OnChanges {
             } else {
                 const data = this.couponForm.value;
                 const formdata = { ...data } as any;
+                formdata.bizname = this.customerObj.bizname;
                 formdata.couponcode = data.couponcode.toString();
                 formdata.membershipid = this.customerObj.membershipid;
                 formdata.noofcoupons = Number(data.noofcoupons);
@@ -113,6 +114,7 @@ export class AddEditCouponComponent implements OnInit, OnChanges {
                         }
                     });
                 } else {
+                    formdata.bizname = this.customerObj.bizname;
                     formdata.status = AppConstant.STATUS_ACTIVE;
                     formdata.createdby = this.userstoragedata.fullname;
                     formdata.createddt = new Date();

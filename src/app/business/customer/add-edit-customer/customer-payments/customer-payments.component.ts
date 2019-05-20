@@ -83,6 +83,10 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
 
   }
   onlinePay() {
+    if (this.donationList[0].selectedAmt < 0) {
+      this.bootstrapAlertService.showError(AppMessages.VALIDATION.PAYMENTS.donationamount.minimum);
+      return false;
+    }
     this.razarpayService.loadrazarpay().then(() => {
       let self = this;
       const options = {
@@ -139,6 +143,7 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
       const response = JSON.parse(res._body);
       if (response.status) {
         this.donationList = response.data;
+        console.log(response.data);
         this.donationList[0].selected = true;
         this.donationChecked();
       }

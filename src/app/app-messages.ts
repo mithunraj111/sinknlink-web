@@ -386,7 +386,8 @@ export const AppMessages = Object.freeze({
       totalamount: { required: 'Please enter amount', pattern: 'Payment should only contain numbers' },
       paymentmode: { required: 'Please select mode of payment' },
       paymentref: { required: 'Please enter payment reference' },
-      remarks: { maxlength: 'Remarks should be within 100 characters'}
+      remarks: { maxlength: 'Remarks should be within 100 characters'},
+      donationamount: { minimum: 'Donation amount should be atleast 1 INR' }
     },
     REPLY: {
       reply: { required: 'Please enter a reply', maxlength: 'Reply should be within 100 Characters'}
