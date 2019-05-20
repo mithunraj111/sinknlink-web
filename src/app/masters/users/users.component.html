@@ -46,7 +46,7 @@
                     <ngx-datatable-column prop="lastlogin" name="Last Login" [resizeable]="false"
                         [cellClass]="'text-center'" headerClass="text-center">
                         <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                            <span>{{row.lastlogin|date:displayformat || '-'}}</span>
+                            <span>{{(row.lastlogin|date:displayformat) || '-'}}</span>
                         </ng-template>
                     </ngx-datatable-column>
                     <ngx-datatable-column prop="updatedby" name="Updated By" [resizeable]="false">

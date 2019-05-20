@@ -18,22 +18,22 @@
                     [(ngModel)]="subscriptionPlan">
                     <label ngbButtonLabel class="btn-inverse mx-2 subscriptionplan-label">
                         <input ngClass="subscriptionPlan ==='360'? 'active':''" ngbButton type="radio" [value]="360"
-                        (change)="getSubscriptionamount()">
+                            (change)="getSubscriptionamount()">
                         {{this.paymentTenure[0]?.refname}}<br />{{this.paymentTenure[0]?.refvalue | currency: 'INR' :symbol}}
                     </label>
                     <label ngbButtonLabel class="btn-inverse mx-2 subscriptionplan-label">
                         <input ngClass="subscriptionPlan ==='180'? 'active':''" ngbButton type="radio" [value]="180"
-                        (change)="getSubscriptionamount()">
+                            (change)="getSubscriptionamount()">
                         {{this.paymentTenure[1]?.refname}}<br />{{this.paymentTenure[1]?.refvalue | currency: 'INR' :symbol}}
                     </label>
                     <label ngbButtonLabel class="btn-inverse mx-2 subscriptionplan-label">
                         <input ngClass="subscriptionPlan ==='90'? 'active':''" ngbButton type="radio" value="90"
-                        (change)="getSubscriptionamount()">
+                            (change)="getSubscriptionamount()">
                         {{this.paymentTenure[2]?.refname}}<br />{{this.paymentTenure[2]?.refvalue | currency: 'INR' :symbol}}
                     </label>
                     <label ngbButtonLabel class="btn-inverse mx-2 subscriptionplan-label">
                         <input ngClass="subscriptionPlan ==='30'? 'active':''" ngbButton type="radio" [value]="30"
-                        (change)="getSubscriptionamount()">
+                            (change)="getSubscriptionamount()">
                         {{this.paymentTenure[3]?.refname}}<br />{{this.paymentTenure[3]?.refvalue | currency: 'INR' :symbol}}
                     </label>
                 </div>
@@ -54,8 +54,8 @@
                 </div> -->
                 <div *ngIf="donationList.length != 0" class="form-group row border-checkbox-section">
                     <div class="border-checkbox-group border-checkbox-group-primary ml-4 p-t-5">
-                        <input class="border-checkbox" type="checkbox" id="donationid" [(ngModel)]="donationList[0].selected"
-                            (change)="donationChecked()">
+                        <input class="border-checkbox" type="checkbox" id="donationid"
+                            [(ngModel)]="donationList[0].selected" (change)="donationChecked()">
                         <label class="border-checkbox-label" for="donationid">{{donationList[0].charityname}}
                             <a placement="bottom" ngbTooltip="Click to view donation cause"
                                 (click)="viewDonationCause(donationList[0]);"><i class="fa fa-question-circle"
@@ -63,8 +63,12 @@
                         </label>
                     </div>
                     <div class="p-l-0 p-r-20">
-                        <input type="text" class="form-control" [(ngModel)]="donationList[0].selectedAmt"
-                            (ngModelChange)="donationChecked()" placeholder="Amount">
+                        <ng-select *ngIf="preferredAmount.length !== 0" [ngClass]="'ng-select'"
+                            [options]="preferredAmountList" [(ngModel)]="donationList[0].selectedAmt"
+                            (ngModelChange)="donationChecked()" selected=preferredAmountList[0]></ng-select>
+                        <input *ngIf="preferredAmount.length === 0" type="text" class="form-control"
+                            [(ngModel)]="donationList[0].selectedAmt" (ngModelChange)="donationChecked()"
+                            placeholder="Amount">
                     </div>
                 </div>
                 <div class="col-md-12 col-sm-12 pay-online">
@@ -141,11 +145,11 @@
         </div>
     </div>
     <!-- View Payment Details PopUp Starts -->
-    <div class="modal-size">
+    <div class="modal-size gigs-modal">
         <app-modal-animation [modalID]="'customerpaymentmodal'" [modalClass]="'md-effect-7'">
             <h3 class="f-26">Payment details</h3>
             <form [formGroup]="addPaymentForm">
-                <div class="form-header">
+                <div class="form-header gig-modal-height">
                     <div class="col-md-12">
                         <div class="form-group required">
                             <label>Paid date</label>
@@ -159,10 +163,20 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="form-group" *ngIf="viewPayment">
+                            <label>Subscription Amount</label>
+                            <input type="number" class="form-control" placeholder="Subscription amount"
+                                formControlName="amount" [readonly]="viewPayment">
+                        </div>
+                        <div *ngIf="viewPayment" class="form-group">
+                            <label>Donation Amount</label>
+                            <input type="number" class="form-control" placeholder="Donation amount"
+                                formControlName="donation" [readonly]="viewPayment">
+                        </div>
                         <div class="form-group required">
-                            <label>Amount</label>
-                            <input type="number" class="form-control" placeholder="Amount" formControlName="totalamount"
-                                [readonly]="viewPayment">
+                            <label>Total Amount</label>
+                            <input type="number" class="form-control" placeholder="Total amount"
+                                formControlName="totalamount" [readonly]="viewPayment">
                         </div>
                         <div class="form-group required" *ngIf="!viewPayment">
                             <label>Reference</label>

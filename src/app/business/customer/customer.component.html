@@ -43,7 +43,7 @@
                     </ngx-datatable-column>
                     <ngx-datatable-column prop="tenure.refname" name="Plan" [resizeable]="false">
                         <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                            <span>{{row.tenure?.refname}}</span>
+                            <span>{{row.tenure?.refname || '-'}}</span>
                         </ng-template>
                     </ngx-datatable-column>
                     <ngx-datatable-column prop="nextdue" name="Next Due" [resizeable]="false">

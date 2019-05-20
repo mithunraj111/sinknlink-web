@@ -21,6 +21,7 @@ declare var Razorpay: any;
 export class CustomerPaymentsComponent implements OnInit, OnChanges {
   subscriptionPlan;
   noDonation = true;
+  preferredAmountList = [] as any;
   payHistoryList = [];
   tempFilter = [];
   @ViewChild(DatatableComponent) table: DatatableComponent;
@@ -38,6 +39,7 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
   donationList = [];
   selectedDonation = {} as any;
   totalamount = 0;
+  preferredAmount;
   nextdue: any;
   lastpaid: any;
   subscriptionAmt;
@@ -66,6 +68,8 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
   initPaymentForm() {
     this.addPaymentForm = this.fb.group({
       paymentdt: [this.commonService.getCurrentDate('Y'), Validators.required],
+      amount: [0],
+      donation:[0],
       totalamount: [null, Validators.compose([Validators.required, Validators.pattern('^[0-9]*$')])],
       paymentref: ['', Validators.required],
       paymentmode: ['', Validators.required],
@@ -79,8 +83,10 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
   getSubscriptionamount() {
     this.selectedplanamt = 0;
     this.selectedplanamt = this.subscriptionPlan;
-    this.totalamount = Number(this.selectedplanamt) + Number(this.donationAmt);
-
+    this.totalamount = Number(this.selectedplanamt);
+    if ( this.donationList[0].selected == true ) {
+      this.totalamount = Number(this.selectedplanamt) + Number(this.donationList[0].selectedAmt);
+    }
   }
   onlinePay() {
     if (this.donationList[0].selectedAmt < 0) {
@@ -143,9 +149,13 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
       const response = JSON.parse(res._body);
       if (response.status) {
         this.donationList = response.data;
-        console.log(response.data);
         this.donationList[0].selected = true;
+        this.preferredAmount = JSON.parse(this.donationList[0].amount);
         this.donationChecked();
+        for(let i = 0; i < this.preferredAmount.length; i++) {
+          this.preferredAmountList[i] = { label: this.preferredAmount[i], value:this.preferredAmount[i] }
+        }
+        this.donationList[0].selectedAmt = this.preferredAmount[0];
       }
     });
   }
@@ -207,6 +217,9 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
       this.subscriptionPlan = self.paymentarray==undefined?0:Number(self.paymentarray.refvalue);
       this.selectedplanamt = this.subscriptionPlan;
       this.totalamount = Number(this.subscriptionPlan);
+      if( this.preferredAmount.length > 0 ) {
+        this.totalamount = Number(this.subscriptionPlan) + Number(this.donationList[0].selectedAmt);
+      }
     });
   }
 
@@ -247,15 +260,19 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
   saveOnlinePayment(onlinepaymentid) {
     const data = {
       paymentdate: new Date(),
-      amount: Number(this.totalamount),
+      amount: Number(this.subscriptionPlan),
       totalamount: Number(this.totalamount),
       membershipid: this.customerObj.membershipid,
       reference: 'Online#',
-      paymentmode: 'Razarpay',
+      paymentmode: 'Razorpay',
       paymenttype: AppConstant.PAYMENT_TYPES[0],
       updateddt: new Date(),
       updatedby: this.userstoragedata.fullname
     } as any;
+    if( this.donationList[0].selected == true ) {
+      data.donation= Number(this.donationList[0].selectedAmt),
+      data.donationid= this.donationList[0].donationid
+    }
     if (onlinepaymentid !== '') {
       data.paymentref = onlinepaymentid;
       data.paymentstatus = AppConstant.STATUS_SUCCESS;
@@ -272,10 +289,11 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
       const response = JSON.parse(res._body);
       if (response.status) {
         if (data.paymenttype === AppConstant.PAYMENT_TYPES[1]) {
-          this.bootstrapAlertService.showSucccess(response.message);
           this.closeModal('customerpaymentmodal');
         }
-        this.getPaymentHistory(this.customerObj);
+        this.bootstrapAlertService.showSucccess(response.message);
+        this.payHistoryList.unshift(response.data);
+        this.payHistoryList = [...this.payHistoryList];
       } else {
         this.bootstrapAlertService.showError(response.message);
       }

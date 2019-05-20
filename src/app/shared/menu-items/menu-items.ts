@@ -44,7 +44,6 @@ export class MenuItems extends BaseService {
           } else {
             _.map(data, function (actual) {
               let hasdata = {} as any;
-              console.log(actual.screencode);
               hasdata = _.find(app_child, { code: actual.screencode });
               if (!_.isUndefined(actual.assignedpermissions)) {
                 if (!_.isUndefined(hasdata) && actual.assignedpermissions.length > 0) {

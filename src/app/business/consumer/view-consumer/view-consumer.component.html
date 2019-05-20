@@ -186,22 +186,25 @@
                                             <div class="row">
                                                 <div class="col-sm-12 col-md-5 review-border consumer-review">
                                                     <div *ngFor="let biz of reviewedBiz"
-                                                        class=" p-10 m-b-10 card waves-effect"
+                                                        class=" p-10 m-b-10 card waves-effect d-block"
                                                         (click)="showReviewFor(biz.membershipid)"
                                                         ngbTooltip="Click here to display the reviews">
-                                                        <h6 class="">{{biz.bizname | titlecase}}</h6>
+                                                        <div class="d-inline-block profile-image">
+                                                            {{biz.bizname.substring(0,1).toUpperCase()}}
+                                                        </div>
+                                                        <h6 class="d-inline-block ml-2">{{biz.bizname | titlecase}}</h6>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-12 col-md-7">
                                                     <div class="p-10 m-b-10">
                                                         <div *ngIf="showRating" class="col-sm-12 col-md-12">
-                                                            <div class="row">
-                                                                <a class="col-md-2">
+                                                            <div class="d-flex">
+                                                                <a>
                                                                     <div class="profile-image">
                                                                         {{bizReview?.consumer?.fullname.substring(0,1).toUpperCase()}}
                                                                     </div>
                                                                 </a>
-                                                                <div class="col-md-10">
+                                                                <div class="ml-2">
                                                                     <a>
                                                                         <h6 class=" media-heading mb-0">
                                                                             {{bizReview?.consumer?.fullname | titlecase}}
@@ -218,16 +221,13 @@
                                                                     <h6 class="m-l-0 my-3">
                                                                         {{bizReview?.comments}}</h6>
                                                                     <div *ngIf="bizReview?.reply" class="row">
-                                                                        <div class="media-left">
-                                                                            <a>
-                                                                                <div class="profile-image">
-                                                                                    {{bizReview?.reply?.updatedby.substring(0,1).toUpperCase()}}
-                                                                                </div>
-                                                                            </a>
-                                                                        </div>
-                                                                        <div class="media-body">
-                                                                            <h6 class="media-heading">
-                                                                                {{bizReview?.reply?.updatedby | titlecase}}
+                                                                        <a>
+                                                                            <div class="profile-image ml-3">
+                                                                                {{bizReview?.reply?.updatedby.substring(0,1).toUpperCase()}}
+                                                                            </div>
+                                                                        </a>
+                                                                        <div class="media-body ml-2">
+                                                                            <h6 class="mb-1">{{bizReview?.reply?.updatedby | titlecase}}
                                                                                 <span class="f-12 text-muted m-l-5">
                                                                                     <i class="fa fa-reply"
                                                                                         aria-hidden="true"></i>

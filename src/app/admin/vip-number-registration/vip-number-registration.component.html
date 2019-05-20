@@ -124,7 +124,7 @@
                                                     [resizeable]="false">
                                                     <ng-template let-rowIndex="rowIndex" let-row="row"
                                                         ngx-datatable-cell-template>
-                                                        <span>{{row.remarks}}</span>
+                                                        <span>{{row.remarks || '-'}}</span>
                                                     </ng-template>
                                                 </ngx-datatable-column>
                                                 <ngx-datatable-column prop="Action" name="Action" [resizeable]="false"

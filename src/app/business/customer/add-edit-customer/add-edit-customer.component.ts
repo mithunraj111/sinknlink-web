@@ -95,7 +95,7 @@ export class AddEditCustomerComponent implements OnInit {
         this.parentid = params.parentid;
       }
     });
-    if (this.userstoragedata.roleid === 3) {
+    if (this.userstoragedata.roleid === 3 && !this.branchFlag) {
       this.customerid = this.userstoragedata.customer.membershipid;
       this.getCustomerDetail();
       this.isAddForm = false;
