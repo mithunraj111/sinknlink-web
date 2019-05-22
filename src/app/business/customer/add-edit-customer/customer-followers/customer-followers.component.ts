@@ -28,7 +28,6 @@ export class CustomerFollowersComponent implements OnInit {
       const response = JSON.parse(res._body);
       this.followerList = response.data;
       this.tempFilter = this.followerList;
-      console.log(this.followerList);
     }, err => {
     })
   }

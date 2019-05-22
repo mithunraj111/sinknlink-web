@@ -44,7 +44,7 @@
                                             </label>
                                             <div class="col-md-7 col-sm-7 m-t-5">
                                                 <span
-                                                    class="f-15">{{consumer.location?.area + consumer.location?.pincode || '-'}}</span>
+                                                    class="f-15">{{consumer.location?.area}}&nbsp;{{consumer.location?.pincode || '-'}}</span>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -125,6 +125,20 @@
                         <ng-template ngbTabContent>
                             <div [@fadeInOutTranslate]>
                                 <div class="header-block m-t-60">
+                                    <div class="fixedheader m-b-15">
+                                        <div class="header-title pos-fixed">
+                                            <div class="col-md-6 col-sm-6">
+                                                <input #consumerCouponSearch type="text"
+                                                    class="header-search form-control col-md-5 col-sm-5 input-sm full-data-search"
+                                                    placeholder="Search here" (keyup)='search($event)'
+                                                    placement="bottom" ngbTooltip="Type here to search">
+                                                <button type="button"
+                                                    class="btn search-close col-md-1 col-sm-1 p-l-0 p-r-0"
+                                                    (click)="consumerCouponSearch.value='';search();"><i
+                                                        class="fa fa-close"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="table-header view-table fixed-table-header">
                                         <div class="card p-r-15 p-l-15">
                                             <ngx-datatable #eventtable class="table data-table expandable"
@@ -227,7 +241,8 @@
                                                                             </div>
                                                                         </a>
                                                                         <div class="media-body ml-2">
-                                                                            <h6 class="mb-1">{{bizReview?.reply?.updatedby | titlecase}}
+                                                                            <h6 class="mb-1">
+                                                                                {{bizReview?.reply?.updatedby | titlecase}}
                                                                                 <span class="f-12 text-muted m-l-5">
                                                                                     <i class="fa fa-reply"
                                                                                         aria-hidden="true"></i>
@@ -280,11 +295,11 @@
                                                         <span>{{row.business?.biztype}}</span>
                                                     </ng-template>
                                                 </ngx-datatable-column>
-                                                <ngx-datatable-column prop="postaladdress" name="Postal Address"
+                                                <ngx-datatable-column prop="city" name="Location"
                                                     [resizeable]="false">
                                                     <ng-template let-rowIndex="rowIndex" let-row="row"
                                                         ngx-datatable-cell-template>
-                                                        <span>{{row.business?.postaladdress}}</span>
+                                                        <span>{{row.business?.city}}</span>
                                                     </ng-template>
                                                 </ngx-datatable-column>
                                                 <ngx-datatable-column prop="inmallyn" name="In Mall"
@@ -297,6 +312,7 @@
                                             </ngx-datatable>
                                         </div>
                                     </div>
+
                                 </div>
                                 <div class="col-md-12 card">
                                     <div class="header-title m-t-10">
@@ -308,14 +324,16 @@
                                                 <div *ngFor="let cat of consumerFavs.category"
                                                     class="col-sm-12 col-md-2 text-center p-4">
                                                     <div>
-                                                        <img class="img-fluid img-100 p-b-10"
+                                                        <!-- <img class="img-fluid img-100 p-b-10"
                                                             *ngIf="cat.category.categoryimage.docurl !== 'http://180.12.181.8:2000/category/'"
-                                                            src={{cat.category.categoryimage.docurl}}>
-                                                        <h1 style="font-size: 35px !important;"
+                                                            src={{cat.category.categoryimage.docurl}}> -->
+                                                        <!-- <h1 style="font-size: 35px !important;"
                                                             *ngIf="cat.category.categoryimage.docurl === 'http://180.12.181.8:2000/category/'">
-                                                            {{cat.category.categoryname.substring(0,1)}}</h1>
+                                                            {{cat.category.categoryname.substring(0,1)}}</h1> -->
+                                                        <h1 style="font-size: 35px !important;">
+                                                            {{cat.category?.categoryname.substring(0,1)}}</h1>
                                                     </div>
-                                                    <div>{{cat.category.categoryname}}</div>
+                                                    <div>{{cat.category?.categoryname}}</div>
                                                 </div>
                                             </div>
                                         </div>

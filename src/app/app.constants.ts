@@ -256,6 +256,7 @@ export const AppConstant = Object.freeze({
           GETBYID: 'review/',
           CREATE: 'review/create',
           LIST: 'review',
+          LIST_MOBILE: 'review/mobile',
           UPDATE: 'review/edit/'
         },
         CUSTOMER: {
@@ -325,7 +326,7 @@ export const AppConstant = Object.freeze({
     DEALERREPORT: { emptyMessage: 'No dealer report data to display', totalMessage: 'total' },
     PAYMENTREPORT: { emptyMessage: 'No payment report data to display', totalMessage: 'total' },
     DEALER_PAYMENT: { emptyMessage: 'No payment data to display', totalMessage: 'total' },
-    SUBSCRIPTION_DUE: { emptyMessage: 'No payment data to display', totalMessage: 'total' }
+    SUBSCRIPTION_DUE: { emptyMessage: 'No subscription due data to display', totalMessage: 'total' }
   }
 
 });

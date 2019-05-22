@@ -17,7 +17,7 @@
                     </a>
                     <a [routerLink]="['/dashboard']" style="margin-top:7px;">
                         <!-- <img class="img-fluid" src="assets/images/Logo.png" alt="Sink n Link" /> -->
-                        <h1 class="logo-title">Sink n Link</h1>
+                        <h1 class="logo-title" style="text-transform: none !important;">Sink n Link</h1>
                     </a>
                     <a href="javascript:" class="mobile-options" (click)="toggleHeaderNavRight()">
                         <i class="ti-more"></i>
@@ -43,8 +43,7 @@
                                 <span class="fullname">{{userstoragedata.fullname}}</span>
                                 <i class="fa fa-chevron-down"></i>
                             </a>
-                            <a *ngIf="userstoragedata.roleid==3 || userstoragedata.roleid==2"
-                               >
+                            <a *ngIf="userstoragedata.roleid==3 || userstoragedata.roleid==2">
                                 <img [src]="userfile" class="img-radius" alt="" *ngIf="userprofile==true">
                                 <span class="profile-image" *ngIf="userprofile==false">{{userfile}}</span>
                                 <span class="fullname">{{userstoragedata.fullname}}</span>
@@ -53,11 +52,10 @@
                             <a class="btn logout-btn" placement="bottom" ngbTooltip="Logout" (click)="logout()"><i
                                     class="icofont-logout"></i></a>
 
-                            <ul  [@notificationBottom]="profileNotification"
+                            <ul [@notificationBottom]="profileNotification"
                                 class="show-notification profile-notification">
                                 <li *ngIf="userstoragedata.roleid==3 || userstoragedata.roleid==2">
-                                    <a 
-                                        [routerLink]="['/profile']">
+                                    <a [routerLink]="['/profile']">
                                         <i class="ti-user"></i> Profile
                                     </a>
                                 </li>
@@ -581,39 +579,24 @@
     <app-modal-animation [modalID]="'profilemodal'" [modalClass]="'md-effect-7'">
         <h3 class="f-26">Change password</h3>
         <form [formGroup]="passwordForm">
-            <div class="form-header pt-2">
-                <div class="col-md-12">
-                    <div class="form-group required">
-                        <!-- <label>New password</label>
-                        <input type="password" class="form-control" placeholder="New password"
-                            formControlName="newpassword"> -->
-
-                            <label>New password</label>
-                            <div class="row plus-button">
-                                <div class="col-md-11 col-sm-6 p-r-0">
-                                    <input [type]="obscureText == true ? 'password' : 'text'" style="width:100% !important" class="form-control"
-                                        formControlName="newpassword" placeholder="New password">
-                                </div>
-                                <button class="col-md-1 btn pt-2 obscure-eye" (click) = "obscureText = !obscureText">
-                                    <i [ngClass]="obscureText == true ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
-                                </button>
-                                </div>
-                    </div>
-                    <div class="form-group required">
-                        <!-- <label>Confirm password</label>
-                        <input type="password" class="form-control" placeholder="Confirm password"
-                            formControlName="confirmpassword"> -->
-                            <label>Confirm password</label>
-                            <div class="row plus-button">
-                                <div class="col-md-11 col-sm-6 p-r-0">
-                                    <input [type]="passwordText == true ? 'password' : 'text'" style="width:100% !important" class="form-control"
-                                        formControlName="confirmpassword" placeholder="Confirm password">
-                                </div>
-                                <button class="col-md-1 btn pt-2 obscure-eye" (click) = "passwordText = !passwordText">
-                                    <i [ngClass]="passwordText == true ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
-                                </button>
-                                </div>
-                    </div>
+            <div class="form-header required p-2">
+                <label><strong>New password</strong></label>
+                <div class="input-group">
+                    <input [type]="obscureText == true ? 'password' : 'text'" class="form-control"
+                        formControlName="newpassword" placeholder="New password">
+                    <button type="button" class="btn p-0 pl-3 pr-2 obscure-eye" (click)="obscureText = !obscureText">
+                        <i [ngClass]="obscureText == true ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
+                    </button>
+                    <span class="md-line"></span>
+                </div>
+                <label><strong>Confirm password</strong></label>
+                <div class="input-group required">
+                    <input [type]="passwordText == true ? 'password' : 'text'" class="form-control"
+                        formControlName="confirmpassword" placeholder="Confirm password">
+                    <button type="button" class="btn p-0 pl-3 pr-2 obscure-eye" (click)="passwordText = !passwordText">
+                        <i [ngClass]="passwordText == true ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
+                    </button>
+                    <span class="md-line"></span>
                 </div>
                 <button type="button" placement="top" (click)="changePassword()" ngbTooltip="Click to save password"
                     class="btn pull-right btn-primary waves-effect 

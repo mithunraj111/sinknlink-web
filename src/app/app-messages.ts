@@ -90,10 +90,10 @@ export const AppMessages = Object.freeze({
     },
     USER: {
       fullname: {
-        required: 'Please enter full name',
-        minlength: 'please enter full name atleast 3 characters',
-        maxlength: 'Please enter full name between 50 characters',
-        pattern: 'Please enter valid name',
+        required: 'Please enter name',
+        minlength: 'please enter name atleast 3 characters',
+        maxlength: 'Please enter name between 50 characters',
+        pattern: 'Please enter a valid name',
       },
       mobileno: {
         required: 'Please enter mobile number',

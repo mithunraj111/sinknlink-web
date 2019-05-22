@@ -65,7 +65,6 @@ export class AddEditEventComponent implements OnInit {
   getCity() {
     this.lookupService.list({ refkey: 'biz_businesscity', status: AppConstant.STATUS_ACTIVE }).subscribe(res => {
       const response = JSON.parse(res._body);
-      console.log(response);
       if (response.status) {
         response.data.map(item => {
           item.label = item.refname;
@@ -123,7 +122,6 @@ export class AddEditEventComponent implements OnInit {
       this.edit = true;
       let response = JSON.parse(res._body);
       let eventObj = response.data;
-      console.log(eventObj);
       eventObj.locationid = eventObj.locationid.toString();
       eventObj.eventdate = this.commonService.parseDate(eventObj.eventdate);
       eventObj.eventexpirydt = this.commonService.parseDate(eventObj.eventexpirydt);

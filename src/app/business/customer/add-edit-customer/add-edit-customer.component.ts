@@ -106,6 +106,9 @@ export class AddEditCustomerComponent implements OnInit {
     this.initForm();
     this.getLookUps();
     this.getCategoryList();
+    if(this.userstoragedata.roleid === 3) {
+      this.customerForm.controls["membershiptype"].disable();
+    }
   }
 
   getCustomerDetail() {

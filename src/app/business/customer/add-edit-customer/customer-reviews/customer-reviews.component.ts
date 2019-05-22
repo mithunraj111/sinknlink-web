@@ -44,7 +44,7 @@ export class CustomerReviewsComponent implements OnInit{
         this.reviewsList = [];
         this.loadingIndicator = true;
         if (!_.isEmpty(customerObj)) {
-            this.reviewService.list({ membershipid: customerObj.membershipid }).subscribe(res => {
+            this.reviewService.listMobile({ membershipid: customerObj.membershipid }).subscribe(res => {
                 const response = JSON.parse(res._body);
                 this.loadingIndicator = false;
                 if (response.status) {
@@ -64,7 +64,6 @@ export class CustomerReviewsComponent implements OnInit{
         document.querySelector('#' + event).classList.add('md-show');
     }
     reply() {
-        console.log(this.replyComment.length);
         this.loadingIndicator = true;
         const data = {} as any;
         data.comments = this.replyComment;

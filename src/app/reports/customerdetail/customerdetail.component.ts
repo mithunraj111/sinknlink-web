@@ -103,7 +103,6 @@ export class CustomerdetailComponent extends BaseService implements OnInit {
       formData.dealerid = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.DEALER).dealerid;
     }
     let service;
-    console.log(formData);
     if (download) {
       this.generatingFile = true;
       service = this.reportService.customerDetailReport(formData, true);
@@ -152,7 +151,6 @@ export class CustomerdetailComponent extends BaseService implements OnInit {
   }
   onClear() {
     this.cityName = '' ;
-    console.log('empty');
     this.customerdetailForm.value.city = this.cityName;
     this.getArea();
   }

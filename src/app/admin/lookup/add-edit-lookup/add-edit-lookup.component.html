@@ -55,7 +55,7 @@
                         </div>
                     </div>
                     <button type="button" [disabled]="savingLookup" (click)="saveOrUpdateLookup()" placement="top"
-                        ngbTooltip="Click to save lookup"
+                        [ngbTooltip]="!savingLookup ? 'Click to save lookup' : ''"
                         class="btn f-15 pull-right btn-primary waves-effect m-b-10">{{savingLookup == true ? 'Saving..':'Save'}}</button>
                 </div>
             </div>

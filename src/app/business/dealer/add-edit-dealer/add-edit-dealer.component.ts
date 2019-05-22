@@ -196,7 +196,7 @@ export class AddEditDealerComponent implements OnInit {
       city: [this.dealerProfileObj.location.city, Validators.required],
       locationid: [this.dealerProfileObj.locationid.toString(), Validators.required],
       address: [this.dealerProfileObj.address],
-      commissionpercent: [this.dealerProfileObj.commissionpercent, Validators.required],
+      commissionpercent: [this.dealerProfileObj.commissionpercent, Validators.compose([Validators.required, Validators.max(100)])],
       status: [this.dealerProfileObj.status === AppConstant.STATUS_ACTIVE ? true : false, Validators.required]
     });
   }

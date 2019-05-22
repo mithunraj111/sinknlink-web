@@ -73,7 +73,6 @@ export class AddEditUserComponent implements OnInit {
       this.buttontext = AppConstant.BUTTON_TXT.UPDATE;
       this.formTitle = AppConstant.FORM_TITLE.USER.UPDATE;
       this.userObj = changes.userObj.currentValue;
-      console.log(this.userObj);
       this.userForm = this.fb.group({
         fullname: [this.userObj.fullname, Validators.compose([Validators.required, Validators.minLength(1),
         Validators.maxLength(50), Validators.pattern('^[a-zA-Z0-9_ ]*$')])],

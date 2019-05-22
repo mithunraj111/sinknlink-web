@@ -11,7 +11,7 @@
                             <input type="text" class="form-control" name="categoryname" formControlName="categoryname"
                                 placeholder="Business Category Name">
                         </div>
-                        <div class="form-group">
+                        <div class="form-group required">
                             <label>Business Category Image</label>
                             <input #categoryimage type="file" class="image form-control" name="categoryimg"
                             accept='image/svg+xml'(change)="onFile($event)">
