@@ -51,6 +51,7 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
   emptymessages = AppConstant.EMPTY_MESSAGES.PAYMENT;
   constructor(private paymentService: AppCommonService.PaymentsService,
     private lookupService: AdminService.LookupService,
+    private customerService: BusinessService.CustomerService,
     private commonService: CommonService,
     private fb: FormBuilder,
     private donationService: AdminService.DonationService,
@@ -209,12 +210,12 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
       }
       let self = this;
       self.paymentarray = _.find(self.paymentTenure,function(item:any){
-        if(item.refid == self.customerObj.paymenttenure){
+        if(item.refid == self.customerObj.paymenttenureid){
           return item;
         }
-      })
+      });
       const date = new Date(this.lastpaid);
-      this.subscriptionPlan = self.paymentarray==undefined?0:Number(self.paymentarray.refvalue);
+      this.subscriptionPlan = self.paymentarray==undefined?0:self.paymentarray.refvalue;
       this.selectedplanamt = this.subscriptionPlan;
       this.totalamount = Number(this.subscriptionPlan);
       if( this.preferredAmount.length > 0 ) {
@@ -299,6 +300,19 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
       }
       this.collectpayment = false;
     });
-  }
-
+    this.customerObj.nextdue = new Date(new Date().setDate(new Date(this.customerObj.nextdue).getDate() + data.amount)).toISOString();
+    let customerData = {}as any;
+    customerData.nextdue= this.customerObj.nextdue;
+    this.customerService.update( customerData, this.customerObj.membershipid).subscribe(res => {
+      const response = JSON.parse(res._body);
+      if (response.status) {
+        this.customerObj = response.data;
+        this.bootstrapAlertService.showSucccess(response.message);
+      } else {
+        this.bootstrapAlertService.showError(response.message);
+      }
+    }, err => {
+      const error = JSON.parse(err._body);
+      this.bootstrapAlertService.showError(error.message);
+    });  }
 }

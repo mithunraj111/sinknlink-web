@@ -326,7 +326,7 @@ export const AppConstant = Object.freeze({
     DEALERREPORT: { emptyMessage: 'No dealer report data to display', totalMessage: 'total' },
     PAYMENTREPORT: { emptyMessage: 'No payment report data to display', totalMessage: 'total' },
     DEALER_PAYMENT: { emptyMessage: 'No payment data to display', totalMessage: 'total' },
-    SUBSCRIPTION_DUE: { emptyMessage: 'No subscription due data to display', totalMessage: 'total' }
+    SUBSCRIPTION_DUE: { emptyMessage: 'No subscription renewal data to display', totalMessage: 'total' }
   }
 
 });

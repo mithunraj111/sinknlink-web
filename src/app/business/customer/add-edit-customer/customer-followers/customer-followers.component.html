@@ -17,8 +17,8 @@
         [messages]="emptymessages">
         <ngx-datatable-column prop="consumer.fullname" name="Name" [resizeable]="false">
           <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-            <img class="userimg" [src]="row.consumer?.user?.profileimg?.docurl" alt="Follower Image">
-            <span>{{row.consumer.fullname}}</span>
+            <img class="userimg d-inline-block" [src]="row.consumer?.user?.profileimg?.docurl || 'assets/images/avatar-blank.png'" alt="Follower Image">
+            <span class="d-inline-block ml-2">{{row.consumer.fullname}}</span>
           </ng-template>
         </ngx-datatable-column>
         <ngx-datatable-column prop="consumer.mobileno" name="Mobile" [resizeable]="false">

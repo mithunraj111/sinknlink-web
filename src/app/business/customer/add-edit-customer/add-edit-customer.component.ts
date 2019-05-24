@@ -329,7 +329,6 @@ export class AddEditCustomerComponent implements OnInit {
         );
         if (!_.isUndefined(paymentarray)) {
           formdata.paymenttenure = paymentarray.refid.toString();
-
           var date = new Date();
 
           if (paymentarray.refname == "Yearly") {
@@ -529,6 +528,7 @@ export class AddEditCustomerComponent implements OnInit {
       }
     });
     if (!_.isUndefined(paymentObj)) {
+      this.customerObj.paymenttenureid = paymentObj.refid;
       this.customerObj.paymenttenure = paymentObj.refvalue;
     }
     this.customerForm.patchValue(this.customerObj);

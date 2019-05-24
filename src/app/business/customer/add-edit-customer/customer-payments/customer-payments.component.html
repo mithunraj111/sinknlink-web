@@ -17,24 +17,24 @@
                 <div class="btn-group btn-group-toggle row mx-auto w-100 my-3" ngbRadioGroup name="radioBasic"
                     [(ngModel)]="subscriptionPlan">
                     <label ngbButtonLabel class="btn-inverse mx-2 subscriptionplan-label">
-                        <input ngClass="subscriptionPlan ==='360'? 'active':''" ngbButton type="radio" [value]="360"
-                            (change)="getSubscriptionamount()">
-                        {{this.paymentTenure[0]?.refname}}<br />{{this.paymentTenure[0]?.refvalue | currency: 'INR' :symbol}}
+                        <input ngClass="subscriptionPlan ==='paymentTenure[0]?.refvalue'? 'active':''" ngbButton
+                            type="radio" [value]="paymentTenure[0]?.refvalue" (change)="getSubscriptionamount()">
+                        {{paymentTenure[0]?.refname}}<br />{{paymentTenure[0]?.refvalue | currency: 'INR' :symbol}}
                     </label>
                     <label ngbButtonLabel class="btn-inverse mx-2 subscriptionplan-label">
-                        <input ngClass="subscriptionPlan ==='180'? 'active':''" ngbButton type="radio" [value]="180"
-                            (change)="getSubscriptionamount()">
-                        {{this.paymentTenure[1]?.refname}}<br />{{this.paymentTenure[1]?.refvalue | currency: 'INR' :symbol}}
+                        <input ngClass="subscriptionPlan ==='paymentTenure[1]?.refvalue'? 'active':''" ngbButton
+                            type="radio" [value]="paymentTenure[1]?.refvalue" (change)="getSubscriptionamount()">
+                        {{paymentTenure[1]?.refname}}<br />{{paymentTenure[1]?.refvalue | currency: 'INR' :symbol}}
                     </label>
                     <label ngbButtonLabel class="btn-inverse mx-2 subscriptionplan-label">
-                        <input ngClass="subscriptionPlan ==='90'? 'active':''" ngbButton type="radio" value="90"
-                            (change)="getSubscriptionamount()">
-                        {{this.paymentTenure[2]?.refname}}<br />{{this.paymentTenure[2]?.refvalue | currency: 'INR' :symbol}}
+                        <input ngClass="subscriptionPlan ==='paymentTenure[2]?.refvalue'? 'active':''" ngbButton
+                            type="radio" [value]="paymentTenure[2]?.refvalue" (change)="getSubscriptionamount()">
+                        {{paymentTenure[2]?.refname}}<br />{{paymentTenure[2]?.refvalue | currency: 'INR' :symbol}}
                     </label>
                     <label ngbButtonLabel class="btn-inverse mx-2 subscriptionplan-label">
-                        <input ngClass="subscriptionPlan ==='30'? 'active':''" ngbButton type="radio" [value]="30"
-                            (change)="getSubscriptionamount()">
-                        {{this.paymentTenure[3]?.refname}}<br />{{this.paymentTenure[3]?.refvalue | currency: 'INR' :symbol}}
+                        <input ngClass="subscriptionPlan ==='paymentTenure[3]?.refvalue'? 'active':''" ngbButton
+                            type="radio" [value]="paymentTenure[3]?.refvalue" (change)="getSubscriptionamount()">
+                        {{paymentTenure[3]?.refname}}<br />{{paymentTenure[3]?.refvalue | currency: 'INR' :symbol}}
                     </label>
                 </div>
                 <!-- <div class="form group row border-checkbox-section">
