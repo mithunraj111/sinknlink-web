@@ -63,6 +63,7 @@ export class CustomerGalleryComponent extends BaseService implements OnInit, OnC
         const response = JSON.parse(res._body);
         if (response.status) {
           // this.imagesList = response.data;
+          this.displayImgList =[];
           this.bootstrapAlertService.showSucccess(response.message);
         } else {
           this.bootstrapAlertService.showError(response.message);

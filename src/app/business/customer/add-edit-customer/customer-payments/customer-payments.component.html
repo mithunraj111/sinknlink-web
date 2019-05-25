@@ -58,14 +58,16 @@
                             [(ngModel)]="donationList[0].selected" (change)="donationChecked()">
                         <label class="border-checkbox-label" for="donationid">{{donationList[0].charityname}}
                             <a placement="bottom" ngbTooltip="Click to view donation cause"
-                                (click)="viewDonationCause(donationList[0]);"><i class="fa fa-question-circle"
-                                    aria-hidden="true"></i></a>
+                                (click)="viewDonationCause(donationList[0]);">
+                                <i class="fa fa-question-circle" aria-hidden="true"></i>
+                            </a>
                         </label>
                     </div>
                     <div class="p-l-0 p-r-20">
                         <ng-select *ngIf="preferredAmount.length !== 0" [ngClass]="'ng-select'"
                             [options]="preferredAmountList" [(ngModel)]="donationList[0].selectedAmt"
-                            (ngModelChange)="donationChecked()" selected=preferredAmountList[0]></ng-select>
+                            (ngModelChange)="donationChecked()" selected=preferredAmountList[0]>
+                        </ng-select>
                         <input *ngIf="preferredAmount.length === 0" type="text" class="form-control"
                             [(ngModel)]="donationList[0].selectedAmt" (ngModelChange)="donationChecked()"
                             placeholder="Amount">
@@ -186,9 +188,10 @@
                         <div class="form-group required">
                             <label>Mode of payment</label>
                             <div class="input-box">
-                                <ng-select [allowClear]="true" [ngClass]="'ng-select w-100'" [options]="paymentMethods"
-                                    formControlName="paymentmode" placeholder="Select payment methods"
-                                    [disabled]="viewPayment">
+                                <ng-select [allowClear]="true"
+                                    [ngClass]="viewPayment == true ? 'disabled ng-select w-100':'ng-select w-100' "
+                                    [options]="paymentMethods" formControlName="paymentmode"
+                                    placeholder="Select payment methods">
                                 </ng-select>
                             </div>
                         </div>
@@ -223,3 +226,5 @@
             <p class="px-3 p-t-10">{{selectedDonation?.causeremarks|| "Cause for donation"}}</p>
         </app-modal-animation>
     </div>
+</div>
+<!-- <app-loader [loadingIndicator]="loadingIndicator"></app-loader> -->

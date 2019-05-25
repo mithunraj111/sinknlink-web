@@ -51,7 +51,7 @@
                     headerClass="text-right">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                         <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status"
-                            color="$primary-color" switchColor="#fff" size="small" [checked]="row.status == 'Active'"
+                            [color]="$primary-color" switchColor="#fff" size="small" [checked]="row.status == 'Active'"
                             (change)="updateCoupon(row,rowIndex,false)"></ui-switch>
                     </ng-template>
                 </ngx-datatable-column>

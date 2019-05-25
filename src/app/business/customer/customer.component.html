@@ -64,7 +64,7 @@
                     </ngx-datatable-column>
                     <ngx-datatable-column name="Status" [sortable]="false" [flexGrow]="0.5" [resizeable]="false" headerClass="text-center" [cellClass]="'text-center status'">
                         <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                            <ui-switch [disabled]="!edit" class="js-small" placement="bottom" ngbTooltip="Click to change status" color="$primary-color" switchColor="#fff" size="small" [checked]="row.status=='Active'" (change)="updateCustomerStatus(row,rowIndex,false)"></ui-switch>
+                            <ui-switch [disabled]="!edit" class="js-small" placement="bottom" ngbTooltip="Click to change status" [color]="$primary-color" switchColor="#fff" size="small" [checked]="row.status=='Active'" (change)="updateCustomerStatus(row,rowIndex,false)"></ui-switch>
                         </ng-template>
                     </ngx-datatable-column>
                     <ngx-datatable-column *ngIf="edit || delete" name="Action" [sortable]="false" [flexGrow]="0.5" [resizeable]="false" [cellClass]="'text-center action'">

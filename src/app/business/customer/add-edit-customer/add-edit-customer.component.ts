@@ -60,6 +60,7 @@ export class AddEditCustomerComponent implements OnInit {
   userstoragedata = {} as any;
   customerErrObj = AppMessages.VALIDATION.BUSINESS;
   customerObj = {} as any;
+  customerDetailObj = {} as any;
   branchFlag = false;
   parentid;
   cityName: string;
@@ -117,8 +118,8 @@ export class AddEditCustomerComponent implements OnInit {
       if (response.status) {
         if (response.data != null) {
           this.customerObj = response.data;
-          this.generateEditForm();
           this.getLocationList();
+          this.generateEditForm();
         }
       }
     });
@@ -212,18 +213,6 @@ export class AddEditCustomerComponent implements OnInit {
           this.customerForm.get('paymentstatus').setValidators(Validators.required);
           this.customerForm.get('paymentstatus').updateValueAndValidity();
           this.customerForm.get('paymenttenure').updateValueAndValidity();
-        }
-        if (this.customerObj != null) {
-          let paymentObj = {} as any;
-          const self = this;
-          paymentObj = _.find(this.paymentTenuresList, function (item) {
-            if (item.refid === Number(self.customerObj.paymenttenure)) {
-              return item;
-            }
-          });
-          if (!_.isUndefined(paymentObj)) {
-            this.customerForm.controls.paymenttenure.setValue(paymentObj.refvalue);
-          }
         }
       }
     });
@@ -427,6 +416,7 @@ export class AddEditCustomerComponent implements OnInit {
         break;
       case '2':
         this.paymentComponent.addpayment();
+        break;
       case '3':
         this.branchComponent.newBranch();
         break;
@@ -447,6 +437,7 @@ export class AddEditCustomerComponent implements OnInit {
   }
   onCustomerTabChange(event) {
     this.customerObj = this.customerObj;
+    this.generateEditForm();
     if (event.nextId === '9' || event.nextId === '8' || event.nextId === '6' || event.nextId === '5' || event.nextId === '3' || event.nextId === '2') {
       this.showbutton = false;
       this.hidebutton = true

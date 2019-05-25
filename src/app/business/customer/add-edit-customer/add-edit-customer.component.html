@@ -391,7 +391,7 @@
                                                             <div class="col-md-9 col-sm-6">
                                                                 <ui-switch class="js-small" placement="bottom"
                                                                     ngbTooltip="Click to change status"
-                                                                    color="$primary-color" switchColor="#fff"
+                                                                    [color]="$primary-color" switchColor="#fff"
                                                                     size="small" formControlName="status"></ui-switch>
                                                             </div>
                                                         </div>
@@ -450,7 +450,7 @@
                     <ngb-tab title="Reviews" id='8' [disabled]="isAddForm || (customerObj.status === false && userstoragedata.roleid === 3)">
                         <ng-template ngbTabContent>
                             <div [@fadeInOutTranslate]>
-                                <app-customer-reviews [customerObj]="customerObj"></app-customer-reviews>
+                                <app-customer-reviews [customerObj]="customerDetailObj"></app-customer-reviews>
                             </div>
                         </ng-template>
                     </ngb-tab>

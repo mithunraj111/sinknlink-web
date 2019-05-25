@@ -21,7 +21,7 @@
                 <ngx-datatable #locationtable class="table data-table expandable" [rows]='locationList' [columnMode]="'flex'" [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false" [footerHeight]="50" [limit]="10" [messages]="emptymessages">
                     <ngx-datatable-column prop="pincode" name="Pincode" [resizeable]="false">
                         <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                            <span>{{row.pincode}}</span>
+                            <span>{{row.pincode || '-'}}</span>
                         </ng-template>
                     </ngx-datatable-column>
                     <ngx-datatable-column prop="area" name="Area" [resizeable]="false">
@@ -31,7 +31,7 @@
                     </ngx-datatable-column>
                     <ngx-datatable-column prop="state" name="State" [resizeable]="false">
                         <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                            <span>{{row.state}}</span>
+                            <span>{{row.state || '-'}}</span>
                         </ng-template>
                     </ngx-datatable-column>
                     <ngx-datatable-column prop="city" name="City" [resizeable]="false">
@@ -47,7 +47,7 @@
                     </ngx-datatable-column>
                     <ngx-datatable-column name="Status" [sortable]="false" [flexGrow]="0.5" headerClass="text-center" [cellClass]="'text-center'" [resizeable]="false">
                         <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                            <ui-switch [disabled]="!edit" class="js-small" placement="bottom" ngbTooltip="Click to change status" color="$primary-color" switchColor="#fff" size="small" [checked]="row.status == 'Active'" (change)="updateLocationStatus(row, rowIndex, false)"></ui-switch>
+                            <ui-switch [disabled]="!edit" class="js-small" placement="bottom" ngbTooltip="Click to change status" [color]="$primary-color" switchColor="#fff" size="small" [checked]="row.status == 'Active'" (change)="updateLocationStatus(row, rowIndex, false)"></ui-switch>
                         </ng-template>
                     </ngx-datatable-column>
                     <ngx-datatable-column *ngIf="edit || delete" name="Action" [sortable]="false" [flexGrow]="0.5" headerClass="text-center" [cellClass]="'text-center'" [resizeable]="false">

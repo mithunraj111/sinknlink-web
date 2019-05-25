@@ -34,7 +34,7 @@
                 </ngx-datatable-column>
                 <ngx-datatable-column name="Status" [sortable]="false" [resizeable]="false" headerClass="text-center" [cellClass]="'text-center status'">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                        <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" color="$primary-color" switchColor="#fff" size="small" (change)="updateBranchStatus(row,rowIndex,false)" [checked]="row.status=='Active'"></ui-switch>
+                        <ui-switch class="js-small" placement="bottom" ngbTooltip="Click to change status" [color]="$primary-color" switchColor="#fff" size="small" (change)="updateBranchStatus(row,rowIndex,false)" [checked]="row.status=='Active'"></ui-switch>
                     </ng-template>
                 </ngx-datatable-column>
                 <ngx-datatable-column name="Action" [sortable]="false" [resizeable]="false" headerClass="text-center" [cellClass]="'text-center action'">

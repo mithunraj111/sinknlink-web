@@ -49,6 +49,8 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
   selectedplanamt = 0;
   donationAmt = 0;
   emptymessages = AppConstant.EMPTY_MESSAGES.PAYMENT;
+  loadingIndicator: boolean = true;
+
   constructor(private paymentService: AppCommonService.PaymentsService,
     private lookupService: AdminService.LookupService,
     private customerService: BusinessService.CustomerService,
@@ -70,7 +72,7 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
     this.addPaymentForm = this.fb.group({
       paymentdt: [this.commonService.getCurrentDate('Y'), Validators.required],
       amount: [0],
-      donation:[0],
+      donation: [0],
       totalamount: [null, Validators.compose([Validators.required, Validators.pattern('^[0-9]*$')])],
       paymentref: ['', Validators.required],
       paymentmode: ['', Validators.required],
@@ -79,13 +81,14 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
   }
   ngOnChanges(changes: SimpleChanges) {
     this.customerObj = changes.customerObj.currentValue;
+    this.customerObj.paymenttenureid = this.customerObj.paymenttenureid;
     this.getPaymentHistory(changes.customerObj.currentValue);
   }
   getSubscriptionamount() {
     this.selectedplanamt = 0;
     this.selectedplanamt = this.subscriptionPlan;
     this.totalamount = Number(this.selectedplanamt);
-    if ( this.donationList[0].selected == true ) {
+    if (this.donationList[0].selected == true) {
       this.totalamount = Number(this.selectedplanamt) + Number(this.donationList[0].selectedAmt);
     }
   }
@@ -153,8 +156,8 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
         this.donationList[0].selected = true;
         this.preferredAmount = JSON.parse(this.donationList[0].amount);
         this.donationChecked();
-        for(let i = 0; i < this.preferredAmount.length; i++) {
-          this.preferredAmountList[i] = { label: this.preferredAmount[i], value:this.preferredAmount[i] }
+        for (let i = 0; i < this.preferredAmount.length; i++) {
+          this.preferredAmountList[i] = { label: this.preferredAmount[i], value: this.preferredAmount[i] }
         }
         this.donationList[0].selectedAmt = this.preferredAmount[0];
       }
@@ -171,18 +174,19 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
     document.querySelector('#' + event).classList.remove('md-show');
   }
   viewpayment(row) {
-    this.openModal('customerpaymentmodal');
     this.newPayment = false;
     this.viewPayment = true;
     this.selectedPaymentObj = row;
     this.selectedPaymentObj.paymentdt = this.commonService.parseDate(this.selectedPaymentObj.paymentdate);
     this.addPaymentForm.patchValue(this.selectedPaymentObj);
+    this.openModal('customerpaymentmodal');
   }
   addpayment() {
     this.initPaymentForm();
-    this.openModal('customerpaymentmodal');
     this.newPayment = true;
     this.viewPayment = false;
+    // this.addPaymentForm.controls["paymentmode"].enable(); 
+    this.openModal('customerpaymentmodal');
   }
   viewDonationCause(data) {
     this.selectedDonation = data;
@@ -192,6 +196,7 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
     return row.height;
   }
   getLookUps() {
+    this.loadingIndicator = true;
     this.lookupService.list({ status: AppConstant.STATUS_ACTIVE }).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
@@ -209,19 +214,28 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
         }
       }
       let self = this;
-      self.paymentarray = _.find(self.paymentTenure,function(item:any){
-        if(item.refid == self.customerObj.paymenttenureid){
+      // console.log(this.paymentObj);
+      // console.log(self.customerObj);
+      console.log(self.customerObj);
+      self.paymentarray = _.find(self.paymentTenure, function (item: any) {
+        console.log(item.refid);
+        console.log(self.customerObj.paymenttenureid);
+        if (item.refid == self.customerObj.paymenttenureid) {
           return item;
         }
       });
+      
+      // console.log(self.paymentarray);
       const date = new Date(this.lastpaid);
-      this.subscriptionPlan = self.paymentarray==undefined?0:self.paymentarray.refvalue;
+      this.subscriptionPlan = self.paymentarray == undefined ? 0 : self.paymentarray.refvalue;
+      console.log(this.subscriptionPlan);
       this.selectedplanamt = this.subscriptionPlan;
       this.totalamount = Number(this.subscriptionPlan);
-      if( this.preferredAmount.length > 0 ) {
+      if (this.preferredAmount.length > 0) {
         this.totalamount = Number(this.subscriptionPlan) + Number(this.donationList[0].selectedAmt);
       }
     });
+    this.loadingIndicator = false;
   }
 
   savePayment() {
@@ -249,7 +263,7 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
   }
   donationChecked() {
     this.donationAmt = 0;
-    let self =this;
+    let self = this;
     _.map(self.donationList, function (item) {
       if (item.selected && item.selectedAmt) {
         self.donationAmt = Number(self.donationAmt) + Number(item.selectedAmt);
@@ -270,13 +284,24 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
       updateddt: new Date(),
       updatedby: this.userstoragedata.fullname
     } as any;
-    if( this.donationList[0].selected == true ) {
-      data.donation= Number(this.donationList[0].selectedAmt),
-      data.donationid= this.donationList[0].donationid
+    if (this.donationList[0].selected == true) {
+      data.donation = Number(this.donationList[0].selectedAmt),
+        data.donationid = this.donationList[0].donationid
     }
     if (onlinepaymentid !== '') {
       data.paymentref = onlinepaymentid;
       data.paymentstatus = AppConstant.STATUS_SUCCESS;
+      this.customerObj.nextdue = new Date(new Date().setDate(new Date(this.customerObj.nextdue).getDate() + data.amount)).toISOString();
+      let customerData = {} as any;
+      customerData.nextdue = this.customerObj.nextdue;
+      this.customerService.update(customerData, this.customerObj.membershipid).subscribe(res => {
+        const response = JSON.parse(res._body);
+        if (response.status) {
+          this.customerObj = response.data;
+        } else {
+        }
+      }, err => {
+      });
     } else {
       data.paymentref = 'Payment cancelled';
       data.remarks = 'Payment cancelled';
@@ -300,19 +325,5 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
       }
       this.collectpayment = false;
     });
-    this.customerObj.nextdue = new Date(new Date().setDate(new Date(this.customerObj.nextdue).getDate() + data.amount)).toISOString();
-    let customerData = {}as any;
-    customerData.nextdue= this.customerObj.nextdue;
-    this.customerService.update( customerData, this.customerObj.membershipid).subscribe(res => {
-      const response = JSON.parse(res._body);
-      if (response.status) {
-        this.customerObj = response.data;
-        this.bootstrapAlertService.showSucccess(response.message);
-      } else {
-        this.bootstrapAlertService.showError(response.message);
-      }
-    }, err => {
-      const error = JSON.parse(err._body);
-      this.bootstrapAlertService.showError(error.message);
-    });  }
+  }
 }
