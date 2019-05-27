@@ -291,7 +291,8 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
     if (onlinepaymentid !== '') {
       data.paymentref = onlinepaymentid;
       data.paymentstatus = AppConstant.STATUS_SUCCESS;
-      this.customerObj.nextdue = new Date(new Date().setDate(new Date(this.customerObj.nextdue).getDate() + data.amount)).toISOString();
+      let nextduedate = new Date(this.customerObj.nextdue);
+      this.customerObj.nextdue = new Date(nextduedate.setDate(new Date(this.customerObj.nextdue).getDate() + data.amount)).toISOString();
       let customerData = {} as any;
       customerData.nextdue = this.customerObj.nextdue;
       this.customerService.update(customerData, this.customerObj.membershipid).subscribe(res => {

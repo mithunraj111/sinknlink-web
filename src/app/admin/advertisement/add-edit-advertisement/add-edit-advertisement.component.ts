@@ -25,7 +25,7 @@ export class AddEditAdvertisementComponent implements OnInit {
   edit = false;
   buttontext = AppConstant.BUTTON_TXT.SAVE;
   status = true;
-  ispremium = true;
+  ispremium = false;
   adObj = {} as any;
   savingAd = false;
   adForm: FormGroup;
@@ -127,7 +127,7 @@ export class AddEditAdvertisementComponent implements OnInit {
       url: [null, [Validators.required]],
       startdate: [null, [Validators.required]],
       expirydate: [null, [Validators.required]],
-      ispremium: ['Y'],
+      ispremium: [null],
       description: [null, [Validators.required]],
       status: ['Active']
     });
