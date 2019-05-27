@@ -28,6 +28,7 @@ import { CustomerPaymentsComponent } from './customer-payments/customer-payments
   animations: [fadeInOutTranslate]
 })
 export class AddEditCustomerComponent implements OnInit {
+  isActive = false;
   customerForm: FormGroup;
   socialidForm: FormGroup;
   formTitle: string;
@@ -118,6 +119,7 @@ export class AddEditCustomerComponent implements OnInit {
       if (response.status) {
         if (response.data != null) {
           this.customerObj = response.data;
+          this.isActive = this.customerObj.status == AppConstant.STATUS_ACTIVE ? true : false;
           this.getLocationList();
           this.generateEditForm();
         }
@@ -397,6 +399,7 @@ export class AddEditCustomerComponent implements OnInit {
             this.customerObj = response.data;
             this.isAddForm = false;
             this.bootstrapAlertService.showSucccess(response.message);
+            this.isActive = true;
           } else {
             this.savecustomer = false;
             this.bootstrapAlertService.showError(response.message);

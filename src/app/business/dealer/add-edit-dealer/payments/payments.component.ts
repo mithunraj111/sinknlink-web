@@ -134,7 +134,7 @@ export class DealerPaymentsComponent implements OnChanges, OnInit {
   initPaymentForm() {
     this.addPaymentForm = this.fb.group({
       paymentdt: ['', Validators.required],
-      totalamount: [null, Validators.required],
+      totalamount: [null, Validators.compose([Validators.required, Validators.pattern('^[0-9]*$')])],
       paymentref: ['', Validators.required],
       paymentmode: ['', Validators.required],
       remarks: ['']

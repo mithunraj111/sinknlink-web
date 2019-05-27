@@ -214,21 +214,14 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
         }
       }
       let self = this;
-      // console.log(this.paymentObj);
-      // console.log(self.customerObj);
-      console.log(self.customerObj);
       self.paymentarray = _.find(self.paymentTenure, function (item: any) {
-        console.log(item.refid);
-        console.log(self.customerObj.paymenttenureid);
         if (item.refid == self.customerObj.paymenttenureid) {
           return item;
         }
       });
       
-      // console.log(self.paymentarray);
       const date = new Date(this.lastpaid);
       this.subscriptionPlan = self.paymentarray == undefined ? 0 : self.paymentarray.refvalue;
-      console.log(this.subscriptionPlan);
       this.selectedplanamt = this.subscriptionPlan;
       this.totalamount = Number(this.subscriptionPlan);
       if (this.preferredAmount.length > 0) {
