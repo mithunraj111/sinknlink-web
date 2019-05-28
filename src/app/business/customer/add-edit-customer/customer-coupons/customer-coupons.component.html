@@ -110,7 +110,7 @@
                     [cellClass]="'text-center status'" [flexGrow]="0.2">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                         <button *ngIf="row.status === 'Claimed'" class="btn btn-primary py-1 px-2"
-                            (click)=editClaimers(row,rowIndex)>{{row.status}}</button>
+                            (click)=editClaimers(row,rowIndex)>Reedem now</button>
                         <label *ngIf="row.status === 'Redeemed'">{{row.status}}</label>
                     </ng-template>
                 </ngx-datatable-column>

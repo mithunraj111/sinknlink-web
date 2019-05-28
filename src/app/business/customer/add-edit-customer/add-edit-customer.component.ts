@@ -61,7 +61,6 @@ export class AddEditCustomerComponent implements OnInit {
   userstoragedata = {} as any;
   customerErrObj = AppMessages.VALIDATION.BUSINESS;
   customerObj = {} as any;
-  customerDetailObj = {} as any;
   branchFlag = false;
   parentid;
   cityName: string;
@@ -533,6 +532,12 @@ export class AddEditCustomerComponent implements OnInit {
       this.customerForm.get('paymenttenure').updateValueAndValidity();
     }
     this.buttonText = AppConstant.BUTTON_TXT.UPDATE;
+    this.mallsList = [];
+    this.lookupList.forEach(element => {
+      if (element.refname === this.customerObj.city) {
+        this.mallsList.push(element);
+      }
+    });
   }
 
   // map starts
