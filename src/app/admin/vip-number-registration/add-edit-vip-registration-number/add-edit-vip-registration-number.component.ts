@@ -30,6 +30,7 @@ export class AddEditVipRegistrationNumberComponent implements OnInit {
   business: any = {};
   ownedNos: any = [];
   allocated: any = {};
+  prefix;
 
   constructor(private bootstrapAlertService: BootstrapAlertService, private commonService: CommonService,
     private fb: FormBuilder, private router: Router, private fancynumberService: FancyNumberService,
@@ -38,7 +39,8 @@ export class AddEditVipRegistrationNumberComponent implements OnInit {
     private customerService: CustomerService,
     private lookupService: LookupService) {
     this.vipForm = this.fb.group({
-      statecode: ['', [Validators.required]],
+      statecode: [''],
+      prefix: ['', Validators.compose([Validators.maxLength(5), Validators.pattern('^[a-zA-Z]*$')])],
       startnumber: ['0', [Validators.required]],
       endnumber: [''],
       status: [true],
@@ -63,6 +65,10 @@ export class AddEditVipRegistrationNumberComponent implements OnInit {
         this.bootstrapAlertService.showError(response.message);
       }
     });
+  }
+
+  selectedState(option) {
+    this.vipForm.controls['prefix'].setValue(option.value);
   }
 
   getBusiness(id) {

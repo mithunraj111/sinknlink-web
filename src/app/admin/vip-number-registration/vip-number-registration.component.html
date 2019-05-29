@@ -117,7 +117,7 @@
                                                     [resizeable]="false">
                                                     <ng-template let-rowIndex="rowIndex" let-row="row"
                                                         ngx-datatable-cell-template>
-                                                        <span>{{row.business?.bizname}} {{row.membershipid}}</span>
+                                                        <span>{{row.business?.bizname || '-'}} {{row.membershipid}}</span>
                                                     </ng-template>
                                                 </ngx-datatable-column>
                                                 <ngx-datatable-column prop="remaraks" name="Remarks"

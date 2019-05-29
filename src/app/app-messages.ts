@@ -32,6 +32,10 @@ export const AppMessages = Object.freeze({
       statecode: {
         required: 'Please select state'
       },
+      prefix: {
+        maxlength: 'Please enter prefix within 5 characters',
+        pattern: 'Please enter a valid prefix'
+      },
       startnumber: {
         required: 'Please enter a start number'
       },

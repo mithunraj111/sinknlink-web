@@ -113,7 +113,7 @@
                                             </label>
                                             <div class="col-md-7 col-sm-7 m-t-5">
                                                 <span
-                                                    class="f-15">{{consumer?.user?.lastlogin|date:datetimedisplayformat}}</span>
+                                                    class="f-15">{{(consumer?.user?.lastlogin|date:datetimedisplayformat) || '-'}}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -160,7 +160,7 @@
                                                         <span>{{row.coupon.couponcode}}</span>
                                                     </ng-template>
                                                 </ngx-datatable-column>
-                                                <ngx-datatable-column prop="shortdesc" name="Description"
+                                                <ngx-datatable-column prop="shortdesc" name="Coupon Title"
                                                     [resizeable]="false">
                                                     <ng-template let-rowIndex="rowIndex" let-row="row"
                                                         ngx-datatable-cell-template>
