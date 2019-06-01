@@ -217,7 +217,7 @@
                                                         <div class="col-md-9 col-sm-6">
                                                             <div class="input-box">
                                                                 <ng-select [allowClear]="true" [ngClass]="'ng-select'"
-                                                                    [options]="locationList"
+                                                                    [options]="locationList" (selected)="selectLocation($event)"
                                                                     formControlName="locationid"
                                                                     placeholder="Select Location">
                                                                 </ng-select>

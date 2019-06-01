@@ -198,7 +198,6 @@ textarea {
         margin-left: 16px;
         margin-bottom: 10px;
     }
-
     @media only screen and(max-width: 1300px) {
         .add-btn.btn{
             padding: 5px 6px !important;
@@ -1491,6 +1490,7 @@ body[themebg-pattern="pattern1"]{
     width:35px !important; 
 }
 .header-navbar {
+    top: 0;
     .navbar-wrapper {
         .navbar-container{
             .nav-right{

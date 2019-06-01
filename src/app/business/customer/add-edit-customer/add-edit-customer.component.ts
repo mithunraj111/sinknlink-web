@@ -61,6 +61,7 @@ export class AddEditCustomerComponent implements OnInit {
   userstoragedata = {} as any;
   customerErrObj = AppMessages.VALIDATION.BUSINESS;
   customerObj = {} as any;
+  locationObj = {} as any;
   branchFlag = false;
   parentid;
   cityName: string;
@@ -107,7 +108,7 @@ export class AddEditCustomerComponent implements OnInit {
     this.initForm();
     this.getLookUps();
     this.getCategoryList();
-    if(this.userstoragedata.roleid === 3) {
+    if (this.userstoragedata.roleid === 3) {
       this.customerForm.controls["membershiptype"].disable();
     }
   }
@@ -137,6 +138,9 @@ export class AddEditCustomerComponent implements OnInit {
         this.loadingIndicator = false;
       }
     });
+  }
+  selectLocation(option) {
+    this.locationObj = option;
   }
   selectCity(option) {
     this.cityName = option.value;
@@ -388,6 +392,13 @@ export class AddEditCustomerComponent implements OnInit {
           this.bootstrapAlertService.showError(error.message);
         });
       } else {
+        let random_string = '';
+        let random_ascii;
+        for (let i = 0; i < 3; i++) {
+          random_ascii = Math.floor((Math.random() * 25) + 65);
+          random_string += String.fromCharCode(random_ascii)
+        }
+        formdata.membershipcode = (this.locationObj.state ? this.locationObj.state : '') + (Math.round(Math.random() * 10000000).toString()) + (random_string);
         formdata.status = AppConstant.STATUS_ACTIVE;
         formdata.createdby = this.userstoragedata.fullname;
         formdata.createddt = new Date();
