@@ -191,7 +191,7 @@
                     <ngb-tab title="Reviews">
                         <ng-template ngbTabContent>
                             <div [@fadeInOutTranslate]>
-                                <div class="col-md-12 col-sm-12 card" height="100vh">
+                                <div class="col-md-12 col-sm-12 card">
                                     <div class="header-title m-t-25 mb-3">
                                         <div class="header-title mb-3">
                                             <h3 class="f-18 text-primary m-l-15">Business Reviewed</h3>
@@ -199,15 +199,14 @@
                                         <div *ngIf="reviewedBiz.length>0">
                                             <div class="row">
                                                 <div class="col-sm-12 col-md-5 review-border consumer-review">
-                                                    <div *ngFor="let biz of consumerReviews"
+                                                    <div *ngFor="let biz of reviewedBiz"
                                                         class=" p-10 m-b-10 card waves-effect d-block"
                                                         (click)="showReviewFor(biz.membershipid)"
                                                         ngbTooltip="Click here to display the reviews">
-                                                        <div class="d-inline-block">
-                                                            <img [src]="imageSrc" alt="image" width="35px">
-                                                            <!-- {{biz.bizname.substring(0,1).toUpperCase()}} -->
+                                                        <div class="d-inline-block profile-image">
+                                                            {{biz.bizname.substring(0,1).toUpperCase()}}
                                                         </div>
-                                                        <h6 class="d-inline-block ml-2">{{biz.fullname | titlecase}}</h6>
+                                                        <h6 class="d-inline-block ml-2">{{biz.bizname | titlecase}}</h6>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-12 col-md-7">
@@ -236,7 +235,9 @@
                                                                         {{bizReview?.comments}}</h6>
                                                                     <div *ngIf="bizReview?.reply" class="row">
                                                                         <a>
-                                                                            <img width="35px" [src]="imageSrc" alt="">
+                                                                            <div class="profile-image">
+                                                                                {{bizReview?.consumer?.fullname.substring(0,1).toUpperCase()}}
+                                                                            </div>
                                                                         </a>
                                                                         <div class="media-body ml-2">
                                                                             <h6 class="mb-1">
@@ -293,8 +294,7 @@
                                                         <span>{{row.business?.biztype}}</span>
                                                     </ng-template>
                                                 </ngx-datatable-column>
-                                                <ngx-datatable-column prop="city" name="Location"
-                                                    [resizeable]="false">
+                                                <ngx-datatable-column prop="city" name="Location" [resizeable]="false">
                                                     <ng-template let-rowIndex="rowIndex" let-row="row"
                                                         ngx-datatable-cell-template>
                                                         <span>{{row.business?.city}}</span>
