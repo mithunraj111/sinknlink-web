@@ -7,6 +7,7 @@ import * as Lodash from 'lodash';
 import { element } from '@angular/core/src/render3/instructions';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { CommonService } from '../../../services';
+import { ReviewsService } from 'src/app/services/business/reviews.service';
 
 @Component({
   selector: 'app-view-consumer',
@@ -20,6 +21,7 @@ export class ViewConsumerComponent implements OnInit {
   datetimedisplayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   consumerProfilepic: any;
   tempFilter = [];
+  imageSrc;
   emptymessages = AppConstant.EMPTY_MESSAGES.CONSUMERCOUPONS;
   nodata = AppConstant.EMPTY_MESSAGES.FAVOURITES;
   showCategoryImage = 'http://180.12.181.8:2000/category/';
@@ -39,13 +41,15 @@ export class ViewConsumerComponent implements OnInit {
   userimg: any = {};
 
   // For Reviews
+  consumerReviews: any = [];
   reviewedBiz: any = [];
   reviews: any = {};
   selectedReview: number;
   bizReview: any = [];
   public rateStar = '';
 
-  constructor(private route: ActivatedRoute, private consumerService: ConsumerService, private commonService: CommonService) {
+  constructor(private route: ActivatedRoute, private consumerService: ConsumerService,
+    private reviewService: ReviewsService, private commonService: CommonService) {
     this.route.params.subscribe(params => {
       let id = params.id;
       this.getConsumer(id);
@@ -83,7 +87,7 @@ export class ViewConsumerComponent implements OnInit {
     });
   }
   getConsumerFavs(id) {
-    this.consumerService.consumerFavs({ consumerid: Number(id) ,status: AppConstant.STATUS_ACTIVE}).subscribe(res => {
+    this.consumerService.consumerFavs({ consumerid: Number(id), status: AppConstant.STATUS_ACTIVE }).subscribe(res => {
       const response = JSON.parse(res._body);
       this.consumerFavs = this.groupFavs(response.data);
     }, err => {
@@ -91,7 +95,7 @@ export class ViewConsumerComponent implements OnInit {
   }
 
   getConsumerReviews(id) {
-    this.consumerService.consumerReviews({ consumerid: Number(id) }).subscribe(res => {
+    this.reviewService.listMobile({ consumerid: Number(id) }).subscribe(res => {
       const response = JSON.parse(res._body);
       const businesses = [] as any;
       let reviews = {};
@@ -99,6 +103,12 @@ export class ViewConsumerComponent implements OnInit {
         response.data.forEach(element => {
           if (Lodash.find(businesses, function (o) { return o.membershipid == element.membershipid }) == undefined) businesses.push({ membershipid: element.membershipid, bizname: element.business == null ? "" : element.business.bizname });
         });
+        this.consumerReviews = response.data;
+        if (this.consumerReviews.docurl != null) {
+          this.imageSrc = this.consumerReviews.docurl;
+        } else {
+          this.imageSrc = 'assets/images/avatar-blank.png';
+        }
         reviews = Lodash.groupBy(response.data, 'membershipid');
         this.reviewedBiz = businesses;
         this.reviews = reviews;
