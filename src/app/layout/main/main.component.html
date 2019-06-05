@@ -10,15 +10,15 @@
             [attr.pcoded-header-position]="pcodedHeaderPosition">
             <div class="navbar-wrapper">
                 <div class="navbar-logo">
-
-                    <a class="mobile-menu" id="mobile-collapse" href="javascript:" (click)="toggleOpened()"
-                        [exclude]="'#main_navbar'" (clickOutside)="onClickedOutsideSidebar($event)">
-                        <i class="ti-menu"></i>
-                    </a>
                     <a [routerLink]="['/dashboard']" style="margin-top:7px;">
                         <!-- <img class="img-fluid" src="assets/images/Logo.png" alt="Sink n Link" /> -->
                         <h1 class="logo-title" style="text-transform: none !important;">Sink n Link</h1>
                     </a>
+                    <a class="mobile-menu" id="mobile-collapse" href="javascript:" (click)="toggleOpened()"
+                        [exclude]="'#main_navbar'" (clickOutside)="onClickedOutsideSidebar($event)">
+                        <i class="ti-menu"></i>
+                    </a>
+                    
                     <a href="javascript:" class="mobile-options" (click)="toggleHeaderNavRight()">
                         <i class="ti-more"></i>
                     </a>

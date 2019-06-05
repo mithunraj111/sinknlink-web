@@ -154,26 +154,29 @@ export class AddEditEventComponent implements OnInit {
       this.bootstrapAlertService.showError(this.commonService.getFormErrorMessage(this.eventForm, this.eventErrObj));
       return false;
     }
-    let form_data = this.eventForm.value;
-    const data = form_data;
-    data.eventdate = this.commonService.formatDate(data.eventdate);
-    data.eventexpirydt = this.commonService.formatDate(data.eventexpirydt);
+    const data = this.eventForm.value;
+    const startdt = this.commonService.formatDate(data.eventdate);
+    const enddt = this.commonService.formatDate(data.eventexpirydt);
     data.status = data.status ? AppConstant.STATUS_ACTIVE : AppConstant.STATUS_INACTIVE;
-    let eventdt = new Date(data.eventdate);
+    let eventdt = new Date(startdt);
     let eventstartdt = eventdt.setHours(23, 59, 59);
     if (new Date(eventstartdt) < this.commonService.getCurrentDate()) {
       this.savingEvent = false;
       this.bootstrapAlertService.showError(AppMessages.VALIDATION.EVENT.eventdate.min);
       return false;
-    } else if (new Date(data.eventexpirydt) < new Date(data.eventdate)) {
+    } else if (new Date(enddt) < new Date(startdt)) {
       this.savingEvent = false;
       this.bootstrapAlertService.showError(AppMessages.VALIDATION.EVENT.eventdate.max);
       return false;
     } else if (this.edit) {
+      data['eventdate'] = startdt;
+      data['eventexpirydt'] = enddt;
       data['updateddt'] = new Date();
       data['updatedby'] = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER).fullname;
       this.updateEvent(data);
     } else {
+      data.eventdate = startdt;
+      data.eventexpirydt = enddt;
       data.createddt = new Date();
       data.createdby = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER).fullname;
       let formData = new FormData();

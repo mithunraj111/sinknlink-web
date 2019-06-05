@@ -1857,3 +1857,6 @@ input[type=number]::-webkit-outer-spin-button{
     width:40px;
     max-width:100%;
 }
+.p-events-none{
+    pointer-events: none;
+}
