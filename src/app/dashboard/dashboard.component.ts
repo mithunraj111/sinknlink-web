@@ -42,7 +42,7 @@ export class DashboardComponent extends BaseService implements OnInit {
     config.placement = 'top-right';
     config.autoClose = true;
   }
-  filterRange: String = 'month';
+  filterRange: String = 'This Month';
 
   ngOnInit() {
     this.getData(this.filterRange);
@@ -56,12 +56,12 @@ export class DashboardComponent extends BaseService implements OnInit {
 
     switch (n) {
 
-      case 'today':
+      case 'Today':
         fromDate = new DatePipe('en-US').transform(new Date(), 'yyyy-MM-dd').toString() + ' 00:00:00';
         toDate = new DatePipe('en-US').transform(new Date(), 'yyyy-MM-dd').toString() + ' 23:59:59';
         break;
 
-      case 'week':
+      case 'This Week':
         fromDate = new DatePipe('en-US').transform((function () {
           let d = new Date();
           var day = d.getDay(),
@@ -75,7 +75,7 @@ export class DashboardComponent extends BaseService implements OnInit {
         }()), 'yyyy-MM-dd').toString() + ' 23:59:59';
         break;
 
-      case 'month':
+      case 'This Month':
         fromDate = new DatePipe('en-US').transform((function () {
           let date = new Date();
           return new Date(date.getFullYear(), date.getMonth(), 1);
@@ -228,8 +228,8 @@ export class DashboardComponent extends BaseService implements OnInit {
         'valueAxis': 'v2',
         'lineThickness': 0,
         'fillAlphas': 0.9,
-        'bulletColor': '#004dff ',
-        'lineColor': '#004dff ',
+        'bulletColor': '#f44336 ',
+        'lineColor': '#f44336 ',
         'type': 'column',
         'columnWidth': 0.4,
         'title': 'Search count',

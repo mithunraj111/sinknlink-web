@@ -6,6 +6,7 @@ import * as _ from 'lodash';
 import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
 import { AppMessages } from '../app-messages';
 import { MainComponent } from '../layout/main/main.component';
+import { LookupService } from '../services/admin';
 
 @Component({
   selector: 'app-profile',
@@ -21,7 +22,9 @@ export class ProfileComponent implements OnInit {
   displayformat = AppConstant.API_CONFIG.ANG_DATE.displaydtime;
   errMessage;
   profileErrObj = AppMessages.VALIDATION.PROFILE;
-  locationList = [];
+  cityLists = [];
+  cityName: string;
+  // locationList = [];
   userimgfile: any;
   userfile: any;
   profileimage: Boolean = false;
@@ -32,9 +35,10 @@ export class ProfileComponent implements OnInit {
     private localStorageService: LocalStorageService,
     private userService: MasterService.UserService,
     private bootstrapAlertService: BootstrapAlertService,
-    private locationService: MasterService.LocationService,
+    // private locationService: MasterService.LocationService,
     private documentService: AppCommonService.DocumentService,
-    private commonService: CommonService
+    private commonService: CommonService,
+    private lookupService: LookupService
   ) {
     this.userstoragedata = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER);
   }
@@ -42,9 +46,9 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.getUser();
     this.userProfileForm();
-    this.getLocationList();
+    // this.getLocationList();
+    this.getCity();
   }
-
 
   checkProfileImg() {
     if (this.userObj.profileimg != null) {
@@ -80,20 +84,25 @@ export class ProfileComponent implements OnInit {
         if (this.userstoragedata.roleid == 2) {
           let dealer = {
             address: '',
-            locationid: null
+            city: null,
+            // locationid: null
           } as any;
           dealer = this.userObj.dealer == null ? dealer : this.userObj.dealer;
-          this.userObj.locationid = dealer.locationid == null ? '' : dealer.locationid.toString();
+          console.log(dealer);
+          this.userObj.city = dealer.location.city;
+          // this.userObj.locationid = dealer.locationid == null ? '' : dealer.locationid.toString();
           this.userObj.address = dealer.address;
         } else {
           let consumer = {
             emailid: '',
-            locationid: null,
+            city: '',
+            // locationid: null,
             socialid: null,
             address: ''
           } as any;
           consumer = this.userObj.consumer == null ? consumer : this.userObj.consumer;
-          this.userObj.locationid = consumer.locationid == null ? '' : consumer.locationid.toString();
+          this.userObj.city = consumer.city;
+          // this.userObj.locationid = consumer.locationid == null ? '' : consumer.locationid.toString();
           if (this.userObj.consumer != null) {
             this.userObj.facebookid = consumer.socialid.facebookid;
             this.userObj.twitterid = consumer.socialid.twitterid;
@@ -104,6 +113,7 @@ export class ProfileComponent implements OnInit {
         this.profileForm.patchValue(this.userObj);
       }
     });
+    // this.getLocationList();
   }
   userProfileForm() {
     this.profileForm = this.fb.group({
@@ -111,26 +121,44 @@ export class ProfileComponent implements OnInit {
       mobileno: [null, Validators.required],
       emailid: ['', Validators.compose([Validators.pattern('([a-z0-9&_\.-]*[@][a-z0-9]+((\.[a-z]{2,3})?\.[a-z]{2,3}))'), Validators.maxLength(100)])],
       address: [null, Validators.compose([Validators.minLength(1), Validators.maxLength(100)])],
-      locationid: [null, Validators.compose([])],
+      city: [null],
+      // locationid: [null],
       facebookid: [''],
       twitterid: [''],
       googleid: [''],
       instagramid: [''],
     });
   }
-  getLocationList() {
-    this.locationService.list({ status: AppConstant.STATUS_ACTIVE }).subscribe((res) => {
+  // getLocationList() {
+  //   this.locationService.list({ city: this.cityName, status: AppConstant.STATUS_ACTIVE }).subscribe((res) => {
+  //     const response = JSON.parse(res._body);
+  //     if (response.status) {
+  //       response.data.map(item => {
+  //         item.label = item.area + ' ( ' + item.pincode + ' )';
+  //         item.value = item.locationid.toString();
+  //       });
+  //       this.locationList = response.data;
+  //     }
+  //   });
+  // }
+
+  getCity() {
+    this.lookupService.list({ refkey: 'biz_businesscity', status: AppConstant.STATUS_ACTIVE }).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
         response.data.map(item => {
-          item.label = item.area + ' ( ' + item.pincode + ' )';
-          item.value = item.locationid.toString();
+          item.label = item.refname;
+          item.value = item.refvalue;
         });
-        this.locationList = response.data;
+        this.cityLists = this.cityLists.concat(response.data);
       }
     });
+    // this.getLocationList();
   }
-
+  // selectCity(option) {
+  //   this.cityName = option.value;
+  //   this.getLocationList();
+  // }
 
   changeProfile(datavalue?) {
     if (!this.profileForm.valid) {
@@ -142,7 +170,7 @@ export class ProfileComponent implements OnInit {
       data = _.omit(data, 'mobileno');
       data.updatedby = this.userstoragedata.fullname;
       data.updateddt = new Date();
-      data.locationid = Number(this.profileForm.value.locationid);
+      // data.locationid = Number(this.profileForm.value.locationid);
       data.socialid = {
         facebookid: data.facebookid,
         twitterid: data.twitterid,

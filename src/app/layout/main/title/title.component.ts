@@ -24,7 +24,7 @@ export class TitleComponent {
           });
         } while (currentRoute);
         if (title !== undefined) {
-          this.titleService.setTitle('Sink n Link | ' + title);
+          this.titleService.setTitle('SinknLink | ' + title);
         }
       });
   }

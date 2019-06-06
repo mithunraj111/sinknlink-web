@@ -1,16 +1,16 @@
 
 $font-stack: 'ProximaNovaSemibold', sans-serif;
 // $primary-color: #03ADED;  // title heading color and list table color //
-$border-color: #004dff; // box border color //
-$button-border-color: #004dff; // all buttons border color, close icon and sidebar title bottom color //
+$border-color: #f44336; // box border color //
+$button-border-color: #f44336; // all buttons border color, close icon and sidebar title bottom color //
 $primary-text-color: #2f3d4a; // table header color //
 $white-txt: #ffffff;
 $danger-color: #FF5370; // alert error //
 $success-color:#2ed8b6; // alert success //
 $warning-color:#FFB64D; // alert warning //
 $info-color :#00bcd4;  // alert info //
-$primary-color: #004dff;
-$background: -webkit-linear-gradient(0deg, rgb(0, 77, 255) 50%, rgb(88, 139, 255) 100%);
+$primary-color: #f44336;
+$background: -webkit-linear-gradient(0deg, rgb(244,67,54) 50%, rgb(244, 139, 100) 100%);
 
 @font-face {
 	font-family: 'ProximaNovaRegular';
@@ -53,7 +53,10 @@ $background: -webkit-linear-gradient(0deg, rgb(0, 77, 255) 50%, rgb(88, 139, 255
     border-radius: 2px;
     // box-shadow: 0px 5px 25px 0 rgba(0, 0, 0, 0.25);
 }
-
+.btn-primary:disabled{
+    background-color: #f77668;
+    border: #f77668;
+}
 p{
     font-family: 'Open Sans',sans-serif;
     font-weight: 300;  
@@ -159,13 +162,16 @@ textarea {
     background-repeat: no-repeat;
 }
 .logo-text{
-    img{
-        margin-top: 16%;
-    }
     h1{
-        font-size: 38px;
-        color:  $white-txt;;
-        margin-top: 35px;
+        font-size: 26px;
+        color: #2e2e2e;
+        font-family: 'Roboto', sans-serif;
+    }
+}
+.form-control {
+    &:focus {
+        border-color: $primary-color !important;
+        box-shadow: none !important;
     }
 }
 .pcoded-main-container{
@@ -1856,6 +1862,9 @@ input[type=number]::-webkit-outer-spin-button{
 .userimg {
     width:40px;
     max-width:100%;
+}
+.form-control.p-events-none {
+    height: 38px !important;
 }
 .p-events-none{
     pointer-events: none;

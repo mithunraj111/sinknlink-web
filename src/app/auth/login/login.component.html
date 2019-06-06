@@ -7,11 +7,12 @@
                 <!-- <div class="col-md-12 col-lg-6 pull-left logo-text"> -->
                 <div class="logo-text login-card auth-body">
                     <div class="text-center">
-                        <!-- <img src="assets/images/fo-log.png" alt="Sink n Link"> -->
-                        <h1>
-                            <span class="ngb-dp-weekday f-38">Sink</span>
-                            <span class="f-38"> n</span>
-                            <span class="ngb-dp-weekday f-38"> Link</span>
+                        <img class="pb-2" width="60px" src="../../../assets/images/logo.png" alt="SinknLink">
+                        <h1><strong>
+                                <span>Sink</span>
+                                <span class="ngb-dp-weekday">n</span>
+                                <span>Link</span>
+                            </strong>
                         </h1>
                     </div>
                 </div>
@@ -20,9 +21,9 @@
                     <div class="login-card card-block">
                         <form class="md-float-material" [formGroup]="loginForm" (ngSubmit)="login()">
                             <div class="auth-box">
-                                <div class="row m-b-10">
+                                <div class="row">
                                     <div class="col-md-12">
-                                        <h3 class="text-left txt-primary mt-0">Sign In</h3>
+                                        <p class="text-left txt-primary mt-0">Sign in to continue to App console.</p>
                                     </div>
                                 </div>
                                 <div *ngIf="errMessage" class="alert alert-danger">
@@ -34,14 +35,15 @@
                                     <span class="md-line"></span>
                                 </div>
                                 <div class="input-group">
-                                    <input [type]="obscureText == true ? 'password' : 'text'" class="form-control" name="password"
-                                        formControlName="password" placeholder="Password">
-                                        <button type="button" class="btn p-0 pl-3 pr-2 obscure-eye" (click) = "obscureText = !obscureText">
-                                            <i [ngClass]="obscureText == true ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
-                                        </button>
+                                    <input [type]="obscureText == true ? 'password' : 'text'" class="form-control"
+                                        name="password" formControlName="password" placeholder="Password">
+                                    <button type="button" class="btn p-0 pl-3 pr-2 obscure-eye"
+                                        (click)="obscureText = !obscureText">
+                                        <i [ngClass]="obscureText == true ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
+                                    </button>
                                     <span class="md-line"></span>
                                 </div>
-                                <div class="row m-t-25 text-left">
+                                <div class="row text-left">
                                     <div class="col-12">
                                         <div class="forgot-phone text-right f-right">
                                             <a [routerLink]="['/auth/forgot']" class="text-right f-w-600 text-inverse">
@@ -49,11 +51,11 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row m-t-30">
+                                <div class="row m-t-20">
                                     <div class="col-md-12">
                                         <!-- <div *ngIf="signingin"> -->
-                                        <button type="submit" [disabled]="signingin"
-                                            class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20">{{signingin == true ? 'Verifying' : 'Sign in'}}
+                                        <button type="submit" [disabled]="signingin" style="font-size: 18px !important;"
+                                            class="btn btn-primary btn-md btn-block waves-effect text-center"><strong>{{signingin == true ? 'Verifying' : 'Sign in'}}</strong>
                                         </button>
                                         <!-- </div> -->
                                     </div>

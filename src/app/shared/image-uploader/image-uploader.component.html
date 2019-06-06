@@ -7,6 +7,7 @@
                 <p>Click here to browse your files</p>
             </div>
         </div>
+        <div *ngIf="extimage.length == 0" class="col-md-8 col-sm-12 p-2"><strong>No image to display</strong></div>
         <div class="col-sm-12 col-md-8 imagePicked">
             <div *ngFor="let img of extimage;let i = index" [id]="'img'+i" class="extimage">
                 <i (click)="removeDoc(img,i)" class="extimage_dicon fa fa-close"></i>

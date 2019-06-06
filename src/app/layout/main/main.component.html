@@ -11,8 +11,12 @@
             <div class="navbar-wrapper">
                 <div class="navbar-logo">
                     <a [routerLink]="['/dashboard']" style="margin-top:7px;">
-                        <!-- <img class="img-fluid" src="assets/images/Logo.png" alt="Sink n Link" /> -->
-                        <h1 class="logo-title" style="text-transform: none !important;">Sink n Link</h1>
+                        <img class="img-fluid py-2 pl-3" src="../../../assets/images/logo.png" alt="SinknLink" />
+                        <h1 class="logo-title" style="text-transform: none !important;">
+                            <span>Sink</span>
+                            <span class="ngb-dp-weekday">n</span>
+                            <span>Link</span>
+                        </h1>
                     </a>
                     <a class="mobile-menu" id="mobile-collapse" href="javascript:" (click)="toggleOpened()"
                         [exclude]="'#main_navbar'" (clickOutside)="onClickedOutsideSidebar($event)">
@@ -83,7 +87,7 @@
 
                                 <!-- <div class="pcoded-navigation-label" [attr.menu-title-theme]="menuTitleTheme"></div> -->
                                 <!-- <a class="navbar-title" [routerLink]="['/dashboard']">
-                                    <h1 class="logo-title">Sink n Link</h1>
+                                    <h1 class="logo-title">SinknLink</h1>
                                 </a> -->
                                 <ul class="pcoded-item pcoded-left-item main-nav-item" [attr.item-border]="itemBorder"
                                     [attr.item-border-style]="itemBorderStyle" [attr.subitem-border]="subItemBorder"

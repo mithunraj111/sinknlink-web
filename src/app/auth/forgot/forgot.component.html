@@ -6,18 +6,19 @@
         <!-- Authentication card start -->
         <div class="login-card card-block auth-body mr-auto ml-auto">
           <form class="md-float-material" [formGroup]="forgotPasswordForm" (ngSubmit)="sendSMS()">
-            <div class="text-center">
-              <!-- <img src="assets/images/fo-log.png" alt="Sink n Link"> -->
-              <h2>
-                <span class="ngb-dp-weekday f-38">Sink</span>
-                <span class="f-38"> n</span>
-                <span class="ngb-dp-weekday f-38"> Link</span>
-              </h2>
+            <div class="text-center logo-text">
+              <img class="pb-2" width="60px" src="../../../assets/images/logo.png" alt="SinknLink">
+              <h1><strong>
+                  <span>Sink</span>
+                  <span class="ngb-dp-weekday">n</span>
+                  <span>Link</span>
+                </strong>
+              </h1>
             </div>
             <div class="auth-box">
-              <div class="row m-b-20">
+              <div class="row">
                 <div class="col-md-12">
-                  <h3 class="text-left">Recover your password</h3>
+                  <p class="text-left">Recover your password</p>
                 </div>
               </div>
               <div *ngIf="errMessage" class="alert alert-danger">
@@ -33,7 +34,7 @@
               <div class="row">
                 <div class="col-md-12">
                   <button [disabled]="validatingUser" type="submit"
-                    class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20">{{validatingUser == true ? 'Verifying user..,' : 'Submit'}}</button>
+                    class="btn btn-primary btn-md btn-block waves-effect text-center">{{validatingUser == true ? 'Verifying user..,' : 'Submit'}}</button>
                 </div>
               </div>
 

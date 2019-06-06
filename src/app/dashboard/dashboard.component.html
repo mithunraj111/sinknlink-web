@@ -5,7 +5,8 @@
       <div (click)="navigateOnCardClick(counts[0]?.label)" class="card bg-c-blue order-card">
         <div class="card-block">
           <h6 class="m-b-10 f-18">{{counts[0]?.label || '-'}}</h6>
-          <h2 class="text-right"><i class="{{counts[0]?.icon}} f-left p-r-10 mt-1"></i><span class="f-20">{{counts[0]?.count || '-'}}</span></h2>
+          <h2 class="text-right"><i class="{{counts[0]?.icon}} f-left p-r-10 mt-1"></i><span
+              class="f-20">{{counts[0]?.count || '-'}}</span></h2>
         </div>
       </div>
     </div>
@@ -23,7 +24,8 @@
       <div (click)="navigateOnCardClick(counts[1]?.label)" class="card bg-c-yellow order-card">
         <div class="card-block">
           <h6 class="m-b-10 f-18">{{counts[1]?.label || '-'}}</h6>
-          <h2 class="text-right"><i class="{{counts[1]?.icon}} f-left p-r-10 mt-1"></i><span class="f-20">{{counts[1]?.count || '-'}}</span></h2>
+          <h2 class="text-right"><i class="{{counts[1]?.icon}} f-left p-r-10 mt-1"></i><span
+              class="f-20">{{counts[1]?.count || '-'}}</span></h2>
         </div>
       </div>
     </div>
@@ -31,12 +33,17 @@
       <div (click)="navigateOnCardClick(counts[3]?.label)" class="card bg-c-pink order-card">
         <div class="card-block">
           <h6 class="m-b-10 f-18">{{counts[3]?.label || '-'}}</h6>
-          <h2 *ngIf="this.userstoragedata.roleid != 2" class="text-right"><i class="{{counts[3]?.icon}} f-left p-r-10 mt-1"></i><span class="f-16">{{counts[3]?.count || '-'}}</span></h2>
-          <h2 *ngIf="this.userstoragedata.roleid == 2" class="text-right"><i class="{{counts[3]?.icon}} f-left p-r-10 mt-1"></i><span class="f-16">{{( this.userstoragedata.lastlogin | date: displaydatetimeformat ) || '-' }}</span></h2>
+          <h2 *ngIf="this.userstoragedata.roleid != 2" class="text-right"><i
+              class="{{counts[3]?.icon}} f-left p-r-10 mt-1"></i><span class="f-16">{{counts[3]?.count || '-'}}</span>
+          </h2>
+          <h2 *ngIf="this.userstoragedata.roleid == 2" class="text-right"><i
+              class="{{counts[3]?.icon}} f-left p-r-10 mt-1"></i><span
+              class="f-16">{{( this.userstoragedata.lastlogin | date: displaydatetimeformat ) || '-' }}</span></h2>
         </div>
       </div>
     </div>
-    <div [hidden]="this.userstoragedata.roleid == 3 || this.userstoragedata.roleid == 2" class="col-xl-8 col-md-12 m-t-10">
+    <div [hidden]="this.userstoragedata.roleid == 3 || this.userstoragedata.roleid == 2"
+      class="col-xl-8 col-md-12 m-t-10">
       <div class="card project-task">
         <div class="card-header p-t-20 p-b-0">
           <h5>Frequently Searched Categories</h5>
@@ -77,7 +84,7 @@
                 <div class="f-left p-l-5">
                   <h5 class="f-14">
                     <span *ngIf="this.userstoragedata.roleid == 2">{{scount.bizname|titlecase}}</span>
-                    <span *ngIf="this.userstoragedata.roleid == 3">{{scount.consumer.fullname|titlecase}}</span> 
+                    <span *ngIf="this.userstoragedata.roleid == 3">{{scount.consumer.fullname|titlecase}}</span>
                     <span class="f-12 text-muted">
                       {{scount.updateddt | date: displaydatetimeformat}}
                     </span>
@@ -103,7 +110,9 @@
       <div *ngIf="userstoragedata.roleid != 3" class="card project-task">
         <div class="card-block p-b-10 p-t-15">
           <div class="row">
-            <span class="col-md-9 pt-2 card-header"><h5>Category Wise Business</h5></span>
+            <span class="col-md-9 pt-2 card-header">
+              <h5>Category Wise Business</h5>
+            </span>
             <div class="col-md-3">
               <button class="btn btn-inverse f-right px-2 py-1 m-b-10"
                 (click)="getData(filterRange, 'getDashboardBizCounts');"><i
@@ -181,11 +190,14 @@
 </div>
 <div ngbDropdown class="pos-fixed" style="bottom:25px; right:25px;">
   <button class="btn btn-primary btn-round px-3" id="dropdownConfig" ngbDropdownToggle><i
-      class="fa fa-filter f-14 m-0"></i></button>
+      class="fa fa-filter f-14 m-0"></i>&nbsp;{{filterRange}}</button>
   <div ngbDropdownMenu aria-labelledby="dropdownConfig">
-    <a class="cursor-pointer dropdown-item" (click)="getData('today');">Today</a>
-    <a class="cursor-pointer dropdown-item" (click)="getData('week');">This week</a>
-    <a class="cursor-pointer dropdown-item" (click)="getData('month');">This month</a>
+    <a class="cursor-pointer dropdown-item" (click)="getData('Today');"
+      [ngClass]="filterRange=='Today'? 'active':''">Today</a>
+    <a class="cursor-pointer dropdown-item" (click)="getData('This Week');"
+      [ngClass]="filterRange=='This Week'? 'active':''">This week</a>
+    <a class="cursor-pointer dropdown-item" (click)="getData('This Month');"
+      [ngClass]="filterRange=='This Month'? 'active':''">This month</a>
   </div>
 </div>
 <app-loader [loadingIndicator]="loadingIndicator"></app-loader>

@@ -24,6 +24,7 @@ export class CustomerCouponsComponent implements OnInit, OnChanges {
   userstoragedata = {} as any;
   @Input() customerObj = {} as any;
   @Output() couponObj = {} as any;
+  noCouponMessage = AppConstant.EMPTY_MESSAGES.COUPONS;
   emptymessages = AppConstant.EMPTY_MESSAGES.COUPONCLAIMER;
   constructor(private bootstrapAlertService: BootstrapAlertService,
     private commonService: CommonService,

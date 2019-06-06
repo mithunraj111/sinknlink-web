@@ -398,7 +398,7 @@ export class AddEditCustomerComponent implements OnInit {
           random_ascii = Math.floor((Math.random() * 25) + 65);
           random_string += String.fromCharCode(random_ascii)
         }
-        formdata.membershipcode = (this.locationObj.state ? this.locationObj.state : '') + (Math.round(Math.random() * 10000000).toString()) + (random_string);
+        formdata.membershipcode = (this.locationObj.state ? this.locationObj.state : '') + (Math.round(Math.random() * 100000).toString()) + (random_string);
         formdata.status = AppConstant.STATUS_ACTIVE;
         formdata.createdby = this.userstoragedata.fullname;
         formdata.createddt = new Date();
