@@ -4,7 +4,7 @@ import { AppConstant } from 'src/app/app.constants';
 import { NgbDateCustomParserFormatter } from '../../../shared/elements/dateParser';
 import { NgbDateParserFormatter, NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 import { fadeInOutTranslate } from '../../../../assets/animations/fadeInOutTranslate';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { MasterService, CommonService, LocalStorageService, AdminService, BusinessService, MapService } from '../../../services';
 import { CustomerCouponsComponent } from './customer-coupons/customer-coupons.component';
 import { CustomerGigsComponent } from './customer-gigs/customer-gigs.component';
@@ -70,6 +70,7 @@ export class AddEditCustomerComponent implements OnInit {
   isAddForm = true;
   msg: string;
   lookupList: any = [];
+  memCode: any;
   constructor(private fb: FormBuilder,
     private categoryService: MasterService.CategoryService,
     private lookupService: AdminService.LookupService,
@@ -245,7 +246,7 @@ export class AddEditCustomerComponent implements OnInit {
       phoneno: [[]],
       categoryid: [null, Validators.required],
       tags: [[], Validators.required],
-      postaladdress: ['', Validators.compose([Validators.minLength(1), Validators.maxLength(100)])],
+      postaladdress: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(100)])],
       latitude: [null, Validators.required],
       longitude: [null, Validators.required],
       city: ['', Validators.required],
@@ -327,7 +328,7 @@ export class AddEditCustomerComponent implements OnInit {
 
           if (paymentarray.refname == "Yearly") {
             formdata.nextdue = new Date(date.setDate(date.getDate() + 365)).toISOString();
-          } else if (paymentarray.refname == "Half Yearly") {
+          } else if (paymentarray.refname == "Half yearly") {
             formdata.nextdue = new Date(date.setDate(date.getDate() + 183)).toISOString();
           } else if (paymentarray.refname == "Quarterly") {
             formdata.nextdue = new Date(date.setDate(date.getDate() + 90)).toISOString();
@@ -677,21 +678,27 @@ export class AddEditCustomerComponent implements OnInit {
     this.getOwnedFancyNos(this.customerObj.membershipid);
   }
   getOwnedFancyNos(id) {
-    this.fancynumberService.getList({
-      membershipid: parseInt(id)
-    }).subscribe(res => {
+    this.fancynumberService.getList({ membershipid: parseInt(id) }).subscribe(res => {
       const response = JSON.parse(res._body);
       if (response.status) {
         this.ownedNos = _.map(response.data, (o) => {
-          return {
-            label: o.fancyno,
-            value: o.fancyid
-          }
+          return { label: o.fancyno, value: o.fancyid }
         });
       } else {
         this.bootstrapAlertService.showError(response.message);
       }
+      this.getfancycode();
     });
+  }
+  getfancycode() {
+    let self = this;
+    let memcode: any;
+    memcode = _.find(this.ownedNos, function (item) {
+      if (item.label == self.customerObj.membershipcode) {
+        return item;
+      }
+    });
+    this.memCode = [memcode.value];
   }
   allocateFancyNos(param?, mid?) {
     let data = {

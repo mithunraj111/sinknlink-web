@@ -77,17 +77,17 @@
                     <label class="col-md-3 col-sm-6 col-form-label text-right">{{business.bizname}}; Membershipid:
                         {{ business.membershipid }}<br> Fancy Code: {{ business?.membershipcode }}</label>
                     <div class="col-md-9 col-sm-6">
-                        <ng-select [ngClass]="'ng-select'" [(ngModel)]="allocated[business.membershipid]"
+                        <ng-select [ngClass]="'ng-select'" [(ngModel)]="allocated"
                             (selected)="allocateFancyNos($event,business.membershipid)"
                             placeholder="Select Fancy Number" [options]="ownedNos"></ng-select>
                     </div>
                 </div>
-                <div *ngFor="let branch of business.branches" class="form-group row ">
+                <div *ngFor="let branch of business.branches; let i= index"  class="form-group row ">
                     <label class="col-md-3 col-sm-6 col-form-label text-right">{{branch.bizname}}; Membershipid:
                         {{branch.membershipid}}; Fancy Code: {{ branch?.membershipcode }}</label>
                     <div class="col-md-9 col-sm-6">
                         <ng-select [ngClass]="'ng-select'" (selected)="allocateFancyNos($event,branch.membershipid)"
-                            [(ngModel)]="allocated[branch.membershipid]" placeholder="Select Fancy Number"
+                            [(ngModel)]="branchallocated[i]" placeholder="Select Fancy Number"
                             [options]="ownedNos">
                         </ng-select>
                     </div>

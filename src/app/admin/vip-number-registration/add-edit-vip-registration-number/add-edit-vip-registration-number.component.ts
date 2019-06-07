@@ -9,6 +9,7 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { AppConstant } from 'src/app/app.constants';
 import { LookupService } from 'src/app/services/admin/lookup.service';
 import * as Lodash from 'lodash';
+import * as _ from 'lodash';
 import { CustomerService } from 'src/app/services/business';
 
 @Component({
@@ -29,7 +30,8 @@ export class AddEditVipRegistrationNumberComponent implements OnInit {
   bizId;
   business: any = {};
   ownedNos: any = [];
-  allocated: any = {};
+  allocated: any = [];
+  branchallocated:any = [] ;
   prefix;
 
   constructor(private bootstrapAlertService: BootstrapAlertService, private commonService: CommonService,
@@ -78,6 +80,7 @@ export class AddEditVipRegistrationNumberComponent implements OnInit {
       const response = JSON.parse(res._body);
       if (response.status) {
         this.business = response.data[0];
+        this.getfancycode();
       } else {
         this.bootstrapAlertService.showError(response.message);
       }
@@ -102,6 +105,12 @@ export class AddEditVipRegistrationNumberComponent implements OnInit {
       }
     });
   }
+  getfancycode() {
+    this.allocated = [this.business.fancyid];
+    for(let i=0; i<this.business.branches.length; i++) {
+      this.branchallocated[i] =[this.business.branches[i].fancyid];
+    }
+  }
 
   submit() {
     if (!this.editMode) {
@@ -115,7 +124,7 @@ export class AddEditVipRegistrationNumberComponent implements OnInit {
         data['createddt'] = new Date();
         data['startnumber'] = parseInt(data['startnumber']);
         data['endnumber'] = parseInt(data['endnumber']) || 0;
-        if ( (data['endnumber'] != '') && ((data['endnumber'] - data['startnumber']) < 0) )  {
+        if ((data['endnumber'] != '') && ((data['endnumber'] - data['startnumber']) < 0)) {
           this.creatingNumbers = false;
           this.bootstrapAlertService.showError('VIP Number range not valid');
         } else {

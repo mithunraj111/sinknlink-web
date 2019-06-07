@@ -170,7 +170,6 @@ textarea {
 }
 .form-control {
     &:focus {
-        border-color: $primary-color !important;
         box-shadow: none !important;
     }
 }
@@ -1658,7 +1657,9 @@ body[themebg-pattern="pattern1"]{
         margin-top:15% !important;
     }
 }
-
+.bg-c-blue.order-card {
+    background: linear-gradient(45deg, #004dff, #3371ff);
+}
 .bg-c-green {
     background: linear-gradient(45deg, #00A8B0, #18C5A9);
 }
@@ -1868,4 +1869,17 @@ input[type=number]::-webkit-outer-spin-button{
 }
 .p-events-none{
     pointer-events: none;
+}
+.search-group{
+    position: relative;
+    input {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    button {
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
 }

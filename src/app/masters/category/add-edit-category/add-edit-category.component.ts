@@ -65,7 +65,7 @@ export class AddEditCategoryComponent implements OnInit, OnChanges {
   }
   initForm() {
     this.categoryForm = this.fb.group({
-      categoryname: [null, Validators.compose([Validators.minLength(3), Validators.maxLength(50)])],
+      categoryname: [null, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])],
       categoryimg: [''],
       status: [''],
     });

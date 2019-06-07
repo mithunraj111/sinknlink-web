@@ -12,7 +12,7 @@
                         <bar-rating class="star-rating" [(rate)]="review.rating" [max]="5" [readOnly]="true">
                         </bar-rating>
                     </div>
-                    <p *ngIf="review.comments" style="line-height: 0;">{{review.comments}}</p>
+                    <p *ngIf="review.comments" class="m-t-5">{{review.comments}}</p>
                     <!-- <div class="m-b-25" *ngIf = "review.reply == null"> -->
                     <div *ngIf="review.reply==null && this.userstoragedata.roleid === 3" class="m-b-25">
                         <button (click)="toReply(review.reviewid)" class="btn btn-primary waves-effect text-uppercase py-1 px-2">
