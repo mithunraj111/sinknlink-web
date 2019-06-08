@@ -72,6 +72,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AdminService.FancyNumberService,
     AdminService.LookupService,
     AdminService.AdvertisementService,
+    AdminService.AppPlanService,
     BusinessService.CouponService,
     BusinessService.CustomerService,
     BusinessService.DealerService,

@@ -10,6 +10,7 @@ import { AppConstant } from 'src/app/app.constants';
 import { DatePipe } from '@angular/common';
 import { Buffer } from 'buffer';
 import downloadService from '../../services/download.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-customerdetail',
@@ -36,6 +37,7 @@ export class CustomerdetailComponent extends BaseService implements OnInit {
   customerdetailForm: FormGroup;
   businessList = [];
   constructor(private fb: FormBuilder,
+    private router: Router,
     private commonService: CommonService,
     private reportService: AppCommonService.ReportService,
     private lookupService: AdminService.LookupService,
@@ -204,6 +206,10 @@ export class CustomerdetailComponent extends BaseService implements OnInit {
         this.bizTypeLists = this.bizTypeLists.concat(response.data);
       }
     });
+  }
+  
+  viewBusiness(id){
+    this.router.navigate(['business/customers/edit/' + id]);
   }
 
   search(event?) {

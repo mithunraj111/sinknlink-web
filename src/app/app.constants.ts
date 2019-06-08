@@ -153,6 +153,13 @@ export const AppConstant = Object.freeze({
           EDIT: 'advertisement/edit/',
           GETBYID: 'advertisement/',
           DELETE: 'advertisement/delete/'
+        },
+        APPPLAN: {
+          CREATE: 'appplan/create',
+          LIST: 'appplan',
+          EDIT: 'appplan/edit/',
+          BYID: 'appplan/',
+          DELETE: 'appplan/delete/'
         }
       },
       COMMON: {
@@ -319,6 +326,7 @@ export const AppConstant = Object.freeze({
     DONATIONS: { emptyMessage: 'No donation data to display', totalMessage: 'total' },
     LOOKUP: { emptyMessage: 'No lookup data to display', totalMessage: 'total' },
     VIPNUMBER: { emptyMessage: 'No vip number registration data to display', totalMessage: 'total' },
+    APPPLAN: { emptyMessage: 'No plans to display', totalMessage: 'total' },
     AREA: { emptyMessage: 'No area report data to display', totalMessage: 'total' },
     CATEGORY: { emptyMessage: 'No category report data to display', totalMessage: 'total' },
     CUSTOMERREPORT: { emptyMessage: 'No customer report data to display', totalMessage: 'total' },

@@ -69,6 +69,32 @@ export const AppMessages = Object.freeze({
         maxlength: 'Please enter description within 500 characters'
       }
     },
+    PLAN: {
+      planname: {
+        required: 'Plan name is required',
+        maxLength: 'Please enter Event name within 50 characters'
+      },
+      planlevel: {
+        required: 'Plan level is required',
+        maxlength: 'Plan level should be within 11 characters'
+      },
+      cost: { required: 'Cost is required' },
+      taxpercent: {
+        required: 'Tax percent is required',
+        max: 'Tax percent should be less than 100%'
+      },
+      noofdays: {
+        required: 'No od days is required',
+        maxLength: 'Days should be within 11 characters',
+        pattern: 'Days should contain only numbers'
+      },
+      trialperiod: {
+        required: 'Trial period is required',
+        maxLength: 'Trial period should be within 11 characters',
+        pattern: 'Trial period should contain only numbers'
+      },
+      description: { maxLength: 'Description should be within 500 characters' }
+    },
     ADVERTISEMENT: {
       adname: {
         required: 'Advertisement name is required'
@@ -392,11 +418,11 @@ export const AppMessages = Object.freeze({
       totalamount: { required: 'Please enter amount', pattern: 'Payment should only contain numbers' },
       paymentmode: { required: 'Please select mode of payment' },
       paymentref: { required: 'Please enter payment reference' },
-      remarks: { maxlength: 'Remarks should be within 100 characters'},
+      remarks: { maxlength: 'Remarks should be within 100 characters' },
       donationamount: { minimum: 'Donation amount should be atleast 1 INR' }
     },
     REPLY: {
-      reply: { required: 'Please enter a reply', maxlength: 'Reply should be within 100 Characters'}
+      reply: { required: 'Please enter a reply', maxlength: 'Reply should be within 100 Characters' }
     },
     FILEUPLOAD: 'You are only allowed to upload a maximum of 5 images and 1 video'
   },

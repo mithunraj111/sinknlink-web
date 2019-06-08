@@ -12,6 +12,8 @@ import { NgxPermissionsGuard } from 'ngx-permissions';
 import { AuthGuard } from '../services/auth.guard';
 import { AdvertisementComponent } from './advertisement/advertisement.component';
 import { AddEditAdvertisementComponent } from './advertisement/add-edit-advertisement/add-edit-advertisement.component';
+import { AppPlanComponent } from './app-plan/app-plan.component'
+import { AddEditAppPlanComponent } from './app-plan/add-edit-app-plan/add-edit-app-plan.component';
 
 const routes: Routes = [
   {
@@ -212,6 +214,45 @@ const routes: Routes = [
             redirectTo: '/accessdenied'
           }
         },
+      },
+      {
+        path: 'appplan',
+        component: AppPlanComponent,
+        canActivate: [AuthGuard, NgxPermissionsGuard],
+        data: {
+          title: 'App Plan',
+          status: false,
+          permissions: {
+            only: ['App Plan'],
+            redirectTo: '/accessdenied'
+          }
+        }
+      },
+      {
+        path: 'appplan/create',
+        component: AddEditAppPlanComponent,
+        canActivate: [NgxPermissionsGuard],
+        data: {
+          title: 'Add Plan',
+          status: false,
+          permissions: {
+            only: ['App PlanCreate'],
+            redirectTo: '/accessdenied'
+          }
+        }
+      },
+      {
+        path: 'appplan/edit/:id',
+        component: AddEditAppPlanComponent,
+        canActivate: [NgxPermissionsGuard],
+        data: {
+          title: 'Edit Plan',
+          status: false,
+          permissions: {
+            only: ['App PlanEdit'],
+            redirectTo: '/accessdenied'
+          }
+        }
       }
     ],
   }

@@ -1,0 +1,98 @@
+<div *ngIf="!loadingIndicator">
+  <div *ngIf="tempFilter.length!=0" class="header-block">
+    <div class="fixedheader m-b-15">
+      <div class="header-title">
+        <div class="row">
+          <div class="col-md-6 col-sm-6">
+            <input #appplanSearch type="text"  placeholder="Search here"
+              class="col-md-5 col-sm-5 header-search form-control input-sm full-data-search"
+              (keyup)='search($event)' placement="bottom" ngbTooltip="Type here to search">
+            <button type="button" class="btn search-close col-md-1 col-sm-1 p-l-0 p-r-0"
+              (click)="appplanSearch.value='';search();"><i class="fa fa-close"></i></button>
+          </div>
+          <div class="col-md-6 col-sm-6 p-r-10 text-right">
+            <button type="button" placement="bottom" ngbTooltip="Click to add event"
+              class="add-btn btn btn-primary waves-effect m-r-10" (click)='addAppPlan()'><i
+                class="fa fa-plus-circle m-r-5"></i> New</button>
+            <button type="button" placement="bottom" ngbTooltip="Reload" (click)="getAppPlan()"
+              class="btn btn-inverse btn-primary waves-effect"><i class="ti-reload"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="table-header fixed-table">
+      <div class="card p-r-15 p-l-15">
+        <ngx-datatable #appplantable class="table data-table expandable" [rows]='appplanList' [columnMode]="'flex'"
+          [headerHeight]="50" [footerHeight]="50" [limit]="10" [rowHeight]="'auto'" [reorderable]="false"
+          [messages]="emptymessages">
+          <ngx-datatable-column prop="planlevel" name="Plan Level" [resizeable]="false">
+            <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+              <span>{{row.planlevel}}</span>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column prop="planname" name="Plan Name" [resizeable]="false">
+            <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+              <span>{{row.planname}}</span>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column prop="cost" name="Cost" [resizeable]="false" headerClass="text-right"
+            [cellClass]="'text-right'">
+            <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+              <span>{{row.cost | currency : 'INR' : symbol}}</span>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column prop="taxpercent" name="Tax (%)" [resizeable]="false">
+            <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+              <span>{{row.taxpercent}}</span>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column prop="noofdays" name="Days" [resizeable]="false">
+              <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                <span>{{row.noofdays}}</span>
+              </ng-template>
+            </ngx-datatable-column>
+          <ngx-datatable-column prop="trialperiod" name="Trial Period" [resizeable]="false">
+            <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+              <span>{{row.trialperiod}}</span>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column prop="updatedby" name="Updated By" [resizeable]="false">
+            <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+              <span class="updatename">{{row.updatedby}}</span>
+              <span class="updatedate"> {{row.updateddt|date:displaydtimeformat}}</span>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Status" [sortable]="false" [flexGrow]="0.5" [resizeable]="false"
+            headerClass="text-center" [cellClass]="'text-center status'" [resizeable]="false">
+            <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+              <ui-switch (change)="updateAppPlan(row,rowIndex,false)" class="js-small" placement="bottom"
+                ngbTooltip="Click to change status" [color]="$primary-color" switchColor="#fff" size="small"
+                [checked]="row.status == 'Active'"></ui-switch>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.5" [resizeable]="false"
+            headerClass="text-center" [cellClass]="'text-center action'" [resizeable]="false">
+            <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+              <a placement="bottom" ngbTooltip="Click to edit plan details" class="m-r-15 crm-action-edit text-primary"
+                (click)='editAppPlan(row.planid)'>
+                <i class="fa fa-pencil"></i></a>
+              <a placement="bottom" (click)="updateAppPlan(row,rowIndex,true)" ngbTooltip="Click to delete plan"
+                class="crm-action-delete text-danger">
+                <i class="fa fa-trash"></i></a>
+            </ng-template>
+          </ngx-datatable-column>
+        </ngx-datatable>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="tempFilter.length == 0" class="text-center no-data">
+    <div class="nodata-text nodata-image">
+      <img class="hand-icon" src="assets/images/no-data.png">
+      <h3>No App Plan(s) Found</h3>
+      <button *ngIf="add" type="button" placement="bottom" ngbTooltip="Click to add App Plan"
+        class="add-btn btn btn-primary waves-effect" (click)='addAppPlan()'><i class="fa fa-plus-circle m-r-5"></i>Create
+        App Plan</button>
+    </div>
+  </div>
+</div>
+<app-loader [loadingIndicator]="loadingIndicator"></app-loader>

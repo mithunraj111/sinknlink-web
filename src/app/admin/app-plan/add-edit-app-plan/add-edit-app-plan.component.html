@@ -1,0 +1,80 @@
+<div class="addeditpage">
+  <div class="fixedheader">
+    <div class="header-title m-b-15 pos-fixed">
+      <div class="row">
+        <div class="offset-md-6 col-md-3 col-sm-6 save-button text-right p-r-30">
+          <button type="button" placement="bottom" [disabled]="savingEvent" ngbTooltip="Click to save plan"
+            class="btn btn-primary waves-effect m-r-10 text-capitalize"
+            (click)="addAppPlan()">{{savingAppPlan == true ? 'Saving..':'Save'}}
+          </button>
+          <button type="button" placement="bottom" ngbTooltip="Go back" routerLink="/admin/appplan"
+            class="btn btn-inverse btn-primary waves-effect"><i class="fa fa-arrow-circle-left"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-9 col-sm-9">
+    <div class="row">
+      <div class="col-md-12 col-sm-8 p-l-0">
+        <form class="employee-form" [formGroup]="appPlanForm">
+          <div class="card tenants-page tenants-pages m-b-10 m-t-15">
+            <div class="col-md-12 col-sm-12 p-t-10">
+              <div class="form-group row required">
+                <label class="col-md-3 col-sm-6 col-form-label text-right">Plan Name</label>
+                <div class="col-md-9 col-sm-6">
+                  <input formControlName="planname" type="text" class="form-control" placeholder="Plan Name">
+                </div>
+              </div>
+              <div class="form-group row required">
+                <label class="col-md-3 col-sm-6 col-form-label text-right">Plan level</label>
+                <div class="col-md-9 col-sm-6">
+                  <input formControlName="planlevel" type="text" class="form-control" placeholder="Plan Level">
+                </div>
+              </div>
+              <div class="form-group row required">
+                <label class="col-md-3 col-sm-6 col-form-label text-right">Cost</label>
+                <div class="col-md-9 col-sm-6">
+                  <input formControlName="cost" type="text" class="form-control" placeholder="Cost">
+                </div>
+              </div>
+              <div class="form-group row required">
+                <label class="col-md-3 col-sm-6 col-form-label text-right">Tax Percent</label>
+                <div class="col-md-9 col-sm-6">
+                  <input formControlName="taxpercent" type="text" class="form-control" placeholder="Tax percent">
+                </div>
+              </div>
+              <div class="form-group row required">
+                <label class="col-md-3 col-sm-6 col-form-label text-right">Days</label>
+                <div class="col-md-9 col-sm-6">
+                  <input formControlName="noofdays" type="text" class="form-control" placeholder="Days">
+                </div>
+              </div>
+              <div class="form-group row required">
+                <label class="col-md-3 col-sm-6 col-form-label text-right">Trial Period</label>
+                <div class="col-md-9 col-sm-6">
+                  <input formControlName="trialperiod" type="text" class="form-control" placeholder="Trial Period">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 col-sm-6 col-form-label text-right">Description</label>
+                <div class="col-md-9 col-sm-6">
+                  <textarea rows="3" cols="3" class="form-control" formControlName="description"
+                    placeholder="Description"></textarea>
+                </div>
+              </div>
+              <div *ngIf="planid">
+                <div class="row required">
+                  <label class="col-md-3 col-sm-6 col-form-label text-right">Status</label>
+                  <div class="col-md-9 col-sm-6">
+                    <ui-switch class="js-small" [color]="$primary-color" formControlName="status" switchColor="#fff"
+                      size="small"></ui-switch>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

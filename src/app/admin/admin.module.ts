@@ -19,6 +19,8 @@ import { SelectModule } from 'ng-select';
 import { AddEditLookupComponent } from './lookup/add-edit-lookup/add-edit-lookup.component';
 import { AdvertisementComponent } from './advertisement/advertisement.component';
 import { AddEditAdvertisementComponent } from './advertisement/add-edit-advertisement/add-edit-advertisement.component';
+import { AppPlanComponent } from './app-plan/app-plan.component';
+import { AddEditAppPlanComponent } from './app-plan/add-edit-app-plan/add-edit-app-plan.component';
 
 @NgModule({
   imports: [
@@ -43,6 +45,8 @@ import { AddEditAdvertisementComponent } from './advertisement/add-edit-advertis
     LookupComponent,
     AddEditLookupComponent,
     AdvertisementComponent,
-    AddEditAdvertisementComponent]
+    AddEditAdvertisementComponent,
+    AppPlanComponent,
+    AddEditAppPlanComponent]
 })
 export class AdminModule { }

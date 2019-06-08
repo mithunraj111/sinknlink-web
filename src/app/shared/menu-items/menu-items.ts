@@ -200,6 +200,14 @@ export class MenuItems extends BaseService {
             data: {
               title: 'Advertisement'
             }
+          },
+          {
+            state: 'appplan',
+            name: 'App Plan',
+            code: 'a_appplan',
+            data: {
+              title: 'App Plan'
+            }
           }
         ]
       },
