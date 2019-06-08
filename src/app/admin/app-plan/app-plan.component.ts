@@ -29,6 +29,7 @@ import { Router } from '@angular/router';
   loadingIndicator = true;
   tempFilter = [];
   emptymessages = AppConstant.EMPTY_MESSAGES.APPPLAN;
+  displaydtimeformat= AppConstant.API_CONFIG.ANG_DATE.displaydtime;
 
   ngOnInit() {
     this.getAppPlan();
@@ -41,7 +42,6 @@ import { Router } from '@angular/router';
         this.loadingIndicator = false;
         this.appplanList = response.data;
         this.tempFilter = this.appplanList;
-        console.log(this.appplanList);
       } else {
         this.bootstrapAlertService.showError(response.message);
       }

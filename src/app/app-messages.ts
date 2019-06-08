@@ -76,15 +76,21 @@ export const AppMessages = Object.freeze({
       },
       planlevel: {
         required: 'Plan level is required',
-        maxlength: 'Plan level should be within 11 characters'
+        maxlength: 'Plan level should be within 11 characters',
+        pattern: 'Plan level should contain only numbers'
       },
-      cost: { required: 'Cost is required' },
+      cost: { 
+        required: 'Cost is required',
+        pattern: 'Cost should contain only numbers',
+        min: 'Cost should not be less than zero'
+      },
       taxpercent: {
         required: 'Tax percent is required',
-        max: 'Tax percent should be less than 100%'
+        max: 'Tax percent should be less than 100%',
+        pattern: 'Tax percent should contain only numbers'
       },
       noofdays: {
-        required: 'No od days is required',
+        required: 'Days is required',
         maxLength: 'Days should be within 11 characters',
         pattern: 'Days should contain only numbers'
       },

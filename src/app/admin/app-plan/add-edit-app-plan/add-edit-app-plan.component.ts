@@ -48,12 +48,12 @@ export class AddEditAppPlanComponent implements OnInit {
   initForm() {
     this.appPlanForm = this.fb.group({
       planname: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
-      planlevel: [null, Validators.compose([Validators.required])],
-      cost: [null, Validators.compose([Validators.required])],
-      taxpercent: [null, Validators.compose([Validators.required, Validators.max(100)])],
+      planlevel: [null, Validators.compose([Validators.required, Validators.pattern('^[0-9]*$')])],
+      cost: [null, Validators.compose([Validators.required, Validators.min(0), Validators.pattern('^[0-9]*$')])],
+      taxpercent: [null, Validators.compose([Validators.required, Validators.max(100), Validators.pattern('^[0-9]*$')])],
       noofdays: [null, Validators.compose([Validators.required, Validators.maxLength(11), Validators.pattern('^[0-9]*$')])],
       trialperiod: [0, Validators.compose([Validators.required, Validators.maxLength(11), Validators.pattern('^[0-9]*$')])],
-      description: ['', Validators.maxLength(500)],
+      description: [''],
       status: [true],
     });
   }
@@ -88,6 +88,7 @@ export class AddEditAppPlanComponent implements OnInit {
       return false;
     }
     const data = this.appPlanForm.value;
+    data.planlevel = Number(data.planlevel);
     data.cost = Number(data.cost);
     data.taxpercent = Number(data.taxpercent);
     data.noofdays = Number(data.noofdays);

@@ -4,9 +4,9 @@
       <div class="header-title">
         <div class="row">
           <div class="col-md-6 col-sm-6">
-            <input #appplanSearch type="text"  placeholder="Search here"
-              class="col-md-5 col-sm-5 header-search form-control input-sm full-data-search"
-              (keyup)='search($event)' placement="bottom" ngbTooltip="Type here to search">
+            <input #appplanSearch type="text" placeholder="Search here"
+              class="col-md-5 col-sm-5 header-search form-control input-sm full-data-search" (keyup)='search($event)'
+              placement="bottom" ngbTooltip="Type here to search">
             <button type="button" class="btn search-close col-md-1 col-sm-1 p-l-0 p-r-0"
               (click)="appplanSearch.value='';search();"><i class="fa fa-close"></i></button>
           </div>
@@ -25,14 +25,16 @@
         <ngx-datatable #appplantable class="table data-table expandable" [rows]='appplanList' [columnMode]="'flex'"
           [headerHeight]="50" [footerHeight]="50" [limit]="10" [rowHeight]="'auto'" [reorderable]="false"
           [messages]="emptymessages">
-          <ngx-datatable-column prop="planlevel" name="Plan Level" [resizeable]="false">
-            <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-              <span>{{row.planlevel}}</span>
-            </ng-template>
-          </ngx-datatable-column>
+
           <ngx-datatable-column prop="planname" name="Plan Name" [resizeable]="false">
             <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
               <span>{{row.planname}}</span>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column prop="planlevel" name="Plan Level" [resizeable]="false" headerClass="text-right"
+            [cellClass]="'text-right'">
+            <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+              <span>{{row.planlevel}}</span>
             </ng-template>
           </ngx-datatable-column>
           <ngx-datatable-column prop="cost" name="Cost" [resizeable]="false" headerClass="text-right"
@@ -41,17 +43,20 @@
               <span>{{row.cost | currency : 'INR' : symbol}}</span>
             </ng-template>
           </ngx-datatable-column>
-          <ngx-datatable-column prop="taxpercent" name="Tax (%)" [resizeable]="false">
+          <ngx-datatable-column prop="taxpercent" name="Tax (%)" [resizeable]="false" headerClass="text-right"
+            [cellClass]="'text-right'">
             <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
               <span>{{row.taxpercent}}</span>
             </ng-template>
           </ngx-datatable-column>
-          <ngx-datatable-column prop="noofdays" name="Days" [resizeable]="false">
-              <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                <span>{{row.noofdays}}</span>
-              </ng-template>
-            </ngx-datatable-column>
-          <ngx-datatable-column prop="trialperiod" name="Trial Period" [resizeable]="false">
+          <ngx-datatable-column prop="noofdays" name="Days" [resizeable]="false" headerClass="text-right"
+            [cellClass]="'text-right'">
+            <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+              <span>{{row.noofdays}}</span>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column prop="trialperiod" name="Trial Period" [resizeable]="false" headerClass="text-right"
+            [cellClass]="'text-right'">
             <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
               <span>{{row.trialperiod}}</span>
             </ng-template>
@@ -90,7 +95,8 @@
       <img class="hand-icon" src="assets/images/no-data.png">
       <h3>No App Plan(s) Found</h3>
       <button *ngIf="add" type="button" placement="bottom" ngbTooltip="Click to add App Plan"
-        class="add-btn btn btn-primary waves-effect" (click)='addAppPlan()'><i class="fa fa-plus-circle m-r-5"></i>Create
+        class="add-btn btn btn-primary waves-effect" (click)='addAppPlan()'><i
+          class="fa fa-plus-circle m-r-5"></i>Create
         App Plan</button>
     </div>
   </div>
