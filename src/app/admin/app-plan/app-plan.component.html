@@ -43,19 +43,19 @@
               <span>{{row.cost | currency : 'INR' : symbol}}</span>
             </ng-template>
           </ngx-datatable-column>
-          <ngx-datatable-column prop="taxpercent" name="Tax (%)" [resizeable]="false" headerClass="text-right"
+          <ngx-datatable-column prop="taxpercentage" name="Tax (%)" [resizeable]="false" headerClass="text-right"
             [cellClass]="'text-right'">
             <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
               <span>{{row.taxpercent}}</span>
             </ng-template>
           </ngx-datatable-column>
-          <ngx-datatable-column prop="noofdays" name="Days" [resizeable]="false" headerClass="text-right"
+          <ngx-datatable-column prop="noofdays" name="No. of Days" [resizeable]="false" headerClass="text-right"
             [cellClass]="'text-right'">
             <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
               <span>{{row.noofdays}}</span>
             </ng-template>
           </ngx-datatable-column>
-          <ngx-datatable-column prop="trialperiod" name="Trial Period" [resizeable]="false" headerClass="text-right"
+          <ngx-datatable-column prop="trialperiod" name="Trial Period (Days)" [resizeable]="false" headerClass="text-right"
             [cellClass]="'text-right'">
             <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
               <span>{{row.trialperiod}}</span>

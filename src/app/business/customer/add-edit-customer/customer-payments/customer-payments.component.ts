@@ -20,8 +20,10 @@ declare var Razorpay: any;
 })
 export class CustomerPaymentsComponent implements OnInit, OnChanges {
   subscriptionPlan;
+  appplanList = [];
   noDonation = true;
   preferredAmountList = [] as any;
+  selectedPlanName;
   payHistoryList = [];
   tempFilter = [];
   @ViewChild(DatatableComponent) table: DatatableComponent;
@@ -57,6 +59,7 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
     private commonService: CommonService,
     private fb: FormBuilder,
     private donationService: AdminService.DonationService,
+    private appPlanService: AdminService.AppPlanService,
     private bootstrapAlertService: BootstrapAlertService,
     private localStorageService: LocalStorageService,
     private razarpayService: RazarpayService) {
@@ -71,13 +74,15 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
   initPaymentForm() {
     this.addPaymentForm = this.fb.group({
       paymentdt: [this.commonService.getCurrentDate('Y'), Validators.required],
-      amount: [0],
-      donation: [0],
-      totalamount: [null, Validators.compose([Validators.required, Validators.pattern('^[0-9]*$')])],
+      appplan: [''],
+      amount: [0, Validators.compose([Validators.required, Validators.pattern('^[0-9.]*$')])],
+      tax: [0, Validators.compose([Validators.required, Validators.pattern('^[0-9.]*$')])],
+      totalamount: [null, Validators.compose([Validators.required, Validators.pattern('^[0-9.]*$')])],
       paymentref: ['', Validators.required],
       paymentmode: ['', Validators.required],
       remarks: ['', Validators.maxLength(100)]
     });
+    this.getAppPlan();
   }
   ngOnChanges(changes: SimpleChanges) {
     this.customerObj = changes.customerObj.currentValue;
@@ -91,6 +96,29 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
     if (this.donationList[0].selected == true) {
       this.totalamount = Number(this.selectedplanamt) + Number(this.donationList[0].selectedAmt);
     }
+  }
+  getAppPlan() {
+    this.appPlanService.list({}).subscribe(res => {
+      const response = JSON.parse(res._body);
+      if (response.status) {
+        this.loadingIndicator = false;
+        if (response.data.length > 0) {
+          response.data.map(item => {
+            item.value = item.planid;
+            item.label = item.planname;
+          });
+        }
+        this.appplanList = response.data;
+        this.tempFilter = this.appplanList;
+      } else {
+        this.bootstrapAlertService.showError(response.message);
+      }
+    });
+  }
+  selectedPlan(Option) {
+    this.addPaymentForm.controls['amount'].setValue(Option.cost);
+    this.addPaymentForm.controls['tax'].setValue(Option.taxpercent);
+    this.addPaymentForm.controls['totalamount'].setValue((Number(Option.cost) + Number((Option.taxpercent * Option.cost)/100)));
   }
   onlinePay() {
     if (this.donationList[0].selectedAmt < 0) {
@@ -185,7 +213,6 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
     this.initPaymentForm();
     this.newPayment = true;
     this.viewPayment = false;
-    // this.addPaymentForm.controls["paymentmode"].enable(); 
     this.openModal('customerpaymentmodal');
   }
   viewDonationCause(data) {
@@ -219,7 +246,7 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
           return item;
         }
       });
-      
+
       const date = new Date(this.lastpaid);
       this.subscriptionPlan = self.paymentarray == undefined ? 0 : self.paymentarray.refvalue;
       this.selectedplanamt = this.subscriptionPlan;
@@ -242,12 +269,16 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
     this.collectpayment = true;
     const data = {
       paymentdate: this.commonService.formatDate(formData.paymentdt),
-      totalamount: Number(formData.totalamount),
+      planid: formData.appplan,
+      amount: Number(formData.amount),
+      taxes: Number(formData.tax),
+      totalamount: formData.totalamount,
       membershipid: this.customerObj.membershipid,
       paymentmode: formData.paymentmode,
       paymentref: formData.paymentref,
       paymenttype: AppConstant.PAYMENT_TYPES[1],
       paymentstatus: AppConstant.STATUS_SUCCESS,
+      state: this.customerObj.location.state,
       remarks: formData.remarks,
       updateddt: new Date(),
       updatedby: this.userstoragedata.fullname
