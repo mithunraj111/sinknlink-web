@@ -7,6 +7,7 @@ import { AppConstant } from 'src/app/app.constants';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Buffer } from 'buffer';
 import { DatePipe } from '@angular/common';
+import { Router } from '@angular/router';
 import downloadService from '../../services/download.service';
 
 @Component({
@@ -40,7 +41,8 @@ export class SubscriptionComponent extends BaseService implements OnInit {
         private lookupService: AdminService.LookupService,
         private locationService: MasterService.LocationService,
         private commonService: CommonService,
-        private reportService: AppCommonService.ReportService
+        private router: Router,
+        private reportService: AppCommonService.ReportService,
     ) {
         super();
         this.getScreenDetails('r_subscription');
@@ -57,6 +59,9 @@ export class SubscriptionComponent extends BaseService implements OnInit {
           area: [''],
           status: ['']
         });
+      }
+      gotoBusiness(id){
+        this.router.navigate(['business/customers/edit/' +id]);
       }
     getReports(download?) {
       const data = this.subscriptionForm.value;

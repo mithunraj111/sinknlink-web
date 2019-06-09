@@ -125,7 +125,8 @@
 
                                 <ngx-datatable-column prop="bizname" name="Name" [resizeable]="false">
                                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                                        <span>{{row.bizname}}</span>
+                                        <a (click)="viewBusiness(row.membershipid)"
+                                            style="text-decoration:underline;cursor:pointer;">{{row.bizname}}</a>
                                     </ng-template>
                                 </ngx-datatable-column>
                                 <ngx-datatable-column prop="contactmobile" name="Mobile Number" [resizeable]="false"
@@ -179,16 +180,6 @@
                                     headerClass="text-right" [cellClass]="'text-right'">
                                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                                         <span>{{row.coupons.length}}</span>
-                                    </ng-template>
-                                </ngx-datatable-column>
-                                <ngx-datatable-column name="Action" [sortable]="false" [flexGrow]="0.5"
-                                    [resizeable]="false" headerClass="text-center" [cellClass]="'text-center action'"
-                                    [resizeable]="false">
-                                    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                                        <a placement="bottom" ngbTooltip="Click to edit plan details"
-                                            class="m-r-15 crm-action-edit text-primary"
-                                            (click)="viewBusiness(row.membershipid)">
-                                            <i class="fa fa-eye"></i></a>
                                     </ng-template>
                                 </ngx-datatable-column>
                             </ngx-datatable>

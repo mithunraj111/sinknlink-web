@@ -10,6 +10,7 @@ import { AppMessages } from '../../app-messages';
 import { Buffer } from 'buffer';
 import { DatePipe } from '@angular/common';
 import downloadService from '../../services/download.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-dealer',
   templateUrl: './dealer.component.html',
@@ -39,6 +40,7 @@ export class DealerComponent extends BaseService implements OnInit {
     private bootstrapAlertService: BootstrapAlertService,
     private locationService: MasterService.LocationService,
     private lookupService: AdminService.LookupService,
+    private router: Router,
     private reportService: AppCommonService.ReportService
   ) {
     super();
@@ -61,6 +63,9 @@ export class DealerComponent extends BaseService implements OnInit {
       area: ['']
     });
 
+  }
+  gotoDealer(id) {
+    this.router.navigate(['business/dealer/edit/' +id]);
   }
   getDealerReport(download?) {
 

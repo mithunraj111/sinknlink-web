@@ -77,7 +77,8 @@
 
                                 <ngx-datatable-column prop="bizname" name="Business Name" [resizeable]="false">
                                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                                        <span>{{row.bizname}}</span>
+                                        <a (click)="gotoBusiness(row?.membershipid)"
+                                            style="text-decoration:underline;cursor:pointer;">{{row.bizname}}</a>
                                     </ng-template>
                                 </ngx-datatable-column>
                                 <ngx-datatable-column prop="paymenttenure" name="Payment Tenure" [resizeable]="false">
@@ -103,9 +104,12 @@
                                 <ngx-datatable-column prop="status" name="Status" [resizeable]="false"
                                     headerClass="bizs-type">
                                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                                        <label *ngIf="row.status === 'Overdue'" class="label label-danger">{{row.status}}</label>
-                                        <label *ngIf="row.status === 'Today'" class="label label-warning">{{row.status}}</label>
-                                        <label *ngIf="row.status === 'Upcoming'" class="label label-success">{{row.status}}</label>
+                                        <label *ngIf="row.status === 'Overdue'"
+                                            class="label label-danger">{{row.status}}</label>
+                                        <label *ngIf="row.status === 'Today'"
+                                            class="label label-warning">{{row.status}}</label>
+                                        <label *ngIf="row.status === 'Upcoming'"
+                                            class="label label-success">{{row.status}}</label>
                                     </ng-template>
                                 </ngx-datatable-column>
 
