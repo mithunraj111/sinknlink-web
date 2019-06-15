@@ -217,7 +217,8 @@
                                                         <div class="col-md-9 col-sm-6">
                                                             <div class="input-box">
                                                                 <ng-select [allowClear]="true" [ngClass]="'ng-select'"
-                                                                    [options]="locationList" (selected)="selectLocation($event)"
+                                                                    [options]="locationList"
+                                                                    (selected)="selectLocation($event)"
                                                                     formControlName="locationid"
                                                                     placeholder="Select Location">
                                                                 </ng-select>
@@ -294,11 +295,27 @@
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
+                                                        <label
+                                                            class="col-md-3 col-sm-6 col-form-label text-right">Online
+                                                            presence</label>
+                                                        <div class="col-md-9 col-sm-6">
+                                                            <div class="input-group">
+                                                                <input type="text" class="form-control w-75"
+                                                                    placeholder="Online presence" readonly
+                                                                    style="height: 38px;">
+                                                                <div class="input-group-append bg-default"
+                                                                    (click)='addOnlinePresence();'>
+                                                                    <span class="fa fa-plus input-group-text"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Tax
                                                             number</label>
                                                         <div class="col-md-9 col-sm-6">
                                                             <input type="text" class="form-control"
-                                                                placeholder="Tax number" formControlName="taxno">
+                                                                placeholder="Pan / GST number" formControlName="taxno">
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
@@ -346,9 +363,9 @@
                                                                 Date</label>
                                                             <div class="col-md-9 col-sm-6">
                                                                 <div class="input-group">
-                                                                    <input class="form-control p-events-none" placeholder="dd-mm-yyyy"
-                                                                        name="regdt" ngbDatepicker
-                                                                        #regdt="ngbDatepicker"
+                                                                    <input class="form-control p-events-none"
+                                                                        placeholder="dd-mm-yyyy" name="regdt"
+                                                                        ngbDatepicker #regdt="ngbDatepicker"
                                                                         formControlName="regdate">
                                                                     <div class="input-group-append bg-default"
                                                                         (click)="regdt.toggle()">
@@ -412,14 +429,16 @@
                             </div>
                         </ng-template>
                     </ngb-tab>
-                    <ngb-tab title="Branches" id='3' [disabled]="isAddForm || (!isActive && userstoragedata.roleid === 3)" *ngIf="!branchFlag">
+                    <ngb-tab title="Branches" id='3'
+                        [disabled]="isAddForm || (!isActive && userstoragedata.roleid === 3)" *ngIf="!branchFlag">
                         <ng-template ngbTabContent>
                             <div [@fadeInOutTranslate]>
                                 <app-customer-branches [customerObj]="customerObj"></app-customer-branches>
                             </div>
                         </ng-template>
                     </ngb-tab>
-                    <ngb-tab title="Settings" id='4' [disabled]="isAddForm || (!isActive && userstoragedata.roleid === 3)">
+                    <ngb-tab title="Settings" id='4'
+                        [disabled]="isAddForm || (!isActive && userstoragedata.roleid === 3)">
                         <ng-template ngbTabContent>
                             <div [@fadeInOutTranslate]>
                                 <app-customer-settings [customerObj]="customerObj"></app-customer-settings>
@@ -433,28 +452,32 @@
                             </div>
                         </ng-template>
                     </ngb-tab>
-                    <ngb-tab title="Coupons" id='6' [disabled]="isAddForm || (!isActive && userstoragedata.roleid === 3)">
+                    <ngb-tab title="Coupons" id='6'
+                        [disabled]="isAddForm || (!isActive && userstoragedata.roleid === 3)">
                         <ng-template ngbTabContent>
                             <div [@fadeInOutTranslate]>
                                 <app-customer-coupons [customerObj]="customerObj"></app-customer-coupons>
                             </div>
                         </ng-template>
                     </ngb-tab>
-                    <ngb-tab title="Gallery" id='7' [disabled]="isAddForm || (!isActive && userstoragedata.roleid === 3)">
+                    <ngb-tab title="Gallery" id='7'
+                        [disabled]="isAddForm || (!isActive && userstoragedata.roleid === 3)">
                         <ng-template ngbTabContent>
                             <div [@fadeInOutTranslate]>
                                 <app-customer-gallery [customerObj]="customerObj"></app-customer-gallery>
                             </div>
                         </ng-template>
                     </ngb-tab>
-                    <ngb-tab title="Reviews" id='8' [disabled]="isAddForm || (!isActive && userstoragedata.roleid === 3)">
+                    <ngb-tab title="Reviews" id='8'
+                        [disabled]="isAddForm || (!isActive && userstoragedata.roleid === 3)">
                         <ng-template ngbTabContent>
                             <div [@fadeInOutTranslate]>
                                 <app-customer-reviews [customerObj]="customerObj"></app-customer-reviews>
                             </div>
                         </ng-template>
                     </ngb-tab>
-                    <ngb-tab title="Followers" id='9' [disabled]="isAddForm || (!isActive && userstoragedata.roleid === 3)">
+                    <ngb-tab title="Followers" id='9'
+                        [disabled]="isAddForm || (!isActive && userstoragedata.roleid === 3)">
                         <ng-template ngbTabContent>
                             <div [@fadeInOutTranslate]>
                                 <app-customer-followers [customerObj]="customerObj"></app-customer-followers>
@@ -514,6 +537,31 @@
     </app-modal-animation>
 </div>
 <!-- SOCIAL ID POPUP Ends -->
+
+<!-- SOCIAL ID POPUP Starts -->
+<div class="modal-size select-input addlocation">
+    <app-modal-animation [modalID]="'onlinepresencemodal'" [modalClass]="'md-effect-7'">
+        <h3 class="f-26">Online presence</h3>
+        <form class="form-header py-2">
+            <div class="col-md-12">
+                <div *ngFor="let list of onlinePresenceList; let i= index" class="input-group row">
+                    <label class="col-md-2 m-auto" for={{list.refname}}>
+                        <img src={{list.refvalue}}
+                            alt="logo" style="width: 50px">
+                    </label>
+                    <input type="text" class="form-control col-md-10 m-auto" [(ngModel)]="presence[i+'1']"
+                    name={{list.refname}} placeholder="Enter your URL">
+                </div>
+            </div>
+            <button (click)="updateonlinepresence()" type="button" placement="bottom"
+                ngbTooltip="Click to save Social IDs "
+                class="btn pull-right btn-primary waves-effect m-b-10 mr-4">Save</button>
+        </form>
+        <button (click)="closeModal('onlinepresencemodal')" aria-label="Close" class="md-close-btn"><i
+                class="fa fa-close"></i></button>
+    </app-modal-animation>
+</div>
+<!-- ONLINE PRESENCEPOPUP Ends -->
 
 <!-- MEMBERSHIP CODE POP UP STARTS-->
 <div class="modal-size select-input addlocation">

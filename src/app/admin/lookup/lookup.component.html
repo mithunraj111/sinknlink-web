@@ -1,5 +1,5 @@
 <div *ngIf="!loadingIndicator">
-    <div *ngIf="tempFilter.length!=0" class="header-block">
+    <div class="header-block">
         <div class="fixedheader m-b-15">
             <div class="header-title">
                 <div class="row">
@@ -28,7 +28,7 @@
                 </div>
             </div>
         </div>
-        <div class="table-header fixed-table">
+        <div *ngIf="tempFilter.length!=0" class="table-header fixed-table">
             <div class="card p-r-15 p-l-15">
                 <ngx-datatable #lookuptable class="table data-table expandable" [rows]='lookupList' [columnMode]="'flex'" [headerHeight]="50" [rowHeight]="'auto'" [reorderable]="false" [footerHeight]="50" [limit]="10" [messages]="emptymessages">
                     <ngx-datatable-column prop="refname" name="Name" [resizeable]="false">

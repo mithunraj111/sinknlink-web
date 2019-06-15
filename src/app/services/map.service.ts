@@ -4,9 +4,9 @@ interface Scripts {
   name: string,
   src: string
 }
-
+let key = 'AIzaSyCaxVRYDsb0PjWm1vnE6NvTyXviTg9cR1M';
 export const Scriptsrc: Scripts[] = [
-  { name: 'googlemaps', src: 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCaQsiZMQNrflWt7RIVF6CV_QTru_DNSeo&libraries=places' }
+  { name: 'googlemaps', src: 'https://maps.googleapis.com/maps/api/js?key='+key+'&libraries=places' }
 ]
 declare var document: any;
 

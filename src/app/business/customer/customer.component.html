@@ -41,9 +41,9 @@
                             <span class="updatedate"> {{row.location?.pincode}}</span>
                         </ng-template>
                     </ngx-datatable-column>
-                    <ngx-datatable-column prop="tenure.refname" name="Plan" [resizeable]="false">
+                    <ngx-datatable-column prop="tenure.planname" name="Plan" [resizeable]="false">
                         <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                            <span>{{row.tenure?.refname || '-'}}</span>
+                            <span>{{row.tenure?.planname || '-'}}</span>
                         </ng-template>
                     </ngx-datatable-column>
                     <ngx-datatable-column prop="nextdue" name="Next Due" [resizeable]="false">
