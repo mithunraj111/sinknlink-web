@@ -26,9 +26,9 @@
                             <span>{{row.mobileno}}</span>
                         </ng-template>
                     </ngx-datatable-column>
-                    <ngx-datatable-column prop="membershipid" name="Membership ID" [resizeable]="false">
+                    <ngx-datatable-column prop="business.membershipcode" name="Shop no." [resizeable]="false">
                         <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                            <span>{{row.membershipid || '-'}}</span>
+                            <span>{{row.business.membershipcode || '-'}}</span>
                         </ng-template>
                     </ngx-datatable-column>
                     <ngx-datatable-column prop="updatedby" name="Updated By" [resizeable]="false">

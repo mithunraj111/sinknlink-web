@@ -4,7 +4,7 @@ import { AppConstant } from 'src/app/app.constants';
 import { NgbDateCustomParserFormatter } from '../../../shared/elements/dateParser';
 import { NgbDateParserFormatter, NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 import { fadeInOutTranslate } from '../../../../assets/animations/fadeInOutTranslate';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl, FormArray } from '@angular/forms';
 import { MasterService, CommonService, LocalStorageService, AdminService, BusinessService, MapService } from '../../../services';
 import { CustomerCouponsComponent } from './customer-coupons/customer-coupons.component';
 import { CustomerGigsComponent } from './customer-gigs/customer-gigs.component';
@@ -279,6 +279,7 @@ export class AddEditCustomerComponent implements OnInit {
       city: ['', Validators.required],
       locationid: [null, Validators.required],
       workdays: [_.map(this.workDays, _.property('value')), Validators.required],
+      open24x7yn: [false],
       starttime: ['09:00', Validators.required],
       endtime: ['21:00', Validators.required],
       acceptedpayments: [null, Validators.required],
@@ -305,7 +306,15 @@ export class AddEditCustomerComponent implements OnInit {
     });
     this.buttonText = AppConstant.BUTTON_TXT.SAVE;
   }
-
+  setOpenTime() {
+    if(this.customerForm.controls['open24x7yn'].value === false) {
+      this.customerForm.controls['starttime'].setValue('00:00');
+      this.customerForm.controls['endtime'].setValue('23:59');
+      console.log(this.customerForm.controls['workdays'].value);
+      this.customerForm.controls['workdays'].setValue(_.map(this.workDays, _.property('value')));
+      console.log(this.customerForm.controls['workdays'].value);
+    }
+  }
   addSocialId() {
     this.openModal('socialidmodal');
   }
@@ -325,13 +334,13 @@ export class AddEditCustomerComponent implements OnInit {
     document.querySelector('#' + event).classList.remove('md-show');
   }
   // updateonlinepresence() {
-  //   let data: any;
-  //   data = {};
-  //   for( let list of this.onlinePresenceList) {
+    //   let data: any;
+    //   data = {};
+    //   for( let list of this.onlinePresenceList) {
 
-  //     data[list.refname] = this.presence[list+1];
-  //   }
-  //   console.log(data);
+    //     data[list.refname] = this.presence[list+1];
+    //   }
+    //   console.log(data);
     // let onlinepresence = '';
     // _.map(this.onlinepresenceForm.value, function (value, key) {
     //   console.log('2');
@@ -414,6 +423,7 @@ export class AddEditCustomerComponent implements OnInit {
       //   formdata.paymenttenure = '';
       // }
       this.savecustomer = true;
+      formdata.open24x7yn = data.open24x7yn ? 'Y':'N';
       formdata.workhours = data.starttime + '-' + data.endtime;
       formdata.city = data.city;
       formdata.locationid = Number(data.locationid);
@@ -468,13 +478,6 @@ export class AddEditCustomerComponent implements OnInit {
           this.bootstrapAlertService.showError(error.message);
         });
       } else {
-        let random_string = '';
-        let random_ascii;
-        for (let i = 0; i < 3; i++) {
-          random_ascii = Math.floor((Math.random() * 25) + 65);
-          random_string += String.fromCharCode(random_ascii)
-        }
-        formdata.membershipcode = (this.locationObj.state ? this.locationObj.state : '') + (Math.round(Math.random() * 100000).toString()) + (random_string);
         formdata.status = AppConstant.STATUS_ACTIVE;
         formdata.createdby = this.userstoragedata.fullname;
         formdata.createddt = new Date();
@@ -569,6 +572,7 @@ export class AddEditCustomerComponent implements OnInit {
     this.customerObj.categoryid = this.customerObj.categoryid.toString();
     this.customerObj.locationid = this.customerObj.locationid.toString();
     this.customerObj.regdate = this.commonService.parseDate(this.customerObj.regdate);
+    this.customerObj.open24x7yn = this.customerObj.open24x7yn === 'Y'? true : false;
     this.customerObj.starttime = this.customerObj.workhours.starttime;
     this.customerObj.endtime = this.customerObj.workhours.endtime;
     if (this.customerObj.parentmembershipid != null) {

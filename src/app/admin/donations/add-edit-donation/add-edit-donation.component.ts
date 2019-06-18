@@ -49,7 +49,7 @@ export class AddEditDonationComponent implements OnInit {
       charityname: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
       startdate: [null, Validators.compose([Validators.required])],
       enddate: [null, Validators.compose([Validators.required])],
-      amount: [''],
+      amount: ['', Validators.required],
       causeremarks: ['', Validators.compose([Validators.maxLength(500)])],
       status: [true],
     });

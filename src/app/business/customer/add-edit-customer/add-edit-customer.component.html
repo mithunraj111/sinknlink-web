@@ -225,6 +225,17 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <div
+                                                        class="form-group border-checkbox-section offset-md-3 col-md-5 col-sm-4 m-t-10">
+                                                        <div
+                                                            class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="open24x7"
+                                                                formControlName="open24x7yn" (click)="setOpenTime();"
+                                                                [checked]>
+                                                            <label class="border-checkbox-label" for="open24x7">Open
+                                                                24*7</label>
+                                                        </div>
+                                                    </div>
                                                     <div class="form-group row required">
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Work
                                                             days</label>
@@ -294,7 +305,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="form-group row">
+                                                    <!-- <div class="form-group row">
                                                         <label
                                                             class="col-md-3 col-sm-6 col-form-label text-right">Online
                                                             presence</label>
@@ -309,7 +320,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    </div> -->
                                                     <div class="form-group row">
                                                         <label class="col-md-3 col-sm-6 col-form-label text-right">Tax
                                                             number</label>
@@ -538,19 +549,18 @@
 </div>
 <!-- SOCIAL ID POPUP Ends -->
 
-<!-- SOCIAL ID POPUP Starts -->
-<div class="modal-size select-input addlocation">
+<!-- ONLINE PRESENCE POPUP Starts -->
+<!-- <div class="modal-size select-input addlocation">
     <app-modal-animation [modalID]="'onlinepresencemodal'" [modalClass]="'md-effect-7'">
         <h3 class="f-26">Online presence</h3>
-        <form class="form-header py-2">
-            <div class="col-md-12">
+        <form class="form-header py-2" [formGroup]="onlinepresenceForm">
+            <div formArrayName="items" class="col-md-12">
                 <div *ngFor="let list of onlinePresenceList; let i= index" class="input-group row">
                     <label class="col-md-2 m-auto" for={{list.refname}}>
-                        <img src={{list.refvalue}}
-                            alt="logo" style="width: 50px">
+                        <img src={{list.refvalue}} alt="{{list.refname}}" style="width: 50px">
                     </label>
-                    <input type="text" class="form-control col-md-10 m-auto" [(ngModel)]="presence[i+'1']"
-                    name={{list.refname}} placeholder="Enter your URL">
+                    <input type="text" class="form-control col-md-10 m-auto" formControlName="presence"
+                        placeholder="Enter your URL">
                 </div>
             </div>
             <button (click)="updateonlinepresence()" type="button" placement="bottom"
@@ -560,8 +570,8 @@
         <button (click)="closeModal('onlinepresencemodal')" aria-label="Close" class="md-close-btn"><i
                 class="fa fa-close"></i></button>
     </app-modal-animation>
-</div>
-<!-- ONLINE PRESENCEPOPUP Ends -->
+</div> -->
+<!-- ONLINE PRESENCE POPUP Ends -->
 
 <!-- MEMBERSHIP CODE POP UP STARTS-->
 <div class="modal-size select-input addlocation">

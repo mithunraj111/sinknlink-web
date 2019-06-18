@@ -164,6 +164,9 @@ export const AppMessages = Object.freeze({
       enddate: {
         required: 'End date is required'
       },
+      amount: {
+        required: 'Amount is required'
+      },
       causeremarks: {
         minlength: 'Cause atleast more than 1 characters',
         maxlength: 'Cause should be within 500 characters'
@@ -339,7 +342,7 @@ export const AppMessages = Object.freeze({
       },
       expirydt: {
         required: 'Please select expiry date',
-        invalid: 'Invalid expiry date'
+        invalid: 'Invalid date'
       },
       description: {
         required: 'Please enter description',
