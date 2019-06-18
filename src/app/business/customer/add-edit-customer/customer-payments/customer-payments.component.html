@@ -128,8 +128,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="input-box">
-                            <label for="appplan">Plan</label>
+                        <div class="form-group">
+                            <label>Plan</label>
                             <ng-select [allowClear]="true" [ngClass]="'ng-select w-100'" [options]="appplanList"
                                 placeholder="Select payment plan" (selected)="selectedPlan($event);"
                                 formControlName="appplan" [disabled]="viewPayment"></ng-select>

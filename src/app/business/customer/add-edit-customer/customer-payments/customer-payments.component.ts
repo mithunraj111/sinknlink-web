@@ -205,7 +205,6 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
     this.newPayment = false;
     this.viewPayment = true;
     this.selectedPaymentObj = row;
-    console.log(this.selectedPaymentObj.planid);
     this.selectedPaymentObj.paymentdt = this.commonService.parseDate(this.selectedPaymentObj.paymentdate);
     this.addPaymentForm.patchValue(this.selectedPaymentObj);
     this.addPaymentForm.controls['appplan'].setValue([this.selectedPaymentObj.planid]);

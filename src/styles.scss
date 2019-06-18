@@ -1815,16 +1815,16 @@ input[type=number]::-webkit-outer-spin-button{
 .image.form-control {
     height: auto !important;
 }
-.customertable {
-    .w-55 {
-        width: 55% !important;
-    }
-    .datatable-body-cell{
-        &:first-child{
-            width: 55% !important; 
-        }
-    }
-}
+// .customertable {
+//     .w-55 {
+//         width: 75% !important;
+//     }
+//     .datatable-body-cell{
+//         &:first-child{
+//             width: 75% !important; 
+//         }
+//     }
+// }
 .subscriptionplan-label {
     color: $white-txt !important;
     width: 22%;
@@ -1881,5 +1881,10 @@ input[type=number]::-webkit-outer-spin-button{
         position: absolute;
         top: 0;
         right: 0;
+    }
+}
+.online-presence {
+    input {
+        display: inline-block;
     }
 }
