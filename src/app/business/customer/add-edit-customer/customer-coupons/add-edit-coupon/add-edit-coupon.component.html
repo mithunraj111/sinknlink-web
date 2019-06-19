@@ -14,29 +14,25 @@
                     </div>
                     <div class="form-group required">
                         <label>Number of coupons</label>
-                        <input type="text" class="form-control" placeholder="Number of coupons" formControlName="noofcoupons">
+                        <input type="text" class="form-control" placeholder="Number of coupons"
+                            formControlName="noofcoupons">
                     </div>
                     <div class="form-group required">
                         <label>Starts at</label>
                         <div class="input-group">
-                            <input formControlName="startdate" class="form-control p-events-none" placeholder="dd-mm-yyyy" name="startdate" ngbDatepicker #startdate="ngbDatepicker">
-                            <div class="input-group-append bg-default" (click)="startdate.toggle()">
-                                <span class="fa fa-calendar input-group-text"></span>
-                            </div>
+                            <input class="form-control" formControlName="startdate" type="datetime-local" />
                         </div>
                     </div>
                     <div class="form-group required">
-                        <label>Expires at</label>
+                        <label>Ends at</label>
                         <div class="input-group">
-                            <input formControlName="expirydt" class="form-control p-events-none" placeholder="dd-mm-yyyy" name="expirydt" ngbDatepicker #expirydt="ngbDatepicker">
-                            <div class="input-group-append bg-default" (click)="expirydt.toggle()">
-                                <span class="fa fa-calendar input-group-text"></span>
-                            </div>
+                            <input class="form-control" formControlName="expirydt" type="datetime-local" />
                         </div>
                     </div>
                     <div class="form-group">
                         <label>Particulars</label>
-                        <textarea rows="3" cols="3" class="form-control" placeholder="Particulars" formControlName="description"></textarea>
+                        <textarea rows="3" cols="3" class="form-control" placeholder="Particulars"
+                            formControlName="description"></textarea>
                     </div>
                     <div class="form-group" *ngIf="couponObj?.couponid">
                         <label>Status <small>*</small></label>
@@ -56,7 +52,8 @@
                         </div>
                     </div>
                 </div>
-                <button type="button" (click)="saveOrUpdateCoupon()" placement="top" ngbTooltip="Click to save coupon" class="btn pull-right btn-primary waves-effect 
+                <button type="button" (click)="saveOrUpdateCoupon()" placement="top" ngbTooltip="Click to save coupon"
+                    class="btn pull-right btn-primary waves-effect 
                 m-b-10 m-r-15 saveupdate">{{saving == true ? 'Saving..':'Save'}}</button>
             </div>
         </form>

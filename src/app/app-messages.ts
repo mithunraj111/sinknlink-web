@@ -340,6 +340,9 @@ export const AppMessages = Object.freeze({
         maxlength: 'Coupon count should be less than 11 digits',
         pattern: 'Coupon count should contain numbers only'
       },
+      startdate: {
+        required: 'Please select start date'
+      },
       expirydt: {
         required: 'Please select expiry date',
         invalid: 'Invalid date'

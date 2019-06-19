@@ -21,6 +21,8 @@ export class AddEditCouponComponent implements OnInit, OnChanges {
     couponForm: FormGroup;
     couponErrObj = AppMessages.VALIDATION.COUPON;
     saving = false;
+    endDateTime = new Date().toISOString().slice(0,10) + 'T23:59';
+    startDateTime = new Date().toISOString().slice(0,10) + 'T00:00'
     @Output() notifyCouponChange: EventEmitter<any> = new EventEmitter();
     buttonTxt = AppConstant.BUTTON_TXT.SAVE;
     formTitle = AppConstant.FORM_TITLE.COUPON.ADD;
@@ -50,8 +52,8 @@ export class AddEditCouponComponent implements OnInit, OnChanges {
             couponcode: [this.randomcouponcode, Validators.compose([Validators.required, Validators.maxLength(50)])],
             shortdesc: [null, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])],
             noofcoupons: [null, Validators.compose([Validators.required, Validators.maxLength(11), Validators.pattern('^[0-9]*$')])],
-            expirydt: [null, Validators.required],
-            startdate: [null, Validators.required],
+            expirydt: [this.endDateTime, Validators.required],
+            startdate: [this.startDateTime, Validators.required],
             description: ['', Validators.compose([Validators.minLength(3), Validators.maxLength(500)])],
             status: [true, Validators.required]
         });
@@ -91,11 +93,9 @@ export class AddEditCouponComponent implements OnInit, OnChanges {
                 formdata.couponcode = data.couponcode.toString();
                 formdata.membershipid = this.customerObj.membershipid;
                 formdata.noofcoupons = Number(data.noofcoupons);
-                formdata.expirydt = this.commonService.formatDate(data.expirydt);
-                formdata.startdate = this.commonService.formatDate(data.startdate);
-                data.expirydt = new Date(this.commonService.formatDate(data.expirydt));
-                data.expirydt = data.expirydt.setHours( 23, 59, 59 );
-                if (new Date(data.expirydt) < this.commonService.getCurrentDate() || new Date(data.expirydt) < this.commonService.getCurrentDate()) {                    
+                formdata.expirydt = data.expirydt;
+                formdata.startdate = data.startdate;
+                if (new Date(data.expirydt) < new Date(data.startdate) || new Date(data.startdate) < this.commonService.getCurrentDate()) {                    
                     this.bootstrapAlertService.showError(this.couponErrObj.expirydt.invalid);
                     return false;
                 }
@@ -136,8 +136,8 @@ export class AddEditCouponComponent implements OnInit, OnChanges {
     }
     editCoupon(data) {
         this.couponObj = data;
-        const expirydt = this.commonService.parseDate(new Date(this.couponObj.expirydt));
-        const startdate = this.commonService.parseDate(new Date(this.couponObj.startdate));
+        const expirydt = this.couponObj.expirydt.slice(0,16);
+        const startdate = this.couponObj.startdate.slice(0,16);
         this.couponForm.patchValue(this.couponObj);
         this.couponForm.controls['expirydt'].setValue(expirydt);
         this.couponForm.controls['startdate'].setValue(startdate);

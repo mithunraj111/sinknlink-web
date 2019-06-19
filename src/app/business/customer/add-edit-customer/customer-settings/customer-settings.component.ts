@@ -40,7 +40,6 @@ export class CustomerSettingsComponent implements OnInit, OnChanges {
                 if (response.status) {
                     if (response.data != null) {
                         this.settingsList = response.data;
-                        console.log(this.settingsList);
                         const editForm = {} as any;
                         const self = this;
                         _.map(this.settingsList, function(item, idx) {
