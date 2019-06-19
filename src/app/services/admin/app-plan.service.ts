@@ -27,6 +27,6 @@ export class AppPlanService {
     }
 
     delete(data, id):Observable<any> {
-        return this.httpHandler.POST(this.endpoint + AppConstant.API_CONFIG.API_URL.ADMIN.APPPLAN.DELETE, id, data);
+        return this.httpHandler.DELETE(this.endpoint + AppConstant.API_CONFIG.API_URL.ADMIN.APPPLAN.DELETE, id, data);
     }
 }

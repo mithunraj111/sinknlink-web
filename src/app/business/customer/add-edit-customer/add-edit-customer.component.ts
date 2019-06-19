@@ -159,7 +159,7 @@ export class AddEditCustomerComponent implements OnInit {
       if (response.status) {
         response.data.map(item => {
           item.value = item.locationid.toString();
-          item.label = item.area + '(' + item.pincode + ')';
+          item.label = item.area + ' ( ' + (item.pincode || '-') + ' )';
         });
         this.locationList = response.data;
         this.loadingIndicator = false;

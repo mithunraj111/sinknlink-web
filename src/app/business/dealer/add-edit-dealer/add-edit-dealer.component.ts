@@ -120,7 +120,7 @@ export class AddEditDealerComponent implements OnInit {
       const response = JSON.parse(res._body);
       if (response.status) {
         response.data.map(item => {
-          item.label = item.area + ' ( ' + item.pincode + ' )';
+          item.label = item.area + ' ( ' + (item.pincode || '-') + ' )';
           item.value = item.locationid.toString();
         });
         this.locationList = response.data;

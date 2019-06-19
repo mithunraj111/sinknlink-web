@@ -92,7 +92,7 @@ export class AddEditEventComponent implements OnInit {
       if (response.status) {
         response.data.map(item => {
           item.value = item.locationid.toString();
-          item.label = item.area + '(' + item.pincode + ')';
+          item.label = item.area + ' ( ' + (item.pincode || '-') + ' )';
         });
         this.statelists = response.data;
       } else {

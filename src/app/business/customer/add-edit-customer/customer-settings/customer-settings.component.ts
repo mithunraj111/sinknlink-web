@@ -27,11 +27,7 @@ export class CustomerSettingsComponent implements OnInit, OnChanges {
         this.settingForm = this.fb.group({
             bizsearch: [true],
             chatyn: [true],
-            starttime: [null],
-            endtime: [null],
-            openyn: [true],
             coupongenyn: [true],
-            notificationyn: [false]
         });
     }
     ngOnChanges(changes: SimpleChanges) {
@@ -44,6 +40,7 @@ export class CustomerSettingsComponent implements OnInit, OnChanges {
                 if (response.status) {
                     if (response.data != null) {
                         this.settingsList = response.data;
+                        console.log(this.settingsList);
                         const editForm = {} as any;
                         const self = this;
                         _.map(this.settingsList, function(item, idx) {
@@ -53,18 +50,8 @@ export class CustomerSettingsComponent implements OnInit, OnChanges {
                             if (item.settingkey === 'bizsearchyn') {
                                 editForm.bizsearch = item.settingvalue === 'Y' ? true : false;
                             }
-                            if (item.settingkey === 'workhrs') {
-                                editForm.starttime = JSON.parse(item.settingvalue).starttime;
-                                editForm.endtime = JSON.parse(item.settingvalue).endtime;
-                            }
-                            if (item.settingkey === 'openyn') {
-                                editForm.openyn = item.settingvalue === 'Y' ? true : false;
-                            }
                             if (item.settingkey === 'autogencouponyn') {
                                 editForm.coupongenyn = item.settingvalue === 'Y' ? true : false;
-                            }
-                            if (item.settingkey === 'notificationyn') {
-                                editForm.notificationyn = item.settingvalue === 'Y' ? true : false;
                             }
                             if ((idx + 1) === self.settingsList.length) {
                                 self.settingForm.patchValue(editForm);
@@ -88,26 +75,8 @@ export class CustomerSettingsComponent implements OnInit, OnChanges {
                 if (this.settingsList[i].settingkey === 'bizsearchyn') {
                     this.settingsList[i].settingvalue = this.settingForm.value.bizsearch ? 'Y' : 'N';
                 }
-                if (this.settingsList[i].settingkey === 'workhrs') {
-                    this.settingsList[i].settingvalue = JSON.stringify({
-                        starttime: this.settingForm.value.starttime,
-                        endtime: this.settingForm.value.endtime
-                    });
-                }
-                if (this.settingsList[i].settingkey === 'openyn') {
-                    this.settingsList[i].settingvalue = this.settingForm.value.openyn ? 'Y' : 'N';
-                }
                 if (this.settingsList[i].settingkey === 'autogencouponyn') {
                     this.settingsList[i].settingvalue = this.settingForm.value.coupongenyn ? 'Y' : 'N';
-                }
-                if (this.settingsList[i].settingkey === 'notificationyn') {
-                    this.settingsList[i].settingvalue = this.settingForm.value.notificationyn ? 'Y' : 'N';
-                }
-                if (this.settingsList[i].settingkey === 'starttime') {
-                    this.settingsList[i].settingvalue = this.settingForm.value.starttime + ':00';
-                }
-                if (this.settingsList[i].settingkey === 'endtime') {
-                    this.settingsList[i].settingvalue = this.settingForm.value.endtime + ':00';
                 }
                 if (i + 1 === this.settingsList.length) {
                     this.settingService.bulkupdate(this.settingsList).subscribe((res) => {

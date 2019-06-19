@@ -128,7 +128,7 @@ export class ConsumerComponent extends BaseService implements OnInit {
       const response = JSON.parse(res._body);
       if (response.status) {
         response.data.map(item => {
-          item.label = item.area + ' (' + item.pincode + ' )';
+          item.label = item.area + ' ( ' + (item.pincode || '-') + ' )';
           item.value = item.locationid;
         });
         this.areaList = response.data;
