@@ -188,6 +188,11 @@ export const AppMessages = Object.freeze({
         max: 'From date should be smaller than to date'
       }
     },
+    DONATIONREPORT: {
+      fromdate: {
+        max: 'From date should be smaller than to date'
+      }
+    },
     PROFILE: {
       newpassword: {
         required: 'Please enter new password',

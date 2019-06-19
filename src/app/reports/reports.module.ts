@@ -14,6 +14,7 @@ import { ConsumerComponent } from './consumer/consumer.component';
 import { CustomerdetailComponent } from './customerdetail/customerdetail.component';
 import { AreaComponent } from './area/area.component';
 import { SubscriptionComponent } from './subscription/subscription.component';
+import { DonationComponent } from './donation/donation.component';
 
 @NgModule({
   imports: [
@@ -26,6 +27,6 @@ import { SubscriptionComponent } from './subscription/subscription.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  declarations: [CategoriesComponent, PaymentComponent, DealerComponent, ConsumerComponent, CustomerdetailComponent, AreaComponent, SubscriptionComponent]
+  declarations: [CategoriesComponent, PaymentComponent, DealerComponent, ConsumerComponent, CustomerdetailComponent, AreaComponent, SubscriptionComponent, DonationComponent]
 })
 export class ReportsModule { }

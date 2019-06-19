@@ -9,6 +9,7 @@ import { NgxPermissionsGuard } from 'ngx-permissions';
 import { AuthGuard } from '../services/auth.guard';
 import { AreaComponent } from './area/area.component';
 import { SubscriptionComponent } from './subscription/subscription.component'
+import { DonationComponent } from './donation/donation.component';
 
 const routes: Routes = [
   {
@@ -90,6 +91,19 @@ const routes: Routes = [
             only: ['Customer Detail Report'],
             redirectTo: '/accessdenied'
           }
+        },
+      },
+      {
+        path: 'donations',
+        component: DonationComponent,
+        // canActivate: [AuthGuard, NgxPermissionsGuard],
+        data: {
+          title: 'Donation Report',
+          status: false,
+          // permissions: {
+          //   only: ['Payments'],
+          //   redirectTo: '/accessdenied'
+          // }
         },
       },
       {

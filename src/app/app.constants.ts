@@ -83,7 +83,8 @@ export const AppConstant = Object.freeze({
     { label: 'Business City', value: 'biz_businesscity' },
     { label: 'Payment Tenure', value: 'biz_paymenttenure' },
     { label: 'Change Number Request', value: 'user_setting' },
-    { label: 'Malls', value: 'biz_malls' }
+    { label: 'Malls', value: 'biz_malls' },
+    { label: 'Online Presence', value: 'biz_onlinepresence' }
   ],
   PAYMENT_STATUS: [
     { label: 'Paid', value: 'Paid' },
@@ -180,6 +181,7 @@ export const AppConstant = Object.freeze({
           DEALER_COUNT: 'report/dealer',
           CUSTOMER_DETAIL: 'report/customerdetails',
           PAYMENT_STATUS: 'report/paymentstatus',
+          DONATION_STATUS: 'report/donationstatus',
           SUBSCRIPTION_DUE: 'report/subscriptiondue'
         },
         DOCUMENT: {
@@ -333,6 +335,7 @@ export const AppConstant = Object.freeze({
     CONSUMER: { emptyMessage: 'No consumer report data to display', totalMessage: 'total' },
     DEALERREPORT: { emptyMessage: 'No dealer report data to display', totalMessage: 'total' },
     PAYMENTREPORT: { emptyMessage: 'No payment report data to display', totalMessage: 'total' },
+    DONATIONREPORT: { emptyMessage: 'No donation report data to display', totalMessage: 'total' },
     DEALER_PAYMENT: { emptyMessage: 'No payment data to display', totalMessage: 'total' },
     SUBSCRIPTION_DUE: { emptyMessage: 'No subscription renewal data to display', totalMessage: 'total' }
   }

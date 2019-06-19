@@ -9,8 +9,12 @@ export class PaymentsService {
     constructor(private httpHandler: HttpHandlerService) {
         this.endpoint = AppConstant.API_END_POINT;
     }
-    list(data): Observable<any> {
-        return this.httpHandler.POST(this.endpoint + AppConstant.API_CONFIG.API_URL.COMMON.PAYMENTS.LIST, data);
+    list(data, download?): Observable<any> {
+        let url = this.endpoint + AppConstant.API_CONFIG.API_URL.COMMON.PAYMENTS.LIST
+        if(download) {
+            url += `?download=${true}`
+        }
+        return this.httpHandler.POST(url, data);
     }
     create(data): Observable<any> {
         return this.httpHandler.POST(this.endpoint + AppConstant.API_CONFIG.API_URL.COMMON.PAYMENTS.CREATE, data);
