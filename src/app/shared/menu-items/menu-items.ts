@@ -268,6 +268,14 @@ export class MenuItems extends BaseService {
             }
           },
           {
+            state: 'donations',
+            name: 'Donation Report',
+            code: 'r_donations',
+            data: {
+              title: 'Donation Report'
+            }
+          },
+          {
             state: 'subscription',
             name: 'Subscription Report',
             code: 'r_subscription',

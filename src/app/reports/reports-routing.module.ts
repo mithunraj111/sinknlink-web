@@ -96,14 +96,14 @@ const routes: Routes = [
       {
         path: 'donations',
         component: DonationComponent,
-        // canActivate: [AuthGuard, NgxPermissionsGuard],
+        canActivate: [AuthGuard, NgxPermissionsGuard],
         data: {
           title: 'Donation Report',
           status: false,
-          // permissions: {
-          //   only: ['Payments'],
-          //   redirectTo: '/accessdenied'
-          // }
+          permissions: {
+            only: ['Donations'],
+            redirectTo: '/accessdenied'
+          }
         },
       },
       {
