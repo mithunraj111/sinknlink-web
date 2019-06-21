@@ -75,6 +75,7 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
     this.addPaymentForm = this.fb.group({
       paymentdt: [this.commonService.getCurrentDate('Y'), Validators.required],
       appplan: [''],
+      donation: [],
       amount: [0, Validators.compose([Validators.required, Validators.pattern('^[0-9.]*$')])],
       tax: [0, Validators.compose([Validators.required, Validators.pattern('^[0-9.]*$')])],
       totalamount: [null, Validators.compose([Validators.required, Validators.pattern('^[0-9.]*$')])],
@@ -88,6 +89,11 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
     this.customerObj = changes.customerObj.currentValue;
     this.customerObj.paymenttenureid = this.customerObj.paymenttenureid;
     this.getPaymentHistory(changes.customerObj.currentValue);
+  }
+  totalamountcalc(abc) {
+    console.log(abc);
+    // console.log(this.addPaymentForm.controls['amount'].value);
+    // console.log(this.addPaymentForm.controls['taxpercent'].value);
   }
   getSubscriptionamount() {
     this.selectedplanamt = 0;
@@ -118,15 +124,16 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
   selectedPlan(Option) {
     this.addPaymentForm.controls['amount'].setValue(Option.cost);
     this.addPaymentForm.controls['tax'].setValue(Option.taxpercent);
-    this.addPaymentForm.controls['totalamount'].setValue((Number(Option.cost) + Number((Option.taxpercent * Option.cost)/100)));
+    this.addPaymentForm.controls['totalamount'].setValue((Number(Option.cost) + Number((Option.taxpercent * Option.cost) / 100)));
   }
+
   onlinePay() {
     if (this.donationList[0].selectedAmt < 0) {
       this.bootstrapAlertService.showError(AppMessages.VALIDATION.PAYMENTS.donationamount.minimum);
       return false;
     }
     this.razarpayService.loadrazarpay().then(() => {
-      let self = this;
+      const self = this;
       const options = {
         key: this.authentication,
         amount: this.totalamount * 100,
@@ -269,6 +276,8 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
     }
     const formData = this.addPaymentForm.value;
     this.collectpayment = true;
+    // formData.totalamount = formData.amount + ((formData.tax * formData.amount) / 100);
+    // console.log(formData.amount + ((formData.tax * formData.amount) / 100));
     const data = {
       paymentdate: this.commonService.formatDate(formData.paymentdt),
       planid: formData.appplan,

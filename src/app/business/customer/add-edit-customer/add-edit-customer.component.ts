@@ -41,6 +41,7 @@ export class AddEditCustomerComponent implements OnInit {
   hidebutton = false;
   ownedNos = [];
   loadingIndicator = true;
+  presenceObj = {}as any;
   @ViewChild(CustomerCouponsComponent) couponComponent: CustomerCouponsComponent;
   @ViewChild(CustomerPaymentsComponent) paymentComponent: CustomerPaymentsComponent;
   @ViewChild(CustomerGigsComponent) gigComponent: CustomerGigsComponent;
@@ -52,7 +53,7 @@ export class AddEditCustomerComponent implements OnInit {
   categoryList = [];
   cityLists = [];
   memberTypes = [];
-  // onlinePresenceList = [];
+  onlinePresenceList = [];
   businesstypes = [];
   deliveryMethods = [];
   locationList = [];
@@ -198,12 +199,11 @@ export class AddEditCustomerComponent implements OnInit {
           this.businesstypes = _.get(groupedData, 'biz_businesstype');
           this.paymentMethods = _.get(groupedData, 'biz_paymentmethods');
           this.deliveryMethods = _.get(groupedData, 'biz_deliverymethods');
-          // this.onlinePresenceList = _.get(groupedData, 'biz_onlinepresence');
+          this.onlinePresenceList = _.get(groupedData, 'biz_onlinepresence');
           if (!this.isAddForm) {
             this.mallsList = _.get(groupedData, 'biz_malls');
           }
           this.lookupList = _.get(groupedData, 'biz_malls');
-          // this.paymentTenuresList = _.get(groupedData, 'biz_paymenttenure');
           this.cityLists = _.get(groupedData, 'biz_businesscity');
         }
         if (this.customerid == null) {
@@ -231,21 +231,14 @@ export class AddEditCustomerComponent implements OnInit {
               selectedDeliveryOpts.push(item.refvalue);
             }
           });
-          // const selectedPaymentTenure = [];
-          // _.each(this.paymentTenuresList, function (item) {
-          //   if (item.isdefault === 'Y') {
-          //     selectedPaymentTenure.push(item.refvalue);
-          //   }
-          // });
           this.customerForm.controls['membershiptype'].setValue(selectedMemberType);
           this.customerForm.controls['biztype'].setValue(selectedBusinessType);
           this.customerForm.controls['acceptedpayments'].setValue(selectedPaymentMethods);
-          // this.customerForm.controls['deliveryoptions'].setValue(selectedDeliveryOpts);
-          // this.customerForm.controls['paymenttenure'].setValue(selectedPaymentTenure);
           this.customerForm.get('paymenttenure').setValidators(Validators.required);
           this.customerForm.get('paymentstatus').setValidators(Validators.required);
           this.customerForm.get('paymentstatus').updateValueAndValidity();
-          // this.customerForm.get('paymenttenure').updateValueAndValidity();
+        } else{
+          this.updateonlinepresence(true);
         }
       }
     });
@@ -285,7 +278,7 @@ export class AddEditCustomerComponent implements OnInit {
       acceptedpayments: [null, Validators.required],
       deliveryoptions: [null],
       socialids: [[]],
-      // onlinepresence: [[]],
+      onlinepresence: [[]],
       taxno: ['', Validators.compose([Validators.maxLength(30)])],
       website: ['', Validators.compose([Validators.maxLength(200), Validators.pattern(AppConstant.REGEX.WEBSITE)])],
       regdate: [this.commonService.getCurrentDate('Y'), Validators.required],
@@ -319,12 +312,6 @@ export class AddEditCustomerComponent implements OnInit {
     this.openModal('socialidmodal');
   }
   addOnlinePresence() {
-    // let tenureList: any = this.paymentTenuresList;
-    // for (let list of tenureList) {
-    //   console.log(list);
-    // }
-
-    // this.onlinepresenceForm = this.fb.group({});
     this.openModal('onlinepresencemodal');
   }
   openModal(event) {
@@ -333,28 +320,25 @@ export class AddEditCustomerComponent implements OnInit {
   closeModal(event) {
     document.querySelector('#' + event).classList.remove('md-show');
   }
-  // updateonlinepresence() {
-    //   let data: any;
-    //   data = {};
-    //   for( let list of this.onlinePresenceList) {
+  updateonlinepresence(flag?) {
+    const self= this;
+    if(flag){
+    let onlinepresence = this.customerObj.onlinepresence;
+  _.map(this.onlinePresenceList,function(item){
+    item.data = onlinepresence[item.refname];
+      self.presenceObj[item.refname] = item.data;
+      return item;
+    });
+    }else{
 
-    //     data[list.refname] = this.presence[list+1];
-    //   }
-    //   console.log(data);
-    // let onlinepresence = '';
-    // _.map(this.onlinepresenceForm.value, function (value, key) {
-    //   console.log('2');
-    //   console.log(value);
-    //   console.log(key);
-    //   if (value != null && value != '') {
-    //     onlinepresence = onlinepresence + value + ',';
-    //     console.log(onlinepresence);
-    //   }
-    //   self.customerForm.controls['onlinepresence'].setValue(onlinepresence);
-    // });
-    // console.log(self.customerForm.controls['onlinepresence'].value);
-    // this.closeModal('onlinepresencemodal');
-  // }
+    _.map(this.onlinePresenceList,function(item){
+      self.presenceObj[item.refname] = item.data;
+    })
+    this.closeModal('onlinepresencemodal');
+    }
+    this.customerForm.controls['onlinepresence'].setValue(JSON.stringify(self.presenceObj).slice(1,(JSON.stringify(self.presenceObj).length-1)));
+    
+  }
   update() {
     let socialids = '';
     const self = this;
@@ -375,6 +359,7 @@ export class AddEditCustomerComponent implements OnInit {
     } else {
       const data = this.customerForm.value;
       const formdata = { ...data } as any;
+      formdata.onlinepresence = this.presenceObj;
       if (_.isNaN(parseFloat(data.latitude)) || _.isNull(parseFloat(data.latitude))) {
         this.bootstrapAlertService.showError(this.customerErrObj.latitude.invalid);
         return false;
@@ -402,26 +387,6 @@ export class AddEditCustomerComponent implements OnInit {
       } else {
         formdata.paymenttenure = '';
       }
-      // if (formdata.membershiptype != AppConstant.MEM_TYPE) {
-      //   const paymentarray = this.paymentTenuresList.find(item =>
-      //     item.refvalue === data.paymenttenure
-      //   );
-      // if (!_.isUndefined(paymentarray)) {
-      //   formdata.paymenttenure = paymentarray.refid.toString();
-      //   var date = new Date();
-      //   if (paymentarray.refname == "Yearly") {
-      //     formdata.nextdue = new Date(date.setDate(date.getDate() + 365)).toISOString();
-      //   } else if (paymentarray.refname == "Half yearly") {
-      //     formdata.nextdue = new Date(date.setDate(date.getDate() + 183)).toISOString();
-      //   } else if (paymentarray.refname == "Quarterly") {
-      //     formdata.nextdue = new Date(date.setDate(date.getDate() + 90)).toISOString();
-      //   } else if (paymentarray.refname == "Monthly") {
-      //     formdata.nextdue = new Date(date.setDate(date.getDate() + 28)).toISOString();
-      //   }
-      // }
-      // } else {
-      //   formdata.paymenttenure = '';
-      // }
       this.savecustomer = true;
       formdata.open24x7yn = data.open24x7yn ? 'Y':'N';
       formdata.workhours = data.starttime + '-' + data.endtime;
@@ -604,21 +569,6 @@ export class AddEditCustomerComponent implements OnInit {
       });
       this.customerObj.socialids = socialids;
     }
-    // let paymentObj = {} as any;
-    // const self = this;
-    // paymentObj = _.find(this.paymentTenuresList, function (item) {
-    //   console.log(self.customerObj.paymenttenure);
-    //   console.log(item.planid);
-    //   if (item.planid == Number(self.customerObj.paymenttenure)) {
-    //     return item;
-    //   }
-    // });
-    // console.log(paymentObj);
-    // console.log(this.customerObj);
-    // if (!_.isUndefined(paymentObj)) {
-    //   this.customerObj.paymenttenureid = paymentObj.planid.toString();
-    //   this.customerObj.paymenttenure = paymentObj.planname;
-    // }
     this.customerForm.patchValue(this.customerObj);
     if (this.customerForm.get('membershiptype').value !== AppConstant.MEM_TYPE) {
       this.customerForm.get('paymenttenure').setValidators(Validators.required);
