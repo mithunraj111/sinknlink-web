@@ -284,6 +284,14 @@ export const AppMessages = Object.freeze({
           maxlength: 'Mobile number should be less than 15 digits',
           pattern: 'Please enter a valid mobile number'
         },
+        password: {
+          required: 'Please enter a password',
+          minlength: 'Password should be atleast 3 characters long',
+          maxlength: 'Password should be less than 15 characters'
+        },
+        dealercode: {
+          required: 'Please enter dealer code'
+        },
         phoneno: {
           maxlength: 'Phone number should be less than 15 digits',
           minlength: 'Phone number should be atleast 10 digits',

@@ -108,10 +108,12 @@ export class AddEditDealerComponent implements OnInit {
       Validators.minLength(10), Validators.maxLength(15), Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')])],
       contactperson: [null, Validators.compose([Validators.required, Validators.maxLength(50)])],
       phoneno: ['', Validators.compose([Validators.maxLength(15), Validators.pattern('^[0-9 ]*$')])],
+      password: ['', Validators.compose([Validators.minLength(3), Validators.maxLength(15)])],
       city: ['', Validators.required],
       locationid: ['', Validators.required],
       address: ['', Validators.maxLength(100)],
       commissionpercent: [null, Validators.compose([Validators.required, Validators.max(100)])],
+      dealercode: [null, Validators.compose([Validators.required])],
       status: [true]
     });
   }
@@ -192,11 +194,13 @@ export class AddEditDealerComponent implements OnInit {
       contactperson: [this.dealerProfileObj.contactperson, Validators.required],
       mobileno: [this.dealerProfileObj.mobileno, Validators.compose([Validators.required,
       Validators.minLength(10), Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')])],
+      dealercode: [this.dealerProfileObj.dealercode, Validators.required],
       phoneno: [this.dealerProfileObj.phoneno],
       city: [this.dealerProfileObj.location.city, Validators.required],
       locationid: [this.dealerProfileObj.locationid.toString(), Validators.required],
       address: [this.dealerProfileObj.address],
-      commissionpercent: [this.dealerProfileObj.commissionpercent, Validators.compose([Validators.required, Validators.max(100), Validators.pattern('^[0-9]*$')])],
+      commissionpercent: [this.dealerProfileObj.commissionpercent, Validators.compose([Validators.required,
+      Validators.max(100), Validators.pattern('^[0-9]*$')])],
       status: [this.dealerProfileObj.status === AppConstant.STATUS_ACTIVE ? true : false, Validators.required]
     });
   }

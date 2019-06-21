@@ -49,8 +49,6 @@ export class CustomerComponent extends BaseService implements OnInit {
     }
     if (this.userstoragedata.roleid === 3) {
       condition.userid = this.userstoragedata.userid;
-    } else {
-      condition.parentmembershipid = null;
     }
     this.loadingIndicator = true;
     this.customerService.list(condition).subscribe(res => {
