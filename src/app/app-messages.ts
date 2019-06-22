@@ -440,6 +440,15 @@ export const AppMessages = Object.freeze({
     },
     PAYMENTS: {
       paymentdt: { required: 'Please select paid date' },
+      amount: {
+        required: 'Please enter amount',
+        pattern: 'Please enter a valid amount',
+      },
+      tax: {
+        required: 'Please enter tax percentage',
+        max: 'Tax percentage should be less than or equal to 100%',
+        pattern: 'Please enter a vaild tax percentage'
+      },
       totalamount: { required: 'Please enter amount', pattern: 'Payment should only contain numbers' },
       paymentmode: { required: 'Please select mode of payment' },
       paymentref: { required: 'Please enter payment reference' },

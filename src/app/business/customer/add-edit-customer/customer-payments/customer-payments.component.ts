@@ -77,7 +77,7 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
       appplan: [''],
       donation: [],
       amount: [0, Validators.compose([Validators.required, Validators.pattern('^[0-9.]*$')])],
-      tax: [0, Validators.compose([Validators.required, Validators.pattern('^[0-9.]*$')])],
+      tax: [0, Validators.compose([Validators.required, Validators.max(100), Validators.pattern('^[0-9.]*$')])],
       totalamount: [null, Validators.compose([Validators.required, Validators.pattern('^[0-9.]*$')])],
       paymentref: ['', Validators.required],
       paymentmode: ['', Validators.required],
@@ -89,11 +89,6 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
     this.customerObj = changes.customerObj.currentValue;
     this.customerObj.paymenttenureid = this.customerObj.paymenttenureid;
     this.getPaymentHistory(changes.customerObj.currentValue);
-  }
-  totalamountcalc(abc) {
-    console.log(abc);
-    // console.log(this.addPaymentForm.controls['amount'].value);
-    // console.log(this.addPaymentForm.controls['taxpercent'].value);
   }
   getSubscriptionamount() {
     this.selectedplanamt = 0;
@@ -126,7 +121,20 @@ export class CustomerPaymentsComponent implements OnInit, OnChanges {
     this.addPaymentForm.controls['tax'].setValue(Option.taxpercent);
     this.addPaymentForm.controls['totalamount'].setValue((Number(Option.cost) + Number((Option.taxpercent * Option.cost) / 100)));
   }
-
+  totalAmountCalc(value, type) {
+    let calcAmount;
+    let calcTax;
+    if (type === 'amount') {
+      calcAmount = value;
+      calcTax = this.addPaymentForm.controls['tax'].value;
+      calcTax = (calcTax * calcAmount) / 100;
+    } else if (type === 'tax') {
+      calcAmount = this.addPaymentForm.controls['amount'].value;
+      calcTax = (value * calcAmount) / 100;
+    }
+    const totalCalcAmount = Number(calcAmount) + Number(calcTax);
+    this.addPaymentForm.controls['totalamount'].setValue(totalCalcAmount);
+  }
   onlinePay() {
     if (this.donationList[0].selectedAmt < 0) {
       this.bootstrapAlertService.showError(AppMessages.VALIDATION.PAYMENTS.donationamount.minimum);
