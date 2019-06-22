@@ -243,7 +243,7 @@
                                                             <div class="input-box">
                                                                 <ng-select [allowClear]="true" [ngClass]="'ng-select'"
                                                                     [options]="workDays" [multiple]="true"
-                                                                    formControlName="workdays"
+                                                                    formControlName="workdays" [disabled]="openAlways"
                                                                     placeholder="Select Work Days">
                                                                 </ng-select>
                                                                 <!-- <tag-input class="tag-chips" [onlyFromAutocomplete]="true" formControlName="workdays" [secondaryPlaceholder]="'Select Work Days'" placeholder="Select Work Days">
@@ -258,9 +258,9 @@
                                                             hours</label>
                                                         <div class="col-md-9 col-sm-6">
                                                             <input class="form-control m-b-10" type="time"
-                                                                formControlName="starttime">
+                                                                formControlName="starttime" [ngClass]="openAlways?'p-events-none':''">
                                                             <input class="form-control" type="time"
-                                                                formControlName="endtime">
+                                                                formControlName="endtime" [ngClass]="openAlways?'p-events-none':''">
                                                         </div>
                                                     </div>
                                                     <div class="form-group row required donation-header">

@@ -74,6 +74,7 @@ export class AddEditCustomerComponent implements OnInit {
   msg: string;
   lookupList: any = [];
   memCode: any;
+  openAlways = false;
   constructor(private fb: FormBuilder,
     private categoryService: MasterService.CategoryService,
     private lookupService: AdminService.LookupService,
@@ -298,9 +299,9 @@ export class AddEditCustomerComponent implements OnInit {
     this.buttonText = AppConstant.BUTTON_TXT.SAVE;
   }
   setOpenTime() {
+    this.openAlways = !this.openAlways;
     if (this.customerForm.controls['open24x7yn'].value === false) {
       this.customerForm.controls['starttime'].setValue('00:00');
-
       this.customerForm.controls['endtime'].setValue('23:59');
       this.customerForm.controls['workdays'].setValue(_.map(this.workDays, _.property('value')));
     }
