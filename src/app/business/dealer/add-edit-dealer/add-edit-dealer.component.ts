@@ -41,6 +41,7 @@ export class AddEditDealerComponent implements OnInit {
   showbutton = true;
   isAddForm = true;
   datedisplayformat = AppConstant.API_CONFIG.ANG_DATE.displaydate;
+  obscureText = true;
   constructor(private route: ActivatedRoute,
     private bootstrapAlertService: BootstrapAlertService,
     private dealerService: BusinessService.DealerService,

@@ -3,9 +3,15 @@
         <div class="header-title m-b-15 pos-fixed">
             <div class="row">
                 <div class="col-md-6 col-sm-6 save-button text-right p-r-30">
-                    <button *ngIf="showbutton && deleartabs.activeId!='2'" type="button" placement="bottom" ngbTooltip="Click to save dealer" (click)="saveOrUpdate()" class="btn btn-primary waves-effect m-r-10 text-capitalize" [disabled]="adddealer">{{adddealer == true ? 'Saving' : 'Save'}}</button>
-                    <button *ngIf="!showbutton && deleartabs.activeId!='2'" type="button" placement="bottom" (click)="saveOrUpdate()" class="btn btn-primary waves-effect m-r-10 text-capitalize"><i class="fa fa-plus-circle m-r-5"></i>&nbsp;New</button>
-                    <button type="button" placement="bottom" ngbTooltip="Go back" routerLink="/business/dealer" class="btn btn-inverse btn-primary waves-effect"><i
+                    <button *ngIf="showbutton && deleartabs.activeId!='2'" type="button" placement="bottom"
+                        ngbTooltip="Click to save dealer" (click)="saveOrUpdate()"
+                        class="btn btn-primary waves-effect m-r-10 text-capitalize"
+                        [disabled]="adddealer">{{adddealer == true ? 'Saving' : 'Save'}}</button>
+                    <button *ngIf="!showbutton && deleartabs.activeId!='2'" type="button" placement="bottom"
+                        (click)="saveOrUpdate()" class="btn btn-primary waves-effect m-r-10 text-capitalize"><i
+                            class="fa fa-plus-circle m-r-5"></i>&nbsp;New</button>
+                    <button type="button" placement="bottom" ngbTooltip="Go back" routerLink="/business/dealer"
+                        class="btn btn-inverse btn-primary waves-effect"><i
                             class="fa fa-arrow-circle-left"></i></button>
                 </div>
             </div>
@@ -26,69 +32,109 @@
                                             <div class="row p-t-10 p-b-5">
                                                 <div class="col-md-12 col-sm-12">
                                                     <div class="form-group row required">
-                                                        <label class="col-md-3 col-sm-6 col-form-label text-right">Dealer
+                                                        <label
+                                                            class="col-md-3 col-sm-6 col-form-label text-right">Dealer
                                                             Name</label>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <input type="text" class="form-control" placeholder="Dealer Name" formControlName="dealername">
+                                                            <input type="text" class="form-control"
+                                                                placeholder="Dealer Name" formControlName="dealername">
                                                         </div>
                                                     </div>
                                                     <div class="form-group row required">
-                                                        <label class="col-md-3 col-sm-6 col-form-label text-right">Mobile</label>
+                                                        <label
+                                                            class="col-md-3 col-sm-6 col-form-label text-right">Dealer
+                                                            Code</label>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <input type="text" class="form-control" placeholder="Mobile" formControlName="mobileno">
-                                                            <span class="p-l-10 f-12 text-muted"><i>This will be considered as login id</i></span>
+                                                            <input type="text" class="form-control"
+                                                                placeholder="Dealer code" formControlName="dealercode">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row required">
+                                                        <label
+                                                            class="col-md-3 col-sm-6 col-form-label text-right">Mobile</label>
+                                                        <div class="col-md-9 col-sm-6">
+                                                            <input type="text" class="form-control" placeholder="Mobile"
+                                                                formControlName="mobileno">
+                                                            <span class="p-l-10 f-12 text-muted"><i>This will be
+                                                                    considered as login id</i></span>
                                                         </div>
                                                     </div>
                                                     <div *ngIf="!dealerid" class="form-group row">
-                                                        <label class="col-md-3 col-sm-6 col-form-label text-right">Password</label>
+                                                        <label
+                                                            class="col-md-3 col-sm-6 col-form-label text-right">Password</label>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <input type="password" class="form-control" placeholder="Password" formControlName="password">
+                                                            <div class="input-group">
+                                                                <input
+                                                                    [type]="obscureText == true ? 'password' : 'text'"
+                                                                    class="form-control" formControlName="password"
+                                                                    placeholder="Password">
+                                                                <button type="button"
+                                                                    class="btn p-0 pl-3 pr-2 obscure-eye"
+                                                                    (click)="obscureText = !obscureText">
+                                                                    <i
+                                                                        [ngClass]="obscureText == true ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
+                                                                </button>
+                                                                <span class="md-line"></span>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="form-group row required">
-                                                        <label class="col-md-3 col-sm-6 col-form-label text-right">Contact
+                                                        <label
+                                                            class="col-md-3 col-sm-6 col-form-label text-right">Contact
                                                             person</label>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <input type="text" class="form-control" placeholder="Contact Person" formControlName="contactperson">
+                                                            <input type="text" class="form-control"
+                                                                placeholder="Contact Person"
+                                                                formControlName="contactperson">
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
-                                                        <label class="col-md-3 col-sm-6 col-form-label text-right">Phone</label>
+                                                        <label
+                                                            class="col-md-3 col-sm-6 col-form-label text-right">Phone</label>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <input type="text" class="form-control" placeholder="Phone" formControlName="phoneno">
+                                                            <input type="text" class="form-control" placeholder="Phone"
+                                                                formControlName="phoneno">
                                                         </div>
                                                     </div>
                                                     <div class="form-group row required">
-                                                        <label class="col-md-3 col-sm-6 col-form-label text-right">City</label>
+                                                        <label
+                                                            class="col-md-3 col-sm-6 col-form-label text-right">City</label>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <ng-select [ngClass]="'ng-select'" placeholder="Select a City" formControlName="city" [options]="cityList" (selected)="selectCity($event)" [allowClear]="true">
+                                                            <ng-select [ngClass]="'ng-select'"
+                                                                placeholder="Select a City" formControlName="city"
+                                                                [options]="cityList" (selected)="selectCity($event)"
+                                                                [allowClear]="true">
                                                             </ng-select>
                                                         </div>
                                                     </div>
                                                     <div class="form-group row required">
-                                                        <label class="col-md-3 col-sm-6 col-form-label text-right">Location</label>
+                                                        <label
+                                                            class="col-md-3 col-sm-6 col-form-label text-right">Location</label>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <ng-select [ngClass]="'ng-select'" placeholder="Select a Location" formControlName="locationid" [options]="locationList" [allowClear]="true">
+                                                            <ng-select [ngClass]="'ng-select'"
+                                                                placeholder="Select a Location"
+                                                                formControlName="locationid" [options]="locationList"
+                                                                [allowClear]="true">
                                                             </ng-select>
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
-                                                        <label class="col-md-3 col-sm-6 col-form-label text-right">Address</label>
+                                                        <label
+                                                            class="col-md-3 col-sm-6 col-form-label text-right">Address</label>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <textarea rows="4" cols="4" class="form-control" formControlName="address" placeholder="Address"></textarea>
+                                                            <textarea rows="4" cols="4" class="form-control"
+                                                                formControlName="address"
+                                                                placeholder="Address"></textarea>
                                                         </div>
                                                     </div>
                                                     <div class="form-group row required">
-                                                        <label class="col-md-3 col-sm-6 col-form-label text-right">Commission
+                                                        <label
+                                                            class="col-md-3 col-sm-6 col-form-label text-right">Commission
                                                             (%)</label>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <input type="text" class="form-control" placeholder="Commission (%)" formControlName="commissionpercent">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row required">
-                                                        <label class="col-md-3 col-sm-6 col-form-label text-right">Dealer Code</label>
-                                                        <div class="col-md-9 col-sm-6">
-                                                            <input type="text" class="form-control" placeholder="Dealer code" formControlName="dealercode">
+                                                            <input type="text" class="form-control"
+                                                                placeholder="Commission (%)"
+                                                                formControlName="commissionpercent">
                                                         </div>
                                                     </div>
                                                     <div *ngIf="dealerid" class="form-group row last-paid">
@@ -97,14 +143,18 @@
                                                         <div class="col-md-9 col-sm-6">
                                                             <div class="static-text">
                                                                 <div class="form-control-static">
-                                                                    {{dealerProfileObj.lastcommissionpaiddt|date:datedisplayformat}}</div>
+                                                                    {{dealerProfileObj.lastcommissionpaiddt|date:datedisplayformat}}
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div *ngIf="dealerid" class="form-group row">
-                                                        <label class="col-md-3 col-sm-6 col-form-label text-right">Status</label>
+                                                        <label
+                                                            class="col-md-3 col-sm-6 col-form-label text-right">Status</label>
                                                         <div class="col-md-9 col-sm-6">
-                                                            <ui-switch class="js-small" [color]="$primary-color" switchColor="#fff" formControlName="status" size="small"></ui-switch>
+                                                            <ui-switch class="js-small" [color]="$primary-color"
+                                                                switchColor="#fff" formControlName="status"
+                                                                size="small"></ui-switch>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -125,7 +175,8 @@
                     <ngb-tab title="Payments" id='3' [disabled]="isAddForm">
                         <ng-template ngbTabContent>
                             <div [@fadeInOutTranslate]>
-                                <app-dealer-payments [dealerObj]="dealerProfileObj" (notifyPayment)="notifyPayment($event)"></app-dealer-payments>
+                                <app-dealer-payments [dealerObj]="dealerProfileObj"
+                                    (notifyPayment)="notifyPayment($event)"></app-dealer-payments>
                             </div>
                         </ng-template>
                     </ngb-tab>

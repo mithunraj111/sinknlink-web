@@ -31,7 +31,6 @@ export class AddEditCustomerComponent implements OnInit {
   isActive = false;
   customerForm: FormGroup;
   socialidForm: FormGroup;
-  // onlinepresenceForm: FormGroup;
   formTitle: string;
   buttonText = AppConstant.BUTTON_TXT.SAVE;
   savecustomer;
@@ -41,7 +40,7 @@ export class AddEditCustomerComponent implements OnInit {
   hidebutton = false;
   ownedNos = [];
   loadingIndicator = true;
-  presenceObj = {}as any;
+  presenceObj = {} as any;
   @ViewChild(CustomerCouponsComponent) couponComponent: CustomerCouponsComponent;
   @ViewChild(CustomerPaymentsComponent) paymentComponent: CustomerPaymentsComponent;
   @ViewChild(CustomerGigsComponent) gigComponent: CustomerGigsComponent;
@@ -75,7 +74,6 @@ export class AddEditCustomerComponent implements OnInit {
   msg: string;
   lookupList: any = [];
   memCode: any;
-  // presence: any[];
   constructor(private fb: FormBuilder,
     private categoryService: MasterService.CategoryService,
     private lookupService: AdminService.LookupService,
@@ -237,7 +235,7 @@ export class AddEditCustomerComponent implements OnInit {
           this.customerForm.get('paymenttenure').setValidators(Validators.required);
           this.customerForm.get('paymentstatus').setValidators(Validators.required);
           this.customerForm.get('paymentstatus').updateValueAndValidity();
-        } else{
+        } else {
           this.updateonlinepresence(true);
         }
       }
@@ -300,12 +298,11 @@ export class AddEditCustomerComponent implements OnInit {
     this.buttonText = AppConstant.BUTTON_TXT.SAVE;
   }
   setOpenTime() {
-    if(this.customerForm.controls['open24x7yn'].value === false) {
+    if (this.customerForm.controls['open24x7yn'].value === false) {
       this.customerForm.controls['starttime'].setValue('00:00');
+
       this.customerForm.controls['endtime'].setValue('23:59');
-      console.log(this.customerForm.controls['workdays'].value);
       this.customerForm.controls['workdays'].setValue(_.map(this.workDays, _.property('value')));
-      console.log(this.customerForm.controls['workdays'].value);
     }
   }
   addSocialId() {
@@ -321,23 +318,22 @@ export class AddEditCustomerComponent implements OnInit {
     document.querySelector('#' + event).classList.remove('md-show');
   }
   updateonlinepresence(flag?) {
-    const self= this;
-    if(flag){
-    let onlinepresence = this.customerObj.onlinepresence;
-  _.map(this.onlinePresenceList,function(item){
-    item.data = onlinepresence[item.refname];
-      self.presenceObj[item.refname] = item.data;
-      return item;
-    });
-    }else{
+    const self = this;
+    if (flag) {
+      let onlinepresence = this.customerObj.onlinepresence;
+      _.map(this.onlinePresenceList, function (item) {
+        item.data = onlinepresence[item.refname];
+        self.presenceObj[item.refname] = item.data;
+        return item;
+      });
+    } else {
 
-    _.map(this.onlinePresenceList,function(item){
-      self.presenceObj[item.refname] = item.data;
-    })
-    this.closeModal('onlinepresencemodal');
+      _.map(this.onlinePresenceList, function (item) {
+        self.presenceObj[item.refname] = item.data;
+      });
+      this.closeModal('onlinepresencemodal');
     }
-    this.customerForm.controls['onlinepresence'].setValue(JSON.stringify(self.presenceObj).slice(1,(JSON.stringify(self.presenceObj).length-1)));
-    
+    this.customerForm.controls['onlinepresence'].setValue(JSON.stringify(self.presenceObj).slice(1, (JSON.stringify(self.presenceObj).length - 1)));
   }
   update() {
     let socialids = '';
@@ -388,7 +384,7 @@ export class AddEditCustomerComponent implements OnInit {
         formdata.paymenttenure = '';
       }
       this.savecustomer = true;
-      formdata.open24x7yn = data.open24x7yn ? 'Y':'N';
+      formdata.open24x7yn = data.open24x7yn ? 'Y' : 'N';
       formdata.workhours = data.starttime + '-' + data.endtime;
       formdata.city = data.city;
       formdata.locationid = Number(data.locationid);
@@ -497,7 +493,7 @@ export class AddEditCustomerComponent implements OnInit {
     this.generateEditForm();
     if (event.nextId === '9' || event.nextId === '8' || event.nextId === '6' || event.nextId === '5' || event.nextId === '3' || event.nextId === '2') {
       this.showbutton = false;
-      this.hidebutton = true
+      this.hidebutton = true;
       if (event.nextId === '6') {
         this.tooltipmessage = AppConstant.MESSAGE.COUPON;
         return false;
@@ -537,7 +533,7 @@ export class AddEditCustomerComponent implements OnInit {
     this.customerObj.categoryid = this.customerObj.categoryid.toString();
     this.customerObj.locationid = this.customerObj.locationid.toString();
     this.customerObj.regdate = this.commonService.parseDate(this.customerObj.regdate);
-    this.customerObj.open24x7yn = this.customerObj.open24x7yn === 'Y'? true : false;
+    this.customerObj.open24x7yn = this.customerObj.open24x7yn === 'Y' ? true : false;
     this.customerObj.starttime = this.customerObj.workhours.starttime;
     this.customerObj.endtime = this.customerObj.workhours.endtime;
     if (this.customerObj.parentmembershipid != null) {

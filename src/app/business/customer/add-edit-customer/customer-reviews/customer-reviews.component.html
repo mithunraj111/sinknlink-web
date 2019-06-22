@@ -1,13 +1,23 @@
 <div class="card" *ngIf="!loadingIndicator && reviewsList.length>0">
     <div class="card-body">
         <ul class="media-list">
-            <li class="media m-b-15" *ngFor="let review of reviewsList">
-                <!-- <a class="media-left">
-                    <div class="profile-image">{{review.fullname.substring(0,1).toUpperCase()}}</div>
-                </a> -->
-                <img style="width:40px; max-width:100%;" [src]="review.docurl != null ? review.docurl : 'assets/images/avatar-blank.png'" alt="img">
+            <li class="media m-b-15" *ngFor="let review of reviewsList; let i=index">
+                <img style="width:40px; max-width:100%;"
+                    [src]="review.docurl != null ? review.docurl : 'assets/images/avatar-blank.png'" alt="img">
                 <div class="media-body ml-2">
-                    <h6 class="media-heading mb-0 cursor-text">{{review.fullname}}<span class="f-12 text-muted m-l-5">{{review.updateddt | date:datedisplayformat}}</span></h6>
+                    <h6 class="media-heading mb-0 cursor-text">{{review.fullname}}<span
+                            class="f-12 text-muted m-l-5">{{review.updateddt | date:datedisplayformat}}</span>
+                        <div class="reviewopt-dd">
+                            <button class="btn py-0 px-2 text-muted" (click)="showDropdown = !showDropdown"><i
+                                    class="fa fa-ellipsis-h"></i></button>
+                            <div *ngIf="showDropdown" class="dd-opt">
+                                <a style="border-right: 1px solid #ccc;" class="pr-2"
+                                    (click)="openOpt('editReview',review.reviewid);">Edit</a>
+                                <a class="ml-2" (click)="deleteReview(review.reviewid);">Delete</a>
+                            </div>
+                        </div>
+                        <!-- <span (click)=openOpt();><i class="fa fa-ellipsis-h"></i></span> -->
+                    </h6>
                     <div class="stars-example-css review-star">
                         <bar-rating class="star-rating" [(rate)]="review.rating" [max]="5" [readOnly]="true">
                         </bar-rating>
@@ -15,47 +25,44 @@
                     <p *ngIf="review.comments" class="m-t-5">{{review.comments}}</p>
                     <!-- <div class="m-b-25" *ngIf = "review.reply == null"> -->
                     <div *ngIf="review.reply==null && this.userstoragedata.roleid === 3" class="m-b-25">
-                        <button (click)="toReply(review.reviewid)" class="btn btn-primary waves-effect text-uppercase py-1 px-2">
+                        <button (click)="toReply(review.reviewid)"
+                            class="btn btn-primary waves-effect text-uppercase py-1 px-2">
                             <i class="fa fa-mail-reply"></i> Reply</button>
                     </div>
                     <div class="modal-size">
                         <app-modal-animation [modalID]="'replyModal'" [modalClass]="'md-effect-7'">
                             <h3>Reply</h3>
                             <div class="row pb-0">
-                                <textarea class="form-control" placeholder="Write comment..." type="text" [(ngModel)]= replyComment></textarea>
+                                <textarea class="form-control" placeholder="Write comment..." type="text"
+                                    [(ngModel)]=replyComment></textarea>
                             </div>
                             <span class="input-group-append pull-right">
-                                <button class="input-group-text btn my-2 mr-3" (click)="reply()" >Reply</button>
+                                <button class="input-group-text btn my-2 mr-3" (click)="reply()">Reply</button>
                             </span>
                         </app-modal-animation>
                     </div>
-                    <!-- <div *ngIf="review.reply==null && this.userstoragedata.roleid === 3" >
-                        <form [formGroup]="replyForm">
-                            <div class="input-group input-group-button input-group-primary p-t-10 form-group form-group">
-                                <input class="form-control" placeholder="Write Comment" type="text" formControlName="reply">
-                                <span class="input-group-append">
-                                    <button class="input-group-text cursor-pointer required" (click)="reply(review.reviewid)" >
-                                        <i class="icofont icofont-plus"></i> Reply
-                                    </button>
-                                </span>
-                            </div>
-                        </form>
-                    </div>
-                    <hr> -->
                     <!-- Nested media object -->
                     <div class="media mt-2" *ngIf="review.reply!=null">
                         <div class="media-left">
-                            <!-- <a>
-                                <div class="profile-image">{{review.reply?.fullname.substring(0,1).toUpperCase()}}
-                                </div>
-                            </a> -->
-                            <img class="userimg" [src]="review.reply?.docurl != null ? review.reply.docurl : 'assets/images/avatar-blank.png'" alt="img">
+                            <img class="userimg"
+                                [src]="review.reply?.docurl != null ? review.reply.docurl : 'assets/images/avatar-blank.png'"
+                                alt="img">
                         </div>
                         <div class="media-body">
                             <h6 class="media-heading">
                                 {{review.reply?.fullname}}<span class="f-12 text-muted m-l-5"> <i class="fa fa-reply"
                                         aria-hidden="true"></i>
-                                    {{review.reply?.updateddt | date:datedisplayformat}}</span></h6>
+                                    {{review.reply?.updateddt | date:datedisplayformat}}</span>
+                                <div class="reviewopt-dd">
+                                    <button class="btn py-0 px-2 text-muted" (click)="showDropdown = !showDropdown"><i
+                                            class="fa fa-ellipsis-h"></i></button>
+                                    <div *ngIf="showDropdown" class="dd-opt">
+                                        <a style="border-right: 1px solid #ccc;" class="pr-2"
+                                            (click)="openOpt('editReview',review.reviewid, 'reply');">Edit</a>
+                                        <a class="ml-2" (click)="deleteReview(review.reply?.reviewid);">Delete</a>
+                                    </div>
+                                </div>
+                            </h6>
                             <p class="m-b-0"> {{review.reply?.comments}}</p>
                         </div>
                     </div>
@@ -71,4 +78,20 @@
         <h3>No Review(s) posted</h3>
     </div>
 </div>
+<div class="modal-size">
+    <app-modal-animation [modalID]="'editReview'" [modalClass]="'md-effect-6'">
+        <h3>Edit Review</h3>
+        <div class="row pb-0">
+            <textarea class="form-control" placeholder="Write comment..." type="text"
+                [(ngModel)]="editCustomerReview"></textarea>
+        </div>
+        <span class="input-group-append pull-right">
+            <button *ngIf="message=='reply'" class="input-group-text btn my-2 mr-3" (click)="savePayment('reply')">Save</button>
+            <button *ngIf="message=='comment'" class="input-group-text btn my-2 mr-3" (click)="savePayment('comment')">Save</button>
+        </span>
+        <button (click)=" closeOpt('editReview')" aria-label="Close" class="md-close-btn">
+            <i class="fa fa-close"></i></button>
+    </app-modal-animation>
+</div>
+
 <app-loader [loadingIndicator]="loadingIndicator"></app-loader>

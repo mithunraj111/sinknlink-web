@@ -10,7 +10,7 @@ import { BootstrapAlertService } from 'ngx-bootstrap-alert-service';
     selector: 'app-customer-reviews',
     templateUrl: './customer-reviews.component.html'
 })
-export class CustomerReviewsComponent implements OnInit{
+export class CustomerReviewsComponent implements OnInit {
     showInput = false;
     reviewsList = [];
     replyComment;
@@ -21,6 +21,11 @@ export class CustomerReviewsComponent implements OnInit{
     @Input() customerObj = {} as any;
     errObj = AppMessages.VALIDATION.REPLY;
     loadingIndicator = false;
+    replyid;
+    showDropdown = false;
+    row: any;
+    editCustomerReview;
+    message;
     constructor(
         private reviewService: BusinessService.ReviewsService,
         private localStorageService: LocalStorageService,
@@ -39,7 +44,53 @@ export class CustomerReviewsComponent implements OnInit{
         });
         this.getCustomerReviews(this.customerObj);
     }
-
+    openOpt(event, id, reply?) {
+        this.row = this.reviewsList.find((o) => {
+            return id === o.reviewid;
+        });
+        if (reply === 'reply') {
+            this.message = 'reply';
+            this.editCustomerReview = this.row.reply.comments;
+        } else {
+            this.message = 'comment';
+            this.editCustomerReview = this.row.comments;
+        }
+        document.querySelector('#' + event).classList.add('md-show');
+    }
+    closeOpt(event) {
+        document.querySelector('#' + event).classList.remove('md-show');
+    }
+    savePayment(message) {
+        const formdata = {} as any;
+        formdata.comments = this.editCustomerReview;
+        let service;
+        if (message === 'comment') {
+            service = this.reviewService.update(formdata, this.row.reviewid);
+        } else if (message === 'reply') {
+            service = this.reviewService.update(formdata, this.row.reply.reviewid);
+        }
+        service.subscribe(res => {
+            const response = JSON.parse(res._body);
+            if (response.status) {
+                this.getCustomerReviews(this.customerObj);
+            }
+            this.bootstrapAlertService.showSucccess(response.message);
+        });
+        document.querySelector('#editReview').classList.remove('md-show');
+    }
+    deleteReview(id) {
+        confirm('Confirm Delete?');
+        if (true) {
+            const formdata = {} as any;
+            formdata.status = AppConstant.STATUS_DELETED;
+            this.reviewService.update(formdata, id).subscribe(res => {
+                const response = JSON.parse(res._body);
+                if (response.status) {
+                    this.getCustomerReviews(this.customerObj);
+                }
+            });
+        }
+    }
     getCustomerReviews(customerObj) {
         this.reviewsList = [];
         this.loadingIndicator = true;
@@ -53,8 +104,7 @@ export class CustomerReviewsComponent implements OnInit{
             });
         }
     }
-    replyid;
-    toReply (id) {
+    toReply(id) {
         this.replyComment = '';
         this.openModal('replyModal');
         this.replyid = id;
@@ -62,6 +112,9 @@ export class CustomerReviewsComponent implements OnInit{
 
     openModal(event) {
         document.querySelector('#' + event).classList.add('md-show');
+    }
+    closeModal(event) {
+        document.querySelector('#' + event).classList.remove('md-show');
     }
     reply() {
         this.loadingIndicator = true;

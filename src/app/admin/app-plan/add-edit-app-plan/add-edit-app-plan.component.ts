@@ -60,8 +60,8 @@ export class AddEditAppPlanComponent implements OnInit {
 
   getAppPlanDetail(id) {
     this.appplanService.byId(id).subscribe(res => {
-      let response = JSON.parse(res._body);
-      let appPlanObj = response.data;
+      const response = JSON.parse(res._body);
+      const appPlanObj = response.data;
       this.edit = true;
       appPlanObj.status = response.data.status == AppConstant.STATUS_ACTIVE ? true : false;
       this.appPlanForm = this.fb.group({
@@ -69,8 +69,10 @@ export class AddEditAppPlanComponent implements OnInit {
         planlevel: [appPlanObj.planlevel, Validators.compose([Validators.required])],
         cost: [appPlanObj.cost, Validators.compose([Validators.required])],
         taxpercent: [appPlanObj.taxpercent, Validators.compose([Validators.required, Validators.max(100)])],
-        noofdays: [appPlanObj.noofdays, Validators.compose([Validators.required, Validators.maxLength(11), Validators.pattern('^[0-9]*$')])],
-        trialperiod: [appPlanObj.trialperiod, Validators.compose([Validators.required, Validators.maxLength(11), Validators.pattern('^[0-9]*$')])],
+        noofdays: [appPlanObj.noofdays, Validators.compose([Validators.required,
+        Validators.maxLength(11), Validators.pattern('^[0-9]*$')])],
+        trialperiod: [appPlanObj.trialperiod, Validators.compose([Validators.required,
+        Validators.maxLength(11), Validators.pattern('^[0-9]*$')])],
         description: [appPlanObj.description, Validators.maxLength(500)],
         status: [appPlanObj.status]
       });
@@ -99,11 +101,13 @@ export class AddEditAppPlanComponent implements OnInit {
       data['updatedby'] = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER).fullname;
       this.updateEvent(data);
     } else {
+      data.updateddt = new Date();
+      data.updatedby = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER).fullname;
       data.createddt = new Date();
       data.createdby = this.localStorageService.getItem(AppConstant.LOCALSTORAGE.USER).fullname;
       this.appplanService.create(data).subscribe(res => {
         this.savingAppPlan = false;
-        let response = JSON.parse(res._body);
+        const response = JSON.parse(res._body);
         if (response.status) {
           this.bootstrapAlertService.showSucccess(response.message);
           this.router.navigate(['/admin/appplan/']);
@@ -119,7 +123,7 @@ export class AddEditAppPlanComponent implements OnInit {
   updateEvent(data) {
     this.appplanService.update(data, this.planid).subscribe(res => {
       this.savingAppPlan = false;
-      let response = JSON.parse(res._body);
+      const response = JSON.parse(res._body);
       if (response.status) {
         this.bootstrapAlertService.showSucccess(response.message);
         this.router.navigate(['/admin/appplan/']);
