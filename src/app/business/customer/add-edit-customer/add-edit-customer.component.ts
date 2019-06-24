@@ -491,7 +491,6 @@ export class AddEditCustomerComponent implements OnInit {
   }
   onCustomerTabChange(event) {
     this.customerObj = this.customerObj;
-    this.generateEditForm();
     if (event.nextId === '9' || event.nextId === '8' || event.nextId === '6' || event.nextId === '5' || event.nextId === '3' || event.nextId === '2') {
       this.showbutton = false;
       this.hidebutton = true;
@@ -540,7 +539,7 @@ export class AddEditCustomerComponent implements OnInit {
     if (this.customerObj.parentmembershipid != null) {
       this.branchFlag = true;
     }
-    this.customerObj.contactmobile = this.customerObj.contactmobile[0];
+    this.customerObj.contactmobile = this.customerObj.contactmobile;
     this.customerObj.phoneno = _.map(this.customerObj.phoneno, function (item) {
       return {
         value: item,

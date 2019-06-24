@@ -7,16 +7,10 @@
                 <div class="media-body ml-2">
                     <h6 class="media-heading mb-0 cursor-text">{{review.fullname}}<span
                             class="f-12 text-muted m-l-5">{{review.updateddt | date:datedisplayformat}}</span>
-                        <div class="reviewopt-dd">
-                            <button class="btn py-0 px-2 text-muted" (click)="showDropdown = !showDropdown"><i
-                                    class="fa fa-ellipsis-h"></i></button>
-                            <div *ngIf="showDropdown" class="dd-opt">
-                                <a style="border-right: 1px solid #ccc;" class="pr-2"
-                                    (click)="openOpt('editReview',review.reviewid);">Edit</a>
-                                <a class="ml-2" (click)="deleteReview(review.reviewid);">Delete</a>
-                            </div>
+                        <div class="dd-opt pl-2 d-inline-block">
+                            <a (click)="openOpt('editReview',review.reviewid);"><i class="fa fa-pencil"></i></a>
+                            <a class="ml-2" (click)="deleteReview(review.reviewid);"><i class="fa fa-trash"></i></a>
                         </div>
-                        <!-- <span (click)=openOpt();><i class="fa fa-ellipsis-h"></i></span> -->
                     </h6>
                     <div class="stars-example-css review-star">
                         <bar-rating class="star-rating" [(rate)]="review.rating" [max]="5" [readOnly]="true">
@@ -53,14 +47,9 @@
                                 {{review.reply?.fullname}}<span class="f-12 text-muted m-l-5"> <i class="fa fa-reply"
                                         aria-hidden="true"></i>
                                     {{review.reply?.updateddt | date:datedisplayformat}}</span>
-                                <div class="reviewopt-dd">
-                                    <button class="btn py-0 px-2 text-muted" (click)="showDropdown = !showDropdown"><i
-                                            class="fa fa-ellipsis-h"></i></button>
-                                    <div *ngIf="showDropdown" class="dd-opt">
-                                        <a style="border-right: 1px solid #ccc;" class="pr-2"
-                                            (click)="openOpt('editReview',review.reviewid, 'reply');">Edit</a>
-                                        <a class="ml-2" (click)="deleteReview(review.reply?.reviewid);">Delete</a>
-                                    </div>
+                                <div class="dd-opt pl-2 d-inline-block">
+                                    <a (click)="openOpt('editReview',review.reviewid, 'reply');"><i class="fa fa-pencil"></i></a>
+                                    <a class="ml-2" (click)="deleteReview(review.reply?.reviewid);"><i class="fa fa-trash"></i></a>
                                 </div>
                             </h6>
                             <p class="m-b-0"> {{review.reply?.comments}}</p>
@@ -86,8 +75,10 @@
                 [(ngModel)]="editCustomerReview"></textarea>
         </div>
         <span class="input-group-append pull-right">
-            <button *ngIf="message=='reply'" class="input-group-text btn my-2 mr-3" (click)="savePayment('reply')">Save</button>
-            <button *ngIf="message=='comment'" class="input-group-text btn my-2 mr-3" (click)="savePayment('comment')">Save</button>
+            <button *ngIf="message=='reply'" class="input-group-text btn my-2 mr-3"
+                (click)="savePayment('reply')">Save</button>
+            <button *ngIf="message=='comment'" class="input-group-text btn my-2 mr-3"
+                (click)="savePayment('comment')">Save</button>
         </span>
         <button (click)=" closeOpt('editReview')" aria-label="Close" class="md-close-btn">
             <i class="fa fa-close"></i></button>

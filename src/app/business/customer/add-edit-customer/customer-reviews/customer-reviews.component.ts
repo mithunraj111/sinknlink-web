@@ -79,8 +79,8 @@ export class CustomerReviewsComponent implements OnInit {
         document.querySelector('#editReview').classList.remove('md-show');
     }
     deleteReview(id) {
-        confirm('Confirm Delete?');
-        if (true) {
+        const confirmBox = confirm('Confirm Delete?');
+        if (confirmBox === true) {
             const formdata = {} as any;
             formdata.status = AppConstant.STATUS_DELETED;
             this.reviewService.update(formdata, id).subscribe(res => {

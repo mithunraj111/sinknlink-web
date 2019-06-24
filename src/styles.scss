@@ -1888,25 +1888,8 @@ input[type=number]::-webkit-outer-spin-button{
         display: inline-block;
     }
 }
-.reviewopt-dd{
-    position: relative;
-    display: inline-block;
-    .btn{
-        &:focus {
-            box-shadow: none;
-        }
-    }
-    .dd-opt{
-        position: absolute;
-        top: -2px;
-        left: 30px;
-        border: 1px solid #ccc;
-        max-width: 200px;
-        text-align: center;
-        background-color: #fff; 
-        padding: 10px;
-        a{
-            cursor: pointer;
-        }
+.dd-opt{
+    a{
+        cursor: pointer;
     }
 }

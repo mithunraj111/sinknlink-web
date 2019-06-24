@@ -5,8 +5,7 @@
                 <div class="col-md-6 col-sm-6">
                 </div>
                 <div class="col-md-6 col-sm-6 save-button text-right p-r-30">
-                    <button type="button" placement="bottom"
-                        ngbTooltip="Click to edit shop no." (click)="editfancyno()"
+                    <button type="button" placement="bottom" ngbTooltip="Click to edit shop no." (click)="editfancyno()"
                         class="btn btn-primary waves-effect m-r-10 text-capitalize"><i class="fa fa-pencil"></i>
                         {{this.customerObj.membershipcode == null || undefined || '' ? 'Shop No.' : this.customerObj.membershipcode}}</button>
                     <!-- <label class="label label-primary f-16">{{customerObj.membershipcode}}</label> -->
@@ -258,9 +257,11 @@
                                                             hours</label>
                                                         <div class="col-md-9 col-sm-6">
                                                             <input class="form-control m-b-10" type="time"
-                                                                formControlName="starttime" [ngClass]="openAlways?'p-events-none':''">
+                                                                formControlName="starttime"
+                                                                [ngClass]="openAlways?'p-events-none':''">
                                                             <input class="form-control" type="time"
-                                                                formControlName="endtime" [ngClass]="openAlways?'p-events-none':''">
+                                                                formControlName="endtime"
+                                                                [ngClass]="openAlways?'p-events-none':''">
                                                         </div>
                                                     </div>
                                                     <div class="form-group row required donation-header">
@@ -313,7 +314,8 @@
                                                             <div class="input-group">
                                                                 <input type="text" class="form-control w-75"
                                                                     placeholder="Online presence" readonly
-                                                                    style="height: 38px;" formControlName="onlinepresence">
+                                                                    style="height: 38px;"
+                                                                    formControlName="onlinepresence">
                                                                 <div class="input-group-append bg-default"
                                                                     (click)='addOnlinePresence();'>
                                                                     <span class="fa fa-plus input-group-text"></span>
@@ -322,8 +324,8 @@
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
-                                                        <label class="col-md-3 col-sm-6 col-form-label text-right">Tax
-                                                            number</label>
+                                                        <label class="col-md-3 col-sm-6 col-form-label text-right">Pan /
+                                                            GST number</label>
                                                         <div class="col-md-9 col-sm-6">
                                                             <input type="text" class="form-control"
                                                                 placeholder="Pan / GST number" formControlName="taxno">
@@ -559,8 +561,8 @@
                     <label class="col-md-2 m-auto" for={{list.refname}}>
                         <img src={{list.refvalue}} alt="{{list.refname}}" style="width: 50px">
                     </label>
-                    <input type="text" class="form-control col-md-10 m-auto"
-                        placeholder="Enter your URL" [(ngModel)]="list.data" [ngModelOptions]="{standalone: true}">
+                    <input type="text" class="form-control col-md-10 m-auto" placeholder="Enter your URL"
+                        [(ngModel)]="list.data" [ngModelOptions]="{standalone: true}">
                 </div>
             </div>
             <button (click)="updateonlinepresence()" type="button" placement="bottom"
