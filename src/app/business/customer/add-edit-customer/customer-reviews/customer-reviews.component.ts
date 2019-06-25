@@ -63,6 +63,13 @@ export class CustomerReviewsComponent implements OnInit {
     savePayment(message) {
         const formdata = {} as any;
         formdata.comments = this.editCustomerReview;
+        if (this.editCustomerReview.length > 100) {
+            this.bootstrapAlertService.showError(AppMessages.VALIDATION.REVIEW.maxlength);
+            return false;
+        } else if (this.editCustomerReview.length === 0) {
+            this.bootstrapAlertService.showError(AppMessages.VALIDATION.REVIEW.required);
+            return false;
+        }
         let service;
         if (message === 'comment') {
             service = this.reviewService.update(formdata, this.row.reviewid);

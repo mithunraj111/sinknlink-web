@@ -79,7 +79,7 @@ export const AppMessages = Object.freeze({
         maxlength: 'Plan level should be within 11 characters',
         pattern: 'Plan level should contain only numbers'
       },
-      cost: { 
+      cost: {
         required: 'Cost is required',
         pattern: 'Cost should contain only numbers',
         min: 'Cost should not be less than zero'
@@ -457,6 +457,10 @@ export const AppMessages = Object.freeze({
     },
     REPLY: {
       reply: { required: 'Please enter a reply', maxlength: 'Reply should be within 100 Characters' }
+    },
+    REVIEW: {
+      required: 'Please enter a review',
+      maxlength: 'Review should be within 100 Characters'
     },
     FILEUPLOAD: 'You are only allowed to upload a maximum of 5 images and 1 video'
   },
